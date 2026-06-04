@@ -200,6 +200,7 @@ body {
 .thread-de-suggested { animation: pulse-thread 2.2s ease-in-out infinite; }
 .node-de-suggested .node-glow { animation: pulse-node-glow 2.2s ease-in-out infinite; }
 .de-btn { animation: de-glow 2.2s ease-in-out infinite; cursor: pointer; }
+#ost-mutations-overlay.open { opacity: 1; pointer-events: all; }
 
 /* ── RESEARCH TIMELINE STRIP ─────────────────────────────────── */
 #timeline-strip {
@@ -2610,17 +2611,10 @@ html.light ::-webkit-scrollbar-thumb { background: var(--surface-4); }
       </div>
     </div>
 
-    <!-- Legend bottom-left -->
-    <div style="position:absolute;bottom:16px;left:20px;display:flex;gap:14px;z-index:2">
-      <div style="display:flex;align-items:center;gap:5px"><div style="width:8px;height:8px;border-radius:50%;background:var(--c-proto)"></div><span style="font-size:10px;color:var(--text-3)">Validated</span></div>
-      <div style="display:flex;align-items:center;gap:5px"><div style="width:8px;height:8px;border-radius:50%;background:var(--amber)"></div><span style="font-size:10px;color:var(--text-3)">Hypothesis</span></div>
-      <div style="display:flex;align-items:center;gap:5px"><div style="width:8px;height:8px;border-radius:50%;background:var(--surface-4);border:1px solid var(--border-d)"></div><span style="font-size:10px;color:var(--text-3)">Weak signal</span></div>
-      <div style="display:flex;align-items:center;gap:5px"><div style="width:14px;height:2px;background:var(--c-def)"></div><span style="font-size:10px;color:var(--text-3)">Validated link</span></div>
-      <div style="display:flex;align-items:center;gap:5px"><div style="width:14px;height:1px;border-top:1px dashed var(--text-4)"></div><span style="font-size:10px;color:var(--text-3)">Hypothesis link</span></div>
-    </div>
+    <!-- Legend: now inside SVG (see bottom of SVG element) -->
 
     <!-- OST Graph SVG — 4 rows: JTBDs → Outcome → Opportunities → Solutions -->
-    <svg width="100%" height="100%" viewBox="0 0 840 470" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" style="position:absolute;inset:0">
+    <svg width="100%" height="100%" viewBox="0 0 840 510" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" style="position:absolute;inset:0">
       <defs>
         <filter id="glow-ost-g" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur in="SourceGraphic" stdDeviation="7"/></filter>
         <filter id="glow-ost-a" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur in="SourceGraphic" stdDeviation="6"/></filter>
@@ -2638,7 +2632,7 @@ html.light ::-webkit-scrollbar-thumb { background: var(--surface-4); }
       <text x="10" y="163" fill="rgba(255,255,255,0.06)" font-family="'Geist Mono',monospace" font-size="8" letter-spacing="0.1em">OUTCOME</text>
       <text x="10" y="290" fill="rgba(255,255,255,0.06)" font-family="'Geist Mono',monospace" font-size="8" letter-spacing="0.1em">OPPORTUNITIES</text>
       <text x="10" y="400" fill="rgba(255,255,255,0.06)" font-family="'Geist Mono',monospace" font-size="8" letter-spacing="0.1em">SOLUTIONS</text>
-      <text x="10" y="455" fill="rgba(74,156,122,0.12)" font-family="'Geist Mono',monospace" font-size="8" letter-spacing="0.1em">ASSUMPTION TESTS</text>
+      <text x="10" y="480" fill="rgba(74,156,122,0.12)" font-family="'Geist Mono',monospace" font-size="8" letter-spacing="0.1em">ASSUMPTION TESTS</text>
 
       <!-- ── EDGES: JTBDs → Outcome ─────────────────────── -->
       <!-- JTBD1 (250,80) → Outcome top (420,152) -->
@@ -2742,24 +2736,32 @@ html.light ::-webkit-scrollbar-thumb { background: var(--surface-4); }
       <text x="670" y="402" text-anchor="middle" fill="#3A3F4D" font-family="'Instrument Sans',sans-serif" font-size="9">Status tracker</text>
       <text x="670" y="414" text-anchor="middle" fill="rgba(65,80,105,0.5)" font-family="'Instrument Sans',sans-serif" font-size="8.5">post-submission</text>
 
-      <!-- ── ASSUMPTION TEST NODES (row 5, y=453) — connected to Prototyping ── -->
+      <!-- ── ASSUMPTION TEST NODES (row 5, y=478) — connected to Prototyping ── -->
       <!-- Sol 1a → AssTest A1 (validated) -->
-      <path d="M80,422 C80,438 120,438 130,453" fill="none" stroke="rgba(74,156,122,0.3)" stroke-width="1" stroke-dasharray="3,3"/>
+      <path d="M80,422 C80,450 120,450 130,478" fill="none" stroke="rgba(74,156,122,0.3)" stroke-width="1" stroke-dasharray="3,3"/>
       <!-- Sol 1b → AssTest A2 (testing) -->
-      <path d="M170,422 C170,438 200,438 200,453" fill="none" stroke="rgba(74,156,122,0.25)" stroke-width="1" stroke-dasharray="3,3"/>
+      <path d="M170,422 C170,450 200,450 200,478" fill="none" stroke="rgba(74,156,122,0.25)" stroke-width="1" stroke-dasharray="3,3"/>
 
       <!-- AssTest A1: Validated -->
-      <rect x="89" y="453" width="82" height="32" rx="6" fill="rgba(74,156,122,0.08)" stroke="rgba(74,156,122,0.55)" stroke-width="1" stroke-dasharray="4,3"/>
-      <text x="130" y="465" text-anchor="middle" fill="rgba(74,156,122,0.9)" font-family="'Geist Mono',monospace" font-size="8" font-weight="700">Validated ✓</text>
-      <text x="130" y="477" text-anchor="middle" fill="rgba(74,156,122,0.65)" font-family="'Instrument Sans',sans-serif" font-size="8">Users engage pre-qual</text>
+      <rect x="89" y="478" width="82" height="28" rx="6" fill="rgba(74,156,122,0.08)" stroke="rgba(74,156,122,0.55)" stroke-width="1" stroke-dasharray="4,3"/>
+      <text x="130" y="489" text-anchor="middle" fill="rgba(74,156,122,0.9)" font-family="'Geist Mono',monospace" font-size="8" font-weight="700">Validated ✓</text>
+      <text x="130" y="500" text-anchor="middle" fill="rgba(74,156,122,0.65)" font-family="'Instrument Sans',sans-serif" font-size="7.5">Users engage pre-qual</text>
 
       <!-- AssTest A2: Testing -->
-      <rect x="159" y="453" width="82" height="32" rx="6" fill="rgba(74,156,122,0.04)" stroke="rgba(74,156,122,0.35)" stroke-width="1" stroke-dasharray="4,3"/>
-      <text x="200" y="465" text-anchor="middle" fill="rgba(74,156,122,0.7)" font-family="'Geist Mono',monospace" font-size="8" font-weight="700">Testing →</text>
-      <text x="200" y="477" text-anchor="middle" fill="rgba(74,156,122,0.5)" font-family="'Instrument Sans',sans-serif" font-size="8">Reduced anxiety signal</text>
+      <rect x="159" y="478" width="82" height="28" rx="6" fill="rgba(74,156,122,0.04)" stroke="rgba(74,156,122,0.35)" stroke-width="1" stroke-dasharray="4,3"/>
+      <text x="200" y="489" text-anchor="middle" fill="rgba(74,156,122,0.7)" font-family="'Geist Mono',monospace" font-size="8" font-weight="700">Testing →</text>
+      <text x="200" y="500" text-anchor="middle" fill="rgba(74,156,122,0.5)" font-family="'Instrument Sans',sans-serif" font-size="7.5">Reduced anxiety signal</text>
 
       <!-- Connected-to-Prototyping label -->
-      <text x="420" y="468" text-anchor="middle" fill="rgba(74,156,122,0.2)" font-family="'Geist Mono',monospace" font-size="7.5" letter-spacing="0.08em">connected to Prototyping module</text>
+      <text x="420" y="496" text-anchor="middle" fill="rgba(74,156,122,0.18)" font-family="'Geist Mono',monospace" font-size="7.5" letter-spacing="0.08em">connected to Prototyping module</text>
+
+      <!-- ── LEGEND (bottom-right, inside SVG) ── -->
+      <circle cx="590" cy="501" r="4" fill="#4A9C7A"/>
+      <text x="598" y="505" fill="rgba(156,163,178,0.7)" font-family="'Instrument Sans',sans-serif" font-size="8.5">Validated</text>
+      <circle cx="648" cy="501" r="4" fill="#C9A84C"/>
+      <text x="656" y="505" fill="rgba(156,163,178,0.7)" font-family="'Instrument Sans',sans-serif" font-size="8.5">Hypothesis</text>
+      <circle cx="708" cy="501" r="4" fill="rgba(60,63,77,0.9)" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+      <text x="716" y="505" fill="rgba(156,163,178,0.7)" font-family="'Instrument Sans',sans-serif" font-size="8.5">Weak signal</text>
 
     </svg>
   </div>
@@ -2780,9 +2782,8 @@ html.light ::-webkit-scrollbar-thumb { background: var(--surface-4); }
 
   <!-- OST Mutations overlay (modal) -->
   <div id="ost-mutations-overlay"
-    style="position:fixed;inset:0;z-index:200;background:rgba(6,10,20,0.65);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity 0.25s ease"
-    onclick="if(event.target===this)this.classList.remove('open')">
-    <style>#ost-mutations-overlay.open{opacity:1;pointer-events:all}</style>
+    style="position:fixed;inset:0;z-index:9999;background:rgba(6,10,20,0.65);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity 0.25s ease"
+    onclick="if(event.target===this)this.classList.remove('open')"
     <div style="width:560px;max-height:80vh;background:var(--surface-1);border:1px solid var(--border-d);border-radius:14px;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 24px 64px rgba(0,0,0,0.5);animation:panel-in 0.22s ease">
 
       <!-- Header -->
