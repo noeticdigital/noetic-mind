@@ -2850,15 +2850,17 @@ html.light ::-webkit-scrollbar-thumb { background: var(--surface-4); }
       <text x="670" y="307" text-anchor="middle" fill="rgba(80,95,125,0.55)" font-family="'Geist Mono',monospace" font-size="8.5">Hypothesis · 28%</text>
 
       <!-- ── SOLUTION NODES (row 4, y=365→399 rect, centers at mid=382) ── -->
-      <!-- Sol 1a -->
-      <rect x="39"  y="365" width="82" height="36" rx="7" fill="rgba(74,156,122,0.1)"  stroke="rgba(74,156,122,0.45)" stroke-width="1.1"/>
-      <text x="80"  y="380" text-anchor="middle" fill="#8A9DA8" font-family="'Instrument Sans',sans-serif" font-size="9" font-weight="500">Pre-qual signal</text>
-      <text x="80"  y="393" text-anchor="middle" fill="rgba(74,156,122,0.6)" font-family="'Instrument Sans',sans-serif" font-size="8.5">at entry point</text>
+      <!-- Sol 1a (has assumption tests — clickable) -->
+      <rect x="39"  y="365" width="82" height="36" rx="7" fill="rgba(74,156,122,0.1)"  stroke="rgba(74,156,122,0.55)" stroke-width="1.3" style="cursor:pointer" onclick="toggleAssTests('sol1a', event)"/>
+      <text x="80"  y="378" text-anchor="middle" fill="#8A9DA8" font-family="'Instrument Sans',sans-serif" font-size="9" font-weight="500" style="cursor:pointer" onclick="toggleAssTests('sol1a', event)">Pre-qual signal</text>
+      <text x="80"  y="389" text-anchor="middle" fill="rgba(74,156,122,0.6)" font-family="'Instrument Sans',sans-serif" font-size="8.5" style="cursor:pointer" onclick="toggleAssTests('sol1a', event)">at entry point</text>
+      <text x="80"  y="399" text-anchor="middle" fill="rgba(74,156,122,0.5)" font-family="'Geist Mono',monospace" font-size="7" style="cursor:pointer" onclick="toggleAssTests('sol1a', event)">2 tests ▾</text>
 
-      <!-- Sol 1b -->
-      <rect x="129" y="365" width="82" height="36" rx="7" fill="rgba(74,156,122,0.1)"  stroke="rgba(74,156,122,0.45)" stroke-width="1.1"/>
-      <text x="170" y="380" text-anchor="middle" fill="#8A9DA8" font-family="'Instrument Sans',sans-serif" font-size="9" font-weight="500">Social proof</text>
-      <text x="170" y="393" text-anchor="middle" fill="rgba(74,156,122,0.6)" font-family="'Instrument Sans',sans-serif" font-size="8.5">approval rates</text>
+      <!-- Sol 1b (has assumption tests — clickable) -->
+      <rect x="129" y="365" width="82" height="36" rx="7" fill="rgba(74,156,122,0.1)"  stroke="rgba(74,156,122,0.55)" stroke-width="1.3" style="cursor:pointer" onclick="toggleAssTests('sol1b', event)"/>
+      <text x="170" y="378" text-anchor="middle" fill="#8A9DA8" font-family="'Instrument Sans',sans-serif" font-size="9" font-weight="500" style="cursor:pointer" onclick="toggleAssTests('sol1b', event)">Social proof</text>
+      <text x="170" y="389" text-anchor="middle" fill="rgba(74,156,122,0.6)" font-family="'Instrument Sans',sans-serif" font-size="8.5" style="cursor:pointer" onclick="toggleAssTests('sol1b', event)">approval rates</text>
+      <text x="170" y="399" text-anchor="middle" fill="rgba(74,156,122,0.5)" font-family="'Geist Mono',monospace" font-size="7" style="cursor:pointer" onclick="toggleAssTests('sol1b', event)">2 tests ▾</text>
 
       <!-- Sol 1c -->
       <rect x="219" y="365" width="82" height="36" rx="7" fill="rgba(74,156,122,0.1)"  stroke="rgba(74,156,122,0.45)" stroke-width="1.1"/>
@@ -2880,29 +2882,24 @@ html.light ::-webkit-scrollbar-thumb { background: var(--surface-4); }
       <text x="670" y="380" text-anchor="middle" fill="#3A3F4D" font-family="'Instrument Sans',sans-serif" font-size="9">Status tracker</text>
       <text x="670" y="393" text-anchor="middle" fill="rgba(65,80,105,0.5)" font-family="'Instrument Sans',sans-serif" font-size="8.5">post-submission</text>
 
-      <!-- ── ASSUMPTION TEST NODES (row 5, y=462→490) ─── -->
-      <path d="M80,401 C80,430 130,430 130,462"  fill="none" stroke="rgba(74,156,122,0.3)"  stroke-width="1" stroke-dasharray="3,3"/>
-      <path d="M170,401 C170,430 200,430 200,462" fill="none" stroke="rgba(74,156,122,0.25)" stroke-width="1" stroke-dasharray="3,3"/>
-
-      <rect x="89"  y="462" width="82" height="30" rx="6" fill="rgba(74,156,122,0.08)" stroke="rgba(74,156,122,0.55)" stroke-width="1" stroke-dasharray="4,3"/>
-      <text x="130" y="474" text-anchor="middle" fill="rgba(74,156,122,0.9)"  font-family="'Geist Mono',monospace"     font-size="8" font-weight="700">Validated ✓</text>
-      <text x="130" y="485" text-anchor="middle" fill="rgba(74,156,122,0.65)" font-family="'Instrument Sans',sans-serif" font-size="7.5">Users engage pre-qual</text>
-
-      <rect x="159" y="462" width="82" height="30" rx="6" fill="rgba(74,156,122,0.04)" stroke="rgba(74,156,122,0.35)" stroke-width="1" stroke-dasharray="4,3"/>
-      <text x="200" y="474" text-anchor="middle" fill="rgba(74,156,122,0.7)"  font-family="'Geist Mono',monospace"     font-size="8" font-weight="700">Testing →</text>
-      <text x="200" y="485" text-anchor="middle" fill="rgba(74,156,122,0.5)"  font-family="'Instrument Sans',sans-serif" font-size="7.5">Reduced anxiety signal</text>
-
-      <!-- Connected-to-Prototyping + legend at very bottom -->
-      <text x="420" y="504" text-anchor="middle" fill="rgba(74,156,122,0.15)" font-family="'Geist Mono',monospace" font-size="7.5" letter-spacing="0.08em">connected to Prototyping module</text>
-
-      <circle cx="595" cy="528" r="4" fill="#4A9C7A"/>
-      <text x="603" y="532" fill="rgba(156,163,178,0.6)" font-family="'Instrument Sans',sans-serif" font-size="8.5">Validated</text>
-      <circle cx="656" cy="528" r="4" fill="#C9A84C"/>
-      <text x="664" y="532" fill="rgba(156,163,178,0.6)" font-family="'Instrument Sans',sans-serif" font-size="8.5">Hypothesis</text>
-      <circle cx="720" cy="528" r="4" fill="rgba(60,63,77,0.9)" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
-      <text x="728" y="532" fill="rgba(156,163,178,0.6)" font-family="'Instrument Sans',sans-serif" font-size="8.5">Weak</text>
+      <!-- Legend -->
+      <circle cx="595" cy="508" r="4" fill="#4A9C7A"/>
+      <text x="603" y="512" fill="rgba(156,163,178,0.6)" font-family="'Instrument Sans',sans-serif" font-size="8.5">Validated</text>
+      <circle cx="656" cy="508" r="4" fill="#C9A84C"/>
+      <text x="664" y="512" fill="rgba(156,163,178,0.6)" font-family="'Instrument Sans',sans-serif" font-size="8.5">Hypothesis</text>
+      <circle cx="720" cy="508" r="4" fill="rgba(60,63,77,0.9)" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+      <text x="728" y="512" fill="rgba(156,163,178,0.6)" font-family="'Instrument Sans',sans-serif" font-size="8.5">Weak</text>
 
     </svg>
+
+  <!-- Assumption test popup (positions near clicked solution) -->
+  <div id="ass-tests-popup" style="display:none;position:absolute;z-index:50;width:220px;background:var(--surface-1);border:1px solid rgba(74,156,122,0.35);border-top:2px solid var(--c-proto);border-radius:10px;box-shadow:0 8px 32px rgba(0,0,0,0.4);padding:12px 14px;animation:fade-in 0.15s ease">
+    <div style="font-size:9px;text-transform:uppercase;letter-spacing:0.1em;color:var(--c-proto);margin-bottom:10px;display:flex;align-items:center;justify-content:space-between">
+      Assumption Tests
+      <span onclick="document.getElementById('ass-tests-popup').style.display='none'" style="cursor:pointer;color:var(--text-3);font-size:12px">✕</span>
+    </div>
+    <div id="ass-tests-content"></div>
+  </div>
   </div>
 
     <!-- OST Pending Mutations — trigger button only -->
@@ -2911,7 +2908,7 @@ html.light ::-webkit-scrollbar-thumb { background: var(--surface-4); }
         <span style="width:5px;height:5px;border-radius:50%;background:var(--amber);display:inline-block;animation:pulse 1.5s ease-in-out infinite;flex-shrink:0"></span>
         3 mutations awaiting your approval
       </div>
-      <button onclick="document.getElementById('ost-mutations-overlay').classList.add('open')"
+      <button onclick="openOSTMutations()"
         style="display:flex;align-items:center;gap:6px;font-size:12px;font-weight:600;padding:6px 14px;border-radius:7px;border:1px solid rgba(201,168,76,0.4);background:rgba(201,168,76,0.1);color:var(--amber);cursor:pointer;font-family:'Instrument Sans',sans-serif;transition:all 0.15s"
         onmouseover="this.style.background='rgba(201,168,76,0.18)'" onmouseout="this.style.background='rgba(201,168,76,0.1)'">
         Review OST Mutations
@@ -3613,7 +3610,7 @@ function toggleTheme() {
         <span class="cmd-label">View Living Report</span>
         <span class="cmd-sub">Auto-generated · updated 2h ago</span>
       </div>
-      <div class="cmd-item" data-action="document.getElementById('ost-mutations-overlay').classList.add('open')" tabindex="-1">
+      <div class="cmd-item" data-action="openOSTMutations()" tabindex="-1">
         <span class="cmd-icon" style="background:var(--amber-dim);color:var(--amber)">⊕</span>
         <span class="cmd-label">Review OST Mutations</span>
         <span class="cmd-sub">3 pending · awaiting approval</span>
@@ -3634,6 +3631,75 @@ function toggleTheme() {
 <script>
 // ── CMD PALETTE ──────────────────────────────────────────────
 let cmdActiveIndex = -1;
+
+// ── ASSUMPTION TEST POPUP ────────────────────────────────────
+const ASS_TESTS = {
+  'sol1a': [
+    { status: 'validated', label: 'Users engage pre-qual', detail: '81% of test users completed pre-qual check before starting application. Reduces abandonment at doc-gather step.' },
+    { status: 'testing',   label: 'Pre-qual reduces anxiety',  detail: 'Measuring emotional state pre/post. Early signal: self-reported confidence up 23%. Still running.' }
+  ],
+  'sol1b': [
+    { status: 'validated', label: 'Social proof increases starts', detail: 'Showing "94% of similar businesses approved" lifted application starts by 31% in A/B test.' },
+    { status: 'hypothesis', label: 'Approval rates visible mid-flow', detail: 'Hypothesis: showing approval rates at document step reduces drop-off. Not yet tested.' }
+  ]
+};
+function toggleAssTests(solId, evt) {
+  const popup = document.getElementById('ass-tests-popup');
+  const content = document.getElementById('ass-tests-content');
+  const tests = ASS_TESTS[solId];
+  if (!tests) return;
+
+  // Position near click, within OST graph area
+  const graphArea = document.querySelector('.ost-graph-area');
+  if (!graphArea) return;
+  const rect = graphArea.getBoundingClientRect();
+  const x = Math.min(evt.clientX - rect.left + 8, rect.width - 240);
+  const y = evt.clientY - rect.top - 20;
+
+  popup.style.left = x + 'px';
+  popup.style.top  = Math.max(8, y) + 'px';
+
+  // Build content
+  const statusMap = {
+    validated:  { color: 'var(--c-proto)', label: 'Validated ✓', bg: 'rgba(74,156,122,0.1)' },
+    testing:    { color: 'var(--amber)',   label: 'Testing →',   bg: 'var(--amber-dim)' },
+    hypothesis: { color: 'var(--c-def)',   label: 'Hypothesis',  bg: 'rgba(91,140,186,0.1)' }
+  };
+  content.innerHTML = tests.map(t => {
+    const s = statusMap[t.status] || statusMap.hypothesis;
+    return `<div style="margin-bottom:10px;padding:10px 12px;background:${s.bg};border-radius:8px;border-left:2px solid ${s.color}">
+      <div style="font-size:10px;font-weight:700;color:${s.color};margin-bottom:4px">${s.label}</div>
+      <div style="font-size:12px;font-weight:600;color:var(--text-1);margin-bottom:3px">${t.label}</div>
+      <div style="font-size:11px;color:var(--text-3);line-height:1.4">${t.detail}</div>
+    </div>`;
+  }).join('');
+
+  popup.style.display = popup.style.display === 'block' ? 'none' : 'block';
+  evt.stopPropagation();
+}
+// Close popup on click outside
+document.addEventListener('click', () => {
+  const p = document.getElementById('ass-tests-popup');
+  if (p) p.style.display = 'none';
+});
+
+// ── OST MUTATIONS MODAL ──────────────────────────────────────
+function openOSTMutations() {
+  const el = document.getElementById('ost-mutations-overlay');
+  if (!el) return;
+  // Ensure it's at the very top of the DOM so no stacking context blocks it
+  if (el.parentElement !== document.body) document.body.appendChild(el);
+  el.style.display = 'flex';
+  el.style.opacity = '0';
+  el.style.pointerEvents = 'all';
+  requestAnimationFrame(() => { el.style.opacity = '1'; });
+}
+function closeOSTMutations() {
+  const el = document.getElementById('ost-mutations-overlay');
+  if (!el) return;
+  el.style.opacity = '0';
+  el.style.pointerEvents = 'none';
+}
 
 function openCmdPalette() {
   const el = document.getElementById('cmdpalette');
@@ -3723,14 +3789,14 @@ window.addEventListener('load', () => {
 <!-- ── OST MUTATIONS OVERLAY — body level, avoids backdrop-filter containment ── -->
 <div id="ost-mutations-overlay"
   style="position:fixed;inset:0;z-index:9999;background:rgba(6,10,20,0.65);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity 0.25s ease"
-  onclick="if(event.target===this)this.classList.remove('open')">
+  onclick="if(event.target===this)closeOSTMutations()">
   <div style="width:560px;max-height:80vh;background:var(--surface-1);border:1px solid var(--border-d);border-radius:14px;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 24px 64px rgba(0,0,0,0.5);animation:panel-in 0.22s ease">
     <div style="padding:18px 24px 14px;border-bottom:1px solid var(--border-s);display:flex;align-items:center;justify-content:space-between;flex-shrink:0">
       <div>
         <div style="font-size:15px;font-weight:600;color:var(--text-1);display:flex;align-items:center;gap:8px">Pending OST Mutations<span style="background:var(--amber);color:var(--navy);border-radius:10px;font-size:10px;font-weight:700;padding:2px 8px">3</span></div>
         <div style="font-size:11px;color:var(--text-3);margin-top:3px">Agent-proposed changes to the Opportunity Solution Tree</div>
       </div>
-      <button onclick="document.getElementById('ost-mutations-overlay').classList.remove('open')" style="width:32px;height:32px;border-radius:8px;background:var(--surface-2);border:1px solid var(--border-d);color:var(--text-2);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.15s" onmouseover="this.style.background='var(--surface-3)'" onmouseout="this.style.background='var(--surface-2)'">✕</button>
+      <button onclick="closeOSTMutations()" style="width:32px;height:32px;border-radius:8px;background:var(--surface-2);border:1px solid var(--border-d);color:var(--text-2);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.15s" onmouseover="this.style.background='var(--surface-3)'" onmouseout="this.style.background='var(--surface-2)'">✕</button>
     </div>
     <div style="overflow-y:auto;padding:16px 24px;display:flex;flex-direction:column;gap:10px">
       <div style="background:var(--surface-2);border-left:3px solid var(--amber);border-radius:10px;padding:14px 16px">
@@ -3765,7 +3831,7 @@ window.addEventListener('load', () => {
       </div>
     </div>
     <div style="padding:12px 24px;border-top:1px solid var(--border-s);display:flex;justify-content:flex-end">
-      <button onclick="document.getElementById('ost-mutations-overlay').classList.remove('open')" style="font-size:12px;font-weight:600;padding:7px 18px;border-radius:7px;border:1px solid var(--border-d);background:var(--surface-3);color:var(--text-2);cursor:pointer;font-family:'Instrument Sans',sans-serif">Done for now</button>
+      <button onclick="closeOSTMutations()" style="font-size:12px;font-weight:600;padding:7px 18px;border-radius:7px;border:1px solid var(--border-d);background:var(--surface-3);color:var(--text-2);cursor:pointer;font-family:'Instrument Sans',sans-serif">Done for now</button>
     </div>
   </div>
 </div>
