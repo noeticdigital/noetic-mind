@@ -78,10 +78,10 @@ body {
 .sb-logo-sub  { font-size: 10px; color: var(--text-3); letter-spacing: 0.05em; margin-top: 1px; }
 
 .sb-project {
-  padding: 14px 16px 10px;
+  padding: 16px 16px 10px;
   border-bottom: 1px solid var(--border-s);
 }
-.sb-project-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-3); margin-bottom: 6px; }
+.sb-project-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-3); margin-bottom: 8px; }
 .sb-project-name  { font-size: 13px; font-weight: 500; color: var(--text-1); line-height: 1.3; }
 .sb-project-client{ font-size: 11px; color: var(--text-3); margin-top: 3px; }
 .sb-ost {
@@ -101,7 +101,7 @@ body {
 .sb-nav { flex: 1; padding: 10px 8px; display: flex; flex-direction: column; gap: 1px; }
 .nav-item {
   display: flex; align-items: center; gap: 10px;
-  padding: 9px 10px; border-radius: 7px;
+  padding: 8px 10px; border-radius: 7px;
   font-size: 13px; color: var(--text-2); cursor: pointer;
   transition: all 0.15s; user-select: none;
 }
@@ -193,13 +193,116 @@ body {
   50%       { filter: drop-shadow(0 0 14px rgba(201,168,76,0.8)); }
 }
 @keyframes spin-slow { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
-@keyframes fade-in   { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+@keyframes fade-in   { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:translateY(0)} }
 @keyframes slide-up  { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
 @keyframes scale-in  { from{opacity:0;transform:scale(0.94)} to{opacity:1;transform:scale(1)} }
+@keyframes panel-in {
+  from { opacity: 0; transform: translateY(6px) scale(0.99); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+/* Right panel section fade-in */
+.panel-view.active { animation: fade-in 0.15s ease-out; }
+
+/* ── SKELETON LOADERS ───────────────────────────────────────── */
+@keyframes shimmer {
+  0%   { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+@keyframes skeleton-shimmer {
+  0%   { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+.skeleton {
+  background: linear-gradient(90deg, var(--surface-3) 25%, var(--surface-4) 50%, var(--surface-3) 75%);
+  background-size: 800px 100%;
+  animation: shimmer 1.4s ease-in-out infinite;
+  border-radius: 6px;
+}
+.skeleton-line { height: 12px; margin-bottom: 8px; }
+.skeleton-line.w-80 { width: 80%; }
+.skeleton-line.w-60 { width: 60%; }
+.skeleton-line.w-40 { width: 40%; }
+.skeleton-title { height: 18px; width: 55%; margin-bottom: 12px; }
+
+/* ── COMMAND PALETTE ─────────────────────────────────────────── */
+#cmdk-overlay {
+  position: fixed; inset: 0; z-index: 10000;
+  background: rgba(6,10,20,0.72); backdrop-filter: blur(8px);
+  display: flex; align-items: flex-start; justify-content: center;
+  padding-top: 18vh;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.15s ease-out;
+}
+#cmdk-overlay.open { opacity: 1; pointer-events: all; }
+#cmdk-panel {
+  width: 520px; background: var(--surface-1);
+  border: 1px solid var(--border-a);
+  border-radius: 14px; overflow: hidden;
+  box-shadow: 0 32px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.04);
+  animation: panel-in 0.15s ease-out;
+}
+#cmdk-input-wrap {
+  display: flex; align-items: center; gap: 12px;
+  padding: 16px 20px; border-bottom: 1px solid var(--border-s);
+}
+#cmdk-search-icon { color: var(--text-3); flex-shrink: 0; font-size: 15px; }
+#cmdk-input {
+  flex: 1; background: none; border: none; outline: none;
+  font-size: 15px; color: var(--text-1);
+  font-family: 'Instrument Sans', sans-serif;
+}
+#cmdk-input::placeholder { color: var(--text-4); }
+#cmdk-kbd {
+  font-size: 10px; font-family: 'Geist Mono', monospace;
+  color: var(--text-4); background: var(--surface-3);
+  border: 1px solid var(--border-d); border-radius: 4px;
+  padding: 2px 6px; flex-shrink: 0;
+}
+#cmdk-results { padding: 8px; max-height: 360px; overflow-y: auto; }
+#cmdk-results::-webkit-scrollbar { width: 3px; }
+#cmdk-results::-webkit-scrollbar-thumb { background: var(--surface-4); }
+.cmdk-section-label {
+  font-size: 10px; font-weight: 500; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--text-4);
+  padding: 8px 12px 4px; font-family: 'Geist Mono', monospace;
+}
+.cmdk-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 10px 12px; border-radius: 8px; cursor: pointer;
+  transition: background 0.08s;
+}
+.cmdk-item:hover, .cmdk-item.selected { background: var(--surface-3); }
+.cmdk-item-icon {
+  width: 28px; height: 28px; border-radius: 7px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; flex-shrink: 0;
+}
+.cmdk-item-label { font-size: 13px; font-weight: 500; color: var(--text-1); flex: 1; }
+.cmdk-item-hint  { font-size: 11px; color: var(--text-3); }
+.cmdk-item-shortcut {
+  font-size: 10px; font-family: 'Geist Mono', monospace;
+  color: var(--text-4); background: var(--surface-3);
+  border: 1px solid var(--border-d); border-radius: 4px;
+  padding: 1px 6px;
+}
+#cmdk-footer {
+  padding: 8px 16px; border-top: 1px solid var(--border-s);
+  display: flex; align-items: center; gap: 16px;
+}
+.cmdk-footer-hint {
+  display: flex; align-items: center; gap: 4px;
+  font-size: 10px; color: var(--text-4);
+}
+.cmdk-footer-hint kbd {
+  font-family: 'Geist Mono', monospace; font-size: 10px;
+  background: var(--surface-3); border: 1px solid var(--border-d);
+  border-radius: 4px; padding: 1px 5px; color: var(--text-3);
+}
 
 .thread-de-suggested { animation: pulse-thread 2.2s ease-in-out infinite; }
 .node-de-suggested .node-glow { animation: pulse-node-glow 2.2s ease-in-out infinite; }
 .de-btn { animation: de-glow 2.2s ease-in-out infinite; cursor: pointer; }
+#ost-mutations-overlay.open { opacity: 1; pointer-events: all; }
 
 /* ── RESEARCH TIMELINE STRIP ─────────────────────────────────── */
 #timeline-strip {
@@ -272,43 +375,44 @@ body {
 }
 .syn-quote {
   font-family: 'Playfair Display', serif;
-  font-style: italic; font-size: 15px; line-height: 1.6;
-  color: var(--text-1); margin-bottom: 10px;
+  font-style: italic; font-size: 16px; font-weight: 600; line-height: 1.7;
+  color: var(--text-1); margin-bottom: 8px;
+  letter-spacing: -0.01em;
 }
 .syn-meta  { font-size: 11px; color: var(--text-3); display: flex; align-items: center; gap: 6px; }
 .syn-dot   { width: 5px; height: 5px; border-radius: 50%; background: var(--c-proto); flex-shrink: 0; }
 
 /* Insight cards */
-.insight-section { padding: 14px 20px; border-bottom: 1px solid var(--border-s); }
-.insight-heading { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-3); margin-bottom: 10px; }
+.insight-section { padding: 16px 20px; border-bottom: 1px solid var(--border-s); }
+.insight-heading { font-size: 10px; text-transform: uppercase; letter-spacing: 0.12em; font-weight: 500; color: var(--text-3); margin-bottom: 8px; }
 .insight-card {
-  background: var(--surface-2); border: 1px solid var(--border-s);
-  border-radius: 8px; padding: 12px 14px; margin-bottom: 8px;
-  transition: border-color 0.2s;
+  background: var(--surface-2);
+  border-radius: 8px; padding: 12px 16px; margin-bottom: 8px;
+  transition: transform 0.12s ease-out, border-color 0.12s ease-out;
 }
 .insight-card:last-child { margin-bottom: 0; }
-.insight-card:hover { border-color: var(--border-d); }
+.insight-card:hover { transform: translateY(-1px); }
 .ic-label  { font-size: 10px; color: var(--text-3); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 5px; }
 .ic-value  { font-size: 13px; color: var(--text-1); line-height: 1.4; }
 .ic-sub    { font-size: 11px; color: var(--text-3); margin-top: 3px; }
-.ic-number { font-family: 'Geist Mono', monospace; font-size: 18px; font-weight: 500; color: var(--text-1); }
+.ic-number { font-family: 'Geist Mono', monospace; font-size: 22px; font-weight: 700; color: var(--text-1); }
 .ic-bar    { height: 3px; background: var(--surface-4); border-radius: 2px; margin-top: 7px; overflow: hidden; }
 .ic-bar-fill { height: 100%; border-radius: 2px; transition: width 0.8s ease; }
 
 /* DE suggestion card */
 .de-suggest-card {
-  margin: 14px 20px;
+  margin: 16px 20px;
   background: var(--amber-dim); border: 1px solid rgba(201,168,76,0.25);
-  border-radius: 8px; padding: 14px 16px;
+  border-radius: 8px; padding: 16px;
   animation: fade-in 0.4s ease;
 }
 .de-suggest-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--amber); margin-bottom: 6px; }
 .de-suggest-text  { font-size: 12px; color: var(--text-1); line-height: 1.5; }
 .de-suggest-btn   {
-  margin-top: 10px; width: 100%;
+  margin-top: 10px; width: 100%; max-width: 360px;
   background: var(--amber); color: var(--navy);
-  border: none; border-radius: 6px; padding: 9px 0;
-  font-size: 13px; font-weight: 600; cursor: pointer;
+  border: none; border-radius: 6px; padding: 12px 24px;
+  font-size: 14px; font-weight: 600; cursor: pointer;
   font-family: 'Instrument Sans', sans-serif;
   transition: opacity 0.15s;
   display: flex; align-items: center; justify-content: center; gap: 6px;
@@ -317,14 +421,14 @@ body {
 
 /* Chat input */
 #rpanel-chat {
-  padding: 14px 20px 16px;
+  padding: 12px 20px 16px;
   border-top: 1px solid var(--border-s);
   flex-shrink: 0;
 }
 .chat-input-wrap {
   display: flex; align-items: center; gap: 8px;
   background: var(--surface-2); border: 1px solid var(--border-d);
-  border-radius: 10px; padding: 10px 14px;
+  border-radius: 10px; padding: 8px 16px;
   transition: border-color 0.2s;
 }
 .chat-input-wrap:focus-within { border-color: var(--border-a); }
@@ -365,7 +469,7 @@ body {
   display: flex; flex-direction: column;
   overflow: hidden;
   box-shadow: 0 24px 64px rgba(0,0,0,0.45), 0 4px 16px rgba(0,0,0,0.2);
-  animation: panel-in 0.25s ease;
+  animation: panel-in 0.18s ease-out;
 }
 html.light .de-panel {
   box-shadow: 0 20px 60px rgba(0,0,0,0.12), 0 4px 16px rgba(0,0,0,0.06);
@@ -382,7 +486,7 @@ html.light #de-room {
 }
 .de-title  { display: flex; align-items: center; gap: 12px; }
 .de-mark   { font-size: 18px; color: var(--amber); }
-.de-name   { font-size: 16px; font-weight: 600; color: var(--text-1); }
+.de-name   { font-size: 18px; font-weight: 700; color: var(--text-1); }
 .de-sub    { font-size: 12px; color: var(--text-3); margin-top: 2px; }
 .de-close  {
   width: 36px; height: 36px; border-radius: 8px;
@@ -467,7 +571,7 @@ html.light #de-room {
 
 /* ── SCROLLABLE PANEL CONTENT ────────────────────────────────── */
 .panel-view  { display: none; }
-.panel-view.active { display: block; animation: fade-in 0.25s ease; }
+.panel-view.active { display: block; animation: fade-in 0.14s ease-out; }
 
 /* ── DATA STATS ROW ──────────────────────────────────────────── */
 .stats-row {
@@ -491,10 +595,10 @@ html.light #de-room {
 
 /* ── JOB STATEMENT CARD ──────────────────────────────────────── */
 .job-card  {
-  margin: 14px 20px 0;
-  padding: 14px 16px;
+  margin: 16px 20px 0;
+  padding: 16px 16px;
   background: var(--surface-2); border-radius: 8px;
-  border: 1px solid var(--border-d); border-left: 3px solid var(--c-jtbd);
+  border-left: 3px solid var(--c-jtbd);
 }
 .job-type  { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 6px; }
 .job-text  { font-size: 13px; color: var(--text-1); line-height: 1.5; }
@@ -640,14 +744,18 @@ html.light ::-webkit-scrollbar-thumb { background: var(--surface-4); }
 
 /* ── CALIBRATED CONFIDENCE BANDS ────────────────────────────────── */
 .conf-band {
-  display: inline-flex; align-items: center; gap: 5px;
-  font-size: 10px; font-family: 'Geist Mono', monospace;
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 10px; font-weight: 600; font-family: 'Geist Mono', monospace;
   padding: 2px 8px; border-radius: 20px; white-space: nowrap;
+  letter-spacing: 0.02em;
 }
-.conf-band.hypothesis { background: rgba(201,168,76,0.18); color: var(--amber); border: 1px solid rgba(201,168,76,0.3); }
-.conf-band.suggestive { background: var(--c-def-dim); color: var(--c-def); border: 1px solid rgba(91,140,186,0.25); }
-.conf-band.strongly   { background: rgba(74,156,122,0.18); color: var(--c-proto); border: 1px solid rgba(74,156,122,0.3); }
-.conf-band.validated  { background: rgba(74,156,122,0.25); color: #5DD9A4; border: 1px solid rgba(74,156,122,0.45); }
+.conf-band.hypothesis { background: rgba(201,168,76,0.12); color: var(--amber); border: 1px solid rgba(201,168,76,0.25); }
+.conf-band.suggestive { background: rgba(91,140,186,0.12); color: var(--c-def); border: 1px solid rgba(91,140,186,0.25); }
+.conf-band.strongly   { background: rgba(74,156,122,0.12); color: var(--c-proto); border: 1px solid rgba(74,156,122,0.25); }
+.conf-band.validated  { background: rgba(74,156,122,0.18); color: #5FD4A3; border: 1px solid rgba(74,156,122,0.4); }
+
+/* Module color context — when overlay is open, non-active colors recede */
+.node-overlay .muted-color { color: var(--text-3) !important; }
 
 /* ── UTILITY ─────────────────────────────────────────────────── */
 .color-green { color: var(--c-proto); }
@@ -691,7 +799,7 @@ html.light ::-webkit-scrollbar-thumb { background: var(--surface-4); }
   display: flex; flex-direction: column;
   align-items: center; justify-content: center;
   opacity: 0; pointer-events: none;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.18s ease-out;
   backdrop-filter: blur(6px);
 }
 .node-overlay.open { opacity: 1; pointer-events: all; }
@@ -706,12 +814,9 @@ html.light ::-webkit-scrollbar-thumb { background: var(--surface-4); }
   display: flex; flex-direction: column;
   overflow: hidden;
   box-shadow: 0 24px 64px rgba(0,0,0,0.45), 0 4px 16px rgba(0,0,0,0.2);
-  animation: panel-in 0.25s ease;
+  animation: panel-in 0.18s ease-out;
 }
-@keyframes panel-in {
-  from { opacity: 0; transform: translateY(10px) scale(0.98); }
-  to   { opacity: 1; transform: translateY(0) scale(1); }
-}
+
 
 .no-header {
   padding: 20px 28px 16px;
@@ -719,13 +824,14 @@ html.light ::-webkit-scrollbar-thumb { background: var(--surface-4); }
   display: flex; align-items: center; justify-content: space-between;
   flex-shrink: 0;
   border-radius: 14px 14px 0 0;
+  background: linear-gradient(180deg, var(--surface-2) 0%, var(--surface-1) 100%);
 }
 .no-title { display: flex; align-items: center; gap: 12px; }
 .no-icon-badge {
   width: 38px; height: 38px; border-radius: 10px;
   display: flex; align-items: center; justify-content: center; flex-shrink: 0;
 }
-.no-name { font-size: 16px; font-weight: 600; color: var(--text-1); }
+.no-name { font-size: 17px; font-weight: 600; color: var(--text-1); }
 .no-sub  { font-size: 12px; color: var(--text-3); margin-top: 2px; }
 .no-close {
   width: 32px; height: 32px; border-radius: 8px;
@@ -749,15 +855,15 @@ html.light ::-webkit-scrollbar-thumb { background: var(--surface-4); }
 .no-body::-webkit-scrollbar { width: 3px; }
 .no-body::-webkit-scrollbar-thumb { background: var(--surface-4); border-radius: 2px; }
 .no-card {
-  background: var(--surface-2); border: 1px solid var(--border-s);
+  background: var(--surface-2);
   border-radius: 10px; padding: 16px 18px;
 }
 .no-card.span2 { grid-column: 1 / -1; }
 .no-card.accent-left { border-left-width: 3px; }
-.no-card-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-3); margin-bottom: 6px; }
+.no-card-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.12em; font-weight: 500; color: var(--text-3); margin-bottom: 6px; }
 .no-card-value { font-size: 13px; color: var(--text-1); line-height: 1.5; }
 .no-card-sub   { font-size: 11px; color: var(--text-3); margin-top: 5px; line-height: 1.4; }
-.no-card-num   { font-family: 'Geist Mono', monospace; font-size: 26px; font-weight: 500; color: var(--text-1); }
+.no-card-num   { font-family: 'Geist Mono', monospace; font-size: 28px; font-weight: 700; color: var(--text-1); }
 .no-bar { height: 3px; background: var(--surface-4); border-radius: 2px; margin-top: 8px; overflow: hidden; }
 .no-bar-fill { height: 100%; border-radius: 2px; transition: width 0.8s ease; }
 .no-locked {
@@ -820,7 +926,7 @@ html.light ::-webkit-scrollbar-thumb { background: var(--surface-4); }
 .lr-callout-sowhat { border-left: 3px solid var(--amber); }
 .lr-callout-sowhat .lr-callout-label { color: var(--amber); }
 .lr-stat-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-bottom: 8px; }
-.lr-stat { background: var(--surface-2); border: 1px solid var(--border-s); border-radius: 8px; padding: 12px 14px; text-align: center; }
+.lr-stat { background: var(--surface-2); border-radius: 8px; padding: 12px 14px; text-align: center; }
 .lr-stat-num { font-family: 'Geist Mono', monospace; font-size: 18px; font-weight: 700; margin-bottom: 3px; }
 .lr-stat-label { font-size: 9px; color: var(--text-3); text-transform: uppercase; letter-spacing: 0.08em; }
 .lr-finding {
@@ -863,7 +969,7 @@ html.light ::-webkit-scrollbar-thumb { background: var(--surface-4); }
   min-width: 24px; padding-top: 2px;
 }
 .lr-opp-body { flex: 1; }
-.lr-opp-title { font-size: 13px; font-weight: 600; color: var(--text-1); margin-bottom: 4px; }
+.lr-opp-title { font-size: 13px; font-weight: 700; color: var(--text-1); margin-bottom: 4px; }
 .lr-opp-desc { font-size: 11px; color: var(--text-2); line-height: 1.5; margin-bottom: 8px; }
 .lr-opp-bar-wrap { display: flex; align-items: center; gap: 8px; }
 .lr-opp-bar { flex: 1; height: 3px; background: var(--surface-4); border-radius: 2px; overflow: hidden; }
@@ -892,13 +998,13 @@ html.light ::-webkit-scrollbar-thumb { background: var(--surface-4); }
 .jtbd-tab.active { background: var(--surface-1); color: var(--text-1); box-shadow: 0 1px 4px rgba(0,0,0,0.15); }
 
 /* ── JTBD schedule UI ────────────────────────────────────────── */
-.sched-row { display: flex; align-items: center; gap: 12px; padding: 11px 14px; border-radius: 8px; background: var(--surface-2); border: 1px solid var(--border-d); }
+.sched-row { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 8px; background: var(--surface-2); border: 1px solid var(--border-d); }
 .sched-avatar { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; flex-shrink: 0; }
 .sched-meta { flex: 1; min-width: 0; }
 .sched-name { font-size: 13px; font-weight: 600; color: var(--text-1); }
 .sched-time { font-size: 11px; color: var(--text-3); margin-top: 1px; font-family: 'Geist Mono', monospace; }
 .sched-badge { font-size: 10px; font-weight: 600; padding: 3px 9px; border-radius: 20px; white-space: nowrap; flex-shrink: 0; }
-.sched-slot { border: 1px dashed var(--border-d); border-radius: 8px; padding: 11px 14px; display: flex; align-items: center; gap: 10px; color: var(--text-3); font-size: 12px; cursor: pointer; transition: border-color 0.15s; }
+.sched-slot { border: 1px dashed var(--border-d); border-radius: 8px; padding: 12px 14px; display: flex; align-items: center; gap: 10px; color: var(--text-3); font-size: 12px; cursor: pointer; transition: border-color 0.15s; }
 .sched-slot:hover { border-color: var(--c-jtbd); color: var(--c-jtbd); }
 .sched-recruit-card { background: rgba(139,107,174,0.06); border: 1px solid rgba(139,107,174,0.2); border-radius: 10px; padding: 14px 16px; }
 
@@ -1022,7 +1128,7 @@ html.light ::-webkit-scrollbar-thumb { background: var(--surface-4); }
 .chat-msg.ai .chat-sender   { color: var(--amber); }
 .chat-msg.user .chat-sender { color: var(--text-3); }
 .chat-bubble {
-  padding: 9px 12px; font-size: 12.5px; line-height: 1.55; max-width: 90%;
+  padding: 8px 12px; font-size: 12.5px; line-height: 1.55; max-width: 90%;
 }
 .chat-msg.ai .chat-bubble {
   background: var(--surface-2); border: 1px solid var(--border-s);
@@ -1066,6 +1172,32 @@ html.light ::-webkit-scrollbar-thumb { background: var(--surface-4); }
   white-space: nowrap;
 }
 .cic-de-btn:hover { background: rgba(201,168,76,0.25); }
+
+/* ── RIGHT PANEL CONTENT WRAPPER ────────────────────────────── */
+#rp-content { display: flex; flex-direction: column; flex: 1; overflow: hidden; min-height: 0; }
+#rpanel-chat-section { flex: 1; display: flex; flex-direction: column; overflow: hidden; min-height: 0; }
+
+/* ── CMD PALETTE (new) ───────────────────────────────────────── */
+#cmdpalette { opacity: 0; pointer-events: none; transition: opacity 0.15s ease-out; }
+#cmdpalette.open { opacity: 1; pointer-events: all; }
+.cmd-group-label {
+  font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em;
+  color: var(--text-4); padding: 8px 12px 4px;
+  font-family: 'Geist Mono', monospace;
+}
+.cmd-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 10px 12px; border-radius: 8px; cursor: pointer;
+  transition: background 0.08s ease;
+}
+.cmd-item:hover, .cmd-item.active { background: var(--surface-3); }
+.cmd-icon {
+  width: 28px; height: 28px; border-radius: 7px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 700; flex-shrink: 0;
+}
+.cmd-label { font-size: 13px; font-weight: 500; color: var(--text-1); flex: 1; }
+.cmd-sub { font-size: 11px; color: var(--text-4); white-space: nowrap; }
 
 </style>
 </head>
@@ -1150,6 +1282,12 @@ html.light ::-webkit-scrollbar-thumb { background: var(--surface-4); }
     <span class="header-sep">›</span>
     <span class="header-title">SMB Account Acquisition</span>
     <div class="header-status">
+      <button onclick="openCmdK()" title="Command palette (⌘K)"
+        style="margin-right:8px;display:flex;align-items:center;gap:6px;font-size:11px;color:var(--text-3);background:var(--surface-2);border:1px solid var(--border-d);border-radius:7px;padding:5px 10px;cursor:pointer;font-family:'Geist Mono',monospace;transition:all 0.15s"
+        onmouseover="this.style.borderColor='var(--border-a)';this.style.color='var(--text-2)'"
+        onmouseout="this.style.borderColor='var(--border-d)';this.style.color='var(--text-3)'">
+        ⌘K
+      </button>
       <div class="status-dot active"></div>
       <span class="status-text">Active Discovery</span>
       <span class="weeks-badge">Week 8</span>
@@ -1376,32 +1514,51 @@ html.light ::-webkit-scrollbar-thumb { background: var(--surface-4); }
     <span style="font-size:10px;color:var(--c-proto);display:flex;align-items:center;gap:4px"><span style="width:6px;height:6px;border-radius:50%;background:var(--c-proto);display:inline-block;animation:pulse-dot 2s infinite"></span>Live</span>
   </div>
 
-  <div style="font-size:10px;color:var(--text-3);padding:6px 20px;background:var(--surface-2);border-bottom:1px solid var(--border-s);display:flex;align-items:center;gap:8px">
+  <div style="font-size:10px;color:var(--text-3);padding:5px 16px;background:var(--surface-2);border-bottom:1px solid var(--border-s);display:flex;align-items:center;gap:8px">
     <span style="width:5px;height:5px;border-radius:50%;background:var(--c-jtbd);display:inline-block;animation:pulse 2s ease-in-out infinite;flex-shrink:0"></span>
-    <span style="font-family:'Geist Mono',monospace">JTBD Agent synthesising cluster 2 · Causal Agent on standby</span>
-    <button id="synth-now-btn" onclick="this.style.animation='none';this.textContent='Queued ✓';this.style.background='rgba(74,156,122,0.15)';this.style.color='var(--c-proto)';this.style.borderColor='rgba(74,156,122,0.3)'" style="margin-left:auto;font-size:10px;font-weight:600;padding:3px 10px;border-radius:20px;border:1px solid rgba(201,168,76,0.4);background:var(--amber-dim);color:var(--amber);cursor:pointer;font-family:'Instrument Sans',sans-serif;animation:de-glow 2s ease-in-out infinite;flex-shrink:0">✦ Synthesise Now</button>
+    <span style="font-family:'Geist Mono',monospace">JTBD Agent · synthesising cluster 2</span>
+    <button id="synth-now-btn" onclick="this.style.animation='none';this.textContent='Queued ✓';this.style.background='rgba(74,156,122,0.15)';this.style.color='var(--c-proto)';this.style.borderColor='rgba(74,156,122,0.3)'" style="margin-left:auto;font-size:10px;font-weight:600;padding:3px 10px;border-radius:20px;border:1px solid rgba(201,168,76,0.4);background:var(--amber-dim);color:var(--amber);cursor:pointer;font-family:'Instrument Sans',sans-serif;animation:de-glow 2s ease-in-out infinite;flex-shrink:0;letter-spacing:0.02em">✦ Synthesise Now</button>
+  </div>
+
+  <!-- ── Skeleton loader (shown briefly on node switch) ── -->
+  <div id="rpanel-skeleton" style="display:none;padding:20px">
+    <div class="skeleton skeleton-title"></div>
+    <div class="skeleton skeleton-line w-80"></div>
+    <div class="skeleton skeleton-line w-60"></div>
+    <div class="skeleton skeleton-line w-80"></div>
+    <div style="height:16px"></div>
+    <div class="skeleton skeleton-line w-40"></div>
+    <div class="skeleton skeleton-line w-60"></div>
+    <div class="skeleton skeleton-line w-40"></div>
   </div>
 
   <!-- ── Full-height chat ── -->
   <div id="rpanel-chat-section">
 
-    <!-- This Week in Discovery -->
-    <div style="padding:12px 20px 10px;border-bottom:1px solid var(--border-s);flex-shrink:0;background:var(--surface-2)">
-      <div style="font-size:9px;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-3);margin-bottom:8px">This Week in Discovery</div>
-      <div style="display:flex;flex-direction:column;gap:5px">
-        <div style="display:flex;align-items:center;gap:8px">
-          <span style="width:6px;height:6px;border-radius:50%;background:var(--c-jtbd);flex-shrink:0;display:inline-block"></span>
-          <span style="font-size:11px;color:var(--text-2)">2 interviews scheduled this week</span>
-        </div>
-        <div style="display:flex;align-items:center;gap:8px">
-          <span style="width:6px;height:6px;border-radius:50%;background:var(--amber);flex-shrink:0;display:inline-block;animation:pulse-dot 2s infinite"></span>
-          <span style="font-size:11px;color:var(--text-2)">1 synthesis pending · Causal Agent on standby</span>
-        </div>
-        <div style="display:flex;align-items:center;gap:8px">
-          <span style="width:6px;height:6px;border-radius:50%;background:var(--c-proto);flex-shrink:0;display:inline-block"></span>
-          <span style="font-size:11px;color:var(--text-2)">OST score <span style="color:var(--c-proto)">+8pts</span> since last week</span>
-        </div>
+    <!-- Initial skeleton loader (dismissed after 800ms) -->
+    <div id="rp-skeleton" style="padding:20px;display:flex;flex-direction:column;gap:12px">
+      <div class="skeleton" style="height:14px;width:60%;margin-bottom:4px"></div>
+      <div class="skeleton" style="height:11px;width:100%"></div>
+      <div class="skeleton" style="height:11px;width:88%"></div>
+      <div class="skeleton" style="height:11px;width:72%"></div>
+      <div style="margin-top:8px;display:flex;flex-direction:column;gap:8px">
+        <div class="skeleton" style="height:64px;width:100%;border-radius:8px"></div>
+        <div class="skeleton" style="height:64px;width:100%;border-radius:8px"></div>
       </div>
+    </div>
+
+    <!-- Content wrapper (hidden until skeleton dismisses) -->
+    <div id="rp-content" style="display:none;flex-direction:column;flex:1;overflow:hidden;min-height:0">
+
+    <!-- This Week in Discovery -->
+    <div style="padding:12px 20px;border-bottom:1px solid var(--border-s);display:flex;gap:8px;flex-wrap:wrap;flex-shrink:0">
+      <span style="font-size:10px;font-family:'Geist Mono',monospace;color:var(--text-3);padding:3px 8px;background:var(--surface-2);border-radius:20px;display:flex;align-items:center;gap:4px">
+        <span style="width:5px;height:5px;border-radius:50%;background:var(--c-jtbd);display:inline-block"></span>2 interviews scheduled
+      </span>
+      <span style="font-size:10px;font-family:'Geist Mono',monospace;color:var(--text-3);padding:3px 8px;background:var(--surface-2);border-radius:20px;display:flex;align-items:center;gap:4px">
+        <span style="width:5px;height:5px;border-radius:50%;background:var(--amber);display:inline-block;animation:pulse-dot 2s infinite"></span>1 synthesis pending
+      </span>
+      <span style="font-size:10px;font-family:'Geist Mono',monospace;color:var(--c-proto);padding:3px 8px;background:var(--c-proto-dim);border-radius:20px">↑ OST +8pts</span>
     </div>
 
     <div id="chat-messages">
@@ -1462,6 +1619,7 @@ html.light ::-webkit-scrollbar-thumb { background: var(--surface-4); }
         </button>
       </div>
     </div>
+    </div><!-- end rp-content -->
   </div>
 
 </aside>
@@ -1584,7 +1742,7 @@ html.light ::-webkit-scrollbar-thumb { background: var(--surface-4); }
   <div class="no-panel">
   <div class="no-header">
     <div class="no-title">
-      <div class="no-icon-badge" style="background:var(--c-def-dim)">
+      <div class="no-icon-badge" style="background:var(--c-def-dim);box-shadow:0 0 0 1px rgba(91,140,186,0.3)">
         <svg width="20" height="20" viewBox="-10 -10 20 20" fill="none" stroke="var(--c-def)" stroke-width="1.6" stroke-linecap="round">
           <path d="M-9,0 C-5,-6 5,-6 9,0 C5,6 -5,6 -9,0Z"/>
           <circle cx="0" cy="0" r="2.8" fill="var(--c-def)" stroke="none"/>
@@ -1775,25 +1933,25 @@ html.light ::-webkit-scrollbar-thumb { background: var(--surface-4); }
       <!-- Struggling Moments Identified -->
       <div style="font-size:9px;text-transform:uppercase;letter-spacing:0.1em;color:var(--c-causal);margin-bottom:10px">Struggling Moments Identified · 3 of 8 interviews</div>
       <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:20px">
-        <div style="background:var(--surface-2);border:1px solid rgba(192,96,128,0.3);border-left:3px solid var(--c-causal);border-radius:8px;padding:10px 12px">
-          <div style="font-size:10px;color:var(--c-causal);font-weight:600;margin-bottom:4px">Situation Trigger</div>
-          <div style="font-size:12px;color:var(--text-1);line-height:1.45;margin-bottom:6px">Supplier asked for business account details before signing contract</div>
+        <div style="background:var(--surface-2);border-left:3px solid var(--c-causal);border-radius:8px;padding:10px 12px">
+          <div style="font-size:10px;color:var(--text-3);font-weight:700;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.08em">Situation Trigger</div>
+          <div style="font-size:12px;color:var(--text-1);font-weight:700;line-height:1.45;margin-bottom:6px">Supplier asked for business account details before signing contract</div>
           <div style="display:flex;gap:8px;flex-wrap:wrap">
             <span style="font-size:10px;padding:2px 8px;background:rgba(192,96,128,0.1);color:var(--c-causal);border-radius:12px">Emotional state: dread + shame</span>
             <span style="font-size:10px;padding:2px 8px;background:var(--surface-3);color:var(--text-3);border-radius:12px">Sarah M. · Interview #1</span>
           </div>
         </div>
-        <div style="background:var(--surface-2);border:1px solid rgba(192,96,128,0.3);border-left:3px solid var(--c-causal);border-radius:8px;padding:10px 12px">
-          <div style="font-size:10px;color:var(--c-causal);font-weight:600;margin-bottom:4px">Situation Trigger</div>
-          <div style="font-size:12px;color:var(--text-1);line-height:1.45;margin-bottom:6px">Accountant said "you should really have a business account by now"</div>
+        <div style="background:var(--surface-2);border-left:3px solid var(--c-causal);border-radius:8px;padding:10px 12px">
+          <div style="font-size:10px;color:var(--text-3);font-weight:700;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.08em">Situation Trigger</div>
+          <div style="font-size:12px;color:var(--text-1);font-weight:700;line-height:1.45;margin-bottom:6px">Accountant said "you should really have a business account by now"</div>
           <div style="display:flex;gap:8px;flex-wrap:wrap">
             <span style="font-size:10px;padding:2px 8px;background:rgba(192,96,128,0.1);color:var(--c-causal);border-radius:12px">Emotional state: inadequacy + urgency</span>
             <span style="font-size:10px;padding:2px 8px;background:var(--surface-3);color:var(--text-3);border-radius:12px">James K. · Interview #2</span>
           </div>
         </div>
-        <div style="background:var(--surface-2);border:1px solid rgba(192,96,128,0.3);border-left:3px solid var(--c-causal);border-radius:8px;padding:10px 12px">
-          <div style="font-size:10px;color:var(--c-causal);font-weight:600;margin-bottom:4px">Situation Trigger</div>
-          <div style="font-size:12px;color:var(--text-1);line-height:1.45;margin-bottom:6px">Applied online, got to document upload step, then closed the browser</div>
+        <div style="background:var(--surface-2);border-left:3px solid var(--c-causal);border-radius:8px;padding:10px 12px">
+          <div style="font-size:10px;color:var(--text-3);font-weight:700;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.08em">Situation Trigger</div>
+          <div style="font-size:12px;color:var(--text-1);font-weight:700;line-height:1.45;margin-bottom:6px">Applied online, got to document upload step, then closed the browser</div>
           <div style="display:flex;gap:8px;flex-wrap:wrap">
             <span style="font-size:10px;padding:2px 8px;background:rgba(192,96,128,0.1);color:var(--c-causal);border-radius:12px">Emotional state: overwhelm + rejection fear</span>
             <span style="font-size:10px;padding:2px 8px;background:var(--surface-3);color:var(--text-3);border-radius:12px">Priya D. · Interview #3</span>
@@ -1837,7 +1995,7 @@ html.light ::-webkit-scrollbar-thumb { background: var(--surface-4); }
   <div class="no-panel">
   <div class="no-header">
     <div class="no-title">
-      <div class="no-icon-badge" style="background:var(--c-jtbd-dim)">
+      <div class="no-icon-badge" style="background:var(--c-jtbd-dim);box-shadow:0 0 0 1px rgba(139,107,174,0.3)">
         <svg width="20" height="20" viewBox="-10 -10 20 20" fill="none" stroke="var(--c-jtbd)" stroke-width="1.6" stroke-linecap="round">
           <circle cx="0" cy="-4.5" r="3.2" stroke="var(--c-jtbd)"/>
           <path d="M-6.5,7 C-6.5,1 -3,-1 0,-1 C3,-1 6.5,1 6.5,7"/>
@@ -1883,12 +2041,12 @@ html.light ::-webkit-scrollbar-thumb { background: var(--surface-4); }
     <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-4);margin-bottom:14px">Thematic Clusters · 8 interviews · each cluster → one JTBD statement</div>
 
     <!-- ── CLUSTER 1: Approval Anxiety ── -->
-    <div class="jtbd-cluster" style="margin-bottom:20px;border:1px solid rgba(139,107,174,0.3);border-left:4px solid var(--c-jtbd);border-radius:10px;overflow:hidden">
+    <div class="jtbd-cluster" style="margin-bottom:20px;border-left:4px solid var(--c-jtbd);border-radius:10px;overflow:hidden;background:rgba(139,107,174,0.04)">
 
       <!-- Cluster header -->
       <div style="background:rgba(139,107,174,0.1);padding:12px 16px;display:flex;align-items:center;justify-content:space-between">
         <div>
-          <div style="font-size:12px;font-weight:700;color:var(--c-jtbd);letter-spacing:0.01em">Cluster 1 · Approval Anxiety</div>
+          <div style="font-size:13px;font-weight:700;color:var(--c-jtbd);letter-spacing:0.01em">Cluster 1 · Approval Anxiety</div>
           <div style="font-size:11px;color:var(--text-3);margin-top:2px">Fear of rejection before committing time and effort</div>
         </div>
         <span style="font-size:10px;font-family:'Geist Mono',monospace;color:var(--c-proto);background:rgba(74,156,122,0.12);padding:2px 8px;border-radius:20px;white-space:nowrap">Saturated · 6/8 interviews</span>
@@ -1914,9 +2072,9 @@ html.light ::-webkit-scrollbar-thumb { background: var(--surface-4); }
         </div>
 
         <!-- JTBD Statement (derived) -->
-        <div style="background:rgba(139,107,174,0.08);border:1px solid rgba(139,107,174,0.25);border-radius:8px;padding:12px 14px">
+        <div style="background:rgba(139,107,174,0.08);border-left:3px solid var(--c-jtbd);border-radius:8px;padding:12px 14px">
           <div style="font-size:9px;text-transform:uppercase;letter-spacing:0.09em;color:var(--c-jtbd);margin-bottom:7px">→ JTBD Statement · Validated ✓ · <span class="conf-band strongly">Strongly Supported · 74%</span></div>
-          <div class="no-quote" style="font-size:13px;line-height:1.55">"When applying for a business account, I want to know I'll be approved before I start gathering documents, so I don't waste time or feel like a failure in front of my suppliers." <span onclick="return false" style="display:inline-flex;align-items:center;gap:3px;font-size:10px;background:var(--surface-3);color:var(--text-3);padding:1px 7px;border-radius:10px;cursor:pointer;margin-left:4px;font-family:'Geist Mono',monospace">📎 6 sources</span></div>
+          <div class="no-quote" style="font-size:14px;font-weight:700;color:var(--text-1);line-height:1.5">"When applying for a business account, I want to know I'll be approved before I start gathering documents, so I don't waste time or feel like a failure in front of my suppliers." <span onclick="return false" style="display:inline-flex;align-items:center;gap:3px;font-size:10px;background:var(--surface-3);color:var(--text-3);padding:1px 7px;border-radius:10px;cursor:pointer;margin-left:4px;font-family:'Geist Mono',monospace;font-weight:400">📎 6 sources</span></div>
           <div style="height:3px;background:var(--surface-4);border-radius:2px;overflow:hidden;margin-top:10px"><div style="width:74%;height:100%;background:var(--c-jtbd);border-radius:2px"></div></div>
           <div style="font-size:11px;color:var(--text-3);margin-top:5px">6 citations · approval uncertainty · application abandonment</div>
         </div>
@@ -1925,12 +2083,12 @@ html.light ::-webkit-scrollbar-thumb { background: var(--surface-4); }
     </div>
 
     <!-- ── CLUSTER 2: Process Friction ── -->
-    <div class="jtbd-cluster" style="margin-bottom:20px;border:1px solid rgba(192,96,128,0.3);border-left:4px solid var(--c-causal);border-radius:10px;overflow:hidden">
+    <div class="jtbd-cluster" style="margin-bottom:20px;border-left:4px solid var(--c-causal);border-radius:10px;overflow:hidden;background:rgba(192,96,128,0.04)">
 
       <!-- Cluster header -->
       <div style="background:rgba(192,96,128,0.08);padding:12px 16px;display:flex;align-items:center;justify-content:space-between">
         <div>
-          <div style="font-size:12px;font-weight:700;color:var(--c-causal);letter-spacing:0.01em">Cluster 2 · Process Friction</div>
+          <div style="font-size:13px;font-weight:700;color:var(--c-causal);letter-spacing:0.01em">Cluster 2 · Process Friction</div>
           <div style="font-size:11px;color:var(--text-3);margin-top:2px">Document gathering felt like a qualification test, not admin</div>
         </div>
         <span style="font-size:10px;font-family:'Geist Mono',monospace;color:var(--amber);background:var(--amber-dim);padding:2px 8px;border-radius:20px;white-space:nowrap">Emerging · 5/8 interviews</span>
@@ -1955,7 +2113,7 @@ html.light ::-webkit-scrollbar-thumb { background: var(--surface-4); }
         </div>
 
         <!-- JTBD Statement (derived) -->
-        <div style="background:rgba(192,96,128,0.06);border:1px solid rgba(192,96,128,0.2);border-radius:8px;padding:12px 14px">
+        <div style="background:rgba(192,96,128,0.06);border-left:3px solid var(--c-causal);border-radius:8px;padding:12px 14px">
           <div style="font-size:9px;text-transform:uppercase;letter-spacing:0.09em;color:var(--c-causal);margin-bottom:7px">→ JTBD Statement · ⧗ Pending Review · <span class="conf-band suggestive">Suggestive · 51%</span></div>
           <div class="no-quote" style="font-size:13px;line-height:1.55;color:var(--text-2)">"When I start a business account application, I want to know exactly what documents I'll need before I begin, so I can prepare everything at once and not feel like I'm being tested mid-process."</div>
           <div style="height:3px;background:var(--surface-4);border-radius:2px;overflow:hidden;margin-top:10px"><div style="width:51%;height:100%;background:var(--amber);border-radius:2px"></div></div>
@@ -1966,12 +2124,12 @@ html.light ::-webkit-scrollbar-thumb { background: var(--surface-4); }
     </div>
 
     <!-- ── CLUSTER 3: Status Signaling ── -->
-    <div class="jtbd-cluster" style="margin-bottom:20px;border:1px solid var(--border-d);border-left:4px solid var(--c-def);border-radius:10px;overflow:hidden;opacity:0.75">
+    <div class="jtbd-cluster" style="margin-bottom:20px;border-left:4px solid var(--c-def);border-radius:10px;overflow:hidden;opacity:0.75;background:rgba(91,140,186,0.03)">
 
       <!-- Cluster header -->
       <div style="background:rgba(91,140,186,0.06);padding:12px 16px;display:flex;align-items:center;justify-content:space-between">
         <div>
-          <div style="font-size:12px;font-weight:700;color:var(--c-def);letter-spacing:0.01em">Cluster 3 · Status Signaling</div>
+          <div style="font-size:13px;font-weight:700;color:var(--c-def);letter-spacing:0.01em">Cluster 3 · Status Signaling</div>
           <div style="font-size:11px;color:var(--text-3);margin-top:2px">Approval signals legitimacy to peers and suppliers</div>
         </div>
         <span style="font-size:10px;font-family:'Geist Mono',monospace;color:var(--text-3);background:var(--surface-3);padding:2px 8px;border-radius:20px;white-space:nowrap">Weak signal · 3/8 interviews</span>
@@ -1994,7 +2152,7 @@ html.light ::-webkit-scrollbar-thumb { background: var(--surface-4); }
         </div>
 
         <!-- JTBD Statement (derived) -->
-        <div style="background:rgba(91,140,186,0.05);border:1px solid rgba(91,140,186,0.18);border-radius:8px;padding:12px 14px">
+        <div style="background:rgba(91,140,186,0.05);border-left:3px solid var(--c-def);border-radius:8px;padding:12px 14px">
           <div style="font-size:9px;text-transform:uppercase;letter-spacing:0.09em;color:var(--c-def);margin-bottom:7px">→ JTBD Statement · Emerging · <span class="conf-band hypothesis">Hypothesis · 38%</span></div>
           <div class="no-quote" style="font-size:13px;line-height:1.55;color:var(--text-2)">"When I get approved, I want to be able to tell my accountant and suppliers, so they see me as a serious and legitimate business owner."</div>
           <div style="height:3px;background:var(--surface-4);border-radius:2px;overflow:hidden;margin-top:10px"><div style="width:38%;height:100%;background:var(--c-def);border-radius:2px"></div></div>
@@ -2009,22 +2167,22 @@ html.light ::-webkit-scrollbar-thumb { background: var(--surface-4); }
       <div style="font-size:9px;text-transform:uppercase;letter-spacing:0.1em;color:var(--c-jtbd);margin-bottom:12px">Four Forces Analysis · Interview #7 · Sarah M.</div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
         <!-- Push -->
-        <div style="background:var(--surface-2);border:1px solid var(--border-d);border-left:3px solid var(--c-causal);border-radius:8px;padding:10px 12px">
+        <div style="background:var(--surface-2);border-left:3px solid var(--c-causal);border-radius:8px;padding:10px 12px">
           <div style="font-size:9px;text-transform:uppercase;letter-spacing:0.09em;color:var(--c-causal);font-weight:700;margin-bottom:6px">Push · Away from status quo</div>
           <div style="font-size:11px;color:var(--text-2);line-height:1.5">"My accountant keeps reminding me I should have this sorted."</div>
         </div>
         <!-- Pull -->
-        <div style="background:var(--surface-2);border:1px solid var(--border-d);border-left:3px solid var(--c-proto);border-radius:8px;padding:10px 12px">
+        <div style="background:var(--surface-2);border-left:3px solid var(--c-proto);border-radius:8px;padding:10px 12px">
           <div style="font-size:9px;text-transform:uppercase;letter-spacing:0.09em;color:var(--c-proto);font-weight:700;margin-bottom:6px">Pull · Toward the new solution</div>
           <div style="font-size:11px;color:var(--text-2);line-height:1.5">"I'd feel like a real business if I had a proper account."</div>
         </div>
         <!-- Anxiety -->
-        <div style="background:var(--surface-2);border:1px solid var(--border-d);border-left:3px solid var(--amber);border-radius:8px;padding:10px 12px">
+        <div style="background:var(--surface-2);border-left:3px solid var(--amber);border-radius:8px;padding:10px 12px">
           <div style="font-size:9px;text-transform:uppercase;letter-spacing:0.09em;color:var(--amber);font-weight:700;margin-bottom:6px">Anxiety · Fears about the new</div>
           <div style="font-size:11px;color:var(--text-2);line-height:1.5">"What if they say no? I'd feel like I'd failed before even starting."</div>
         </div>
         <!-- Habit -->
-        <div style="background:var(--surface-2);border:1px solid var(--border-d);border-left:3px solid var(--c-def);border-radius:8px;padding:10px 12px">
+        <div style="background:var(--surface-2);border-left:3px solid var(--c-def);border-radius:8px;padding:10px 12px">
           <div style="font-size:9px;text-transform:uppercase;letter-spacing:0.09em;color:var(--c-def);font-weight:700;margin-bottom:6px">Habit · Comfort of the old</div>
           <div style="font-size:11px;color:var(--text-2);line-height:1.5">"I've been using my personal account for everything — it works fine."</div>
         </div>
@@ -2176,12 +2334,12 @@ html.light ::-webkit-scrollbar-thumb { background: var(--surface-4); }
       <div style="font-size:11px;font-weight:700;color:var(--c-jtbd);margin-bottom:8px">Participant Recruitment</div>
       <div style="font-size:12px;color:var(--text-2);line-height:1.5;margin-bottom:12px">Noetic recommends recruiting participants matching the Process Friction profile: ABN 6–18 months, applied for a business account and abandoned before document upload, industry: trades or services.</div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
-        <div style="background:var(--surface-2);border-radius:8px;padding:10px 12px;border:1px solid var(--border-d)">
+        <div style="background:var(--surface-2);border-radius:8px;padding:10px 12px">
           <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.09em;color:var(--text-4);margin-bottom:4px">Screened pool</div>
           <div style="font-size:18px;font-weight:700;color:var(--text-1)">23</div>
           <div style="font-size:11px;color:var(--text-3)">candidates available</div>
         </div>
-        <div style="background:var(--surface-2);border-radius:8px;padding:10px 12px;border:1px solid var(--border-d)">
+        <div style="background:var(--surface-2);border-radius:8px;padding:10px 12px">
           <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.09em;color:var(--text-4);margin-bottom:4px">Incentive</div>
           <div style="font-size:18px;font-weight:700;color:var(--text-1)">$75</div>
           <div style="font-size:11px;color:var(--text-3)">gift card per session</div>
@@ -2200,7 +2358,7 @@ html.light ::-webkit-scrollbar-thumb { background: var(--surface-4); }
   <div class="no-panel">
   <div class="no-header">
     <div class="no-title">
-      <div class="no-icon-badge" style="background:var(--c-causal-dim)">
+      <div class="no-icon-badge" style="background:var(--c-causal-dim);box-shadow:0 0 0 1px rgba(192,96,128,0.3)">
         <svg width="20" height="20" viewBox="-10 -10 20 20" fill="var(--c-causal)" stroke="none">
           <circle cx="0" cy="-5.5" r="2.5"/>
           <circle cx="-6" cy="4" r="2.5"/>
@@ -2229,8 +2387,8 @@ html.light ::-webkit-scrollbar-thumb { background: var(--surface-4); }
     <!-- Mechanism 1 with counterfactual test -->
     <div class="no-card span2" style="border-left:3px solid var(--c-causal);margin-top:8px">
       <div class="no-card-label">Root Cause Mechanism · <span class="conf-band strongly">Strongly Supported · 67%</span></div>
-      <div class="no-card-value">Approval uncertainty → application abandonment</div>
-      <div class="no-card-sub">Mechanism: applicants cannot assess eligibility before committing documents → perceived risk of public rejection → exit <span onclick="return false" style="display:inline-flex;align-items:center;gap:3px;font-size:10px;background:var(--surface-3);color:var(--text-3);padding:1px 7px;border-radius:10px;cursor:pointer;margin-left:6px;font-family:'Geist Mono',monospace">📎 6 sources</span></div>
+      <div class="no-card-value" style="font-weight:700;color:var(--text-1)">Approval uncertainty → application abandonment</div>
+      <div class="no-card-sub" style="font-weight:600;font-size:13px;color:var(--text-2)">Mechanism: applicants cannot assess eligibility before committing documents → perceived risk of public rejection → exit <span onclick="return false" style="display:inline-flex;align-items:center;gap:3px;font-size:10px;background:var(--surface-3);color:var(--text-3);padding:1px 7px;border-radius:10px;cursor:pointer;margin-left:6px;font-family:'Geist Mono',monospace">📎 6 sources</span></div>
       <div style="margin-top:10px;padding:9px 12px;background:var(--surface-3);border-radius:7px;border-left:2px solid var(--c-causal)">
         <div style="font-size:9px;text-transform:uppercase;letter-spacing:0.08em;color:var(--c-causal);margin-bottom:4px">Counterfactual Test</div>
         <div style="font-size:11px;color:var(--text-2);line-height:1.45">If approval uncertainty were removed (e.g., a guaranteed pre-qualification signal shown), would abandonment still occur? → <strong style="color:var(--c-proto)">No — 4/5 prototype participants completed the flow when a pre-qual signal was present.</strong> This distinguishes emotional anxiety from documentation complexity as the primary cause.</div>
@@ -2266,9 +2424,9 @@ html.light ::-webkit-scrollbar-thumb { background: var(--surface-4); }
       <div style="font-size:12px;color:var(--text-2);line-height:1.5;margin-bottom:12px"><strong style="color:var(--text-1)">JTBD Agent</strong> attributes abandonment primarily to <em>approval anxiety (emotional trigger)</em>. <strong style="color:var(--text-1)">Causal Structures Agent</strong> models it as a <em>rational cost-benefit decision (functional trigger)</em>. These frames lead to different solution paths.</div>
       <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.09em;color:var(--text-4);margin-bottom:8px">3 Resolution Scenarios</div>
       <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:12px">
-        <div style="background:var(--surface-2);border-radius:8px;padding:9px 12px;border:1px solid var(--border-d);font-size:12px;color:var(--text-2);line-height:1.4"><strong style="color:var(--text-1)">A)</strong> Emotional trigger fires first, rational trigger amplifies it — solution must address both sequentially.</div>
-        <div style="background:var(--surface-2);border-radius:8px;padding:9px 12px;border:1px solid var(--border-d);font-size:12px;color:var(--text-2);line-height:1.4"><strong style="color:var(--text-1)">B)</strong> Two distinct sub-populations: emotionally-driven (Approval Anxiety cluster) vs. rationally-driven (Process Friction cluster) — different solutions needed.</div>
-        <div style="background:var(--surface-2);border-radius:8px;padding:9px 12px;border:1px solid var(--border-d);font-size:12px;color:var(--text-2);line-height:1.4"><strong style="color:var(--text-1)">C)</strong> Emotional and rational triggers are the same mechanism described differently — one unified solution addresses both.</div>
+        <div style="background:var(--surface-2);border-radius:8px;padding:9px 12px;font-size:12px;color:var(--text-2);line-height:1.4"><strong style="color:var(--text-1)">A)</strong> Emotional trigger fires first, rational trigger amplifies it — solution must address both sequentially.</div>
+        <div style="background:var(--surface-2);border-radius:8px;padding:9px 12px;font-size:12px;color:var(--text-2);line-height:1.4"><strong style="color:var(--text-1)">B)</strong> Two distinct sub-populations: emotionally-driven (Approval Anxiety cluster) vs. rationally-driven (Process Friction cluster) — different solutions needed.</div>
+        <div style="background:var(--surface-2);border-radius:8px;padding:9px 12px;font-size:12px;color:var(--text-2);line-height:1.4"><strong style="color:var(--text-1)">C)</strong> Emotional and rational triggers are the same mechanism described differently — one unified solution addresses both.</div>
       </div>
       <div style="display:flex;gap:8px">
         <button onclick="closeNodeOverlay('causal');openDE()" style="background:var(--amber-dim);color:var(--amber);border:1px solid rgba(201,168,76,0.3);border-radius:8px;padding:8px 14px;font-size:11px;font-weight:600;cursor:pointer;font-family:'Instrument Sans',sans-serif">✦ Pass to DE for Deliberation</button>
@@ -2296,7 +2454,7 @@ html.light ::-webkit-scrollbar-thumb { background: var(--surface-4); }
   <div class="no-panel">
   <div class="no-header">
     <div class="no-title">
-      <div class="no-icon-badge" style="background:var(--c-proto-dim)">
+      <div class="no-icon-badge" style="background:var(--c-proto-dim);box-shadow:0 0 0 1px rgba(74,156,122,0.3)">
         <svg width="20" height="20" viewBox="-10 -10 20 20" fill="none" stroke="var(--c-proto)" stroke-width="1.6" stroke-linecap="round" opacity="0.7">
           <path d="M0,-8 C-4.5,-8 -4.5,-2 -2.5,2 L2.5,2 C4.5,-2 4.5,-8 0,-8Z"/>
           <line x1="-2.5" y1="2" x2="-2.5" y2="5.5"/>
@@ -2336,7 +2494,7 @@ html.light ::-webkit-scrollbar-thumb { background: var(--surface-4); }
     <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-4);margin-bottom:14px">Prototype Concepts</div>
 
     <!-- Concept A: Validated -->
-    <div style="margin-bottom:16px;border:1px solid rgba(74,156,122,0.3);border-left:4px solid var(--c-proto);border-radius:10px;overflow:hidden">
+    <div style="margin-bottom:16px;border-left:4px solid var(--c-proto);border-radius:10px;overflow:hidden;background:rgba(74,156,122,0.03)">
       <div style="background:rgba(74,156,122,0.08);padding:12px 16px;display:flex;align-items:center;justify-content:space-between">
         <div>
           <div style="font-size:12px;font-weight:700;color:var(--c-proto)">Concept A · Pre-Qualification Signal</div>
@@ -2347,17 +2505,17 @@ html.light ::-webkit-scrollbar-thumb { background: var(--surface-4); }
       <div style="padding:14px 16px;display:flex;flex-direction:column;gap:10px">
         <div style="font-size:12px;color:var(--text-2);line-height:1.5">Display a soft approval signal (traffic-light indicator) based on ABN age, industry, and estimated revenue range at the application entry point — before the user commits to document gathering.</div>
         <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px">
-          <div style="background:var(--surface-2);border-radius:8px;padding:10px 12px;border:1px solid var(--border-d)">
+          <div style="background:var(--surface-2);border-radius:8px;padding:10px 12px">
             <div style="font-size:10px;text-transform:uppercase;color:var(--text-4);letter-spacing:0.08em;margin-bottom:4px">Usability Test</div>
             <div style="font-size:16px;font-weight:700;color:var(--c-proto)">5/5</div>
             <div style="font-size:11px;color:var(--text-3)">sessions passed</div>
           </div>
-          <div style="background:var(--surface-2);border-radius:8px;padding:10px 12px;border:1px solid var(--border-d)">
+          <div style="background:var(--surface-2);border-radius:8px;padding:10px 12px">
             <div style="font-size:10px;text-transform:uppercase;color:var(--text-4);letter-spacing:0.08em;margin-bottom:4px">Confidence lift</div>
             <div style="font-size:16px;font-weight:700;color:var(--c-proto)">+68%</div>
             <div style="font-size:11px;color:var(--text-3)">reported by participants</div>
           </div>
-          <div style="background:var(--surface-2);border-radius:8px;padding:10px 12px;border:1px solid var(--border-d)">
+          <div style="background:var(--surface-2);border-radius:8px;padding:10px 12px">
             <div style="font-size:10px;text-transform:uppercase;color:var(--text-4);letter-spacing:0.08em;margin-bottom:4px">MPI Rank</div>
             <div style="font-size:16px;font-weight:700;color:var(--amber)">#1</div>
             <div style="font-size:11px;color:var(--text-3)">of 3 concepts</div>
@@ -2371,7 +2529,7 @@ html.light ::-webkit-scrollbar-thumb { background: var(--surface-4); }
     </div>
 
     <!-- Concept B: In test -->
-    <div style="margin-bottom:16px;border:1px solid rgba(201,168,76,0.3);border-left:4px solid var(--amber);border-radius:10px;overflow:hidden">
+    <div style="margin-bottom:16px;border-left:4px solid var(--amber);border-radius:10px;overflow:hidden;background:rgba(201,168,76,0.03)">
       <div style="background:rgba(201,168,76,0.07);padding:12px 16px;display:flex;align-items:center;justify-content:space-between">
         <div>
           <div style="font-size:12px;font-weight:700;color:var(--amber)">Concept B · Document Readiness Checklist</div>
@@ -2382,12 +2540,12 @@ html.light ::-webkit-scrollbar-thumb { background: var(--surface-4); }
       <div style="padding:14px 16px;display:flex;flex-direction:column;gap:10px">
         <div style="font-size:12px;color:var(--text-2);line-height:1.5">Provide a complete document checklist at the start of the application flow, allowing the user to self-assess readiness before committing time.</div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
-          <div style="background:var(--surface-2);border-radius:8px;padding:10px 12px;border:1px solid var(--border-d)">
+          <div style="background:var(--surface-2);border-radius:8px;padding:10px 12px">
             <div style="font-size:10px;text-transform:uppercase;color:var(--text-4);letter-spacing:0.08em;margin-bottom:4px">Usability Test</div>
             <div style="font-size:16px;font-weight:700;color:var(--amber)">3/5</div>
             <div style="font-size:11px;color:var(--text-3)">sessions — mixed results</div>
           </div>
-          <div style="background:var(--surface-2);border-radius:8px;padding:10px 12px;border:1px solid var(--border-d)">
+          <div style="background:var(--surface-2);border-radius:8px;padding:10px 12px">
             <div style="font-size:10px;text-transform:uppercase;color:var(--text-4);letter-spacing:0.08em;margin-bottom:4px">MPI Rank</div>
             <div style="font-size:16px;font-weight:700;color:var(--text-2)">#2</div>
             <div style="font-size:11px;color:var(--text-3)">of 3 concepts</div>
@@ -2401,7 +2559,7 @@ html.light ::-webkit-scrollbar-thumb { background: var(--surface-4); }
     </div>
 
     <!-- Concept C: Weak -->
-    <div style="margin-bottom:20px;border:1px solid var(--border-d);border-left:4px solid var(--text-3);border-radius:10px;overflow:hidden;opacity:0.7">
+    <div style="margin-bottom:20px;border-left:4px solid var(--text-3);border-radius:10px;overflow:hidden;opacity:0.7;background:var(--surface-2)">
       <div style="background:var(--surface-2);padding:12px 16px;display:flex;align-items:center;justify-content:space-between">
         <div>
           <div style="font-size:12px;font-weight:700;color:var(--text-2)">Concept C · Peer Approval Stories</div>
@@ -2456,7 +2614,7 @@ html.light ::-webkit-scrollbar-thumb { background: var(--surface-4); }
   <div class="no-panel">
   <div class="no-header">
     <div class="no-title">
-      <div class="no-icon-badge" style="background:var(--c-trade-dim)">
+      <div class="no-icon-badge" style="background:var(--c-trade-dim);box-shadow:0 0 0 1px rgba(201,168,76,0.3)">
         <svg width="20" height="20" viewBox="-11 -10 22 20" fill="none" stroke="var(--c-trade)" stroke-width="1.6" stroke-linecap="round" opacity="0.7">
           <line x1="0" y1="-8" x2="0" y2="7"/>
           <line x1="-8" y1="-2" x2="8" y2="-2"/>
@@ -2538,7 +2696,7 @@ html.light ::-webkit-scrollbar-thumb { background: var(--surface-4); }
     <!-- Recommendation -->
     <div style="background:rgba(74,156,122,0.07);border:1px solid rgba(74,156,122,0.25);border-left:4px solid var(--c-proto);border-radius:10px;padding:14px 16px;margin-bottom:20px">
       <div style="font-size:9px;text-transform:uppercase;letter-spacing:0.09em;color:var(--c-proto);margin-bottom:8px">→ Noetic Recommendation · 79% confidence</div>
-      <div style="font-size:14px;font-weight:600;color:var(--text-1);margin-bottom:8px">Ship Concept A first. Add Concept B in the next release cycle.</div>
+      <div style="font-size:14px;font-weight:700;color:var(--text-1);margin-bottom:8px">Ship Concept A first. Add Concept B in the next release cycle.</div>
       <div style="font-size:12px;color:var(--text-2);line-height:1.5">Concept A addresses the primary abandonment trigger (Approval Anxiety, 6/8 interviews) with strong evidence and validated prototype results. Concept B addresses the secondary cluster (Process Friction) and has a low build cost — sequence it 4–6 weeks later to avoid scope creep. Concept C is not recommended: low evidence, low strategic fit, doesn't address the primary JTBD.</div>
       <div style="height:3px;background:var(--surface-4);border-radius:2px;overflow:hidden;margin-top:12px"><div style="width:79%;height:100%;background:var(--c-proto);border-radius:2px"></div></div>
     </div>
@@ -2610,17 +2768,10 @@ html.light ::-webkit-scrollbar-thumb { background: var(--surface-4); }
       </div>
     </div>
 
-    <!-- Legend bottom-left -->
-    <div style="position:absolute;bottom:16px;left:20px;display:flex;gap:14px;z-index:2">
-      <div style="display:flex;align-items:center;gap:5px"><div style="width:8px;height:8px;border-radius:50%;background:var(--c-proto)"></div><span style="font-size:10px;color:var(--text-3)">Validated</span></div>
-      <div style="display:flex;align-items:center;gap:5px"><div style="width:8px;height:8px;border-radius:50%;background:var(--amber)"></div><span style="font-size:10px;color:var(--text-3)">Hypothesis</span></div>
-      <div style="display:flex;align-items:center;gap:5px"><div style="width:8px;height:8px;border-radius:50%;background:var(--surface-4);border:1px solid var(--border-d)"></div><span style="font-size:10px;color:var(--text-3)">Weak signal</span></div>
-      <div style="display:flex;align-items:center;gap:5px"><div style="width:14px;height:2px;background:var(--c-def)"></div><span style="font-size:10px;color:var(--text-3)">Validated link</span></div>
-      <div style="display:flex;align-items:center;gap:5px"><div style="width:14px;height:1px;border-top:1px dashed var(--text-4)"></div><span style="font-size:10px;color:var(--text-3)">Hypothesis link</span></div>
-    </div>
+    <!-- Legend: now inside SVG (see bottom of SVG element) -->
 
     <!-- OST Graph SVG — 4 rows: JTBDs → Outcome → Opportunities → Solutions -->
-    <svg width="100%" height="100%" viewBox="0 0 840 470" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" style="position:absolute;inset:0">
+    <svg width="100%" height="100%" viewBox="0 0 840 510" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" style="position:absolute;inset:0">
       <defs>
         <filter id="glow-ost-g" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur in="SourceGraphic" stdDeviation="7"/></filter>
         <filter id="glow-ost-a" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur in="SourceGraphic" stdDeviation="6"/></filter>
@@ -2638,7 +2789,7 @@ html.light ::-webkit-scrollbar-thumb { background: var(--surface-4); }
       <text x="10" y="163" fill="rgba(255,255,255,0.06)" font-family="'Geist Mono',monospace" font-size="8" letter-spacing="0.1em">OUTCOME</text>
       <text x="10" y="290" fill="rgba(255,255,255,0.06)" font-family="'Geist Mono',monospace" font-size="8" letter-spacing="0.1em">OPPORTUNITIES</text>
       <text x="10" y="400" fill="rgba(255,255,255,0.06)" font-family="'Geist Mono',monospace" font-size="8" letter-spacing="0.1em">SOLUTIONS</text>
-      <text x="10" y="455" fill="rgba(74,156,122,0.12)" font-family="'Geist Mono',monospace" font-size="8" letter-spacing="0.1em">ASSUMPTION TESTS</text>
+      <text x="10" y="480" fill="rgba(74,156,122,0.12)" font-family="'Geist Mono',monospace" font-size="8" letter-spacing="0.1em">ASSUMPTION TESTS</text>
 
       <!-- ── EDGES: JTBDs → Outcome ─────────────────────── -->
       <!-- JTBD1 (250,80) → Outcome top (420,152) -->
@@ -2742,70 +2893,144 @@ html.light ::-webkit-scrollbar-thumb { background: var(--surface-4); }
       <text x="670" y="402" text-anchor="middle" fill="#3A3F4D" font-family="'Instrument Sans',sans-serif" font-size="9">Status tracker</text>
       <text x="670" y="414" text-anchor="middle" fill="rgba(65,80,105,0.5)" font-family="'Instrument Sans',sans-serif" font-size="8.5">post-submission</text>
 
-      <!-- ── ASSUMPTION TEST NODES (row 5, y=453) — connected to Prototyping ── -->
+      <!-- ── ASSUMPTION TEST NODES (row 5, y=478) — connected to Prototyping ── -->
       <!-- Sol 1a → AssTest A1 (validated) -->
-      <path d="M80,422 C80,438 120,438 130,453" fill="none" stroke="rgba(74,156,122,0.3)" stroke-width="1" stroke-dasharray="3,3"/>
+      <path d="M80,422 C80,450 120,450 130,478" fill="none" stroke="rgba(74,156,122,0.3)" stroke-width="1" stroke-dasharray="3,3"/>
       <!-- Sol 1b → AssTest A2 (testing) -->
-      <path d="M170,422 C170,438 200,438 200,453" fill="none" stroke="rgba(74,156,122,0.25)" stroke-width="1" stroke-dasharray="3,3"/>
+      <path d="M170,422 C170,450 200,450 200,478" fill="none" stroke="rgba(74,156,122,0.25)" stroke-width="1" stroke-dasharray="3,3"/>
 
       <!-- AssTest A1: Validated -->
-      <rect x="89" y="453" width="82" height="32" rx="6" fill="rgba(74,156,122,0.08)" stroke="rgba(74,156,122,0.55)" stroke-width="1" stroke-dasharray="4,3"/>
-      <text x="130" y="465" text-anchor="middle" fill="rgba(74,156,122,0.9)" font-family="'Geist Mono',monospace" font-size="8" font-weight="700">Validated ✓</text>
-      <text x="130" y="477" text-anchor="middle" fill="rgba(74,156,122,0.65)" font-family="'Instrument Sans',sans-serif" font-size="8">Users engage pre-qual</text>
+      <rect x="89" y="478" width="82" height="28" rx="6" fill="rgba(74,156,122,0.08)" stroke="rgba(74,156,122,0.55)" stroke-width="1" stroke-dasharray="4,3"/>
+      <text x="130" y="489" text-anchor="middle" fill="rgba(74,156,122,0.9)" font-family="'Geist Mono',monospace" font-size="8" font-weight="700">Validated ✓</text>
+      <text x="130" y="500" text-anchor="middle" fill="rgba(74,156,122,0.65)" font-family="'Instrument Sans',sans-serif" font-size="7.5">Users engage pre-qual</text>
 
       <!-- AssTest A2: Testing -->
-      <rect x="159" y="453" width="82" height="32" rx="6" fill="rgba(74,156,122,0.04)" stroke="rgba(74,156,122,0.35)" stroke-width="1" stroke-dasharray="4,3"/>
-      <text x="200" y="465" text-anchor="middle" fill="rgba(74,156,122,0.7)" font-family="'Geist Mono',monospace" font-size="8" font-weight="700">Testing →</text>
-      <text x="200" y="477" text-anchor="middle" fill="rgba(74,156,122,0.5)" font-family="'Instrument Sans',sans-serif" font-size="8">Reduced anxiety signal</text>
+      <rect x="159" y="478" width="82" height="28" rx="6" fill="rgba(74,156,122,0.04)" stroke="rgba(74,156,122,0.35)" stroke-width="1" stroke-dasharray="4,3"/>
+      <text x="200" y="489" text-anchor="middle" fill="rgba(74,156,122,0.7)" font-family="'Geist Mono',monospace" font-size="8" font-weight="700">Testing →</text>
+      <text x="200" y="500" text-anchor="middle" fill="rgba(74,156,122,0.5)" font-family="'Instrument Sans',sans-serif" font-size="7.5">Reduced anxiety signal</text>
 
       <!-- Connected-to-Prototyping label -->
-      <text x="420" y="468" text-anchor="middle" fill="rgba(74,156,122,0.2)" font-family="'Geist Mono',monospace" font-size="7.5" letter-spacing="0.08em">connected to Prototyping module</text>
+      <text x="420" y="496" text-anchor="middle" fill="rgba(74,156,122,0.18)" font-family="'Geist Mono',monospace" font-size="7.5" letter-spacing="0.08em">connected to Prototyping module</text>
+
+      <!-- ── LEGEND (bottom-right, inside SVG) ── -->
+      <circle cx="590" cy="501" r="4" fill="#4A9C7A"/>
+      <text x="598" y="505" fill="rgba(156,163,178,0.7)" font-family="'Instrument Sans',sans-serif" font-size="8.5">Validated</text>
+      <circle cx="648" cy="501" r="4" fill="#C9A84C"/>
+      <text x="656" y="505" fill="rgba(156,163,178,0.7)" font-family="'Instrument Sans',sans-serif" font-size="8.5">Hypothesis</text>
+      <circle cx="708" cy="501" r="4" fill="rgba(60,63,77,0.9)" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+      <text x="716" y="505" fill="rgba(156,163,178,0.7)" font-family="'Instrument Sans',sans-serif" font-size="8.5">Weak signal</text>
 
     </svg>
   </div>
 
-    <!-- OST Pending Mutations -->
-    <div style="flex-shrink:0;border-top:1px solid var(--border-d);background:var(--surface-1);padding:12px 20px">
-      <div style="font-size:9px;text-transform:uppercase;letter-spacing:0.1em;color:var(--amber);margin-bottom:10px;display:flex;align-items:center;gap:6px"><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--amber);animation:pulse 1.5s ease-in-out infinite"></span>3 Pending OST Mutations · Awaiting Approval</div>
-      <div style="display:flex;flex-direction:column;gap:6px">
-        <div style="display:flex;align-items:center;gap:10px;padding:9px 12px;background:var(--surface-2);border:1px solid rgba(201,168,76,0.3);border-radius:8px;box-shadow:0 0 0 2px rgba(201,168,76,0.1)">
-          <div style="flex:1">
-            <span style="font-size:9px;text-transform:uppercase;letter-spacing:0.08em;color:var(--amber)">New Opportunity</span>
-            <div style="font-size:12px;font-weight:600;color:var(--text-1);margin-top:2px">Real-time eligibility feedback loop post-application</div>
-            <div style="font-size:11px;color:var(--text-3);margin-top:1px">Proposed by JTBD Agent · 62% confidence</div>
-          </div>
-          <div style="display:flex;gap:6px;flex-shrink:0">
-            <button style="font-size:11px;font-weight:600;padding:5px 11px;border-radius:6px;border:1px solid rgba(74,156,122,0.4);background:rgba(74,156,122,0.1);color:var(--c-proto);cursor:pointer;font-family:'Instrument Sans',sans-serif">Approve</button>
-            <button style="font-size:11px;font-weight:600;padding:5px 11px;border-radius:6px;border:1px solid var(--border-d);background:var(--surface-3);color:var(--text-2);cursor:pointer;font-family:'Instrument Sans',sans-serif">Edit</button>
-            <button style="font-size:11px;font-weight:600;padding:5px 11px;border-radius:6px;border:1px solid rgba(192,96,128,0.3);background:rgba(192,96,128,0.08);color:var(--c-causal);cursor:pointer;font-family:'Instrument Sans',sans-serif">Reject</button>
-          </div>
-        </div>
-        <div style="display:flex;align-items:center;gap:10px;padding:9px 12px;background:var(--surface-2);border:1px solid rgba(201,168,76,0.3);border-radius:8px;box-shadow:0 0 0 2px rgba(201,168,76,0.1)">
-          <div style="flex:1">
-            <span style="font-size:9px;text-transform:uppercase;letter-spacing:0.08em;color:var(--amber)">New Solution</span>
-            <div style="font-size:12px;font-weight:600;color:var(--text-1);margin-top:2px">Soft pre-qualification check via ABN + industry lookup</div>
-            <div style="font-size:11px;color:var(--text-3);margin-top:1px">Proposed by Prototyping Agent · 81% confidence</div>
-          </div>
-          <div style="display:flex;gap:6px;flex-shrink:0">
-            <button style="font-size:11px;font-weight:600;padding:5px 11px;border-radius:6px;border:1px solid rgba(74,156,122,0.4);background:rgba(74,156,122,0.1);color:var(--c-proto);cursor:pointer;font-family:'Instrument Sans',sans-serif">Approve</button>
-            <button style="font-size:11px;font-weight:600;padding:5px 11px;border-radius:6px;border:1px solid var(--border-d);background:var(--surface-3);color:var(--text-2);cursor:pointer;font-family:'Instrument Sans',sans-serif">Edit</button>
-            <button style="font-size:11px;font-weight:600;padding:5px 11px;border-radius:6px;border:1px solid rgba(192,96,128,0.3);background:rgba(192,96,128,0.08);color:var(--c-causal);cursor:pointer;font-family:'Instrument Sans',sans-serif">Reject</button>
-          </div>
-        </div>
-        <div style="display:flex;align-items:center;gap:10px;padding:9px 12px;background:var(--surface-2);border:1px solid rgba(201,168,76,0.3);border-radius:8px;box-shadow:0 0 0 2px rgba(201,168,76,0.1)">
-          <div style="flex:1">
-            <span style="font-size:9px;text-transform:uppercase;letter-spacing:0.08em;color:var(--amber)">Confidence Update</span>
-            <div style="font-size:12px;font-weight:600;color:var(--text-1);margin-top:2px">Opp #1 confidence: 67% → 74% (post-prototype validation)</div>
-            <div style="font-size:11px;color:var(--text-3);margin-top:1px">Proposed by Noetic Mind · based on Concept A test results</div>
-          </div>
-          <div style="display:flex;gap:6px;flex-shrink:0">
-            <button style="font-size:11px;font-weight:600;padding:5px 11px;border-radius:6px;border:1px solid rgba(74,156,122,0.4);background:rgba(74,156,122,0.1);color:var(--c-proto);cursor:pointer;font-family:'Instrument Sans',sans-serif">Approve</button>
-            <button style="font-size:11px;font-weight:600;padding:5px 11px;border-radius:6px;border:1px solid var(--border-d);background:var(--surface-3);color:var(--text-2);cursor:pointer;font-family:'Instrument Sans',sans-serif">Edit</button>
-            <button style="font-size:11px;font-weight:600;padding:5px 11px;border-radius:6px;border:1px solid rgba(192,96,128,0.3);background:rgba(192,96,128,0.08);color:var(--c-causal);cursor:pointer;font-family:'Instrument Sans',sans-serif">Reject</button>
-          </div>
-        </div>
+    <!-- OST Pending Mutations — trigger button only -->
+    <div style="flex-shrink:0;border-top:1px solid var(--border-d);background:var(--surface-1);padding:10px 20px;display:flex;align-items:center;justify-content:space-between">
+      <div style="display:flex;align-items:center;gap:7px;font-size:11px;color:var(--text-3)">
+        <span style="width:5px;height:5px;border-radius:50%;background:var(--amber);display:inline-block;animation:pulse 1.5s ease-in-out infinite;flex-shrink:0"></span>
+        3 mutations awaiting your approval
       </div>
+      <button onclick="document.getElementById('ost-mutations-overlay').classList.add('open')"
+        style="display:flex;align-items:center;gap:6px;font-size:12px;font-weight:600;padding:6px 14px;border-radius:7px;border:1px solid rgba(201,168,76,0.4);background:rgba(201,168,76,0.1);color:var(--amber);cursor:pointer;font-family:'Instrument Sans',sans-serif;transition:all 0.15s"
+        onmouseover="this.style.background='rgba(201,168,76,0.18)'" onmouseout="this.style.background='rgba(201,168,76,0.1)'">
+        Review OST Mutations
+        <span style="background:var(--amber);color:var(--navy);border-radius:10px;font-size:10px;font-weight:700;padding:1px 6px">3</span>
+      </button>
     </div>
+
+  <!-- OST Mutations overlay (modal) -->
+  <div id="ost-mutations-overlay"
+    style="position:fixed;inset:0;z-index:9999;background:rgba(6,10,20,0.65);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity 0.25s ease"
+    onclick="if(event.target===this)this.classList.remove('open')"
+    <div style="width:560px;max-height:80vh;background:var(--surface-1);border:1px solid var(--border-d);border-radius:14px;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 24px 64px rgba(0,0,0,0.5);animation:panel-in 0.22s ease">
+
+      <!-- Header -->
+      <div style="padding:18px 24px 14px;border-bottom:1px solid var(--border-s);display:flex;align-items:center;justify-content:space-between;flex-shrink:0">
+        <div>
+          <div style="font-size:15px;font-weight:600;color:var(--text-1);display:flex;align-items:center;gap:8px">
+            Pending OST Mutations
+            <span style="background:var(--amber);color:var(--navy);border-radius:10px;font-size:10px;font-weight:700;padding:2px 8px">3</span>
+          </div>
+          <div style="font-size:11px;color:var(--text-3);margin-top:3px">Agent-proposed changes to the Opportunity Solution Tree — review before they take effect</div>
+        </div>
+        <button onclick="document.getElementById('ost-mutations-overlay').classList.remove('open')"
+          style="width:32px;height:32px;border-radius:8px;background:var(--surface-2);border:1px solid var(--border-d);color:var(--text-2);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.15s"
+          onmouseover="this.style.background='var(--surface-3)'" onmouseout="this.style.background='var(--surface-2)'">✕</button>
+      </div>
+
+      <!-- Mutations list -->
+      <div style="overflow-y:auto;padding:16px 24px;display:flex;flex-direction:column;gap:10px">
+
+        <!-- Mutation 1 -->
+        <div style="background:var(--surface-2);border:1px solid rgba(201,168,76,0.25);border-left:3px solid var(--amber);border-radius:10px;padding:14px 16px">
+          <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px">
+            <div style="flex:1">
+              <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px">
+                <span style="font-size:9px;text-transform:uppercase;letter-spacing:0.08em;font-weight:700;color:var(--amber);background:var(--amber-dim);padding:2px 7px;border-radius:10px">New Opportunity</span>
+                <span style="font-size:10px;color:var(--text-4);font-family:'Geist Mono',monospace">JTBD Agent · Suggestive · 62%</span>
+              </div>
+              <div style="font-size:13px;font-weight:600;color:var(--text-1);line-height:1.4">Real-time eligibility feedback loop post-application</div>
+              <div style="font-size:11px;color:var(--text-3);margin-top:4px">Proposed from Cluster 1 · Approval Anxiety pattern across 6 interviews</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:7px;margin-top:12px">
+            <button style="flex:1;font-size:12px;font-weight:600;padding:7px 0;border-radius:7px;border:1px solid rgba(74,156,122,0.4);background:rgba(74,156,122,0.1);color:var(--c-proto);cursor:pointer;font-family:'Instrument Sans',sans-serif;transition:opacity 0.15s" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">✓ Approve</button>
+            <button style="flex:1;font-size:12px;font-weight:600;padding:7px 0;border-radius:7px;border:1px solid var(--border-d);background:var(--surface-3);color:var(--text-2);cursor:pointer;font-family:'Instrument Sans',sans-serif;transition:opacity 0.15s" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">✎ Edit</button>
+            <button style="flex:1;font-size:12px;font-weight:600;padding:7px 0;border-radius:7px;border:1px solid rgba(192,96,128,0.3);background:rgba(192,96,128,0.08);color:var(--c-causal);cursor:pointer;font-family:'Instrument Sans',sans-serif;transition:opacity 0.15s" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">✕ Reject</button>
+          </div>
+        </div>
+
+        <!-- Mutation 2 -->
+        <div style="background:var(--surface-2);border:1px solid rgba(201,168,76,0.25);border-left:3px solid var(--amber);border-radius:10px;padding:14px 16px">
+          <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px">
+            <div style="flex:1">
+              <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px">
+                <span style="font-size:9px;text-transform:uppercase;letter-spacing:0.08em;font-weight:700;color:var(--c-jtbd);background:var(--c-jtbd-dim);padding:2px 7px;border-radius:10px">New Solution</span>
+                <span style="font-size:10px;color:var(--text-4);font-family:'Geist Mono',monospace">Prototyping Agent · Validated · 81%</span>
+              </div>
+              <div style="font-size:13px;font-weight:600;color:var(--text-1);line-height:1.4">Soft pre-qualification check via ABN + industry lookup</div>
+              <div style="font-size:11px;color:var(--text-3);margin-top:4px">Connects to Opp #1 · Concept A prototype result supports this</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:7px;margin-top:12px">
+            <button style="flex:1;font-size:12px;font-weight:600;padding:7px 0;border-radius:7px;border:1px solid rgba(74,156,122,0.4);background:rgba(74,156,122,0.1);color:var(--c-proto);cursor:pointer;font-family:'Instrument Sans',sans-serif;transition:opacity 0.15s" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">✓ Approve</button>
+            <button style="flex:1;font-size:12px;font-weight:600;padding:7px 0;border-radius:7px;border:1px solid var(--border-d);background:var(--surface-3);color:var(--text-2);cursor:pointer;font-family:'Instrument Sans',sans-serif;transition:opacity 0.15s" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">✎ Edit</button>
+            <button style="flex:1;font-size:12px;font-weight:600;padding:7px 0;border-radius:7px;border:1px solid rgba(192,96,128,0.3);background:rgba(192,96,128,0.08);color:var(--c-causal);cursor:pointer;font-family:'Instrument Sans',sans-serif;transition:opacity 0.15s" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">✕ Reject</button>
+          </div>
+        </div>
+
+        <!-- Mutation 3 -->
+        <div style="background:var(--surface-2);border:1px solid rgba(201,168,76,0.25);border-left:3px solid var(--amber);border-radius:10px;padding:14px 16px">
+          <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px">
+            <div style="flex:1">
+              <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px">
+                <span style="font-size:9px;text-transform:uppercase;letter-spacing:0.08em;font-weight:700;color:var(--c-proto);background:var(--c-proto-dim);padding:2px 7px;border-radius:10px">Confidence Update</span>
+                <span style="font-size:10px;color:var(--text-4);font-family:'Geist Mono',monospace">Noetic Mind · auto-proposed</span>
+              </div>
+              <div style="font-size:13px;font-weight:600;color:var(--text-1);line-height:1.4">Opp #1 confidence: 67% → 74%</div>
+              <div style="font-size:11px;color:var(--text-3);margin-top:4px">Post-prototype validation · Concept A test results · 3 supporting data points</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:7px;margin-top:12px">
+            <button style="flex:1;font-size:12px;font-weight:600;padding:7px 0;border-radius:7px;border:1px solid rgba(74,156,122,0.4);background:rgba(74,156,122,0.1);color:var(--c-proto);cursor:pointer;font-family:'Instrument Sans',sans-serif;transition:opacity 0.15s" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">✓ Approve</button>
+            <button style="flex:1;font-size:12px;font-weight:600;padding:7px 0;border-radius:7px;border:1px solid var(--border-d);background:var(--surface-3);color:var(--text-2);cursor:pointer;font-family:'Instrument Sans',sans-serif;transition:opacity 0.15s" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">✎ Edit</button>
+            <button style="flex:1;font-size:12px;font-weight:600;padding:7px 0;border-radius:7px;border:1px solid rgba(192,96,128,0.3);background:rgba(192,96,128,0.08);color:var(--c-causal);cursor:pointer;font-family:'Instrument Sans',sans-serif;transition:opacity 0.15s" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">✕ Reject</button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Footer -->
+      <div style="padding:12px 24px;border-top:1px solid var(--border-s);display:flex;align-items:center;justify-content:space-between;flex-shrink:0">
+        <div style="font-size:11px;color:var(--text-4)">OST mutations require approval before they update the tree</div>
+        <button onclick="document.getElementById('ost-mutations-overlay').classList.remove('open')"
+          style="font-size:12px;font-weight:600;padding:7px 18px;border-radius:7px;border:1px solid var(--border-d);background:var(--surface-3);color:var(--text-2);cursor:pointer;font-family:'Instrument Sans',sans-serif;transition:all 0.15s"
+          onmouseover="this.style.borderColor='var(--border-a)';this.style.color='var(--text-1)'" onmouseout="this.style.borderColor='var(--border-d)';this.style.color='var(--text-2)'">
+          Done for now
+        </button>
+      </div>
+
+    </div>
+  </div>
 
   </div><!-- end center-tab-ost -->
 
@@ -3368,11 +3593,17 @@ function showToast(msg) {
 // ── Keyboard shortcuts ───────────────────────────────────────────
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') {
+    // Check cmd palette first (it handles its own Escape in the cmd palette script)
+    const palette = document.getElementById('cmdpalette');
+    if (palette && palette.classList.contains('open')) return;
     if (deOpen) closeDE();
     else if (activeOverlay) closeNodeOverlay(activeOverlay);
   }
-  if (e.key === 'd' && !e.target.matches('input')) openDE();
+  if (e.key === 'd' && !e.target.matches('input, textarea')) openDE();
 });
+
+// Alias for header button
+function openCmdK() { openCmdPalette(); }
 
 // ── Entrance animation ───────────────────────────────────────────
 window.addEventListener('load', () => {
@@ -3431,6 +3662,174 @@ function toggleTheme() {
     <button onclick="closeBlankProject()" style="background:var(--c-def);color:#fff;border:none;border-radius:9px;padding:12px 28px;font-size:13px;font-weight:600;cursor:pointer;font-family:'Instrument Sans',sans-serif;transition:opacity 0.15s" onmouseover="this.style.opacity='0.88'" onmouseout="this.style.opacity='1'">Start with Definition →</button>
   </div>
 </div>
+
+<!-- ── CMD+K COMMAND PALETTE ─────────────────────────────────── -->
+<div id="cmdpalette" style="position:fixed;inset:0;z-index:10000;background:rgba(6,10,20,0.7);backdrop-filter:blur(8px);display:flex;align-items:flex-start;justify-content:center;padding-top:18vh" onclick="if(event.target===this)closeCmdPalette()">
+
+  <div style="width:520px;background:var(--surface-1);border:1px solid var(--border-a);border-radius:14px;overflow:hidden;box-shadow:0 32px 80px rgba(0,0,0,0.6),0 0 0 1px rgba(255,255,255,0.04);animation:panel-in 0.15s ease-out">
+
+    <!-- Search input -->
+    <div style="display:flex;align-items:center;gap:12px;padding:16px 20px;border-bottom:1px solid var(--border-s)">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="var(--text-3)" stroke-width="1.6" stroke-linecap="round"><circle cx="6.5" cy="6.5" r="4.5"/><path d="M10.5 10.5L14 14"/></svg>
+      <input id="cmd-input" type="text" placeholder="Search commands..." autocomplete="off"
+        style="flex:1;background:none;border:none;outline:none;font-size:15px;color:var(--text-1);font-family:'Instrument Sans',sans-serif;caret-color:var(--amber)"
+        oninput="filterCmdResults(this.value)"
+        onkeydown="handleCmdKey(event)"/>
+      <kbd style="font-size:10px;font-family:'Geist Mono',monospace;color:var(--text-4);background:var(--surface-3);border:1px solid var(--border-d);border-radius:5px;padding:2px 6px">esc</kbd>
+    </div>
+
+    <!-- Results -->
+    <div id="cmd-results" style="padding:8px;max-height:360px;overflow-y:auto">
+
+      <div class="cmd-group-label">Navigate</div>
+      <div class="cmd-item" data-action="selectNode('definition')" tabindex="-1">
+        <span class="cmd-icon" style="background:var(--c-def-dim);color:var(--c-def)">D</span>
+        <span class="cmd-label">Open Definition</span>
+        <span class="cmd-sub">Switch interview analysis</span>
+      </div>
+      <div class="cmd-item" data-action="selectNode('jtbd')" tabindex="-1">
+        <span class="cmd-icon" style="background:var(--c-jtbd-dim);color:var(--c-jtbd)">J</span>
+        <span class="cmd-label">Open JTBD</span>
+        <span class="cmd-sub">Clusters · 8 of 15 interviews</span>
+      </div>
+      <div class="cmd-item" data-action="selectNode('causal')" tabindex="-1">
+        <span class="cmd-icon" style="background:var(--c-causal-dim);color:var(--c-causal)">C</span>
+        <span class="cmd-label">Open Causal Structures</span>
+        <span class="cmd-sub">Counterfactual mechanisms</span>
+      </div>
+      <div class="cmd-item" data-action="selectNode('prototyping')" tabindex="-1">
+        <span class="cmd-icon" style="background:var(--c-proto-dim);color:var(--c-proto)">P</span>
+        <span class="cmd-label">Open Prototyping</span>
+        <span class="cmd-sub">Concept A validated · 81%</span>
+      </div>
+      <div class="cmd-item" data-action="selectNode('tradeoffs')" tabindex="-1">
+        <span class="cmd-icon" style="background:var(--c-trade-dim);color:var(--c-trade)">T</span>
+        <span class="cmd-label">Open Trade-offs</span>
+        <span class="cmd-sub">Final recommendation ready</span>
+      </div>
+
+      <div class="cmd-group-label">Actions</div>
+      <div class="cmd-item" data-action="openDE()" tabindex="-1">
+        <span class="cmd-icon" style="background:var(--amber-dim);color:var(--amber)">✦</span>
+        <span class="cmd-label">Run Deliberation Engine</span>
+        <span class="cmd-sub">4-model council · ~2 min</span>
+      </div>
+      <div class="cmd-item" data-action="switchCenterTab('ost')" tabindex="-1">
+        <span class="cmd-icon" style="background:var(--surface-3);color:var(--text-2)">◈</span>
+        <span class="cmd-label">View OST</span>
+        <span class="cmd-sub">Opportunity Solution Tree</span>
+      </div>
+      <div class="cmd-item" data-action="switchCenterTab('report')" tabindex="-1">
+        <span class="cmd-icon" style="background:var(--surface-3);color:var(--text-2)">≡</span>
+        <span class="cmd-label">View Living Report</span>
+        <span class="cmd-sub">Auto-generated · updated 2h ago</span>
+      </div>
+      <div class="cmd-item" data-action="document.getElementById('ost-mutations-overlay').classList.add('open')" tabindex="-1">
+        <span class="cmd-icon" style="background:var(--amber-dim);color:var(--amber)">⊕</span>
+        <span class="cmd-label">Review OST Mutations</span>
+        <span class="cmd-sub">3 pending · awaiting approval</span>
+      </div>
+
+    </div>
+
+    <!-- Footer -->
+    <div style="padding:8px 16px;border-top:1px solid var(--border-s);display:flex;align-items:center;gap:16px">
+      <span style="font-size:10px;color:var(--text-4);font-family:'Geist Mono',monospace;display:flex;align-items:center;gap:5px"><kbd style="background:var(--surface-3);border:1px solid var(--border-d);border-radius:4px;padding:1px 5px;font-size:9px">↑↓</kbd> navigate</span>
+      <span style="font-size:10px;color:var(--text-4);font-family:'Geist Mono',monospace;display:flex;align-items:center;gap:5px"><kbd style="background:var(--surface-3);border:1px solid var(--border-d);border-radius:4px;padding:1px 5px;font-size:9px">↵</kbd> open</span>
+      <span style="font-size:10px;color:var(--text-4);font-family:'Geist Mono',monospace;display:flex;align-items:center;gap:5px"><kbd style="background:var(--surface-3);border:1px solid var(--border-d);border-radius:4px;padding:1px 5px;font-size:9px">esc</kbd> close</span>
+    </div>
+
+  </div>
+</div>
+
+<script>
+// ── CMD PALETTE ──────────────────────────────────────────────
+let cmdActiveIndex = -1;
+
+function openCmdPalette() {
+  const el = document.getElementById('cmdpalette');
+  el.classList.add('open');
+  setTimeout(() => document.getElementById('cmd-input').focus(), 50);
+  cmdActiveIndex = -1;
+  filterCmdResults('');
+}
+
+function closeCmdPalette() {
+  document.getElementById('cmdpalette').classList.remove('open');
+  document.getElementById('cmd-input').value = '';
+}
+
+function filterCmdResults(query) {
+  const items = document.querySelectorAll('.cmd-item');
+  const q = query.toLowerCase();
+  items.forEach(item => {
+    const label = item.querySelector('.cmd-label').textContent.toLowerCase();
+    const sub = item.querySelector('.cmd-sub').textContent.toLowerCase();
+    item.style.display = (!q || label.includes(q) || sub.includes(q)) ? 'flex' : 'none';
+  });
+  cmdActiveIndex = -1;
+}
+
+function handleCmdKey(e) {
+  const items = [...document.querySelectorAll('.cmd-item')].filter(i => i.style.display !== 'none');
+  if (e.key === 'Escape') { closeCmdPalette(); return; }
+  if (e.key === 'ArrowDown') {
+    e.preventDefault();
+    cmdActiveIndex = Math.min(cmdActiveIndex + 1, items.length - 1);
+    items.forEach((item, i) => item.classList.toggle('active', i === cmdActiveIndex));
+  }
+  if (e.key === 'ArrowUp') {
+    e.preventDefault();
+    cmdActiveIndex = Math.max(cmdActiveIndex - 1, 0);
+    items.forEach((item, i) => item.classList.toggle('active', i === cmdActiveIndex));
+  }
+  if (e.key === 'Enter') {
+    const active = items[cmdActiveIndex] || items[0];
+    if (active) { executeCmdAction(active); }
+  }
+}
+
+function executeCmdAction(item) {
+  const action = item.getAttribute('data-action');
+  closeCmdPalette();
+  setTimeout(() => { try { eval(action); } catch(e) {} }, 80);
+}
+
+// Attach click handlers to cmd items
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.cmd-item').forEach(item => {
+    item.addEventListener('click', () => executeCmdAction(item));
+  });
+});
+
+// Global Cmd+K / Ctrl+K listener
+document.addEventListener('keydown', e => {
+  if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+    e.preventDefault();
+    const palette = document.getElementById('cmdpalette');
+    if (palette.classList.contains('open')) closeCmdPalette();
+    else openCmdPalette();
+  }
+  if (e.key === 'Escape' && document.getElementById('cmdpalette').classList.contains('open')) {
+    closeCmdPalette();
+  }
+});
+
+// Skeleton loader — dismiss after 800ms
+window.addEventListener('load', () => {
+  const skeleton = document.getElementById('rp-skeleton');
+  const content = document.getElementById('rp-content');
+  if (!skeleton) return;
+  setTimeout(() => {
+    skeleton.style.transition = 'opacity 0.4s ease';
+    skeleton.style.opacity = '0';
+    setTimeout(() => {
+      skeleton.style.display = 'none';
+      if (content) { content.style.display = 'flex'; }
+    }, 400);
+  }, 800);
+});
+</script>
 
 </body>
 </html>
