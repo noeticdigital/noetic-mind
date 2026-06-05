@@ -2771,7 +2771,7 @@ html.light ::-webkit-scrollbar-thumb { background: var(--surface-4); }
     <!-- Legend: now inside SVG (see bottom of SVG element) -->
 
     <!-- OST Graph SVG — 4 rows: JTBDs → Outcome → Opportunities → Solutions -->
-    <svg width="100%" height="100%" viewBox="0 0 840 540" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" style="position:absolute;inset:0">
+    <svg width="100%" height="100%" viewBox="0 0 840 420" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" style="position:absolute;inset:0">
       <defs>
         <filter id="glow-ost-g" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur in="SourceGraphic" stdDeviation="7"/></filter>
         <filter id="glow-ost-a" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur in="SourceGraphic" stdDeviation="6"/></filter>
@@ -2782,7 +2782,6 @@ html.light ::-webkit-scrollbar-thumb { background: var(--surface-4); }
       <line x1="0" y1="95"  x2="840" y2="95"  stroke="rgba(255,255,255,0.025)" stroke-width="1"/>
       <line x1="0" y1="195" x2="840" y2="195" stroke="rgba(255,255,255,0.025)" stroke-width="1"/>
       <line x1="0" y1="310" x2="840" y2="310" stroke="rgba(255,255,255,0.025)" stroke-width="1"/>
-      <line x1="0" y1="450" x2="840" y2="450" stroke="rgba(74,156,122,0.06)"   stroke-width="1" stroke-dasharray="4,6"/>
 
       <!-- ── ROW LABELS ──────────────────────────────────── -->
       <text x="10" y="50"  fill="rgba(255,255,255,0.06)" font-family="'Geist Mono',monospace" font-size="8" letter-spacing="0.1em">JTBD</text>
@@ -2882,12 +2881,12 @@ html.light ::-webkit-scrollbar-thumb { background: var(--surface-4); }
       <text x="670" y="393" text-anchor="middle" fill="rgba(65,80,105,0.5)" font-family="'Instrument Sans',sans-serif" font-size="8.5">post-submission</text>
 
       <!-- Legend -->
-      <circle cx="595" cy="508" r="4" fill="#4A9C7A"/>
-      <text x="603" y="512" fill="rgba(156,163,178,0.6)" font-family="'Instrument Sans',sans-serif" font-size="8.5">Validated</text>
-      <circle cx="656" cy="508" r="4" fill="#C9A84C"/>
-      <text x="664" y="512" fill="rgba(156,163,178,0.6)" font-family="'Instrument Sans',sans-serif" font-size="8.5">Hypothesis</text>
-      <circle cx="720" cy="508" r="4" fill="rgba(60,63,77,0.9)" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
-      <text x="728" y="512" fill="rgba(156,163,178,0.6)" font-family="'Instrument Sans',sans-serif" font-size="8.5">Weak</text>
+      <circle cx="595" cy="410" r="4" fill="#4A9C7A"/>
+      <text x="603" y="414" fill="rgba(156,163,178,0.6)" font-family="'Instrument Sans',sans-serif" font-size="8.5">Validated</text>
+      <circle cx="656" cy="410" r="4" fill="#C9A84C"/>
+      <text x="664" y="414" fill="rgba(156,163,178,0.6)" font-family="'Instrument Sans',sans-serif" font-size="8.5">Hypothesis</text>
+      <circle cx="720" cy="410" r="4" fill="rgba(60,63,77,0.9)" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+      <text x="728" y="414" fill="rgba(156,163,178,0.6)" font-family="'Instrument Sans',sans-serif" font-size="8.5">Weak</text>
 
     </svg>
 
@@ -3655,7 +3654,7 @@ function toggleAssTests(solId, evt) {
   // Anchor popup ABOVE the solutions row.
   // Solutions sit at SVG y=365 in a 540-tall viewBox.
   // Map to CSS pixels and subtract popup height (est. 220px) + 12px gap.
-  const solutionRowCssY = (365 / 540) * rect.height;
+  const solutionRowCssY = (365 / 420) * rect.height;
   const popupTop = Math.max(8, solutionRowCssY - 236);
 
   // Horizontal: follow click x, clamped so popup stays inside graph
