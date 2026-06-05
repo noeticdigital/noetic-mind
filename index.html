@@ -2789,7 +2789,6 @@ html.light ::-webkit-scrollbar-thumb { background: var(--surface-4); }
       <text x="10" y="140" fill="rgba(255,255,255,0.06)" font-family="'Geist Mono',monospace" font-size="8" letter-spacing="0.1em">OUTCOME</text>
       <text x="10" y="258" fill="rgba(255,255,255,0.06)" font-family="'Geist Mono',monospace" font-size="8" letter-spacing="0.1em">OPPORTUNITIES</text>
       <text x="10" y="380" fill="rgba(255,255,255,0.06)" font-family="'Geist Mono',monospace" font-size="8" letter-spacing="0.1em">SOLUTIONS</text>
-      <text x="10" y="466" fill="rgba(74,156,122,0.12)"  font-family="'Geist Mono',monospace" font-size="8" letter-spacing="0.1em">ASSUMPTION TESTS</text>
 
       <!-- ── EDGES: JTBDs → Outcome (JTBD y=52, Outcome y=155) ── -->
       <path d="M250,52 C250,100 420,100 420,125" fill="none" stroke="rgba(139,107,174,0.45)" stroke-width="1.4"/>
@@ -3649,15 +3648,22 @@ function toggleAssTests(solId, evt) {
   const tests = ASS_TESTS[solId];
   if (!tests) return;
 
-  // Position near click, within OST graph area
   const graphArea = document.querySelector('.ost-graph-area');
   if (!graphArea) return;
   const rect = graphArea.getBoundingClientRect();
-  const x = Math.min(evt.clientX - rect.left + 8, rect.width - 240);
-  const y = evt.clientY - rect.top - 20;
 
-  popup.style.left = x + 'px';
-  popup.style.top  = Math.max(8, y) + 'px';
+  // Anchor popup ABOVE the solutions row.
+  // Solutions sit at SVG y=365 in a 540-tall viewBox.
+  // Map to CSS pixels and subtract popup height (est. 220px) + 12px gap.
+  const solutionRowCssY = (365 / 540) * rect.height;
+  const popupTop = Math.max(8, solutionRowCssY - 236);
+
+  // Horizontal: follow click x, clamped so popup stays inside graph
+  const clickX = evt.clientX - rect.left;
+  const popupLeft = Math.max(8, Math.min(clickX - 110, rect.width - 248));
+
+  popup.style.left = popupLeft + 'px';
+  popup.style.top  = popupTop + 'px';
 
   // Build content
   const statusMap = {
