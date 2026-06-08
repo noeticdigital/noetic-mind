@@ -1065,13 +1065,52 @@ html.light ::-webkit-scrollbar-thumb { background: var(--surface-4); }
 .cmd-sub { font-size: 11px; color: var(--text-4); white-space: nowrap; }
 
 /* ── OST TREE CENTER PANEL ───────────────────────────────── */
+/* #ost-tree legacy selector kept for light-mode overrides below */
 #ost-tree {
-  flex: 1; overflow-y: auto; padding: 20px 24px 32px;
-  display: flex; flex-direction: column;
+  flex: 1; display: flex; flex-direction: column; overflow: hidden;
   background: var(--surface-0); position: relative;
 }
-#ost-tree::-webkit-scrollbar { width: 3px; }
-#ost-tree::-webkit-scrollbar-thumb { background: var(--surface-4); border-radius: 2px; }
+
+/* ── SKILL GATEWAY ROW ───────────────────────────────────── */
+#ost-skill-row {
+  display: flex; gap: 8px; padding: 16px 20px 12px;
+  flex-shrink: 0; border-bottom: 1px solid var(--border-s);
+  background: var(--surface-1);
+}
+.skill-pill {
+  flex: 1; display: flex; flex-direction: column; align-items: center;
+  gap: 3px; padding: 8px 6px; border-radius: 10px;
+  cursor: pointer; transition: all 0.15s; border: 1px solid var(--border-s);
+  background: var(--surface-2);
+}
+.skill-pill:hover { background: var(--surface-3); border-color: var(--border-d); transform: translateY(-1px); }
+.skill-pill-num   { font-size: 9px; font-family: 'Geist Mono', monospace; color: var(--text-4); }
+.skill-pill-name  { font-size: 12px; font-weight: 700; color: var(--text-1); font-family: 'Instrument Sans', sans-serif; }
+.skill-pill-badge { font-size: 9px; font-family: 'Geist Mono', monospace; padding: 1px 6px; border-radius: 10px; }
+/* Evidence states for skill pills */
+.skill-pill[data-evidence="supported"]   { border-color: rgba(91,140,186,0.3); }
+.skill-pill[data-evidence="in-progress"] { border-color: rgba(201,168,76,0.3); }
+.skill-pill[data-evidence="in-progress"] .skill-pill-badge { background: var(--amber-dim); color: var(--amber); }
+.skill-pill[data-evidence="supported"]   .skill-pill-badge { background: rgba(91,140,186,0.15); color: var(--c-def); }
+.skill-pill[data-evidence="unvalidated"] .skill-pill-name  { color: var(--text-3); }
+.skill-pill[data-evidence="unvalidated"] .skill-pill-badge { background: rgba(255,255,255,0.04); color: var(--text-4); }
+
+/* ── OST SVG CANVAS ──────────────────────────────────────── */
+#ost-canvas {
+  flex: 1; overflow-y: auto; overflow-x: hidden;
+  background: var(--surface-0); position: relative;
+}
+#ost-canvas::-webkit-scrollbar { width: 3px; }
+#ost-canvas::-webkit-scrollbar-thumb { background: var(--surface-4); }
+#ost-svg { display: block; width: 100%; }
+
+/* ── RE-PRIORITISE ARC ANIMATION ─────────────────────────── */
+.reprioritise-arc {
+  animation: reprioritise-dash 3s linear infinite;
+}
+@keyframes reprioritise-dash {
+  to { stroke-dashoffset: -40; }
+}
 
 .ost-level-label {
   font-size: 9px; text-transform: uppercase; letter-spacing: 0.12em;
@@ -1348,114 +1387,208 @@ html.light .ost-reprioritise { background: rgba(52,136,104,0.04); }
   <!-- OST TREE -->
   <div id="ost-tree">
 
-    <!-- ── FRAME ─────────────────────────────────────── -->
-    <div class="ost-level-label">Frame · assumptions surface here</div>
-    <div class="ost-node" id="ost-node-definition" data-evidence="supported" onclick="selectNode('definition')"
-         style="--node-color:var(--c-def);--node-color-dim:var(--c-def-dim)">
-      <div class="ost-node-icon" style="background:rgba(91,140,186,0.2);color:var(--c-def)">
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="8" cy="5" r="2.5"/><path d="M3 14c0-3 2-5 5-5s5 2 5 5"/></svg>
+    <!-- ── PART 1: SKILL GATEWAY ROW ─────────────────── -->
+    <div id="ost-skill-row">
+
+      <div class="skill-pill" data-evidence="supported" onclick="selectNode('definition')"
+           style="--pill-color:var(--c-def)">
+        <span class="skill-pill-num">01</span>
+        <span class="skill-pill-name" style="color:var(--c-def)">Frame</span>
+        <span class="skill-pill-badge">Supported</span>
       </div>
-      <div class="ost-node-content">
-        <div class="ost-node-skill">Skill 1 · Empathetic Perspective</div>
-        <div class="ost-node-name">Frame</div>
-        <div class="ost-node-status">8 assumptions logged · DE session complete · desk research done</div>
+
+      <div class="skill-pill" data-evidence="in-progress" onclick="selectNode('jtbd')"
+           style="--pill-color:var(--c-jtbd)">
+        <span class="skill-pill-num">02</span>
+        <span class="skill-pill-name" style="color:var(--c-jtbd)">Discover</span>
+        <span class="skill-pill-badge">In progress</span>
       </div>
-      <div class="ost-node-evidence-badge">Supported</div>
-      <div class="ost-node-chevron">›</div>
+
+      <div class="skill-pill" data-evidence="in-progress" onclick="selectNode('causal')"
+           style="--pill-color:var(--c-causal)">
+        <span class="skill-pill-num">03</span>
+        <span class="skill-pill-name" style="color:var(--c-causal)">Connect</span>
+        <span class="skill-pill-badge">In progress</span>
+      </div>
+
+      <div class="skill-pill" data-evidence="unvalidated" onclick="selectNode('tradeoffs')"
+           style="--pill-color:var(--amber)">
+        <span class="skill-pill-num">05</span>
+        <span class="skill-pill-name" style="color:var(--text-3)">Decide</span>
+        <span class="skill-pill-badge">Not started</span>
+      </div>
+
+      <div class="skill-pill" data-evidence="unvalidated" onclick="selectNode('prototyping')"
+           style="--pill-color:var(--c-proto)">
+        <span class="skill-pill-num">04</span>
+        <span class="skill-pill-name" style="color:var(--text-3)">Test</span>
+        <span class="skill-pill-badge">Not started</span>
+      </div>
+
     </div>
 
-    <div class="ost-connector"></div>
+    <!-- ── PART 2: SVG BRANCHING TREE ────────────────── -->
+    <div id="ost-canvas" class="ost-graph-area">
+      <svg id="ost-svg" width="100%" viewBox="0 0 560 580" preserveAspectRatio="xMidYMin meet" xmlns="http://www.w3.org/2000/svg">
 
-    <!-- ── OUTCOME (not a skill — a leadership commitment) ── -->
-    <div class="ost-outcome">
-      <div class="ost-outcome-inner">
-        <span class="ost-outcome-label">✦ Desired Outcome</span>
-        <span class="ost-outcome-value">+30% SMB account acquisition in 12 months</span>
-      </div>
-    </div>
+        <!-- Defs: glow filters -->
+        <defs>
+          <filter id="glow-ost-p" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="8" result="blur"/>
+            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+          <filter id="glow-ost-g" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="6" result="blur"/>
+            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+          <filter id="glow-ost-a" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="6" result="blur"/>
+            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
 
-    <div class="ost-connector"></div>
+        <!-- ── ZONE LABELS ── -->
+        <text x="10" y="60"  fill="rgba(255,255,255,0.06)" font-family="'Geist Mono',monospace" font-size="7.5" letter-spacing="0.1em">OUTCOME</text>
+        <text x="10" y="165" fill="rgba(255,255,255,0.06)" font-family="'Geist Mono',monospace" font-size="7.5" letter-spacing="0.1em">OPPS</text>
+        <text x="10" y="350" fill="rgba(255,255,255,0.06)" font-family="'Geist Mono',monospace" font-size="7.5" letter-spacing="0.1em">SOLUTIONS</text>
+        <text x="10" y="445" fill="rgba(74,156,122,0.2)"  font-family="'Geist Mono',monospace" font-size="7.5" letter-spacing="0.1em">TESTS</text>
 
-    <!-- ── DISCOVER ───────────────────────────────────── -->
-    <div class="ost-level-label">Discover · demand-side evidence</div>
-    <div class="ost-node" id="ost-node-jtbd" data-evidence="in-progress" onclick="selectNode('jtbd')"
-         style="--node-color:var(--c-jtbd);--node-color-dim:var(--c-jtbd-dim)">
-      <div class="ost-node-icon" style="background:rgba(139,107,174,0.2);color:var(--c-jtbd)">
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M8 2C5 2 3 4 3 6.5c0 2 1.5 3.5 3 4.5v2l1 1 1-1v-2c1.5-1 3-2.5 3-4.5C11 4 10 2 8 2z"/></svg>
-      </div>
-      <div class="ost-node-content">
-        <div class="ost-node-skill">Skill 2 · Uncovering Demand</div>
-        <div class="ost-node-name">Discover</div>
-        <div class="ost-node-status">3 opportunities mapped · 8 of 15 interviews · 2 validated job statements</div>
-      </div>
-      <div class="ost-node-evidence-badge">In progress</div>
-      <div class="ost-node-chevron">›</div>
-    </div>
+        <!-- ── HORIZONTAL ZONE GUIDES ── -->
+        <line x1="0" y1="115" x2="560" y2="115" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+        <line x1="0" y1="215" x2="560" y2="215" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+        <line x1="0" y1="300" x2="560" y2="300" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+        <line x1="0" y1="405" x2="560" y2="405" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
 
-    <!-- Opportunities branch hint -->
-    <div class="ost-branch-hint">
-      <div class="ost-branch-dot" style="background:rgba(74,156,122,0.7)"></div><span>Approval Anxiety · Strongly Supported</span>
-      <div class="ost-branch-dot" style="background:var(--amber)"></div><span>Doc Friction · Suggestive</span>
-      <div class="ost-branch-dot" style="background:var(--surface-4)"></div><span>Status Ambiguity · Hypothesis</span>
-    </div>
+        <!-- ── EDGES: Outcome → Opportunities ── -->
+        <path d="M280,82 V120 H110 V138" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1.5"/>
+        <path d="M280,82 V120"            fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1.5"/>
+        <path d="M280,120 V138"           fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1.5"/>
+        <path d="M280,82 V120 H450 V138"  fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="1" stroke-dasharray="4,3"/>
 
-    <!-- Causal bridge -->
-    <div class="ost-causal-connector"></div>
-    <div class="ost-causal-bridge" id="ost-node-causal" onclick="selectNode('causal')">
-      <span class="ost-causal-icon" style="color:var(--c-causal)">⟳</span>
-      <div class="ost-causal-body">
-        <div class="ost-causal-label">Connect · <span style="font-weight:400;color:var(--text-3)">Skill 3 · Causal Structures</span></div>
-        <div class="ost-causal-sub">Map the mechanism · context → forces → behavior → outcome</div>
-      </div>
-      <div class="ost-causal-badge">In progress</div>
-    </div>
-    <div class="ost-causal-connector"></div>
+        <!-- ── EDGES: Opp1 → Causal → Solutions ── -->
+        <path d="M110,182 V242" fill="none" stroke="rgba(74,156,122,0.3)" stroke-width="1.2"/>
+        <path d="M110,270 V300 H50 V323"  fill="none" stroke="rgba(74,156,122,0.25)" stroke-width="1"/>
+        <path d="M110,270 V300 H130 V323" fill="none" stroke="rgba(74,156,122,0.25)" stroke-width="1"/>
+        <path d="M110,270 V300 H210 V323" fill="none" stroke="rgba(74,156,122,0.25)" stroke-width="1"/>
 
-    <!-- ── DECIDE ─────────────────────────────────────── -->
-    <div class="ost-level-label">Decide · what to give up</div>
-    <div class="ost-node" id="ost-node-tradeoffs" data-evidence="unvalidated" onclick="selectNode('tradeoffs')"
-         style="--node-color:var(--amber);--node-color-dim:var(--amber-dim)">
-      <div class="ost-node-icon" style="background:rgba(201,168,76,0.15);color:var(--amber)">
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M3 5h10M5 8h6M7 11h2"/></svg>
-      </div>
-      <div class="ost-node-content">
-        <div class="ost-node-skill">Skill 5 · Making Tradeoffs</div>
-        <div class="ost-node-name">Decide</div>
-        <div class="ost-node-status">Awaiting causal synthesis · what will we give up?</div>
-      </div>
-      <div class="ost-node-evidence-badge">Not started</div>
-      <div class="ost-node-chevron">›</div>
-    </div>
+        <!-- ── EDGES: Opp2 → Causal → Solutions ── -->
+        <path d="M280,182 V242" fill="none" stroke="rgba(201,168,76,0.25)" stroke-width="1.2" stroke-dasharray="5,3"/>
+        <path d="M280,270 V300 H265 V323" fill="none" stroke="rgba(201,168,76,0.18)" stroke-width="1" stroke-dasharray="4,3"/>
+        <path d="M280,270 V300 H345 V323" fill="none" stroke="rgba(201,168,76,0.18)" stroke-width="1" stroke-dasharray="4,3"/>
 
-    <div class="ost-connector"></div>
+        <!-- ── EDGES: Opp3 → Causal → Solutions ── -->
+        <path d="M450,182 V242" fill="none" stroke="rgba(80,95,120,0.2)" stroke-width="1" stroke-dasharray="3,4"/>
+        <path d="M450,270 V323" fill="none" stroke="rgba(80,95,120,0.15)" stroke-width="1" stroke-dasharray="3,5"/>
 
-    <!-- ── TEST ───────────────────────────────────────── -->
-    <div class="ost-level-label">Test · real humans · The People</div>
-    <div class="ost-node" id="ost-node-prototyping" data-evidence="unvalidated" onclick="selectNode('prototyping')"
-         style="--node-color:var(--c-proto);--node-color-dim:var(--c-proto-dim)">
-      <div class="ost-node-icon" style="background:rgba(74,156,122,0.15);color:var(--c-proto)">
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="2" y="3" width="12" height="9" rx="2"/><path d="M5 14h6"/><path d="M8 12v2"/></svg>
-      </div>
-      <div class="ost-node-content">
-        <div class="ost-node-skill">Skill 4 · Prototyping to Learn</div>
-        <div class="ost-node-name">Test</div>
-        <div class="ost-node-status">Designed-matrix experiments · 8 variants · real respondents via The People</div>
-      </div>
-      <div class="ost-node-evidence-badge">Not started</div>
-      <div class="ost-node-chevron">›</div>
-    </div>
+        <!-- ── EDGES: Solutions → Experiments ── -->
+        <path d="M50,365 V410 H90 V418"   fill="none" stroke="rgba(74,156,122,0.3)" stroke-width="1" stroke-dasharray="3,3"/>
+        <path d="M130,365 V400 H190 V418" fill="none" stroke="rgba(74,156,122,0.2)" stroke-width="1" stroke-dasharray="3,3"/>
 
-    <!-- Re-prioritise loop -->
-    <div class="ost-reprioritise">
-      <div class="ost-reprioritise-line"></div>
-      <div class="ost-reprioritise-label">↻ always re-tests the weakest node</div>
-    </div>
+        <!-- ── GLOW HALOS ── -->
+        <circle cx="280" cy="60"  r="28" fill="rgba(201,168,76,0.12)"  filter="url(#glow-ost-p)"/>
+        <circle cx="110" cy="160" r="20" fill="rgba(74,156,122,0.15)"  filter="url(#glow-ost-g)"/>
+        <circle cx="280" cy="160" r="18" fill="rgba(201,168,76,0.1)"   filter="url(#glow-ost-a)"/>
 
-    <!-- Next best action -->
-    <div class="ost-next-action">
-      <div class="ost-next-action-label">✦ Next Best Action</div>
-      <div class="ost-next-action-name">Complete JTBD interview set</div>
-      <div class="ost-next-action-why">7 interviews remain. Highest-potential, lowest-evidence node on the tree. Causal synthesis cannot begin until cluster saturation is reached.</div>
+        <!-- ── OUTCOME NODE ── -->
+        <circle cx="280" cy="60" r="26" fill="rgba(201,168,76,0.12)" stroke="rgba(201,168,76,0.8)" stroke-width="1.8"/>
+        <circle cx="280" cy="60" r="16" fill="rgba(201,168,76,0.06)"/>
+        <text x="280" y="64" text-anchor="middle" fill="rgba(201,168,76,0.95)" font-size="14">✦</text>
+        <text x="280" y="96"  text-anchor="middle" fill="#F0EDE8" font-family="'Instrument Sans',sans-serif" font-size="10" font-weight="600">Desired Outcome</text>
+        <text x="280" y="108" text-anchor="middle" fill="rgba(201,168,76,0.6)" font-family="'Playfair Display',serif" font-style="italic" font-size="9">+30% SMB acquisition · 12 months</text>
+
+        <!-- ── OPP 1: Approval Anxiety (validated) ── -->
+        <circle cx="110" cy="160" r="20" fill="rgba(74,156,122,0.2)" stroke="rgba(74,156,122,0.9)" stroke-width="1.8"/>
+        <text x="110" y="164" text-anchor="middle" fill="rgba(74,156,122,1)" font-size="12" font-weight="700">✓</text>
+        <text x="110" y="192" text-anchor="middle" fill="#9AA3B2" font-family="'Instrument Sans',sans-serif" font-size="9" font-weight="600">Approval Anxiety</text>
+        <text x="110" y="203" text-anchor="middle" fill="rgba(74,156,122,0.75)" font-family="'Geist Mono',monospace" font-size="8">Strongly Supported</text>
+
+        <!-- ── OPP 2: Doc Friction (hypothesis) ── -->
+        <circle cx="280" cy="160" r="18" fill="rgba(201,168,76,0.1)" stroke="rgba(201,168,76,0.6)" stroke-width="1.4" stroke-dasharray="5,3"/>
+        <text x="280" y="164" text-anchor="middle" fill="rgba(201,168,76,0.8)" font-size="11">◈</text>
+        <text x="280" y="190" text-anchor="middle" fill="#9AA3B2" font-family="'Instrument Sans',sans-serif" font-size="9">Doc Friction</text>
+        <text x="280" y="201" text-anchor="middle" fill="rgba(201,168,76,0.6)" font-family="'Geist Mono',monospace" font-size="8">Suggestive · 41%</text>
+
+        <!-- ── OPP 3: Status Ambiguity (weak) ── -->
+        <circle cx="450" cy="160" r="14" fill="rgba(50,60,85,0.4)" stroke="rgba(80,95,125,0.35)" stroke-width="1.2" stroke-dasharray="3,4"/>
+        <text x="450" y="164" text-anchor="middle" fill="rgba(80,95,125,0.5)" font-size="9">○</text>
+        <text x="450" y="187" text-anchor="middle" fill="#4A5060" font-family="'Instrument Sans',sans-serif" font-size="9">Status Ambiguity</text>
+        <text x="450" y="198" text-anchor="middle" fill="rgba(80,95,125,0.45)" font-family="'Geist Mono',monospace" font-size="8">Hypothesis · 28%</text>
+
+        <!-- ── CAUSAL SYNTHESIS BRIDGE ── -->
+        <rect x="30" y="242" width="500" height="28" rx="7" fill="rgba(192,96,128,0.06)" stroke="rgba(192,96,128,0.25)" stroke-width="1" stroke-dasharray="5,3"/>
+        <text x="280" y="253" text-anchor="middle" fill="rgba(192,96,128,0.7)" font-family="'Geist Mono',monospace" font-size="8" font-weight="600" letter-spacing="0.06em">⟳  CONNECT · Causal Synthesis · context → forces → behavior → outcome  ⟳</text>
+        <text x="280" y="264" text-anchor="middle" fill="rgba(192,96,128,0.4)" font-family="'Instrument Sans',sans-serif" font-size="7.5">click to map the mechanism</text>
+        <!-- Invisible click target -->
+        <rect x="30" y="242" width="500" height="28" rx="7" fill="transparent" style="cursor:pointer" onclick="selectNode('causal')"/>
+
+        <!-- ── SOLUTION NODES ── -->
+        <!-- Sol 1a: Pre-qual signal (x=14, under Opp1 at x=110) -->
+        <rect x="14"  y="323" width="70" height="34" rx="6" fill="rgba(74,156,122,0.1)" stroke="rgba(74,156,122,0.5)" stroke-width="1.1"/>
+        <text x="49"  y="337" text-anchor="middle" fill="#8A9DA8" font-family="'Instrument Sans',sans-serif" font-size="8.5" font-weight="500">Pre-qual</text>
+        <text x="49"  y="349" text-anchor="middle" fill="rgba(74,156,122,0.6)" font-family="'Instrument Sans',sans-serif" font-size="8">signal</text>
+
+        <!-- Sol 1b: Social proof (x=92, under Opp1 at x=110) -->
+        <rect x="92"  y="323" width="70" height="34" rx="6" fill="rgba(74,156,122,0.1)" stroke="rgba(74,156,122,0.5)" stroke-width="1.1"/>
+        <text x="127" y="337" text-anchor="middle" fill="#8A9DA8" font-family="'Instrument Sans',sans-serif" font-size="8.5" font-weight="500">Social proof</text>
+        <text x="127" y="349" text-anchor="middle" fill="rgba(74,156,122,0.6)" font-family="'Instrument Sans',sans-serif" font-size="8">approval rates</text>
+
+        <!-- Sol 1c: Soft check (x=170, under Opp1 at x=110) -->
+        <rect x="170" y="323" width="70" height="34" rx="6" fill="rgba(74,156,122,0.1)" stroke="rgba(74,156,122,0.5)" stroke-width="1.1"/>
+        <text x="205" y="337" text-anchor="middle" fill="#8A9DA8" font-family="'Instrument Sans',sans-serif" font-size="8.5" font-weight="500">Soft check</text>
+        <text x="205" y="349" text-anchor="middle" fill="rgba(74,156,122,0.6)" font-family="'Instrument Sans',sans-serif" font-size="8">before upload</text>
+
+        <!-- Sol 2a: Doc checklist (x=248, under Opp2 at x=280) -->
+        <rect x="248" y="323" width="70" height="34" rx="6" fill="rgba(201,168,76,0.07)" stroke="rgba(201,168,76,0.3)" stroke-width="1" stroke-dasharray="4,3"/>
+        <text x="283" y="337" text-anchor="middle" fill="#6E6548" font-family="'Instrument Sans',sans-serif" font-size="8.5">Doc checklist</text>
+        <text x="283" y="349" text-anchor="middle" fill="rgba(201,168,76,0.45)" font-family="'Instrument Sans',sans-serif" font-size="8">upfront</text>
+
+        <!-- Sol 2b: Progress-save (x=326, under Opp2 at x=280) -->
+        <rect x="326" y="323" width="70" height="34" rx="6" fill="rgba(201,168,76,0.07)" stroke="rgba(201,168,76,0.3)" stroke-width="1" stroke-dasharray="4,3"/>
+        <text x="361" y="337" text-anchor="middle" fill="#6E6548" font-family="'Instrument Sans',sans-serif" font-size="8.5">Progress-save</text>
+        <text x="361" y="349" text-anchor="middle" fill="rgba(201,168,76,0.45)" font-family="'Instrument Sans',sans-serif" font-size="8">on upload</text>
+
+        <!-- Sol 3a: Status tracker (x=415, under Opp3 at x=450) -->
+        <rect x="415" y="323" width="70" height="34" rx="6" fill="rgba(35,45,65,0.5)" stroke="rgba(65,80,105,0.25)" stroke-width="1" stroke-dasharray="3,5"/>
+        <text x="450" y="337" text-anchor="middle" fill="#3A3F4D" font-family="'Instrument Sans',sans-serif" font-size="8.5">Status tracker</text>
+        <text x="450" y="349" text-anchor="middle" fill="rgba(65,80,105,0.4)" font-family="'Instrument Sans',sans-serif" font-size="8">post-submission</text>
+
+        <!-- "2 tests ▾" indicators on Sol1a and Sol1b -->
+        <text x="49"  y="362" text-anchor="middle" fill="rgba(74,156,122,0.5)" font-family="'Geist Mono',monospace" font-size="7" style="cursor:pointer" onclick="toggleAssTests('sol1a',event)">2 tests ▾</text>
+        <text x="127" y="362" text-anchor="middle" fill="rgba(74,156,122,0.5)" font-family="'Geist Mono',monospace" font-size="7" style="cursor:pointer" onclick="toggleAssTests('sol1b',event)">2 tests ▾</text>
+
+        <!-- ── EXPERIMENT NODES ── -->
+        <!-- Exp1: Validated -->
+        <rect x="55"  y="418" width="72" height="28" rx="6" fill="rgba(74,156,122,0.08)" stroke="rgba(74,156,122,0.5)" stroke-width="1" stroke-dasharray="4,3"/>
+        <text x="91"  y="429" text-anchor="middle" fill="rgba(74,156,122,0.9)"  font-family="'Geist Mono',monospace" font-size="7.5" font-weight="700">Validated ✓</text>
+        <text x="91"  y="440" text-anchor="middle" fill="rgba(74,156,122,0.6)"  font-family="'Instrument Sans',sans-serif" font-size="7.5">Users engage pre-qual</text>
+
+        <!-- Exp2: Testing -->
+        <rect x="154" y="418" width="72" height="28" rx="6" fill="rgba(74,156,122,0.04)" stroke="rgba(74,156,122,0.3)" stroke-width="1" stroke-dasharray="4,3"/>
+        <text x="190" y="429" text-anchor="middle" fill="rgba(74,156,122,0.7)"  font-family="'Geist Mono',monospace" font-size="7.5" font-weight="700">Testing →</text>
+        <text x="190" y="440" text-anchor="middle" fill="rgba(74,156,122,0.45)" font-family="'Instrument Sans',sans-serif" font-size="7.5">Reduced anxiety signal</text>
+
+        <!-- ── RE-PRIORITISE LOOP (animated dashed arc on right side) ── -->
+        <path d="M480,418 C530,380 530,185 480,165" fill="none" stroke="rgba(74,156,122,0.2)" stroke-width="1.5" stroke-dasharray="6,4" class="reprioritise-arc"/>
+        <polygon points="478,160 486,168 474,170" fill="rgba(74,156,122,0.3)"/>
+        <text x="542" y="300" text-anchor="middle" fill="rgba(74,156,122,0.3)" font-family="'Geist Mono',monospace" font-size="7.5" transform="rotate(90,542,300)">↻ re-prioritise</text>
+
+        <!-- ── LEGEND + NEXT BEST ACTION ── -->
+        <rect x="30" y="468" width="500" height="58" rx="8" fill="rgba(201,168,76,0.05)" stroke="rgba(201,168,76,0.2)" stroke-width="1"/>
+        <text x="46" y="485" fill="rgba(201,168,76,0.8)" font-family="'Geist Mono',monospace" font-size="8" letter-spacing="0.08em" font-weight="700">✦ NEXT BEST ACTION</text>
+        <text x="46" y="499" fill="#F0EDE8" font-family="'Instrument Sans',sans-serif" font-size="11" font-weight="600">Complete JTBD interview set</text>
+        <text x="46" y="513" fill="#5C6475" font-family="'Instrument Sans',sans-serif" font-size="10">7 interviews remain · highest-potential, lowest-evidence node</text>
+
+        <!-- Evidence legend -->
+        <circle cx="370" cy="480" r="4" fill="#4A9C7A"/>
+        <text x="378" y="483" fill="rgba(156,163,178,0.6)" font-family="'Instrument Sans',sans-serif" font-size="8">Validated</text>
+        <circle cx="430" cy="480" r="4" fill="#C9A84C"/>
+        <text x="438" y="483" fill="rgba(156,163,178,0.6)" font-family="'Instrument Sans',sans-serif" font-size="8">Hypothesis</text>
+        <circle cx="370" cy="495" r="4" fill="rgba(60,63,77,0.9)" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+        <text x="378" y="498" fill="rgba(156,163,178,0.6)" font-family="'Instrument Sans',sans-serif" font-size="8">Weak</text>
+        <line x1="430" y1="493" x2="444" y2="493" stroke="#444" stroke-width="1.5" stroke-dasharray="3,2"/>
+        <text x="448" y="498" fill="rgba(100,100,100,0.6)" font-family="'Instrument Sans',sans-serif" font-size="8">Invalidated</text>
+
+      </svg>
     </div>
 
   </div>

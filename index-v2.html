@@ -159,40 +159,12 @@ body {
   font-family: 'Geist Mono', monospace;
 }
 
-/* ── RING AREA ───────────────────────────────────────────────── */
-#ring-area {
-  flex: 1; display: flex; align-items: center; justify-content: center;
-  position: relative; overflow: hidden;
-}
-#ring-svg { max-width: 100%; max-height: 100%; cursor: default; }
-
-/* SVG node elements */
-.node-circle {
-  cursor: pointer;
-  transition: all 0.2s;
-}
-.node-circle:hover .node-bg { opacity: 1; }
-.node-label {
-  pointer-events: none;
-  user-select: none;
-}
-.node-label text { font-family: 'Instrument Sans', sans-serif; }
-
-/* ── NODE GLOW ANIMATIONS ────────────────────────────────────── */
-@keyframes pulse-thread {
-  0%, 100% { opacity: 0.5; stroke-width: 1.5; }
-  50%       { opacity: 1;   stroke-width: 2.5; }
-}
+/* ── ANIMATIONS ──────────────────────────────────────────────── */
 @keyframes pulse-dot { 0%,100%{opacity:1;} 50%{opacity:0.4;} }
-@keyframes pulse-node-glow {
-  0%, 100% { opacity: 0.4; r: 46px; }
-  50%       { opacity: 0.7; r: 52px; }
-}
 @keyframes de-glow {
   0%, 100% { filter: drop-shadow(0 0 6px rgba(201,168,76,0.4)); }
   50%       { filter: drop-shadow(0 0 14px rgba(201,168,76,0.8)); }
 }
-@keyframes spin-slow { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
 @keyframes fade-in   { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:translateY(0)} }
 @keyframes slide-up  { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
 @keyframes scale-in  { from{opacity:0;transform:scale(0.94)} to{opacity:1;transform:scale(1)} }
@@ -303,50 +275,6 @@ body {
 .node-de-suggested .node-glow { animation: pulse-node-glow 2.2s ease-in-out infinite; }
 .de-btn { animation: de-glow 2.2s ease-in-out infinite; cursor: pointer; }
 #ost-mutations-overlay.open { opacity: 1; pointer-events: all; }
-
-/* ── RESEARCH TIMELINE STRIP ─────────────────────────────────── */
-#timeline-strip {
-  height: 56px; flex-shrink: 0;
-  border-top: 1px solid var(--border-s);
-  background: var(--surface-1);
-  display: flex; flex-direction: column; justify-content: center;
-  padding: 0 24px; overflow: hidden; position: relative;
-}
-.ts-track {
-  position: relative; height: 2px;
-  background: var(--surface-3); border-radius: 2px;
-  margin: 0 0 0 0;
-}
-.ts-progress {
-  position: absolute; left: 0; top: 0; height: 100%;
-  width: 33.3%; /* week 8 of 24 */
-  background: linear-gradient(90deg, var(--c-def) 0%, var(--c-jtbd) 40%, var(--amber) 100%);
-  border-radius: 2px;
-}
-.ts-weeks {
-  position: absolute; top: -18px; left: 0; right: 0; pointer-events: none;
-}
-.ts-week-label {
-  position: absolute;
-  font-size: 9px; font-family: 'Geist Mono', monospace;
-  color: var(--text-4); transform: translateX(-50%);
-  white-space: nowrap;
-}
-.ts-week-label.now { color: var(--amber); font-weight: 600; }
-.ts-events {
-  position: absolute; top: -10px; left: 0; right: 0;
-}
-.ts-ev {
-  position: absolute; transform: translateX(-50%);
-  width: 10px; height: 10px; border-radius: 50%;
-  border: 2px solid var(--surface-1);
-  cursor: default;
-}
-.ts-ev-label {
-  position: absolute; top: 14px; transform: translateX(-50%);
-  font-size: 9px; color: var(--text-3); white-space: nowrap;
-  font-family: 'Instrument Sans', sans-serif;
-}
 
 /* ── RIGHT PANEL ─────────────────────────────────────────────── */
 .rp-title  { font-size: 13px; font-weight: 600; color: var(--text-1); display: flex; align-items: center; gap: 7px; }
@@ -669,20 +597,7 @@ html.light text[fill="#F0EDE8 "] { fill: #0D1117 !important; }
 /* Light mode: dim the white watermark text in OST */
 html.light text[fill="rgba(255,255,255,0.06)"] { fill: rgba(0,0,0,0.04) !important; }
 
-/* Light mode: center info card — swap dark gradient for light surface */
-html.light #center-info-card {
-  background: radial-gradient(circle at 40% 35%, #FFFFFF 0%, #F0F2F8 100%);
-  box-shadow: 0 0 40px rgba(139,107,174,0.12), 0 0 80px rgba(139,107,174,0.06), 0 2px 16px rgba(0,0,0,0.08);
-  border-color: rgba(139,107,174,0.25);
-}
-html.light #center-info-card:hover {
-  box-shadow: 0 0 50px rgba(139,107,174,0.18), 0 0 100px rgba(139,107,174,0.08), 0 4px 20px rgba(0,0,0,0.10);
-}
-
-/* Light mode: orbit ring arcs — make visible on light bg */
-html.light #ring-svg path[stroke="rgba(180,200,230,0.2)"] {
-  stroke: rgba(90,110,150,0.15);
-}
+/* Light mode: (ring removed — no ring CSS needed) */
 
 /* OST graph area background */
 .ost-graph-area {
@@ -690,13 +605,6 @@ html.light #ring-svg path[stroke="rgba(180,200,230,0.2)"] {
 }
 html.light .ost-graph-area {
   background: radial-gradient(ellipse at 50% 40%, #F8F9FC 0%, #EEF0F6 100%);
-}
-
-/* Light mode: center icon strokes (lavender → muted purple) */
-html.light #center-info-card svg line,
-html.light #center-info-card svg rect,
-html.light #center-info-card svg polyline {
-  stroke: rgba(100,80,160,0.55);
 }
 
 /* Light mode: overlay backdrop */
@@ -707,15 +615,6 @@ html.light .node-overlay {
 html.light .no-panel {
   box-shadow: 0 20px 60px rgba(0,0,0,0.12), 0 4px 16px rgba(0,0,0,0.06);
   border-color: var(--border-d);
-}
-
-/* Light mode: node circles — white fill + subtle shadow so they lift off the bg */
-html.light .node-circle circle[r="46"] {
-  fill: var(--surface-1);
-  filter: drop-shadow(0 2px 10px rgba(0,0,0,0.07));
-}
-html.light .node-circle {
-  filter: drop-shadow(0 2px 12px rgba(0,0,0,0.06));
 }
 
 /* Light mode: chat bubble contrast */
@@ -1139,40 +1038,6 @@ html.light ::-webkit-scrollbar-thumb { background: var(--surface-4); }
   color: var(--text-1); border-radius: 10px; border-bottom-right-radius: 3px;
 }
 
-/* ── CENTER INFO CARD (circular) ─────────────────────────────── */
-#center-info-card {
-  position: absolute;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -47%);
-  width: 220px; height: 220px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 40% 35%, rgba(30,25,55,0.97) 0%, rgba(13,22,42,0.97) 100%);
-  border: 1px solid rgba(139,107,174,0.4);
-  z-index: 5;
-  pointer-events: all;
-  cursor: pointer;
-  box-shadow: 0 0 60px rgba(139,107,174,0.25), 0 0 120px rgba(139,107,174,0.1), 0 2px 20px rgba(0,0,0,0.7);
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  text-align: center; padding: 12px;
-  transition: box-shadow 0.25s;
-}
-#center-info-card:hover {
-  box-shadow: 0 0 80px rgba(139,107,174,0.4), 0 0 140px rgba(139,107,174,0.15), 0 2px 20px rgba(0,0,0,0.7);
-}
-.cic-de-btn {
-  pointer-events: all;
-  background: rgba(201,168,76,0.12); border: 1px solid rgba(201,168,76,0.4);
-  border-radius: 20px; padding: 4px 14px;
-  font-size: 9.5px; font-weight: 600; color: var(--amber);
-  cursor: pointer; font-family: 'Instrument Sans', sans-serif;
-  transition: background 0.15s; margin-top: 8px;
-  display: inline-flex; align-items: center; justify-content: center; gap: 4px;
-  animation: de-glow 2.2s ease-in-out infinite;
-  white-space: nowrap;
-}
-.cic-de-btn:hover { background: rgba(201,168,76,0.25); }
-
 /* ── RIGHT PANEL CONTENT WRAPPER ────────────────────────────── */
 #rp-content { display: flex; flex-direction: column; flex: 1; overflow: hidden; min-height: 0; }
 #rpanel-chat-section { flex: 1; display: flex; flex-direction: column; overflow: hidden; min-height: 0; }
@@ -1198,6 +1063,230 @@ html.light ::-webkit-scrollbar-thumb { background: var(--surface-4); }
 }
 .cmd-label { font-size: 13px; font-weight: 500; color: var(--text-1); flex: 1; }
 .cmd-sub { font-size: 11px; color: var(--text-4); white-space: nowrap; }
+
+/* ── OST TREE CENTER PANEL ───────────────────────────────── */
+/* #ost-tree legacy selector kept for light-mode overrides below */
+#ost-tree {
+  flex: 1; display: flex; flex-direction: column; overflow: hidden;
+  background: var(--surface-0); position: relative;
+}
+
+/* ── SKILL GATEWAY ROW ───────────────────────────────────── */
+#ost-skill-row {
+  display: flex; gap: 8px; padding: 16px 20px 12px;
+  flex-shrink: 0; border-bottom: 1px solid var(--border-s);
+  background: var(--surface-1);
+}
+.skill-pill {
+  flex: 1; display: flex; flex-direction: column; align-items: center;
+  gap: 3px; padding: 8px 6px; border-radius: 10px;
+  cursor: pointer; transition: all 0.15s; border: 1px solid var(--border-s);
+  background: var(--surface-2);
+}
+.skill-pill:hover { background: var(--surface-3); border-color: var(--border-d); transform: translateY(-1px); }
+.skill-pill-num   { font-size: 9px; font-family: 'Geist Mono', monospace; color: var(--text-4); }
+.skill-pill-name  { font-size: 12px; font-weight: 700; color: var(--text-1); font-family: 'Instrument Sans', sans-serif; }
+.skill-pill-badge { font-size: 9px; font-family: 'Geist Mono', monospace; padding: 1px 6px; border-radius: 10px; }
+/* Evidence states for skill pills */
+.skill-pill[data-evidence="supported"]   { border-color: rgba(91,140,186,0.3); }
+.skill-pill[data-evidence="in-progress"] { border-color: rgba(201,168,76,0.3); }
+.skill-pill[data-evidence="in-progress"] .skill-pill-badge { background: var(--amber-dim); color: var(--amber); }
+.skill-pill[data-evidence="supported"]   .skill-pill-badge { background: rgba(91,140,186,0.15); color: var(--c-def); }
+.skill-pill[data-evidence="unvalidated"] .skill-pill-name  { color: var(--text-3); }
+.skill-pill[data-evidence="unvalidated"] .skill-pill-badge { background: rgba(255,255,255,0.04); color: var(--text-4); }
+
+/* ── OST SVG CANVAS ──────────────────────────────────────── */
+#ost-canvas {
+  flex: 1; overflow-y: auto; overflow-x: hidden;
+  background: var(--surface-0); position: relative;
+}
+#ost-canvas::-webkit-scrollbar { width: 3px; }
+#ost-canvas::-webkit-scrollbar-thumb { background: var(--surface-4); }
+#ost-svg { display: block; width: 100%; }
+
+/* ── RE-PRIORITISE ARC ANIMATION ─────────────────────────── */
+.reprioritise-arc {
+  animation: reprioritise-dash 3s linear infinite;
+}
+@keyframes reprioritise-dash {
+  to { stroke-dashoffset: -40; }
+}
+
+.ost-level-label {
+  font-size: 9px; text-transform: uppercase; letter-spacing: 0.12em;
+  color: var(--text-4); font-family: 'Geist Mono', monospace;
+  padding: 0 2px; margin-bottom: 6px; margin-top: 4px;
+}
+
+.ost-connector {
+  width: 2px; height: 16px;
+  background: rgba(255,255,255,0.07);
+  margin: 0 auto 0 22px;
+}
+
+/* ── OST NODE ── */
+.ost-node {
+  display: flex; align-items: center; gap: 14px;
+  padding: 13px 16px; border-radius: 12px;
+  cursor: pointer; transition: all 0.15s ease;
+  border: 1px solid transparent; position: relative;
+}
+.ost-node:hover { transform: translateX(3px); }
+
+/* Evidence state variants */
+.ost-node[data-evidence="unvalidated"] {
+  background: rgba(255,255,255,0.02);
+  border: 1px dashed rgba(255,255,255,0.08);
+}
+.ost-node[data-evidence="unvalidated"] .ost-node-icon { opacity: 0.35; }
+.ost-node[data-evidence="unvalidated"] .ost-node-name { color: var(--text-3); }
+.ost-node[data-evidence="unvalidated"] .ost-node-status { color: var(--text-4); }
+.ost-node[data-evidence="unvalidated"] .ost-node-evidence-badge { background: rgba(255,255,255,0.04); color: var(--text-4); }
+
+.ost-node[data-evidence="in-progress"] {
+  background: rgba(255,255,255,0.03);
+  border-color: rgba(255,255,255,0.1);
+}
+.ost-node[data-evidence="in-progress"] .ost-node-evidence-badge { background: var(--amber-dim); color: var(--amber); }
+
+.ost-node[data-evidence="supported"] {
+  background: rgba(255,255,255,0.04);
+  border-color: rgba(255,255,255,0.12);
+}
+.ost-node[data-evidence="supported"] .ost-node-evidence-badge { background: rgba(91,140,186,0.15); color: var(--c-def); }
+
+.ost-node[data-evidence="validated"] {
+  border-color: rgba(74,156,122,0.35);
+}
+.ost-node[data-evidence="validated"] .ost-node-evidence-badge { background: rgba(74,156,122,0.15); color: var(--c-proto); }
+
+.ost-node[data-evidence="invalidated"] {
+  background: rgba(255,255,255,0.01);
+  border: 1px dashed rgba(255,255,255,0.05);
+  opacity: 0.55;
+}
+.ost-node[data-evidence="invalidated"] .ost-node-icon { filter: grayscale(1); opacity: 0.4; }
+.ost-node[data-evidence="invalidated"] .ost-node-name { color: var(--text-4); text-decoration: line-through; }
+.ost-node[data-evidence="invalidated"] .ost-node-status { color: var(--text-4); text-decoration: line-through; }
+.ost-node[data-evidence="invalidated"] .ost-node-evidence-badge { background: rgba(255,255,255,0.04); color: var(--text-4); text-decoration: none; }
+
+/* Module-specific node backgrounds (when not overridden by evidence state) */
+#ost-node-definition[data-evidence="supported"] { background: rgba(91,140,186,0.07); border-color: rgba(91,140,186,0.22); }
+#ost-node-jtbd[data-evidence="in-progress"]     { background: rgba(139,107,174,0.06); border-color: rgba(139,107,174,0.18); }
+#ost-node-tradeoffs[data-evidence="validated"]  { background: rgba(201,168,76,0.08); }
+#ost-node-prototyping[data-evidence="validated"]{ background: rgba(74,156,122,0.08); }
+
+.ost-node-icon {
+  width: 38px; height: 38px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; transition: opacity 0.15s;
+}
+.ost-node-content { flex: 1; min-width: 0; }
+.ost-node-skill  { font-size: 9px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-4); font-family: 'Geist Mono', monospace; margin-bottom: 2px; }
+.ost-node-name   { font-size: 15px; font-weight: 700; color: var(--text-1); font-family: 'Instrument Sans', sans-serif; line-height: 1.2; }
+.ost-node-status { font-size: 11px; color: var(--text-3); margin-top: 2px; line-height: 1.4; }
+.ost-node-evidence-badge {
+  font-size: 10px; font-family: 'Geist Mono', monospace;
+  padding: 3px 10px; border-radius: 20px; flex-shrink: 0;
+  white-space: nowrap;
+}
+.ost-node-chevron { font-size: 18px; color: var(--text-4); flex-shrink: 0; transition: transform 0.12s, color 0.12s; }
+.ost-node:hover .ost-node-chevron { transform: translateX(4px); color: var(--text-2); }
+
+/* ── OUTCOME DISPLAY ── */
+.ost-outcome {
+  display: flex; justify-content: center;
+}
+.ost-outcome-inner {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 20px; border-radius: 10px;
+  background: rgba(201,168,76,0.06); border: 1px solid rgba(201,168,76,0.2);
+  max-width: 100%;
+}
+.ost-outcome-label { font-size: 9px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--amber); font-family: 'Geist Mono', monospace; white-space: nowrap; }
+.ost-outcome-value { font-size: 13px; font-weight: 600; color: var(--text-1); font-family: 'Instrument Sans', sans-serif; }
+
+/* ── BRANCH HINT ── */
+.ost-branch-hint {
+  display: flex; align-items: center; gap: 10px;
+  padding: 6px 16px 6px 52px; flex-wrap: wrap;
+}
+.ost-branch-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+.ost-branch-hint span { font-size: 10px; color: var(--text-3); font-family: 'Geist Mono', monospace; margin-right: 6px; }
+
+/* ── CAUSAL BRIDGE ── */
+.ost-causal-connector {
+  width: 0;
+  height: 12px;
+  border-left: 2px dashed rgba(192,96,128,0.3);
+  margin: 0 auto 0 22px;
+}
+.ost-causal-bridge {
+  display: flex; align-items: center; gap: 10px;
+  padding: 8px 16px; margin: 0 0 0 12px;
+  border-radius: 8px; cursor: pointer; transition: all 0.12s;
+  background: rgba(192,96,128,0.05);
+  border: 1px dashed rgba(192,96,128,0.25);
+}
+.ost-causal-bridge:hover { background: rgba(192,96,128,0.1); transform: translateX(3px); }
+.ost-causal-icon  { font-size: 16px; flex-shrink: 0; }
+.ost-causal-body  { flex: 1; min-width: 0; }
+.ost-causal-label { font-size: 12px; font-weight: 600; color: var(--c-causal); line-height: 1.3; }
+.ost-causal-sub   { font-size: 10px; color: var(--text-3); margin-top: 1px; }
+.ost-causal-badge { font-size: 10px; font-family: 'Geist Mono', monospace; color: var(--amber); background: var(--amber-dim); padding: 2px 8px; border-radius: 10px; flex-shrink: 0; }
+
+/* ── RE-PRIORITISE LOOP ── */
+.ost-reprioritise {
+  display: flex; align-items: center; gap: 10px;
+  padding: 8px 16px; margin-top: 4px;
+  border-radius: 8px;
+  background: rgba(74,156,122,0.04);
+  border: 1px dashed rgba(74,156,122,0.15);
+  animation: reprioritise-pulse 3s ease-in-out infinite;
+}
+@keyframes reprioritise-pulse {
+  0%, 100% { border-color: rgba(74,156,122,0.15); background: rgba(74,156,122,0.04); }
+  50%       { border-color: rgba(74,156,122,0.28); background: rgba(74,156,122,0.08); }
+}
+.ost-reprioritise-line {
+  width: 20px; height: 2px;
+  background: linear-gradient(90deg, var(--c-proto), var(--c-jtbd));
+  border-radius: 2px; flex-shrink: 0;
+  position: relative;
+}
+.ost-reprioritise-line::after {
+  content: ''; position: absolute; right: -6px; top: -3px;
+  border: 4px solid transparent; border-left: 6px solid var(--c-jtbd);
+  animation: loop-arrow 2s ease-in-out infinite;
+}
+@keyframes loop-arrow {
+  0%, 100% { opacity: 0.5; } 50% { opacity: 1; }
+}
+.ost-reprioritise-label {
+  font-size: 10px; font-family: 'Geist Mono', monospace;
+  color: var(--c-proto); letter-spacing: 0.03em;
+}
+
+/* ── NEXT BEST ACTION ── */
+.ost-next-action {
+  margin-top: 16px; padding: 14px 16px;
+  background: var(--surface-2); border-radius: 10px;
+  border-left: 3px solid var(--amber);
+}
+.ost-next-action-label { font-size: 9px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--amber); font-family: 'Geist Mono', monospace; margin-bottom: 5px; }
+.ost-next-action-name  { font-size: 14px; font-weight: 700; color: var(--text-1); margin-bottom: 4px; font-family: 'Instrument Sans', sans-serif; }
+.ost-next-action-why   { font-size: 11px; color: var(--text-3); line-height: 1.55; }
+
+/* Invalidated node in OST SVG */
+.ost-svg-invalidated text { fill: #4A4A4A !important; text-decoration: line-through; }
+.ost-svg-invalidated circle, .ost-svg-invalidated ellipse { fill: rgba(60,60,60,0.3) !important; stroke: rgba(100,100,100,0.3) !important; }
+
+/* ── LIGHT MODE ADDITIONS ── */
+html.light #ost-tree { background: var(--surface-0); }
+html.light .ost-node[data-evidence="unvalidated"] { background: rgba(0,0,0,0.02); border-color: rgba(0,0,0,0.08); }
+html.light .ost-outcome-inner { background: rgba(184,148,60,0.06); }
+html.light .ost-next-action { background: var(--surface-2); }
+html.light .ost-reprioritise { background: rgba(52,136,104,0.04); }
 
 </style>
 </head>
@@ -1295,211 +1384,213 @@ html.light ::-webkit-scrollbar-thumb { background: var(--surface-4); }
     </div>
   </div>
 
-  <!-- RING SVG -->
-  <div id="ring-area" style="position:relative">
-    <svg id="ring-svg" viewBox="0 0 840 720" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <!-- Glow filters -->
-        <filter id="f-def"  x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur in="SourceGraphic" stdDeviation="8"/></filter>
-        <filter id="f-jtbd" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur in="SourceGraphic" stdDeviation="8"/></filter>
-        <filter id="f-cau"  x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur in="SourceGraphic" stdDeviation="10"/></filter>
-        <filter id="f-pro"  x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur in="SourceGraphic" stdDeviation="6"/></filter>
-        <filter id="f-tra"  x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur in="SourceGraphic" stdDeviation="6"/></filter>
-        <filter id="f-center" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur in="SourceGraphic" stdDeviation="12"/></filter>
-        <!-- Dash patterns -->
-        <marker id="arrow" viewBox="0 0 6 6" refX="3" refY="3" markerWidth="5" markerHeight="5" orient="auto">
-          <path d="M0,0 L6,3 L0,6 Z" fill="rgba(201,168,76,0.6)"/>
-        </marker>
-      </defs>
+  <!-- OST TREE -->
+  <div id="ost-tree">
 
-      <!-- ── Orbit ring: arc segments between each node ── -->
-      <path d="M420,170 A200,200 0 0 1 610,308" fill="none" stroke="rgba(180,200,230,0.2)" stroke-width="1.5"/>
-      <path d="M610,308 A200,200 0 0 1 538,532" fill="none" stroke="rgba(180,200,230,0.2)" stroke-width="1.5"/>
-      <path d="M538,532 A200,200 0 0 1 302,532" fill="none" stroke="rgba(180,200,230,0.2)" stroke-width="1.5"/>
-      <path d="M302,532 A200,200 0 0 1 230,308" fill="none" stroke="rgba(180,200,230,0.2)" stroke-width="1.5"/>
-      <path d="M230,308 A200,200 0 0 1 420,170" fill="none" stroke="rgba(180,200,230,0.2)" stroke-width="1.5"/>
+    <!-- ── PART 1: SKILL GATEWAY ROW ─────────────────── -->
+    <div id="ost-skill-row">
 
-      <!-- ── THREADS (back layer, shallow cubic bezier) ── -->
-      <!-- Definition → Center: VALIDATED (green solid) -->
-      <path id="thread-def" d="M420,216 C445,237 445,257 420,278"
-        stroke="var(--thread-val)" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.9"/>
+      <div class="skill-pill" data-evidence="supported" onclick="selectNode('definition')"
+           style="--pill-color:var(--c-def)">
+        <span class="skill-pill-num">01</span>
+        <span class="skill-pill-name" style="color:var(--c-def)">Frame</span>
+        <span class="skill-pill-badge">Supported</span>
+      </div>
 
-      <!-- JTBD → Center: PARTIAL (amber solid) -->
-      <path id="thread-jtbd" d="M566,322 C554,352 534,358 506,341"
-        stroke="var(--thread-part)" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.8"/>
+      <div class="skill-pill" data-evidence="in-progress" onclick="selectNode('jtbd')"
+           style="--pill-color:var(--c-jtbd)">
+        <span class="skill-pill-num">02</span>
+        <span class="skill-pill-name" style="color:var(--c-jtbd)">Discover</span>
+        <span class="skill-pill-badge">In progress</span>
+      </div>
 
-      <!-- Causal → Center: DE SUGGESTED (pulsing amber) -->
-      <path id="thread-causal" d="M511,495 C478,491 465,473 473,441"
-        stroke="var(--amber)" stroke-width="2" stroke-linecap="round" fill="none"
-        class="thread-de-suggested"/>
+      <div class="skill-pill" data-evidence="in-progress" onclick="selectNode('causal')"
+           style="--pill-color:var(--c-causal)">
+        <span class="skill-pill-num">03</span>
+        <span class="skill-pill-name" style="color:var(--c-causal)">Connect</span>
+        <span class="skill-pill-badge">In progress</span>
+      </div>
 
-      <!-- Prototyping → Center: NONE (grey dashed) -->
-      <path id="thread-proto" d="M329,495 C321,463 334,445 367,441"
-        stroke="var(--thread-none)" stroke-width="1.5" stroke-dasharray="6,7" stroke-linecap="round" fill="none" opacity="0.45"/>
+      <div class="skill-pill" data-evidence="unvalidated" onclick="selectNode('tradeoffs')"
+           style="--pill-color:var(--amber)">
+        <span class="skill-pill-num">05</span>
+        <span class="skill-pill-name" style="color:var(--text-3)">Decide</span>
+        <span class="skill-pill-badge">Not started</span>
+      </div>
 
-      <!-- Trade-offs → Center: NONE (grey dashed) -->
-      <path id="thread-trade" d="M274,322 C302,305 322,311 334,341"
-        stroke="var(--thread-none)" stroke-width="1.5" stroke-dasharray="6,7" stroke-linecap="round" fill="none" opacity="0.45"/>
+      <div class="skill-pill" data-evidence="unvalidated" onclick="selectNode('prototyping')"
+           style="--pill-color:var(--c-proto)">
+        <span class="skill-pill-num">04</span>
+        <span class="skill-pill-name" style="color:var(--text-3)">Test</span>
+        <span class="skill-pill-badge">Not started</span>
+      </div>
 
-      <!-- ── CENTER CARD glow only (content via HTML overlay) ── -->
-      <circle cx="420" cy="368" r="135" fill="rgba(139,107,174,0.07)" filter="url(#f-center)" opacity="0.9"/>
-      <circle cx="420" cy="368" r="112" fill="none" stroke="rgba(139,107,174,0.1)" stroke-width="1" stroke-dasharray="4,8"/>
-      <circle cx="420" cy="368" r="80" fill="none" stroke="rgba(139,107,174,0.06)" stroke-width="1" stroke-dasharray="2,12"/>
+    </div>
 
-      <!-- ── DEFINITION NODE (top, 270°) ── -->
-      <g class="node-circle" id="node-def" onclick="selectNode('definition')" transform="translate(420,170)">
-        <circle r="62" fill="var(--c-def-dim)" filter="url(#f-def)" opacity="0.6" class="node-glow"/>
-        <circle r="46" fill="var(--surface-2)" stroke="var(--c-def)" stroke-width="2"/>
-        <!-- Validated badge -->
-        <circle r="11" cx="33" cy="-33" fill="var(--c-proto)" stroke="var(--surface-0)" stroke-width="2"/>
-        <text x="33" y="-29" text-anchor="middle" fill="#fff" font-size="10" font-weight="700">✓</text>
-        <!-- Checklist icon -->
-        <g fill="none" stroke="var(--c-def)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="-15,-11 -12,-8 -8,-13"/>
-          <line x1="-5" y1="-10" x2="13" y2="-10"/>
-          <polyline points="-15,-1 -12,2 -8,-3"/>
-          <line x1="-5" y1="0" x2="13" y2="0"/>
-          <line x1="-15" y1="10" x2="5" y2="10"/>
-        </g>
-      </g>
-      <text x="420" y="84" text-anchor="middle" fill="var(--text-2)" font-family="'Instrument Sans',sans-serif" font-size="12" font-weight="500" class="node-label">Definition</text>
-      <text x="420" y="98" text-anchor="middle" fill="var(--c-proto)" font-family="'Geist Mono',monospace" font-size="10" class="node-label">● Validated</text>
-      <text x="420" y="112" text-anchor="middle" fill="var(--text-4)" font-family="'Instrument Sans',sans-serif" font-size="10" class="node-label">Signal intake &amp; social listening</text>
+    <!-- ── PART 2: SVG BRANCHING TREE ────────────────── -->
+    <div id="ost-canvas" class="ost-graph-area">
+      <svg id="ost-svg" width="100%" viewBox="0 0 560 580" preserveAspectRatio="xMidYMin meet" xmlns="http://www.w3.org/2000/svg">
 
-      <!-- ── JTBD NODE (upper right, 342°) ── -->
-      <g class="node-circle" id="node-jtbd" onclick="selectNode('jtbd')" transform="translate(610,308)">
-        <circle r="62" fill="var(--c-jtbd-dim)" filter="url(#f-jtbd)" opacity="0.6" class="node-glow"/>
-        <circle r="46" fill="var(--surface-2)" stroke="var(--c-jtbd)" stroke-width="2"/>
-        <circle r="46" fill="none" stroke="var(--c-jtbd)" stroke-width="2" stroke-dasharray="96 192" stroke-dashoffset="-48" opacity="0.35"/>
-        <!-- Progress badge -->
-        <rect x="16" y="-46" width="32" height="15" rx="7" fill="var(--amber-dim)" stroke="rgba(201,168,76,0.3)" stroke-width="1"/>
-        <text x="32" y="-35" text-anchor="middle" fill="var(--amber)" font-family="'Geist Mono',monospace" font-size="9">8/15</text>
-        <!-- Group of people icon -->
-        <g fill="none" stroke="var(--c-jtbd)" stroke-width="2" stroke-linecap="round">
-          <circle cx="0" cy="-8" r="5"/>
-          <path d="M-7,8 C-7,1 -3.5,-1 0,-1 C3.5,-1 7,1 7,8"/>
-          <circle cx="-11" cy="-7" r="3.5" opacity="0.6"/>
-          <path d="M-16,8 C-16,3 -14,1.5 -11,1.5 C-8,1.5 -6,3 -6,8" opacity="0.6"/>
-          <circle cx="11" cy="-7" r="3.5" opacity="0.6"/>
-          <path d="M6,8 C6,3 8,1.5 11,1.5 C14,1.5 16,3 16,8" opacity="0.6"/>
-        </g>
-      </g>
-      <text x="668" y="300" text-anchor="start" fill="var(--text-2)" font-family="'Instrument Sans',sans-serif" font-size="12" font-weight="500" class="node-label">JTBD</text>
-      <text x="668" y="314" text-anchor="start" fill="var(--amber)" font-family="'Geist Mono',monospace" font-size="10" class="node-label">◑ Partial</text>
-      <text x="668" y="328" text-anchor="start" fill="var(--text-4)" font-family="'Instrument Sans',sans-serif" font-size="10" class="node-label">Uncovering jobs &amp; outcomes</text>
+        <!-- Defs: glow filters -->
+        <defs>
+          <filter id="glow-ost-p" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="8" result="blur"/>
+            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+          <filter id="glow-ost-g" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="6" result="blur"/>
+            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+          <filter id="glow-ost-a" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="6" result="blur"/>
+            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
 
-      <!-- ── CAUSAL NODE (lower right, 54°) ── -->
-      <g class="node-circle node-de-suggested" id="node-causal" onclick="selectNode('causal')" transform="translate(538,532)">
-        <circle r="64" fill="var(--c-causal-dim)" filter="url(#f-cau)" class="node-glow" opacity="0.7"/>
-        <circle r="46" fill="var(--surface-2)" stroke="var(--c-causal)" stroke-width="2" stroke-dasharray="10,6"/>
-        <!-- DE badge -->
-        <circle r="12" cx="33" cy="-33" fill="var(--amber-dim)" stroke="rgba(201,168,76,0.5)" stroke-width="1.5" class="thread-de-suggested"/>
-        <text x="33" y="-29" text-anchor="middle" fill="var(--amber)" font-size="11" font-weight="700">✦</text>
-        <!-- City skyline icon -->
-        <g fill="none" stroke="var(--c-causal)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="-15,12 -15,4 -11,4 -11,-5 -7,-5 -7,-10 -3,-10 -3,-6 2,-6 2,-13 6,-13 6,-7 10,-7 10,0 15,0 15,12"/>
-          <polyline points="2,-13 4,-17 6,-13"/>
-          <line x1="-16" y1="12" x2="16" y2="12"/>
-        </g>
-      </g>
-      <text x="590" y="596" text-anchor="middle" fill="var(--text-2)" font-family="'Instrument Sans',sans-serif" font-size="12" font-weight="500" class="node-label">Causal Structures</text>
-      <text x="590" y="610" text-anchor="middle" fill="var(--amber)" font-family="'Geist Mono',monospace" font-size="10" class="node-label">✦ DE Suggested</text>
-      <text x="590" y="624" text-anchor="middle" fill="var(--text-4)" font-family="'Instrument Sans',sans-serif" font-size="10" class="node-label">Root cause &amp; mechanism mapping</text>
+        <!-- ── ZONE LABELS ── -->
+        <text x="10" y="60"  fill="rgba(255,255,255,0.06)" font-family="'Geist Mono',monospace" font-size="7.5" letter-spacing="0.1em">OUTCOME</text>
+        <text x="10" y="165" fill="rgba(255,255,255,0.06)" font-family="'Geist Mono',monospace" font-size="7.5" letter-spacing="0.1em">OPPS</text>
+        <text x="10" y="350" fill="rgba(255,255,255,0.06)" font-family="'Geist Mono',monospace" font-size="7.5" letter-spacing="0.1em">SOLUTIONS</text>
+        <text x="10" y="445" fill="rgba(74,156,122,0.2)"  font-family="'Geist Mono',monospace" font-size="7.5" letter-spacing="0.1em">TESTS</text>
 
-      <!-- ── PROTOTYPING NODE (lower left, 126°) ── -->
-      <g class="node-circle" id="node-proto" onclick="selectNode('prototyping')" transform="translate(302,532)">
-        <circle r="62" fill="var(--c-proto-dim)" filter="url(#f-pro)" opacity="0.35" class="node-glow"/>
-        <circle r="46" fill="var(--surface-2)" stroke="rgba(74,156,122,0.35)" stroke-width="1.5" stroke-dasharray="6,7"/>
-        <!-- Lightbulb icon -->
-        <g fill="none" stroke="rgba(74,156,122,0.75)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M-8,-2 C-8,-12 8,-12 8,-2 C8,4 4.5,8 4.5,11 L-4.5,11 C-4.5,8 -8,4 -8,-2Z"/>
-          <line x1="-4.5" y1="11" x2="-4.5" y2="14"/>
-          <line x1="4.5" y1="11" x2="4.5" y2="14"/>
-          <line x1="-5.5" y1="14" x2="5.5" y2="14"/>
-          <circle cx="0" cy="-1" r="2.5" fill="rgba(74,156,122,0.12)" stroke="none"/>
-        </g>
-      </g>
-      <text x="248" y="596" text-anchor="middle" fill="var(--text-3)" font-family="'Instrument Sans',sans-serif" font-size="12" class="node-label">Prototyping</text>
-      <text x="248" y="610" text-anchor="middle" fill="var(--text-4)" font-family="'Geist Mono',monospace" font-size="10" class="node-label">○ Not Started</text>
-      <text x="248" y="624" text-anchor="middle" fill="var(--text-4)" font-family="'Instrument Sans',sans-serif" font-size="10" class="node-label">Concept testing &amp; solution design</text>
+        <!-- ── HORIZONTAL ZONE GUIDES ── -->
+        <line x1="0" y1="115" x2="560" y2="115" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+        <line x1="0" y1="215" x2="560" y2="215" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+        <line x1="0" y1="300" x2="560" y2="300" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+        <line x1="0" y1="405" x2="560" y2="405" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
 
-      <!-- ── TRADE-OFFS NODE (upper left, 198°) ── -->
-      <g class="node-circle" id="node-trade" onclick="selectNode('tradeoffs')" transform="translate(230,308)">
-        <circle r="62" fill="var(--c-trade-dim)" filter="url(#f-tra)" opacity="0.35" class="node-glow"/>
-        <circle r="46" fill="var(--surface-2)" stroke="rgba(201,168,76,0.3)" stroke-width="1.5" stroke-dasharray="6,7"/>
-        <!-- Scales icon -->
-        <g fill="none" stroke="rgba(201,168,76,0.75)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <line x1="0" y1="-13" x2="0" y2="10"/>
-          <line x1="-12" y1="-4" x2="12" y2="-4"/>
-          <polyline points="-12,-4 -15,5 -9,5 -12,-4"/>
-          <polyline points="12,-4 14,3 10,3 12,-4"/>
-          <line x1="-4" y1="10" x2="4" y2="10"/>
-        </g>
-      </g>
-      <text x="172" y="300" text-anchor="end" fill="var(--text-3)" font-family="'Instrument Sans',sans-serif" font-size="12" class="node-label">Making Trade-offs</text>
-      <text x="172" y="314" text-anchor="end" fill="var(--text-4)" font-family="'Geist Mono',monospace" font-size="10" class="node-label">○ Not Started</text>
-      <text x="172" y="328" text-anchor="end" fill="var(--text-4)" font-family="'Instrument Sans',sans-serif" font-size="10" class="node-label">Priority &amp; tradeoff analysis</text>
+        <!-- ── EDGES: Outcome → Opportunities ── -->
+        <path d="M280,82 V120 H110 V138" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1.5"/>
+        <path d="M280,82 V120"            fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1.5"/>
+        <path d="M280,120 V138"           fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1.5"/>
+        <path d="M280,82 V120 H450 V138"  fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="1" stroke-dasharray="4,3"/>
 
+        <!-- ── EDGES: Opp1 → Causal → Solutions ── -->
+        <path d="M110,182 V242" fill="none" stroke="rgba(74,156,122,0.3)" stroke-width="1.2"/>
+        <path d="M110,270 V300 H50 V323"  fill="none" stroke="rgba(74,156,122,0.25)" stroke-width="1"/>
+        <path d="M110,270 V300 H130 V323" fill="none" stroke="rgba(74,156,122,0.25)" stroke-width="1"/>
+        <path d="M110,270 V300 H210 V323" fill="none" stroke="rgba(74,156,122,0.25)" stroke-width="1"/>
 
-    </svg>
+        <!-- ── EDGES: Opp2 → Causal → Solutions ── -->
+        <path d="M280,182 V242" fill="none" stroke="rgba(201,168,76,0.25)" stroke-width="1.2" stroke-dasharray="5,3"/>
+        <path d="M280,270 V300 H265 V323" fill="none" stroke="rgba(201,168,76,0.18)" stroke-width="1" stroke-dasharray="4,3"/>
+        <path d="M280,270 V300 H345 V323" fill="none" stroke="rgba(201,168,76,0.18)" stroke-width="1" stroke-dasharray="4,3"/>
 
-    <!-- Center Noetic Mind info card (circular HTML overlay) -->
-    <div id="center-info-card" onclick="selectCenter()">
-      <svg width="36" height="36" viewBox="-12 -12 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-bottom:6px;flex-shrink:0">
-        <rect x="-7" y="-7" width="14" height="14" rx="1.5" stroke="rgba(200,185,255,0.85)" stroke-width="1.5"/>
-        <rect x="-3.5" y="-3.5" width="7" height="7" rx="0.8" stroke="rgba(200,185,255,0.6)" stroke-width="1.2"/>
-        <line x1="-4" y1="-7" x2="-4" y2="-11" stroke="rgba(200,185,255,0.85)" stroke-width="1.4" stroke-linecap="round"/>
-        <line x1="0" y1="-7" x2="0" y2="-11" stroke="rgba(200,185,255,0.85)" stroke-width="1.4" stroke-linecap="round"/>
-        <line x1="4" y1="-7" x2="4" y2="-11" stroke="rgba(200,185,255,0.85)" stroke-width="1.4" stroke-linecap="round"/>
-        <line x1="-4" y1="7" x2="-4" y2="11" stroke="rgba(200,185,255,0.85)" stroke-width="1.4" stroke-linecap="round"/>
-        <line x1="0" y1="7" x2="0" y2="11" stroke="rgba(200,185,255,0.85)" stroke-width="1.4" stroke-linecap="round"/>
-        <line x1="4" y1="7" x2="4" y2="11" stroke="rgba(200,185,255,0.85)" stroke-width="1.4" stroke-linecap="round"/>
-        <line x1="-7" y1="-4" x2="-11" y2="-4" stroke="rgba(200,185,255,0.85)" stroke-width="1.4" stroke-linecap="round"/>
-        <line x1="-7" y1="0" x2="-11" y2="0" stroke="rgba(200,185,255,0.85)" stroke-width="1.4" stroke-linecap="round"/>
-        <line x1="-7" y1="4" x2="-11" y2="4" stroke="rgba(200,185,255,0.85)" stroke-width="1.4" stroke-linecap="round"/>
-        <line x1="7" y1="-4" x2="11" y2="-4" stroke="rgba(200,185,255,0.85)" stroke-width="1.4" stroke-linecap="round"/>
-        <line x1="7" y1="0" x2="11" y2="0" stroke="rgba(200,185,255,0.85)" stroke-width="1.4" stroke-linecap="round"/>
-        <line x1="7" y1="4" x2="11" y2="4" stroke="rgba(200,185,255,0.85)" stroke-width="1.4" stroke-linecap="round"/>
+        <!-- ── EDGES: Opp3 → Causal → Solutions ── -->
+        <path d="M450,182 V242" fill="none" stroke="rgba(80,95,120,0.2)" stroke-width="1" stroke-dasharray="3,4"/>
+        <path d="M450,270 V323" fill="none" stroke="rgba(80,95,120,0.15)" stroke-width="1" stroke-dasharray="3,5"/>
+
+        <!-- ── EDGES: Solutions → Experiments ── -->
+        <path d="M50,365 V410 H90 V418"   fill="none" stroke="rgba(74,156,122,0.3)" stroke-width="1" stroke-dasharray="3,3"/>
+        <path d="M130,365 V400 H190 V418" fill="none" stroke="rgba(74,156,122,0.2)" stroke-width="1" stroke-dasharray="3,3"/>
+
+        <!-- ── GLOW HALOS ── -->
+        <circle cx="280" cy="60"  r="28" fill="rgba(201,168,76,0.12)"  filter="url(#glow-ost-p)"/>
+        <circle cx="110" cy="160" r="20" fill="rgba(74,156,122,0.15)"  filter="url(#glow-ost-g)"/>
+        <circle cx="280" cy="160" r="18" fill="rgba(201,168,76,0.1)"   filter="url(#glow-ost-a)"/>
+
+        <!-- ── OUTCOME NODE ── -->
+        <circle cx="280" cy="60" r="26" fill="rgba(201,168,76,0.12)" stroke="rgba(201,168,76,0.8)" stroke-width="1.8"/>
+        <circle cx="280" cy="60" r="16" fill="rgba(201,168,76,0.06)"/>
+        <text x="280" y="64" text-anchor="middle" fill="rgba(201,168,76,0.95)" font-size="14">✦</text>
+        <text x="280" y="96"  text-anchor="middle" fill="#F0EDE8" font-family="'Instrument Sans',sans-serif" font-size="10" font-weight="600">Desired Outcome</text>
+        <text x="280" y="108" text-anchor="middle" fill="rgba(201,168,76,0.6)" font-family="'Playfair Display',serif" font-style="italic" font-size="9">+30% SMB acquisition · 12 months</text>
+
+        <!-- ── OPP 1: Approval Anxiety (validated) ── -->
+        <circle cx="110" cy="160" r="20" fill="rgba(74,156,122,0.2)" stroke="rgba(74,156,122,0.9)" stroke-width="1.8"/>
+        <text x="110" y="164" text-anchor="middle" fill="rgba(74,156,122,1)" font-size="12" font-weight="700">✓</text>
+        <text x="110" y="192" text-anchor="middle" fill="#9AA3B2" font-family="'Instrument Sans',sans-serif" font-size="9" font-weight="600">Approval Anxiety</text>
+        <text x="110" y="203" text-anchor="middle" fill="rgba(74,156,122,0.75)" font-family="'Geist Mono',monospace" font-size="8">Strongly Supported</text>
+
+        <!-- ── OPP 2: Doc Friction (hypothesis) ── -->
+        <circle cx="280" cy="160" r="18" fill="rgba(201,168,76,0.1)" stroke="rgba(201,168,76,0.6)" stroke-width="1.4" stroke-dasharray="5,3"/>
+        <text x="280" y="164" text-anchor="middle" fill="rgba(201,168,76,0.8)" font-size="11">◈</text>
+        <text x="280" y="190" text-anchor="middle" fill="#9AA3B2" font-family="'Instrument Sans',sans-serif" font-size="9">Doc Friction</text>
+        <text x="280" y="201" text-anchor="middle" fill="rgba(201,168,76,0.6)" font-family="'Geist Mono',monospace" font-size="8">Suggestive · 41%</text>
+
+        <!-- ── OPP 3: Status Ambiguity (weak) ── -->
+        <circle cx="450" cy="160" r="14" fill="rgba(50,60,85,0.4)" stroke="rgba(80,95,125,0.35)" stroke-width="1.2" stroke-dasharray="3,4"/>
+        <text x="450" y="164" text-anchor="middle" fill="rgba(80,95,125,0.5)" font-size="9">○</text>
+        <text x="450" y="187" text-anchor="middle" fill="#4A5060" font-family="'Instrument Sans',sans-serif" font-size="9">Status Ambiguity</text>
+        <text x="450" y="198" text-anchor="middle" fill="rgba(80,95,125,0.45)" font-family="'Geist Mono',monospace" font-size="8">Hypothesis · 28%</text>
+
+        <!-- ── CAUSAL SYNTHESIS BRIDGE ── -->
+        <rect x="30" y="242" width="500" height="28" rx="7" fill="rgba(192,96,128,0.06)" stroke="rgba(192,96,128,0.25)" stroke-width="1" stroke-dasharray="5,3"/>
+        <text x="280" y="253" text-anchor="middle" fill="rgba(192,96,128,0.7)" font-family="'Geist Mono',monospace" font-size="8" font-weight="600" letter-spacing="0.06em">⟳  CONNECT · Causal Synthesis · context → forces → behavior → outcome  ⟳</text>
+        <text x="280" y="264" text-anchor="middle" fill="rgba(192,96,128,0.4)" font-family="'Instrument Sans',sans-serif" font-size="7.5">click to map the mechanism</text>
+        <!-- Invisible click target -->
+        <rect x="30" y="242" width="500" height="28" rx="7" fill="transparent" style="cursor:pointer" onclick="selectNode('causal')"/>
+
+        <!-- ── SOLUTION NODES ── -->
+        <!-- Sol 1a: Pre-qual signal (x=14, under Opp1 at x=110) -->
+        <rect x="14"  y="323" width="70" height="34" rx="6" fill="rgba(74,156,122,0.1)" stroke="rgba(74,156,122,0.5)" stroke-width="1.1"/>
+        <text x="49"  y="337" text-anchor="middle" fill="#8A9DA8" font-family="'Instrument Sans',sans-serif" font-size="8.5" font-weight="500">Pre-qual</text>
+        <text x="49"  y="349" text-anchor="middle" fill="rgba(74,156,122,0.6)" font-family="'Instrument Sans',sans-serif" font-size="8">signal</text>
+
+        <!-- Sol 1b: Social proof (x=92, under Opp1 at x=110) -->
+        <rect x="92"  y="323" width="70" height="34" rx="6" fill="rgba(74,156,122,0.1)" stroke="rgba(74,156,122,0.5)" stroke-width="1.1"/>
+        <text x="127" y="337" text-anchor="middle" fill="#8A9DA8" font-family="'Instrument Sans',sans-serif" font-size="8.5" font-weight="500">Social proof</text>
+        <text x="127" y="349" text-anchor="middle" fill="rgba(74,156,122,0.6)" font-family="'Instrument Sans',sans-serif" font-size="8">approval rates</text>
+
+        <!-- Sol 1c: Soft check (x=170, under Opp1 at x=110) -->
+        <rect x="170" y="323" width="70" height="34" rx="6" fill="rgba(74,156,122,0.1)" stroke="rgba(74,156,122,0.5)" stroke-width="1.1"/>
+        <text x="205" y="337" text-anchor="middle" fill="#8A9DA8" font-family="'Instrument Sans',sans-serif" font-size="8.5" font-weight="500">Soft check</text>
+        <text x="205" y="349" text-anchor="middle" fill="rgba(74,156,122,0.6)" font-family="'Instrument Sans',sans-serif" font-size="8">before upload</text>
+
+        <!-- Sol 2a: Doc checklist (x=248, under Opp2 at x=280) -->
+        <rect x="248" y="323" width="70" height="34" rx="6" fill="rgba(201,168,76,0.07)" stroke="rgba(201,168,76,0.3)" stroke-width="1" stroke-dasharray="4,3"/>
+        <text x="283" y="337" text-anchor="middle" fill="#6E6548" font-family="'Instrument Sans',sans-serif" font-size="8.5">Doc checklist</text>
+        <text x="283" y="349" text-anchor="middle" fill="rgba(201,168,76,0.45)" font-family="'Instrument Sans',sans-serif" font-size="8">upfront</text>
+
+        <!-- Sol 2b: Progress-save (x=326, under Opp2 at x=280) -->
+        <rect x="326" y="323" width="70" height="34" rx="6" fill="rgba(201,168,76,0.07)" stroke="rgba(201,168,76,0.3)" stroke-width="1" stroke-dasharray="4,3"/>
+        <text x="361" y="337" text-anchor="middle" fill="#6E6548" font-family="'Instrument Sans',sans-serif" font-size="8.5">Progress-save</text>
+        <text x="361" y="349" text-anchor="middle" fill="rgba(201,168,76,0.45)" font-family="'Instrument Sans',sans-serif" font-size="8">on upload</text>
+
+        <!-- Sol 3a: Status tracker (x=415, under Opp3 at x=450) -->
+        <rect x="415" y="323" width="70" height="34" rx="6" fill="rgba(35,45,65,0.5)" stroke="rgba(65,80,105,0.25)" stroke-width="1" stroke-dasharray="3,5"/>
+        <text x="450" y="337" text-anchor="middle" fill="#3A3F4D" font-family="'Instrument Sans',sans-serif" font-size="8.5">Status tracker</text>
+        <text x="450" y="349" text-anchor="middle" fill="rgba(65,80,105,0.4)" font-family="'Instrument Sans',sans-serif" font-size="8">post-submission</text>
+
+        <!-- "2 tests ▾" indicators on Sol1a and Sol1b -->
+        <text x="49"  y="362" text-anchor="middle" fill="rgba(74,156,122,0.5)" font-family="'Geist Mono',monospace" font-size="7" style="cursor:pointer" onclick="toggleAssTests('sol1a',event)">2 tests ▾</text>
+        <text x="127" y="362" text-anchor="middle" fill="rgba(74,156,122,0.5)" font-family="'Geist Mono',monospace" font-size="7" style="cursor:pointer" onclick="toggleAssTests('sol1b',event)">2 tests ▾</text>
+
+        <!-- ── EXPERIMENT NODES ── -->
+        <!-- Exp1: Validated -->
+        <rect x="55"  y="418" width="72" height="28" rx="6" fill="rgba(74,156,122,0.08)" stroke="rgba(74,156,122,0.5)" stroke-width="1" stroke-dasharray="4,3"/>
+        <text x="91"  y="429" text-anchor="middle" fill="rgba(74,156,122,0.9)"  font-family="'Geist Mono',monospace" font-size="7.5" font-weight="700">Validated ✓</text>
+        <text x="91"  y="440" text-anchor="middle" fill="rgba(74,156,122,0.6)"  font-family="'Instrument Sans',sans-serif" font-size="7.5">Users engage pre-qual</text>
+
+        <!-- Exp2: Testing -->
+        <rect x="154" y="418" width="72" height="28" rx="6" fill="rgba(74,156,122,0.04)" stroke="rgba(74,156,122,0.3)" stroke-width="1" stroke-dasharray="4,3"/>
+        <text x="190" y="429" text-anchor="middle" fill="rgba(74,156,122,0.7)"  font-family="'Geist Mono',monospace" font-size="7.5" font-weight="700">Testing →</text>
+        <text x="190" y="440" text-anchor="middle" fill="rgba(74,156,122,0.45)" font-family="'Instrument Sans',sans-serif" font-size="7.5">Reduced anxiety signal</text>
+
+        <!-- ── RE-PRIORITISE LOOP (animated dashed arc on right side) ── -->
+        <path d="M480,418 C530,380 530,185 480,165" fill="none" stroke="rgba(74,156,122,0.2)" stroke-width="1.5" stroke-dasharray="6,4" class="reprioritise-arc"/>
+        <polygon points="478,160 486,168 474,170" fill="rgba(74,156,122,0.3)"/>
+        <text x="542" y="300" text-anchor="middle" fill="rgba(74,156,122,0.3)" font-family="'Geist Mono',monospace" font-size="7.5" transform="rotate(90,542,300)">↻ re-prioritise</text>
+
+        <!-- ── LEGEND + NEXT BEST ACTION ── -->
+        <rect x="30" y="468" width="500" height="58" rx="8" fill="rgba(201,168,76,0.05)" stroke="rgba(201,168,76,0.2)" stroke-width="1"/>
+        <text x="46" y="485" fill="rgba(201,168,76,0.8)" font-family="'Geist Mono',monospace" font-size="8" letter-spacing="0.08em" font-weight="700">✦ NEXT BEST ACTION</text>
+        <text x="46" y="499" fill="#F0EDE8" font-family="'Instrument Sans',sans-serif" font-size="11" font-weight="600">Complete JTBD interview set</text>
+        <text x="46" y="513" fill="#5C6475" font-family="'Instrument Sans',sans-serif" font-size="10">7 interviews remain · highest-potential, lowest-evidence node</text>
+
+        <!-- Evidence legend -->
+        <circle cx="370" cy="480" r="4" fill="#4A9C7A"/>
+        <text x="378" y="483" fill="rgba(156,163,178,0.6)" font-family="'Instrument Sans',sans-serif" font-size="8">Validated</text>
+        <circle cx="430" cy="480" r="4" fill="#C9A84C"/>
+        <text x="438" y="483" fill="rgba(156,163,178,0.6)" font-family="'Instrument Sans',sans-serif" font-size="8">Hypothesis</text>
+        <circle cx="370" cy="495" r="4" fill="rgba(60,63,77,0.9)" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+        <text x="378" y="498" fill="rgba(156,163,178,0.6)" font-family="'Instrument Sans',sans-serif" font-size="8">Weak</text>
+        <line x1="430" y1="493" x2="444" y2="493" stroke="#444" stroke-width="1.5" stroke-dasharray="3,2"/>
+        <text x="448" y="498" fill="rgba(100,100,100,0.6)" font-family="'Instrument Sans',sans-serif" font-size="8">Invalidated</text>
+
       </svg>
-      <div style="font-size:9px;text-transform:uppercase;letter-spacing:0.16em;color:rgba(139,107,174,0.7);margin-bottom:4px">✦ Noetic</div>
-      <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:500;color:var(--text-1);line-height:1.1;margin-bottom:6px">Mind</div>
-      <div style="width:32px;height:1px;background:rgba(139,107,174,0.25);margin:0 auto 8px"></div>
-      <div style="font-size:9.5px;color:var(--text-3);line-height:1.55;margin-bottom:10px;max-width:140px;text-align:center">Synthesizing across all five research methodologies</div>
-      <div style="font-size:9px;color:var(--c-proto);font-family:'Geist Mono',monospace;letter-spacing:0.04em;margin-bottom:4px">● High confidence</div>
-      <button class="cic-de-btn" onclick="event.stopPropagation();openDE()">✦ Deliberation Engine</button>
     </div>
-  </div>
 
-  <!-- TIMELINE STRIP -->
-  <div id="timeline-strip">
-    <div class="ts-track">
-      <div class="ts-progress"></div>
-      <!-- Week labels -->
-      <div class="ts-weeks">
-        <span class="ts-week-label" style="left:0%">W1</span>
-        <span class="ts-week-label" style="left:12.5%">W4</span>
-        <span class="ts-week-label" style="left:25%">W6</span>
-        <span class="ts-week-label now" style="left:33.3%">W8 ●</span>
-        <span class="ts-week-label" style="left:50%">W12</span>
-        <span class="ts-week-label" style="left:66.6%">W16</span>
-        <span class="ts-week-label" style="left:83.3%">W20</span>
-        <span class="ts-week-label" style="left:100%">W24</span>
-      </div>
-      <!-- Event markers -->
-      <div class="ts-events">
-        <div class="ts-ev" style="left:4.2%;background:var(--c-def)" title="Definition validated"></div>
-        <div class="ts-ev" style="left:12.5%;background:var(--c-jtbd)" title="JTBD interviews started"></div>
-        <div class="ts-ev" style="left:20.8%;background:var(--c-jtbd)" title="JTBD cluster 1 saturated"></div>
-        <div class="ts-ev" style="left:29.2%;background:var(--c-jtbd)" title="Interview #8 — Jamie K."></div>
-        <div class="ts-ev" style="left:33.3%;background:var(--amber);box-shadow:0 0 6px var(--amber)" title="DE suggested — now"></div>
-      </div>
-      <!-- Event labels (just the recent ones) -->
-      <div class="ts-events">
-        <div class="ts-ev-label" style="left:4.2%;color:var(--c-def)">Def ✓</div>
-        <div class="ts-ev-label" style="left:20.8%;color:var(--c-jtbd)">Cluster 1</div>
-        <div class="ts-ev-label" style="left:33.3%;color:var(--amber)">DE ready</div>
-      </div>
-    </div>
   </div>
 </main>
 
@@ -1605,8 +1696,8 @@ html.light ::-webkit-scrollbar-thumb { background: var(--surface-4); }
         <span class="chat-sender">Noetic Mind</span>
         <div class="chat-card chat-card-action">
           <div class="cca-label">✦ Next Best Action</div>
-          <div class="cca-text" id="rp-action-text">Run the Causal Structures deliberation — 67% confidence threshold reached. Three signals agree on the root mechanism.</div>
-          <button class="cca-btn" id="rp-action-btn" onclick="openDE()">✦ Open Deliberation Engine</button>
+          <div class="cca-text" id="rp-action-text">Complete the next JTBD interview — 7 remain. Highest-potential, lowest-evidence node on the tree.</div>
+          <button class="cca-btn" id="rp-action-btn" onclick="selectNode('jtbd')">→ Complete next interview</button>
         </div>
       </div>
     </div>
@@ -1749,8 +1840,8 @@ html.light ::-webkit-scrollbar-thumb { background: var(--surface-4); }
         </svg>
       </div>
       <div>
-        <div class="no-name">Definition · Switch Interview Analysis</div>
-        <div class="no-sub">8 switch interviews · 3 struggling moments identified · Validated ✓</div>
+        <div class="no-name">Framing · Switch Interview Analysis</div>
+        <div class="no-sub">Empathetic Perspective · assumptions surface here</div>
       </div>
     </div>
     <div class="no-close" onclick="closeNodeOverlay('definition')">✕</div>
@@ -1758,7 +1849,7 @@ html.light ::-webkit-scrollbar-thumb { background: var(--surface-4); }
 
   <!-- Source tabs -->
   <div style="display:flex;gap:0;border-bottom:1px solid var(--border-s);flex-shrink:0;background:var(--surface-1);padding:0 24px">
-    <div class="def-tab active" onclick="switchDefTab(this,'input')">Your Definition</div>
+    <div class="def-tab active" onclick="switchDefTab(this,'input')">Your Framing</div>
     <div class="def-tab" onclick="switchDefTab(this,'docs')">Your Docs</div>
     <div class="def-tab" onclick="switchDefTab(this,'search')">Web Search</div>
     <div class="def-tab" onclick="switchDefTab(this,'social')">Social Signals</div>
@@ -1972,7 +2063,7 @@ html.light ::-webkit-scrollbar-thumb { background: var(--surface-4); }
   <!-- RECOMMENDATIONS tab -->
   <div class="def-panel" id="def-recs" style="flex:1;overflow-y:auto;padding:20px 24px;display:none">
     <div style="max-width:560px">
-      <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.1em;color:var(--amber);margin-bottom:12px">✦ Agent Recommendation — Definition Phase</div>
+      <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.1em;color:var(--amber);margin-bottom:12px">✦ Agent Recommendation — Framing Phase</div>
       <div style="background:var(--amber-dim);border:1px solid rgba(201,168,76,0.25);border-radius:10px;padding:16px 18px;margin-bottom:14px">
         <div style="font-size:13px;font-weight:500;color:var(--text-1);line-height:1.5;margin-bottom:8px">The Definition agent has sufficient signal to validate the problem space. Social listening confirms emotional framing. Web data corroborates at-scale.</div>
         <div style="font-size:11px;color:var(--text-3);line-height:1.5">Confidence: 81% · 3 of 3 sources corroborate · Ready to advance</div>
@@ -2195,7 +2286,6 @@ html.light ::-webkit-scrollbar-thumb { background: var(--surface-4); }
       <div style="font-size:12px;color:var(--text-2);line-height:1.5;margin-bottom:12px">8 of 15 interviews complete. 2 clusters validated, 1 emerging. You can run causal analysis in parallel with ongoing interviews — discovery is a loop, not a funnel. Add any context that should shape the causal analysis.</div>
       <textarea placeholder="Add context for the causal agent (e.g. hypotheses about root causes, constraints, known confounders)..." style="width:100%;box-sizing:border-box;background:var(--surface-2);border:1px solid var(--border-d);border-radius:8px;padding:10px 12px;font-family:'Instrument Sans',sans-serif;font-size:12px;color:var(--text-1);resize:vertical;min-height:72px;outline:none;margin-bottom:10px"></textarea>
       <div style="display:flex;gap:8px;align-items:center">
-        <button style="background:var(--amber-dim);color:var(--amber);border:1px solid rgba(201,168,76,0.3);border-radius:8px;padding:8px 16px;font-size:11px;font-weight:600;cursor:pointer;font-family:'Instrument Sans',sans-serif">✦ Suggest DE Review First</button>
         <button onclick="closeNodeOverlay('jtbd');selectNode('causal')" style="background:var(--c-jtbd);color:#fff;border:none;border-radius:8px;padding:8px 16px;font-size:12px;font-weight:600;cursor:pointer;font-family:'Instrument Sans',sans-serif;margin-left:auto">Send Context to Causal →</button>
       </div>
     </div>
@@ -2379,7 +2469,6 @@ html.light ::-webkit-scrollbar-thumb { background: var(--surface-4); }
       <div class="no-card-label" style="color:var(--amber)">✦ Noetic Mind Recommendation</div>
       <div class="no-card-value">Enough signal from Definition + 8 JTBD interviews to run a causal deliberation. The proposed chain has counterfactual evidence from 6 of 8 interviews — needs multi-model debate before acting. <span onclick="return false" style="display:inline-flex;align-items:center;gap:3px;font-size:10px;background:var(--surface-3);color:var(--text-3);padding:1px 7px;border-radius:10px;cursor:pointer;margin-left:4px;font-family:'Geist Mono',monospace">📎 3 sources</span></div>
       <div style="display:flex;align-items:center;gap:10px;margin-top:12px">
-        <button class="de-suggest-btn" onclick="closeNodeOverlay('causal');openDE()" style="width:auto;padding:8px 20px;display:flex;align-items:center;gap:6px">✦ Run Deliberation Engine</button>
         <span class="conf-band strongly">Strongly Supported · 67%</span>
       </div>
     </div>
@@ -2429,8 +2518,7 @@ html.light ::-webkit-scrollbar-thumb { background: var(--surface-4); }
         <div style="background:var(--surface-2);border-radius:8px;padding:9px 12px;font-size:12px;color:var(--text-2);line-height:1.4"><strong style="color:var(--text-1)">C)</strong> Emotional and rational triggers are the same mechanism described differently — one unified solution addresses both.</div>
       </div>
       <div style="display:flex;gap:8px">
-        <button onclick="closeNodeOverlay('causal');openDE()" style="background:var(--amber-dim);color:var(--amber);border:1px solid rgba(201,168,76,0.3);border-radius:8px;padding:8px 14px;font-size:11px;font-weight:600;cursor:pointer;font-family:'Instrument Sans',sans-serif">✦ Pass to DE for Deliberation</button>
-        <button style="background:none;color:var(--text-2);border:1px solid var(--border-d);border-radius:8px;padding:8px 14px;font-size:11px;font-weight:600;cursor:pointer;font-family:'Instrument Sans',sans-serif;margin-left:auto">Approve Scenario A →</button>
+        <button style="background:none;color:var(--text-2);border:1px solid var(--border-d);border-radius:8px;padding:8px 14px;font-size:11px;font-weight:600;cursor:pointer;font-family:'Instrument Sans',sans-serif">Approve Scenario A →</button>
       </div>
     </div>
 
@@ -2440,7 +2528,6 @@ html.light ::-webkit-scrollbar-thumb { background: var(--surface-4); }
       <div style="font-size:12px;color:var(--text-2);line-height:1.5;margin-bottom:12px">Causal model is at 67% confidence with one unresolved confounding factor. Prototyping can run in parallel — each prototype test feeds evidence back into the causal model. Add any context that should shape prototype development.</div>
       <textarea placeholder="Add context for the prototyping agent (e.g. solution hypotheses, design constraints, budget, timeline)..." style="width:100%;box-sizing:border-box;background:var(--surface-2);border:1px solid var(--border-d);border-radius:8px;padding:10px 12px;font-family:'Instrument Sans',sans-serif;font-size:12px;color:var(--text-1);resize:vertical;min-height:72px;outline:none;margin-bottom:10px"></textarea>
       <div style="display:flex;gap:8px;align-items:center">
-        <button onclick="closeNodeOverlay('causal');openDE()" style="background:var(--amber-dim);color:var(--amber);border:1px solid rgba(201,168,76,0.3);border-radius:8px;padding:8px 16px;font-size:11px;font-weight:600;cursor:pointer;font-family:'Instrument Sans',sans-serif">✦ Run DE Before Advancing</button>
         <button onclick="closeNodeOverlay('causal');selectNode('prototyping')" style="background:var(--c-causal);color:#fff;border:none;border-radius:8px;padding:8px 16px;font-size:12px;font-weight:600;cursor:pointer;font-family:'Instrument Sans',sans-serif;margin-left:auto">Send Context to Prototyping →</button>
       </div>
     </div>
@@ -2600,7 +2687,6 @@ html.light ::-webkit-scrollbar-thumb { background: var(--surface-4); }
       <div style="font-size:12px;color:var(--text-2);line-height:1.5;margin-bottom:12px">Concept A is validated with 81% confidence. Trade-off analysis can begin now — insights from the trade-off evaluation may surface new prototype directions to explore. Add any context on constraints or strategic priorities.</div>
       <textarea placeholder="Add context for the trade-offs agent (e.g. budget constraints, timeline, technical feasibility limits)..." style="width:100%;box-sizing:border-box;background:var(--surface-2);border:1px solid var(--border-d);border-radius:8px;padding:10px 12px;font-family:'Instrument Sans',sans-serif;font-size:12px;color:var(--text-1);resize:vertical;min-height:72px;outline:none;margin-bottom:10px"></textarea>
       <div style="display:flex;gap:8px;align-items:center">
-        <button style="background:var(--amber-dim);color:var(--amber);border:1px solid rgba(201,168,76,0.3);border-radius:8px;padding:8px 16px;font-size:11px;font-weight:600;cursor:pointer;font-family:'Instrument Sans',sans-serif">✦ Suggest DE Review First</button>
         <button style="background:var(--c-proto);color:#fff;border:none;border-radius:8px;padding:8px 16px;font-size:12px;font-weight:600;cursor:pointer;font-family:'Instrument Sans',sans-serif;margin-left:auto">Send Context to Trade-offs →</button>
       </div>
     </div>
@@ -2701,20 +2787,12 @@ html.light ::-webkit-scrollbar-thumb { background: var(--surface-4); }
       <div style="height:3px;background:var(--surface-4);border-radius:2px;overflow:hidden;margin-top:12px"><div style="width:79%;height:100%;background:var(--c-proto);border-radius:2px"></div></div>
     </div>
 
-    <!-- DE suggestion card -->
-    <div class="de-suggest-card" style="margin-bottom:20px">
-      <div class="de-suggest-label">✦ Deliberation Engine Recommended</div>
-      <div class="de-suggest-text">The sequencing decision (A-then-B vs. A-only) has strategic implications for the roadmap. Running a DE session would pressure-test the sequencing assumption and confirm whether the 4–6 week gap is appropriate given Meridian's release constraints.</div>
-      <button class="de-suggest-btn" onclick="closeNodeOverlay('tradeoffs');openDE()">Run Trade-offs DE Session →</button>
-    </div>
-
     <!-- Module transition gate -->
     <div style="background:rgba(74,156,122,0.06);border:1px solid rgba(74,156,122,0.25);border-radius:12px;padding:16px 18px">
       <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.1em;color:var(--c-proto);margin-bottom:10px">Continuous Discovery · Generate Living Report</div>
       <div style="font-size:12px;color:var(--text-2);line-height:1.5;margin-bottom:12px">All 5 modules connected. Discovery continues — the Living Report updates as new evidence comes in. Add any final context or caveats before Noetic Mind generates the current OST snapshot for client delivery.</div>
       <textarea placeholder="Final context, caveats, or client-specific constraints to include in the Living Report..." style="width:100%;box-sizing:border-box;background:var(--surface-2);border:1px solid var(--border-d);border-radius:8px;padding:10px 12px;font-family:'Instrument Sans',sans-serif;font-size:12px;color:var(--text-1);resize:vertical;min-height:72px;outline:none;margin-bottom:10px"></textarea>
       <div style="display:flex;gap:8px;align-items:center">
-        <button style="background:var(--amber-dim);color:var(--amber);border:1px solid rgba(201,168,76,0.3);border-radius:8px;padding:8px 16px;font-size:11px;font-weight:600;cursor:pointer;font-family:'Instrument Sans',sans-serif">✦ Run Final DE Session</button>
         <button style="background:var(--c-proto);color:#fff;border:none;border-radius:8px;padding:8px 16px;font-size:12px;font-weight:600;cursor:pointer;font-family:'Instrument Sans',sans-serif;margin-left:auto">Generate Final Report →</button>
       </div>
     </div>
@@ -2771,156 +2849,135 @@ html.light ::-webkit-scrollbar-thumb { background: var(--surface-4); }
     <!-- Legend: now inside SVG (see bottom of SVG element) -->
 
     <!-- OST Graph SVG — 4 rows: JTBDs → Outcome → Opportunities → Solutions -->
-    <svg width="100%" height="100%" viewBox="0 0 840 510" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" style="position:absolute;inset:0">
+    <svg width="100%" height="100%" viewBox="0 0 840 420" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" style="position:absolute;inset:0">
       <defs>
         <filter id="glow-ost-g" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur in="SourceGraphic" stdDeviation="7"/></filter>
         <filter id="glow-ost-a" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur in="SourceGraphic" stdDeviation="6"/></filter>
         <filter id="glow-ost-p" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur in="SourceGraphic" stdDeviation="9"/></filter>
       </defs>
 
-      <!-- ── HORIZONTAL GUIDES ────────────────────────────── -->
-      <line x1="0" y1="108" x2="840" y2="108" stroke="rgba(255,255,255,0.025)" stroke-width="1"/>
-      <line x1="0" y1="222" x2="840" y2="222" stroke="rgba(255,255,255,0.025)" stroke-width="1"/>
-      <line x1="0" y1="360" x2="840" y2="360" stroke="rgba(255,255,255,0.025)" stroke-width="1"/>
-      <line x1="0" y1="435" x2="840" y2="435" stroke="rgba(74,156,122,0.06)" stroke-width="1" stroke-dasharray="4,6"/>
+      <!-- ── HORIZONTAL GUIDES (new proportions: JTBD+Outcome compact, Solutions+Tests spacious) -->
+      <line x1="0" y1="95"  x2="840" y2="95"  stroke="rgba(255,255,255,0.025)" stroke-width="1"/>
+      <line x1="0" y1="195" x2="840" y2="195" stroke="rgba(255,255,255,0.025)" stroke-width="1"/>
+      <line x1="0" y1="310" x2="840" y2="310" stroke="rgba(255,255,255,0.025)" stroke-width="1"/>
 
       <!-- ── ROW LABELS ──────────────────────────────────── -->
-      <text x="10" y="58"  fill="rgba(255,255,255,0.06)" font-family="'Geist Mono',monospace" font-size="8" letter-spacing="0.1em">JTBD</text>
-      <text x="10" y="163" fill="rgba(255,255,255,0.06)" font-family="'Geist Mono',monospace" font-size="8" letter-spacing="0.1em">OUTCOME</text>
-      <text x="10" y="290" fill="rgba(255,255,255,0.06)" font-family="'Geist Mono',monospace" font-size="8" letter-spacing="0.1em">OPPORTUNITIES</text>
-      <text x="10" y="400" fill="rgba(255,255,255,0.06)" font-family="'Geist Mono',monospace" font-size="8" letter-spacing="0.1em">SOLUTIONS</text>
-      <text x="10" y="480" fill="rgba(74,156,122,0.12)" font-family="'Geist Mono',monospace" font-size="8" letter-spacing="0.1em">ASSUMPTION TESTS</text>
+      <text x="10" y="50"  fill="rgba(255,255,255,0.06)" font-family="'Geist Mono',monospace" font-size="8" letter-spacing="0.1em">FRAMING ASSUMPTIONS</text>
+      <text x="10" y="140" fill="rgba(255,255,255,0.06)" font-family="'Geist Mono',monospace" font-size="8" letter-spacing="0.1em">OUTCOME</text>
+      <text x="10" y="258" fill="rgba(255,255,255,0.06)" font-family="'Geist Mono',monospace" font-size="8" letter-spacing="0.1em">OPPORTUNITIES</text>
+      <text x="10" y="380" fill="rgba(255,255,255,0.06)" font-family="'Geist Mono',monospace" font-size="8" letter-spacing="0.1em">EXPERIMENTS</text>
 
-      <!-- ── EDGES: JTBDs → Outcome ─────────────────────── -->
-      <!-- JTBD1 (250,80) → Outcome top (420,152) -->
-      <path d="M250,80 C250,118 420,114 420,152" fill="none" stroke="rgba(139,107,174,0.45)" stroke-width="1.4"/>
-      <!-- JTBD2 (590,80) → Outcome top (420,152) -->
-      <path d="M590,80 C590,118 420,114 420,152" fill="none" stroke="rgba(139,107,174,0.45)" stroke-width="1.4"/>
+      <!-- ── EDGES: JTBDs → Outcome (JTBD y=52, Outcome y=155) ── -->
+      <path d="M250,52 C250,100 420,100 420,125" fill="none" stroke="rgba(139,107,174,0.45)" stroke-width="1.4"/>
+      <path d="M590,52 C590,100 420,100 420,125" fill="none" stroke="rgba(139,107,174,0.45)" stroke-width="1.4"/>
 
-      <!-- ── EDGES: Outcome → Opportunities ─────────────── -->
-      <!-- → Opp1 validated -->
-      <path d="M420,212 C420,248 170,248 170,276" fill="none" stroke="rgba(74,156,122,0.5)" stroke-width="1.5"/>
-      <!-- → Opp2 hypothesis -->
-      <path d="M420,212 C420,248 420,248 420,276" fill="none" stroke="rgba(201,168,76,0.4)" stroke-width="1.4" stroke-dasharray="5,4"/>
-      <!-- → Opp3 weak -->
-      <path d="M420,212 C420,248 670,248 670,276" fill="none" stroke="rgba(90,100,130,0.3)" stroke-width="1" stroke-dasharray="4,5"/>
+      <!-- ── EDGES: Outcome → Opportunities (Outcome y=155, Opps y=265) ── -->
+      <path d="M420,183 C420,220 170,220 170,243" fill="none" stroke="rgba(74,156,122,0.5)"   stroke-width="1.5"/>
+      <path d="M420,183 C420,220 420,220 420,243" fill="none" stroke="rgba(201,168,76,0.4)"   stroke-width="1.4" stroke-dasharray="5,4"/>
+      <path d="M420,183 C420,220 670,220 670,243" fill="none" stroke="rgba(90,100,130,0.3)"   stroke-width="1"   stroke-dasharray="4,5"/>
 
-      <!-- ── EDGES: Opportunities → Solutions ───────────── -->
-      <!-- Opp1 (170,320) → Sol 1a,1b,1c -->
-      <path d="M170,320 C170,352 80,352 80,388"  fill="none" stroke="rgba(74,156,122,0.35)" stroke-width="1.1"/>
-      <path d="M170,320 C170,352 170,352 170,388" fill="none" stroke="rgba(74,156,122,0.35)" stroke-width="1.1"/>
-      <path d="M170,320 C170,352 260,352 260,388" fill="none" stroke="rgba(74,156,122,0.35)" stroke-width="1.1"/>
-      <!-- Opp2 (420,320) → Sol 2a,2b -->
-      <path d="M420,320 C420,352 370,352 370,388" fill="none" stroke="rgba(201,168,76,0.28)" stroke-width="1" stroke-dasharray="4,4"/>
-      <path d="M420,320 C420,352 470,352 470,388" fill="none" stroke="rgba(201,168,76,0.28)" stroke-width="1" stroke-dasharray="4,4"/>
-      <!-- Opp3 (670,320) → Sol 3a -->
-      <path d="M670,320 C670,352 670,352 670,388" fill="none" stroke="rgba(90,100,130,0.2)"  stroke-width="1" stroke-dasharray="3,5"/>
+      <!-- ── EDGES: Opportunities → Solutions (Opps y=265, Sol tops y=365) ── -->
+      <path d="M170,287 C170,326 80,326 80,365"   fill="none" stroke="rgba(74,156,122,0.35)" stroke-width="1.1"/>
+      <path d="M170,287 C170,326 170,326 170,365"  fill="none" stroke="rgba(74,156,122,0.35)" stroke-width="1.1"/>
+      <path d="M170,287 C170,326 260,326 260,365"  fill="none" stroke="rgba(74,156,122,0.35)" stroke-width="1.1"/>
+      <path d="M420,287 C420,326 370,326 370,365"  fill="none" stroke="rgba(201,168,76,0.28)" stroke-width="1"   stroke-dasharray="4,4"/>
+      <path d="M420,287 C420,326 470,326 470,365"  fill="none" stroke="rgba(201,168,76,0.28)" stroke-width="1"   stroke-dasharray="4,4"/>
+      <path d="M670,287 C670,326 670,326 670,365"  fill="none" stroke="rgba(90,100,130,0.2)"  stroke-width="1"   stroke-dasharray="3,5"/>
 
       <!-- ── GLOW HALOS ──────────────────────────────────── -->
-      <ellipse cx="250" cy="58" rx="44" ry="26" fill="rgba(139,107,174,0.2)" filter="url(#glow-ost-a)"/>
-      <ellipse cx="590" cy="58" rx="44" ry="26" fill="rgba(139,107,174,0.2)" filter="url(#glow-ost-a)"/>
-      <circle cx="420" cy="182" r="34" fill="rgba(201,168,76,0.18)" filter="url(#glow-ost-p)"/>
-      <circle cx="170" cy="298" r="26" fill="rgba(74,156,122,0.2)"  filter="url(#glow-ost-g)"/>
+      <ellipse cx="250" cy="52" rx="44" ry="26" fill="rgba(139,107,174,0.2)"  filter="url(#glow-ost-a)"/>
+      <ellipse cx="590" cy="52" rx="44" ry="26" fill="rgba(139,107,174,0.2)"  filter="url(#glow-ost-a)"/>
+      <circle  cx="420" cy="155" r="34"          fill="rgba(201,168,76,0.18)" filter="url(#glow-ost-p)"/>
+      <circle  cx="170" cy="265" r="26"          fill="rgba(74,156,122,0.2)"  filter="url(#glow-ost-g)"/>
 
-      <!-- ── JTBD NODES (row 1, y≈58) ───────────────────── -->
-      <!-- JTBD #1 Functional -->
-      <ellipse cx="250" cy="58" rx="72" ry="28" fill="rgba(139,107,174,0.14)" stroke="rgba(139,107,174,0.75)" stroke-width="1.5"/>
-      <text x="250" y="53" text-anchor="middle" fill="#C5B8E0" font-family="'Instrument Sans',sans-serif" font-size="9.5" font-weight="600">Functional JTBD #1</text>
-      <text x="250" y="66" text-anchor="middle" fill="rgba(139,107,174,0.65)" font-family="'Geist Mono',monospace" font-size="8.5">Strongly Supported · 74%</text>
-      <text x="250" y="96"  text-anchor="middle" fill="#6B7280" font-family="'Playfair Display',serif" font-style="italic" font-size="9">"Approval certainty"</text>
+      <!-- ── JTBD NODES (row 1, y=52) ───────────────────── -->
+      <ellipse cx="250" cy="52" rx="72" ry="28" fill="rgba(139,107,174,0.14)" stroke="rgba(139,107,174,0.75)" stroke-width="1.5"/>
+      <text x="250" y="47" text-anchor="middle" fill="#C5B8E0" font-family="'Instrument Sans',sans-serif" font-size="9.5" font-weight="600">Functional JTBD #1</text>
+      <text x="250" y="60" text-anchor="middle" fill="rgba(139,107,174,0.65)" font-family="'Geist Mono',monospace" font-size="8.5">Strongly Supported · 74%</text>
+      <text x="250" y="88" text-anchor="middle" fill="#6B7280" font-family="'Playfair Display',serif" font-style="italic" font-size="9">"Approval certainty"</text>
 
-      <!-- JTBD #2 Emotional -->
-      <ellipse cx="590" cy="58" rx="72" ry="28" fill="rgba(139,107,174,0.14)" stroke="rgba(139,107,174,0.75)" stroke-width="1.5"/>
-      <text x="590" y="53" text-anchor="middle" fill="#C5B8E0" font-family="'Instrument Sans',sans-serif" font-size="9.5" font-weight="600">Emotional JTBD #2</text>
-      <text x="590" y="66" text-anchor="middle" fill="rgba(139,107,174,0.65)" font-family="'Geist Mono',monospace" font-size="8.5">Strongly Supported · 68%</text>
-      <text x="590" y="96" text-anchor="middle" fill="#6B7280" font-family="'Playfair Display',serif" font-style="italic" font-size="9">"Business legitimacy"</text>
+      <ellipse cx="590" cy="52" rx="72" ry="28" fill="rgba(139,107,174,0.14)" stroke="rgba(139,107,174,0.75)" stroke-width="1.5"/>
+      <text x="590" y="47" text-anchor="middle" fill="#C5B8E0" font-family="'Instrument Sans',sans-serif" font-size="9.5" font-weight="600">Emotional JTBD #2</text>
+      <text x="590" y="60" text-anchor="middle" fill="rgba(139,107,174,0.65)" font-family="'Geist Mono',monospace" font-size="8.5">Strongly Supported · 68%</text>
+      <text x="590" y="88" text-anchor="middle" fill="#6B7280" font-family="'Playfair Display',serif" font-style="italic" font-size="9">"Business legitimacy"</text>
 
-      <!-- ── OUTCOME NODE (row 2, y=182) ────────────────── -->
-      <circle cx="420" cy="182" r="30" fill="rgba(201,168,76,0.14)" stroke="rgba(201,168,76,0.85)" stroke-width="1.8"/>
-      <circle cx="420" cy="182" r="20" fill="rgba(201,168,76,0.07)"/>
-      <text x="420" y="186" text-anchor="middle" fill="rgba(201,168,76,0.95)" font-size="14">✦</text>
-      <text x="420" y="224" text-anchor="middle" fill="#F0EDE8" font-family="'Instrument Sans',sans-serif" font-size="10.5" font-weight="600">Desired Outcome</text>
-      <text x="420" y="237" text-anchor="middle" fill="rgba(201,168,76,0.65)" font-family="'Playfair Display',serif" font-style="italic" font-size="9">+30% SMB acquisition in 12 months</text>
+      <!-- ── OUTCOME NODE (row 2, y=155) ───────────────── -->
+      <circle cx="420" cy="155" r="30" fill="rgba(201,168,76,0.14)" stroke="rgba(201,168,76,0.85)" stroke-width="1.8"/>
+      <circle cx="420" cy="155" r="20" fill="rgba(201,168,76,0.07)"/>
+      <text x="420" y="160" text-anchor="middle" fill="rgba(201,168,76,0.95)" font-size="14">✦</text>
+      <text x="420" y="198" text-anchor="middle" fill="#F0EDE8" font-family="'Instrument Sans',sans-serif" font-size="10.5" font-weight="600">Desired Outcome</text>
+      <text x="420" y="211" text-anchor="middle" fill="rgba(201,168,76,0.65)" font-family="'Playfair Display',serif" font-style="italic" font-size="9">+30% SMB acquisition in 12 months</text>
 
-      <!-- ── OPPORTUNITY NODES (row 3, y=298) ───────────── -->
-      <!-- Opp1 Validated -->
-      <circle cx="170" cy="298" r="22" fill="rgba(74,156,122,0.2)"  stroke="rgba(74,156,122,0.9)"  stroke-width="1.8"/>
-      <text x="170" y="303" text-anchor="middle" fill="rgba(74,156,122,1)" font-size="13" font-weight="700">✓</text>
-      <text x="170" y="334" text-anchor="middle" fill="#9AA3B2" font-family="'Instrument Sans',sans-serif" font-size="9.5" font-weight="500">Approval Anxiety</text>
-      <text x="170" y="346" text-anchor="middle" fill="rgba(74,156,122,0.8)" font-family="'Geist Mono',monospace" font-size="8.5">Strongly Supported · 74%</text>
+      <!-- ── OPPORTUNITY NODES (row 3, y=265) ──────────── -->
+      <circle cx="170" cy="265" r="22" fill="rgba(74,156,122,0.2)"  stroke="rgba(74,156,122,0.9)"  stroke-width="1.8"/>
+      <text x="170" y="270" text-anchor="middle" fill="rgba(74,156,122,1)" font-size="13" font-weight="700">✓</text>
+      <text x="170" y="302" text-anchor="middle" fill="#9AA3B2" font-family="'Instrument Sans',sans-serif" font-size="9.5" font-weight="500">Approval Anxiety</text>
+      <text x="170" y="314" text-anchor="middle" fill="rgba(74,156,122,0.8)" font-family="'Geist Mono',monospace" font-size="8.5">Strongly Supported · 74%</text>
 
-      <!-- Opp2 Hypothesis -->
-      <circle cx="420" cy="298" r="20" fill="rgba(201,168,76,0.12)" stroke="rgba(201,168,76,0.65)" stroke-width="1.5" stroke-dasharray="5,3"/>
-      <text x="420" y="303" text-anchor="middle" fill="rgba(201,168,76,0.85)" font-size="12">◈</text>
-      <text x="420" y="332" text-anchor="middle" fill="#9AA3B2" font-family="'Instrument Sans',sans-serif" font-size="9.5">Doc Friction</text>
-      <text x="420" y="344" text-anchor="middle" fill="rgba(201,168,76,0.65)" font-family="'Geist Mono',monospace" font-size="8.5">Suggestive · 41%</text>
+      <circle cx="420" cy="265" r="20" fill="rgba(201,168,76,0.12)" stroke="rgba(201,168,76,0.65)" stroke-width="1.5" stroke-dasharray="5,3"/>
+      <text x="420" y="270" text-anchor="middle" fill="rgba(201,168,76,0.85)" font-size="12">◈</text>
+      <text x="420" y="299" text-anchor="middle" fill="#9AA3B2" font-family="'Instrument Sans',sans-serif" font-size="9.5">Doc Friction</text>
+      <text x="420" y="311" text-anchor="middle" fill="rgba(201,168,76,0.65)" font-family="'Geist Mono',monospace" font-size="8.5">Suggestive · 41%</text>
 
-      <!-- Opp3 Weak -->
-      <circle cx="670" cy="298" r="16" fill="rgba(50,60,85,0.4)" stroke="rgba(80,95,125,0.4)" stroke-width="1.2" stroke-dasharray="3,4"/>
-      <text x="670" y="303" text-anchor="middle" fill="rgba(80,95,125,0.6)" font-size="10">○</text>
-      <text x="670" y="328" text-anchor="middle" fill="#4A5060" font-family="'Instrument Sans',sans-serif" font-size="9.5">Status Ambiguity</text>
-      <text x="670" y="340" text-anchor="middle" fill="rgba(80,95,125,0.55)" font-family="'Geist Mono',monospace" font-size="8.5">Hypothesis · 28%</text>
+      <!-- Opp3 Weak (y=265) -->
+      <circle cx="670" cy="265" r="16" fill="rgba(50,60,85,0.4)" stroke="rgba(80,95,125,0.4)" stroke-width="1.2" stroke-dasharray="3,4"/>
+      <text x="670" y="270" text-anchor="middle" fill="rgba(80,95,125,0.6)" font-size="10">○</text>
+      <text x="670" y="295" text-anchor="middle" fill="#4A5060" font-family="'Instrument Sans',sans-serif" font-size="9.5">Status Ambiguity</text>
+      <text x="670" y="307" text-anchor="middle" fill="rgba(80,95,125,0.55)" font-family="'Geist Mono',monospace" font-size="8.5">Hypothesis · 28%</text>
 
-      <!-- ── SOLUTION NODES (row 4, y=388+19=center) ────── -->
-      <!-- rect: width=82, height=36. centers: 80, 170, 260, 370, 460, 670 -->
-      <!-- Sol 1a (center=80) -->
-      <rect x="39"  y="388" width="82" height="34" rx="7" fill="rgba(74,156,122,0.1)"  stroke="rgba(74,156,122,0.45)" stroke-width="1.1"/>
-      <text x="80"  y="402" text-anchor="middle" fill="#8A9DA8" font-family="'Instrument Sans',sans-serif" font-size="9">Pre-qual signal</text>
-      <text x="80"  y="414" text-anchor="middle" fill="rgba(74,156,122,0.6)" font-family="'Instrument Sans',sans-serif" font-size="8.5">at entry point</text>
+      <!-- ── SOLUTION NODES (row 4, y=365→399 rect, centers at mid=382) ── -->
+      <!-- Sol 1a (has assumption tests — clickable) -->
+      <rect x="39"  y="365" width="82" height="36" rx="7" fill="rgba(74,156,122,0.1)"  stroke="rgba(74,156,122,0.55)" stroke-width="1.3" style="cursor:pointer" onclick="toggleAssTests('sol1a', event)"/>
+      <text x="80"  y="378" text-anchor="middle" fill="#8A9DA8" font-family="'Instrument Sans',sans-serif" font-size="9" font-weight="500" style="cursor:pointer" onclick="toggleAssTests('sol1a', event)">Pre-qual signal</text>
+      <text x="80"  y="389" text-anchor="middle" fill="rgba(74,156,122,0.6)" font-family="'Instrument Sans',sans-serif" font-size="8.5" style="cursor:pointer" onclick="toggleAssTests('sol1a', event)">at entry point</text>
+      <text x="80"  y="399" text-anchor="middle" fill="rgba(74,156,122,0.5)" font-family="'Geist Mono',monospace" font-size="7" style="cursor:pointer" onclick="toggleAssTests('sol1a', event)">2 tests ▾</text>
 
-      <!-- Sol 1b (center=170) -->
-      <rect x="129" y="388" width="82" height="34" rx="7" fill="rgba(74,156,122,0.1)"  stroke="rgba(74,156,122,0.45)" stroke-width="1.1"/>
-      <text x="170" y="402" text-anchor="middle" fill="#8A9DA8" font-family="'Instrument Sans',sans-serif" font-size="9">Social proof</text>
-      <text x="170" y="414" text-anchor="middle" fill="rgba(74,156,122,0.6)" font-family="'Instrument Sans',sans-serif" font-size="8.5">approval rates</text>
+      <!-- Sol 1b (has assumption tests — clickable) -->
+      <rect x="129" y="365" width="82" height="36" rx="7" fill="rgba(74,156,122,0.1)"  stroke="rgba(74,156,122,0.55)" stroke-width="1.3" style="cursor:pointer" onclick="toggleAssTests('sol1b', event)"/>
+      <text x="170" y="378" text-anchor="middle" fill="#8A9DA8" font-family="'Instrument Sans',sans-serif" font-size="9" font-weight="500" style="cursor:pointer" onclick="toggleAssTests('sol1b', event)">Social proof</text>
+      <text x="170" y="389" text-anchor="middle" fill="rgba(74,156,122,0.6)" font-family="'Instrument Sans',sans-serif" font-size="8.5" style="cursor:pointer" onclick="toggleAssTests('sol1b', event)">approval rates</text>
+      <text x="170" y="399" text-anchor="middle" fill="rgba(74,156,122,0.5)" font-family="'Geist Mono',monospace" font-size="7" style="cursor:pointer" onclick="toggleAssTests('sol1b', event)">2 tests ▾</text>
 
-      <!-- Sol 1c (center=260) -->
-      <rect x="219" y="388" width="82" height="34" rx="7" fill="rgba(74,156,122,0.1)"  stroke="rgba(74,156,122,0.45)" stroke-width="1.1"/>
-      <text x="260" y="402" text-anchor="middle" fill="#8A9DA8" font-family="'Instrument Sans',sans-serif" font-size="9">Soft check</text>
-      <text x="260" y="414" text-anchor="middle" fill="rgba(74,156,122,0.6)" font-family="'Instrument Sans',sans-serif" font-size="8.5">before upload</text>
+      <!-- Sol 1c -->
+      <rect x="219" y="365" width="82" height="36" rx="7" fill="rgba(74,156,122,0.1)"  stroke="rgba(74,156,122,0.45)" stroke-width="1.1"/>
+      <text x="260" y="380" text-anchor="middle" fill="#8A9DA8" font-family="'Instrument Sans',sans-serif" font-size="9" font-weight="500">Soft check</text>
+      <text x="260" y="393" text-anchor="middle" fill="rgba(74,156,122,0.6)" font-family="'Instrument Sans',sans-serif" font-size="8.5">before upload</text>
 
-      <!-- Sol 2a (center=370) -->
-      <rect x="329" y="388" width="82" height="34" rx="7" fill="rgba(201,168,76,0.07)" stroke="rgba(201,168,76,0.3)"  stroke-width="1" stroke-dasharray="4,3"/>
-      <text x="370" y="402" text-anchor="middle" fill="#6E6548" font-family="'Instrument Sans',sans-serif" font-size="9">Doc checklist</text>
-      <text x="370" y="414" text-anchor="middle" fill="rgba(201,168,76,0.45)" font-family="'Instrument Sans',sans-serif" font-size="8.5">upfront</text>
+      <!-- Sol 2a -->
+      <rect x="329" y="365" width="82" height="36" rx="7" fill="rgba(201,168,76,0.07)" stroke="rgba(201,168,76,0.3)" stroke-width="1" stroke-dasharray="4,3"/>
+      <text x="370" y="380" text-anchor="middle" fill="#6E6548" font-family="'Instrument Sans',sans-serif" font-size="9">Doc checklist</text>
+      <text x="370" y="393" text-anchor="middle" fill="rgba(201,168,76,0.45)" font-family="'Instrument Sans',sans-serif" font-size="8.5">upfront</text>
 
-      <!-- Sol 2b (center=460) -->
-      <rect x="419" y="388" width="82" height="34" rx="7" fill="rgba(201,168,76,0.07)" stroke="rgba(201,168,76,0.3)"  stroke-width="1" stroke-dasharray="4,3"/>
-      <text x="460" y="402" text-anchor="middle" fill="#6E6548" font-family="'Instrument Sans',sans-serif" font-size="9">Progress-save</text>
-      <text x="460" y="414" text-anchor="middle" fill="rgba(201,168,76,0.45)" font-family="'Instrument Sans',sans-serif" font-size="8.5">during upload</text>
+      <!-- Sol 2b -->
+      <rect x="419" y="365" width="82" height="36" rx="7" fill="rgba(201,168,76,0.07)" stroke="rgba(201,168,76,0.3)" stroke-width="1" stroke-dasharray="4,3"/>
+      <text x="460" y="380" text-anchor="middle" fill="#6E6548" font-family="'Instrument Sans',sans-serif" font-size="9">Progress-save</text>
+      <text x="460" y="393" text-anchor="middle" fill="rgba(201,168,76,0.45)" font-family="'Instrument Sans',sans-serif" font-size="8.5">during upload</text>
 
-      <!-- Sol 3a (center=670) -->
-      <rect x="629" y="388" width="82" height="34" rx="7" fill="rgba(35,45,65,0.5)"    stroke="rgba(65,80,105,0.25)" stroke-width="1" stroke-dasharray="3,5"/>
-      <text x="670" y="402" text-anchor="middle" fill="#3A3F4D" font-family="'Instrument Sans',sans-serif" font-size="9">Status tracker</text>
-      <text x="670" y="414" text-anchor="middle" fill="rgba(65,80,105,0.5)" font-family="'Instrument Sans',sans-serif" font-size="8.5">post-submission</text>
+      <!-- Sol 3a -->
+      <rect x="629" y="365" width="82" height="36" rx="7" fill="rgba(35,45,65,0.5)" stroke="rgba(65,80,105,0.25)" stroke-width="1" stroke-dasharray="3,5"/>
+      <text x="670" y="380" text-anchor="middle" fill="#3A3F4D" font-family="'Instrument Sans',sans-serif" font-size="9">Status tracker</text>
+      <text x="670" y="393" text-anchor="middle" fill="rgba(65,80,105,0.5)" font-family="'Instrument Sans',sans-serif" font-size="8.5">post-submission</text>
 
-      <!-- ── ASSUMPTION TEST NODES (row 5, y=478) — connected to Prototyping ── -->
-      <!-- Sol 1a → AssTest A1 (validated) -->
-      <path d="M80,422 C80,450 120,450 130,478" fill="none" stroke="rgba(74,156,122,0.3)" stroke-width="1" stroke-dasharray="3,3"/>
-      <!-- Sol 1b → AssTest A2 (testing) -->
-      <path d="M170,422 C170,450 200,450 200,478" fill="none" stroke="rgba(74,156,122,0.25)" stroke-width="1" stroke-dasharray="3,3"/>
-
-      <!-- AssTest A1: Validated -->
-      <rect x="89" y="478" width="82" height="28" rx="6" fill="rgba(74,156,122,0.08)" stroke="rgba(74,156,122,0.55)" stroke-width="1" stroke-dasharray="4,3"/>
-      <text x="130" y="489" text-anchor="middle" fill="rgba(74,156,122,0.9)" font-family="'Geist Mono',monospace" font-size="8" font-weight="700">Validated ✓</text>
-      <text x="130" y="500" text-anchor="middle" fill="rgba(74,156,122,0.65)" font-family="'Instrument Sans',sans-serif" font-size="7.5">Users engage pre-qual</text>
-
-      <!-- AssTest A2: Testing -->
-      <rect x="159" y="478" width="82" height="28" rx="6" fill="rgba(74,156,122,0.04)" stroke="rgba(74,156,122,0.35)" stroke-width="1" stroke-dasharray="4,3"/>
-      <text x="200" y="489" text-anchor="middle" fill="rgba(74,156,122,0.7)" font-family="'Geist Mono',monospace" font-size="8" font-weight="700">Testing →</text>
-      <text x="200" y="500" text-anchor="middle" fill="rgba(74,156,122,0.5)" font-family="'Instrument Sans',sans-serif" font-size="7.5">Reduced anxiety signal</text>
-
-      <!-- Connected-to-Prototyping label -->
-      <text x="420" y="496" text-anchor="middle" fill="rgba(74,156,122,0.18)" font-family="'Geist Mono',monospace" font-size="7.5" letter-spacing="0.08em">connected to Prototyping module</text>
-
-      <!-- ── LEGEND (bottom-right, inside SVG) ── -->
-      <circle cx="590" cy="501" r="4" fill="#4A9C7A"/>
-      <text x="598" y="505" fill="rgba(156,163,178,0.7)" font-family="'Instrument Sans',sans-serif" font-size="8.5">Validated</text>
-      <circle cx="648" cy="501" r="4" fill="#C9A84C"/>
-      <text x="656" y="505" fill="rgba(156,163,178,0.7)" font-family="'Instrument Sans',sans-serif" font-size="8.5">Hypothesis</text>
-      <circle cx="708" cy="501" r="4" fill="rgba(60,63,77,0.9)" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
-      <text x="716" y="505" fill="rgba(156,163,178,0.7)" font-family="'Instrument Sans',sans-serif" font-size="8.5">Weak signal</text>
+      <!-- Legend -->
+      <circle cx="595" cy="410" r="4" fill="#4A9C7A"/>
+      <text x="603" y="414" fill="rgba(156,163,178,0.6)" font-family="'Instrument Sans',sans-serif" font-size="8.5">Validated</text>
+      <circle cx="656" cy="410" r="4" fill="#C9A84C"/>
+      <text x="664" y="414" fill="rgba(156,163,178,0.6)" font-family="'Instrument Sans',sans-serif" font-size="8.5">Hypothesis</text>
+      <circle cx="720" cy="410" r="4" fill="rgba(60,63,77,0.9)" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+      <text x="728" y="414" fill="rgba(156,163,178,0.6)" font-family="'Instrument Sans',sans-serif" font-size="8.5">Weak</text>
+      <line x1="740" y1="408" x2="760" y2="408" stroke="#444" stroke-width="1.5" stroke-dasharray="3,2"/>
+      <text x="764" y="412" fill="rgba(100,100,100,0.6)" font-family="'Instrument Sans',sans-serif" font-size="8.5">Invalidated</text>
 
     </svg>
+
+  <!-- Assumption test popup (positions near clicked solution) -->
+  <div id="ass-tests-popup" style="display:none;position:absolute;z-index:50;width:220px;background:var(--surface-1);border:1px solid rgba(74,156,122,0.35);border-top:2px solid var(--c-proto);border-radius:10px;box-shadow:0 8px 32px rgba(0,0,0,0.4);padding:12px 14px;animation:fade-in 0.15s ease">
+    <div style="font-size:9px;text-transform:uppercase;letter-spacing:0.1em;color:var(--c-proto);margin-bottom:10px;display:flex;align-items:center;justify-content:space-between">
+      Assumption Tests
+      <span onclick="document.getElementById('ass-tests-popup').style.display='none'" style="cursor:pointer;color:var(--text-3);font-size:12px">✕</span>
+    </div>
+    <div id="ass-tests-content"></div>
+  </div>
   </div>
 
     <!-- OST Pending Mutations — trigger button only -->
@@ -2929,7 +2986,7 @@ html.light ::-webkit-scrollbar-thumb { background: var(--surface-4); }
         <span style="width:5px;height:5px;border-radius:50%;background:var(--amber);display:inline-block;animation:pulse 1.5s ease-in-out infinite;flex-shrink:0"></span>
         3 mutations awaiting your approval
       </div>
-      <button onclick="document.getElementById('ost-mutations-overlay').classList.add('open')"
+      <button onclick="openOSTMutations()"
         style="display:flex;align-items:center;gap:6px;font-size:12px;font-weight:600;padding:6px 14px;border-radius:7px;border:1px solid rgba(201,168,76,0.4);background:rgba(201,168,76,0.1);color:var(--amber);cursor:pointer;font-family:'Instrument Sans',sans-serif;transition:all 0.15s"
         onmouseover="this.style.background='rgba(201,168,76,0.18)'" onmouseout="this.style.background='rgba(201,168,76,0.1)'">
         Review OST Mutations
@@ -2937,100 +2994,7 @@ html.light ::-webkit-scrollbar-thumb { background: var(--surface-4); }
       </button>
     </div>
 
-  <!-- OST Mutations overlay (modal) -->
-  <div id="ost-mutations-overlay"
-    style="position:fixed;inset:0;z-index:9999;background:rgba(6,10,20,0.65);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity 0.25s ease"
-    onclick="if(event.target===this)this.classList.remove('open')"
-    <div style="width:560px;max-height:80vh;background:var(--surface-1);border:1px solid var(--border-d);border-radius:14px;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 24px 64px rgba(0,0,0,0.5);animation:panel-in 0.22s ease">
-
-      <!-- Header -->
-      <div style="padding:18px 24px 14px;border-bottom:1px solid var(--border-s);display:flex;align-items:center;justify-content:space-between;flex-shrink:0">
-        <div>
-          <div style="font-size:15px;font-weight:600;color:var(--text-1);display:flex;align-items:center;gap:8px">
-            Pending OST Mutations
-            <span style="background:var(--amber);color:var(--navy);border-radius:10px;font-size:10px;font-weight:700;padding:2px 8px">3</span>
-          </div>
-          <div style="font-size:11px;color:var(--text-3);margin-top:3px">Agent-proposed changes to the Opportunity Solution Tree — review before they take effect</div>
-        </div>
-        <button onclick="document.getElementById('ost-mutations-overlay').classList.remove('open')"
-          style="width:32px;height:32px;border-radius:8px;background:var(--surface-2);border:1px solid var(--border-d);color:var(--text-2);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.15s"
-          onmouseover="this.style.background='var(--surface-3)'" onmouseout="this.style.background='var(--surface-2)'">✕</button>
-      </div>
-
-      <!-- Mutations list -->
-      <div style="overflow-y:auto;padding:16px 24px;display:flex;flex-direction:column;gap:10px">
-
-        <!-- Mutation 1 -->
-        <div style="background:var(--surface-2);border:1px solid rgba(201,168,76,0.25);border-left:3px solid var(--amber);border-radius:10px;padding:14px 16px">
-          <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px">
-            <div style="flex:1">
-              <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px">
-                <span style="font-size:9px;text-transform:uppercase;letter-spacing:0.08em;font-weight:700;color:var(--amber);background:var(--amber-dim);padding:2px 7px;border-radius:10px">New Opportunity</span>
-                <span style="font-size:10px;color:var(--text-4);font-family:'Geist Mono',monospace">JTBD Agent · Suggestive · 62%</span>
-              </div>
-              <div style="font-size:13px;font-weight:600;color:var(--text-1);line-height:1.4">Real-time eligibility feedback loop post-application</div>
-              <div style="font-size:11px;color:var(--text-3);margin-top:4px">Proposed from Cluster 1 · Approval Anxiety pattern across 6 interviews</div>
-            </div>
-          </div>
-          <div style="display:flex;gap:7px;margin-top:12px">
-            <button style="flex:1;font-size:12px;font-weight:600;padding:7px 0;border-radius:7px;border:1px solid rgba(74,156,122,0.4);background:rgba(74,156,122,0.1);color:var(--c-proto);cursor:pointer;font-family:'Instrument Sans',sans-serif;transition:opacity 0.15s" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">✓ Approve</button>
-            <button style="flex:1;font-size:12px;font-weight:600;padding:7px 0;border-radius:7px;border:1px solid var(--border-d);background:var(--surface-3);color:var(--text-2);cursor:pointer;font-family:'Instrument Sans',sans-serif;transition:opacity 0.15s" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">✎ Edit</button>
-            <button style="flex:1;font-size:12px;font-weight:600;padding:7px 0;border-radius:7px;border:1px solid rgba(192,96,128,0.3);background:rgba(192,96,128,0.08);color:var(--c-causal);cursor:pointer;font-family:'Instrument Sans',sans-serif;transition:opacity 0.15s" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">✕ Reject</button>
-          </div>
-        </div>
-
-        <!-- Mutation 2 -->
-        <div style="background:var(--surface-2);border:1px solid rgba(201,168,76,0.25);border-left:3px solid var(--amber);border-radius:10px;padding:14px 16px">
-          <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px">
-            <div style="flex:1">
-              <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px">
-                <span style="font-size:9px;text-transform:uppercase;letter-spacing:0.08em;font-weight:700;color:var(--c-jtbd);background:var(--c-jtbd-dim);padding:2px 7px;border-radius:10px">New Solution</span>
-                <span style="font-size:10px;color:var(--text-4);font-family:'Geist Mono',monospace">Prototyping Agent · Validated · 81%</span>
-              </div>
-              <div style="font-size:13px;font-weight:600;color:var(--text-1);line-height:1.4">Soft pre-qualification check via ABN + industry lookup</div>
-              <div style="font-size:11px;color:var(--text-3);margin-top:4px">Connects to Opp #1 · Concept A prototype result supports this</div>
-            </div>
-          </div>
-          <div style="display:flex;gap:7px;margin-top:12px">
-            <button style="flex:1;font-size:12px;font-weight:600;padding:7px 0;border-radius:7px;border:1px solid rgba(74,156,122,0.4);background:rgba(74,156,122,0.1);color:var(--c-proto);cursor:pointer;font-family:'Instrument Sans',sans-serif;transition:opacity 0.15s" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">✓ Approve</button>
-            <button style="flex:1;font-size:12px;font-weight:600;padding:7px 0;border-radius:7px;border:1px solid var(--border-d);background:var(--surface-3);color:var(--text-2);cursor:pointer;font-family:'Instrument Sans',sans-serif;transition:opacity 0.15s" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">✎ Edit</button>
-            <button style="flex:1;font-size:12px;font-weight:600;padding:7px 0;border-radius:7px;border:1px solid rgba(192,96,128,0.3);background:rgba(192,96,128,0.08);color:var(--c-causal);cursor:pointer;font-family:'Instrument Sans',sans-serif;transition:opacity 0.15s" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">✕ Reject</button>
-          </div>
-        </div>
-
-        <!-- Mutation 3 -->
-        <div style="background:var(--surface-2);border:1px solid rgba(201,168,76,0.25);border-left:3px solid var(--amber);border-radius:10px;padding:14px 16px">
-          <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px">
-            <div style="flex:1">
-              <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px">
-                <span style="font-size:9px;text-transform:uppercase;letter-spacing:0.08em;font-weight:700;color:var(--c-proto);background:var(--c-proto-dim);padding:2px 7px;border-radius:10px">Confidence Update</span>
-                <span style="font-size:10px;color:var(--text-4);font-family:'Geist Mono',monospace">Noetic Mind · auto-proposed</span>
-              </div>
-              <div style="font-size:13px;font-weight:600;color:var(--text-1);line-height:1.4">Opp #1 confidence: 67% → 74%</div>
-              <div style="font-size:11px;color:var(--text-3);margin-top:4px">Post-prototype validation · Concept A test results · 3 supporting data points</div>
-            </div>
-          </div>
-          <div style="display:flex;gap:7px;margin-top:12px">
-            <button style="flex:1;font-size:12px;font-weight:600;padding:7px 0;border-radius:7px;border:1px solid rgba(74,156,122,0.4);background:rgba(74,156,122,0.1);color:var(--c-proto);cursor:pointer;font-family:'Instrument Sans',sans-serif;transition:opacity 0.15s" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">✓ Approve</button>
-            <button style="flex:1;font-size:12px;font-weight:600;padding:7px 0;border-radius:7px;border:1px solid var(--border-d);background:var(--surface-3);color:var(--text-2);cursor:pointer;font-family:'Instrument Sans',sans-serif;transition:opacity 0.15s" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">✎ Edit</button>
-            <button style="flex:1;font-size:12px;font-weight:600;padding:7px 0;border-radius:7px;border:1px solid rgba(192,96,128,0.3);background:rgba(192,96,128,0.08);color:var(--c-causal);cursor:pointer;font-family:'Instrument Sans',sans-serif;transition:opacity 0.15s" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">✕ Reject</button>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- Footer -->
-      <div style="padding:12px 24px;border-top:1px solid var(--border-s);display:flex;align-items:center;justify-content:space-between;flex-shrink:0">
-        <div style="font-size:11px;color:var(--text-4)">OST mutations require approval before they update the tree</div>
-        <button onclick="document.getElementById('ost-mutations-overlay').classList.remove('open')"
-          style="font-size:12px;font-weight:600;padding:7px 18px;border-radius:7px;border:1px solid var(--border-d);background:var(--surface-3);color:var(--text-2);cursor:pointer;font-family:'Instrument Sans',sans-serif;transition:all 0.15s"
-          onmouseover="this.style.borderColor='var(--border-a)';this.style.color='var(--text-1)'" onmouseout="this.style.borderColor='var(--border-d)';this.style.color='var(--text-2)'">
-          Done for now
-        </button>
-      </div>
-
-    </div>
-  </div>
+  <!-- OST Mutations overlay moved to body level — see end of file -->
 
   </div><!-- end center-tab-ost -->
 
@@ -3275,16 +3239,16 @@ const AGENT_CONTEXT = {
   'jtbd': {
     synth: '"9 job statements extracted. Approval Anxiety cluster saturated at 6/8 interviews."',
     meta: '8 interviews · 3 clusters · 74% top confidence',
-    action: 'Two JTBDs validated. Pending review: 3 statements. Run causal deliberation to validate root mechanism.',
-    btnLabel: '✦ Open Deliberation Engine',
-    btnFn: "closeNodeOverlay('jtbd');openDE()"
+    action: 'Two JTBDs validated. 7 interviews remain. Complete the interview set to reach causal synthesis.',
+    btnLabel: '→ Complete next interview',
+    btnFn: "closeNodeOverlay('jtbd');selectNode('causal')"
   },
   'causal': {
     synth: '"67% confidence in causal chain: approval uncertainty → cognitive exit before document gathering."',
     meta: '67% confidence · 1 confounding factor unresolved',
-    action: 'Causal hypothesis ready for multi-model deliberation. Three signals agree on root mechanism.',
-    btnLabel: '✦ Run Deliberation Engine',
-    btnFn: "closeNodeOverlay('causal');openDE()"
+    action: 'Causal model ready. Review the three resolution scenarios and advance to trade-off analysis.',
+    btnLabel: '→ Advance to Trade-offs',
+    btnFn: "closeNodeOverlay('causal');selectNode('tradeoffs')"
   },
   'prototyping': {
     synth: '"Concept A validated at 81% confidence. Pre-qualification signal removes the primary abandonment trigger for the Approval Anxiety cluster."',
@@ -3295,17 +3259,17 @@ const AGENT_CONTEXT = {
   },
   'tradeoffs': {
     synth: '"Recommendation: ship Concept A first, add Concept B in next release cycle. Sequential delivery scores 8.2/10 vs. 7.0 for standalone options."',
-    meta: '3 options scored · 79% confidence · DE session recommended for sequencing',
-    action: 'All 5 modules complete. Run a final DE session to pressure-test the sequencing recommendation, then generate the Living Report.',
-    btnLabel: '✦ Run Final DE Session',
-    btnFn: "closeNodeOverlay('tradeoffs');openDE()"
+    meta: '3 options scored · 79% confidence · ready for final report',
+    action: 'All 5 modules connected. Generate the Living Report for client delivery.',
+    btnLabel: '→ View OST',
+    btnFn: "closeNodeOverlay('tradeoffs');selectCenter()"
   },
   '_default': {
     synth: '"Approval uncertainty drives exit before document gathering begins."',
     meta: '8 interviews · 9 job statements · 74% confidence',
-    action: 'Run the Causal Structures deliberation — 67% confidence threshold reached. Three signals agree on the root mechanism.',
-    btnLabel: '✦ Open Deliberation Engine',
-    btnFn: 'openDE()'
+    action: 'Complete the next JTBD interview — 7 remain. Highest-potential, lowest-evidence node on the tree.',
+    btnLabel: '→ Complete next interview',
+    btnFn: "selectNode('jtbd')"
   }
 };
 
@@ -3359,13 +3323,13 @@ function selectNode(id) {
   // Close any open node overlay first
   if (activeOverlay) closeNodeOverlay(activeOverlay);
 
-  // Dim all nodes, highlight selected
-  const idMap = { definition:'def', jtbd:'jtbd', causal:'causal', prototyping:'proto', tradeoffs:'trade' };
-  ['def','jtbd','causal','proto','trade'].forEach(n => {
-    const el = document.getElementById('node-' + n);
+  // Dim all OST tree nodes, highlight selected
+  ['ost-node-definition','ost-node-jtbd','ost-node-tradeoffs','ost-node-prototyping'].forEach(n => {
+    const el = document.getElementById(n);
     if (el) el.style.opacity = '0.4';
   });
-  const nodeEl = document.getElementById('node-' + idMap[id]);
+  const ostIdMap = { definition:'ost-node-definition', jtbd:'ost-node-jtbd', causal:'ost-node-causal', prototyping:'ost-node-prototyping', tradeoffs:'ost-node-tradeoffs' };
+  const nodeEl = document.getElementById(ostIdMap[id]);
   if (nodeEl) nodeEl.style.opacity = '1';
 
   // Open overlay
@@ -3380,9 +3344,9 @@ function closeNodeOverlay(id) {
   const overlay = document.getElementById('overlay-' + (id || activeOverlay));
   if (overlay) overlay.classList.remove('open');
 
-  // Restore all node opacities
-  ['def','jtbd','causal','proto','trade'].forEach(n => {
-    const el = document.getElementById('node-' + n);
+  // Restore all OST node opacities
+  ['ost-node-definition','ost-node-jtbd','ost-node-causal','ost-node-tradeoffs','ost-node-prototyping'].forEach(n => {
+    const el = document.getElementById(n);
     if (el) el.style.opacity = '1';
   });
   activeOverlay = null;
@@ -3607,13 +3571,14 @@ function openCmdK() { openCmdPalette(); }
 
 // ── Entrance animation ───────────────────────────────────────────
 window.addEventListener('load', () => {
-  document.querySelectorAll('.node-circle, #ring-svg, #center-info-card').forEach((el, i) => {
-    el.style.opacity = '0';
+  const ostTree = document.getElementById('ost-tree');
+  if (ostTree) {
+    ostTree.style.opacity = '0';
     setTimeout(() => {
-      el.style.transition = 'opacity 0.5s ease';
-      el.style.opacity = '1';
-    }, 200 + i * 80);
-  });
+      ostTree.style.transition = 'opacity 0.5s ease';
+      ostTree.style.opacity = '1';
+    }, 200);
+  }
   // Scroll chat to bottom so most recent message is visible
   const msgs = document.getElementById('chat-messages');
   if (msgs) msgs.scrollTop = msgs.scrollHeight;
@@ -3684,7 +3649,7 @@ function toggleTheme() {
       <div class="cmd-group-label">Navigate</div>
       <div class="cmd-item" data-action="selectNode('definition')" tabindex="-1">
         <span class="cmd-icon" style="background:var(--c-def-dim);color:var(--c-def)">D</span>
-        <span class="cmd-label">Open Definition</span>
+        <span class="cmd-label">Open Frame</span>
         <span class="cmd-sub">Switch interview analysis</span>
       </div>
       <div class="cmd-item" data-action="selectNode('jtbd')" tabindex="-1">
@@ -3724,7 +3689,7 @@ function toggleTheme() {
         <span class="cmd-label">View Living Report</span>
         <span class="cmd-sub">Auto-generated · updated 2h ago</span>
       </div>
-      <div class="cmd-item" data-action="document.getElementById('ost-mutations-overlay').classList.add('open')" tabindex="-1">
+      <div class="cmd-item" data-action="openOSTMutations()" tabindex="-1">
         <span class="cmd-icon" style="background:var(--amber-dim);color:var(--amber)">⊕</span>
         <span class="cmd-label">Review OST Mutations</span>
         <span class="cmd-sub">3 pending · awaiting approval</span>
@@ -3745,6 +3710,82 @@ function toggleTheme() {
 <script>
 // ── CMD PALETTE ──────────────────────────────────────────────
 let cmdActiveIndex = -1;
+
+// ── ASSUMPTION TEST POPUP ────────────────────────────────────
+const ASS_TESTS = {
+  'sol1a': [
+    { status: 'validated', label: 'Users engage pre-qual', detail: '81% of test users completed pre-qual check before starting application. Reduces abandonment at doc-gather step.' },
+    { status: 'testing',   label: 'Pre-qual reduces anxiety',  detail: 'Measuring emotional state pre/post. Early signal: self-reported confidence up 23%. Still running.' }
+  ],
+  'sol1b': [
+    { status: 'validated', label: 'Social proof increases starts', detail: 'Showing "94% of similar businesses approved" lifted application starts by 31% in A/B test.' },
+    { status: 'hypothesis', label: 'Approval rates visible mid-flow', detail: 'Hypothesis: showing approval rates at document step reduces drop-off. Not yet tested.' }
+  ]
+};
+function toggleAssTests(solId, evt) {
+  const popup = document.getElementById('ass-tests-popup');
+  const content = document.getElementById('ass-tests-content');
+  const tests = ASS_TESTS[solId];
+  if (!tests) return;
+
+  const graphArea = document.querySelector('.ost-graph-area');
+  if (!graphArea) return;
+  const rect = graphArea.getBoundingClientRect();
+
+  // Anchor popup ABOVE the solutions row.
+  // Solutions sit at SVG y=365 in a 540-tall viewBox.
+  // Map to CSS pixels and subtract popup height (est. 220px) + 12px gap.
+  const solutionRowCssY = (365 / 420) * rect.height;
+  const popupTop = Math.max(8, solutionRowCssY - 236);
+
+  // Horizontal: follow click x, clamped so popup stays inside graph
+  const clickX = evt.clientX - rect.left;
+  const popupLeft = Math.max(8, Math.min(clickX - 110, rect.width - 248));
+
+  popup.style.left = popupLeft + 'px';
+  popup.style.top  = popupTop + 'px';
+
+  // Build content
+  const statusMap = {
+    validated:  { color: 'var(--c-proto)', label: 'Validated ✓', bg: 'rgba(74,156,122,0.1)' },
+    testing:    { color: 'var(--amber)',   label: 'Testing →',   bg: 'var(--amber-dim)' },
+    hypothesis: { color: 'var(--c-def)',   label: 'Hypothesis',  bg: 'rgba(91,140,186,0.1)' }
+  };
+  content.innerHTML = tests.map(t => {
+    const s = statusMap[t.status] || statusMap.hypothesis;
+    return `<div style="margin-bottom:10px;padding:10px 12px;background:${s.bg};border-radius:8px;border-left:2px solid ${s.color}">
+      <div style="font-size:10px;font-weight:700;color:${s.color};margin-bottom:4px">${s.label}</div>
+      <div style="font-size:12px;font-weight:600;color:var(--text-1);margin-bottom:3px">${t.label}</div>
+      <div style="font-size:11px;color:var(--text-3);line-height:1.4">${t.detail}</div>
+    </div>`;
+  }).join('');
+
+  popup.style.display = popup.style.display === 'block' ? 'none' : 'block';
+  evt.stopPropagation();
+}
+// Close popup on click outside
+document.addEventListener('click', () => {
+  const p = document.getElementById('ass-tests-popup');
+  if (p) p.style.display = 'none';
+});
+
+// ── OST MUTATIONS MODAL ──────────────────────────────────────
+function openOSTMutations() {
+  const el = document.getElementById('ost-mutations-overlay');
+  if (!el) return;
+  // Ensure it's at the very top of the DOM so no stacking context blocks it
+  if (el.parentElement !== document.body) document.body.appendChild(el);
+  el.style.display = 'flex';
+  el.style.opacity = '0';
+  el.style.pointerEvents = 'all';
+  requestAnimationFrame(() => { el.style.opacity = '1'; });
+}
+function closeOSTMutations() {
+  const el = document.getElementById('ost-mutations-overlay');
+  if (!el) return;
+  el.style.opacity = '0';
+  el.style.pointerEvents = 'none';
+}
 
 function openCmdPalette() {
   const el = document.getElementById('cmdpalette');
@@ -3830,6 +3871,56 @@ window.addEventListener('load', () => {
   }, 800);
 });
 </script>
+
+<!-- ── OST MUTATIONS OVERLAY — body level, avoids backdrop-filter containment ── -->
+<div id="ost-mutations-overlay"
+  style="position:fixed;inset:0;z-index:9999;background:rgba(6,10,20,0.65);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity 0.25s ease"
+  onclick="if(event.target===this)closeOSTMutations()">
+  <div style="width:560px;max-height:80vh;background:var(--surface-1);border:1px solid var(--border-d);border-radius:14px;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 24px 64px rgba(0,0,0,0.5);animation:panel-in 0.22s ease">
+    <div style="padding:18px 24px 14px;border-bottom:1px solid var(--border-s);display:flex;align-items:center;justify-content:space-between;flex-shrink:0">
+      <div>
+        <div style="font-size:15px;font-weight:600;color:var(--text-1);display:flex;align-items:center;gap:8px">Pending OST Mutations<span style="background:var(--amber);color:var(--navy);border-radius:10px;font-size:10px;font-weight:700;padding:2px 8px">3</span></div>
+        <div style="font-size:11px;color:var(--text-3);margin-top:3px">Agent-proposed changes to the Opportunity Solution Tree</div>
+      </div>
+      <button onclick="closeOSTMutations()" style="width:32px;height:32px;border-radius:8px;background:var(--surface-2);border:1px solid var(--border-d);color:var(--text-2);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.15s" onmouseover="this.style.background='var(--surface-3)'" onmouseout="this.style.background='var(--surface-2)'">✕</button>
+    </div>
+    <div style="overflow-y:auto;padding:16px 24px;display:flex;flex-direction:column;gap:10px">
+      <div style="background:var(--surface-2);border-left:3px solid var(--amber);border-radius:10px;padding:14px 16px">
+        <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px"><span style="font-size:9px;text-transform:uppercase;letter-spacing:0.08em;font-weight:700;color:var(--amber);background:var(--amber-dim);padding:2px 7px;border-radius:10px">New Opportunity</span><span style="font-size:10px;color:var(--text-4);font-family:'Geist Mono',monospace">JTBD Agent · Suggestive · 62%</span></div>
+        <div style="font-size:13px;font-weight:600;color:var(--text-1);line-height:1.4">Real-time eligibility feedback loop post-application</div>
+        <div style="font-size:11px;color:var(--text-3);margin-top:4px">Proposed from Cluster 1 · Approval Anxiety pattern across 6 interviews</div>
+        <div style="display:flex;gap:7px;margin-top:12px">
+          <button style="flex:1;font-size:12px;font-weight:600;padding:7px 0;border-radius:7px;border:1px solid rgba(74,156,122,0.4);background:rgba(74,156,122,0.1);color:var(--c-proto);cursor:pointer;font-family:'Instrument Sans',sans-serif">✓ Approve</button>
+          <button style="flex:1;font-size:12px;font-weight:600;padding:7px 0;border-radius:7px;border:1px solid var(--border-d);background:var(--surface-3);color:var(--text-2);cursor:pointer;font-family:'Instrument Sans',sans-serif">✎ Edit</button>
+          <button style="flex:1;font-size:12px;font-weight:600;padding:7px 0;border-radius:7px;border:1px solid rgba(192,96,128,0.3);background:rgba(192,96,128,0.08);color:var(--c-causal);cursor:pointer;font-family:'Instrument Sans',sans-serif">✕ Reject</button>
+        </div>
+      </div>
+      <div style="background:var(--surface-2);border-left:3px solid var(--amber);border-radius:10px;padding:14px 16px">
+        <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px"><span style="font-size:9px;text-transform:uppercase;letter-spacing:0.08em;font-weight:700;color:var(--c-jtbd);background:var(--c-jtbd-dim);padding:2px 7px;border-radius:10px">New Solution</span><span style="font-size:10px;color:var(--text-4);font-family:'Geist Mono',monospace">Prototyping Agent · Validated · 81%</span></div>
+        <div style="font-size:13px;font-weight:600;color:var(--text-1);line-height:1.4">Soft pre-qualification check via ABN + industry lookup</div>
+        <div style="font-size:11px;color:var(--text-3);margin-top:4px">Connects to Opp #1 · Concept A prototype result supports this</div>
+        <div style="display:flex;gap:7px;margin-top:12px">
+          <button style="flex:1;font-size:12px;font-weight:600;padding:7px 0;border-radius:7px;border:1px solid rgba(74,156,122,0.4);background:rgba(74,156,122,0.1);color:var(--c-proto);cursor:pointer;font-family:'Instrument Sans',sans-serif">✓ Approve</button>
+          <button style="flex:1;font-size:12px;font-weight:600;padding:7px 0;border-radius:7px;border:1px solid var(--border-d);background:var(--surface-3);color:var(--text-2);cursor:pointer;font-family:'Instrument Sans',sans-serif">✎ Edit</button>
+          <button style="flex:1;font-size:12px;font-weight:600;padding:7px 0;border-radius:7px;border:1px solid rgba(192,96,128,0.3);background:rgba(192,96,128,0.08);color:var(--c-causal);cursor:pointer;font-family:'Instrument Sans',sans-serif">✕ Reject</button>
+        </div>
+      </div>
+      <div style="background:var(--surface-2);border-left:3px solid var(--amber);border-radius:10px;padding:14px 16px">
+        <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px"><span style="font-size:9px;text-transform:uppercase;letter-spacing:0.08em;font-weight:700;color:var(--c-proto);background:var(--c-proto-dim);padding:2px 7px;border-radius:10px">Confidence Update</span><span style="font-size:10px;color:var(--text-4);font-family:'Geist Mono',monospace">Noetic Mind · auto-proposed</span></div>
+        <div style="font-size:13px;font-weight:600;color:var(--text-1);line-height:1.4">Opp #1 confidence: 67% → 74%</div>
+        <div style="font-size:11px;color:var(--text-3);margin-top:4px">Post-prototype validation · Concept A test results · 3 supporting data points</div>
+        <div style="display:flex;gap:7px;margin-top:12px">
+          <button style="flex:1;font-size:12px;font-weight:600;padding:7px 0;border-radius:7px;border:1px solid rgba(74,156,122,0.4);background:rgba(74,156,122,0.1);color:var(--c-proto);cursor:pointer;font-family:'Instrument Sans',sans-serif">✓ Approve</button>
+          <button style="flex:1;font-size:12px;font-weight:600;padding:7px 0;border-radius:7px;border:1px solid var(--border-d);background:var(--surface-3);color:var(--text-2);cursor:pointer;font-family:'Instrument Sans',sans-serif">✎ Edit</button>
+          <button style="flex:1;font-size:12px;font-weight:600;padding:7px 0;border-radius:7px;border:1px solid rgba(192,96,128,0.3);background:rgba(192,96,128,0.08);color:var(--c-causal);cursor:pointer;font-family:'Instrument Sans',sans-serif">✕ Reject</button>
+        </div>
+      </div>
+    </div>
+    <div style="padding:12px 24px;border-top:1px solid var(--border-s);display:flex;justify-content:flex-end">
+      <button onclick="closeOSTMutations()" style="font-size:12px;font-weight:600;padding:7px 18px;border-radius:7px;border:1px solid var(--border-d);background:var(--surface-3);color:var(--text-2);cursor:pointer;font-family:'Instrument Sans',sans-serif">Done for now</button>
+    </div>
+  </div>
+</div>
 
 </body>
 </html>
