@@ -1097,12 +1097,11 @@ html.light ::-webkit-scrollbar-thumb { background: var(--surface-4); }
 
 /* ── OST SVG CANVAS ──────────────────────────────────────── */
 #ost-canvas {
-  flex: 1; overflow-y: auto; overflow-x: hidden;
+  flex: 1; overflow: hidden;
   background: var(--surface-0); position: relative;
+  display: flex; align-items: stretch;
 }
-#ost-canvas::-webkit-scrollbar { width: 3px; }
-#ost-canvas::-webkit-scrollbar-thumb { background: var(--surface-4); }
-#ost-svg { display: block; width: 100%; }
+#ost-svg { display: block; width: 100%; height: 100%; }
 
 /* ── RE-PRIORITISE ARC ANIMATION ─────────────────────────── */
 .reprioritise-arc {
@@ -1429,7 +1428,7 @@ html.light .ost-reprioritise { background: rgba(52,136,104,0.04); }
 
     <!-- ── PART 2: SVG BRANCHING TREE ────────────────── -->
     <div id="ost-canvas" class="ost-graph-area">
-      <svg id="ost-svg" width="100%" viewBox="0 0 560 580" preserveAspectRatio="xMidYMin meet" xmlns="http://www.w3.org/2000/svg">
+      <svg id="ost-svg" width="100%" height="100%" viewBox="0 0 560 580" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
 
         <!-- Defs: glow filters -->
         <defs>
