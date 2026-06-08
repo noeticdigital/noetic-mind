@@ -159,40 +159,12 @@ body {
   font-family: 'Geist Mono', monospace;
 }
 
-/* ── RING AREA ───────────────────────────────────────────────── */
-#ring-area {
-  flex: 1; display: flex; align-items: center; justify-content: center;
-  position: relative; overflow: hidden;
-}
-#ring-svg { max-width: 100%; max-height: 100%; cursor: default; }
-
-/* SVG node elements */
-.node-circle {
-  cursor: pointer;
-  transition: all 0.2s;
-}
-.node-circle:hover .node-bg { opacity: 1; }
-.node-label {
-  pointer-events: none;
-  user-select: none;
-}
-.node-label text { font-family: 'Instrument Sans', sans-serif; }
-
-/* ── NODE GLOW ANIMATIONS ────────────────────────────────────── */
-@keyframes pulse-thread {
-  0%, 100% { opacity: 0.5; stroke-width: 1.5; }
-  50%       { opacity: 1;   stroke-width: 2.5; }
-}
+/* ── ANIMATIONS ──────────────────────────────────────────────── */
 @keyframes pulse-dot { 0%,100%{opacity:1;} 50%{opacity:0.4;} }
-@keyframes pulse-node-glow {
-  0%, 100% { opacity: 0.4; r: 46px; }
-  50%       { opacity: 0.7; r: 52px; }
-}
 @keyframes de-glow {
   0%, 100% { filter: drop-shadow(0 0 6px rgba(201,168,76,0.4)); }
   50%       { filter: drop-shadow(0 0 14px rgba(201,168,76,0.8)); }
 }
-@keyframes spin-slow { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
 @keyframes fade-in   { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:translateY(0)} }
 @keyframes slide-up  { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
 @keyframes scale-in  { from{opacity:0;transform:scale(0.94)} to{opacity:1;transform:scale(1)} }
@@ -303,50 +275,6 @@ body {
 .node-de-suggested .node-glow { animation: pulse-node-glow 2.2s ease-in-out infinite; }
 .de-btn { animation: de-glow 2.2s ease-in-out infinite; cursor: pointer; }
 #ost-mutations-overlay.open { opacity: 1; pointer-events: all; }
-
-/* ── RESEARCH TIMELINE STRIP ─────────────────────────────────── */
-#timeline-strip {
-  height: 56px; flex-shrink: 0;
-  border-top: 1px solid var(--border-s);
-  background: var(--surface-1);
-  display: flex; flex-direction: column; justify-content: center;
-  padding: 0 24px; overflow: hidden; position: relative;
-}
-.ts-track {
-  position: relative; height: 2px;
-  background: var(--surface-3); border-radius: 2px;
-  margin: 0 0 0 0;
-}
-.ts-progress {
-  position: absolute; left: 0; top: 0; height: 100%;
-  width: 33.3%; /* week 8 of 24 */
-  background: linear-gradient(90deg, var(--c-def) 0%, var(--c-jtbd) 40%, var(--amber) 100%);
-  border-radius: 2px;
-}
-.ts-weeks {
-  position: absolute; top: -18px; left: 0; right: 0; pointer-events: none;
-}
-.ts-week-label {
-  position: absolute;
-  font-size: 9px; font-family: 'Geist Mono', monospace;
-  color: var(--text-4); transform: translateX(-50%);
-  white-space: nowrap;
-}
-.ts-week-label.now { color: var(--amber); font-weight: 600; }
-.ts-events {
-  position: absolute; top: -10px; left: 0; right: 0;
-}
-.ts-ev {
-  position: absolute; transform: translateX(-50%);
-  width: 10px; height: 10px; border-radius: 50%;
-  border: 2px solid var(--surface-1);
-  cursor: default;
-}
-.ts-ev-label {
-  position: absolute; top: 14px; transform: translateX(-50%);
-  font-size: 9px; color: var(--text-3); white-space: nowrap;
-  font-family: 'Instrument Sans', sans-serif;
-}
 
 /* ── RIGHT PANEL ─────────────────────────────────────────────── */
 .rp-title  { font-size: 13px; font-weight: 600; color: var(--text-1); display: flex; align-items: center; gap: 7px; }
@@ -669,20 +597,7 @@ html.light text[fill="#F0EDE8 "] { fill: #0D1117 !important; }
 /* Light mode: dim the white watermark text in OST */
 html.light text[fill="rgba(255,255,255,0.06)"] { fill: rgba(0,0,0,0.04) !important; }
 
-/* Light mode: center info card — swap dark gradient for light surface */
-html.light #center-info-card {
-  background: radial-gradient(circle at 40% 35%, #FFFFFF 0%, #F0F2F8 100%);
-  box-shadow: 0 0 40px rgba(139,107,174,0.12), 0 0 80px rgba(139,107,174,0.06), 0 2px 16px rgba(0,0,0,0.08);
-  border-color: rgba(139,107,174,0.25);
-}
-html.light #center-info-card:hover {
-  box-shadow: 0 0 50px rgba(139,107,174,0.18), 0 0 100px rgba(139,107,174,0.08), 0 4px 20px rgba(0,0,0,0.10);
-}
-
-/* Light mode: orbit ring arcs — make visible on light bg */
-html.light #ring-svg path[stroke="rgba(180,200,230,0.2)"] {
-  stroke: rgba(90,110,150,0.15);
-}
+/* Light mode: (ring removed — no ring CSS needed) */
 
 /* OST graph area background */
 .ost-graph-area {
@@ -690,13 +605,6 @@ html.light #ring-svg path[stroke="rgba(180,200,230,0.2)"] {
 }
 html.light .ost-graph-area {
   background: radial-gradient(ellipse at 50% 40%, #F8F9FC 0%, #EEF0F6 100%);
-}
-
-/* Light mode: center icon strokes (lavender → muted purple) */
-html.light #center-info-card svg line,
-html.light #center-info-card svg rect,
-html.light #center-info-card svg polyline {
-  stroke: rgba(100,80,160,0.55);
 }
 
 /* Light mode: overlay backdrop */
@@ -707,15 +615,6 @@ html.light .node-overlay {
 html.light .no-panel {
   box-shadow: 0 20px 60px rgba(0,0,0,0.12), 0 4px 16px rgba(0,0,0,0.06);
   border-color: var(--border-d);
-}
-
-/* Light mode: node circles — white fill + subtle shadow so they lift off the bg */
-html.light .node-circle circle[r="46"] {
-  fill: var(--surface-1);
-  filter: drop-shadow(0 2px 10px rgba(0,0,0,0.07));
-}
-html.light .node-circle {
-  filter: drop-shadow(0 2px 12px rgba(0,0,0,0.06));
 }
 
 /* Light mode: chat bubble contrast */
@@ -1139,40 +1038,6 @@ html.light ::-webkit-scrollbar-thumb { background: var(--surface-4); }
   color: var(--text-1); border-radius: 10px; border-bottom-right-radius: 3px;
 }
 
-/* ── CENTER INFO CARD (circular) ─────────────────────────────── */
-#center-info-card {
-  position: absolute;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -47%);
-  width: 220px; height: 220px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 40% 35%, rgba(30,25,55,0.97) 0%, rgba(13,22,42,0.97) 100%);
-  border: 1px solid rgba(139,107,174,0.4);
-  z-index: 5;
-  pointer-events: all;
-  cursor: pointer;
-  box-shadow: 0 0 60px rgba(139,107,174,0.25), 0 0 120px rgba(139,107,174,0.1), 0 2px 20px rgba(0,0,0,0.7);
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  text-align: center; padding: 12px;
-  transition: box-shadow 0.25s;
-}
-#center-info-card:hover {
-  box-shadow: 0 0 80px rgba(139,107,174,0.4), 0 0 140px rgba(139,107,174,0.15), 0 2px 20px rgba(0,0,0,0.7);
-}
-.cic-de-btn {
-  pointer-events: all;
-  background: rgba(201,168,76,0.12); border: 1px solid rgba(201,168,76,0.4);
-  border-radius: 20px; padding: 4px 14px;
-  font-size: 9.5px; font-weight: 600; color: var(--amber);
-  cursor: pointer; font-family: 'Instrument Sans', sans-serif;
-  transition: background 0.15s; margin-top: 8px;
-  display: inline-flex; align-items: center; justify-content: center; gap: 4px;
-  animation: de-glow 2.2s ease-in-out infinite;
-  white-space: nowrap;
-}
-.cic-de-btn:hover { background: rgba(201,168,76,0.25); }
-
 /* ── RIGHT PANEL CONTENT WRAPPER ────────────────────────────── */
 #rp-content { display: flex; flex-direction: column; flex: 1; overflow: hidden; min-height: 0; }
 #rpanel-chat-section { flex: 1; display: flex; flex-direction: column; overflow: hidden; min-height: 0; }
@@ -1198,6 +1063,191 @@ html.light ::-webkit-scrollbar-thumb { background: var(--surface-4); }
 }
 .cmd-label { font-size: 13px; font-weight: 500; color: var(--text-1); flex: 1; }
 .cmd-sub { font-size: 11px; color: var(--text-4); white-space: nowrap; }
+
+/* ── OST TREE CENTER PANEL ───────────────────────────────── */
+#ost-tree {
+  flex: 1; overflow-y: auto; padding: 20px 24px 32px;
+  display: flex; flex-direction: column;
+  background: var(--surface-0); position: relative;
+}
+#ost-tree::-webkit-scrollbar { width: 3px; }
+#ost-tree::-webkit-scrollbar-thumb { background: var(--surface-4); border-radius: 2px; }
+
+.ost-level-label {
+  font-size: 9px; text-transform: uppercase; letter-spacing: 0.12em;
+  color: var(--text-4); font-family: 'Geist Mono', monospace;
+  padding: 0 2px; margin-bottom: 6px; margin-top: 4px;
+}
+
+.ost-connector {
+  width: 2px; height: 16px;
+  background: rgba(255,255,255,0.07);
+  margin: 0 auto 0 22px;
+}
+
+/* ── OST NODE ── */
+.ost-node {
+  display: flex; align-items: center; gap: 14px;
+  padding: 13px 16px; border-radius: 12px;
+  cursor: pointer; transition: all 0.15s ease;
+  border: 1px solid transparent; position: relative;
+}
+.ost-node:hover { transform: translateX(3px); }
+
+/* Evidence state variants */
+.ost-node[data-evidence="unvalidated"] {
+  background: rgba(255,255,255,0.02);
+  border: 1px dashed rgba(255,255,255,0.08);
+}
+.ost-node[data-evidence="unvalidated"] .ost-node-icon { opacity: 0.35; }
+.ost-node[data-evidence="unvalidated"] .ost-node-name { color: var(--text-3); }
+.ost-node[data-evidence="unvalidated"] .ost-node-status { color: var(--text-4); }
+.ost-node[data-evidence="unvalidated"] .ost-node-evidence-badge { background: rgba(255,255,255,0.04); color: var(--text-4); }
+
+.ost-node[data-evidence="in-progress"] {
+  background: rgba(255,255,255,0.03);
+  border-color: rgba(255,255,255,0.1);
+}
+.ost-node[data-evidence="in-progress"] .ost-node-evidence-badge { background: var(--amber-dim); color: var(--amber); }
+
+.ost-node[data-evidence="supported"] {
+  background: rgba(255,255,255,0.04);
+  border-color: rgba(255,255,255,0.12);
+}
+.ost-node[data-evidence="supported"] .ost-node-evidence-badge { background: rgba(91,140,186,0.15); color: var(--c-def); }
+
+.ost-node[data-evidence="validated"] {
+  border-color: rgba(74,156,122,0.35);
+}
+.ost-node[data-evidence="validated"] .ost-node-evidence-badge { background: rgba(74,156,122,0.15); color: var(--c-proto); }
+
+.ost-node[data-evidence="invalidated"] {
+  background: rgba(255,255,255,0.01);
+  border: 1px dashed rgba(255,255,255,0.05);
+  opacity: 0.55;
+}
+.ost-node[data-evidence="invalidated"] .ost-node-icon { filter: grayscale(1); opacity: 0.4; }
+.ost-node[data-evidence="invalidated"] .ost-node-name { color: var(--text-4); text-decoration: line-through; }
+.ost-node[data-evidence="invalidated"] .ost-node-status { color: var(--text-4); text-decoration: line-through; }
+.ost-node[data-evidence="invalidated"] .ost-node-evidence-badge { background: rgba(255,255,255,0.04); color: var(--text-4); text-decoration: none; }
+
+/* Module-specific node backgrounds (when not overridden by evidence state) */
+#ost-node-definition[data-evidence="supported"] { background: rgba(91,140,186,0.07); border-color: rgba(91,140,186,0.22); }
+#ost-node-jtbd[data-evidence="in-progress"]     { background: rgba(139,107,174,0.06); border-color: rgba(139,107,174,0.18); }
+#ost-node-tradeoffs[data-evidence="validated"]  { background: rgba(201,168,76,0.08); }
+#ost-node-prototyping[data-evidence="validated"]{ background: rgba(74,156,122,0.08); }
+
+.ost-node-icon {
+  width: 38px; height: 38px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; transition: opacity 0.15s;
+}
+.ost-node-content { flex: 1; min-width: 0; }
+.ost-node-skill  { font-size: 9px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-4); font-family: 'Geist Mono', monospace; margin-bottom: 2px; }
+.ost-node-name   { font-size: 15px; font-weight: 700; color: var(--text-1); font-family: 'Instrument Sans', sans-serif; line-height: 1.2; }
+.ost-node-status { font-size: 11px; color: var(--text-3); margin-top: 2px; line-height: 1.4; }
+.ost-node-evidence-badge {
+  font-size: 10px; font-family: 'Geist Mono', monospace;
+  padding: 3px 10px; border-radius: 20px; flex-shrink: 0;
+  white-space: nowrap;
+}
+.ost-node-chevron { font-size: 18px; color: var(--text-4); flex-shrink: 0; transition: transform 0.12s, color 0.12s; }
+.ost-node:hover .ost-node-chevron { transform: translateX(4px); color: var(--text-2); }
+
+/* ── OUTCOME DISPLAY ── */
+.ost-outcome {
+  display: flex; justify-content: center;
+}
+.ost-outcome-inner {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 20px; border-radius: 10px;
+  background: rgba(201,168,76,0.06); border: 1px solid rgba(201,168,76,0.2);
+  max-width: 100%;
+}
+.ost-outcome-label { font-size: 9px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--amber); font-family: 'Geist Mono', monospace; white-space: nowrap; }
+.ost-outcome-value { font-size: 13px; font-weight: 600; color: var(--text-1); font-family: 'Instrument Sans', sans-serif; }
+
+/* ── BRANCH HINT ── */
+.ost-branch-hint {
+  display: flex; align-items: center; gap: 10px;
+  padding: 6px 16px 6px 52px; flex-wrap: wrap;
+}
+.ost-branch-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+.ost-branch-hint span { font-size: 10px; color: var(--text-3); font-family: 'Geist Mono', monospace; margin-right: 6px; }
+
+/* ── CAUSAL BRIDGE ── */
+.ost-causal-connector {
+  width: 0;
+  height: 12px;
+  border-left: 2px dashed rgba(192,96,128,0.3);
+  margin: 0 auto 0 22px;
+}
+.ost-causal-bridge {
+  display: flex; align-items: center; gap: 10px;
+  padding: 8px 16px; margin: 0 0 0 12px;
+  border-radius: 8px; cursor: pointer; transition: all 0.12s;
+  background: rgba(192,96,128,0.05);
+  border: 1px dashed rgba(192,96,128,0.25);
+}
+.ost-causal-bridge:hover { background: rgba(192,96,128,0.1); transform: translateX(3px); }
+.ost-causal-icon  { font-size: 16px; flex-shrink: 0; }
+.ost-causal-body  { flex: 1; min-width: 0; }
+.ost-causal-label { font-size: 12px; font-weight: 600; color: var(--c-causal); line-height: 1.3; }
+.ost-causal-sub   { font-size: 10px; color: var(--text-3); margin-top: 1px; }
+.ost-causal-badge { font-size: 10px; font-family: 'Geist Mono', monospace; color: var(--amber); background: var(--amber-dim); padding: 2px 8px; border-radius: 10px; flex-shrink: 0; }
+
+/* ── RE-PRIORITISE LOOP ── */
+.ost-reprioritise {
+  display: flex; align-items: center; gap: 10px;
+  padding: 8px 16px; margin-top: 4px;
+  border-radius: 8px;
+  background: rgba(74,156,122,0.04);
+  border: 1px dashed rgba(74,156,122,0.15);
+  animation: reprioritise-pulse 3s ease-in-out infinite;
+}
+@keyframes reprioritise-pulse {
+  0%, 100% { border-color: rgba(74,156,122,0.15); background: rgba(74,156,122,0.04); }
+  50%       { border-color: rgba(74,156,122,0.28); background: rgba(74,156,122,0.08); }
+}
+.ost-reprioritise-line {
+  width: 20px; height: 2px;
+  background: linear-gradient(90deg, var(--c-proto), var(--c-jtbd));
+  border-radius: 2px; flex-shrink: 0;
+  position: relative;
+}
+.ost-reprioritise-line::after {
+  content: ''; position: absolute; right: -6px; top: -3px;
+  border: 4px solid transparent; border-left: 6px solid var(--c-jtbd);
+  animation: loop-arrow 2s ease-in-out infinite;
+}
+@keyframes loop-arrow {
+  0%, 100% { opacity: 0.5; } 50% { opacity: 1; }
+}
+.ost-reprioritise-label {
+  font-size: 10px; font-family: 'Geist Mono', monospace;
+  color: var(--c-proto); letter-spacing: 0.03em;
+}
+
+/* ── NEXT BEST ACTION ── */
+.ost-next-action {
+  margin-top: 16px; padding: 14px 16px;
+  background: var(--surface-2); border-radius: 10px;
+  border-left: 3px solid var(--amber);
+}
+.ost-next-action-label { font-size: 9px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--amber); font-family: 'Geist Mono', monospace; margin-bottom: 5px; }
+.ost-next-action-name  { font-size: 14px; font-weight: 700; color: var(--text-1); margin-bottom: 4px; font-family: 'Instrument Sans', sans-serif; }
+.ost-next-action-why   { font-size: 11px; color: var(--text-3); line-height: 1.55; }
+
+/* Invalidated node in OST SVG */
+.ost-svg-invalidated text { fill: #4A4A4A !important; text-decoration: line-through; }
+.ost-svg-invalidated circle, .ost-svg-invalidated ellipse { fill: rgba(60,60,60,0.3) !important; stroke: rgba(100,100,100,0.3) !important; }
+
+/* ── LIGHT MODE ADDITIONS ── */
+html.light #ost-tree { background: var(--surface-0); }
+html.light .ost-node[data-evidence="unvalidated"] { background: rgba(0,0,0,0.02); border-color: rgba(0,0,0,0.08); }
+html.light .ost-outcome-inner { background: rgba(184,148,60,0.06); }
+html.light .ost-next-action { background: var(--surface-2); }
+html.light .ost-reprioritise { background: rgba(52,136,104,0.04); }
 
 </style>
 </head>
@@ -1295,211 +1345,119 @@ html.light ::-webkit-scrollbar-thumb { background: var(--surface-4); }
     </div>
   </div>
 
-  <!-- RING SVG -->
-  <div id="ring-area" style="position:relative">
-    <svg id="ring-svg" viewBox="0 0 840 720" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <!-- Glow filters -->
-        <filter id="f-def"  x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur in="SourceGraphic" stdDeviation="8"/></filter>
-        <filter id="f-jtbd" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur in="SourceGraphic" stdDeviation="8"/></filter>
-        <filter id="f-cau"  x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur in="SourceGraphic" stdDeviation="10"/></filter>
-        <filter id="f-pro"  x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur in="SourceGraphic" stdDeviation="6"/></filter>
-        <filter id="f-tra"  x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur in="SourceGraphic" stdDeviation="6"/></filter>
-        <filter id="f-center" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur in="SourceGraphic" stdDeviation="12"/></filter>
-        <!-- Dash patterns -->
-        <marker id="arrow" viewBox="0 0 6 6" refX="3" refY="3" markerWidth="5" markerHeight="5" orient="auto">
-          <path d="M0,0 L6,3 L0,6 Z" fill="rgba(201,168,76,0.6)"/>
-        </marker>
-      </defs>
+  <!-- OST TREE -->
+  <div id="ost-tree">
 
-      <!-- ── Orbit ring: arc segments between each node ── -->
-      <path d="M420,170 A200,200 0 0 1 610,308" fill="none" stroke="rgba(180,200,230,0.2)" stroke-width="1.5"/>
-      <path d="M610,308 A200,200 0 0 1 538,532" fill="none" stroke="rgba(180,200,230,0.2)" stroke-width="1.5"/>
-      <path d="M538,532 A200,200 0 0 1 302,532" fill="none" stroke="rgba(180,200,230,0.2)" stroke-width="1.5"/>
-      <path d="M302,532 A200,200 0 0 1 230,308" fill="none" stroke="rgba(180,200,230,0.2)" stroke-width="1.5"/>
-      <path d="M230,308 A200,200 0 0 1 420,170" fill="none" stroke="rgba(180,200,230,0.2)" stroke-width="1.5"/>
-
-      <!-- ── THREADS (back layer, shallow cubic bezier) ── -->
-      <!-- Definition → Center: VALIDATED (green solid) -->
-      <path id="thread-def" d="M420,216 C445,237 445,257 420,278"
-        stroke="var(--thread-val)" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.9"/>
-
-      <!-- JTBD → Center: PARTIAL (amber solid) -->
-      <path id="thread-jtbd" d="M566,322 C554,352 534,358 506,341"
-        stroke="var(--thread-part)" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.8"/>
-
-      <!-- Causal → Center: DE SUGGESTED (pulsing amber) -->
-      <path id="thread-causal" d="M511,495 C478,491 465,473 473,441"
-        stroke="var(--amber)" stroke-width="2" stroke-linecap="round" fill="none"
-        class="thread-de-suggested"/>
-
-      <!-- Prototyping → Center: NONE (grey dashed) -->
-      <path id="thread-proto" d="M329,495 C321,463 334,445 367,441"
-        stroke="var(--thread-none)" stroke-width="1.5" stroke-dasharray="6,7" stroke-linecap="round" fill="none" opacity="0.45"/>
-
-      <!-- Trade-offs → Center: NONE (grey dashed) -->
-      <path id="thread-trade" d="M274,322 C302,305 322,311 334,341"
-        stroke="var(--thread-none)" stroke-width="1.5" stroke-dasharray="6,7" stroke-linecap="round" fill="none" opacity="0.45"/>
-
-      <!-- ── CENTER CARD glow only (content via HTML overlay) ── -->
-      <circle cx="420" cy="368" r="135" fill="rgba(139,107,174,0.07)" filter="url(#f-center)" opacity="0.9"/>
-      <circle cx="420" cy="368" r="112" fill="none" stroke="rgba(139,107,174,0.1)" stroke-width="1" stroke-dasharray="4,8"/>
-      <circle cx="420" cy="368" r="80" fill="none" stroke="rgba(139,107,174,0.06)" stroke-width="1" stroke-dasharray="2,12"/>
-
-      <!-- ── DEFINITION NODE (top, 270°) ── -->
-      <g class="node-circle" id="node-def" onclick="selectNode('definition')" transform="translate(420,170)">
-        <circle r="62" fill="var(--c-def-dim)" filter="url(#f-def)" opacity="0.6" class="node-glow"/>
-        <circle r="46" fill="var(--surface-2)" stroke="var(--c-def)" stroke-width="2"/>
-        <!-- Validated badge -->
-        <circle r="11" cx="33" cy="-33" fill="var(--c-proto)" stroke="var(--surface-0)" stroke-width="2"/>
-        <text x="33" y="-29" text-anchor="middle" fill="#fff" font-size="10" font-weight="700">✓</text>
-        <!-- Checklist icon -->
-        <g fill="none" stroke="var(--c-def)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="-15,-11 -12,-8 -8,-13"/>
-          <line x1="-5" y1="-10" x2="13" y2="-10"/>
-          <polyline points="-15,-1 -12,2 -8,-3"/>
-          <line x1="-5" y1="0" x2="13" y2="0"/>
-          <line x1="-15" y1="10" x2="5" y2="10"/>
-        </g>
-      </g>
-      <text x="420" y="84" text-anchor="middle" fill="var(--text-2)" font-family="'Instrument Sans',sans-serif" font-size="12" font-weight="500" class="node-label">Definition</text>
-      <text x="420" y="98" text-anchor="middle" fill="var(--c-proto)" font-family="'Geist Mono',monospace" font-size="10" class="node-label">● Validated</text>
-      <text x="420" y="112" text-anchor="middle" fill="var(--text-4)" font-family="'Instrument Sans',sans-serif" font-size="10" class="node-label">Signal intake &amp; social listening</text>
-
-      <!-- ── JTBD NODE (upper right, 342°) ── -->
-      <g class="node-circle" id="node-jtbd" onclick="selectNode('jtbd')" transform="translate(610,308)">
-        <circle r="62" fill="var(--c-jtbd-dim)" filter="url(#f-jtbd)" opacity="0.6" class="node-glow"/>
-        <circle r="46" fill="var(--surface-2)" stroke="var(--c-jtbd)" stroke-width="2"/>
-        <circle r="46" fill="none" stroke="var(--c-jtbd)" stroke-width="2" stroke-dasharray="96 192" stroke-dashoffset="-48" opacity="0.35"/>
-        <!-- Progress badge -->
-        <rect x="16" y="-46" width="32" height="15" rx="7" fill="var(--amber-dim)" stroke="rgba(201,168,76,0.3)" stroke-width="1"/>
-        <text x="32" y="-35" text-anchor="middle" fill="var(--amber)" font-family="'Geist Mono',monospace" font-size="9">8/15</text>
-        <!-- Group of people icon -->
-        <g fill="none" stroke="var(--c-jtbd)" stroke-width="2" stroke-linecap="round">
-          <circle cx="0" cy="-8" r="5"/>
-          <path d="M-7,8 C-7,1 -3.5,-1 0,-1 C3.5,-1 7,1 7,8"/>
-          <circle cx="-11" cy="-7" r="3.5" opacity="0.6"/>
-          <path d="M-16,8 C-16,3 -14,1.5 -11,1.5 C-8,1.5 -6,3 -6,8" opacity="0.6"/>
-          <circle cx="11" cy="-7" r="3.5" opacity="0.6"/>
-          <path d="M6,8 C6,3 8,1.5 11,1.5 C14,1.5 16,3 16,8" opacity="0.6"/>
-        </g>
-      </g>
-      <text x="668" y="300" text-anchor="start" fill="var(--text-2)" font-family="'Instrument Sans',sans-serif" font-size="12" font-weight="500" class="node-label">JTBD</text>
-      <text x="668" y="314" text-anchor="start" fill="var(--amber)" font-family="'Geist Mono',monospace" font-size="10" class="node-label">◑ Partial</text>
-      <text x="668" y="328" text-anchor="start" fill="var(--text-4)" font-family="'Instrument Sans',sans-serif" font-size="10" class="node-label">Uncovering jobs &amp; outcomes</text>
-
-      <!-- ── CAUSAL NODE (lower right, 54°) ── -->
-      <g class="node-circle node-de-suggested" id="node-causal" onclick="selectNode('causal')" transform="translate(538,532)">
-        <circle r="64" fill="var(--c-causal-dim)" filter="url(#f-cau)" class="node-glow" opacity="0.7"/>
-        <circle r="46" fill="var(--surface-2)" stroke="var(--c-causal)" stroke-width="2" stroke-dasharray="10,6"/>
-        <!-- DE badge -->
-        <circle r="12" cx="33" cy="-33" fill="var(--amber-dim)" stroke="rgba(201,168,76,0.5)" stroke-width="1.5" class="thread-de-suggested"/>
-        <text x="33" y="-29" text-anchor="middle" fill="var(--amber)" font-size="11" font-weight="700">✦</text>
-        <!-- City skyline icon -->
-        <g fill="none" stroke="var(--c-causal)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="-15,12 -15,4 -11,4 -11,-5 -7,-5 -7,-10 -3,-10 -3,-6 2,-6 2,-13 6,-13 6,-7 10,-7 10,0 15,0 15,12"/>
-          <polyline points="2,-13 4,-17 6,-13"/>
-          <line x1="-16" y1="12" x2="16" y2="12"/>
-        </g>
-      </g>
-      <text x="590" y="596" text-anchor="middle" fill="var(--text-2)" font-family="'Instrument Sans',sans-serif" font-size="12" font-weight="500" class="node-label">Causal Structures</text>
-      <text x="590" y="610" text-anchor="middle" fill="var(--amber)" font-family="'Geist Mono',monospace" font-size="10" class="node-label">✦ DE Suggested</text>
-      <text x="590" y="624" text-anchor="middle" fill="var(--text-4)" font-family="'Instrument Sans',sans-serif" font-size="10" class="node-label">Root cause &amp; mechanism mapping</text>
-
-      <!-- ── PROTOTYPING NODE (lower left, 126°) ── -->
-      <g class="node-circle" id="node-proto" onclick="selectNode('prototyping')" transform="translate(302,532)">
-        <circle r="62" fill="var(--c-proto-dim)" filter="url(#f-pro)" opacity="0.35" class="node-glow"/>
-        <circle r="46" fill="var(--surface-2)" stroke="rgba(74,156,122,0.35)" stroke-width="1.5" stroke-dasharray="6,7"/>
-        <!-- Lightbulb icon -->
-        <g fill="none" stroke="rgba(74,156,122,0.75)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M-8,-2 C-8,-12 8,-12 8,-2 C8,4 4.5,8 4.5,11 L-4.5,11 C-4.5,8 -8,4 -8,-2Z"/>
-          <line x1="-4.5" y1="11" x2="-4.5" y2="14"/>
-          <line x1="4.5" y1="11" x2="4.5" y2="14"/>
-          <line x1="-5.5" y1="14" x2="5.5" y2="14"/>
-          <circle cx="0" cy="-1" r="2.5" fill="rgba(74,156,122,0.12)" stroke="none"/>
-        </g>
-      </g>
-      <text x="248" y="596" text-anchor="middle" fill="var(--text-3)" font-family="'Instrument Sans',sans-serif" font-size="12" class="node-label">Prototyping</text>
-      <text x="248" y="610" text-anchor="middle" fill="var(--text-4)" font-family="'Geist Mono',monospace" font-size="10" class="node-label">○ Not Started</text>
-      <text x="248" y="624" text-anchor="middle" fill="var(--text-4)" font-family="'Instrument Sans',sans-serif" font-size="10" class="node-label">Concept testing &amp; solution design</text>
-
-      <!-- ── TRADE-OFFS NODE (upper left, 198°) ── -->
-      <g class="node-circle" id="node-trade" onclick="selectNode('tradeoffs')" transform="translate(230,308)">
-        <circle r="62" fill="var(--c-trade-dim)" filter="url(#f-tra)" opacity="0.35" class="node-glow"/>
-        <circle r="46" fill="var(--surface-2)" stroke="rgba(201,168,76,0.3)" stroke-width="1.5" stroke-dasharray="6,7"/>
-        <!-- Scales icon -->
-        <g fill="none" stroke="rgba(201,168,76,0.75)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <line x1="0" y1="-13" x2="0" y2="10"/>
-          <line x1="-12" y1="-4" x2="12" y2="-4"/>
-          <polyline points="-12,-4 -15,5 -9,5 -12,-4"/>
-          <polyline points="12,-4 14,3 10,3 12,-4"/>
-          <line x1="-4" y1="10" x2="4" y2="10"/>
-        </g>
-      </g>
-      <text x="172" y="300" text-anchor="end" fill="var(--text-3)" font-family="'Instrument Sans',sans-serif" font-size="12" class="node-label">Making Trade-offs</text>
-      <text x="172" y="314" text-anchor="end" fill="var(--text-4)" font-family="'Geist Mono',monospace" font-size="10" class="node-label">○ Not Started</text>
-      <text x="172" y="328" text-anchor="end" fill="var(--text-4)" font-family="'Instrument Sans',sans-serif" font-size="10" class="node-label">Priority &amp; tradeoff analysis</text>
-
-
-    </svg>
-
-    <!-- Center Noetic Mind info card (circular HTML overlay) -->
-    <div id="center-info-card" onclick="selectCenter()">
-      <svg width="36" height="36" viewBox="-12 -12 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-bottom:6px;flex-shrink:0">
-        <rect x="-7" y="-7" width="14" height="14" rx="1.5" stroke="rgba(200,185,255,0.85)" stroke-width="1.5"/>
-        <rect x="-3.5" y="-3.5" width="7" height="7" rx="0.8" stroke="rgba(200,185,255,0.6)" stroke-width="1.2"/>
-        <line x1="-4" y1="-7" x2="-4" y2="-11" stroke="rgba(200,185,255,0.85)" stroke-width="1.4" stroke-linecap="round"/>
-        <line x1="0" y1="-7" x2="0" y2="-11" stroke="rgba(200,185,255,0.85)" stroke-width="1.4" stroke-linecap="round"/>
-        <line x1="4" y1="-7" x2="4" y2="-11" stroke="rgba(200,185,255,0.85)" stroke-width="1.4" stroke-linecap="round"/>
-        <line x1="-4" y1="7" x2="-4" y2="11" stroke="rgba(200,185,255,0.85)" stroke-width="1.4" stroke-linecap="round"/>
-        <line x1="0" y1="7" x2="0" y2="11" stroke="rgba(200,185,255,0.85)" stroke-width="1.4" stroke-linecap="round"/>
-        <line x1="4" y1="7" x2="4" y2="11" stroke="rgba(200,185,255,0.85)" stroke-width="1.4" stroke-linecap="round"/>
-        <line x1="-7" y1="-4" x2="-11" y2="-4" stroke="rgba(200,185,255,0.85)" stroke-width="1.4" stroke-linecap="round"/>
-        <line x1="-7" y1="0" x2="-11" y2="0" stroke="rgba(200,185,255,0.85)" stroke-width="1.4" stroke-linecap="round"/>
-        <line x1="-7" y1="4" x2="-11" y2="4" stroke="rgba(200,185,255,0.85)" stroke-width="1.4" stroke-linecap="round"/>
-        <line x1="7" y1="-4" x2="11" y2="-4" stroke="rgba(200,185,255,0.85)" stroke-width="1.4" stroke-linecap="round"/>
-        <line x1="7" y1="0" x2="11" y2="0" stroke="rgba(200,185,255,0.85)" stroke-width="1.4" stroke-linecap="round"/>
-        <line x1="7" y1="4" x2="11" y2="4" stroke="rgba(200,185,255,0.85)" stroke-width="1.4" stroke-linecap="round"/>
-      </svg>
-      <div style="font-size:9px;text-transform:uppercase;letter-spacing:0.16em;color:rgba(139,107,174,0.7);margin-bottom:4px">✦ Noetic</div>
-      <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:500;color:var(--text-1);line-height:1.1;margin-bottom:6px">Mind</div>
-      <div style="width:32px;height:1px;background:rgba(139,107,174,0.25);margin:0 auto 8px"></div>
-      <div style="font-size:9.5px;color:var(--text-3);line-height:1.55;margin-bottom:10px;max-width:140px;text-align:center">Synthesizing across all five research methodologies</div>
-      <div style="font-size:9px;color:var(--c-proto);font-family:'Geist Mono',monospace;letter-spacing:0.04em;margin-bottom:4px">● High confidence</div>
-      <button class="cic-de-btn" onclick="event.stopPropagation();openDE()">✦ Deliberation Engine</button>
+    <!-- ── FRAME ─────────────────────────────────────── -->
+    <div class="ost-level-label">Frame · assumptions surface here</div>
+    <div class="ost-node" id="ost-node-definition" data-evidence="supported" onclick="selectNode('definition')"
+         style="--node-color:var(--c-def);--node-color-dim:var(--c-def-dim)">
+      <div class="ost-node-icon" style="background:rgba(91,140,186,0.2);color:var(--c-def)">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="8" cy="5" r="2.5"/><path d="M3 14c0-3 2-5 5-5s5 2 5 5"/></svg>
+      </div>
+      <div class="ost-node-content">
+        <div class="ost-node-skill">Skill 1 · Empathetic Perspective</div>
+        <div class="ost-node-name">Frame</div>
+        <div class="ost-node-status">8 assumptions logged · DE session complete · desk research done</div>
+      </div>
+      <div class="ost-node-evidence-badge">Supported</div>
+      <div class="ost-node-chevron">›</div>
     </div>
-  </div>
 
-  <!-- TIMELINE STRIP -->
-  <div id="timeline-strip">
-    <div class="ts-track">
-      <div class="ts-progress"></div>
-      <!-- Week labels -->
-      <div class="ts-weeks">
-        <span class="ts-week-label" style="left:0%">W1</span>
-        <span class="ts-week-label" style="left:12.5%">W4</span>
-        <span class="ts-week-label" style="left:25%">W6</span>
-        <span class="ts-week-label now" style="left:33.3%">W8 ●</span>
-        <span class="ts-week-label" style="left:50%">W12</span>
-        <span class="ts-week-label" style="left:66.6%">W16</span>
-        <span class="ts-week-label" style="left:83.3%">W20</span>
-        <span class="ts-week-label" style="left:100%">W24</span>
-      </div>
-      <!-- Event markers -->
-      <div class="ts-events">
-        <div class="ts-ev" style="left:4.2%;background:var(--c-def)" title="Definition validated"></div>
-        <div class="ts-ev" style="left:12.5%;background:var(--c-jtbd)" title="JTBD interviews started"></div>
-        <div class="ts-ev" style="left:20.8%;background:var(--c-jtbd)" title="JTBD cluster 1 saturated"></div>
-        <div class="ts-ev" style="left:29.2%;background:var(--c-jtbd)" title="Interview #8 — Jamie K."></div>
-        <div class="ts-ev" style="left:33.3%;background:var(--amber);box-shadow:0 0 6px var(--amber)" title="DE suggested — now"></div>
-      </div>
-      <!-- Event labels (just the recent ones) -->
-      <div class="ts-events">
-        <div class="ts-ev-label" style="left:4.2%;color:var(--c-def)">Def ✓</div>
-        <div class="ts-ev-label" style="left:20.8%;color:var(--c-jtbd)">Cluster 1</div>
-        <div class="ts-ev-label" style="left:33.3%;color:var(--amber)">DE ready</div>
+    <div class="ost-connector"></div>
+
+    <!-- ── OUTCOME (not a skill — a leadership commitment) ── -->
+    <div class="ost-outcome">
+      <div class="ost-outcome-inner">
+        <span class="ost-outcome-label">✦ Desired Outcome</span>
+        <span class="ost-outcome-value">+30% SMB account acquisition in 12 months</span>
       </div>
     </div>
+
+    <div class="ost-connector"></div>
+
+    <!-- ── DISCOVER ───────────────────────────────────── -->
+    <div class="ost-level-label">Discover · demand-side evidence</div>
+    <div class="ost-node" id="ost-node-jtbd" data-evidence="in-progress" onclick="selectNode('jtbd')"
+         style="--node-color:var(--c-jtbd);--node-color-dim:var(--c-jtbd-dim)">
+      <div class="ost-node-icon" style="background:rgba(139,107,174,0.2);color:var(--c-jtbd)">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M8 2C5 2 3 4 3 6.5c0 2 1.5 3.5 3 4.5v2l1 1 1-1v-2c1.5-1 3-2.5 3-4.5C11 4 10 2 8 2z"/></svg>
+      </div>
+      <div class="ost-node-content">
+        <div class="ost-node-skill">Skill 2 · Uncovering Demand</div>
+        <div class="ost-node-name">Discover</div>
+        <div class="ost-node-status">3 opportunities mapped · 8 of 15 interviews · 2 validated job statements</div>
+      </div>
+      <div class="ost-node-evidence-badge">In progress</div>
+      <div class="ost-node-chevron">›</div>
+    </div>
+
+    <!-- Opportunities branch hint -->
+    <div class="ost-branch-hint">
+      <div class="ost-branch-dot" style="background:rgba(74,156,122,0.7)"></div><span>Approval Anxiety · Strongly Supported</span>
+      <div class="ost-branch-dot" style="background:var(--amber)"></div><span>Doc Friction · Suggestive</span>
+      <div class="ost-branch-dot" style="background:var(--surface-4)"></div><span>Status Ambiguity · Hypothesis</span>
+    </div>
+
+    <!-- Causal bridge -->
+    <div class="ost-causal-connector"></div>
+    <div class="ost-causal-bridge" id="ost-node-causal" onclick="selectNode('causal')">
+      <span class="ost-causal-icon" style="color:var(--c-causal)">⟳</span>
+      <div class="ost-causal-body">
+        <div class="ost-causal-label">Connect · <span style="font-weight:400;color:var(--text-3)">Skill 3 · Causal Structures</span></div>
+        <div class="ost-causal-sub">Map the mechanism · context → forces → behavior → outcome</div>
+      </div>
+      <div class="ost-causal-badge">In progress</div>
+    </div>
+    <div class="ost-causal-connector"></div>
+
+    <!-- ── DECIDE ─────────────────────────────────────── -->
+    <div class="ost-level-label">Decide · what to give up</div>
+    <div class="ost-node" id="ost-node-tradeoffs" data-evidence="unvalidated" onclick="selectNode('tradeoffs')"
+         style="--node-color:var(--amber);--node-color-dim:var(--amber-dim)">
+      <div class="ost-node-icon" style="background:rgba(201,168,76,0.15);color:var(--amber)">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M3 5h10M5 8h6M7 11h2"/></svg>
+      </div>
+      <div class="ost-node-content">
+        <div class="ost-node-skill">Skill 5 · Making Tradeoffs</div>
+        <div class="ost-node-name">Decide</div>
+        <div class="ost-node-status">Awaiting causal synthesis · what will we give up?</div>
+      </div>
+      <div class="ost-node-evidence-badge">Not started</div>
+      <div class="ost-node-chevron">›</div>
+    </div>
+
+    <div class="ost-connector"></div>
+
+    <!-- ── TEST ───────────────────────────────────────── -->
+    <div class="ost-level-label">Test · real humans · The People</div>
+    <div class="ost-node" id="ost-node-prototyping" data-evidence="unvalidated" onclick="selectNode('prototyping')"
+         style="--node-color:var(--c-proto);--node-color-dim:var(--c-proto-dim)">
+      <div class="ost-node-icon" style="background:rgba(74,156,122,0.15);color:var(--c-proto)">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="2" y="3" width="12" height="9" rx="2"/><path d="M5 14h6"/><path d="M8 12v2"/></svg>
+      </div>
+      <div class="ost-node-content">
+        <div class="ost-node-skill">Skill 4 · Prototyping to Learn</div>
+        <div class="ost-node-name">Test</div>
+        <div class="ost-node-status">Designed-matrix experiments · 8 variants · real respondents via The People</div>
+      </div>
+      <div class="ost-node-evidence-badge">Not started</div>
+      <div class="ost-node-chevron">›</div>
+    </div>
+
+    <!-- Re-prioritise loop -->
+    <div class="ost-reprioritise">
+      <div class="ost-reprioritise-line"></div>
+      <div class="ost-reprioritise-label">↻ always re-tests the weakest node</div>
+    </div>
+
+    <!-- Next best action -->
+    <div class="ost-next-action">
+      <div class="ost-next-action-label">✦ Next Best Action</div>
+      <div class="ost-next-action-name">Complete JTBD interview set</div>
+      <div class="ost-next-action-why">7 interviews remain. Highest-potential, lowest-evidence node on the tree. Causal synthesis cannot begin until cluster saturation is reached.</div>
+    </div>
+
   </div>
 </main>
 
@@ -1605,8 +1563,8 @@ html.light ::-webkit-scrollbar-thumb { background: var(--surface-4); }
         <span class="chat-sender">Noetic Mind</span>
         <div class="chat-card chat-card-action">
           <div class="cca-label">✦ Next Best Action</div>
-          <div class="cca-text" id="rp-action-text">Run the Causal Structures deliberation — 67% confidence threshold reached. Three signals agree on the root mechanism.</div>
-          <button class="cca-btn" id="rp-action-btn" onclick="openDE()">✦ Open Deliberation Engine</button>
+          <div class="cca-text" id="rp-action-text">Complete the next JTBD interview — 7 remain. Highest-potential, lowest-evidence node on the tree.</div>
+          <button class="cca-btn" id="rp-action-btn" onclick="selectNode('jtbd')">→ Complete next interview</button>
         </div>
       </div>
     </div>
@@ -1749,8 +1707,8 @@ html.light ::-webkit-scrollbar-thumb { background: var(--surface-4); }
         </svg>
       </div>
       <div>
-        <div class="no-name">Definition · Switch Interview Analysis</div>
-        <div class="no-sub">8 switch interviews · 3 struggling moments identified · Validated ✓</div>
+        <div class="no-name">Framing · Switch Interview Analysis</div>
+        <div class="no-sub">Empathetic Perspective · assumptions surface here</div>
       </div>
     </div>
     <div class="no-close" onclick="closeNodeOverlay('definition')">✕</div>
@@ -1758,7 +1716,7 @@ html.light ::-webkit-scrollbar-thumb { background: var(--surface-4); }
 
   <!-- Source tabs -->
   <div style="display:flex;gap:0;border-bottom:1px solid var(--border-s);flex-shrink:0;background:var(--surface-1);padding:0 24px">
-    <div class="def-tab active" onclick="switchDefTab(this,'input')">Your Definition</div>
+    <div class="def-tab active" onclick="switchDefTab(this,'input')">Your Framing</div>
     <div class="def-tab" onclick="switchDefTab(this,'docs')">Your Docs</div>
     <div class="def-tab" onclick="switchDefTab(this,'search')">Web Search</div>
     <div class="def-tab" onclick="switchDefTab(this,'social')">Social Signals</div>
@@ -1972,7 +1930,7 @@ html.light ::-webkit-scrollbar-thumb { background: var(--surface-4); }
   <!-- RECOMMENDATIONS tab -->
   <div class="def-panel" id="def-recs" style="flex:1;overflow-y:auto;padding:20px 24px;display:none">
     <div style="max-width:560px">
-      <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.1em;color:var(--amber);margin-bottom:12px">✦ Agent Recommendation — Definition Phase</div>
+      <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.1em;color:var(--amber);margin-bottom:12px">✦ Agent Recommendation — Framing Phase</div>
       <div style="background:var(--amber-dim);border:1px solid rgba(201,168,76,0.25);border-radius:10px;padding:16px 18px;margin-bottom:14px">
         <div style="font-size:13px;font-weight:500;color:var(--text-1);line-height:1.5;margin-bottom:8px">The Definition agent has sufficient signal to validate the problem space. Social listening confirms emotional framing. Web data corroborates at-scale.</div>
         <div style="font-size:11px;color:var(--text-3);line-height:1.5">Confidence: 81% · 3 of 3 sources corroborate · Ready to advance</div>
@@ -2195,7 +2153,6 @@ html.light ::-webkit-scrollbar-thumb { background: var(--surface-4); }
       <div style="font-size:12px;color:var(--text-2);line-height:1.5;margin-bottom:12px">8 of 15 interviews complete. 2 clusters validated, 1 emerging. You can run causal analysis in parallel with ongoing interviews — discovery is a loop, not a funnel. Add any context that should shape the causal analysis.</div>
       <textarea placeholder="Add context for the causal agent (e.g. hypotheses about root causes, constraints, known confounders)..." style="width:100%;box-sizing:border-box;background:var(--surface-2);border:1px solid var(--border-d);border-radius:8px;padding:10px 12px;font-family:'Instrument Sans',sans-serif;font-size:12px;color:var(--text-1);resize:vertical;min-height:72px;outline:none;margin-bottom:10px"></textarea>
       <div style="display:flex;gap:8px;align-items:center">
-        <button style="background:var(--amber-dim);color:var(--amber);border:1px solid rgba(201,168,76,0.3);border-radius:8px;padding:8px 16px;font-size:11px;font-weight:600;cursor:pointer;font-family:'Instrument Sans',sans-serif">✦ Suggest DE Review First</button>
         <button onclick="closeNodeOverlay('jtbd');selectNode('causal')" style="background:var(--c-jtbd);color:#fff;border:none;border-radius:8px;padding:8px 16px;font-size:12px;font-weight:600;cursor:pointer;font-family:'Instrument Sans',sans-serif;margin-left:auto">Send Context to Causal →</button>
       </div>
     </div>
@@ -2379,7 +2336,6 @@ html.light ::-webkit-scrollbar-thumb { background: var(--surface-4); }
       <div class="no-card-label" style="color:var(--amber)">✦ Noetic Mind Recommendation</div>
       <div class="no-card-value">Enough signal from Definition + 8 JTBD interviews to run a causal deliberation. The proposed chain has counterfactual evidence from 6 of 8 interviews — needs multi-model debate before acting. <span onclick="return false" style="display:inline-flex;align-items:center;gap:3px;font-size:10px;background:var(--surface-3);color:var(--text-3);padding:1px 7px;border-radius:10px;cursor:pointer;margin-left:4px;font-family:'Geist Mono',monospace">📎 3 sources</span></div>
       <div style="display:flex;align-items:center;gap:10px;margin-top:12px">
-        <button class="de-suggest-btn" onclick="closeNodeOverlay('causal');openDE()" style="width:auto;padding:8px 20px;display:flex;align-items:center;gap:6px">✦ Run Deliberation Engine</button>
         <span class="conf-band strongly">Strongly Supported · 67%</span>
       </div>
     </div>
@@ -2429,8 +2385,7 @@ html.light ::-webkit-scrollbar-thumb { background: var(--surface-4); }
         <div style="background:var(--surface-2);border-radius:8px;padding:9px 12px;font-size:12px;color:var(--text-2);line-height:1.4"><strong style="color:var(--text-1)">C)</strong> Emotional and rational triggers are the same mechanism described differently — one unified solution addresses both.</div>
       </div>
       <div style="display:flex;gap:8px">
-        <button onclick="closeNodeOverlay('causal');openDE()" style="background:var(--amber-dim);color:var(--amber);border:1px solid rgba(201,168,76,0.3);border-radius:8px;padding:8px 14px;font-size:11px;font-weight:600;cursor:pointer;font-family:'Instrument Sans',sans-serif">✦ Pass to DE for Deliberation</button>
-        <button style="background:none;color:var(--text-2);border:1px solid var(--border-d);border-radius:8px;padding:8px 14px;font-size:11px;font-weight:600;cursor:pointer;font-family:'Instrument Sans',sans-serif;margin-left:auto">Approve Scenario A →</button>
+        <button style="background:none;color:var(--text-2);border:1px solid var(--border-d);border-radius:8px;padding:8px 14px;font-size:11px;font-weight:600;cursor:pointer;font-family:'Instrument Sans',sans-serif">Approve Scenario A →</button>
       </div>
     </div>
 
@@ -2440,7 +2395,6 @@ html.light ::-webkit-scrollbar-thumb { background: var(--surface-4); }
       <div style="font-size:12px;color:var(--text-2);line-height:1.5;margin-bottom:12px">Causal model is at 67% confidence with one unresolved confounding factor. Prototyping can run in parallel — each prototype test feeds evidence back into the causal model. Add any context that should shape prototype development.</div>
       <textarea placeholder="Add context for the prototyping agent (e.g. solution hypotheses, design constraints, budget, timeline)..." style="width:100%;box-sizing:border-box;background:var(--surface-2);border:1px solid var(--border-d);border-radius:8px;padding:10px 12px;font-family:'Instrument Sans',sans-serif;font-size:12px;color:var(--text-1);resize:vertical;min-height:72px;outline:none;margin-bottom:10px"></textarea>
       <div style="display:flex;gap:8px;align-items:center">
-        <button onclick="closeNodeOverlay('causal');openDE()" style="background:var(--amber-dim);color:var(--amber);border:1px solid rgba(201,168,76,0.3);border-radius:8px;padding:8px 16px;font-size:11px;font-weight:600;cursor:pointer;font-family:'Instrument Sans',sans-serif">✦ Run DE Before Advancing</button>
         <button onclick="closeNodeOverlay('causal');selectNode('prototyping')" style="background:var(--c-causal);color:#fff;border:none;border-radius:8px;padding:8px 16px;font-size:12px;font-weight:600;cursor:pointer;font-family:'Instrument Sans',sans-serif;margin-left:auto">Send Context to Prototyping →</button>
       </div>
     </div>
@@ -2600,7 +2554,6 @@ html.light ::-webkit-scrollbar-thumb { background: var(--surface-4); }
       <div style="font-size:12px;color:var(--text-2);line-height:1.5;margin-bottom:12px">Concept A is validated with 81% confidence. Trade-off analysis can begin now — insights from the trade-off evaluation may surface new prototype directions to explore. Add any context on constraints or strategic priorities.</div>
       <textarea placeholder="Add context for the trade-offs agent (e.g. budget constraints, timeline, technical feasibility limits)..." style="width:100%;box-sizing:border-box;background:var(--surface-2);border:1px solid var(--border-d);border-radius:8px;padding:10px 12px;font-family:'Instrument Sans',sans-serif;font-size:12px;color:var(--text-1);resize:vertical;min-height:72px;outline:none;margin-bottom:10px"></textarea>
       <div style="display:flex;gap:8px;align-items:center">
-        <button style="background:var(--amber-dim);color:var(--amber);border:1px solid rgba(201,168,76,0.3);border-radius:8px;padding:8px 16px;font-size:11px;font-weight:600;cursor:pointer;font-family:'Instrument Sans',sans-serif">✦ Suggest DE Review First</button>
         <button style="background:var(--c-proto);color:#fff;border:none;border-radius:8px;padding:8px 16px;font-size:12px;font-weight:600;cursor:pointer;font-family:'Instrument Sans',sans-serif;margin-left:auto">Send Context to Trade-offs →</button>
       </div>
     </div>
@@ -2701,20 +2654,12 @@ html.light ::-webkit-scrollbar-thumb { background: var(--surface-4); }
       <div style="height:3px;background:var(--surface-4);border-radius:2px;overflow:hidden;margin-top:12px"><div style="width:79%;height:100%;background:var(--c-proto);border-radius:2px"></div></div>
     </div>
 
-    <!-- DE suggestion card -->
-    <div class="de-suggest-card" style="margin-bottom:20px">
-      <div class="de-suggest-label">✦ Deliberation Engine Recommended</div>
-      <div class="de-suggest-text">The sequencing decision (A-then-B vs. A-only) has strategic implications for the roadmap. Running a DE session would pressure-test the sequencing assumption and confirm whether the 4–6 week gap is appropriate given Meridian's release constraints.</div>
-      <button class="de-suggest-btn" onclick="closeNodeOverlay('tradeoffs');openDE()">Run Trade-offs DE Session →</button>
-    </div>
-
     <!-- Module transition gate -->
     <div style="background:rgba(74,156,122,0.06);border:1px solid rgba(74,156,122,0.25);border-radius:12px;padding:16px 18px">
       <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.1em;color:var(--c-proto);margin-bottom:10px">Continuous Discovery · Generate Living Report</div>
       <div style="font-size:12px;color:var(--text-2);line-height:1.5;margin-bottom:12px">All 5 modules connected. Discovery continues — the Living Report updates as new evidence comes in. Add any final context or caveats before Noetic Mind generates the current OST snapshot for client delivery.</div>
       <textarea placeholder="Final context, caveats, or client-specific constraints to include in the Living Report..." style="width:100%;box-sizing:border-box;background:var(--surface-2);border:1px solid var(--border-d);border-radius:8px;padding:10px 12px;font-family:'Instrument Sans',sans-serif;font-size:12px;color:var(--text-1);resize:vertical;min-height:72px;outline:none;margin-bottom:10px"></textarea>
       <div style="display:flex;gap:8px;align-items:center">
-        <button style="background:var(--amber-dim);color:var(--amber);border:1px solid rgba(201,168,76,0.3);border-radius:8px;padding:8px 16px;font-size:11px;font-weight:600;cursor:pointer;font-family:'Instrument Sans',sans-serif">✦ Run Final DE Session</button>
         <button style="background:var(--c-proto);color:#fff;border:none;border-radius:8px;padding:8px 16px;font-size:12px;font-weight:600;cursor:pointer;font-family:'Instrument Sans',sans-serif;margin-left:auto">Generate Final Report →</button>
       </div>
     </div>
@@ -2784,10 +2729,10 @@ html.light ::-webkit-scrollbar-thumb { background: var(--surface-4); }
       <line x1="0" y1="310" x2="840" y2="310" stroke="rgba(255,255,255,0.025)" stroke-width="1"/>
 
       <!-- ── ROW LABELS ──────────────────────────────────── -->
-      <text x="10" y="50"  fill="rgba(255,255,255,0.06)" font-family="'Geist Mono',monospace" font-size="8" letter-spacing="0.1em">JTBD</text>
+      <text x="10" y="50"  fill="rgba(255,255,255,0.06)" font-family="'Geist Mono',monospace" font-size="8" letter-spacing="0.1em">FRAMING ASSUMPTIONS</text>
       <text x="10" y="140" fill="rgba(255,255,255,0.06)" font-family="'Geist Mono',monospace" font-size="8" letter-spacing="0.1em">OUTCOME</text>
       <text x="10" y="258" fill="rgba(255,255,255,0.06)" font-family="'Geist Mono',monospace" font-size="8" letter-spacing="0.1em">OPPORTUNITIES</text>
-      <text x="10" y="380" fill="rgba(255,255,255,0.06)" font-family="'Geist Mono',monospace" font-size="8" letter-spacing="0.1em">SOLUTIONS</text>
+      <text x="10" y="380" fill="rgba(255,255,255,0.06)" font-family="'Geist Mono',monospace" font-size="8" letter-spacing="0.1em">EXPERIMENTS</text>
 
       <!-- ── EDGES: JTBDs → Outcome (JTBD y=52, Outcome y=155) ── -->
       <path d="M250,52 C250,100 420,100 420,125" fill="none" stroke="rgba(139,107,174,0.45)" stroke-width="1.4"/>
@@ -2887,6 +2832,8 @@ html.light ::-webkit-scrollbar-thumb { background: var(--surface-4); }
       <text x="664" y="414" fill="rgba(156,163,178,0.6)" font-family="'Instrument Sans',sans-serif" font-size="8.5">Hypothesis</text>
       <circle cx="720" cy="410" r="4" fill="rgba(60,63,77,0.9)" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
       <text x="728" y="414" fill="rgba(156,163,178,0.6)" font-family="'Instrument Sans',sans-serif" font-size="8.5">Weak</text>
+      <line x1="740" y1="408" x2="760" y2="408" stroke="#444" stroke-width="1.5" stroke-dasharray="3,2"/>
+      <text x="764" y="412" fill="rgba(100,100,100,0.6)" font-family="'Instrument Sans',sans-serif" font-size="8.5">Invalidated</text>
 
     </svg>
 
@@ -3159,16 +3106,16 @@ const AGENT_CONTEXT = {
   'jtbd': {
     synth: '"9 job statements extracted. Approval Anxiety cluster saturated at 6/8 interviews."',
     meta: '8 interviews · 3 clusters · 74% top confidence',
-    action: 'Two JTBDs validated. Pending review: 3 statements. Run causal deliberation to validate root mechanism.',
-    btnLabel: '✦ Open Deliberation Engine',
-    btnFn: "closeNodeOverlay('jtbd');openDE()"
+    action: 'Two JTBDs validated. 7 interviews remain. Complete the interview set to reach causal synthesis.',
+    btnLabel: '→ Complete next interview',
+    btnFn: "closeNodeOverlay('jtbd');selectNode('causal')"
   },
   'causal': {
     synth: '"67% confidence in causal chain: approval uncertainty → cognitive exit before document gathering."',
     meta: '67% confidence · 1 confounding factor unresolved',
-    action: 'Causal hypothesis ready for multi-model deliberation. Three signals agree on root mechanism.',
-    btnLabel: '✦ Run Deliberation Engine',
-    btnFn: "closeNodeOverlay('causal');openDE()"
+    action: 'Causal model ready. Review the three resolution scenarios and advance to trade-off analysis.',
+    btnLabel: '→ Advance to Trade-offs',
+    btnFn: "closeNodeOverlay('causal');selectNode('tradeoffs')"
   },
   'prototyping': {
     synth: '"Concept A validated at 81% confidence. Pre-qualification signal removes the primary abandonment trigger for the Approval Anxiety cluster."',
@@ -3179,17 +3126,17 @@ const AGENT_CONTEXT = {
   },
   'tradeoffs': {
     synth: '"Recommendation: ship Concept A first, add Concept B in next release cycle. Sequential delivery scores 8.2/10 vs. 7.0 for standalone options."',
-    meta: '3 options scored · 79% confidence · DE session recommended for sequencing',
-    action: 'All 5 modules complete. Run a final DE session to pressure-test the sequencing recommendation, then generate the Living Report.',
-    btnLabel: '✦ Run Final DE Session',
-    btnFn: "closeNodeOverlay('tradeoffs');openDE()"
+    meta: '3 options scored · 79% confidence · ready for final report',
+    action: 'All 5 modules connected. Generate the Living Report for client delivery.',
+    btnLabel: '→ View OST',
+    btnFn: "closeNodeOverlay('tradeoffs');selectCenter()"
   },
   '_default': {
     synth: '"Approval uncertainty drives exit before document gathering begins."',
     meta: '8 interviews · 9 job statements · 74% confidence',
-    action: 'Run the Causal Structures deliberation — 67% confidence threshold reached. Three signals agree on the root mechanism.',
-    btnLabel: '✦ Open Deliberation Engine',
-    btnFn: 'openDE()'
+    action: 'Complete the next JTBD interview — 7 remain. Highest-potential, lowest-evidence node on the tree.',
+    btnLabel: '→ Complete next interview',
+    btnFn: "selectNode('jtbd')"
   }
 };
 
@@ -3243,13 +3190,13 @@ function selectNode(id) {
   // Close any open node overlay first
   if (activeOverlay) closeNodeOverlay(activeOverlay);
 
-  // Dim all nodes, highlight selected
-  const idMap = { definition:'def', jtbd:'jtbd', causal:'causal', prototyping:'proto', tradeoffs:'trade' };
-  ['def','jtbd','causal','proto','trade'].forEach(n => {
-    const el = document.getElementById('node-' + n);
+  // Dim all OST tree nodes, highlight selected
+  ['ost-node-definition','ost-node-jtbd','ost-node-tradeoffs','ost-node-prototyping'].forEach(n => {
+    const el = document.getElementById(n);
     if (el) el.style.opacity = '0.4';
   });
-  const nodeEl = document.getElementById('node-' + idMap[id]);
+  const ostIdMap = { definition:'ost-node-definition', jtbd:'ost-node-jtbd', causal:'ost-node-causal', prototyping:'ost-node-prototyping', tradeoffs:'ost-node-tradeoffs' };
+  const nodeEl = document.getElementById(ostIdMap[id]);
   if (nodeEl) nodeEl.style.opacity = '1';
 
   // Open overlay
@@ -3264,9 +3211,9 @@ function closeNodeOverlay(id) {
   const overlay = document.getElementById('overlay-' + (id || activeOverlay));
   if (overlay) overlay.classList.remove('open');
 
-  // Restore all node opacities
-  ['def','jtbd','causal','proto','trade'].forEach(n => {
-    const el = document.getElementById('node-' + n);
+  // Restore all OST node opacities
+  ['ost-node-definition','ost-node-jtbd','ost-node-causal','ost-node-tradeoffs','ost-node-prototyping'].forEach(n => {
+    const el = document.getElementById(n);
     if (el) el.style.opacity = '1';
   });
   activeOverlay = null;
@@ -3491,13 +3438,14 @@ function openCmdK() { openCmdPalette(); }
 
 // ── Entrance animation ───────────────────────────────────────────
 window.addEventListener('load', () => {
-  document.querySelectorAll('.node-circle, #ring-svg, #center-info-card').forEach((el, i) => {
-    el.style.opacity = '0';
+  const ostTree = document.getElementById('ost-tree');
+  if (ostTree) {
+    ostTree.style.opacity = '0';
     setTimeout(() => {
-      el.style.transition = 'opacity 0.5s ease';
-      el.style.opacity = '1';
-    }, 200 + i * 80);
-  });
+      ostTree.style.transition = 'opacity 0.5s ease';
+      ostTree.style.opacity = '1';
+    }, 200);
+  }
   // Scroll chat to bottom so most recent message is visible
   const msgs = document.getElementById('chat-messages');
   if (msgs) msgs.scrollTop = msgs.scrollHeight;
@@ -3568,7 +3516,7 @@ function toggleTheme() {
       <div class="cmd-group-label">Navigate</div>
       <div class="cmd-item" data-action="selectNode('definition')" tabindex="-1">
         <span class="cmd-icon" style="background:var(--c-def-dim);color:var(--c-def)">D</span>
-        <span class="cmd-label">Open Definition</span>
+        <span class="cmd-label">Open Frame</span>
         <span class="cmd-sub">Switch interview analysis</span>
       </div>
       <div class="cmd-item" data-action="selectNode('jtbd')" tabindex="-1">
