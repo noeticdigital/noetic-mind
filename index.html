@@ -1301,6 +1301,40 @@ html.light .ost-outcome-inner { background: rgba(184,148,60,0.06); }
 html.light .ost-next-action { background: var(--surface-2); }
 html.light .ost-reprioritise { background: rgba(52,136,104,0.04); }
 
+/* ── LIGHT MODE · CONVERGENT TREE SVG (high contrast) ───────────── */
+/* Node titles — darken the dark-mode pastels into saturated, readable tones */
+html.light #ost-svg text[fill="#9FC0E0"] { fill: #1F5C9E !important; }   /* outcome (blue)   */
+html.light #ost-svg text[fill="#C5B8E0"] { fill: #5A3E96 !important; }   /* jobs (purple)    */
+html.light #ost-svg text[fill="#E8C55A"] { fill: #8A6A12 !important; }   /* solutions/opps (gold) */
+html.light #ost-svg text[fill="#6FCBA0"] { fill: #11704F !important; }   /* experiments (green)   */
+/* Colored sublabels / metadata */
+html.light #ost-svg text[fill="rgba(91,140,186,0.6)"],
+html.light #ost-svg text[fill="rgba(91,140,186,0.45)"] { fill: #2C6AA8 !important; }
+html.light #ost-svg text[fill="rgba(139,107,174,0.6)"],
+html.light #ost-svg text[fill="rgba(139,107,174,0.45)"] { fill: #6A4D9C !important; }
+html.light #ost-svg text[fill="rgba(201,168,76,0.7)"],
+html.light #ost-svg text[fill="rgba(201,168,76,0.6)"],
+html.light #ost-svg text[fill="rgba(201,168,76,0.5)"] { fill: #8A6A12 !important; }
+html.light #ost-svg text[fill="rgba(74,156,122,0.65)"],
+html.light #ost-svg text[fill="rgba(74,156,122,0.3)"] { fill: #11704F !important; }
+html.light #ost-svg text[fill="rgba(156,163,178,0.55)"] { fill: rgba(70,80,100,0.85) !important; }
+html.light #ost-svg text[fill="var(--text-4)"] { fill: rgba(90,100,120,0.8) !important; }
+/* Node fills — give a touch more tint so cards read on white */
+html.light #ost-svg rect[fill="rgba(91,140,186,0.08)"]  { fill: rgba(91,140,186,0.14) !important; }
+html.light #ost-svg rect[fill="rgba(139,107,174,0.12)"] { fill: rgba(139,107,174,0.16) !important; }
+html.light #ost-svg rect[fill="rgba(201,168,76,0.08)"],
+html.light #ost-svg rect[fill="rgba(201,168,76,0.1)"]   { fill: rgba(201,168,76,0.18) !important; }
+html.light #ost-svg rect[fill="rgba(74,156,122,0.08)"]  { fill: rgba(74,156,122,0.16) !important; }
+html.light #ost-svg rect[fill="rgba(120,130,150,0.05)"] { fill: rgba(120,130,150,0.1) !important; }
+/* Connector / arrow strokes — darken so they're visible on white */
+html.light #ost-svg path[stroke="rgba(201,168,76,0.4)"]  { stroke: rgba(154,123,30,0.8) !important; }
+html.light #ost-svg path[stroke="rgba(139,107,174,0.4)"] { stroke: rgba(106,77,156,0.75) !important; }
+html.light #ost-svg path[stroke="rgba(140,150,170,0.35)"]{ stroke: rgba(90,100,120,0.6) !important; }
+html.light #ost-svg path[stroke="rgba(74,156,122,0.22)"] { stroke: rgba(17,112,79,0.5) !important; }
+html.light #ost-svg line[stroke="rgba(91,140,186,0.3)"],
+html.light #ost-svg line[stroke="rgba(139,107,174,0.3)"],
+html.light #ost-svg line[stroke="rgba(74,156,122,0.3)"]  { stroke: rgba(90,100,120,0.5) !important; }
+
 </style>
 </head>
 <body>
@@ -1395,6 +1429,12 @@ html.light .ost-reprioritise { background: rgba(52,136,104,0.04); }
         onmouseover="this.style.borderColor='var(--border-a)';this.style.color='var(--text-2)'"
         onmouseout="this.style.borderColor='var(--border-d)';this.style.color='var(--text-3)'">
         ✦ Tour
+      </button>
+      <button onclick="openCenter('report')" title="Living Report"
+        style="margin-right:8px;background:var(--surface-2);border:1px solid var(--border-d);border-radius:7px;padding:4px 10px;font-size:11px;color:var(--text-3);cursor:pointer;transition:all 0.15s"
+        onmouseover="this.style.borderColor='var(--border-a)';this.style.color='var(--text-2)'"
+        onmouseout="this.style.borderColor='var(--border-d)';this.style.color='var(--text-3)'">
+        ≡ Living Report
       </button>
       <div class="status-dot active"></div>
       <span class="status-text">Active Discovery</span>
@@ -3292,6 +3332,13 @@ function selectCenter() {
   // Always open on OST tab
   switchCenterTab('ost');
 }
+// Open the OST / Living Report overlay on a specific tab
+function openCenter(tab) {
+  if (activeOverlay) closeNodeOverlay(activeOverlay);
+  const overlay = document.getElementById('overlay-center');
+  if (overlay) { overlay.classList.add('open'); activeOverlay = 'center'; }
+  switchCenterTab(tab || 'ost');
+}
 
 function switchJtbdTab(tab) {
   const clustersTab  = document.getElementById('jtbd-tab-clusters');
@@ -3578,43 +3625,38 @@ function toggleTheme() {
 
       <div class="cmd-group-label">Navigate</div>
       <div class="cmd-item" data-action="selectNode('definition')" tabindex="-1">
-        <span class="cmd-icon" style="background:var(--c-def-dim);color:var(--c-def)">D</span>
+        <span class="cmd-icon" style="background:var(--c-def-dim);color:var(--c-def)">F</span>
         <span class="cmd-label">Open Frame</span>
-        <span class="cmd-sub">Switch interview analysis</span>
+        <span class="cmd-sub">Your project brief · assumptions</span>
       </div>
       <div class="cmd-item" data-action="selectNode('jtbd')" tabindex="-1">
-        <span class="cmd-icon" style="background:var(--c-jtbd-dim);color:var(--c-jtbd)">J</span>
-        <span class="cmd-label">Open JTBD</span>
-        <span class="cmd-sub">Clusters · 8 of 15 interviews</span>
+        <span class="cmd-icon" style="background:var(--c-jtbd-dim);color:var(--c-jtbd)">D</span>
+        <span class="cmd-label">Open Discover</span>
+        <span class="cmd-sub">JTBD interviews · jobs &amp; opportunities</span>
       </div>
       <div class="cmd-item" data-action="selectNode('causal')" tabindex="-1">
         <span class="cmd-icon" style="background:var(--c-causal-dim);color:var(--c-causal)">C</span>
-        <span class="cmd-label">Open Causal Structures</span>
-        <span class="cmd-sub">Counterfactual mechanisms</span>
-      </div>
-      <div class="cmd-item" data-action="selectNode('prototyping')" tabindex="-1">
-        <span class="cmd-icon" style="background:var(--c-proto-dim);color:var(--c-proto)">P</span>
-        <span class="cmd-label">Open Prototyping</span>
-        <span class="cmd-sub">Concept A validated · 81%</span>
+        <span class="cmd-label">Open Connect</span>
+        <span class="cmd-sub">Causal structures · counterfactuals</span>
       </div>
       <div class="cmd-item" data-action="selectNode('tradeoffs')" tabindex="-1">
-        <span class="cmd-icon" style="background:var(--c-trade-dim);color:var(--c-trade)">T</span>
-        <span class="cmd-label">Open Trade-offs</span>
-        <span class="cmd-sub">Final recommendation ready</span>
+        <span class="cmd-icon" style="background:var(--c-trade-dim);color:var(--c-trade)">De</span>
+        <span class="cmd-label">Open Decide</span>
+        <span class="cmd-sub">Making tradeoffs · deliberate sacrifices</span>
+      </div>
+      <div class="cmd-item" data-action="selectNode('prototyping')" tabindex="-1">
+        <span class="cmd-icon" style="background:var(--c-proto-dim);color:var(--c-proto)">T</span>
+        <span class="cmd-label">Open Test</span>
+        <span class="cmd-sub">Prototyping · designed experiments</span>
       </div>
 
       <div class="cmd-group-label">Actions</div>
-      <div class="cmd-item" data-action="openDE()" tabindex="-1">
-        <span class="cmd-icon" style="background:var(--amber-dim);color:var(--amber)">✦</span>
-        <span class="cmd-label">Run Deliberation Engine</span>
-        <span class="cmd-sub">4-model council · ~2 min</span>
-      </div>
-      <div class="cmd-item" data-action="switchCenterTab('ost')" tabindex="-1">
+      <div class="cmd-item" data-action="openCenter('ost')" tabindex="-1">
         <span class="cmd-icon" style="background:var(--surface-3);color:var(--text-2)">◈</span>
-        <span class="cmd-label">View OST</span>
+        <span class="cmd-label">View OST snapshot</span>
         <span class="cmd-sub">Opportunity Solution Tree</span>
       </div>
-      <div class="cmd-item" data-action="switchCenterTab('report')" tabindex="-1">
+      <div class="cmd-item" data-action="openCenter('report')" tabindex="-1">
         <span class="cmd-icon" style="background:var(--surface-3);color:var(--text-2)">≡</span>
         <span class="cmd-label">View Living Report</span>
         <span class="cmd-sub">Auto-generated · updated 2h ago</span>
