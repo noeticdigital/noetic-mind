@@ -1335,6 +1335,14 @@ html.light #ost-svg line[stroke="rgba(91,140,186,0.3)"],
 html.light #ost-svg line[stroke="rgba(139,107,174,0.3)"],
 html.light #ost-svg line[stroke="rgba(74,156,122,0.3)"]  { stroke: rgba(90,100,120,0.5) !important; }
 
+/* Modal sub-tree SVGs — keep titles high-contrast in light mode */
+html.light .subtree-svg text[fill="#6FCBA0"] { fill: #11704F !important; }
+html.light .subtree-svg text[fill="#E8C55A"] { fill: #8A6A12 !important; }
+html.light .subtree-svg text[fill="#8b96a6"] { fill: rgba(70,80,100,0.9) !important; }
+html.light .subtree-svg text[fill="rgba(74,156,122,0.65)"] { fill: #11704F !important; }
+html.light .subtree-svg text[fill="rgba(201,168,76,0.7)"] { fill: #8A6A12 !important; }
+html.light .subtree-svg text[fill="rgba(156,163,178,0.55)"] { fill: rgba(70,80,100,0.85) !important; }
+
 </style>
 </head>
 <body>
@@ -1549,9 +1557,9 @@ html.light #ost-svg line[stroke="rgba(74,156,122,0.3)"]  { stroke: rgba(90,100,1
 
   <!-- Experiments -->
   <line x1="440" y1="302" x2="440" y2="320" stroke="rgba(74,156,122,0.3)" stroke-width="1.2"/>
-  <rect x="350" y="320" width="180" height="46" rx="11" fill="rgba(74,156,122,0.08)" stroke="rgba(74,156,122,0.5)" stroke-width="1.3" style="cursor:pointer" onclick="selectNode('prototyping')"/>
-  <text x="440" y="340" text-anchor="middle" fill="#6FCBA0" font-family="'Instrument Sans',sans-serif" font-size="13" font-weight="700">Experiments</text>
-  <text x="440" y="355" text-anchor="middle" fill="rgba(74,156,122,0.65)" font-family="'Geist Mono',monospace" font-size="8">prototyping · real humans</text>
+  <rect x="350" y="320" width="180" height="46" rx="11" fill="rgba(74,156,122,0.08)" stroke="rgba(74,156,122,0.5)" stroke-width="1.3" style="cursor:pointer" onclick="openExperimentsModal()"/>
+  <text x="440" y="340" text-anchor="middle" fill="#6FCBA0" font-family="'Instrument Sans',sans-serif" font-size="13" font-weight="700" style="cursor:pointer" onclick="openExperimentsModal()">Experiments</text>
+  <text x="440" y="355" text-anchor="middle" fill="rgba(74,156,122,0.65)" font-family="'Geist Mono',monospace" font-size="8" style="cursor:pointer" onclick="openExperimentsModal()">prototyping · real humans</text>
 
   <!-- Re-prioritise loop: Experiments → Opportunities -->
   <path d="M530,343 C710,336 818,248 806,150" fill="none" stroke="rgba(74,156,122,0.22)" stroke-width="1.4" stroke-dasharray="6,4" class="cv-loop-arc"/>
@@ -3782,6 +3790,7 @@ function closeTreeModal(id) {
 function openJobsModal()      { openTreeModal('jobs-modal'); }
 function openOppsModal()      { openTreeModal('opps-modal'); }
 function openSolutionsModal() { openTreeModal('solutions-modal'); }
+function openExperimentsModal(){ openTreeModal('experiments-modal'); }
 
 // ── Guided tour ──
 const tourSteps = [
@@ -4017,34 +4026,63 @@ window.addEventListener('load', () => {
       </div>
       <button onclick="closeTreeModal('opps-modal')" style="width:32px;height:32px;border-radius:8px;background:var(--surface-2);border:1px solid var(--border-d);color:var(--text-2);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center" onmouseover="this.style.background='var(--surface-3)'" onmouseout="this.style.background='var(--surface-2)'">✕</button>
     </div>
-    <div style="overflow-y:auto;padding:16px 24px;display:flex;flex-direction:column;gap:10px">
-      <!-- Opp 1 · STRONG (green) -->
-      <div style="background:var(--surface-2);border-left:3px solid #4A9C7A;border-radius:10px;padding:14px 16px">
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
-          <span style="font-size:13px;font-weight:700;color:var(--text-1)">Approval Anxiety</span>
-          <span style="font-size:10px;font-weight:600;color:#5FD4A3;background:rgba(74,156,122,0.15);padding:2px 8px;border-radius:10px;font-family:'Geist Mono',monospace">Strongly Supported · 74%</span>
-        </div>
-        <div style="font-size:12px;color:var(--text-2);line-height:1.5;margin-bottom:6px">Fear of rejection before committing time and effort. The struggle fires before the application even begins — applicants want certainty they'll be approved before gathering documents.</div>
-        <div style="font-size:10px;color:var(--text-4);font-family:'Geist Mono',monospace">6 of 8 interviews · saturated · functional + emotional + social forces</div>
-      </div>
-      <!-- Opp 2 · SUGGESTIVE (amber) -->
-      <div style="background:var(--surface-2);border-left:3px solid #C9A84C;border-radius:10px;padding:14px 16px">
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
-          <span style="font-size:13px;font-weight:700;color:var(--text-1)">Doc Friction</span>
-          <span style="font-size:10px;font-weight:600;color:var(--amber);background:var(--amber-dim);padding:2px 8px;border-radius:10px;font-family:'Geist Mono',monospace">Suggestive · 41%</span>
-        </div>
-        <div style="font-size:12px;color:var(--text-2);line-height:1.5;margin-bottom:6px">Document gathering felt like a qualification test, not routine admin. Applicants experience the upload step as judgment rather than process.</div>
-        <div style="font-size:10px;color:var(--text-4);font-family:'Geist Mono',monospace">5 of 8 interviews · emerging · needs 2-3 more to confirm</div>
-      </div>
-      <!-- Opp 3 · HYPOTHESIS (grey) -->
-      <div style="background:var(--surface-2);border-left:3px solid rgba(120,130,150,0.5);border-radius:10px;padding:14px 16px">
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
-          <span style="font-size:13px;font-weight:700;color:var(--text-2)">Status Ambiguity</span>
-          <span style="font-size:10px;font-weight:600;color:var(--text-3);background:rgba(120,130,150,0.12);padding:2px 8px;border-radius:10px;font-family:'Geist Mono',monospace">Hypothesis · 28%</span>
-        </div>
-        <div style="font-size:12px;color:var(--text-2);line-height:1.5;margin-bottom:6px">Unclear where the application stands after submission. Weak signal so far — may be a sub-force of Approval Anxiety rather than a distinct opportunity.</div>
-        <div style="font-size:10px;color:var(--text-4);font-family:'Geist Mono',monospace">2 of 8 interviews · weak · candidate for merge or kill</div>
-      </div>
+    <div style="overflow-y:auto;padding:16px 20px;display:flex;flex-direction:column">
+      <svg class="subtree-svg" width="100%" height="auto" viewBox="0 0 560 360" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+        <!-- ROOT: Opportunities -->
+        <rect x="200" y="14" width="160" height="46" rx="11" fill="rgba(201,168,76,0.1)" stroke="rgba(201,168,76,0.55)" stroke-width="1.4"/>
+        <text x="280" y="36" text-anchor="middle" fill="#E8C55A" font-family="'Instrument Sans',sans-serif" font-size="13" font-weight="700">Opportunities</text>
+        <text x="280" y="50" text-anchor="middle" fill="rgba(201,168,76,0.7)" font-family="'Geist Mono',monospace" font-size="8">3 mapped · demand-side</text>
+
+        <!-- root → opportunity connectors -->
+        <path d="M280,60 C280,86 100,86 100,108" fill="none" stroke="rgba(74,156,122,0.3)" stroke-width="1.3"/>
+        <path d="M280,60 V108" fill="none" stroke="rgba(201,168,76,0.4)" stroke-width="1.3" stroke-dasharray="4,3"/>
+        <path d="M280,60 C280,86 460,86 460,108" fill="none" stroke="rgba(140,150,170,0.35)" stroke-width="1.3" stroke-dasharray="4,3"/>
+
+        <!-- OPP 1 · Approval Anxiety (green) -->
+        <rect x="20" y="108" width="160" height="50" rx="11" fill="rgba(74,156,122,0.08)" stroke="rgba(74,156,122,0.5)" stroke-width="1.3"/>
+        <text x="100" y="129" text-anchor="middle" fill="#6FCBA0" font-family="'Instrument Sans',sans-serif" font-size="12" font-weight="700">Approval Anxiety</text>
+        <text x="100" y="146" text-anchor="middle" fill="rgba(74,156,122,0.65)" font-family="'Geist Mono',monospace" font-size="8">Strongly Supported · 74%</text>
+
+        <!-- OPP 2 · Doc Friction (amber) -->
+        <rect x="200" y="108" width="160" height="50" rx="11" fill="rgba(201,168,76,0.08)" stroke="rgba(201,168,76,0.5)" stroke-width="1.3"/>
+        <text x="280" y="129" text-anchor="middle" fill="#E8C55A" font-family="'Instrument Sans',sans-serif" font-size="12" font-weight="700">Doc Friction</text>
+        <text x="280" y="146" text-anchor="middle" fill="rgba(201,168,76,0.7)" font-family="'Geist Mono',monospace" font-size="8">Suggestive · 41%</text>
+
+        <!-- OPP 3 · Status Ambiguity (grey/dashed) -->
+        <rect x="380" y="108" width="160" height="50" rx="11" fill="rgba(120,130,150,0.05)" stroke="rgba(140,150,170,0.3)" stroke-width="1.3" stroke-dasharray="6,3"/>
+        <text x="460" y="129" text-anchor="middle" fill="#8b96a6" font-family="'Instrument Sans',sans-serif" font-size="12" font-weight="700">Status Ambiguity</text>
+        <text x="460" y="146" text-anchor="middle" fill="rgba(156,163,178,0.55)" font-family="'Geist Mono',monospace" font-size="8">Hypothesis · 28%</text>
+
+        <!-- OPP1 → solutions (3) -->
+        <path d="M100,158 C100,186 42,186 42,212" fill="none" stroke="rgba(74,156,122,0.3)" stroke-width="1.2"/>
+        <path d="M100,158 V212" fill="none" stroke="rgba(74,156,122,0.3)" stroke-width="1.2"/>
+        <path d="M100,158 C100,186 158,186 158,212" fill="none" stroke="rgba(74,156,122,0.3)" stroke-width="1.2"/>
+        <rect x="6" y="212" width="72" height="34" rx="9" fill="rgba(74,156,122,0.08)" stroke="rgba(74,156,122,0.5)" stroke-width="1.2"/>
+        <text x="42" y="233" text-anchor="middle" fill="#6FCBA0" font-family="'Instrument Sans',sans-serif" font-size="9.5" font-weight="700">Pre-qual signal</text>
+        <rect x="84" y="212" width="72" height="34" rx="9" fill="rgba(74,156,122,0.08)" stroke="rgba(74,156,122,0.5)" stroke-width="1.2"/>
+        <text x="120" y="233" text-anchor="middle" fill="#6FCBA0" font-family="'Instrument Sans',sans-serif" font-size="9.5" font-weight="700">Social proof</text>
+        <rect x="122" y="262" width="72" height="34" rx="9" fill="rgba(74,156,122,0.08)" stroke="rgba(74,156,122,0.5)" stroke-width="1.2"/>
+        <text x="158" y="283" text-anchor="middle" fill="#6FCBA0" font-family="'Instrument Sans',sans-serif" font-size="9.5" font-weight="700">Soft check</text>
+        <path d="M158,212 C158,254 158,254 158,262" fill="none" stroke="rgba(74,156,122,0.3)" stroke-width="1.2"/>
+
+        <!-- OPP2 → solutions (2) -->
+        <path d="M280,158 C280,186 244,186 244,212" fill="none" stroke="rgba(201,168,76,0.4)" stroke-width="1.2" stroke-dasharray="4,3"/>
+        <path d="M280,158 C280,186 316,186 316,212" fill="none" stroke="rgba(201,168,76,0.4)" stroke-width="1.2" stroke-dasharray="4,3"/>
+        <rect x="208" y="212" width="72" height="34" rx="9" fill="rgba(201,168,76,0.08)" stroke="rgba(201,168,76,0.5)" stroke-width="1.2"/>
+        <text x="244" y="233" text-anchor="middle" fill="#E8C55A" font-family="'Instrument Sans',sans-serif" font-size="9.5" font-weight="700">Doc checklist</text>
+        <rect x="286" y="212" width="72" height="34" rx="9" fill="rgba(201,168,76,0.08)" stroke="rgba(201,168,76,0.5)" stroke-width="1.2"/>
+        <text x="322" y="233" text-anchor="middle" fill="#E8C55A" font-family="'Instrument Sans',sans-serif" font-size="9.5" font-weight="700">Progress-save</text>
+
+        <!-- OPP3 → solution (1, weak/dashed) -->
+        <path d="M460,158 V212" fill="none" stroke="rgba(140,150,170,0.35)" stroke-width="1.2" stroke-dasharray="4,3"/>
+        <rect x="416" y="212" width="88" height="34" rx="9" fill="rgba(120,130,150,0.05)" stroke="rgba(140,150,170,0.3)" stroke-width="1.2" stroke-dasharray="6,3"/>
+        <text x="460" y="233" text-anchor="middle" fill="#8b96a6" font-family="'Instrument Sans',sans-serif" font-size="9.5" font-weight="700">Status tracker</text>
+
+        <!-- legend -->
+        <circle cx="20" cy="330" r="4" fill="#4A9C7A"/><text x="28" y="333" fill="rgba(156,163,178,0.55)" font-family="'Instrument Sans',sans-serif" font-size="8">Strongly Supported</text>
+        <circle cx="150" cy="330" r="4" fill="#C9A84C"/><text x="158" y="333" fill="rgba(156,163,178,0.55)" font-family="'Instrument Sans',sans-serif" font-size="8">Suggestive</text>
+        <circle cx="248" cy="330" r="4" fill="rgba(60,63,77,0.9)" stroke="rgba(255,255,255,0.15)" stroke-width="1"/><text x="256" y="333" fill="rgba(156,163,178,0.55)" font-family="'Instrument Sans',sans-serif" font-size="8">Hypothesis</text>
+      </svg>
     </div>
     <div style="padding:12px 24px;border-top:1px solid var(--border-s);display:flex;justify-content:space-between;align-items:center">
       <span style="font-size:11px;color:var(--text-4)">Opportunities update continuously as interviews land</span>
@@ -4065,35 +4103,125 @@ window.addEventListener('load', () => {
       </div>
       <button onclick="closeTreeModal('solutions-modal')" style="width:32px;height:32px;border-radius:8px;background:var(--surface-2);border:1px solid var(--border-d);color:var(--text-2);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center" onmouseover="this.style.background='var(--surface-3)'" onmouseout="this.style.background='var(--surface-2)'">✕</button>
     </div>
-    <div style="overflow-y:auto;padding:16px 24px;display:flex;flex-direction:column;gap:10px">
-      <!-- Sol 1 -->
-      <div style="background:var(--surface-2);border-left:3px solid var(--c-proto);border-radius:10px;padding:14px 16px">
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:5px">
-          <span style="font-size:13px;font-weight:700;color:var(--text-1)">Pre-qual signal at entry point</span>
-        </div>
-        <div style="font-size:11px;color:var(--text-3);margin-bottom:7px">addresses <span style="color:var(--c-proto)">Approval Anxiety</span> · value risk</div>
-        <div style="font-size:12px;color:var(--text-2);line-height:1.5">Show eligibility likelihood before any document gathering. <span style="color:var(--text-1)">Tradeoff:</span> gives up rich upfront data capture in exchange for speed-to-confidence — we'd rather convert than profile.</div>
-      </div>
-      <!-- Sol 2 -->
-      <div style="background:var(--surface-2);border-left:3px solid var(--c-proto);border-radius:10px;padding:14px 16px">
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:5px">
-          <span style="font-size:13px;font-weight:700;color:var(--text-1)">Social proof · approval rates</span>
-        </div>
-        <div style="font-size:11px;color:var(--text-3);margin-bottom:7px">addresses <span style="color:var(--c-proto)">Approval Anxiety</span> · value risk</div>
-        <div style="font-size:12px;color:var(--text-2);line-height:1.5">"94% of similar businesses were approved." <span style="color:var(--text-1)">Tradeoff:</span> gives up generality for specificity — must segment by business type to stay credible, which adds setup cost.</div>
-      </div>
-      <!-- Sol 3 -->
-      <div style="background:var(--surface-2);border-left:3px solid var(--text-4);border-radius:10px;padding:14px 16px">
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:5px">
-          <span style="font-size:13px;font-weight:700;color:var(--text-2)">Soft check before upload</span>
-        </div>
-        <div style="font-size:11px;color:var(--text-3);margin-bottom:7px">addresses <span style="color:var(--c-proto)">Approval Anxiety</span> · feasibility risk</div>
-        <div style="font-size:12px;color:var(--text-2);line-height:1.5">Soft credit check that doesn't affect score. <span style="color:var(--text-1)">Tradeoff:</span> strongest reassurance but highest build cost and a bureau dependency — likely sequence after the first two prove the mechanism.</div>
-      </div>
+    <div style="overflow-y:auto;padding:16px 20px;display:flex;flex-direction:column">
+      <svg class="subtree-svg" width="100%" height="auto" viewBox="0 0 560 340" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+        <!-- ROOT: Solutions -->
+        <rect x="200" y="14" width="160" height="46" rx="11" fill="rgba(201,168,76,0.1)" stroke="rgba(201,168,76,0.55)" stroke-width="1.4"/>
+        <text x="280" y="36" text-anchor="middle" fill="#E8C55A" font-family="'Instrument Sans',sans-serif" font-size="13" font-weight="700">Solutions</text>
+        <text x="280" y="50" text-anchor="middle" fill="rgba(201,168,76,0.7)" font-family="'Geist Mono',monospace" font-size="8">3 candidates · Approval Anxiety</text>
+
+        <!-- root → solution connectors -->
+        <path d="M280,60 C280,86 100,86 100,108" fill="none" stroke="rgba(74,156,122,0.3)" stroke-width="1.3"/>
+        <path d="M280,60 V108" fill="none" stroke="rgba(74,156,122,0.3)" stroke-width="1.3"/>
+        <path d="M280,60 C280,86 460,86 460,108" fill="none" stroke="rgba(140,150,170,0.35)" stroke-width="1.3" stroke-dasharray="4,3"/>
+
+        <!-- SOL 1 · Pre-qual signal (green) -->
+        <rect x="20" y="108" width="160" height="50" rx="11" fill="rgba(74,156,122,0.08)" stroke="rgba(74,156,122,0.5)" stroke-width="1.3"/>
+        <text x="100" y="129" text-anchor="middle" fill="#6FCBA0" font-family="'Instrument Sans',sans-serif" font-size="12" font-weight="700">Pre-qual signal</text>
+        <text x="100" y="146" text-anchor="middle" fill="rgba(74,156,122,0.65)" font-family="'Geist Mono',monospace" font-size="8">value risk · validated</text>
+
+        <!-- SOL 2 · Social proof (green) -->
+        <rect x="200" y="108" width="160" height="50" rx="11" fill="rgba(74,156,122,0.08)" stroke="rgba(74,156,122,0.5)" stroke-width="1.3"/>
+        <text x="280" y="129" text-anchor="middle" fill="#6FCBA0" font-family="'Instrument Sans',sans-serif" font-size="12" font-weight="700">Social proof</text>
+        <text x="280" y="146" text-anchor="middle" fill="rgba(74,156,122,0.65)" font-family="'Geist Mono',monospace" font-size="8">value risk · approval rates</text>
+
+        <!-- SOL 3 · Soft check (grey/dashed) -->
+        <rect x="380" y="108" width="160" height="50" rx="11" fill="rgba(120,130,150,0.05)" stroke="rgba(140,150,170,0.3)" stroke-width="1.3" stroke-dasharray="6,3"/>
+        <text x="460" y="129" text-anchor="middle" fill="#8b96a6" font-family="'Instrument Sans',sans-serif" font-size="12" font-weight="700">Soft check</text>
+        <text x="460" y="146" text-anchor="middle" fill="rgba(156,163,178,0.55)" font-family="'Geist Mono',monospace" font-size="8">feasibility · not tested</text>
+
+        <!-- SOL1 → 2 experiments -->
+        <path d="M100,158 C100,190 56,190 56,216" fill="none" stroke="rgba(74,156,122,0.3)" stroke-width="1.2"/>
+        <path d="M100,158 C100,190 144,190 144,216" fill="none" stroke="rgba(201,168,76,0.4)" stroke-width="1.2" stroke-dasharray="4,3"/>
+        <rect x="14" y="216" width="84" height="44" rx="9" fill="rgba(74,156,122,0.08)" stroke="rgba(74,156,122,0.5)" stroke-width="1.2"/>
+        <text x="56" y="234" text-anchor="middle" fill="#6FCBA0" font-family="'Instrument Sans',sans-serif" font-size="9" font-weight="700">Validated ✓</text>
+        <text x="56" y="248" text-anchor="middle" fill="rgba(74,156,122,0.65)" font-family="'Geist Mono',monospace" font-size="7.5">engage pre-qual</text>
+        <rect x="102" y="216" width="84" height="44" rx="9" fill="rgba(201,168,76,0.08)" stroke="rgba(201,168,76,0.5)" stroke-width="1.2" stroke-dasharray="6,3"/>
+        <text x="144" y="234" text-anchor="middle" fill="#E8C55A" font-family="'Instrument Sans',sans-serif" font-size="9" font-weight="700">Testing →</text>
+        <text x="144" y="248" text-anchor="middle" fill="rgba(201,168,76,0.7)" font-family="'Geist Mono',monospace" font-size="7.5">anxiety signal</text>
+
+        <!-- SOL2 → 1 experiment -->
+        <path d="M280,158 V216" fill="none" stroke="rgba(201,168,76,0.4)" stroke-width="1.2" stroke-dasharray="4,3"/>
+        <rect x="238" y="216" width="84" height="44" rx="9" fill="rgba(201,168,76,0.08)" stroke="rgba(201,168,76,0.5)" stroke-width="1.2" stroke-dasharray="6,3"/>
+        <text x="280" y="234" text-anchor="middle" fill="#E8C55A" font-family="'Instrument Sans',sans-serif" font-size="9" font-weight="700">Testing →</text>
+        <text x="280" y="248" text-anchor="middle" fill="rgba(201,168,76,0.7)" font-family="'Geist Mono',monospace" font-size="7.5">lifts app starts</text>
+
+        <!-- SOL3 → 1 experiment (grey/dashed) -->
+        <path d="M460,158 V216" fill="none" stroke="rgba(140,150,170,0.35)" stroke-width="1.2" stroke-dasharray="4,3"/>
+        <rect x="416" y="216" width="88" height="44" rx="9" fill="rgba(120,130,150,0.05)" stroke="rgba(140,150,170,0.3)" stroke-width="1.2" stroke-dasharray="6,3"/>
+        <text x="460" y="234" text-anchor="middle" fill="#8b96a6" font-family="'Instrument Sans',sans-serif" font-size="9" font-weight="700">Not started</text>
+        <text x="460" y="248" text-anchor="middle" fill="rgba(156,163,178,0.55)" font-family="'Geist Mono',monospace" font-size="7.5">bureau dependency</text>
+
+        <!-- legend -->
+        <circle cx="20" cy="312" r="4" fill="#4A9C7A"/><text x="28" y="315" fill="rgba(156,163,178,0.55)" font-family="'Instrument Sans',sans-serif" font-size="8">Validated</text>
+        <circle cx="110" cy="312" r="4" fill="#C9A84C"/><text x="118" y="315" fill="rgba(156,163,178,0.55)" font-family="'Instrument Sans',sans-serif" font-size="8">Testing</text>
+        <circle cx="190" cy="312" r="4" fill="rgba(60,63,77,0.9)" stroke="rgba(255,255,255,0.15)" stroke-width="1"/><text x="198" y="315" fill="rgba(156,163,178,0.55)" font-family="'Instrument Sans',sans-serif" font-size="8">Not started</text>
+      </svg>
     </div>
     <div style="padding:12px 24px;border-top:1px solid var(--border-s);display:flex;justify-content:space-between;align-items:center">
       <span style="font-size:11px;color:var(--text-4)">All three target one opportunity — that's the highest-leverage bet</span>
       <button onclick="closeTreeModal('solutions-modal');selectNode('tradeoffs')" style="font-size:12px;font-weight:600;padding:7px 16px;border-radius:7px;border:1px solid rgba(201,168,76,0.4);background:rgba(201,168,76,0.1);color:var(--amber);cursor:pointer;font-family:'Instrument Sans',sans-serif">Open Tradeoffs workspace →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── EXPERIMENTS MODAL ── -->
+<div id="experiments-modal"
+  style="position:fixed;inset:0;z-index:9999;background:rgba(6,10,20,0.65);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity 0.25s ease"
+  onclick="if(event.target===this)closeTreeModal('experiments-modal')">
+  <div style="width:580px;max-height:82vh;background:var(--surface-1);border:1px solid var(--border-d);border-radius:14px;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 24px 64px rgba(0,0,0,0.5);animation:panel-in 0.22s ease">
+    <div style="padding:18px 24px 14px;border-bottom:1px solid var(--border-s);display:flex;align-items:center;justify-content:space-between;flex-shrink:0">
+      <div>
+        <div style="font-size:15px;font-weight:600;color:var(--text-1);display:flex;align-items:center;gap:8px">Experiments<span style="background:rgba(74,156,122,0.15);color:#5FD4A3;border-radius:10px;font-size:10px;font-weight:700;padding:2px 8px">2</span></div>
+        <div style="font-size:11px;color:var(--text-3);margin-top:3px">Designed-matrix tests fielded to real humans via The People</div>
+      </div>
+      <button onclick="closeTreeModal('experiments-modal')" style="width:32px;height:32px;border-radius:8px;background:var(--surface-2);border:1px solid var(--border-d);color:var(--text-2);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center" onmouseover="this.style.background='var(--surface-3)'" onmouseout="this.style.background='var(--surface-2)'">✕</button>
+    </div>
+    <div style="overflow-y:auto;padding:16px 20px;display:flex;flex-direction:column">
+      <svg class="subtree-svg" width="100%" height="auto" viewBox="0 0 560 320" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+        <!-- ROOT: Experiments -->
+        <rect x="200" y="14" width="160" height="46" rx="11" fill="rgba(74,156,122,0.08)" stroke="rgba(74,156,122,0.5)" stroke-width="1.3"/>
+        <text x="280" y="36" text-anchor="middle" fill="#6FCBA0" font-family="'Instrument Sans',sans-serif" font-size="13" font-weight="700">Experiments</text>
+        <text x="280" y="50" text-anchor="middle" fill="rgba(74,156,122,0.65)" font-family="'Geist Mono',monospace" font-size="8">2 fielded · real humans</text>
+
+        <!-- root → experiment connectors -->
+        <path d="M280,60 C280,86 150,86 150,108" fill="none" stroke="rgba(74,156,122,0.3)" stroke-width="1.3"/>
+        <path d="M280,60 C280,86 410,86 410,108" fill="none" stroke="rgba(201,168,76,0.4)" stroke-width="1.3" stroke-dasharray="4,3"/>
+
+        <!-- EXP 1 · Pre-qual eligibility test (green, validated) -->
+        <rect x="60" y="108" width="180" height="52" rx="11" fill="rgba(74,156,122,0.08)" stroke="rgba(74,156,122,0.5)" stroke-width="1.3"/>
+        <text x="150" y="130" text-anchor="middle" fill="#6FCBA0" font-family="'Instrument Sans',sans-serif" font-size="12" font-weight="700">Pre-qual eligibility test</text>
+        <text x="150" y="147" text-anchor="middle" fill="rgba(74,156,122,0.65)" font-family="'Geist Mono',monospace" font-size="8">Validated · 8 variants · 20/cell</text>
+
+        <!-- EXP 2 · Anxiety-signal test (amber, testing) -->
+        <rect x="320" y="108" width="180" height="52" rx="11" fill="rgba(201,168,76,0.08)" stroke="rgba(201,168,76,0.5)" stroke-width="1.3" stroke-dasharray="6,3"/>
+        <text x="410" y="130" text-anchor="middle" fill="#E8C55A" font-family="'Instrument Sans',sans-serif" font-size="12" font-weight="700">Anxiety-signal test</text>
+        <text x="410" y="147" text-anchor="middle" fill="rgba(201,168,76,0.7)" font-family="'Geist Mono',monospace" font-size="8">Testing · 8 variants · fielding</text>
+
+        <!-- EXP1 → matrix detail → result -->
+        <path d="M150,160 V190" fill="none" stroke="rgba(74,156,122,0.3)" stroke-width="1.2"/>
+        <rect x="60" y="190" width="180" height="34" rx="9" fill="rgba(74,156,122,0.08)" stroke="rgba(74,156,122,0.5)" stroke-width="1.2"/>
+        <text x="150" y="211" text-anchor="middle" fill="#6FCBA0" font-family="'Geist Mono',monospace" font-size="8.5">8 variants · 20/cell</text>
+        <path d="M150,224 V250" fill="none" stroke="rgba(74,156,122,0.3)" stroke-width="1.2"/>
+        <rect x="48" y="250" width="204" height="36" rx="9" fill="rgba(74,156,122,0.08)" stroke="rgba(74,156,122,0.5)" stroke-width="1.2"/>
+        <text x="150" y="272" text-anchor="middle" fill="#6FCBA0" font-family="'Instrument Sans',sans-serif" font-size="10" font-weight="700">Result: completion +23pp · proceed ✓</text>
+
+        <!-- EXP2 → matrix detail → measure -->
+        <path d="M410,160 V190" fill="none" stroke="rgba(201,168,76,0.4)" stroke-width="1.2" stroke-dasharray="4,3"/>
+        <rect x="320" y="190" width="180" height="34" rx="9" fill="rgba(201,168,76,0.08)" stroke="rgba(201,168,76,0.5)" stroke-width="1.2" stroke-dasharray="6,3"/>
+        <text x="410" y="211" text-anchor="middle" fill="#E8C55A" font-family="'Geist Mono',monospace" font-size="8.5">8 variants · fielding now</text>
+        <path d="M410,224 V250" fill="none" stroke="rgba(201,168,76,0.4)" stroke-width="1.2" stroke-dasharray="4,3"/>
+        <rect x="308" y="250" width="204" height="36" rx="9" fill="rgba(201,168,76,0.08)" stroke="rgba(201,168,76,0.5)" stroke-width="1.2" stroke-dasharray="6,3"/>
+        <text x="410" y="272" text-anchor="middle" fill="#E8C55A" font-family="'Instrument Sans',sans-serif" font-size="10" font-weight="700">Primary measure: task completion</text>
+
+        <!-- legend -->
+        <circle cx="20" cy="306" r="4" fill="#4A9C7A"/><text x="28" y="309" fill="rgba(156,163,178,0.55)" font-family="'Instrument Sans',sans-serif" font-size="8">Validated</text>
+        <circle cx="110" cy="306" r="4" fill="#C9A84C"/><text x="118" y="309" fill="rgba(156,163,178,0.55)" font-family="'Instrument Sans',sans-serif" font-size="8">Testing</text>
+      </svg>
+    </div>
+    <div style="padding:12px 24px;border-top:1px solid var(--border-s);display:flex;justify-content:space-between;align-items:center">
+      <span style="font-size:11px;color:var(--text-4)">Matrix tests run on real humans — validated learning feeds the tree</span>
+      <button onclick="closeTreeModal('experiments-modal');selectNode('prototyping')" style="font-size:12px;font-weight:600;padding:7px 16px;border-radius:7px;border:1px solid rgba(74,156,122,0.4);background:rgba(74,156,122,0.1);color:var(--c-proto);cursor:pointer;font-family:'Instrument Sans',sans-serif">Open Test workspace →</button>
     </div>
   </div>
 </div>
