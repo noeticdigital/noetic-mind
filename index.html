@@ -48,6 +48,18 @@
 /* ── RESET ───────────────────────────────────────────────────── */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 html, body { height: 100%; overflow: hidden; }
+
+/* ── GLOBAL COHESIVE SCROLLBAR ───────────────────────────────── */
+* { scrollbar-width: thin; scrollbar-color: var(--surface-4) transparent; }
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: var(--surface-4);
+  border-radius: 6px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--border-a); background-clip: padding-box; }
 body {
   font-family: 'Geist', 'Instrument Sans', -apple-system, sans-serif;
   background: var(--surface-0);
