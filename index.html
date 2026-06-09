@@ -1430,7 +1430,7 @@ html.light .ost-reprioritise { background: rgba(52,136,104,0.04); }
 
     <!-- ── PART 2: SVG BRANCHING TREE ────────────────── -->
     <div id="ost-canvas" class="ost-graph-area">
-      <svg id="ost-svg" width="100%" height="100%" viewBox="0 0 880 560" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+      <svg id="ost-svg" width="100%" height="100%" viewBox="0 0 880 372" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <marker id="cv-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
       <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -1438,102 +1438,94 @@ html.light .ost-reprioritise { background: rgba(52,136,104,0.04); }
   </defs>
 
   <!-- ── SIDE LABELS ── -->
-  <text x="200" y="24" text-anchor="middle" fill="rgba(91,140,186,0.45)" font-family="'Geist Mono',monospace" font-size="9" letter-spacing="0.14em">SUPPLY</text>
-  <text x="680" y="24" text-anchor="middle" fill="rgba(139,107,174,0.45)" font-family="'Geist Mono',monospace" font-size="9" letter-spacing="0.14em">DEMAND</text>
+  <text x="205" y="20" text-anchor="middle" fill="rgba(91,140,186,0.45)" font-family="'Geist Mono',monospace" font-size="9" letter-spacing="0.14em">SUPPLY</text>
+  <text x="680" y="20" text-anchor="middle" fill="rgba(139,107,174,0.45)" font-family="'Geist Mono',monospace" font-size="9" letter-spacing="0.14em">DEMAND</text>
 
-  <!-- ════ SUPPLY SPINE ════ -->
-  <!-- Framing assumptions (seeds the outcome) -->
-  <rect x="95" y="40" width="210" height="40" rx="9" fill="rgba(120,130,150,0.05)" stroke="rgba(140,150,170,0.3)" stroke-width="1" stroke-dasharray="5,3" style="cursor:pointer" onclick="selectNode('definition')"/>
-  <text x="200" y="56" text-anchor="middle" fill="var(--text-2)" font-family="'Instrument Sans',sans-serif" font-size="11" font-weight="600">Framing Assumptions</text>
-  <text x="200" y="70" text-anchor="middle" fill="var(--text-4)" font-family="'Geist Mono',monospace" font-size="8">unvalidated · seeds the outcome</text>
-  <line x1="200" y1="80" x2="200" y2="102" stroke="rgba(91,140,186,0.3)" stroke-width="1.2"/>
+  <!-- ════ TOP ROW: Framing (supply) | Customer Progress (demand) ════ -->
+  <rect x="105" y="34" width="210" height="38" rx="9" fill="rgba(120,130,150,0.05)" stroke="rgba(140,150,170,0.3)" stroke-width="1" stroke-dasharray="5,3" style="cursor:pointer" onclick="selectNode('definition')"/>
+  <text x="210" y="50" text-anchor="middle" fill="var(--text-2)" font-family="'Instrument Sans',sans-serif" font-size="11" font-weight="600">Framing Assumptions</text>
+  <text x="210" y="64" text-anchor="middle" fill="var(--text-4)" font-family="'Geist Mono',monospace" font-size="8">unvalidated · seeds the outcome</text>
+  <line x1="210" y1="72" x2="210" y2="92" stroke="rgba(91,140,186,0.3)" stroke-width="1.2"/>
 
-  <!-- Desired Outcome (supply anchor, revisable) -->
-  <rect x="85" y="102" width="230" height="56" rx="11" fill="rgba(91,140,186,0.08)" stroke="rgba(91,140,186,0.45)" stroke-width="1.3" stroke-dasharray="6,3" style="cursor:pointer" onclick="selectNode('definition')"/>
-  <text x="200" y="121" text-anchor="middle" fill="#9FC0E0" font-family="'Instrument Sans',sans-serif" font-size="13" font-weight="700">Desired Outcome</text>
-  <text x="200" y="137" text-anchor="middle" fill="var(--text-1)" font-family="'Instrument Sans',sans-serif" font-size="11">+30% SMB acquisition · 12mo</text>
-  <text x="200" y="150" text-anchor="middle" fill="rgba(91,140,186,0.6)" font-family="'Geist Mono',monospace" font-size="8">supply hypothesis · revisable</text>
+  <rect x="565" y="34" width="230" height="38" rx="9" fill="rgba(139,107,174,0.12)" stroke="rgba(139,107,174,0.65)" stroke-width="1.4" style="cursor:pointer" onclick="selectNode('jtbd')"/>
+  <text x="680" y="50" text-anchor="middle" fill="#C5B8E0" font-family="'Instrument Sans',sans-serif" font-size="12" font-weight="700">Customer Progress · JTBD</text>
+  <text x="680" y="64" text-anchor="middle" fill="var(--text-1)" font-family="'Playfair Display',serif" font-style="italic" font-size="9.5">"set up credible banking, fast"</text>
+  <line x1="680" y1="72" x2="680" y2="88" stroke="rgba(139,107,174,0.3)" stroke-width="1.2"/>
 
-  <!-- ════ DEMAND SPINE ════ -->
-  <!-- Customer Progress / JTBD (demand anchor, validated) -->
-  <rect x="565" y="102" width="230" height="56" rx="11" fill="rgba(139,107,174,0.12)" stroke="rgba(139,107,174,0.65)" stroke-width="1.5" style="cursor:pointer" onclick="selectNode('jtbd')"/>
-  <text x="680" y="120" text-anchor="middle" fill="#C5B8E0" font-family="'Instrument Sans',sans-serif" font-size="13" font-weight="700">Customer Progress · JTBD</text>
-  <text x="680" y="136" text-anchor="middle" fill="var(--text-1)" font-family="'Playfair Display',serif" font-style="italic" font-size="11">"set up credible banking, fast"</text>
-  <text x="680" y="150" text-anchor="middle" fill="rgba(139,107,174,0.7)" font-family="'Geist Mono',monospace" font-size="8">validated market truth</text>
+  <!-- ════ MID ROW: Desired Outcome (supply) | Opportunities (demand) — same level ════ -->
+  <!-- Desired Outcome -->
+  <rect x="90" y="92" width="240" height="54" rx="11" fill="rgba(91,140,186,0.08)" stroke="rgba(91,140,186,0.45)" stroke-width="1.3" stroke-dasharray="6,3" style="cursor:pointer" onclick="selectNode('definition')"/>
+  <text x="210" y="110" text-anchor="middle" fill="#9FC0E0" font-family="'Instrument Sans',sans-serif" font-size="13" font-weight="700">Desired Outcome</text>
+  <text x="210" y="126" text-anchor="middle" fill="var(--text-1)" font-family="'Instrument Sans',sans-serif" font-size="11">+30% SMB acquisition · 12mo</text>
+  <text x="210" y="139" text-anchor="middle" fill="rgba(91,140,186,0.6)" font-family="'Geist Mono',monospace" font-size="8">supply hypothesis · revisable</text>
 
-  <!-- Challenge arrow: demand → outcome -->
-  <text x="440" y="120" text-anchor="middle" fill="var(--text-4)" font-family="'Geist Mono',monospace" font-size="8">validated demand can challenge the outcome</text>
-  <path d="M563,131 H319" fill="none" stroke="rgba(139,107,174,0.4)" stroke-width="1.2" stroke-dasharray="5,4" marker-end="url(#cv-arrow)"/>
+  <!-- Challenge arrow: demand → outcome (horizontal, in the gap) -->
+  <text x="455" y="104" text-anchor="middle" fill="var(--text-4)" font-family="'Geist Mono',monospace" font-size="8">validated demand can challenge the outcome</text>
+  <path d="M566,116 H334" fill="none" stroke="rgba(139,107,174,0.4)" stroke-width="1.2" stroke-dasharray="5,4" marker-end="url(#cv-arrow)"/>
 
-  <!-- Opportunities under demand anchor -->
-  <line x1="680" y1="158" x2="680" y2="178" stroke="rgba(139,107,174,0.3)" stroke-width="1.2"/>
-  <text x="680" y="174" text-anchor="middle" fill="var(--text-4)" font-family="'Geist Mono',monospace" font-size="8" letter-spacing="0.06em">OPPORTUNITIES · forces &amp; struggles</text>
-  <path d="M680,178 V186 H590 V192" fill="none" stroke="rgba(74,156,122,0.3)" stroke-width="1"/>
-  <path d="M680,178 V195" fill="none" stroke="rgba(201,168,76,0.3)" stroke-width="1" stroke-dasharray="4,3"/>
-  <path d="M680,178 V186 H768 V199" fill="none" stroke="rgba(80,95,125,0.25)" stroke-width="1" stroke-dasharray="3,4"/>
+  <!-- Opportunities (3 nodes, demand) -->
+  <text x="680" y="86" text-anchor="middle" fill="var(--text-4)" font-family="'Geist Mono',monospace" font-size="8" letter-spacing="0.05em">OPPORTUNITIES · forces &amp; struggles</text>
+  <path d="M680,88 V94 H600 V92" fill="none" stroke="rgba(74,156,122,0.3)" stroke-width="1"/>
+  <path d="M680,88 V95" fill="none" stroke="rgba(201,168,76,0.3)" stroke-width="1" stroke-dasharray="4,3"/>
+  <path d="M680,88 V94 H752 V98" fill="none" stroke="rgba(80,95,125,0.25)" stroke-width="1" stroke-dasharray="3,4"/>
 
-  <!-- Opp 1: Approval Anxiety (validated) -->
-  <circle cx="590" cy="212" r="20" fill="rgba(74,156,122,0.2)" stroke="rgba(74,156,122,0.9)" stroke-width="1.8"/>
-  <text x="590" y="216" text-anchor="middle" fill="rgba(74,156,122,1)" font-size="12" font-weight="700">✓</text>
-  <text x="590" y="245" text-anchor="middle" fill="#9AA3B2" font-family="'Instrument Sans',sans-serif" font-size="9" font-weight="600">Approval Anxiety</text>
-  <text x="590" y="257" text-anchor="middle" fill="rgba(74,156,122,0.75)" font-family="'Geist Mono',monospace" font-size="7.5">Strongly Supported</text>
+  <circle cx="600" cy="110" r="18" fill="rgba(74,156,122,0.2)" stroke="rgba(74,156,122,0.9)" stroke-width="1.8"/>
+  <text x="600" y="114" text-anchor="middle" fill="rgba(74,156,122,1)" font-size="11" font-weight="700">✓</text>
+  <text x="600" y="139" text-anchor="middle" fill="#9AA3B2" font-family="'Instrument Sans',sans-serif" font-size="8.5" font-weight="600">Approval Anxiety</text>
+  <text x="600" y="149" text-anchor="middle" fill="rgba(74,156,122,0.75)" font-family="'Geist Mono',monospace" font-size="7">Strongly Supported</text>
 
-  <!-- Opp 2: Doc Friction (hypothesis) -->
-  <circle cx="680" cy="212" r="17" fill="rgba(201,168,76,0.1)" stroke="rgba(201,168,76,0.6)" stroke-width="1.4" stroke-dasharray="5,3"/>
-  <text x="680" y="216" text-anchor="middle" fill="rgba(201,168,76,0.8)" font-size="11">◈</text>
-  <text x="680" y="243" text-anchor="middle" fill="#9AA3B2" font-family="'Instrument Sans',sans-serif" font-size="9">Doc Friction</text>
-  <text x="680" y="255" text-anchor="middle" fill="rgba(201,168,76,0.6)" font-family="'Geist Mono',monospace" font-size="7.5">Suggestive · 41%</text>
+  <circle cx="680" cy="110" r="15" fill="rgba(201,168,76,0.1)" stroke="rgba(201,168,76,0.6)" stroke-width="1.4" stroke-dasharray="5,3"/>
+  <text x="680" y="114" text-anchor="middle" fill="rgba(201,168,76,0.8)" font-size="10">◈</text>
+  <text x="680" y="137" text-anchor="middle" fill="#9AA3B2" font-family="'Instrument Sans',sans-serif" font-size="8.5">Doc Friction</text>
+  <text x="680" y="147" text-anchor="middle" fill="rgba(201,168,76,0.6)" font-family="'Geist Mono',monospace" font-size="7">Suggestive · 41%</text>
 
-  <!-- Opp 3: Status Ambiguity (weak) -->
-  <circle cx="768" cy="212" r="13" fill="rgba(50,60,85,0.4)" stroke="rgba(80,95,125,0.35)" stroke-width="1.2" stroke-dasharray="3,4"/>
-  <text x="768" y="216" text-anchor="middle" fill="rgba(80,95,125,0.5)" font-size="9">○</text>
-  <text x="768" y="241" text-anchor="middle" fill="#4A5060" font-family="'Instrument Sans',sans-serif" font-size="9">Status Ambiguity</text>
-  <text x="768" y="253" text-anchor="middle" fill="rgba(80,95,125,0.45)" font-family="'Geist Mono',monospace" font-size="7.5">Hypothesis · 28%</text>
+  <circle cx="752" cy="110" r="12" fill="rgba(50,60,85,0.4)" stroke="rgba(80,95,125,0.35)" stroke-width="1.2" stroke-dasharray="3,4"/>
+  <text x="752" y="114" text-anchor="middle" fill="rgba(80,95,125,0.5)" font-size="8">○</text>
+  <text x="752" y="135" text-anchor="middle" fill="#4A5060" font-family="'Instrument Sans',sans-serif" font-size="8.5">Status Ambiguity</text>
+  <text x="752" y="145" text-anchor="middle" fill="rgba(80,95,125,0.45)" font-family="'Geist Mono',monospace" font-size="7">Hypothesis · 28%</text>
 
-  <!-- ════ CONVERGENCE ════ -->
-  <!-- system requirements: outcome → solutions (left side, no crossing) -->
-  <path d="M200,158 C200,280 280,322 358,352" fill="none" stroke="rgba(201,168,76,0.35)" stroke-width="1.4" marker-end="url(#cv-arrow)"/>
-  <text x="232" y="270" text-anchor="middle" fill="rgba(201,168,76,0.55)" font-family="'Geist Mono',monospace" font-size="8" transform="rotate(58,232,270)">system requirements</text>
-  <!-- design requirements: opportunities → solutions (right side, no crossing) -->
-  <path d="M650,262 C560,318 540,330 522,352" fill="none" stroke="rgba(201,168,76,0.35)" stroke-width="1.4" marker-end="url(#cv-arrow)"/>
-  <text x="630" y="300" text-anchor="middle" fill="rgba(201,168,76,0.55)" font-family="'Geist Mono',monospace" font-size="8" transform="rotate(-52,630,300)">design requirements</text>
+  <!-- ════ CONVERGENCE: short symmetric mirror arrows into Solutions ════ -->
+  <path d="M210,146 C210,176 322,180 384,200" fill="none" stroke="rgba(201,168,76,0.4)" stroke-width="1.4" marker-end="url(#cv-arrow)"/>
+  <text x="300" y="170" text-anchor="middle" fill="rgba(201,168,76,0.5)" font-family="'Geist Mono',monospace" font-size="7.5">system requirements</text>
+  <path d="M680,152 C680,178 558,180 496,200" fill="none" stroke="rgba(201,168,76,0.4)" stroke-width="1.4" marker-end="url(#cv-arrow)"/>
+  <text x="590" y="172" text-anchor="middle" fill="rgba(201,168,76,0.5)" font-family="'Geist Mono',monospace" font-size="7.5">design requirements</text>
 
-  <!-- Solutions (convergence node) -->
-  <rect x="350" y="350" width="180" height="48" rx="11" fill="rgba(201,168,76,0.1)" stroke="rgba(201,168,76,0.55)" stroke-width="1.4" style="cursor:pointer" onclick="selectNode('tradeoffs')"/>
-  <text x="440" y="370" text-anchor="middle" fill="#E8C55A" font-family="'Instrument Sans',sans-serif" font-size="13" font-weight="700">Solutions</text>
-  <text x="440" y="386" text-anchor="middle" fill="rgba(201,168,76,0.65)" font-family="'Geist Mono',monospace" font-size="8">demand meets supply</text>
+  <!-- Solutions (convergence) -->
+  <rect x="350" y="200" width="180" height="46" rx="11" fill="rgba(201,168,76,0.1)" stroke="rgba(201,168,76,0.55)" stroke-width="1.4" style="cursor:pointer" onclick="selectNode('tradeoffs')"/>
+  <text x="440" y="219" text-anchor="middle" fill="#E8C55A" font-family="'Instrument Sans',sans-serif" font-size="13" font-weight="700">Solutions</text>
+  <text x="440" y="235" text-anchor="middle" fill="rgba(201,168,76,0.65)" font-family="'Geist Mono',monospace" font-size="8">demand meets supply</text>
 
   <!-- Solution children -->
-  <path d="M440,398 V408" fill="none" stroke="rgba(74,156,122,0.3)" stroke-width="1"/>
-  <path d="M372,408 H508" fill="none" stroke="rgba(74,156,122,0.3)" stroke-width="1"/>
-  <path d="M372,408 V416" fill="none" stroke="rgba(74,156,122,0.3)" stroke-width="1"/>
-  <path d="M440,408 V416" fill="none" stroke="rgba(74,156,122,0.3)" stroke-width="1"/>
-  <path d="M508,408 V416" fill="none" stroke="rgba(74,156,122,0.3)" stroke-width="1"/>
-  <rect x="340" y="416" width="64" height="24" rx="6" fill="rgba(74,156,122,0.1)" stroke="rgba(74,156,122,0.45)" stroke-width="1"/>
-  <text x="372" y="431" text-anchor="middle" fill="#8A9DA8" font-family="'Instrument Sans',sans-serif" font-size="8">Pre-qual signal</text>
-  <rect x="408" y="416" width="64" height="24" rx="6" fill="rgba(74,156,122,0.1)" stroke="rgba(74,156,122,0.45)" stroke-width="1"/>
-  <text x="440" y="431" text-anchor="middle" fill="#8A9DA8" font-family="'Instrument Sans',sans-serif" font-size="8">Social proof</text>
-  <rect x="476" y="416" width="64" height="24" rx="6" fill="rgba(74,156,122,0.1)" stroke="rgba(74,156,122,0.45)" stroke-width="1"/>
-  <text x="508" y="431" text-anchor="middle" fill="#8A9DA8" font-family="'Instrument Sans',sans-serif" font-size="8">Soft check</text>
+  <path d="M440,246 V254" fill="none" stroke="rgba(74,156,122,0.3)" stroke-width="1"/>
+  <path d="M372,254 H508" fill="none" stroke="rgba(74,156,122,0.3)" stroke-width="1"/>
+  <path d="M372,254 V260" fill="none" stroke="rgba(74,156,122,0.3)" stroke-width="1"/>
+  <path d="M440,254 V260" fill="none" stroke="rgba(74,156,122,0.3)" stroke-width="1"/>
+  <path d="M508,254 V260" fill="none" stroke="rgba(74,156,122,0.3)" stroke-width="1"/>
+  <rect x="340" y="260" width="64" height="24" rx="6" fill="rgba(74,156,122,0.1)" stroke="rgba(74,156,122,0.45)" stroke-width="1"/>
+  <text x="372" y="275" text-anchor="middle" fill="#8A9DA8" font-family="'Instrument Sans',sans-serif" font-size="8">Pre-qual signal</text>
+  <rect x="408" y="260" width="64" height="24" rx="6" fill="rgba(74,156,122,0.1)" stroke="rgba(74,156,122,0.45)" stroke-width="1"/>
+  <text x="440" y="275" text-anchor="middle" fill="#8A9DA8" font-family="'Instrument Sans',sans-serif" font-size="8">Social proof</text>
+  <rect x="476" y="260" width="64" height="24" rx="6" fill="rgba(74,156,122,0.1)" stroke="rgba(74,156,122,0.45)" stroke-width="1"/>
+  <text x="508" y="275" text-anchor="middle" fill="#8A9DA8" font-family="'Instrument Sans',sans-serif" font-size="8">Soft check</text>
 
   <!-- Experiments -->
-  <line x1="440" y1="440" x2="440" y2="454" stroke="rgba(74,156,122,0.3)" stroke-width="1.2"/>
-  <rect x="350" y="454" width="180" height="44" rx="11" fill="rgba(74,156,122,0.08)" stroke="rgba(74,156,122,0.5)" stroke-width="1.3" style="cursor:pointer" onclick="selectNode('prototyping')"/>
-  <text x="440" y="473" text-anchor="middle" fill="#6FCBA0" font-family="'Instrument Sans',sans-serif" font-size="13" font-weight="700">Experiments</text>
-  <text x="440" y="489" text-anchor="middle" fill="rgba(74,156,122,0.65)" font-family="'Geist Mono',monospace" font-size="8">prototyping · real humans · The People</text>
+  <line x1="440" y1="284" x2="440" y2="298" stroke="rgba(74,156,122,0.3)" stroke-width="1.2"/>
+  <rect x="350" y="298" width="180" height="42" rx="11" fill="rgba(74,156,122,0.08)" stroke="rgba(74,156,122,0.5)" stroke-width="1.3" style="cursor:pointer" onclick="selectNode('prototyping')"/>
+  <text x="440" y="316" text-anchor="middle" fill="#6FCBA0" font-family="'Instrument Sans',sans-serif" font-size="13" font-weight="700">Experiments</text>
+  <text x="440" y="331" text-anchor="middle" fill="rgba(74,156,122,0.65)" font-family="'Geist Mono',monospace" font-size="8">prototyping · real humans</text>
 
   <!-- Re-prioritise loop: Experiments → Opportunities -->
-  <path d="M530,476 C700,470 805,360 790,235" fill="none" stroke="rgba(74,156,122,0.22)" stroke-width="1.4" stroke-dasharray="6,4" class="cv-loop-arc"/>
-  <polygon points="786,230 794,238 782,240" fill="rgba(74,156,122,0.32)"/>
-  <text x="828" y="360" text-anchor="middle" fill="rgba(74,156,122,0.32)" font-family="'Geist Mono',monospace" font-size="8" transform="rotate(90,828,360)">↻ re-prioritise weakest node</text>
+  <path d="M530,320 C690,312 792,210 762,128" fill="none" stroke="rgba(74,156,122,0.22)" stroke-width="1.4" stroke-dasharray="6,4" class="cv-loop-arc"/>
+  <polygon points="758,123 766,131 754,133" fill="rgba(74,156,122,0.32)"/>
+  <text x="820" y="230" text-anchor="middle" fill="rgba(74,156,122,0.3)" font-family="'Geist Mono',monospace" font-size="8" transform="rotate(90,820,230)">↻ re-prioritise weakest node</text>
 
   <!-- Evidence legend (bottom-left) -->
-  <circle cx="44" cy="450" r="4" fill="#4A9C7A"/>
-  <text x="52" y="453" fill="rgba(156,163,178,0.55)" font-family="'Instrument Sans',sans-serif" font-size="8">Validated</text>
-  <circle cx="44" cy="466" r="4" fill="#C9A84C"/>
-  <text x="52" y="469" fill="rgba(156,163,178,0.55)" font-family="'Instrument Sans',sans-serif" font-size="8">Hypothesis</text>
-  <circle cx="44" cy="482" r="4" fill="rgba(60,63,77,0.9)" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
-  <text x="52" y="485" fill="rgba(156,163,178,0.55)" font-family="'Instrument Sans',sans-serif" font-size="8">Weak</text>
+  <circle cx="44" cy="300" r="4" fill="#4A9C7A"/>
+  <text x="52" y="303" fill="rgba(156,163,178,0.55)" font-family="'Instrument Sans',sans-serif" font-size="8">Validated</text>
+  <circle cx="44" cy="316" r="4" fill="#C9A84C"/>
+  <text x="52" y="319" fill="rgba(156,163,178,0.55)" font-family="'Instrument Sans',sans-serif" font-size="8">Hypothesis</text>
+  <circle cx="44" cy="332" r="4" fill="rgba(60,63,77,0.9)" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+  <text x="52" y="335" fill="rgba(156,163,178,0.55)" font-family="'Instrument Sans',sans-serif" font-size="8">Weak</text>
       </svg>
     </div>
 
