@@ -2394,7 +2394,7 @@ html.light .ost-reprioritise { background: rgba(52,136,104,0.04); }
       </div>
       <div>
         <div class="no-name">Causal Structures</div>
-        <div class="no-sub">✦ DE Suggested by Noetic Mind · 2h ago</div>
+        <div class="no-sub">✦ Suggested by Noetic Mind · 2h ago</div>
       </div>
     </div>
     <div class="no-close" onclick="closeNodeOverlay('causal')">✕</div>
@@ -2402,7 +2402,7 @@ html.light .ost-reprioritise { background: rgba(52,136,104,0.04); }
   <div class="no-body">
     <div class="no-card span2" style="background:var(--amber-dim);border-color:rgba(201,168,76,0.3);margin-top:4px">
       <div class="no-card-label" style="color:var(--amber)">✦ Noetic Mind Recommendation</div>
-      <div class="no-card-value">Enough signal from Definition + 8 JTBD interviews to run a causal deliberation. The proposed chain has counterfactual evidence from 6 of 8 interviews — needs multi-model debate before acting. <span onclick="return false" style="display:inline-flex;align-items:center;gap:3px;font-size:10px;background:var(--surface-3);color:var(--text-3);padding:1px 7px;border-radius:10px;cursor:pointer;margin-left:4px;font-family:'Geist Mono',monospace">📎 3 sources</span></div>
+      <div class="no-card-value">Enough signal from Definition + 8 JTBD interviews to model the causal structure. The proposed chain holds up under counterfactual testing in 6 of 8 interviews — one confounding factor stays unresolved until prototype evidence lands. <span onclick="return false" style="display:inline-flex;align-items:center;gap:3px;font-size:10px;background:var(--surface-3);color:var(--text-3);padding:1px 7px;border-radius:10px;cursor:pointer;margin-left:4px;font-family:'Geist Mono',monospace">📎 3 sources</span></div>
       <div style="display:flex;align-items:center;gap:10px;margin-top:12px">
         <span class="conf-band strongly">Strongly Supported · 67%</span>
       </div>
@@ -2493,27 +2493,52 @@ html.light .ost-reprioritise { background: rgba(52,136,104,0.04); }
   </div>
   <div class="no-body" style="display:block;overflow-y:auto;padding:20px 32px">
 
-    <!-- Status row -->
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:20px">
-      <div class="no-card">
-        <div class="no-card-label">Concepts Tested</div>
-        <div class="no-card-num" style="color:var(--c-proto)">3</div>
-        <div class="no-card-sub">1 validated · 2 in test</div>
+    <!-- The learning question (lead) -->
+    <div style="background:rgba(74,156,122,0.07);border:1px solid rgba(74,156,122,0.3);border-left:4px solid var(--c-proto);border-radius:12px;padding:16px 18px;margin-bottom:14px">
+      <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.1em;color:var(--c-proto);margin-bottom:8px">The Learning Question</div>
+      <div style="font-size:16px;font-weight:700;color:var(--text-1);line-height:1.4;margin-bottom:6px">Does showing pre-qualification <em>before</em> document upload reduce the credibility anxiety that drives abandonment?</div>
+      <div style="font-size:12px;color:var(--text-2);line-height:1.5">We are not asking "do users like it." We are asking what must be true before we commit to building it: that a confidence signal placed early enough actually weakens the force pushing applicants out of the flow.</div>
+    </div>
+
+    <!-- Causal theory under test -->
+    <div style="background:var(--surface-2);border:1px solid var(--border-d);border-left:3px solid var(--c-causal);border-radius:10px;padding:14px 16px;margin-bottom:14px">
+      <div style="font-size:9px;text-transform:uppercase;letter-spacing:0.08em;color:var(--c-causal);margin-bottom:6px">Causal Theory Under Test</div>
+      <div style="font-size:13px;color:var(--text-2);line-height:1.5">If applicants feel credible early, the approval-anxiety force weakens below the pull of completing the application — so abandonment falls even though the documentation burden is unchanged. The experiment exists to confirm or break this mechanism, inherited from the Causal Structures model (67% confidence, one unresolved confound).</div>
+    </div>
+
+    <!-- Designed experiment -->
+    <div style="background:var(--surface-2);border:1px solid var(--border-d);border-radius:10px;padding:14px 16px;margin-bottom:20px">
+      <div style="font-size:9px;text-transform:uppercase;letter-spacing:0.08em;color:var(--c-proto);margin-bottom:10px">The Designed Experiment</div>
+      <div style="font-size:12px;color:var(--text-2);line-height:1.5;margin-bottom:12px">Smallest test that answers the question: a designed-matrix study isolating the factors that could move completion, fielded to real humans via The People — not a like/dislike survey.</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px">
+        <div style="background:var(--surface-3);border-radius:8px;padding:10px 12px">
+          <div style="font-size:10px;text-transform:uppercase;color:var(--text-4);letter-spacing:0.08em;margin-bottom:4px">Design</div>
+          <div style="font-size:15px;font-weight:700;color:var(--text-1)">8 variants</div>
+          <div style="font-size:11px;color:var(--text-3)">factors × levels matrix</div>
+        </div>
+        <div style="background:var(--surface-3);border-radius:8px;padding:10px 12px">
+          <div style="font-size:10px;text-transform:uppercase;color:var(--text-4);letter-spacing:0.08em;margin-bottom:4px">Sample</div>
+          <div style="font-size:15px;font-weight:700;color:var(--text-1)">20 / variant</div>
+          <div style="font-size:11px;color:var(--text-3)">real respondents</div>
+        </div>
+        <div style="background:var(--surface-3);border-radius:8px;padding:10px 12px">
+          <div style="font-size:10px;text-transform:uppercase;color:var(--text-4);letter-spacing:0.08em;margin-bottom:4px">Primary Measure</div>
+          <div style="font-size:15px;font-weight:700;color:var(--text-1)">Completion</div>
+          <div style="font-size:11px;color:var(--text-3)">binary, not opinion</div>
+        </div>
+        <div style="background:var(--surface-3);border-radius:8px;padding:10px 12px">
+          <div style="font-size:10px;text-transform:uppercase;color:var(--text-4);letter-spacing:0.08em;margin-bottom:4px">Fielded Via</div>
+          <div style="font-size:15px;font-weight:700;color:var(--text-1)">The People</div>
+          <div style="font-size:11px;color:var(--text-3)">67 responses</div>
+        </div>
       </div>
-      <div class="no-card">
-        <div class="no-card-label">MPI Responses</div>
-        <div class="no-card-num" style="color:var(--amber)">67</div>
-        <div class="no-bar"><div class="no-bar-fill" style="width:89%;background:var(--amber)"></div></div>
-        <div class="no-card-sub">Target: 75</div>
-      </div>
-      <div class="no-card">
-        <div class="no-card-label">Prototype Confidence</div>
-        <div class="no-card-num" style="color:var(--c-proto)">81%</div>
-        <div class="no-card-sub">Concept A validated</div>
+      <div style="background:rgba(74,156,122,0.06);border:1px solid rgba(74,156,122,0.2);border-radius:8px;padding:10px 14px;margin-top:12px">
+        <div style="font-size:9px;text-transform:uppercase;color:var(--c-proto);letter-spacing:0.08em;margin-bottom:5px">Pre-Committed Thresholds</div>
+        <div style="font-size:12px;color:var(--text-2);line-height:1.4">Decided before fielding, so the data can't be rationalised: <strong style="color:var(--c-proto)">Proceed</strong> if a variant lifts completion ≥ +20pts vs. control · <strong style="color:var(--amber)">Mend</strong> if +5–20pts (refine and re-test) · <strong style="color:var(--text-3)">Kill</strong> if &lt; +5pts.</div>
       </div>
     </div>
 
-    <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-4);margin-bottom:14px">Prototype Concepts</div>
+    <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-4);margin-bottom:14px">Prototype Concepts · evidence downstream of the learning question</div>
 
     <!-- Concept A: Validated -->
     <div style="margin-bottom:16px;border-left:4px solid var(--c-proto);border-radius:10px;overflow:hidden;background:rgba(74,156,122,0.03)">
@@ -2646,80 +2671,43 @@ html.light .ost-reprioritise { background: rgba(52,136,104,0.04); }
       </div>
       <div>
         <div class="no-name">Making Trade-offs</div>
-        <div class="no-sub">● Active · 3 options · A+B sequential recommended</div>
+        <div class="no-sub">● Active · 1 job protected · 3 deliberate sacrifices</div>
       </div>
     </div>
     <div class="no-close" onclick="closeNodeOverlay('tradeoffs')">✕</div>
   </div>
   <div class="no-body" style="display:block;overflow-y:auto;padding:20px 32px">
 
-    <!-- Status row -->
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:20px">
-      <div class="no-card">
-        <div class="no-card-label">Options Analysed</div>
-        <div class="no-card-num" style="color:var(--c-trade)">3</div>
-        <div class="no-card-sub">Scored across 5 dimensions</div>
+    <!-- The job we're protecting -->
+    <div style="background:rgba(139,107,174,0.06);border:1px solid rgba(139,107,174,0.3);border-left:4px solid var(--c-jtbd);border-radius:12px;padding:16px 18px;margin-bottom:16px">
+      <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.1em;color:var(--c-jtbd);margin-bottom:8px">The Job We're Protecting</div>
+      <div style="font-size:15px;font-weight:700;color:var(--text-1);line-height:1.4;margin-bottom:6px">When a supplier asks for proof of business banking, the applicant needs to feel credible before any external interaction.</div>
+      <div style="font-size:12px;color:var(--text-2);line-height:1.5">Causal mechanism we must not break: the intervention has to reduce <em>social exposure</em> — the risk of looking unprepared in front of a counterparty — not just bank-rejection risk. Every trade-off below is made to keep this mechanism intact. <span class="conf-band strongly">Strongly Supported · 67%</span></div>
+    </div>
+
+    <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-4);margin-bottom:14px">What We're Deliberately Giving Up</div>
+
+    <!-- Sacrifices -->
+    <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:20px">
+      <div class="no-card" style="background:var(--surface-2);border-left:3px solid var(--c-trade);padding:14px 16px">
+        <div style="font-size:13px;font-weight:700;color:var(--text-1);line-height:1.4"><span style="color:var(--c-trade)">Give up:</span> rich upfront data capture &nbsp;→&nbsp; <span style="color:var(--c-proto)">for:</span> speed-to-confidence</div>
+        <div style="font-size:12px;color:var(--text-2);line-height:1.5;margin-top:5px">Why: profiling forms add friction exactly where social exposure is highest. We'd rather convert an anxious applicant than fully profile one. The product will be deliberately <strong>bad at data richness</strong> at the entry point.</div>
       </div>
-      <div class="no-card">
-        <div class="no-card-label">Recommendation</div>
-        <div class="no-card-num" style="color:var(--c-proto);font-size:18px">A+B</div>
-        <div class="no-card-sub">Sequential delivery</div>
+      <div class="no-card" style="background:var(--surface-2);border-left:3px solid var(--c-trade);padding:14px 16px">
+        <div style="font-size:13px;font-weight:700;color:var(--text-1);line-height:1.4"><span style="color:var(--c-trade)">Give up:</span> methodological completeness &nbsp;→&nbsp; <span style="color:var(--c-proto)">for:</span> a decision the team can act on this quarter</div>
+        <div style="font-size:12px;color:var(--text-2);line-height:1.5;margin-top:5px">Why: one confounding factor in the causal model stays unresolved. We accept that gap rather than stall — the primary mechanism is supported strongly enough to act on now. The product will be deliberately <strong>bad at exhaustive certainty</strong>.</div>
       </div>
-      <div class="no-card">
-        <div class="no-card-label">Confidence</div>
-        <div class="no-card-num" style="color:var(--c-proto)">79%</div>
-        <div class="no-card-sub">DE session recommended</div>
+      <div class="no-card" style="background:var(--surface-2);border-left:3px solid var(--c-trade);padding:14px 16px">
+        <div style="font-size:13px;font-weight:700;color:var(--text-1);line-height:1.4"><span style="color:var(--c-trade)">Give up:</span> serving the "Status Ambiguity" edge case &nbsp;→&nbsp; <span style="color:var(--c-proto)">for:</span> nailing Approval Anxiety</div>
+        <div style="font-size:12px;color:var(--text-2);line-height:1.5;margin-top:5px">Why: Approval Anxiety is the validated job (6/8 interviews); Status Ambiguity is a thinner signal. Splitting effort would weaken both. The product will be deliberately <strong>bad for the status-signalling segment</strong> — peer-stories (old Concept C) is explicitly out.</div>
       </div>
     </div>
 
-    <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-4);margin-bottom:14px">Options Matrix · Scored across customer value, evidence strength, build complexity, time-to-market, strategic fit</div>
-
-    <!-- Options Matrix Table -->
-    <div style="background:var(--surface-2);border:1px solid var(--border-d);border-radius:10px;overflow:hidden;margin-bottom:20px">
-      <div style="display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr 1fr 1fr 80px;background:var(--surface-3);padding:8px 14px;gap:8px">
-        <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-4)">Option</div>
-        <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-4);text-align:center">Cust. Value</div>
-        <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-4);text-align:center">Evidence</div>
-        <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-4);text-align:center">Build</div>
-        <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-4);text-align:center">Time</div>
-        <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-4);text-align:center">Strategic</div>
-        <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-4);text-align:center">Score</div>
-      </div>
-      <div style="display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr 1fr 1fr 80px;padding:10px 14px;gap:8px;border-top:1px solid var(--border-d);background:rgba(74,156,122,0.04)">
-        <div style="font-size:12px;font-weight:600;color:var(--c-proto)">A: Pre-qual signal</div>
-        <div style="font-size:12px;color:var(--text-1);text-align:center">9/10</div>
-        <div style="font-size:12px;color:var(--text-1);text-align:center">8/10</div>
-        <div style="font-size:12px;color:var(--text-1);text-align:center">7/10</div>
-        <div style="font-size:12px;color:var(--text-1);text-align:center">8/10</div>
-        <div style="font-size:12px;color:var(--text-1);text-align:center">9/10</div>
-        <div style="font-size:13px;font-weight:700;color:var(--c-proto);text-align:center;font-family:'Geist Mono',monospace">8.2</div>
-      </div>
-      <div style="display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr 1fr 1fr 80px;padding:10px 14px;gap:8px;border-top:1px solid var(--border-d)">
-        <div style="font-size:12px;font-weight:600;color:var(--amber)">B: Doc checklist</div>
-        <div style="font-size:12px;color:var(--text-2);text-align:center">6/10</div>
-        <div style="font-size:12px;color:var(--text-2);text-align:center">5/10</div>
-        <div style="font-size:12px;color:var(--text-2);text-align:center">9/10</div>
-        <div style="font-size:12px;color:var(--text-2);text-align:center">9/10</div>
-        <div style="font-size:12px;color:var(--text-2);text-align:center">6/10</div>
-        <div style="font-size:13px;font-weight:700;color:var(--amber);text-align:center;font-family:'Geist Mono',monospace">7.0</div>
-      </div>
-      <div style="display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr 1fr 1fr 80px;padding:10px 14px;gap:8px;border-top:1px solid var(--border-d);opacity:0.6">
-        <div style="font-size:12px;font-weight:600;color:var(--text-3)">C: Peer stories</div>
-        <div style="font-size:12px;color:var(--text-3);text-align:center">4/10</div>
-        <div style="font-size:12px;color:var(--text-3);text-align:center">3/10</div>
-        <div style="font-size:12px;color:var(--text-3);text-align:center">8/10</div>
-        <div style="font-size:12px;color:var(--text-3);text-align:center">9/10</div>
-        <div style="font-size:12px;color:var(--text-3);text-align:center">4/10</div>
-        <div style="font-size:13px;font-weight:700;color:var(--text-3);text-align:center;font-family:'Geist Mono',monospace">4.8</div>
-      </div>
-    </div>
-
-    <!-- Recommendation -->
-    <div style="background:rgba(74,156,122,0.07);border:1px solid rgba(74,156,122,0.25);border-left:4px solid var(--c-proto);border-radius:10px;padding:14px 16px;margin-bottom:20px">
-      <div style="font-size:9px;text-transform:uppercase;letter-spacing:0.09em;color:var(--c-proto);margin-bottom:8px">→ Noetic Recommendation · 79% confidence</div>
-      <div style="font-size:14px;font-weight:700;color:var(--text-1);margin-bottom:8px">Ship Concept A first. Add Concept B in the next release cycle.</div>
-      <div style="font-size:12px;color:var(--text-2);line-height:1.5">Concept A addresses the primary abandonment trigger (Approval Anxiety, 6/8 interviews) with strong evidence and validated prototype results. Concept B addresses the secondary cluster (Process Friction) and has a low build cost — sequence it 4–6 weeks later to avoid scope creep. Concept C is not recommended: low evidence, low strategic fit, doesn't address the primary JTBD.</div>
-      <div style="height:3px;background:var(--surface-4);border-radius:2px;overflow:hidden;margin-top:12px"><div style="width:79%;height:100%;background:var(--c-proto);border-radius:2px"></div></div>
+    <!-- Sharpened solution direction -->
+    <div style="background:rgba(201,168,76,0.07);border:1px solid rgba(201,168,76,0.3);border-left:4px solid var(--c-trade);border-radius:12px;padding:16px 18px;margin-bottom:20px">
+      <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.1em;color:var(--c-trade);margin-bottom:8px">Sharpened Solution Direction</div>
+      <div style="font-size:15px;font-weight:700;color:var(--text-1);line-height:1.4;margin-bottom:6px">Pre-qualification that makes applicants feel credible before they ever face a supplier or upload a document.</div>
+      <div style="font-size:12px;color:var(--text-2);line-height:1.5">By giving up breadth, certainty, and the edge segment, the product overperforms on the one thing the protected job demands: collapsing social exposure to near zero at the moment anxiety peaks. This is the constraint we ship against — not the highest-scoring option, but the sharpest one.</div>
     </div>
 
     <!-- Module transition gate -->
