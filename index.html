@@ -1390,6 +1390,12 @@ html.light .ost-reprioritise { background: rgba(52,136,104,0.04); }
         onmouseout="this.style.borderColor='var(--border-d)';this.style.color='var(--text-3)'">
         ⌘K
       </button>
+      <button onclick="startTour()" title="Guided tour"
+        style="margin-right:8px;background:var(--surface-2);border:1px solid var(--border-d);border-radius:7px;padding:4px 10px;font-size:11px;color:var(--text-3);cursor:pointer;transition:all 0.15s"
+        onmouseover="this.style.borderColor='var(--border-a)';this.style.color='var(--text-2)'"
+        onmouseout="this.style.borderColor='var(--border-d)';this.style.color='var(--text-3)'">
+        ✦ Tour
+      </button>
       <div class="status-dot active"></div>
       <span class="status-text">Active Discovery</span>
       <span class="weeks-badge">Week 8</span>
@@ -1472,7 +1478,8 @@ html.light .ost-reprioritise { background: rgba(52,136,104,0.04); }
   <rect x="90" y="118" width="240" height="58" rx="11" fill="rgba(91,140,186,0.08)" stroke="rgba(91,140,186,0.45)" stroke-width="1.3" stroke-dasharray="6,3" style="cursor:pointer" onclick="selectNode('definition')"/>
   <text x="210" y="138" text-anchor="middle" fill="#9FC0E0" font-family="'Instrument Sans',sans-serif" font-size="13" font-weight="700">Desired Outcome</text>
   <text x="210" y="154" text-anchor="middle" fill="var(--text-1)" font-family="'Instrument Sans',sans-serif" font-size="11">+30% SMB acquisition · 12mo</text>
-  <text x="210" y="167" text-anchor="middle" fill="rgba(91,140,186,0.6)" font-family="'Geist Mono',monospace" font-size="8">supply hypothesis · revisable</text>
+  <text x="210" y="166" text-anchor="middle" fill="rgba(91,140,186,0.6)" font-family="'Geist Mono',monospace" font-size="8">supply hypothesis · revisable</text>
+  <text x="210" y="175" text-anchor="middle" fill="rgba(91,140,186,0.6)" font-family="'Geist Mono',monospace" font-size="8" style="cursor:pointer" onclick="event.stopPropagation();openTreeModal('outcomes-modal')">1 of 3 outcomes · switch ▾</text>
 
   <!-- Challenge arrow: demand → outcome -->
   <text x="455" y="134" text-anchor="middle" fill="var(--text-4)" font-family="'Geist Mono',monospace" font-size="8">validated demand can challenge the outcome</text>
@@ -3729,6 +3736,49 @@ function openJobsModal()      { openTreeModal('jobs-modal'); }
 function openOppsModal()      { openTreeModal('opps-modal'); }
 function openSolutionsModal() { openTreeModal('solutions-modal'); }
 
+// ── Guided tour ──
+const tourSteps = [
+  { label: 'STEP 1 / 6', title: 'The convergent canvas',
+    body: "Noetic Mind isn't a funnel. Two sides meet in the middle: your business goal (supply) and validated customer truth (demand). Solutions live where they reconcile." },
+  { label: 'STEP 2 / 6', title: 'Supply side · Framing → Outcome',
+    body: "Your project brief seeds the Desired Outcome. It's a revisable hypothesis — a guess about what to move, held loosely until evidence arrives." },
+  { label: 'STEP 3 / 6', title: 'Demand side · Jobs & Opportunities',
+    body: "JTBD interviews surface the jobs customers are trying to do, and the forces (opportunities) blocking them. This is validated market truth." },
+  { label: 'STEP 4 / 6', title: 'Validated demand can challenge the outcome',
+    body: "When real demand contradicts the supply-side guess, the outcome loses its immunity. Demand can force a rethink — that's the dashed arrow." },
+  { label: 'STEP 5 / 6', title: 'Solutions · demand meets supply',
+    body: "A solution is where design requirements (demand) meet system requirements (supply), reconciled by deliberate tradeoffs." },
+  { label: 'STEP 6 / 6', title: 'Experiments · real humans',
+    body: "The riskiest assumption gets tested with a designed experiment fielded to real people. Then the system re-prioritises the weakest node — continuously." },
+];
+let tourStep = 0;
+function renderTourStep() {
+  const s = tourSteps[tourStep];
+  document.getElementById('tour-step-label').textContent = s.label;
+  document.getElementById('tour-title').textContent = s.title;
+  document.getElementById('tour-body').textContent = s.body;
+  document.getElementById('tour-next').textContent = (tourStep === tourSteps.length - 1) ? 'Done' : 'Next →';
+}
+function startTour() {
+  tourStep = 0;
+  renderTourStep();
+  const el = document.getElementById('tour-overlay');
+  if (el.parentElement !== document.body) document.body.appendChild(el);
+  el.style.opacity = '0';
+  el.style.pointerEvents = 'all';
+  requestAnimationFrame(() => { el.style.opacity = '1'; });
+}
+function tourNext() {
+  if (tourStep >= tourSteps.length - 1) { tourSkip(); return; }
+  tourStep++;
+  renderTourStep();
+}
+function tourSkip() {
+  const el = document.getElementById('tour-overlay');
+  el.style.opacity = '0';
+  el.style.pointerEvents = 'none';
+}
+
 function openCmdPalette() {
   const el = document.getElementById('cmdpalette');
   el.classList.add('open');
@@ -3815,6 +3865,61 @@ window.addEventListener('load', () => {
 </script>
 
 <!-- ── JOBS TO BE DONE MODAL ── -->
+<!-- ── DESIRED OUTCOMES MODAL ── -->
+<!-- GUIDED TOUR OVERLAY -->
+<div id="tour-overlay"
+  style="position:fixed;inset:0;z-index:10001;background:rgba(6,10,20,0.72);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity 0.25s ease">
+  <div style="width:440px;background:var(--surface-1);border:1px solid var(--border-d);border-radius:14px;overflow:hidden;box-shadow:0 24px 64px rgba(0,0,0,0.5);animation:panel-in 0.22s ease">
+    <div style="padding:22px 26px 20px">
+      <div id="tour-step-label" style="font-size:10px;font-weight:600;color:var(--amber);font-family:'Geist Mono',monospace;letter-spacing:0.06em;margin-bottom:10px">STEP 1 / 6</div>
+      <div id="tour-title" style="font-size:17px;font-weight:600;color:var(--text-1);line-height:1.3;margin-bottom:10px">The convergent canvas</div>
+      <div id="tour-body" style="font-size:13px;color:var(--text-2);line-height:1.6"></div>
+    </div>
+    <div style="padding:14px 26px;border-top:1px solid var(--border-s);display:flex;justify-content:space-between;align-items:center">
+      <button onclick="tourSkip()" style="font-size:12px;font-weight:500;background:none;border:none;color:var(--text-4);cursor:pointer;font-family:'Instrument Sans',sans-serif" onmouseover="this.style.color='var(--text-2)'" onmouseout="this.style.color='var(--text-4)'">Skip</button>
+      <button id="tour-next" onclick="tourNext()" style="font-size:12px;font-weight:600;padding:7px 18px;border-radius:7px;border:1px solid rgba(201,168,76,0.4);background:rgba(201,168,76,0.12);color:var(--amber);cursor:pointer;font-family:'Instrument Sans',sans-serif">Next →</button>
+    </div>
+  </div>
+</div>
+
+<div id="outcomes-modal"
+  style="position:fixed;inset:0;z-index:9999;background:rgba(6,10,20,0.65);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity 0.25s ease"
+  onclick="if(event.target===this)closeTreeModal('outcomes-modal')">
+  <div style="width:600px;max-height:82vh;background:var(--surface-1);border:1px solid var(--border-d);border-radius:14px;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 24px 64px rgba(0,0,0,0.5);animation:panel-in 0.22s ease">
+    <div style="padding:18px 24px 14px;border-bottom:1px solid var(--border-s);display:flex;align-items:center;justify-content:space-between;flex-shrink:0">
+      <div>
+        <div style="font-size:15px;font-weight:600;color:var(--text-1);display:flex;align-items:center;gap:8px">Desired Outcomes<span style="background:var(--c-def-dim);color:var(--c-def);border-radius:10px;font-size:10px;font-weight:700;padding:2px 8px">3</span></div>
+        <div style="font-size:11px;color:var(--text-3);margin-top:3px">Supply-side goals · discovery focuses on one at a time</div>
+      </div>
+      <button onclick="closeTreeModal('outcomes-modal')" style="width:32px;height:32px;border-radius:8px;background:var(--surface-2);border:1px solid var(--border-d);color:var(--text-2);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center" onmouseover="this.style.background='var(--surface-3)'" onmouseout="this.style.background='var(--surface-2)'">✕</button>
+    </div>
+    <div style="overflow-y:auto;padding:16px 24px;display:flex;flex-direction:column;gap:10px">
+      <!-- Active outcome -->
+      <div style="background:var(--surface-2);border-left:3px solid var(--c-def);border-radius:10px;padding:14px 16px">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+          <span style="font-size:10px;font-weight:600;color:var(--c-proto);background:rgba(74,156,122,0.15);padding:2px 8px;border-radius:10px;font-family:'Geist Mono',monospace">● Active</span>
+        </div>
+        <div style="font-size:13px;color:var(--text-1);line-height:1.55;font-weight:600">+30% SMB account acquisition in 12 months</div>
+        <div style="font-size:10px;color:var(--text-4);font-family:'Geist Mono',monospace;margin-top:8px">Currently driving discovery · 3 opportunities mapped</div>
+      </div>
+      <!-- Parked outcome -->
+      <div style="background:var(--surface-2);border-left:3px solid var(--border-a);border-radius:10px;padding:14px 16px">
+        <div style="font-size:13px;color:var(--text-2);line-height:1.55;font-weight:600">Reduce 90-day SMB churn by 15%</div>
+        <div style="font-size:10px;color:var(--text-4);font-family:'Geist Mono',monospace;margin-top:8px">Parked · no active discovery</div>
+      </div>
+      <!-- Parked outcome -->
+      <div style="background:var(--surface-2);border-left:3px solid var(--border-a);border-radius:10px;padding:14px 16px">
+        <div style="font-size:13px;color:var(--text-2);line-height:1.55;font-weight:600">Lift cross-sell attach rate to 1.8 products</div>
+        <div style="font-size:10px;color:var(--text-4);font-family:'Geist Mono',monospace;margin-top:8px">Parked · no active discovery</div>
+      </div>
+    </div>
+    <div style="padding:12px 24px;border-top:1px solid var(--border-s);display:flex;justify-content:space-between;align-items:center">
+      <span style="font-size:11px;color:var(--text-4)">One active outcome at a time keeps discovery focused (Teresa Torres).</span>
+      <button onclick="closeTreeModal('outcomes-modal')" style="font-size:12px;font-weight:600;padding:7px 16px;border-radius:7px;border:1px solid rgba(91,140,186,0.4);background:rgba(91,140,186,0.1);color:var(--c-def);cursor:pointer;font-family:'Instrument Sans',sans-serif">Done</button>
+    </div>
+  </div>
+</div>
+
 <div id="jobs-modal"
   style="position:fixed;inset:0;z-index:9999;background:rgba(6,10,20,0.65);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity 0.25s ease"
   onclick="if(event.target===this)closeTreeModal('jobs-modal')">
