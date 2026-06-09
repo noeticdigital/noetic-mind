@@ -1430,7 +1430,7 @@ html.light .ost-reprioritise { background: rgba(52,136,104,0.04); }
 
     <!-- ── PART 2: SVG BRANCHING TREE ────────────────── -->
     <div id="ost-canvas" class="ost-graph-area">
-      <svg id="ost-svg" width="100%" height="100%" viewBox="0 0 880 326" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+      <svg id="ost-svg" width="100%" height="100%" viewBox="0 0 880 400" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <marker id="cv-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
       <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -1438,67 +1438,70 @@ html.light .ost-reprioritise { background: rgba(52,136,104,0.04); }
   </defs>
 
   <!-- ── SIDE LABELS ── -->
-  <text x="205" y="20" text-anchor="middle" fill="rgba(91,140,186,0.45)" font-family="'Geist Mono',monospace" font-size="9" letter-spacing="0.14em">SUPPLY</text>
-  <text x="680" y="20" text-anchor="middle" fill="rgba(139,107,174,0.45)" font-family="'Geist Mono',monospace" font-size="9" letter-spacing="0.14em">DEMAND</text>
+  <text x="210" y="24" text-anchor="middle" fill="rgba(91,140,186,0.45)" font-family="'Geist Mono',monospace" font-size="9" letter-spacing="0.14em">SUPPLY</text>
+  <text x="680" y="24" text-anchor="middle" fill="rgba(139,107,174,0.45)" font-family="'Geist Mono',monospace" font-size="9" letter-spacing="0.14em">DEMAND</text>
 
-  <!-- ════ TOP ROW: Framing (supply) | Customer Progress (demand) ════ -->
-  <rect x="105" y="34" width="210" height="38" rx="9" fill="rgba(120,130,150,0.05)" stroke="rgba(140,150,170,0.3)" stroke-width="1" stroke-dasharray="5,3" style="cursor:pointer" onclick="selectNode('definition')"/>
-  <text x="210" y="50" text-anchor="middle" fill="var(--text-2)" font-family="'Instrument Sans',sans-serif" font-size="11" font-weight="600">Framing Assumptions</text>
-  <text x="210" y="64" text-anchor="middle" fill="var(--text-4)" font-family="'Geist Mono',monospace" font-size="8">unvalidated · seeds the outcome</text>
-  <line x1="210" y1="72" x2="210" y2="92" stroke="rgba(91,140,186,0.3)" stroke-width="1.2"/>
+  <!-- ════ TOP ROW: Framing (supply) | Jobs to Be Done (demand) ════ -->
+  <rect x="105" y="46" width="210" height="44" rx="9" fill="rgba(120,130,150,0.05)" stroke="rgba(140,150,170,0.3)" stroke-width="1" stroke-dasharray="5,3" style="cursor:pointer" onclick="selectNode('definition')"/>
+  <text x="210" y="65" text-anchor="middle" fill="var(--text-2)" font-family="'Instrument Sans',sans-serif" font-size="11" font-weight="600">Framing Assumptions</text>
+  <text x="210" y="79" text-anchor="middle" fill="var(--text-4)" font-family="'Geist Mono',monospace" font-size="8">your project brief · unvalidated</text>
+  <line x1="210" y1="90" x2="210" y2="118" stroke="rgba(91,140,186,0.3)" stroke-width="1.2"/>
 
-  <rect x="565" y="34" width="230" height="38" rx="9" fill="rgba(139,107,174,0.12)" stroke="rgba(139,107,174,0.65)" stroke-width="1.4" style="cursor:pointer" onclick="selectNode('jtbd')"/>
-  <text x="680" y="50" text-anchor="middle" fill="#C5B8E0" font-family="'Instrument Sans',sans-serif" font-size="12" font-weight="700">Customer Progress · JTBD</text>
-  <text x="680" y="64" text-anchor="middle" fill="var(--text-1)" font-family="'Playfair Display',serif" font-style="italic" font-size="9.5">"set up credible banking, fast"</text>
-  <line x1="680" y1="72" x2="680" y2="92" stroke="rgba(139,107,174,0.3)" stroke-width="1.2"/>
+  <rect x="565" y="46" width="230" height="44" rx="9" fill="rgba(139,107,174,0.12)" stroke="rgba(139,107,174,0.65)" stroke-width="1.4" style="cursor:pointer" onclick="openJobsModal()"/>
+  <text x="680" y="65" text-anchor="middle" fill="#C5B8E0" font-family="'Instrument Sans',sans-serif" font-size="12" font-weight="700">Jobs to Be Done</text>
+  <text x="680" y="79" text-anchor="middle" fill="var(--text-1)" font-family="'Geist Mono',monospace" font-size="8.5">2 jobs uncovered · validated · click to review →</text>
+  <line x1="680" y1="90" x2="680" y2="118" stroke="rgba(139,107,174,0.3)" stroke-width="1.2"/>
+
+  <!-- Framing → Jobs dashed cross-link: unvalidated assumptions tested against demand -->
+  <text x="442" y="62" text-anchor="middle" fill="var(--text-4)" font-family="'Geist Mono',monospace" font-size="8">unvalidated assumptions</text>
+  <path d="M317,73 H561" fill="none" stroke="rgba(140,150,170,0.35)" stroke-width="1.1" stroke-dasharray="4,4" marker-end="url(#cv-arrow)"/>
 
   <!-- ════ MID ROW: Desired Outcome (supply) | Opportunities (demand) — same level ════ -->
-  <!-- Desired Outcome -->
-  <rect x="90" y="92" width="240" height="54" rx="11" fill="rgba(91,140,186,0.08)" stroke="rgba(91,140,186,0.45)" stroke-width="1.3" stroke-dasharray="6,3" style="cursor:pointer" onclick="selectNode('definition')"/>
-  <text x="210" y="110" text-anchor="middle" fill="#9FC0E0" font-family="'Instrument Sans',sans-serif" font-size="13" font-weight="700">Desired Outcome</text>
-  <text x="210" y="126" text-anchor="middle" fill="var(--text-1)" font-family="'Instrument Sans',sans-serif" font-size="11">+30% SMB acquisition · 12mo</text>
-  <text x="210" y="139" text-anchor="middle" fill="rgba(91,140,186,0.6)" font-family="'Geist Mono',monospace" font-size="8">supply hypothesis · revisable</text>
+  <rect x="90" y="118" width="240" height="58" rx="11" fill="rgba(91,140,186,0.08)" stroke="rgba(91,140,186,0.45)" stroke-width="1.3" stroke-dasharray="6,3" style="cursor:pointer" onclick="selectNode('definition')"/>
+  <text x="210" y="138" text-anchor="middle" fill="#9FC0E0" font-family="'Instrument Sans',sans-serif" font-size="13" font-weight="700">Desired Outcome</text>
+  <text x="210" y="154" text-anchor="middle" fill="var(--text-1)" font-family="'Instrument Sans',sans-serif" font-size="11">+30% SMB acquisition · 12mo</text>
+  <text x="210" y="167" text-anchor="middle" fill="rgba(91,140,186,0.6)" font-family="'Geist Mono',monospace" font-size="8">supply hypothesis · revisable</text>
 
-  <!-- Challenge arrow: demand → outcome (horizontal, in the gap) -->
-  <text x="455" y="104" text-anchor="middle" fill="var(--text-4)" font-family="'Geist Mono',monospace" font-size="8">validated demand can challenge the outcome</text>
-  <path d="M566,116 H334" fill="none" stroke="rgba(139,107,174,0.4)" stroke-width="1.2" stroke-dasharray="5,4" marker-end="url(#cv-arrow)"/>
+  <!-- Challenge arrow: demand → outcome -->
+  <text x="455" y="134" text-anchor="middle" fill="var(--text-4)" font-family="'Geist Mono',monospace" font-size="8">validated demand can challenge the outcome</text>
+  <path d="M566,147 H334" fill="none" stroke="rgba(139,107,174,0.4)" stroke-width="1.2" stroke-dasharray="5,4" marker-end="url(#cv-arrow)"/>
 
   <!-- Opportunities (single node → modal) -->
-  <rect x="565" y="92" width="230" height="54" rx="11" fill="rgba(139,107,174,0.08)" stroke="rgba(139,107,174,0.45)" stroke-width="1.3" style="cursor:pointer" onclick="openOppsModal()"/>
-  <text x="680" y="110" text-anchor="middle" fill="#C5B8E0" font-family="'Instrument Sans',sans-serif" font-size="13" font-weight="700">Opportunities</text>
-  <text x="680" y="126" text-anchor="middle" fill="var(--text-1)" font-family="'Instrument Sans',sans-serif" font-size="11">3 mapped · 1 validated · 2 emerging</text>
-  <text x="680" y="139" text-anchor="middle" fill="rgba(139,107,174,0.6)" font-family="'Geist Mono',monospace" font-size="8">forces &amp; struggles · click to review →</text>
+  <rect x="565" y="118" width="230" height="58" rx="11" fill="rgba(139,107,174,0.08)" stroke="rgba(139,107,174,0.45)" stroke-width="1.3" style="cursor:pointer" onclick="openOppsModal()"/>
+  <text x="680" y="138" text-anchor="middle" fill="#C5B8E0" font-family="'Instrument Sans',sans-serif" font-size="13" font-weight="700">Opportunities</text>
+  <text x="680" y="154" text-anchor="middle" fill="var(--text-1)" font-family="'Instrument Sans',sans-serif" font-size="11">3 mapped · forces &amp; struggles</text>
+  <text x="680" y="167" text-anchor="middle" fill="rgba(139,107,174,0.6)" font-family="'Geist Mono',monospace" font-size="8">1 strong · 1 suggestive · 1 hypothesis · review →</text>
 
   <!-- ════ CONVERGENCE: short symmetric mirror arrows into Solutions ════ -->
-  <path d="M210,146 C210,176 322,180 384,200" fill="none" stroke="rgba(201,168,76,0.4)" stroke-width="1.4" marker-end="url(#cv-arrow)"/>
-  <text x="300" y="170" text-anchor="middle" fill="rgba(201,168,76,0.5)" font-family="'Geist Mono',monospace" font-size="7.5">system requirements</text>
-  <path d="M680,146 C680,176 558,180 496,200" fill="none" stroke="rgba(201,168,76,0.4)" stroke-width="1.4" marker-end="url(#cv-arrow)"/>
-  <text x="590" y="170" text-anchor="middle" fill="rgba(201,168,76,0.5)" font-family="'Geist Mono',monospace" font-size="7.5">design requirements</text>
+  <path d="M210,176 C210,216 330,222 392,252" fill="none" stroke="rgba(201,168,76,0.4)" stroke-width="1.4" marker-end="url(#cv-arrow)"/>
+  <text x="300" y="208" text-anchor="middle" fill="rgba(201,168,76,0.5)" font-family="'Geist Mono',monospace" font-size="7.5">system requirements</text>
+  <path d="M680,176 C680,216 552,222 488,252" fill="none" stroke="rgba(201,168,76,0.4)" stroke-width="1.4" marker-end="url(#cv-arrow)"/>
+  <text x="590" y="208" text-anchor="middle" fill="rgba(201,168,76,0.5)" font-family="'Geist Mono',monospace" font-size="7.5">design requirements</text>
 
   <!-- Solutions (single node → modal) -->
-  <rect x="350" y="200" width="180" height="50" rx="11" fill="rgba(201,168,76,0.1)" stroke="rgba(201,168,76,0.55)" stroke-width="1.4" style="cursor:pointer" onclick="openSolutionsModal()"/>
-  <text x="440" y="218" text-anchor="middle" fill="#E8C55A" font-family="'Instrument Sans',sans-serif" font-size="13" font-weight="700">Solutions</text>
-  <text x="440" y="233" text-anchor="middle" fill="var(--text-1)" font-family="'Instrument Sans',sans-serif" font-size="10">3 candidates · demand meets supply</text>
-  <text x="440" y="245" text-anchor="middle" fill="rgba(201,168,76,0.6)" font-family="'Geist Mono',monospace" font-size="8">click to review →</text>
+  <rect x="350" y="252" width="180" height="50" rx="11" fill="rgba(201,168,76,0.1)" stroke="rgba(201,168,76,0.55)" stroke-width="1.4" style="cursor:pointer" onclick="openSolutionsModal()"/>
+  <text x="440" y="270" text-anchor="middle" fill="#E8C55A" font-family="'Instrument Sans',sans-serif" font-size="13" font-weight="700">Solutions</text>
+  <text x="440" y="285" text-anchor="middle" fill="var(--text-1)" font-family="'Instrument Sans',sans-serif" font-size="10">3 candidates · demand meets supply</text>
+  <text x="440" y="297" text-anchor="middle" fill="rgba(201,168,76,0.6)" font-family="'Geist Mono',monospace" font-size="8">click to review →</text>
 
   <!-- Experiments -->
-  <line x1="440" y1="250" x2="440" y2="266" stroke="rgba(74,156,122,0.3)" stroke-width="1.2"/>
-  <rect x="350" y="266" width="180" height="42" rx="11" fill="rgba(74,156,122,0.08)" stroke="rgba(74,156,122,0.5)" stroke-width="1.3" style="cursor:pointer" onclick="selectNode('prototyping')"/>
-  <text x="440" y="284" text-anchor="middle" fill="#6FCBA0" font-family="'Instrument Sans',sans-serif" font-size="13" font-weight="700">Experiments</text>
-  <text x="440" y="299" text-anchor="middle" fill="rgba(74,156,122,0.65)" font-family="'Geist Mono',monospace" font-size="8">prototyping · real humans</text>
+  <line x1="440" y1="302" x2="440" y2="320" stroke="rgba(74,156,122,0.3)" stroke-width="1.2"/>
+  <rect x="350" y="320" width="180" height="46" rx="11" fill="rgba(74,156,122,0.08)" stroke="rgba(74,156,122,0.5)" stroke-width="1.3" style="cursor:pointer" onclick="selectNode('prototyping')"/>
+  <text x="440" y="340" text-anchor="middle" fill="#6FCBA0" font-family="'Instrument Sans',sans-serif" font-size="13" font-weight="700">Experiments</text>
+  <text x="440" y="355" text-anchor="middle" fill="rgba(74,156,122,0.65)" font-family="'Geist Mono',monospace" font-size="8">prototyping · real humans</text>
 
   <!-- Re-prioritise loop: Experiments → Opportunities -->
-  <path d="M530,288 C690,282 790,205 762,128" fill="none" stroke="rgba(74,156,122,0.22)" stroke-width="1.4" stroke-dasharray="6,4" class="cv-loop-arc"/>
-  <polygon points="758,123 766,131 754,133" fill="rgba(74,156,122,0.32)"/>
-  <text x="818" y="215" text-anchor="middle" fill="rgba(74,156,122,0.3)" font-family="'Geist Mono',monospace" font-size="8" transform="rotate(90,818,215)">↻ re-prioritise weakest node</text>
+  <path d="M530,343 C700,335 802,250 768,160" fill="none" stroke="rgba(74,156,122,0.22)" stroke-width="1.4" stroke-dasharray="6,4" class="cv-loop-arc"/>
+  <polygon points="764,155 772,163 760,165" fill="rgba(74,156,122,0.32)"/>
+  <text x="828" y="255" text-anchor="middle" fill="rgba(74,156,122,0.3)" font-family="'Geist Mono',monospace" font-size="8" transform="rotate(90,828,255)">↻ re-prioritise weakest node</text>
 
-  <!-- Evidence legend (bottom-left) -->
-  <circle cx="44" cy="268" r="4" fill="#4A9C7A"/>
-  <text x="52" y="271" fill="rgba(156,163,178,0.55)" font-family="'Instrument Sans',sans-serif" font-size="8">Validated</text>
-  <circle cx="44" cy="284" r="4" fill="#C9A84C"/>
-  <text x="52" y="287" fill="rgba(156,163,178,0.55)" font-family="'Instrument Sans',sans-serif" font-size="8">Hypothesis</text>
-  <circle cx="44" cy="300" r="4" fill="rgba(60,63,77,0.9)" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
-  <text x="52" y="303" fill="rgba(156,163,178,0.55)" font-family="'Instrument Sans',sans-serif" font-size="8">Weak</text>
+  <!-- Evidence legend (bottom-left) — consistent: green strong, amber suggestive, grey hypothesis -->
+  <circle cx="44" cy="322" r="4" fill="#4A9C7A"/>
+  <text x="52" y="325" fill="rgba(156,163,178,0.55)" font-family="'Instrument Sans',sans-serif" font-size="8">Strongly Supported</text>
+  <circle cx="44" cy="338" r="4" fill="#C9A84C"/>
+  <text x="52" y="341" fill="rgba(156,163,178,0.55)" font-family="'Instrument Sans',sans-serif" font-size="8">Suggestive</text>
+  <circle cx="44" cy="354" r="4" fill="rgba(60,63,77,0.9)" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+  <text x="52" y="357" fill="rgba(156,163,178,0.55)" font-family="'Instrument Sans',sans-serif" font-size="8">Hypothesis</text>
       </svg>
     </div>
 
@@ -1930,42 +1933,52 @@ html.light .ost-reprioritise { background: rgba(52,136,104,0.04); }
 
   <!-- YOUR DEFINITION tab -->
   <div class="def-panel active" id="def-input" style="flex:1;overflow-y:auto;padding:20px 24px;display:block">
-    <div style="max-width:640px">
+    <div style="max-width:660px">
 
-      <!-- Struggling Moments Identified -->
-      <div style="font-size:9px;text-transform:uppercase;letter-spacing:0.1em;color:var(--c-causal);margin-bottom:10px">Struggling Moments Identified · 3 of 8 interviews</div>
-      <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:20px">
-        <div style="background:var(--surface-2);border-left:3px solid var(--c-causal);border-radius:8px;padding:10px 12px">
-          <div style="font-size:10px;color:var(--text-3);font-weight:700;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.08em">Situation Trigger</div>
-          <div style="font-size:12px;color:var(--text-1);font-weight:700;line-height:1.45;margin-bottom:6px">Supplier asked for business account details before signing contract</div>
-          <div style="display:flex;gap:8px;flex-wrap:wrap">
-            <span style="font-size:10px;padding:2px 8px;background:rgba(192,96,128,0.1);color:var(--c-causal);border-radius:12px">Emotional state: dread + shame</span>
-            <span style="font-size:10px;padding:2px 8px;background:var(--surface-3);color:var(--text-3);border-radius:12px">Sarah M. · Interview #1</span>
-          </div>
+      <div style="font-size:13px;color:var(--text-2);line-height:1.55;margin-bottom:16px">Capture your current understanding of the project. Everything here enters the tree as <span style="color:var(--c-def);font-weight:600">unvalidated assumption</span> — it seeds the Desired Outcome and gets tested, confirmed, or overturned as real evidence lands.</div>
+
+      <!-- Project brief composer -->
+      <div style="font-size:9px;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-4);margin-bottom:8px">Project Brief</div>
+      <div style="background:var(--surface-2);border:1px solid var(--border-d);border-radius:10px;padding:0;margin-bottom:18px">
+        <div style="padding:12px 14px;border-bottom:1px solid var(--border-s)">
+          <div style="font-size:10px;color:var(--text-3);margin-bottom:5px">The problem, as we currently understand it</div>
+          <div style="font-size:13px;color:var(--text-1);line-height:1.5">SMB customers abandon the business account application before completing it. We believe the drop-off is concentrated at the document-upload step and is costing us roughly 30% of qualified SMB signups.</div>
         </div>
-        <div style="background:var(--surface-2);border-left:3px solid var(--c-causal);border-radius:8px;padding:10px 12px">
-          <div style="font-size:10px;color:var(--text-3);font-weight:700;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.08em">Situation Trigger</div>
-          <div style="font-size:12px;color:var(--text-1);font-weight:700;line-height:1.45;margin-bottom:6px">Accountant said "you should really have a business account by now"</div>
-          <div style="display:flex;gap:8px;flex-wrap:wrap">
-            <span style="font-size:10px;padding:2px 8px;background:rgba(192,96,128,0.1);color:var(--c-causal);border-radius:12px">Emotional state: inadequacy + urgency</span>
-            <span style="font-size:10px;padding:2px 8px;background:var(--surface-3);color:var(--text-3);border-radius:12px">James K. · Interview #2</span>
-          </div>
+        <div style="padding:12px 14px;border-bottom:1px solid var(--border-s)">
+          <div style="font-size:10px;color:var(--text-3);margin-bottom:5px">Who we think we're building for</div>
+          <div style="font-size:13px;color:var(--text-1);line-height:1.5">Newly-formed SMBs (0–2 years), often first-time business banking applicants, frequently sole traders transitioning to a registered company.</div>
         </div>
-        <div style="background:var(--surface-2);border-left:3px solid var(--c-causal);border-radius:8px;padding:10px 12px">
-          <div style="font-size:10px;color:var(--text-3);font-weight:700;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.08em">Situation Trigger</div>
-          <div style="font-size:12px;color:var(--text-1);font-weight:700;line-height:1.45;margin-bottom:6px">Applied online, got to document upload step, then closed the browser</div>
-          <div style="display:flex;gap:8px;flex-wrap:wrap">
-            <span style="font-size:10px;padding:2px 8px;background:rgba(192,96,128,0.1);color:var(--c-causal);border-radius:12px">Emotional state: overwhelm + rejection fear</span>
-            <span style="font-size:10px;padding:2px 8px;background:var(--surface-3);color:var(--text-3);border-radius:12px">Priya D. · Interview #3</span>
-          </div>
+        <div style="padding:12px 14px;border-bottom:1px solid var(--border-s)">
+          <div style="font-size:10px;color:var(--text-3);margin-bottom:5px">What we currently believe causes the problem</div>
+          <div style="font-size:13px;color:var(--text-1);line-height:1.5">Our assumption: the application form is too long and asks for documents people don't have to hand. <span style="color:var(--amber)">(unverified)</span></div>
+        </div>
+        <div style="padding:12px 14px">
+          <div style="font-size:10px;color:var(--text-3);margin-bottom:5px">The metric we want to move</div>
+          <div style="font-size:13px;color:var(--text-1);line-height:1.5">+30% SMB account acquisition within 12 months.</div>
         </div>
       </div>
 
-      <!-- Synthesis quote with push/pull/anxiety framing -->
-      <div style="background:rgba(91,140,186,0.08);border:1px solid rgba(91,140,186,0.25);border-radius:10px;padding:14px 16px;margin-bottom:16px">
-        <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.1em;color:var(--c-def);margin-bottom:7px">✦ Switch Interview Synthesis <span onclick="return false" style="display:inline-flex;align-items:center;gap:3px;font-size:10px;background:var(--surface-3);color:var(--text-4);padding:1px 7px;border-radius:10px;cursor:pointer;margin-left:6px;font-family:'Geist Mono',monospace;text-transform:none;letter-spacing:0">📎 3 sources</span></div>
-        <div style="font-family:'Playfair Display',serif;font-style:italic;font-size:13px;color:var(--text-1);line-height:1.65;margin-bottom:8px">"Push forces (supplier pressure, accountability from peers) drive active looking. Pull toward the new is legitimacy and credibility. The key anxiety: rejection before effort is justified."</div>
-        <div style="font-size:11px;color:var(--text-3)">8 switch interviews · push/pull forces mapped · anxieties catalogued</div>
+      <!-- Assumptions extracted -->
+      <div style="font-size:9px;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-4);margin-bottom:8px">Assumptions extracted from your brief</div>
+      <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:18px">
+        <div style="display:flex;align-items:center;gap:10px;background:var(--surface-2);border-left:3px solid var(--c-def);border-radius:8px;padding:9px 12px">
+          <span style="flex:1;font-size:12px;color:var(--text-1)">Drop-off is concentrated at the document-upload step</span>
+          <span style="font-size:9px;font-weight:600;color:var(--amber);background:var(--amber-dim);padding:2px 8px;border-radius:10px;font-family:'Geist Mono',monospace">unvalidated</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;background:var(--surface-2);border-left:3px solid var(--c-def);border-radius:8px;padding:9px 12px">
+          <span style="flex:1;font-size:12px;color:var(--text-1)">The form being "too long" is the main driver</span>
+          <span style="font-size:9px;font-weight:600;color:var(--amber);background:var(--amber-dim);padding:2px 8px;border-radius:10px;font-family:'Geist Mono',monospace">unvalidated</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;background:var(--surface-2);border-left:3px solid var(--c-def);border-radius:8px;padding:9px 12px">
+          <span style="flex:1;font-size:12px;color:var(--text-1)">Target user is the first-time business banking applicant</span>
+          <span style="font-size:9px;font-weight:600;color:var(--amber);background:var(--amber-dim);padding:2px 8px;border-radius:10px;font-family:'Geist Mono',monospace">unvalidated</span>
+        </div>
+      </div>
+
+      <!-- Noetic challenge note -->
+      <div style="background:rgba(201,168,76,0.06);border:1px solid rgba(201,168,76,0.25);border-radius:10px;padding:14px 16px">
+        <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.1em;color:var(--amber);margin-bottom:7px">✦ Noetic Mind · challenging the brief</div>
+        <div style="font-size:13px;color:var(--text-1);line-height:1.6">Your brief assumes the upload step is the problem. That's a supply-side guess about <em>where</em> people drop off, not <em>why</em>. Before we trust it, run a Deliberation Engine pass to stress-test the framing, then validate against real demand in the JTBD interviews — the real struggle may fire <em>before</em> the form even begins.</div>
       </div>
 
     </div>
@@ -3713,6 +3726,7 @@ function closeTreeModal(id) {
   el.style.opacity = '0';
   el.style.pointerEvents = 'none';
 }
+function openJobsModal()      { openTreeModal('jobs-modal'); }
 function openOppsModal()      { openTreeModal('opps-modal'); }
 function openSolutionsModal() { openTreeModal('solutions-modal'); }
 
@@ -3801,6 +3815,45 @@ window.addEventListener('load', () => {
 });
 </script>
 
+<!-- ── JOBS TO BE DONE MODAL ── -->
+<div id="jobs-modal"
+  style="position:fixed;inset:0;z-index:9999;background:rgba(6,10,20,0.65);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity 0.25s ease"
+  onclick="if(event.target===this)closeTreeModal('jobs-modal')">
+  <div style="width:600px;max-height:82vh;background:var(--surface-1);border:1px solid var(--border-d);border-radius:14px;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 24px 64px rgba(0,0,0,0.5);animation:panel-in 0.22s ease">
+    <div style="padding:18px 24px 14px;border-bottom:1px solid var(--border-s);display:flex;align-items:center;justify-content:space-between;flex-shrink:0">
+      <div>
+        <div style="font-size:15px;font-weight:600;color:var(--text-1);display:flex;align-items:center;gap:8px">Jobs to Be Done<span style="background:var(--c-jtbd-dim);color:var(--c-jtbd);border-radius:10px;font-size:10px;font-weight:700;padding:2px 8px">2</span></div>
+        <div style="font-size:11px;color:var(--text-3);margin-top:3px">Validated market truth · the progress customers are trying to make</div>
+      </div>
+      <button onclick="closeTreeModal('jobs-modal')" style="width:32px;height:32px;border-radius:8px;background:var(--surface-2);border:1px solid var(--border-d);color:var(--text-2);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center" onmouseover="this.style.background='var(--surface-3)'" onmouseout="this.style.background='var(--surface-2)'">✕</button>
+    </div>
+    <div style="overflow-y:auto;padding:16px 24px;display:flex;flex-direction:column;gap:10px">
+      <!-- Job 1 -->
+      <div style="background:var(--surface-2);border-left:3px solid var(--c-proto);border-radius:10px;padding:14px 16px">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+          <span style="font-size:11px;font-weight:700;color:var(--c-jtbd);background:var(--c-jtbd-dim);padding:2px 8px;border-radius:10px">Functional Job</span>
+          <span style="font-size:10px;font-weight:600;color:var(--c-proto);background:rgba(74,156,122,0.15);padding:2px 8px;border-radius:10px;font-family:'Geist Mono',monospace">Validated · 74%</span>
+        </div>
+        <div style="font-size:13px;color:var(--text-1);line-height:1.55;font-family:'Playfair Display',serif;font-style:italic">"When applying for a business account, I want to know I'll be approved before I start gathering documents, so I don't waste time or feel like a failure in front of my suppliers."</div>
+        <div style="font-size:10px;color:var(--text-4);font-family:'Geist Mono',monospace;margin-top:8px">6 of 8 interviews · saturated</div>
+      </div>
+      <!-- Job 2 -->
+      <div style="background:var(--surface-2);border-left:3px solid var(--c-proto);border-radius:10px;padding:14px 16px">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+          <span style="font-size:11px;font-weight:700;color:var(--c-jtbd);background:var(--c-jtbd-dim);padding:2px 8px;border-radius:10px">Emotional Job</span>
+          <span style="font-size:10px;font-weight:600;color:var(--c-proto);background:rgba(74,156,122,0.15);padding:2px 8px;border-radius:10px;font-family:'Geist Mono',monospace">Strongly Supported · 68%</span>
+        </div>
+        <div style="font-size:13px;color:var(--text-1);line-height:1.55;font-family:'Playfair Display',serif;font-style:italic">"When a supplier or accountant asks for proof of business banking, I want to look established and credible, so I don't lose standing in a relationship that matters to me."</div>
+        <div style="font-size:10px;color:var(--text-4);font-family:'Geist Mono',monospace;margin-top:8px">5 of 8 interviews · emerging toward saturation</div>
+      </div>
+    </div>
+    <div style="padding:12px 24px;border-top:1px solid var(--border-s);display:flex;justify-content:space-between;align-items:center">
+      <span style="font-size:11px;color:var(--text-4)">Jobs are stable; the forces blocking them are the Opportunities</span>
+      <button onclick="closeTreeModal('jobs-modal');selectNode('jtbd')" style="font-size:12px;font-weight:600;padding:7px 16px;border-radius:7px;border:1px solid rgba(139,107,174,0.4);background:rgba(139,107,174,0.1);color:var(--c-jtbd);cursor:pointer;font-family:'Instrument Sans',sans-serif">Open JTBD workspace →</button>
+    </div>
+  </div>
+</div>
+
 <!-- ── OPPORTUNITIES MODAL ── -->
 <div id="opps-modal"
   style="position:fixed;inset:0;z-index:9999;background:rgba(6,10,20,0.65);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity 0.25s ease"
@@ -3814,29 +3867,29 @@ window.addEventListener('load', () => {
       <button onclick="closeTreeModal('opps-modal')" style="width:32px;height:32px;border-radius:8px;background:var(--surface-2);border:1px solid var(--border-d);color:var(--text-2);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center" onmouseover="this.style.background='var(--surface-3)'" onmouseout="this.style.background='var(--surface-2)'">✕</button>
     </div>
     <div style="overflow-y:auto;padding:16px 24px;display:flex;flex-direction:column;gap:10px">
-      <!-- Opp 1 -->
-      <div style="background:var(--surface-2);border-left:3px solid var(--c-proto);border-radius:10px;padding:14px 16px">
+      <!-- Opp 1 · STRONG (green) -->
+      <div style="background:var(--surface-2);border-left:3px solid #4A9C7A;border-radius:10px;padding:14px 16px">
         <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
           <span style="font-size:13px;font-weight:700;color:var(--text-1)">Approval Anxiety</span>
-          <span class="conf-band strongly">Strongly Supported · 74%</span>
+          <span style="font-size:10px;font-weight:600;color:#5FD4A3;background:rgba(74,156,122,0.15);padding:2px 8px;border-radius:10px;font-family:'Geist Mono',monospace">Strongly Supported · 74%</span>
         </div>
         <div style="font-size:12px;color:var(--text-2);line-height:1.5;margin-bottom:6px">Fear of rejection before committing time and effort. The struggle fires before the application even begins — applicants want certainty they'll be approved before gathering documents.</div>
         <div style="font-size:10px;color:var(--text-4);font-family:'Geist Mono',monospace">6 of 8 interviews · saturated · functional + emotional + social forces</div>
       </div>
-      <!-- Opp 2 -->
-      <div style="background:var(--surface-2);border-left:3px solid var(--amber);border-radius:10px;padding:14px 16px">
+      <!-- Opp 2 · SUGGESTIVE (amber) -->
+      <div style="background:var(--surface-2);border-left:3px solid #C9A84C;border-radius:10px;padding:14px 16px">
         <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
           <span style="font-size:13px;font-weight:700;color:var(--text-1)">Doc Friction</span>
-          <span class="conf-band suggestive">Suggestive · 41%</span>
+          <span style="font-size:10px;font-weight:600;color:var(--amber);background:var(--amber-dim);padding:2px 8px;border-radius:10px;font-family:'Geist Mono',monospace">Suggestive · 41%</span>
         </div>
         <div style="font-size:12px;color:var(--text-2);line-height:1.5;margin-bottom:6px">Document gathering felt like a qualification test, not routine admin. Applicants experience the upload step as judgment rather than process.</div>
         <div style="font-size:10px;color:var(--text-4);font-family:'Geist Mono',monospace">5 of 8 interviews · emerging · needs 2-3 more to confirm</div>
       </div>
-      <!-- Opp 3 -->
-      <div style="background:var(--surface-2);border-left:3px solid var(--text-4);border-radius:10px;padding:14px 16px">
+      <!-- Opp 3 · HYPOTHESIS (grey) -->
+      <div style="background:var(--surface-2);border-left:3px solid rgba(120,130,150,0.5);border-radius:10px;padding:14px 16px">
         <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
           <span style="font-size:13px;font-weight:700;color:var(--text-2)">Status Ambiguity</span>
-          <span class="conf-band hypothesis">Hypothesis · 28%</span>
+          <span style="font-size:10px;font-weight:600;color:var(--text-3);background:rgba(120,130,150,0.12);padding:2px 8px;border-radius:10px;font-family:'Geist Mono',monospace">Hypothesis · 28%</span>
         </div>
         <div style="font-size:12px;color:var(--text-2);line-height:1.5;margin-bottom:6px">Unclear where the application stands after submission. Weak signal so far — may be a sub-force of Approval Anxiety rather than a distinct opportunity.</div>
         <div style="font-size:10px;color:var(--text-4);font-family:'Geist Mono',monospace">2 of 8 interviews · weak · candidate for merge or kill</div>
