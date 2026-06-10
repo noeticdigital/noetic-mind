@@ -3793,35 +3793,66 @@ function openSolutionsModal() { openTreeModal('solutions-modal'); }
 function openExperimentsModal(){ openTreeModal('experiments-modal'); }
 
 // ── Guided tour ──
+// Close anything the tour may have opened, returning to the bare canvas
+function closeAllTourModules() {
+  ['jobs-modal','opps-modal','solutions-modal','experiments-modal','outcomes-modal','ost-mutations-overlay'].forEach(closeTreeModal);
+  try { if (typeof deOpen !== 'undefined' && deOpen) closeDE(); } catch(e){}
+  if (activeOverlay) closeNodeOverlay(activeOverlay);
+}
+
+// End-to-end walkthrough of a live JTBD discovery project — opens each module as it explains it
 const tourSteps = [
-  { label: 'STEP 1 / 6', title: 'The convergent canvas',
-    body: "Noetic Mind isn't a funnel. Two sides meet in the middle: your business goal (supply) and validated customer truth (demand). Solutions live where they reconcile." },
-  { label: 'STEP 2 / 6', title: 'Supply side · Framing → Outcome',
-    body: "Your project brief seeds the Desired Outcome. It's a revisable hypothesis — a guess about what to move, held loosely until evidence arrives." },
-  { label: 'STEP 3 / 6', title: 'Demand side · Jobs & Opportunities',
-    body: "JTBD interviews surface the jobs customers are trying to do, and the forces (opportunities) blocking them. This is validated market truth." },
-  { label: 'STEP 4 / 6', title: 'Validated demand can challenge the outcome',
-    body: "When real demand contradicts the supply-side guess, the outcome loses its immunity. Demand can force a rethink — that's the dashed arrow." },
-  { label: 'STEP 5 / 6', title: 'Solutions · demand meets supply',
-    body: "A solution is where design requirements (demand) meet system requirements (supply), reconciled by deliberate tradeoffs." },
-  { label: 'STEP 6 / 6', title: 'Experiments · real humans',
-    body: "The riskiest assumption gets tested with a designed experiment fielded to real people. Then the system re-prioritises the weakest node — continuously." },
+  { title: 'An end-to-end discovery project',
+    body: "Noetic Mind runs continuous product discovery — no phases, no laps. Two sides reconcile in the middle: your business goal (supply) and validated customer truth (demand). Let's walk a live project, module by module.",
+    run: () => closeAllTourModules() },
+  { title: 'Frame · your starting assumptions',
+    body: "Every project begins with your brief. It enters the tree as unvalidated assumptions and seeds the Desired Outcome. The system is built to surface and challenge these beliefs, not absorb them — bias in, bias out.",
+    run: () => { closeAllTourModules(); selectNode('definition'); } },
+  { title: 'Desired Outcome · a revisable bet',
+    body: "The outcome is your supply-side hypothesis — the metric you want to move. It's a guess, held loosely. A portfolio can hold several, but discovery deliberately focuses on one at a time.",
+    run: () => { closeAllTourModules(); openTreeModal('outcomes-modal'); } },
+  { title: 'Discover · JTBD interviews',
+    body: "Discover is where Jobs-to-be-Done switch interviews happen. One interviewer, an AI copilot surfacing the four forces live on the call. From the transcripts, the system extracts jobs and opportunities automatically.",
+    run: () => { closeAllTourModules(); selectNode('jtbd'); } },
+  { title: 'Jobs to Be Done · validated truth',
+    body: "Jobs are the progress customers are trying to make — stable, solution-free, validated from real interviews. Here we've confirmed two: approval certainty (functional) and business legitimacy (emotional).",
+    run: () => { closeAllTourModules(); openTreeModal('jobs-modal'); } },
+  { title: 'Opportunities · the forces in the way',
+    body: "Opportunities are the struggles and forces blocking those jobs. Each branches to the solutions that could address it. Colour encodes evidence: green strongly supported, amber suggestive, grey still a hypothesis.",
+    run: () => { closeAllTourModules(); openTreeModal('opps-modal'); } },
+  { title: 'Connect · the causal mechanism',
+    body: "Connect maps context → forces → behaviour → outcome, and validates whether serving an opportunity would actually move the metric — using counterfactual tests, not correlation. This is the wiring that makes it a model, not a list.",
+    run: () => { closeAllTourModules(); selectNode('causal'); } },
+  { title: 'Decide · making tradeoffs',
+    body: "Decide is choosing what to deliberately be bad at, so the product overperforms on the real job. The output isn't a winner off a scorecard — it's a constraint with a reason, rooted in the causal mechanism.",
+    run: () => { closeAllTourModules(); selectNode('tradeoffs'); } },
+  { title: 'Solutions · demand meets supply',
+    body: "A solution sits exactly where customer design requirements meet business system requirements. Each one branches to the experiment that will put it to the test.",
+    run: () => { closeAllTourModules(); openTreeModal('solutions-modal'); } },
+  { title: 'Test · prototyping to learn',
+    body: "Test runs the smallest experiment that answers the riskiest uncertainty. Designed-matrix tests fielded to real humans via The People — behavioural evidence, not opinion. Always lead with the learning question.",
+    run: () => { closeAllTourModules(); selectNode('prototyping'); } },
+  { title: 'Living Report · and it never stops',
+    body: "Everything flows into the Living Report — an always-current deliverable for your client. Then the loop closes: the system continuously re-prioritises the weakest, highest-stakes belief. Discovery is never finished.",
+    run: () => { closeAllTourModules(); openCenter('report'); } },
 ];
 let tourStep = 0;
 function renderTourStep() {
   const s = tourSteps[tourStep];
-  document.getElementById('tour-step-label').textContent = s.label;
+  document.getElementById('tour-step-label').textContent = 'STEP ' + (tourStep + 1) + ' / ' + tourSteps.length;
   document.getElementById('tour-title').textContent = s.title;
   document.getElementById('tour-body').textContent = s.body;
-  document.getElementById('tour-next').textContent = (tourStep === tourSteps.length - 1) ? 'Done' : 'Next →';
+  document.getElementById('tour-next').textContent = (tourStep === tourSteps.length - 1) ? 'Finish' : 'Next →';
+  document.getElementById('tour-back').style.visibility = (tourStep === 0) ? 'hidden' : 'visible';
+  if (s.run) { try { s.run(); } catch(e){} }
 }
 function startTour() {
   tourStep = 0;
-  renderTourStep();
   const el = document.getElementById('tour-overlay');
   if (el.parentElement !== document.body) document.body.appendChild(el);
   el.style.opacity = '0';
   el.style.pointerEvents = 'all';
+  renderTourStep();
   requestAnimationFrame(() => { el.style.opacity = '1'; });
 }
 function tourNext() {
@@ -3829,7 +3860,13 @@ function tourNext() {
   tourStep++;
   renderTourStep();
 }
+function tourBack() {
+  if (tourStep === 0) return;
+  tourStep--;
+  renderTourStep();
+}
 function tourSkip() {
+  closeAllTourModules();
   const el = document.getElementById('tour-overlay');
   el.style.opacity = '0';
   el.style.pointerEvents = 'none';
@@ -3924,16 +3961,19 @@ window.addEventListener('load', () => {
 <!-- ── DESIRED OUTCOMES MODAL ── -->
 <!-- GUIDED TOUR OVERLAY -->
 <div id="tour-overlay"
-  style="position:fixed;inset:0;z-index:10001;background:rgba(6,10,20,0.72);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity 0.25s ease">
-  <div style="width:440px;background:var(--surface-1);border:1px solid var(--border-d);border-radius:14px;overflow:hidden;box-shadow:0 24px 64px rgba(0,0,0,0.5);animation:panel-in 0.22s ease">
-    <div style="padding:22px 26px 20px">
-      <div id="tour-step-label" style="font-size:10px;font-weight:600;color:var(--amber);font-family:'Geist Mono',monospace;letter-spacing:0.06em;margin-bottom:10px">STEP 1 / 6</div>
-      <div id="tour-title" style="font-size:17px;font-weight:600;color:var(--text-1);line-height:1.3;margin-bottom:10px">The convergent canvas</div>
+  style="position:fixed;inset:0;z-index:10001;background:transparent;display:flex;align-items:flex-end;justify-content:center;padding-bottom:30px;opacity:0;pointer-events:none;transition:opacity 0.25s ease">
+  <div style="width:520px;max-width:calc(100vw - 48px);background:var(--surface-1);border:1px solid var(--border-a);border-radius:14px;overflow:hidden;box-shadow:0 24px 64px rgba(0,0,0,0.55),0 0 0 1px rgba(0,0,0,0.2);animation:panel-in 0.22s ease;pointer-events:auto">
+    <div style="padding:18px 24px 16px">
+      <div id="tour-step-label" style="font-size:10px;font-weight:600;color:var(--amber);font-family:'Geist Mono',monospace;letter-spacing:0.06em;margin-bottom:9px">STEP 1 / 11</div>
+      <div id="tour-title" style="font-size:16px;font-weight:700;color:var(--text-1);line-height:1.3;margin-bottom:9px">An end-to-end discovery project</div>
       <div id="tour-body" style="font-size:13px;color:var(--text-2);line-height:1.6"></div>
     </div>
-    <div style="padding:14px 26px;border-top:1px solid var(--border-s);display:flex;justify-content:space-between;align-items:center">
-      <button onclick="tourSkip()" style="font-size:12px;font-weight:500;background:none;border:none;color:var(--text-4);cursor:pointer;font-family:'Instrument Sans',sans-serif" onmouseover="this.style.color='var(--text-2)'" onmouseout="this.style.color='var(--text-4)'">Skip</button>
-      <button id="tour-next" onclick="tourNext()" style="font-size:12px;font-weight:600;padding:7px 18px;border-radius:7px;border:1px solid rgba(201,168,76,0.4);background:rgba(201,168,76,0.12);color:var(--amber);cursor:pointer;font-family:'Instrument Sans',sans-serif">Next →</button>
+    <div style="padding:12px 24px;border-top:1px solid var(--border-s);display:flex;justify-content:space-between;align-items:center;background:var(--surface-2)">
+      <button onclick="tourSkip()" style="font-size:12px;font-weight:500;background:none;border:none;color:var(--text-4);cursor:pointer;font-family:'Instrument Sans',sans-serif" onmouseover="this.style.color='var(--text-2)'" onmouseout="this.style.color='var(--text-4)'">Skip tour</button>
+      <div style="display:flex;gap:8px;align-items:center">
+        <button onclick="tourBack()" id="tour-back" style="font-size:12px;font-weight:500;padding:7px 14px;border-radius:7px;border:1px solid var(--border-d);background:var(--surface-1);color:var(--text-3);cursor:pointer;font-family:'Instrument Sans',sans-serif">← Back</button>
+        <button id="tour-next" onclick="tourNext()" style="font-size:12px;font-weight:600;padding:7px 18px;border-radius:7px;border:1px solid rgba(201,168,76,0.4);background:rgba(201,168,76,0.14);color:var(--amber);cursor:pointer;font-family:'Instrument Sans',sans-serif">Next →</button>
+      </div>
     </div>
   </div>
 </div>
