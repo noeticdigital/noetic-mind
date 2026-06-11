@@ -753,6 +753,83 @@ html.dark .theme-btn .ico-moon{display:none}
 .fade-up{opacity:0;transform:translateY(10px);animation:fadeUp .5s var(--ease) forwards}
 @keyframes fadeUp{to{opacity:1;transform:none}}
 
+/* ───────────────────────────── PROJECT CHAT (Feature A) ───────────────────────────── */
+.chat-fab{
+  position:fixed;right:24px;bottom:24px;z-index:46;display:inline-flex;align-items:center;gap:9px;
+  height:46px;padding:0 17px 0 15px;border-radius:23px;cursor:pointer;
+  background:var(--accent);color:#fff;font-weight:600;font-size:13px;letter-spacing:-.005em;
+  box-shadow:0 8px 26px rgba(24,76,132,.34),0 2px 6px rgba(24,76,132,.28);
+  border:1px solid rgba(255,255,255,.14);
+  transition:transform .16s var(--ease),box-shadow .16s var(--ease),opacity .2s var(--ease);
+}
+.chat-fab:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(24,76,132,.42),0 3px 8px rgba(24,76,132,.3)}
+.chat-fab .cf-glyph{width:22px;height:22px;display:grid;place-items:center;flex:none}
+html.dark .chat-fab{background:#1e5fa6;box-shadow:0 8px 26px rgba(0,0,0,.5),0 0 0 1px rgba(255,255,255,.06)}
+.chat-fab.hidden{opacity:0;pointer-events:none;transform:translateY(8px) scale(.96)}
+
+.chat-panel{
+  position:fixed;right:24px;bottom:24px;z-index:47;width:380px;max-width:calc(100vw - 32px);
+  height:70vh;max-height:680px;min-height:420px;display:flex;flex-direction:column;
+  background:var(--surface);border:1px solid var(--line-strong);border-radius:var(--r-lg);
+  box-shadow:var(--shadow-lg);overflow:hidden;
+  opacity:0;pointer-events:none;transform:translateY(16px) scale(.97);transform-origin:bottom right;
+  transition:opacity .2s var(--ease),transform .22s var(--ease);
+}
+.chat-panel.open{opacity:1;pointer-events:auto;transform:none}
+.chat-head{flex:none;padding:14px 16px;border-bottom:1px solid var(--line);background:var(--surface-2);position:relative}
+.chat-head .ch-top{display:flex;align-items:center;gap:9px}
+.chat-head .ch-glyph{width:26px;height:26px;border-radius:7px;flex:none;display:grid;place-items:center;color:#fff;
+  background:radial-gradient(circle at 30% 30%,#2f6fb0,#184c84)}
+html.dark .chat-head .ch-glyph{background:radial-gradient(circle at 30% 30%,#3f7cc0,#184c84)}
+.chat-head .ch-title{font-weight:600;font-size:13.5px;letter-spacing:-.01em;line-height:1.2}
+.chat-head .ch-title .ch-proj{color:var(--muted);font-weight:500}
+.chat-head .ch-close{position:absolute;top:11px;right:12px;width:28px;height:28px;border-radius:7px;display:grid;place-items:center;
+  color:var(--muted);transition:.13s var(--ease)}
+.chat-head .ch-close:hover{background:var(--surface);color:var(--ink)}
+.chat-head .ch-scope{font-size:11px;color:var(--muted);margin-top:8px;display:flex;align-items:center;gap:6px}
+.chat-head .ch-scope svg{flex:none;opacity:.8}
+
+.chat-body{flex:1;overflow-y:auto;padding:16px 16px 8px;display:flex;flex-direction:column;gap:14px}
+.chat-body::-webkit-scrollbar{width:9px}
+.chat-body::-webkit-scrollbar-thumb{background:var(--line-strong);border-radius:6px;border:2px solid var(--surface)}
+.chat-msg{display:flex;flex-direction:column;gap:4px;max-width:100%}
+.chat-msg .cm-who{font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--muted)}
+.chat-msg.user{align-items:flex-end}
+.chat-msg.user .cm-who{color:var(--accent-ink)}
+.cm-bubble{font-size:13px;line-height:1.55;padding:10px 13px;border-radius:13px;max-width:90%}
+.chat-msg.assistant .cm-bubble{background:var(--surface-2);border:1px solid var(--line);border-bottom-left-radius:5px;color:var(--ink-2)}
+.chat-msg.assistant .cm-bubble b{color:var(--ink)}
+.chat-msg.user .cm-bubble{background:var(--accent-soft);color:var(--accent-ink);border-bottom-right-radius:5px}
+.cm-cursor{display:inline-block;width:7px;height:14px;margin-left:1px;vertical-align:text-bottom;
+  background:var(--accent);border-radius:1px;animation:cmBlink 1s steps(2,start) infinite}
+@keyframes cmBlink{0%,100%{opacity:1}50%{opacity:0}}
+.cm-thinking{display:inline-flex;align-items:center;gap:5px;padding:2px 0}
+.cm-thinking .cm-dot{width:6px;height:6px;border-radius:50%;background:var(--muted);animation:cmPulse 1.2s var(--ease) infinite}
+.cm-thinking .cm-dot:nth-child(2){animation-delay:.18s}
+.cm-thinking .cm-dot:nth-child(3){animation-delay:.36s}
+.cm-thinking .cm-lab{font-size:11.5px;color:var(--muted);margin-left:3px;font-style:italic}
+@keyframes cmPulse{0%,100%{opacity:.3;transform:translateY(0)}40%{opacity:1;transform:translateY(-2px)}}
+
+.chat-chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:2px}
+.chat-chip{font-size:12px;font-weight:500;color:var(--accent-ink);background:var(--accent-soft);
+  border:1px solid transparent;border-radius:14px;padding:6px 12px;cursor:pointer;line-height:1.3;text-align:left;
+  transition:.13s var(--ease)}
+.chat-chip:hover{border-color:var(--accent);transform:translateY(-1px)}
+.chat-empty-lead{font-size:12.5px;color:var(--muted);line-height:1.5;margin-bottom:2px}
+
+.chat-foot{flex:none;border-top:1px solid var(--line);padding:11px 12px;display:flex;align-items:flex-end;gap:8px;background:var(--surface)}
+.chat-input{flex:1;border:1px solid var(--line-strong);background:var(--surface-2);border-radius:11px;
+  padding:9px 12px;font-family:var(--font-sans);font-size:13px;color:var(--ink);resize:none;line-height:1.45;
+  max-height:96px;transition:border-color .13s var(--ease)}
+.chat-input:focus{outline:none;border-color:var(--accent)}
+.chat-input::placeholder{color:var(--muted)}
+.chat-send{width:36px;height:36px;flex:none;border-radius:10px;background:var(--accent);color:#fff;display:grid;place-items:center;
+  transition:.13s var(--ease)}
+.chat-send:hover{background:var(--accent-ink)}
+.chat-send:disabled{opacity:.4;cursor:not-allowed}
+html.dark .chat-send{color:#0c0f15}
+@media(prefers-reduced-motion:reduce){.cm-cursor,.cm-thinking .cm-dot{animation:none}.cm-cursor{opacity:1}}
+
 /* responsive degrade to 1024 */
 @media(max-width:1180px){
   .app{grid-template-columns:200px 1fr}
@@ -963,6 +1040,38 @@ html.dark .theme-btn .ico-moon{display:none}
     <button class="btn btn-primary" id="walkNext" onclick="walkGo(1)">Next →</button>
   </div>
 </div>
+
+<!-- ───────── PROJECT CHAT (Feature A) ───────── -->
+<button class="chat-fab" id="chatFab" onclick="openChat()" aria-label="Ask about this project">
+  <span class="cf-glyph">
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M2.5 4.2A1.7 1.7 0 014.2 2.5h9.6a1.7 1.7 0 011.7 1.7v6.1a1.7 1.7 0 01-1.7 1.7H7l-3.4 2.8a.5.5 0 01-.8-.4v-2.4H4.2a1.7 1.7 0 01-1.7-1.7z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M6 6.4h6M6 8.8h3.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+  </span>
+  Ask about this project
+</button>
+<aside class="chat-panel" id="chatPanel" role="dialog" aria-modal="false" aria-label="Project chat">
+  <div class="chat-head">
+    <div class="ch-top">
+      <div class="ch-glyph">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="#fff" stroke-width="1.4" opacity=".5"/><circle cx="8" cy="8" r="2.4" fill="#fff"/></svg>
+      </div>
+      <div class="ch-title">Noetic <span class="ch-proj">· Ledgerline project</span></div>
+    </div>
+    <button class="ch-close" onclick="closeChat()" aria-label="Close chat">
+      <svg width="14" height="14" viewBox="0 0 16 16"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </button>
+    <div class="ch-scope">
+      <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.2" stroke="currentColor" stroke-width="1.3"/><path d="M8 5v3.4M8 11h.01" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+      I can only see this discovery project.
+    </div>
+  </div>
+  <div class="chat-body" id="chatBody"></div>
+  <div class="chat-foot">
+    <textarea class="chat-input" id="chatInput" rows="1" placeholder="Ask about Ledgerline…" oninput="chatAutogrow(this)" onkeydown="chatKey(event)"></textarea>
+    <button class="chat-send" id="chatSend" onclick="chatSubmit()" aria-label="Send">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2.5 8h9M8 4.5L11.5 8 8 11.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+  </div>
+</aside>
 
 <script>
 /* ════════════════════════════ DATA — Project "Ledgerline" ════════════════════════════
@@ -1917,10 +2026,148 @@ function paintWalk(){
   next.onclick = walkI===WALK.length-1? closeWalk : ()=>walkGo(1);
 }
 
+/* ════════════════════════════ PROJECT CHAT (Feature A) ════════════════════════════
+   A contained, project-scoped Claude-style chat. Streams canned, intent-matched
+   intelligence keyed to Ledgerline facts. All state in JS — no network. */
+const CHAT_PROMPTS = [
+  "What's the next step?",
+  "Why was sandbox-first killed?",
+  "What's still unproven?",
+  "Summarise the project",
+];
+/* intent bank: keyword sets → concierge answer (with an optional loop pointer) */
+const CHAT_BANK = [
+  { id:'next', kw:['next step','what next',"what's next",'next move','what should','do next','now what','nba','next best'],
+    a:`The next move is <b>TC-08</b> — the trust-first connection test. It's in flight across 40 new accounts, currently <b>57%</b> connecting their primary account in session one against a locked <b>50%</b> bar. It moves our weakest belief, so finishing it is what unlocks the increment. Open the <b>Delivery &amp; Impact loop</b> to watch it.` },
+  { id:'sandbox', kw:['sandbox','connect later','sample data','tc-05','tc05','fake door','defer','deferr'],
+    a:`We killed sandbox-first as a cheap win. The <b>TC-05</b> fake-door test offered "explore with sample data first" — only <b>9%</b> returned to connect within 48h, against a <b>30%</b> bar. Exploring fake books felt pointless, so the path closed before a line of production code. The lesson: safety has to be legible <i>at</i> the credential moment, not deferred around it.` },
+  { id:'unproven', kw:['unproven','weakest','still prove','not proven','riskiest','risky','what if','assumption','uncertain','suggestive'],
+    a:`The weakest, load-bearing belief is: <b>"make safety legible and founders will connect the primary account in session one."</b> It's only <b>suggestive</b> — a 7/10 concierge signal, not yet behavioral at scale. <b>TC-08</b> is the test measuring exactly this. Until it clears, the increment rests on an unproven bet.` },
+  { id:'kill', kw:['killed','dead end','what did you kill','beliefs you killed','tc-03','tc03','soc 2','soc-2','badge'],
+    a:`Two beliefs died cheaply. <b>TC-03</b>: a SOC-2 badge at every placement moved <b>nothing</b> (+1pt vs an +8pt bar) — certification in the footer isn't trust. <b>TC-05</b>: sandbox-first converted <b>9% vs a 30% bar</b>. Both were killed for the price of a fake door, which is the cheapest progress we made.` },
+  { id:'proven', kw:['proven','validated','what do we know','what is proven','certain','load-bearing','evidence'],
+    a:`Two things are validated. The <b>outcome</b> is ratified: 7-day bank-feed activation, <b>34% → 55%</b>, owned by this team. And the <b>Job</b> is consistent — across 14 interviews of real switches, 11 confirm people hire us to escape spreadsheet chaos for trusted, always-current books. Everything downstream of the trust bet is still suggestive.` },
+  { id:'outcome', kw:['outcome','34','55','activation','metric','number','goal','target number'],
+    a:`The one number we own is <b>7-day bank-feed activation: 34% → 55%</b> — connect a feed AND complete a first reconciliation within a week. It's a controllable behavior negotiated with leadership, serving the business outcome of lower 90-day churn. See the <b>Outcome loop</b>.` },
+  { id:'job', kw:['job','jtbd','progress','why switch','why do people','interview','customer'],
+    a:`The Job: <b>"move from spreadsheet chaos to trusted, always-current books"</b> — so owners answer money questions in minutes and look credible to their accountant and investors. It recurs in 11 of 14 interviews of real past switches. The decisive struggle lands at onboarding, on "Connect your bank." See the <b>Progress loop</b>.` },
+  { id:'opportunity', kw:['opportunity','target','crown','trust','connection','which problem','focus on','bank connect'],
+    a:`The crowned target opportunity is <b>bank-connection trust</b>: "I won't connect my primary account until I believe this company is safe and serious." It sits top-right on demand × ability to win, named unprompted in 8/14 interviews, and lands exactly on the activation drop-off. Open the <b>Opportunity loop</b>.` },
+  { id:'increment', kw:['increment','bet','what are you building','ship','scope','solution','kick-ass','kick ass','build'],
+    a:`The bet is the <b>trust-first connection flow — the primary-account moment only</b>: read-only framing, granular permissions, "disconnect anytime," and the security page inline at the credential step. White-glove, sandbox, and historical import are deliberately excluded — a kick-ass half, not a half-assed whole. See the <b>Delivery &amp; Impact loop</b>.` },
+  { id:'impact', kw:['impact','ladder','four level','4 level','measure','churn','business outcome','how will you know'],
+    a:`Impact is instrumented at four levels: <b>assumption behavior</b> (primary connection in session one) → <b>opportunity relief</b> (fewer trust stalls) → <b>product outcome</b> (7-day activation, early read 34→41%) → <b>business outcome</b> (90-day churn, read next quarter). If a level doesn't move, the tree tells us which link to revisit.` },
+  { id:'causal', kw:['causal','system','what must be true','chain','control factor','noise'],
+    a:`Before any solution we mapped the causal system right-to-left: trusted books need a reconciled feed → a feed needs a primary-account connection → that needs the trust threshold crossed in session one. Control factors include badging placement, read-only messaging, and connection sequencing; noise includes bank OAuth quality and fintech-breach press. See the <b>Causal Learning loop</b>.` },
+  { id:'summary', kw:['summarise','summarize','summary','overview','catch me up','where are we','project status','tldr','brief me'],
+    a:`Ledgerline owns one number — <b>7-day activation 34% → 55%</b> (validated, serving 90-day churn). The Job is proven: escape spreadsheet chaos for trusted books. The crowned opportunity is <b>bank-connection trust</b>, and the bet is a <b>trust-first connection flow</b> scoped to the primary-account moment. We killed two wrong answers cheaply (SOC-2 badge, sandbox-first). The weakest belief is in test now via <b>TC-08</b> (57% vs 50% bar) — that's the next step.` },
+];
+let chatThread = [];       // {role, html}
+let chatStreaming = false;
+
+function chatMatch(q){
+  const t = q.toLowerCase();
+  let best=null, bestScore=0;
+  CHAT_BANK.forEach(e=>{
+    let s=0;
+    e.kw.forEach(k=>{ if(t.includes(k)) s += k.length; });
+    if(s>bestScore){ bestScore=s; best=e; }
+  });
+  if(best) return best.a;
+  return `Here's what I can tell you about the Ledgerline project: we're driving <b>7-day bank-feed activation from 34% to 55%</b> by making bank-connection trust legible at the credential moment. Ask me about the next step, what's proven, the weakest belief, or why we killed sandbox-first — or open the <b>Delivery &amp; Impact loop</b> to see the live test.`;
+}
+
+function openChat(){
+  document.getElementById('chatPanel').classList.add('open');
+  document.getElementById('chatFab').classList.add('hidden');
+  if(!chatThread.length) renderChatEmpty();
+  setTimeout(()=>document.getElementById('chatInput').focus(),60);
+}
+function closeChat(){
+  document.getElementById('chatPanel').classList.remove('open');
+  document.getElementById('chatFab').classList.remove('hidden');
+}
+function chatIsOpen(){ return document.getElementById('chatPanel').classList.contains('open'); }
+
+function renderChatEmpty(){
+  const body=document.getElementById('chatBody');
+  body.innerHTML = `<div class="chat-msg assistant"><span class="cm-who">Noetic</span>
+      <div class="cm-bubble">I'm scoped to the <b>Ledgerline</b> discovery project. Ask me where we are, what's proven, or what to do next.</div></div>
+    <div><div class="chat-empty-lead">Try one of these:</div>
+      <div class="chat-chips">${CHAT_PROMPTS.map(p=>`<button class="chat-chip" onclick="chatChip(this)">${p}</button>`).join('')}</div></div>`;
+}
+function chatChip(btn){ chatSend(btn.textContent.trim()); }
+function chatAutogrow(el){ el.style.height='auto'; el.style.height=Math.min(el.scrollHeight,96)+'px'; }
+function chatKey(e){
+  if(e.key==='Enter' && !e.shiftKey){ e.preventDefault(); chatSubmit(); }
+}
+function chatSubmit(){
+  const el=document.getElementById('chatInput'); const v=el.value.trim();
+  if(!v||chatStreaming) return;
+  el.value=''; el.style.height='auto';
+  chatSend(v);
+}
+function chatScroll(){ const b=document.getElementById('chatBody'); b.scrollTop=b.scrollHeight; }
+
+function chatSend(text){
+  if(chatStreaming) return;
+  const body=document.getElementById('chatBody');
+  /* drop the empty-state chips once a real thread begins */
+  if(!chatThread.length) body.innerHTML='';
+  chatThread.push({role:'user',html:text});
+  body.insertAdjacentHTML('beforeend',
+    `<div class="chat-msg user"><span class="cm-who">You</span><div class="cm-bubble">${chatEsc(text)}</div></div>`);
+  chatScroll();
+  const answer = chatMatch(text);
+  chatStreamAnswer(answer);
+}
+function chatEsc(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+function chatStreamAnswer(html){
+  chatStreaming=true;
+  document.getElementById('chatSend').disabled=true;
+  const body=document.getElementById('chatBody');
+  const wrap=document.createElement('div');
+  wrap.className='chat-msg assistant';
+  wrap.innerHTML=`<span class="cm-who">Noetic</span><div class="cm-bubble"><span class="cm-thinking"><span class="cm-dot"></span><span class="cm-dot"></span><span class="cm-dot"></span><span class="cm-lab">Noetic is thinking…</span></span></div>`;
+  body.appendChild(wrap); chatScroll();
+  const bubble=wrap.querySelector('.cm-bubble');
+  const reduce = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+
+  const finish=()=>{ bubble.innerHTML=html; chatThread.push({role:'assistant',html}); chatStreaming=false;
+    document.getElementById('chatSend').disabled=false; chatScroll(); };
+
+  if(reduce){ setTimeout(finish,80); return; }
+
+  /* token-by-token (word) typewriter, ~14ms/word, after a short think pause */
+  const tokens = html.split(/(\s+)/);   // keep whitespace tokens to preserve markup spacing
+  let i=0;
+  setTimeout(()=>{
+    bubble.innerHTML=`<span class="cm-stream"></span><span class="cm-cursor"></span>`;
+    const span=bubble.querySelector('.cm-stream');
+    const tick=()=>{
+      if(!chatIsOpen()){ finish(); return; }       // bail cleanly if closed mid-stream
+      if(i>=tokens.length){ finish(); return; }
+      span.innerHTML += tokens[i++];
+      /* skip the artificial delay on pure-whitespace tokens so timing reads per-word */
+      chatScroll();
+      setTimeout(tick, /\S/.test(tokens[i-1])?14:0);
+    };
+    tick();
+  }, 420);
+}
+
 /* ════════════════════════════ GLOBAL KEYS ════════════════════════════ */
 document.addEventListener('keydown',e=>{
   if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==='k'){ e.preventDefault(); document.getElementById('cmdkScrim').classList.contains('open')?closeCmdk():openCmdk(); }
-  else if(e.key==='Escape'){ closePanel(); closeCmdk(); closeWalk(); closeCategory(); }
+  else if(e.key==='Escape'){
+    /* close only the topmost open layer */
+    if(document.getElementById('cmdkScrim').classList.contains('open')) closeCmdk();
+    else if(document.getElementById('catScrim').classList.contains('open')) closeCategory();
+    else if(document.getElementById('panel').classList.contains('open')) closePanel();
+    else if(document.getElementById('walkScrim').classList.contains('open')) closeWalk();
+    else if(chatIsOpen()) closeChat();
+  }
   else if(document.getElementById('walkScrim').classList.contains('open')){
     if(e.key==='ArrowRight') walkGo(1); else if(e.key==='ArrowLeft') walkGo(-1);
   }
