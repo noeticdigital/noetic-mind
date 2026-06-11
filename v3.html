@@ -78,12 +78,86 @@
   --shadow-md:0 4px 16px rgba(40,34,20,.08), 0 1px 3px rgba(40,34,20,.06);
   --shadow-lg:0 18px 50px rgba(30,26,18,.16), 0 6px 16px rgba(30,26,18,.08);
 
+  /* semantic accents (force colors, gold, tints) */
+  --amber-ink:#9a6a12;      /* amber text on light       */
+  --green-ink:#2f7048;      /* green text on light       */
+  --red-push:#b4533a;       /* push force                */
+  --blue-habit:#5a6b8c;     /* habit force               */
+  --gold:#c9a24f;           /* locked-threshold gold     */
+  --gold-deep:#a4761d;      /* NBA kicker gold           */
+  --assump-ink:#6f695e;
+  --killed-ink:#7d776c;
+  --amber-line:#ecd9ad;
+  --warm-tint-1:#fbf6ea; --warm-tint-2:#faf0dc; --warm-tint-3:#f8ecd2;
+  --grad-hi:#fbfaf6; --grad-lo:#f4f1e9;
+  --green-fill-1:#dfeee3; --green-fill-2:#bfe0cb;
+  --label-bg:rgba(253,252,249,.85);
+  --topbar-bg:rgba(253,252,249,.82);
+  --btn-primary-bg:#1c1a17; --btn-primary-ink:#faf8f2; --btn-primary-hover:#000;
+
   --r-sm:6px; --r-md:10px; --r-lg:14px; --r-xl:20px;
   --ease:cubic-bezier(.2,.7,.2,1);
   --font-serif:'Fraunces',Georgia,serif;
   --font-sans:'Inter',system-ui,sans-serif;
   --font-mono:'JetBrains Mono',ui-monospace,monospace;
 }
+
+/* ───────────────────────────── DARK THEME ─────────────────────────────
+   Designed, not inverted. Warm-dark paper: deep warm charcoal surfaces,
+   creamy ink, indigo lifted for contrast, evidence colors desaturated so
+   they read as pigment, not neon. Shadows become elevation tints/borders. */
+html.dark{
+  color-scheme:dark;
+  --paper:#181612;        /* deep warm charcoal page    */
+  --surface:#211e19;      /* raised card                */
+  --surface-2:#14120e;    /* sunken / inset             */
+  --ink:#ece9e2;          /* creamy ink                 */
+  --ink-2:#b9b3a7;
+  --muted:#867f72;
+  --line:#332f28;
+  --line-strong:#484236;
+  --accent:#8d86ec;       /* indigo, lifted             */
+  --accent-soft:#2b2845;
+  --accent-ink:#aca6f3;
+
+  --ev-assumption:#8d8779;
+  --ev-assumption-bg:#2a2720;
+  --ev-suggestive:#cf9c44;
+  --ev-suggestive-bg:#33290f;
+  --ev-validated:#62a87d;
+  --ev-validated-bg:#1c2d21;
+  --ev-killed:#7c766a;
+  --ev-killed-bg:#262320;
+
+  --shadow-sm:0 0 0 1px rgba(255,255,255,.035);
+  --shadow-md:0 0 0 1px rgba(255,255,255,.05), 0 8px 24px rgba(0,0,0,.38);
+  --shadow-lg:0 0 0 1px rgba(255,255,255,.06), 0 24px 60px rgba(0,0,0,.55);
+
+  --amber-ink:#d6a751;
+  --green-ink:#7fc09a;
+  --red-push:#d8836c;
+  --blue-habit:#92a6c9;
+  --gold:#d2ae62;
+  --gold-deep:#cda35a;
+  --assump-ink:#a59e8f;
+  --killed-ink:#979082;
+  --amber-line:#4a3d21;
+  --warm-tint-1:#272014; --warm-tint-2:#2b2415; --warm-tint-3:#2f2817;
+  --grad-hi:#221f1a; --grad-lo:#1b1814;
+  --green-fill-1:#22382b; --green-fill-2:#2d4c39;
+  --label-bg:rgba(33,30,25,.85);
+  --topbar-bg:rgba(24,22,18,.82);
+  --btn-primary-bg:#ece9e2; --btn-primary-ink:#1c1a17; --btn-primary-hover:#fffdf7;
+}
+html.dark .brand .glyph{background:radial-gradient(circle at 30% 30%,#7a72e6,#443c9e)}
+html.dark .nav-loop:hover{background:rgba(141,134,236,.09)}
+html.dark .nav-loop.active .loop-num{color:#14120e}
+html.dark .scrim{background:rgba(8,7,5,.55)}
+html.dark .cmdk-scrim{background:rgba(8,7,5,.58)}
+html.dark .nba{border-color:var(--amber-line)}
+html.dark .kickass{border-color:var(--amber-line)}
+html.dark .meter .seg{box-shadow:inset 0 0 0 1px rgba(255,255,255,.04)}
+html.dark .threshold{background:#0c0b09;box-shadow:0 0 0 1px rgba(255,255,255,.05)}
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%}
 body{
@@ -106,7 +180,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 
 /* ── Rail ── */
 .rail{
-  background:linear-gradient(180deg,#fbfaf6,#f4f1e9);
+  background:linear-gradient(180deg,var(--grad-hi),var(--grad-lo));
   border-right:1px solid var(--line);
   display:flex;flex-direction:column;
   padding:18px 14px;gap:4px;position:relative;z-index:5;
@@ -153,7 +227,7 @@ kbd{font-family:var(--font-mono);font-size:10.5px;background:var(--surface);bord
 /* ── Topbar ── */
 .topbar{
   height:54px;flex:none;border-bottom:1px solid var(--line);
-  display:flex;align-items:center;gap:14px;padding:0 22px;background:rgba(253,252,249,.82);
+  display:flex;align-items:center;gap:14px;padding:0 22px;background:var(--topbar-bg);
   backdrop-filter:blur(8px);
 }
 .crumbs{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);min-width:0}
@@ -168,6 +242,15 @@ kbd{font-family:var(--font-mono);font-size:10.5px;background:var(--surface);bord
 }
 .cmdk-btn:hover{border-color:var(--accent);color:var(--ink-2)}
 .cmdk-btn kbd{border-bottom-width:1px}
+.theme-btn{
+  width:32px;height:32px;border-radius:8px;border:1px solid var(--line-strong);
+  background:var(--surface);color:var(--ink-2);display:grid;place-items:center;
+  transition:.15s var(--ease);flex:none;
+}
+.theme-btn:hover{border-color:var(--accent);color:var(--accent-ink)}
+.theme-btn .ico-sun{display:none}
+html.dark .theme-btn .ico-sun{display:block}
+html.dark .theme-btn .ico-moon{display:none}
 .avatar{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,#c9a24f,#9c7b2e);
   color:#fff;display:grid;place-items:center;font-weight:600;font-size:12px;flex:none;box-shadow:var(--shadow-sm)}
 
@@ -217,35 +300,35 @@ kbd{font-family:var(--font-mono);font-size:10.5px;background:var(--surface);bord
 .ev-pill{display:inline-flex;align-items:center;gap:6px;height:22px;padding:0 9px;border-radius:11px;
   font-size:11px;font-weight:600;letter-spacing:.01em;white-space:nowrap}
 .ev-pill .ev-d{width:6px;height:6px;border-radius:50%;flex:none}
-.ev-assumption{background:var(--ev-assumption-bg);color:#6f695e}.ev-assumption .ev-d{background:var(--ev-assumption)}
-.ev-suggestive{background:var(--ev-suggestive-bg);color:#9a6a12}.ev-suggestive .ev-d{background:var(--ev-suggestive)}
-.ev-validated{background:var(--ev-validated-bg);color:#2f7048}.ev-validated .ev-d{background:var(--ev-validated)}
-.ev-killed{background:var(--ev-killed-bg);color:#7d776c}.ev-killed .ev-d{background:var(--ev-killed)}
+.ev-assumption{background:var(--ev-assumption-bg);color:var(--assump-ink)}.ev-assumption .ev-d{background:var(--ev-assumption)}
+.ev-suggestive{background:var(--ev-suggestive-bg);color:var(--amber-ink)}.ev-suggestive .ev-d{background:var(--ev-suggestive)}
+.ev-validated{background:var(--ev-validated-bg);color:var(--green-ink)}.ev-validated .ev-d{background:var(--ev-validated)}
+.ev-killed{background:var(--ev-killed-bg);color:var(--killed-ink)}.ev-killed .ev-d{background:var(--ev-killed)}
 .ev-killed .lbl{text-decoration:line-through}
 
 /* ───────────────────────────── NEXT BEST ACTION (heartbeat) ───────────────────────────── */
 .nba{
   margin:0 22px;margin-top:18px;border-radius:var(--r-lg);position:relative;overflow:hidden;
-  background:linear-gradient(120deg,#fbf6ea,#faf0dc 60%,#f8ecd2);
-  border:1px solid #ecd9ad;box-shadow:var(--shadow-sm);
+  background:linear-gradient(120deg,var(--warm-tint-1),var(--warm-tint-2) 60%,var(--warm-tint-3));
+  border:1px solid var(--amber-line);box-shadow:var(--shadow-sm);
 }
 .nba::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--ev-suggestive)}
 .nba-in{display:flex;align-items:center;gap:20px;padding:15px 20px 15px 22px}
-.nba-kicker{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#a4761d;font-weight:700;
+.nba-kicker{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-deep);font-weight:700;
   display:flex;align-items:center;gap:7px}
 .nba-kicker .hb{width:7px;height:7px;border-radius:50%;background:var(--ev-suggestive);
   animation:pulse 2.2s var(--ease) infinite}
 .nba-belief{font-family:var(--font-serif);font-size:18px;line-height:1.3;color:var(--ink);margin-top:5px;
   font-weight:500;letter-spacing:-.01em;max-width:62ch}
 .nba-test{font-size:12.5px;color:var(--ink-2);margin-top:5px}
-.nba-test b{color:#9a6a12}
+.nba-test b{color:var(--amber-ink)}
 .nba-right{margin-left:auto;display:flex;flex-direction:column;align-items:flex-end;gap:9px;flex:none}
 .btn{
   display:inline-flex;align-items:center;gap:7px;height:36px;padding:0 16px;border-radius:9px;
   font-weight:600;font-size:13px;transition:.15s var(--ease);white-space:nowrap;
 }
-.btn-primary{background:var(--ink);color:#faf8f2;box-shadow:var(--shadow-sm)}
-.btn-primary:hover{background:#000;transform:translateY(-1px);box-shadow:var(--shadow-md)}
+.btn-primary{background:var(--btn-primary-bg);color:var(--btn-primary-ink);box-shadow:var(--shadow-sm)}
+.btn-primary:hover{background:var(--btn-primary-hover);transform:translateY(-1px);box-shadow:var(--shadow-md)}
 .btn-ghost{background:var(--surface);border:1px solid var(--line-strong);color:var(--ink-2)}
 .btn-ghost:hover{border-color:var(--accent);color:var(--accent-ink)}
 .btn-sm{height:30px;padding:0 12px;font-size:12px}
@@ -262,16 +345,30 @@ kbd{font-family:var(--font-mono);font-size:10.5px;background:var(--surface);bord
 .fchip.on{background:var(--surface);box-shadow:var(--shadow-sm);color:var(--ink)}
 .fchip:hover{color:var(--ink)}
 
-.canvas{padding:14px 22px 60px;position:relative}
-/* convergent two-spine layout via grid of "strata" */
-.stratum{margin:0 auto;max-width:1180px;position:relative}
-.stratum-label{display:flex;align-items:center;gap:10px;margin:22px 0 10px}
-.stratum-label .sl-num{font-family:var(--font-mono);font-size:10px;color:var(--muted);
-  border:1px solid var(--line);border-radius:5px;padding:2px 6px}
-.stratum-label .sl-name{font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);font-weight:700}
-.stratum-label .sl-line{flex:1;height:1px;background:var(--line)}
-.stratum-label .sl-loop{font-size:10.5px;color:var(--accent-ink);background:var(--accent-soft);
-  border-radius:10px;padding:2px 9px;font-weight:600}
+/* two-spine convergent canvas — scales to fit one viewport panel, no scroll */
+.tree-stage{position:relative;padding:4px 22px 10px;display:flex;justify-content:center;overflow:hidden}
+.tree-fit{position:relative;width:1180px;height:660px;transform-origin:top center;flex:none}
+.tree-svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.tree-svg .conn{stroke:var(--line-strong);stroke-width:1.5;fill:none}
+.tree-svg .conn.dashed{stroke-dasharray:5 5}
+.tree-svg .conn.accent{stroke:var(--accent);opacity:.85}
+.tree-svg .arrowlab{font-family:var(--font-sans);font-size:10.5px;fill:var(--muted);font-style:italic}
+.tree-svg .arrowlab.accent{fill:var(--accent-ink)}
+.spine-side{position:absolute;top:0;height:340px;width:22px;display:flex;align-items:center;justify-content:center}
+.spine-side span{transform:rotate(-90deg);white-space:nowrap;font-size:10px;letter-spacing:.34em;
+  text-transform:uppercase;color:var(--muted);font-weight:700}
+.node.tnode{position:absolute;overflow:hidden}
+.node.slim{padding:9px 14px}
+.node.slim .node-top{margin-bottom:4px}
+.node.slim .node-foot{margin-top:7px}
+.node.mini{padding:8px 11px}
+.node.mini .node-h{font-size:11.5px;line-height:1.25}
+.node.mini .node-kind{font-size:9px}
+.node.mini .node-foot{margin-top:6px}
+.tnode .node-h{font-size:13px}
+.tnode.lead .node-h{font-size:15.5px}
+.tnode .node-d{font-size:11px;margin-top:3px;line-height:1.35}
+.tnode .node-foot{gap:8px}
 
 .node{
   background:var(--surface);border:1px solid var(--line);border-radius:var(--r-md);
@@ -286,7 +383,7 @@ kbd{font-family:var(--font-mono);font-size:10.5px;background:var(--surface);bord
 .node-kind{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700}
 .node-crown{margin-left:auto;font-size:10px;font-weight:700;color:var(--accent-ink);background:var(--accent-soft);
   padding:2px 8px;border-radius:9px;letter-spacing:.04em}
-.node-weak-flag{margin-left:auto;font-size:10px;font-weight:700;color:#9a6a12;background:var(--ev-suggestive-bg);
+.node-weak-flag{margin-left:auto;font-size:10px;font-weight:700;color:var(--amber-ink);background:var(--ev-suggestive-bg);
   padding:2px 8px;border-radius:9px}
 .node-h{font-size:14.5px;font-weight:600;line-height:1.3;letter-spacing:-.01em}
 .node.lead .node-h{font-family:var(--font-serif);font-size:17px;font-weight:500}
@@ -351,12 +448,12 @@ kbd{font-family:var(--font-mono);font-size:10.5px;background:var(--surface);bord
 .force{border:1px solid var(--line);border-radius:var(--r-md);padding:13px 14px;background:var(--surface)}
 .force .f-h{display:flex;align-items:center;gap:8px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;margin-bottom:8px}
 .force .f-arrow{font-size:14px}
-.force.push .f-h{color:#b4533a}.force.pull .f-h{color:#2f7048}
-.force.anxiety .f-h{color:#9a6a12}.force.habit .f-h{color:#5a6b8c}
+.force.push .f-h{color:var(--red-push)}.force.pull .f-h{color:var(--green-ink)}
+.force.anxiety .f-h{color:var(--amber-ink)}.force.habit .f-h{color:var(--blue-habit)}
 .force li{list-style:none;font-size:12.5px;color:var(--ink-2);padding:4px 0 4px 16px;position:relative;line-height:1.4}
 .force li::before{content:"";position:absolute;left:2px;top:11px;width:5px;height:5px;border-radius:50%;background:var(--line-strong)}
-.force.push li::before{background:#b4533a}.force.pull li::before{background:#2f7048}
-.force.anxiety li::before{background:#9a6a12}.force.habit li::before{background:#5a6b8c}
+.force.push li::before{background:var(--red-push)}.force.pull li::before{background:var(--green-ink)}
+.force.anxiety li::before{background:var(--amber-ink)}.force.habit li::before{background:var(--blue-habit)}
 
 /* timeline */
 .timeline{display:grid;grid-template-columns:repeat(7,1fr);gap:0;margin-top:8px;position:relative}
@@ -367,7 +464,7 @@ kbd{font-family:var(--font-mono);font-size:10.5px;background:var(--surface);bord
 .tl-stage .tl-n{font-family:var(--font-mono);font-size:10px;color:var(--muted)}
 .tl-stage .tl-name{font-size:12px;font-weight:600;margin-top:3px;line-height:1.25}
 .tl-stage .tl-note{font-size:11px;color:var(--muted);margin-top:6px;line-height:1.4}
-.tl-stage.hot .tl-name{color:#9a6a12}
+.tl-stage.hot .tl-name{color:var(--amber-ink)}
 
 /* competitor list */
 .comp-row{display:flex;align-items:center;gap:12px;padding:9px 0;border-bottom:1px dashed var(--line)}
@@ -379,7 +476,7 @@ kbd{font-family:var(--font-mono);font-size:10.5px;background:var(--surface);bord
 /* baseline→target bar */
 .bt{margin-top:6px}
 .bt-track{height:30px;border-radius:8px;background:var(--surface-2);position:relative;overflow:hidden;border:1px solid var(--line)}
-.bt-fill{position:absolute;left:0;top:0;bottom:0;background:linear-gradient(90deg,#dfeee3,#bfe0cb);border-right:2px solid var(--ev-validated)}
+.bt-fill{position:absolute;left:0;top:0;bottom:0;background:linear-gradient(90deg,var(--green-fill-1),var(--green-fill-2));border-right:2px solid var(--ev-validated)}
 .bt-cur{position:absolute;top:0;bottom:0;border-right:2px dashed var(--accent)}
 .bt-marks{display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:11px;color:var(--muted);margin-top:6px}
 
@@ -395,7 +492,7 @@ kbd{font-family:var(--font-mono);font-size:10.5px;background:var(--surface);bord
 
 /* sibling comparison (demand × ability) */
 .matrix{position:relative;aspect-ratio:1.5/1;border:1px solid var(--line);border-radius:var(--r-md);
-  background:linear-gradient(180deg,#fbfaf6,#f4f1e9);overflow:hidden}
+  background:linear-gradient(180deg,var(--grad-hi),var(--grad-lo));overflow:hidden}
 .matrix .axis-x,.matrix .axis-y{position:absolute;font-size:10.5px;color:var(--muted);font-weight:600;letter-spacing:.04em}
 .matrix .axis-x{bottom:8px;left:50%;transform:translateX(-50%)}
 .matrix .axis-y{top:50%;left:8px;transform:translateY(-50%) rotate(-90deg);transform-origin:left}
@@ -405,7 +502,7 @@ kbd{font-family:var(--font-mono);font-size:10.5px;background:var(--surface);bord
 .dot{position:absolute;transform:translate(-50%,50%);display:flex;flex-direction:column;align-items:center;gap:4px;cursor:default}
 .dot .bub{width:16px;height:16px;border-radius:50%;background:var(--ink-2);box-shadow:var(--shadow-sm);border:2px solid var(--surface)}
 .dot.target .bub{background:var(--accent);width:20px;height:20px;box-shadow:0 0 0 4px var(--accent-soft)}
-.dot .dl{font-size:11px;font-weight:600;background:rgba(253,252,249,.85);padding:1px 6px;border-radius:5px;white-space:nowrap}
+.dot .dl{font-size:11px;font-weight:600;background:var(--label-bg);padding:1px 6px;border-radius:5px;white-space:nowrap}
 
 /* causal system flow */
 .flow{display:grid;grid-template-columns:repeat(4,1fr);gap:0;align-items:stretch;margin-top:6px}
@@ -417,7 +514,7 @@ kbd{font-family:var(--font-mono);font-size:10.5px;background:var(--surface);bord
 .flow-item.lead{border-color:var(--ev-validated);background:var(--ev-validated-bg)}
 .factors{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
 .fcol .fcol-h{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px}
-.fcol.control .fcol-h{color:var(--accent-ink)}.fcol.noise .fcol-h{color:#9a6a12}
+.fcol.control .fcol-h{color:var(--accent-ink)}.fcol.noise .fcol-h{color:var(--amber-ink)}
 .factor{font-size:12.5px;padding:6px 0;border-bottom:1px dashed var(--line);color:var(--ink-2)}
 .factor:last-child{border:none}
 
@@ -456,12 +553,12 @@ kbd{font-family:var(--font-mono);font-size:10.5px;background:var(--surface);bord
 .scope-col{padding:14px 16px}
 .scope-col.inc{background:var(--ev-validated-bg)}.scope-col.exc{background:var(--surface-2);border-left:1px solid var(--line)}
 .scope-col h4{font-size:11px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:9px}
-.scope-col.inc h4{color:#2f7048}.scope-col.exc h4{color:var(--muted)}
+.scope-col.inc h4{color:var(--green-ink)}.scope-col.exc h4{color:var(--muted)}
 .scope-col li{list-style:none;font-size:12.5px;padding:5px 0 5px 18px;position:relative;line-height:1.4;color:var(--ink-2)}
 .scope-col.inc li::before{content:"✓";position:absolute;left:0;color:var(--ev-validated);font-weight:700}
 .scope-col.exc li::before{content:"–";position:absolute;left:2px;color:var(--muted)}
-.kickass{margin-top:14px;padding:13px 16px;border-radius:var(--r-md);background:linear-gradient(120deg,#faf0dc,#f8ecd2);border:1px solid #ecd9ad}
-.kickass .ka-l{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#a4761d;font-weight:700}
+.kickass{margin-top:14px;padding:13px 16px;border-radius:var(--r-md);background:linear-gradient(120deg,var(--warm-tint-2),var(--warm-tint-3));border:1px solid var(--amber-line)}
+.kickass .ka-l{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-deep);font-weight:700}
 .kickass .ka-v{font-family:var(--font-serif);font-size:15px;color:var(--ink);margin-top:5px;font-style:italic}
 
 /* impact ladder big */
@@ -473,7 +570,7 @@ kbd{font-family:var(--font-mono);font-size:10.5px;background:var(--surface);bord
 .irow .i-sub{font-size:12px;color:var(--muted);margin-top:2px}
 .irow .i-val{font-family:var(--font-mono);font-size:14px;font-weight:500}
 .irow .i-delta{font-size:11px;font-family:var(--font-mono)}
-.iup{color:#2f7048}.iflat{color:var(--muted)}
+.iup{color:var(--green-ink)}.iflat{color:var(--muted)}
 .iconn{height:14px;width:2px;background:var(--line-strong);margin-left:31px}
 
 /* decision log */
@@ -490,10 +587,10 @@ kbd{font-family:var(--font-mono);font-size:10.5px;background:var(--surface);bord
 .ladder-ctrl{display:flex;align-items:center;gap:0;background:var(--surface-2);border:1px solid var(--line);border-radius:9px;padding:3px;width:max-content}
 .lstep{height:30px;padding:0 12px;border-radius:6px;font-size:12px;font-weight:600;color:var(--muted);transition:.13s var(--ease);display:flex;align-items:center;gap:6px}
 .lstep.on{background:var(--surface);box-shadow:var(--shadow-sm)}
-.lstep.on[data-s="assumption"]{color:#6f695e}
-.lstep.on[data-s="suggestive"]{color:#9a6a12}
-.lstep.on[data-s="validated"]{color:#2f7048}
-.lstep.on[data-s="killed"]{color:#7d776c}
+.lstep.on[data-s="assumption"]{color:var(--assump-ink)}
+.lstep.on[data-s="suggestive"]{color:var(--amber-ink)}
+.lstep.on[data-s="validated"]{color:var(--green-ink)}
+.lstep.on[data-s="killed"]{color:var(--killed-ink)}
 
 /* ───────────────────────────── SLIDE-OVER PANEL ───────────────────────────── */
 .scrim{position:fixed;inset:0;background:rgba(28,24,18,.34);backdrop-filter:blur(2px);opacity:0;pointer-events:none;
@@ -537,7 +634,7 @@ kbd{font-family:var(--font-mono);font-size:10.5px;background:var(--surface);bord
 .cmdk-item .ci-ico{width:22px;height:22px;border-radius:6px;background:var(--surface-2);display:grid;place-items:center;font-size:12px;flex:none}
 .cmdk-item .ci-sub{margin-left:auto;font-size:11px;color:var(--muted);font-family:var(--font-mono)}
 .cmdk-item.sel,.cmdk-item:hover{background:var(--accent-soft);color:var(--accent-ink)}
-.cmdk-item.sel .ci-ico{background:#fff}
+.cmdk-item.sel .ci-ico{background:var(--surface)}
 
 /* ───────────────────────────── STAKEHOLDER WALKTHROUGH ───────────────────────────── */
 .walk-scrim{position:fixed;inset:0;background:var(--paper);opacity:0;pointer-events:none;transition:opacity .3s var(--ease);z-index:55;display:flex;flex-direction:column}
@@ -579,6 +676,10 @@ kbd{font-family:var(--font-mono);font-size:10.5px;background:var(--surface);bord
   *{animation-duration:.001ms!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
 }
 </style>
+<script>
+/* theme boot — before paint, no flash. Default light; persisted choice wins. */
+(function(){try{if(localStorage.getItem('noetic-theme')==='dark')document.documentElement.classList.add('dark');}catch(e){}})();
+</script>
 </head>
 <body>
 <div class="app">
@@ -633,7 +734,7 @@ kbd{font-family:var(--font-mono);font-size:10.5px;background:var(--surface);bord
   <main class="main">
     <div class="topbar">
       <div class="crumbs">
-        <span class="proj">Atlas · Team Onboarding</span>
+        <span class="proj">Ledgerline · Bank-Feed Activation</span>
         <span class="sep">/</span>
         <span class="here" id="crumbHere">Progress-to-Outcome Tree</span>
       </div>
@@ -642,15 +743,19 @@ kbd{font-family:var(--font-mono);font-size:10.5px;background:var(--surface);bord
         <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.4"/><path d="M11 11l3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
         Search or jump… <kbd>⌘K</kbd>
       </button>
+      <button class="theme-btn" onclick="toggleTheme()" title="Toggle dark mode" aria-label="Toggle dark mode">
+        <svg class="ico-moon" width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M13.5 9.6A6 6 0 116.4 2.5a4.8 4.8 0 107.1 7.1z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+        <svg class="ico-sun" width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="3" stroke="currentColor" stroke-width="1.4"/><path d="M8 1v2M8 13v2M1 8h2M13 8h2M3 3l1.4 1.4M11.6 11.6L13 13M13 3l-1.4 1.4M4.4 11.6L3 13" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+      </button>
       <div class="avatar">PD</div>
     </div>
 
     <!-- Cadence ribbon -->
     <div class="cadence">
       <span class="wk">WEEK 24 · 2026</span>
-      <div class="cad-item cad-done"><span class="cad-dot"></span>Interview logged — Priya (Tue)</div>
+      <div class="cad-item cad-done"><span class="cad-dot"></span>Interview logged — Rosa (Tue)</div>
       <div class="cad-item cad-done"><span class="cad-dot"></span>Tree reviewed</div>
-      <div class="cad-item cad-now"><span class="cad-dot"></span>1 test in flight — TC-07</div>
+      <div class="cad-item cad-now"><span class="cad-dot"></span>1 test in flight — TC-08</div>
       <div class="cad-item cad-todo"><span class="cad-dot"></span>Impact review (Fri)</div>
       <div class="cad-spacer"></div>
       <span class="cad-quarter">Q2 outcome negotiation · 18 days</span>
@@ -661,8 +766,8 @@ kbd{font-family:var(--font-mono);font-size:10.5px;background:var(--surface);bord
       <div class="nba-in">
         <div>
           <div class="nba-kicker"><span class="hb"></span>Next best action · weakest load-bearing belief</div>
-          <div class="nba-belief">“New admins will invite their team within the first session if we make the value of a populated workspace legible.”</div>
-          <div class="nba-test">Smallest test that moves it: <b>TC-07 — fake-door “Invite your team” prompt</b> on the empty workspace, measured over 40 new admins. Threshold locked.</div>
+          <div class="nba-belief">“Founders will connect their primary bank account in session one if the connection flow makes safety legible.”</div>
+          <div class="nba-test">Smallest test that moves it: <b>TC-08 — trust-first connection flow prototype</b> at the connect-your-bank step, measured over 40 new accounts. Threshold locked.</div>
         </div>
         <div class="nba-right">
           <div class="meter sz-lg" data-state="suggestive" title="Suggestive — some signal, not yet load-bearing"><span class="seg"></span><span class="seg"></span><span class="seg"></span><span class="seg"></span></div>
@@ -679,7 +784,7 @@ kbd{font-family:var(--font-mono);font-size:10.5px;background:var(--surface);bord
         <div class="tree-head">
           <div>
             <div class="tree-title serif">The Progress-to-Outcome Tree</div>
-            <div class="tree-sub">A living map from desired outcome to the next increment. Every node carries its evidence state. The weakest load-bearing belief is flagged in amber.</div>
+            <div class="tree-sub">Supply and demand converge at the causal system. Every node carries its evidence state; the whole map fits one panel.</div>
           </div>
           <div class="tree-tools">
             <div class="filterbar" id="treeFilter">
@@ -692,8 +797,10 @@ kbd{font-family:var(--font-mono);font-size:10.5px;background:var(--surface);bord
           </div>
         </div>
 
-        <div class="canvas" id="treeCanvas">
-          <!-- nodes injected by JS -->
+        <div class="tree-stage" id="treeStage">
+          <div class="tree-fit" id="treeFit">
+            <!-- two-spine canvas injected by JS -->
+          </div>
         </div>
       </section>
 
@@ -751,10 +858,12 @@ kbd{font-family:var(--font-mono);font-size:10.5px;background:var(--surface);bord
 </div>
 
 <script>
-/* ════════════════════════════ DATA — Project "Atlas" ════════════════════════════
-   A B2B SaaS team (collaborative analytics tool) chasing time-to-first-value in
-   team onboarding. One internally-consistent example, evidence at varied states,
-   one KILLED belief and one FAILED test shown as a win. */
+/* ════════════════════════════ DATA — Project "Ledgerline" ════════════════════════════
+   A fintech SaaS startup: SMB accounting / cash-flow management. The team chases
+   7-day bank-feed activation (connect feed + first reconciliation): 34% → 55%,
+   serving the business outcome of lower 90-day churn. One internally-consistent
+   example with evidence at varied states, one KILLED belief and one FAILED test
+   framed as a cheap win. */
 
 const EV = {
   assumption:{label:'Assumption',cls:'ev-assumption'},
@@ -771,171 +880,284 @@ function pill(state){
   return `<span class="ev-pill ${EV[state].cls}"><span class="ev-d"></span><span class="lbl">${EV[state].label}</span></span>`;
 }
 
-/* Tree nodes — keyed, with strata for the convergent canvas */
+/* Tree nodes — keyed, positioned on the two-spine convergent canvas */
 const NODES = {
-  outcome:{kind:'Desired Outcome', lead:true, ev:'validated',
-    h:'Lift 30-day team activation from 41% to 60%',
-    d:'Product outcome — controllable, behavioral. Negotiated with leadership, not a feature.',
+  framing:{kind:'Framing Assumptions', ev:'suggestive',
+    h:'Books that never become trustworthy are why SMBs churn',
+    d:'Supply-side frame: early activation (connected feed + first reconciliation) is the controllable driver of 90-day retention.',
     detail:{
-      grounding:'Grounded in a progress hypothesis: teams that reach a populated, shared workspace in week one keep using Atlas; teams that don’t, churn quietly.',
-      type:'Product outcome (not a business outcome, not a traction metric).',
-      baseline:'41% of new teams active at day 30 (Q1 cohort, n=212).',
-      target:'60% by end of Q3. Learning-goal mode until the activation driver is validated.',
+      grounding:'We assume the causal chain runs: connected bank feed → first reconciliation → trusted, always-current books → the account stays past day 90. If the chain is wrong, the outcome below is wrong.',
+      type:'Framing assumption — held consciously, revisable.',
       evidence:[
-        ['cohort','Q1 retention curve: activated teams retain 3.1× vs non-activated.'],
-        ['leadership','Outcome ratified in Q2 negotiation — owns the metric, not the roadmap.'],
+        ['cohort','Q1 cohort: accounts that activated in week 1 churned 2.7× less by day 90.'],
+        ['caveat','Correlation so far — causal direction not yet isolated.'],
       ],
     }},
-  progress:{kind:'Customer Progress · JTBD', ev:'validated',
-    h:'“Get my team seeing the same numbers — fast — so I stop being the bottleneck.”',
-    d:'The Job a new admin hires Atlas for in their first week.',
+  outcome:{kind:'Desired Outcome', lead:true, ev:'validated',
+    h:'Lift 7-day bank-feed activation from 34% to 55%',
+    d:'% of new SMB accounts that connect a bank feed AND complete a first reconciliation within 7 days.',
     detail:{
-      grounding:'Job statement (full grammar): When I roll out a new analytics tool to my team, I want everyone looking at the same trusted dashboard within days, so I can stop fielding one-off data questions and look credible to my boss.',
-      type:'Functional + social + emotional motivations all present.',
+      grounding:'Grounded in a progress hypothesis: owners who see a reconciled, live picture of their cash in week one come to trust the books; those who don’t quietly go back to the spreadsheet. Serves the business outcome: reduce 90-day churn.',
+      type:'Product outcome (not a business outcome, not a traction metric). Negotiated with leadership.',
+      baseline:'34% of new accounts activated within 7 days (Q1 cohort, n=418).',
+      target:'55% by end of Q3. Learning-goal mode until the trust driver is validated.',
       evidence:[
-        ['12 interviews','Recurs in 9 of 12 progress interviews of real past rollouts.'],
-        ['behavior','Admins who invited ≥2 teammates in week 1 activated at 71%.'],
+        ['cohort','Activated accounts retain 2.7× at day 90 vs non-activated.'],
+        ['leadership','Outcome ratified in Q2 negotiation — the team owns the metric, not a roadmap.'],
+      ],
+    }},
+  jtbd:{kind:'Job to be Done · Customer Progress', ev:'validated',
+    h:'“Move from spreadsheet chaos to trusted, always-current books.”',
+    d:'When tax season or an investor request exposes the mess, owners want to answer money questions in minutes — and look credible.',
+    detail:{
+      grounding:'Job statement (full grammar): When tax season or an investor request exposes how messy my books are, I want to move from spreadsheet chaos to trusted, always-current books, so I can answer money questions in minutes, feel in control, and look credible to my accountant and investors.',
+      type:'Functional (current numbers), emotional (in control), social (credible to accountant & investors) — all three motivations present. Segment: founder/owner-operators of <20-person companies doing their own books on spreadsheets + bank-portal exports.',
+      evidence:[
+        ['14 interviews','Recurs in 11 of 14 progress interviews of real past switches.'],
+        ['behavior','Owners who connected a feed in week 1 reconciled 3.2× more often in month one.'],
       ],
     }},
   forces:{kind:'Timeline & Forces', ev:'suggestive',
-    h:'Strong push & pull at onboarding; anxiety about an empty workspace stalls invites',
-    d:'Four forces around the “first session” moment in the buyer timeline.',
+    h:'A deadline pushes hard; bank-credential anxiety stalls the connection',
+    d:'Four forces around the connect-your-bank moment.',
     detail:{
-      grounding:'The decisive struggling moment sits at Onboarding: the admin logs in, sees an empty workspace, and hesitates to invite the team to “nothing.”',
-      type:'Push (manual reporting pain) and Pull (shared truth) are strong; Anxiety (looking bad with an empty board) and Habit (the trusty spreadsheet) hold them back.',
+      grounding:'The decisive struggling moment sits at Onboarding: the owner reaches “Connect your bank,” imagines handing a startup their business account credentials, and stalls.',
+      type:'Push (deadline exposed the mess) and Pull (always-current books) are strong; Anxiety (bank credentials, miscategorization) and Habit (the spreadsheet ritual they secretly like) hold them back.',
       evidence:[
-        ['quotes','“I’m not inviting eight people to a blank screen.” — Priya, Ops Lead'],
-        ['signal','Drop-off concentrated between first login and first invite.'],
+        ['quotes','“I’m not giving a two-year-old startup the keys to my business account.” — Rosa, roastery owner'],
+        ['signal','Drop-off concentrates between signup and a completed bank connection.'],
       ],
     }},
   oppTarget:{kind:'Target Opportunity', ev:'suggestive', target:true,
-    h:'The empty-workspace moment: admins won’t invite a team to a blank board',
-    d:'Crowned target opportunity. Demand strength high × ability to win high.',
+    h:'“I won’t connect my primary business account until I believe this company is safe and serious.”',
+    d:'Bank-connection trust · demand high × ability to win high.',
     detail:{
-      grounding:'A customer-framed struggling moment, not a feature. Passed all five admission tests.',
-      type:'Timeline moment: Onboarding → first session.',
+      grounding:'A customer-framed struggling moment, not a feature. Passed all five admission tests. The trust threshold, not the OAuth mechanics, is the struggle.',
+      type:'Timeline moment: Onboarding → evaluating trust.',
       evidence:[
-        ['recurrence','Named, unprompted, in 7 of 12 interviews.'],
-        ['severity','Sits exactly on the activation drop-off.'],
-        ['win','We control the first-session surface — high ability to win.'],
+        ['recurrence','Named, unprompted, in 8 of 14 interviews.'],
+        ['severity','Sits exactly on the 7-day activation drop-off.'],
+        ['win','We control the connection surface end-to-end — high ability to win.'],
       ],
+    }},
+  opp2:{kind:'Opportunity', ev:'assumption',
+    h:'“Importing my history feels like confessing.”',
+    d:'Starting moment — parked this cycle.',
+    detail:{
+      grounding:'Owners delay onboarding because importing two years of messy spreadsheets feels like an audit of their own negligence.',
+      type:'Timeline moment: Onboarding → starting. Real but not addressable this cycle — parked.',
+      evidence:[['interviews','Named in 5 of 14 interviews, but downstream of the connection stall.']],
+    }},
+  opp3:{kind:'Opportunity', ev:'assumption',
+    h:'“Reconciliation drifts when I skip a week.”',
+    d:'Ongoing-use moment — split later.',
+    detail:{
+      grounding:'After first value, a skipped week compounds into a backlog that feels like starting over — a churn risk later in life.',
+      type:'Timeline moment: Ongoing use. Large and hard — will be split into sub-opportunities.',
+      evidence:[['interviews','Recurs among month-2+ accounts; weak signal in new accounts.']],
     }},
   causal:{kind:'Causal System', ev:'suggestive',
-    h:'What must be true for a first session to end in an invite',
-    d:'Inputs → process → outputs → outcome, with control vs noise factors.',
+    h:'What must be true for a first session to end in a connected feed',
+    d:'Inputs → process → outputs → outcome · the slim bridge where spines converge.',
     detail:{
-      grounding:'Mapped before any solution. Control factors: first-screen content, time-to-first-chart, invite affordance. Noise: team size, data source, admin seniority.',
-      type:'Lead measure: % of sessions reaching a populated view before invite prompt. Lag: 30-day activation.',
+      grounding:'Mapped before any solution. Control factors: security-badging placement, read-only-access messaging, connection sequencing (sandbox-first vs primary-first), accountant co-sign flow. Noise: bank OAuth quality, past fraud experiences, press about fintech breaches.',
+      type:'Lead measure: % of first sessions completing a primary-account connection. Lag: 7-day activation (connect + first reconciliation).',
       evidence:[
-        ['model','Right-to-left: activation needs invites → invites need a non-empty workspace → that needs sample data + a fast first chart.'],
+        ['model','Right-to-left: trusted books need a reconciled feed → a feed needs a primary-account connection → that needs the trust threshold crossed in session one.'],
       ],
     }},
-  belief:{kind:'Load-bearing belief', ev:'suggestive', weakest:true,
-    h:'Make a populated workspace legible and admins invite in session one',
-    d:'The weakest belief the whole increment rests on. Currently suggestive — TC-07 in flight.',
+  belief:{kind:'Belief under test', ev:'suggestive', weakest:true,
+    h:'Make safety legible and founders connect the primary account in session one',
+    d:'The weakest belief the increment rests on. TC-08 in flight.',
     detail:{
-      grounding:'If admins can SEE what a live, shared workspace looks like (sample data + a real chart of their own), the empty-board anxiety drops and they invite the team immediately.',
+      grounding:'If the connection step shows — at the moment of hesitation — that access is read-only, permissions are granular, disconnection is one click, and the security posture is inspectable, the credential anxiety drops below the trust threshold and the primary account gets connected in session one.',
       type:'Desirability + causal-effectiveness assumption.',
       evidence:[
-        ['signal','In moderated tests, 6 of 9 admins invited after seeing seeded data.'],
-        ['gap','Not yet behavioral at scale — TC-07 fake-door measures real intent over 40 admins.'],
+        ['signal','Concierge test: 7 of 10 owners completed connection with read-only framing (bar was 6/10).'],
+        ['gap','Not yet behavioral at scale — TC-08 measures the self-serve flow over 40 new accounts.'],
       ],
     }},
   solA:{kind:'Solution · Product', ev:'suggestive', solType:'PRODUCT',
-    h:'Seeded sample workspace',
-    d:'Pre-populate every new workspace with relevant sample data and one auto-built chart.',
-    detail:{grounding:'Causal theory: removes empty-board anxiety by making value legible on screen one.',type:'Product path.',evidence:[['proto','Clickable prototype shown to 9 admins.']]}},
+    h:'Trust-first connection flow',
+    d:'Read-only framing, granular permissions, security page inline at the moment of doubt.',
+    detail:{grounding:'Causal theory: anxiety drops when safety is legible exactly where the hesitation happens — not on a marketing page.',type:'Product path.',evidence:[['concierge','10-user concierge test: 7/10 completed connection vs 6/10 bar — validated read-only framing.']]}},
   solB:{kind:'Solution · Service', ev:'assumption', solType:'SERVICE',
-    h:'Concierge first-dashboard',
-    d:'A human builds the team’s first dashboard live in a 20-min call before invites go out.',
-    detail:{grounding:'Causal theory: trust + a real artifact beats anything self-serve.',type:'Service path — tests willingness, not scalability yet.',evidence:[['untested','No behavioral evidence yet — pure assumption.']]}},
-  solC:{kind:'Solution · Process', ev:'killed', solType:'PROCESS',
-    h:'Gamified setup checklist',
-    d:'A progress-bar checklist nudging admins through setup steps before inviting.',
-    detail:{grounding:'Hypothesis: completion pressure drives invites. KILLED — a win: we stopped building it.',type:'Process path.',evidence:[['killed','TC-04: checklist raised step-completion but NOT invites (see below). The struggle isn’t motivation, it’s the empty board.']]}},
-  increment:{kind:'Smallest Coherent Increment', ev:'assumption',
-    h:'Seeded workspace + in-context invite prompt — admins only',
-    d:'The kick-ass half of the seeded-workspace path, scoped to one segment.',
+    h:'White-glove first connection',
+    d:'A human connects the feed with the owner on a 20-minute onboarding call.',
+    detail:{grounding:'Causal theory: a person vouching in real time beats any UI for trust — tests willingness, not scalability yet.',type:'Service path.',evidence:[['untested','No behavioral evidence yet — pure assumption.']]}},
+  solC:{kind:'Solution · Hybrid', ev:'killed', solType:'HYBRID',
+    h:'Sandbox-first with sample data',
+    d:'Explore on sample books first; guided primary connection after first aha.',
+    detail:{grounding:'Hypothesis: deferring the scary step raises eventual connection. KILLED — a win: exploration without real data felt pointless and the deferral never converted.',type:'Hybrid path.',evidence:[['killed','TC-05 fake-door: only 9% of “connect later” users returned to connect within 48h (bar 30%).']]}},
+  increment:{kind:'Increment & Impact', ev:'assumption',
+    h:'Trust-first connection — the primary-account moment only',
+    d:'The kick-ass half of the product path, scoped to one moment.',
     detail:{
-      grounding:'Included: sample data, one auto-chart, an invite prompt the moment the chart renders. Excluded: concierge, templates gallery, multi-source seeding.',
-      type:'Better + faster over cheaper — we’re buying a clean activation signal.',
-      evidence:[['rationale','Smallest thing that can move the lead measure and be instrumented in one cycle.']],
+      grounding:'Included: read-only framing at the credential step, granular permission list, “disconnect anytime” affordance, inline security page, instrumented lead measure. Excluded — on purpose: multi-entity support, historical-import automation, white-glove service, sandbox mode.',
+      type:'Better + faster over cheaper — we’re buying a clean activation signal in one cycle.',
+      evidence:[['rationale','Smallest thing that can move the lead measure (primary-account connections) and be read in one cycle.']],
     }},
   impact:{kind:'Impact (4 levels)', ev:'assumption',
     h:'Assumption → opportunity → product outcome → business outcome',
     d:'Expected ladder for this increment. Instrumented at release.',
     detail:{
-      grounding:'Four-level impact ladder, expected vs actual measured each cycle.',
+      grounding:'Four-level impact ladder, expected vs actual measured each cycle: connection completion → connection-stall relief → 7-day activation (34→55%) → 90-day churn.',
       type:'Currently projected — increment not yet shipped.',
-      evidence:[['plan','Lead measure wired before launch; lag measure (30-day activation) read at cycle close.']],
+      evidence:[['plan','Lead measure wired before launch; lag measure (7-day activation) read at cycle close; churn read next quarter.']],
     }},
 };
 
-/* Canvas strata — the convergent two-spine geometry */
-const STRATA = [
-  {n:'01', name:'Desired Outcome', loop:'Outcome', cols:1, nodes:['outcome']},
-  {n:'02', name:'Customer Progress · Timeline & Forces', loop:'Progress', cols:2, nodes:['progress','forces']},
-  {n:'03', name:'Opportunity Space', loop:'Opportunity', cols:1, nodes:['oppTarget'], conv:'Demand and supply converge ↓'},
-  {n:'04', name:'Causal System', loop:'Causal', cols:1, nodes:['causal']},
-  {n:'05', name:'Load-bearing belief', loop:'Delivery', cols:1, nodes:['belief']},
-  {n:'06', name:'Solution Set · 3 materially different paths', loop:'Delivery', cols:3, nodes:['solA','solB','solC']},
-  {n:'07', name:'Increment & Impact', loop:'Delivery', cols:2, nodes:['increment','impact']},
-];
+/* Two-spine convergent geometry — design space 1180 wide; height computed from
+   measured node heights so nothing ever clips. The whole canvas scales to fit. */
+const TREE_W=1180; let TREE_H=690;
+const TL={
+  framing:  {x:56,  w:350, cls:'slim', top:true, nod:true},
+  outcome:  {x:56,  w:350, note:'supply hypothesis · revisable'},
+  jtbd:     {x:774, w:350, cls:'slim', top:true, nod:true},
+  forces:   {x:774, w:350, cls:'slim', top:true, nod:true},
+  oppTarget:{x:774, w:350, cls:'slim', top:true},
+  opp2:     {x:774, w:168, cls:'mini', top:true, nod:true},
+  opp3:     {x:956, w:168, cls:'mini', top:true, nod:true},
+  causal:   {x:430, w:320, cls:'slim', top:true, nod:true},
+  solA:     {x:185, w:250, cls:'slim sol', top:true},
+  solB:     {x:465, w:250, cls:'slim sol', top:true},
+  solC:     {x:745, w:250, cls:'slim sol', top:true},
+  belief:   {x:250, w:320, cls:'slim', top:true, nod:true},
+  increment:{x:610, w:320, cls:'slim', top:true, nod:true},
+};
 </script>
 <script>
-/* ════════════════════════════ TREE RENDER ════════════════════════════ */
+/* ════════════════════════════ TREE RENDER — two-spine convergent canvas ════════════════════════════
+   Nodes are rendered at their design x/width, measured, then placed vertically;
+   connectors are generated from the measured geometry. Nothing clips, nothing
+   overlaps, and the whole canvas scales to fit one panel. */
 function nodeHTML(key){
-  const n = NODES[key];
-  const cls = ['node', n.lead?'lead':'', n.target?'is-target':'', n.weakest?'is-weakest':''].join(' ');
+  const l=TL[key], n=NODES[key];
+  const cls = ['node','tnode', l.cls||'', n.lead?'lead':'', n.target?'is-target':'', n.weakest?'is-weakest':''].join(' ');
   let flag='';
   if(n.target) flag = `<span class="node-crown">★ Target</span>`;
-  else if(n.weakest) flag = `<span class="node-weak-flag">⚠ Weakest belief</span>`;
-  let extra='';
-  if(key==='impact') extra = `
-    <div class="ladder">
-      <div class="ladder-step"><span class="rung" style="background:var(--ev-suggestive)"></span><span class="lab">Assumption behavior</span><span class="val">in test</span></div>
-      <div class="ladder-step"><span class="rung" style="background:var(--ev-assumption)"></span><span class="lab">Opportunity relief</span><span class="val">—</span></div>
-      <div class="ladder-step"><span class="rung" style="background:var(--ev-assumption)"></span><span class="lab">Product outcome</span><span class="val">41→60%</span></div>
-      <div class="ladder-step"><span class="rung" style="background:var(--ev-assumption)"></span><span class="lab">Business outcome</span><span class="val">NRR</span></div>
-    </div>`;
-  if(n.solType) extra = `<div class="node-foot" style="margin-top:8px"><span class="sol-type">${n.solType}</span></div>`;
-  return `<div class="${cls}" data-key="${key}" data-ev="${n.ev}" tabindex="0" role="button"
+  else if(n.weakest) flag = `<span class="node-weak-flag">⚠ Weakest</span>`;
+  const mini = (l.cls||'').includes('mini');
+  const showD = !l.nod && !mini;
+  const topMeter = l.top ? `<span style="margin-left:${flag?'8px':'auto'}">${meter(n.ev,mini?'sm':'')}</span>` : '';
+  return `<div class="${cls}" style="left:${l.x}px;top:0;width:${l.w}px"
+            data-key="${key}" data-ev="${n.ev}" tabindex="0" role="button"
             onclick="openNode('${key}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openNode('${key}')}">
-    <div class="node-top">
-      <span class="node-kind">${n.kind}</span>${flag}
-    </div>
+    <div class="node-top"><span class="node-kind">${n.kind}</span>${flag}${topMeter}
+      ${l.note?`<span style="margin-left:auto;font-family:var(--font-mono);font-size:10px;color:var(--muted)">${l.note}</span>`:''}</div>
     <div class="node-h">${n.h}</div>
-    <div class="node-d">${n.d}</div>
-    ${extra}
-    <div class="node-foot">
+    ${showD?`<div class="node-d">${n.d}</div>`:''}
+    ${l.top?'':`<div class="node-foot">
       ${meter(n.ev)} ${pill(n.ev)}
-      <span class="meta">${key.toUpperCase()}</span>
-    </div>
+    </div>`}
   </div>`;
 }
 
-function renderTree(){
-  const c = document.getElementById('treeCanvas');
-  let html='';
-  STRATA.forEach((s,i)=>{
-    html += `<div class="stratum-label"><span class="sl-num">${s.n}</span><span class="sl-name">${s.name}</span><span class="sl-line"></span><span class="sl-loop">${s.loop}</span></div>`;
-    html += `<div class="spine-row cols-${s.cols}">`;
-    s.nodes.forEach(k=> html += nodeHTML(k));
-    html += `</div>`;
-    if(s.conv) html += `<div class="conv-note">${s.conv}</div>`;
-    if(i<STRATA.length-1) html += `<div class="connector ${i===0?'dashed':''}"></div>`;
-  });
-  // dashed challenge-arrow note
-  html += `<div class="conv-note" style="margin-top:18px">↑ Validated demand retains standing to challenge the outcome (the dashed arrow)</div>`;
-  c.innerHTML = html;
+function treeSVG(Y,H,solH,rowH){
+  const sx=TL.framing.x+TL.framing.w/2, dx=TL.jtbd.x+TL.jtbd.w/2;   // spine centers
+  const ob=Y.outcome+H.outcome;                                      // outcome bottom
+  const otb=Y.oppTarget+H.oppTarget;                                 // target opp bottom
+  const c2=TL.opp2.x+TL.opp2.w/2, c3=TL.opp3.x+TL.opp3.w/2;          // mini centers
+  const cy0=Y.causal, cb=Y.causal+H.causal;                          // causal top/bottom
+  const s1=TL.solA.x+TL.solA.w/2, s2=TL.solB.x+TL.solB.w/2, s3=TL.solC.x+TL.solC.w/2; // solution centers
+  const solB=Y.solA+solH;
+  const bar1=Y.solA-14, bar2=solB+10;
+  const rowY=Y.belief, rcy=rowY+rowH/2;
+  const bcx=TL.belief.x+TL.belief.w/2;                               // belief center x
+  const mcy=Y.opp2+Math.max(H.opp2,H.opp3)/2;                        // mini row center y
+  const chY1=Y.oppTarget+34, chY2=Y.outcome+50;                      // challenge arrow y's
+  return `<svg class="tree-svg" viewBox="0 0 ${TREE_W} ${TREE_H}" preserveAspectRatio="xMidYMin meet" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <marker id="arr" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+        <path d="M0 0L8 4L0 8z" fill="var(--line-strong)"/>
+      </marker>
+      <marker id="arrAcc" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+        <path d="M0 0L8 4L0 8z" fill="var(--accent)"/>
+      </marker>
+    </defs>
+    <!-- supply spine: framing → outcome -->
+    <path class="conn" d="M${sx} ${Y.framing+H.framing} V${Y.outcome-4}" marker-end="url(#arr)"/>
+    <!-- demand spine: jtbd → forces → target opportunity → siblings -->
+    <path class="conn" d="M${dx} ${Y.jtbd+H.jtbd} V${Y.forces-4}" marker-end="url(#arr)"/>
+    <path class="conn" d="M${dx} ${Y.forces+H.forces} V${Y.oppTarget-4}" marker-end="url(#arr)"/>
+    <path class="conn" d="M${dx} ${otb} V${otb+8} M${c2} ${otb+8} H${c3} M${c2} ${otb+8} V${otb+14} M${c3} ${otb+8} V${otb+14}"/>
+    <!-- challenge arrow: validated demand can challenge the outcome -->
+    <path class="conn dashed accent" d="M${TL.oppTarget.x-4} ${chY1} C620 ${chY1} 560 ${chY2} ${TL.outcome.x+TL.outcome.w+6} ${chY2}" marker-end="url(#arrAcc)"/>
+    <text class="arrowlab accent" x="590" y="${(chY1+chY2)/2-16}" text-anchor="middle">validated demand can challenge the outcome</text>
+    <!-- convergence into the causal bridge -->
+    <path class="conn" d="M${sx} ${ob} C${sx} ${ob+46} 500 ${cy0-46} 522 ${cy0-6}" marker-end="url(#arr)"/>
+    <path class="conn" d="M${TL.oppTarget.x-4} ${Y.oppTarget+H.oppTarget/2+10} C690 ${Y.oppTarget+H.oppTarget/2+10} 668 ${cy0-44} 660 ${cy0-6}" marker-end="url(#arr)"/>
+    <text class="arrowlab" x="590" y="${cy0-54}" text-anchor="middle">supply and demand converge</text>
+    <!-- causal → solutions (fan) -->
+    <path class="conn" d="M590 ${cb} V${bar1} M${s1} ${bar1} H${s3} M${s1} ${bar1} V${Y.solA-4} M${s2} ${bar1} V${Y.solA-4} M${s3} ${bar1} V${Y.solA-4}"/>
+    <!-- solutions → assumption tests (reverse fan) -->
+    <path class="conn" d="M${s1} ${solB} V${bar2} M${s2} ${solB} V${bar2} M${s3} ${solB} V${bar2} M${s1} ${bar2} H${s3} M${bcx} ${bar2} V${rowY-4}" marker-end="url(#arr)"/>
+    <!-- tests → increment -->
+    <path class="conn" d="M${TL.belief.x+TL.belief.w} ${rcy} H${TL.increment.x-5}" marker-end="url(#arr)"/>
+    <!-- re-prioritise loop back to the opportunity space -->
+    <path class="conn dashed" d="M${TL.increment.x+TL.increment.w+2} ${rcy} C1070 ${rcy} 1152 ${rcy-90} 1152 ${(rcy+mcy)/2} C1152 ${mcy+50} 1148 ${mcy+14} ${TL.opp3.x+TL.opp3.w+8} ${mcy+6}" marker-end="url(#arr)"/>
+    <text class="arrowlab" x="${TL.increment.x+TL.increment.w+58}" y="${rcy+30}" text-anchor="middle">measure impact → re-prioritise</text>
+  </svg>`;
 }
 
-let activeFilter='all';
+function renderTree(){
+  const c = document.getElementById('treeFit');
+  let html='';
+  Object.keys(TL).forEach(k=> html += nodeHTML(k));
+  c.innerHTML = html;
+  /* measure natural heights */
+  const H={};
+  c.querySelectorAll('.node').forEach(n=>{ H[n.dataset.key]=n.offsetHeight; });
+  /* place vertically */
+  const Y={};
+  Y.framing=16;                         Y.outcome=Y.framing+H.framing+26;
+  Y.jtbd=16;                            Y.forces=Y.jtbd+H.jtbd+22;
+  Y.oppTarget=Y.forces+H.forces+22;
+  Y.opp2=Y.opp3=Y.oppTarget+H.oppTarget+14;
+  Y.causal=Y.outcome+H.outcome+24;
+  const minisB=Y.opp2+Math.max(H.opp2,H.opp3);
+  const solH=Math.max(H.solA,H.solB,H.solC);
+  Y.solA=Y.solB=Y.solC=Math.max(Y.causal+H.causal, minisB)+22;
+  const rowH=Math.max(H.belief,H.increment);
+  Y.belief=Y.increment=Y.solA+solH+26;
+  TREE_H=Y.belief+rowH+40;
+  c.querySelectorAll('.node').forEach(n=>{
+    const k=n.dataset.key;
+    n.style.top=Y[k]+'px';
+    if(k==='solA'||k==='solB'||k==='solC') n.style.height=solH+'px';
+    if(k==='belief'||k==='increment') n.style.height=rowH+'px';
+  });
+  c.style.height=TREE_H+'px';
+  c.insertAdjacentHTML('afterbegin', treeSVG(Y,H,solH,rowH));
+  c.insertAdjacentHTML('beforeend',
+    `<div class="spine-side" style="left:6px;height:${Y.outcome+H.outcome}px"><span>Supply</span></div>`+
+    `<div class="spine-side" style="right:6px;height:${minisB}px"><span>Demand</span></div>`);
+  if(typeof activeFilter!=='undefined' && activeFilter!=='all')
+    c.querySelectorAll('.node').forEach(n=>n.classList.toggle('dim', n.dataset.ev!==activeFilter));
+  fitTree();
+}
+
+/* scale the whole canvas so the tree fits the panel — no internal scroll */
+function fitTree(){
+  const stage=document.getElementById('treeStage'), fit=document.getElementById('treeFit'),
+        view=document.getElementById('view');
+  if(!stage||!fit||!view) return;
+  const availW = stage.clientWidth - 16;
+  const availH = view.getBoundingClientRect().bottom - stage.getBoundingClientRect().top - 12;
+  const s = Math.min(availW/TREE_W, availH/TREE_H, 1.08);
+  fit.style.transform = `scale(${s})`;
+  stage.style.height = (TREE_H*s+8)+'px';
+}
+window.addEventListener('resize', fitTree);
+/* re-measure once webfonts arrive (heights depend on metrics) */
+if(document.fonts && document.fonts.ready) document.fonts.ready.then(()=>renderTree());
+
+var activeFilter='all';
 function filterTree(f, btn){
   activeFilter=f;
   document.querySelectorAll('#treeFilter .fchip').forEach(b=>b.classList.remove('on'));
   btn.classList.add('on');
-  document.querySelectorAll('#treeCanvas .node').forEach(node=>{
+  document.querySelectorAll('#treeFit .node').forEach(node=>{
     const match = f==='all' || node.dataset.ev===f;
     node.classList.toggle('dim', !match);
   });
@@ -978,7 +1200,13 @@ function closePanel(){
   document.getElementById('scrim').classList.remove('open');
   document.getElementById('panel').classList.remove('open');
 }
-function openNBATest(){ goLoop('delivery'); setTimeout(()=>{ const el=document.getElementById('tc07'); if(el){el.scrollIntoView({behavior:'smooth',block:'center'}); el.animate([{boxShadow:'0 0 0 0 rgba(201,138,30,.5)'},{boxShadow:'0 0 0 6px rgba(201,138,30,0)'}],{duration:1200}); } },340); }
+function openNBATest(){ goLoop('delivery'); setTimeout(()=>{ const el=document.getElementById('tc08'); if(el){el.scrollIntoView({behavior:'smooth',block:'center'}); el.animate([{boxShadow:'0 0 0 0 rgba(201,138,30,.5)'},{boxShadow:'0 0 0 6px rgba(201,138,30,0)'}],{duration:1200}); } },340); }
+
+/* ── theme ── */
+function toggleTheme(){
+  const dark = document.documentElement.classList.toggle('dark');
+  try{ localStorage.setItem('noetic-theme', dark?'dark':'light'); }catch(e){}
+}
 </script>
 <script>
 /* ════════════════════════════ LOOP SCREENS ════════════════════════════ */
@@ -996,6 +1224,7 @@ function goLoop(loop){
   document.querySelectorAll('.nav-loop').forEach(b=>b.classList.toggle('active', b.dataset.loop===loop));
   document.getElementById('crumbHere').textContent = LOOP_TITLES[loop]||loop;
   document.getElementById('view').scrollTop=0;
+  if(loop==='tree') requestAnimationFrame(fitTree);
   closeCmdk(); closePanel();
 }
 
@@ -1008,52 +1237,58 @@ const BUILDERS = {
       <p class="lede">Continuous JTBD interviews of real past rollouts — never hypotheticals. We listen for the struggling moment and the four forces, then render demand as a map the whole team can read.</p>
     </div>
 
-    <div class="section-rule"><span class="sr-n">3.1</span><h2 class="serif">Interview snapshots</h2><span class="sr-line"></span><span class="mono" style="font-size:11px;color:var(--muted)">12 logged · 1 this week</span></div>
+    <div class="section-rule"><span class="sr-n">3.1</span><h2 class="serif">Interview snapshots</h2><span class="sr-line"></span><span class="mono" style="font-size:11px;color:var(--muted)">14 logged · 1 this week</span></div>
     <div class="grid g-2">
       <div class="card">
         <div class="snap">
-          <div class="who">Priya Nadkarni <span class="role">· Ops Lead, 24-person fintech</span></div>
-          <div class="quote">I rolled it out on a Monday. By Wednesday I still hadn’t invited the team — I’m not inviting eight people to a blank screen and looking like I bought a toy.</div>
-          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px">${pill('validated')}<span class="ev-pill ev-suggestive"><span class="ev-d"></span>Anxiety: empty board</span></div>
+          <div class="who">Rosa Delgado <span class="role">· Owner, Cardinal Coffee Roasters (12 people)</span></div>
+          <div class="quote">My accountant sent the spreadsheet back with forty comments in March. That was the push. But when Ledgerline asked for my bank login, I closed the tab — I’m not giving a two-year-old startup the keys to my business account.</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px">${pill('validated')}<span class="ev-pill ev-suggestive"><span class="ev-d"></span>Anxiety: bank credentials</span></div>
+        </div>
+        <div class="snap">
+          <div class="who">Tom Halloran <span class="role">· Founder, Brightwork Creative (9-person agency)</span></div>
+          <div class="quote">An investor asked for our runway on a Friday. It took me a whole weekend of exports to answer. That weekend is why I signed up. The spreadsheet is painful, but honestly? The Sunday-night ritual of tidying it is the one time I feel on top of the business.</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px"><span class="ev-pill ev-suggestive"><span class="ev-d"></span>Habit: the spreadsheet ritual</span></div>
         </div>
         <div class="snap" style="margin-bottom:0">
-          <div class="who">Marcus Webb <span class="role">· Head of RevOps, 60-person SaaS</span></div>
-          <div class="quote">The spreadsheet already works. To get me to switch the whole team, day one has to feel obviously better — not like more setup homework.</div>
-          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px"><span class="ev-pill ev-suggestive"><span class="ev-d"></span>Habit: the spreadsheet</span></div>
+          <div class="who">Aisha Khan <span class="role">· Operator, Solstice Skincare (Shopify brand, 6 people)</span></div>
+          <div class="quote">I connected a test card account first, just to watch it. The auto-categorization put my Meta ads under “office supplies.” Until I’ve checked every line myself, I don’t trust it — so what did connecting buy me?</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px"><span class="ev-pill ev-suggestive"><span class="ev-d"></span>Anxiety: miscategorization</span></div>
         </div>
       </div>
       <div class="card inset">
         <div class="card-t">Demand Map · The Job<span class="ct-line"></span></div>
-        <p class="serif" style="font-size:16px;line-height:1.5;color:var(--ink)">When I roll out a new analytics tool to my team, I want everyone looking at the <b>same trusted dashboard within days</b>, so I can stop fielding one-off data questions and look credible to my boss.</p>
+        <p class="serif" style="font-size:16px;line-height:1.5;color:var(--ink)">When tax season or an investor request exposes how messy my books are, I want to move from spreadsheet chaos to <b>trusted, always-current books</b>, so I can answer money questions in minutes, feel in control, and look credible to my accountant and investors.</p>
         <div class="card-t" style="margin-top:18px">Real competitors<span class="ct-line"></span></div>
-        <div class="comp-row"><span class="comp-name">The existing spreadsheet</span><span class="comp-kind">do-nothing</span><span class="comp-note">Works, trusted, zero rollout risk.</span></div>
-        <div class="comp-row"><span class="comp-name">Screenshots in Slack</span><span class="comp-kind">workaround</span><span class="comp-note">Admin stays the bottleneck.</span></div>
-        <div class="comp-row"><span class="comp-name">Looker / incumbent BI</span><span class="comp-kind">competitor</span><span class="comp-note">Powerful, but heavy to stand up.</span></div>
+        <div class="comp-row"><span class="comp-name">The spreadsheet</span><span class="comp-kind">do-nothing</span><span class="comp-note">Painful but trusted — and secretly a ritual.</span></div>
+        <div class="comp-row"><span class="comp-name">Accountant, quarterly</span><span class="comp-kind">outsource</span><span class="comp-note">Books are right four times a year — never current.</span></div>
+        <div class="comp-row"><span class="comp-name">Bank-portal exports</span><span class="comp-kind">workaround</span><span class="comp-note">CSV archaeology every time a question lands.</span></div>
+        <div class="comp-row"><span class="comp-name">Doing nothing</span><span class="comp-kind">nonconsumption</span><span class="comp-note">Hope the next deadline is far away.</span></div>
       </div>
     </div>
 
-    <div class="section-rule"><span class="sr-n">3.2</span><h2 class="serif">Four forces · the first-session moment</h2><span class="sr-line"></span></div>
+    <div class="section-rule"><span class="sr-n">3.2</span><h2 class="serif">Four forces · the connect-your-bank moment</h2><span class="sr-line"></span></div>
     <div class="forces">
       <div class="force push"><div class="f-h"><span class="f-arrow">→</span>Push (away from today)</div>
-        <ul><li>Manual reporting eats the admin’s Monday.</li><li>One-off data questions never stop.</li><li>“Looking credible to my boss” is at stake.</li></ul></div>
-      <div class="force pull"><div class="f-h"><span class="f-arrow">←</span>Pull (toward Atlas)</div>
-        <ul><li>One shared, trusted source of truth.</li><li>Team self-serves; admin stops being asked.</li><li>Looks modern, looks decisive.</li></ul></div>
+        <ul><li>Accountant scolded them over the spreadsheet.</li><li>Investor asked for runway; it took a weekend.</li><li>Tax deadline turns books into panic.</li></ul></div>
+      <div class="force pull"><div class="f-h"><span class="f-arrow">←</span>Pull (toward Ledgerline)</div>
+        <ul><li>Always-current books — answers in minutes.</li><li>Feeling in control of cash for once.</li><li>Looking credible to accountant &amp; investors.</li></ul></div>
       <div class="force anxiety"><div class="f-h">⚠ Anxiety (of switching)</div>
-        <ul><li>“Inviting the team to a blank board.”</li><li>What if the data’s wrong on day one?</li><li>Re-training eight people.</li></ul></div>
+        <ul><li>“Handing a startup my bank credentials.”</li><li>What if auto-categorization is quietly wrong?</li><li>Importing the historical mess = confessing.</li></ul></div>
       <div class="force habit"><div class="f-h">⟳ Habit (of today)</div>
-        <ul><li>The spreadsheet already works.</li><li>Muscle memory of the old report.</li><li>“We’ll switch next quarter.”</li></ul></div>
+        <ul><li>The spreadsheet already works, sort of.</li><li>The Sunday-night tidy-up ritual they secretly like.</li><li>“I’ll switch after tax season.”</li></ul></div>
     </div>
 
-    <div class="section-rule"><span class="sr-n">3.3</span><h2 class="serif">Buyer timeline</h2><span class="sr-line"></span><span class="mono" style="font-size:11px;color:var(--muted)">struggle concentrates at Onboarding</span></div>
+    <div class="section-rule"><span class="sr-n">3.3</span><h2 class="serif">Buyer timeline</h2><span class="sr-line"></span><span class="mono" style="font-size:11px;color:var(--muted)">struggle concentrates at Onboarding · evaluating trust</span></div>
     <div class="card">
       <div class="timeline">
-        <div class="tl-stage"><div class="tl-n">01</div><div class="tl-name">First Thought</div><div class="tl-note">“Reporting is a mess.”</div></div>
-        <div class="tl-stage"><div class="tl-n">02</div><div class="tl-name">Passive Looking</div><div class="tl-note">Notices peers using BI.</div></div>
-        <div class="tl-stage"><div class="tl-n">03</div><div class="tl-name">Active Looking</div><div class="tl-note">Trials two tools.</div></div>
-        <div class="tl-stage"><div class="tl-n">04</div><div class="tl-name">Deciding</div><div class="tl-note">Picks Atlas, signs up.</div></div>
-        <div class="tl-stage hot"><div class="tl-n">05</div><div class="tl-name">Onboarding</div><div class="tl-note">Empty workspace → stalls before inviting.</div></div>
-        <div class="tl-stage"><div class="tl-n">06</div><div class="tl-name">Ongoing Use</div><div class="tl-note">Team checks dashboards weekly.</div></div>
-        <div class="tl-stage"><div class="tl-n">07</div><div class="tl-name">Renew / Expand</div><div class="tl-note">Adds seats, more sources.</div></div>
+        <div class="tl-stage"><div class="tl-n">01</div><div class="tl-name">First Thought</div><div class="tl-note">A deadline exposes the mess.</div></div>
+        <div class="tl-stage"><div class="tl-n">02</div><div class="tl-name">Passive Looking</div><div class="tl-note">Notices peers off spreadsheets.</div></div>
+        <div class="tl-stage"><div class="tl-n">03</div><div class="tl-name">Active Looking</div><div class="tl-note">Trials two tools, asks accountant.</div></div>
+        <div class="tl-stage"><div class="tl-n">04</div><div class="tl-name">Deciding</div><div class="tl-note">Picks Ledgerline, signs up.</div></div>
+        <div class="tl-stage hot"><div class="tl-n">05</div><div class="tl-name">Onboarding</div><div class="tl-note">“Connect your bank” → trust stall.</div></div>
+        <div class="tl-stage"><div class="tl-n">06</div><div class="tl-name">Ongoing Use</div><div class="tl-note">Weekly reconciliation; drifts if skipped.</div></div>
+        <div class="tl-stage"><div class="tl-n">07</div><div class="tl-name">Renew / Expand</div><div class="tl-note">Adds accounts, invites accountant.</div></div>
       </div>
     </div>
   </div>`; },
@@ -1070,33 +1305,33 @@ const BUILDERS = {
       <div class="card">
         <div class="card-t">The three altitudes — keep them distinct<span class="ct-line"></span></div>
         <div class="grid" style="gap:10px">
-          <div class="card inset" style="border-radius:10px;padding:13px 15px"><div style="display:flex;align-items:center;gap:9px"><span style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)">Business outcome</span>${pill('assumption')}</div><div style="margin-top:6px;font-size:13.5px">Net revenue retention — the thing leadership ultimately cares about. We don’t control it directly.</div></div>
-          <div class="card" style="border-radius:10px;padding:13px 15px;border-color:var(--accent)"><div style="display:flex;align-items:center;gap:9px"><span style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-ink)">Product outcome ★ ours</span>${pill('validated')}</div><div style="margin-top:6px;font-size:14px"><b>30-day team activation: 41% → 60%.</b> Controllable, behavioral, the one metric this team owns.</div></div>
-          <div class="card inset" style="border-radius:10px;padding:13px 15px"><div style="display:flex;align-items:center;gap:9px"><span style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)">Traction metric</span>${pill('killed')}</div><div style="margin-top:6px;font-size:13.5px">“Invites sent” — too narrow. Rejected as the primary: it games easily and doesn’t imply progress.</div></div>
+          <div class="card inset" style="border-radius:10px;padding:13px 15px"><div style="display:flex;align-items:center;gap:9px"><span style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)">Business outcome</span>${pill('assumption')}</div><div style="margin-top:6px;font-size:13.5px">90-day churn of new SMB accounts — the thing leadership ultimately cares about. We don’t control it directly.</div></div>
+          <div class="card" style="border-radius:10px;padding:13px 15px;border-color:var(--accent)"><div style="display:flex;align-items:center;gap:9px"><span style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-ink)">Product outcome ★ ours</span>${pill('validated')}</div><div style="margin-top:6px;font-size:14px"><b>7-day bank-feed activation: 34% → 55%.</b> Connect a bank feed AND complete a first reconciliation within 7 days. Controllable, behavioral, the one metric this team owns.</div></div>
+          <div class="card inset" style="border-radius:10px;padding:13px 15px"><div style="display:flex;align-items:center;gap:9px"><span style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)">Traction metric</span>${pill('killed')}</div><div style="margin-top:6px;font-size:13.5px">“Bank connections started” — too narrow. Rejected as the primary: it games easily and doesn’t imply trusted books.</div></div>
         </div>
 
         <div class="card-t" style="margin-top:20px">Baseline → Target<span class="ct-line"></span></div>
         <div class="bt">
           <div class="bt-track">
-            <div class="bt-fill" style="width:60%"></div>
-            <div class="bt-cur" style="left:41%"></div>
+            <div class="bt-fill" style="width:55%"></div>
+            <div class="bt-cur" style="left:34%"></div>
           </div>
-          <div class="bt-marks"><span>0%</span><span style="color:var(--accent-ink)">today 41%</span><span style="color:#2f7048">target 60%</span><span>100%</span></div>
+          <div class="bt-marks"><span>0%</span><span style="color:var(--accent-ink)">today 34%</span><span style="color:var(--green-ink)">target 55%</span><span>100%</span></div>
         </div>
-        <p style="font-size:12.5px;color:var(--muted);margin-top:10px">Mode: <b style="color:var(--ink-2)">learning goal</b> until the activation driver is validated, then a committed target for Q3.</p>
+        <p style="font-size:12.5px;color:var(--muted);margin-top:10px">Mode: <b style="color:var(--ink-2)">learning goal</b> until the trust driver is validated, then a committed target for Q3. Baseline: Q1 cohort, n=418.</p>
       </div>
 
       <div class="card inset">
         <div class="card-t">Suspected Job<span class="ct-line"></span></div>
-        <p style="font-size:13.5px;line-height:1.55">Stop being the data bottleneck in week one — get the team on a shared, trusted board fast.</p>
+        <p style="font-size:13.5px;line-height:1.55">Move from spreadsheet chaos to trusted, always-current books — answer money questions in minutes and look credible to accountant &amp; investors.</p>
         <div class="card-t" style="margin-top:18px">Non-goals<span class="ct-line"></span></div>
         <ul style="list-style:none;font-size:13px;line-height:1.5">
-          <li style="padding:4px 0 4px 16px;position:relative;color:var(--ink-2)"><span style="position:absolute;left:0;color:var(--muted)">×</span>Single-player power-user features.</li>
-          <li style="padding:4px 0 4px 16px;position:relative;color:var(--ink-2)"><span style="position:absolute;left:0;color:var(--muted)">×</span>Self-serve billing changes.</li>
-          <li style="padding:4px 0 4px 16px;position:relative;color:var(--ink-2)"><span style="position:absolute;left:0;color:var(--muted)">×</span>Enterprise SSO (parked, real-but-later).</li>
+          <li style="padding:4px 0 4px 16px;position:relative;color:var(--ink-2)"><span style="position:absolute;left:0;color:var(--muted)">×</span>Multi-entity consolidation.</li>
+          <li style="padding:4px 0 4px 16px;position:relative;color:var(--ink-2)"><span style="position:absolute;left:0;color:var(--muted)">×</span>Payroll &amp; invoicing automation.</li>
+          <li style="padding:4px 0 4px 16px;position:relative;color:var(--ink-2)"><span style="position:absolute;left:0;color:var(--muted)">×</span>Historical-import automation (parked, real-but-later).</li>
         </ul>
         <div class="card-t" style="margin-top:18px">Constraints<span class="ct-line"></span></div>
-        <p style="font-size:13px;color:var(--ink-2);line-height:1.5">One delivery cycle. No new data connectors. Must be measurable at release.</p>
+        <p style="font-size:13px;color:var(--ink-2);line-height:1.5">One delivery cycle. No new banking-data aggregator. Must be measurable at release.</p>
       </div>
     </div>
   </div>`; },
@@ -1112,36 +1347,36 @@ const BUILDERS = {
     <div class="section-rule"><span class="sr-n">3.1</span><h2 class="serif">Opportunities by timeline moment</h2><span class="sr-line"></span></div>
     <div class="grid g-3">
       <div class="card">
-        <div class="card-t" style="color:var(--ev-suggestive)">Onboarding ★<span class="ct-line"></span></div>
-        <div style="font-weight:600;font-size:14px;margin-bottom:6px">Won’t invite a team to an empty board</div>
+        <div class="card-t" style="color:var(--ev-suggestive)">Onboarding · evaluating trust ★<span class="ct-line"></span></div>
+        <div style="font-weight:600;font-size:14px;margin-bottom:6px">Won’t connect the primary bank account until the company feels safe and serious</div>
         ${meter('suggestive')} <span style="font-size:11px;color:var(--muted);margin-left:6px">demand high · win high</span>
         <div style="margin-top:12px;padding-top:12px;border-top:1px dashed var(--line)">
-          <div style="font-size:12.5px;color:var(--ink-2);margin-bottom:4px">↳ Empty-board anxiety</div>
-          <div style="font-size:12.5px;color:var(--ink-2)">↳ “Is the data even right?” doubt</div>
+          <div style="font-size:12.5px;color:var(--ink-2);margin-bottom:4px">↳ “Handing over my bank credentials” fear</div>
+          <div style="font-size:12.5px;color:var(--ink-2)">↳ “Is it really read-only?” doubt</div>
         </div>
       </div>
       <div class="card">
-        <div class="card-t">Active Looking<span class="ct-line"></span></div>
-        <div style="font-weight:600;font-size:14px;margin-bottom:6px">Can’t tell trial dashboards apart</div>
+        <div class="card-t">Onboarding · starting<span class="ct-line"></span></div>
+        <div style="font-weight:600;font-size:14px;margin-bottom:6px">Importing my historical mess feels like confessing</div>
         ${meter('assumption')} <span style="font-size:11px;color:var(--muted);margin-left:6px">demand med · win med</span>
-        <div style="margin-top:12px;padding-top:12px;border-top:1px dashed var(--line);font-size:12.5px;color:var(--muted)">Parked — real but not addressable this cycle.</div>
+        <div style="margin-top:12px;padding-top:12px;border-top:1px dashed var(--line);font-size:12.5px;color:var(--muted)">Parked — real but downstream of the connection stall.</div>
       </div>
       <div class="card">
         <div class="card-t">Ongoing Use<span class="ct-line"></span></div>
-        <div style="font-weight:600;font-size:14px;margin-bottom:6px">Dashboards go stale, nobody owns them</div>
+        <div style="font-weight:600;font-size:14px;margin-bottom:6px">Reconciliation drifts when I skip a week</div>
         ${meter('assumption')} <span style="font-size:11px;color:var(--muted);margin-left:6px">demand med · win low</span>
-        <div style="margin-top:12px;padding-top:12px;border-top:1px dashed var(--line);font-size:12.5px;color:var(--muted)">Split into sub-opportunities later.</div>
+        <div style="margin-top:12px;padding-top:12px;border-top:1px dashed var(--line);font-size:12.5px;color:var(--muted)">Large and hard — split into sub-opportunities later.</div>
       </div>
     </div>
 
     <div class="grid g-2" style="margin-top:24px">
       <div class="card">
         <div class="card-t">Five admission tests · adding an opportunity<span class="ct-line"></span></div>
-        <div class="check met"><span class="box">✓</span><span class="c-txt">Framed as a customer struggle, not a solution<span class="ct-meta">“Won’t invite to an empty board” — a moment, not a feature.</span></span></div>
-        <div class="check met"><span class="box">✓</span><span class="c-txt">Not a feature request in disguise<span class="ct-meta">Translated from “add sample data” → underlying anxiety.</span></span></div>
-        <div class="check met"><span class="box">✓</span><span class="c-txt">Grounded in real behavior / a real story<span class="ct-meta">Priya, Marcus, + 5 more interviews.</span></span></div>
-        <div class="check met"><span class="box">✓</span><span class="c-txt">Plausibly connects to the desired outcome<span class="ct-meta">Sits on the activation drop-off.</span></span></div>
-        <div class="check met"><span class="box">✓</span><span class="c-txt">Enough evidence to matter<span class="ct-meta">Recurs unprompted in 7 of 12 interviews.</span></span></div>
+        <div class="check met"><span class="box">✓</span><span class="c-txt">Framed as a customer struggle, not a solution<span class="ct-meta">“Won’t connect my primary account” — a moment, not a feature.</span></span></div>
+        <div class="check met"><span class="box">✓</span><span class="c-txt">Not a feature request in disguise<span class="ct-meta">Translated from “add more security badges” → the underlying trust threshold.</span></span></div>
+        <div class="check met"><span class="box">✓</span><span class="c-txt">Grounded in real behavior / a real story<span class="ct-meta">Rosa, Aisha, + 6 more interviews of real past switches.</span></span></div>
+        <div class="check met"><span class="box">✓</span><span class="c-txt">Plausibly connects to the desired outcome<span class="ct-meta">Sits exactly on the 7-day activation drop-off.</span></span></div>
+        <div class="check met"><span class="box">✓</span><span class="c-txt">Enough evidence to matter<span class="ct-meta">Recurs unprompted in 8 of 14 interviews.</span></span></div>
       </div>
       <div class="card">
         <div class="card-t">Sibling comparison · demand strength × ability to win<span class="ct-line"></span></div>
@@ -1149,9 +1384,9 @@ const BUILDERS = {
           <span class="axis-x">Demand strength →</span>
           <span class="axis-y">Ability to win →</span>
           <span class="qline v"></span><span class="qline h"></span>
-          <div class="dot target" style="left:78%;bottom:74%"><span class="bub"></span><span class="dl">Empty board ★</span></div>
-          <div class="dot" style="left:52%;bottom:48%"><span class="bub"></span><span class="dl">Trial clarity</span></div>
-          <div class="dot" style="left:55%;bottom:24%"><span class="bub"></span><span class="dl">Stale dashboards</span></div>
+          <div class="dot target" style="left:78%;bottom:74%"><span class="bub"></span><span class="dl">Connection trust ★</span></div>
+          <div class="dot" style="left:52%;bottom:48%"><span class="bub"></span><span class="dl">Historical import</span></div>
+          <div class="dot" style="left:55%;bottom:24%"><span class="bub"></span><span class="dl">Reconciliation drift</span></div>
         </div>
         <p style="font-size:12px;color:var(--muted);margin-top:10px">One target crowned: top-right quadrant — high demand, high ability to win.</p>
       </div>
@@ -1168,42 +1403,43 @@ const BUILDERS = {
 
     <div class="card" style="margin-top:22px">
       <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px">
-        <div class="card-t" style="margin:0">Causal System Map · first-session → invite<span class="ct-line"></span></div>
+        <div class="card-t" style="margin:0">Causal System Map · first session → connected primary account<span class="ct-line"></span></div>
         <button class="btn btn-ghost btn-sm" onclick="this.textContent = this.textContent.includes('Right')?'Design left → right':'Design right ← left'">Design right ← left</button>
       </div>
       <div class="flow">
         <div class="flow-col"><div class="fc-h">Inputs <span class="arr">→</span></div>
-          <div class="flow-item">New workspace created</div>
-          <div class="flow-item">Sample dataset available</div>
-          <div class="flow-item">Admin identity / team size</div>
+          <div class="flow-item">Bank credentials (owner-held)</div>
+          <div class="flow-item">Security signals (SOC 2, security page)</div>
+          <div class="flow-item">Social proof &amp; accountant endorsement</div>
         </div>
         <div class="flow-col"><div class="fc-h">Process <span class="arr">→</span></div>
-          <div class="flow-item">First-screen renders</div>
-          <div class="flow-item">Auto-build a starter chart</div>
-          <div class="flow-item">Surface invite affordance</div>
+          <div class="flow-item">Connection flow with trust scaffolding</div>
+          <div class="flow-item">Read-only framing at the credential step</div>
+          <div class="flow-item">Granular permissions, “disconnect anytime”</div>
         </div>
         <div class="flow-col"><div class="fc-h">Outputs <span class="arr">→</span></div>
-          <div class="flow-item lead">Populated workspace seen <span style="font-size:10px;color:#2f7048">· lead measure</span></div>
-          <div class="flow-item">Invite prompt shown</div>
+          <div class="flow-item lead">Primary account connected <span style="font-size:10px;color:var(--green-ink)">· lead measure</span></div>
+          <div class="flow-item">Visible security posture</div>
         </div>
         <div class="flow-col"><div class="fc-h">Outcome</div>
-          <div class="flow-item">Team invited in session 1</div>
-          <div class="flow-item lead">30-day activation <span style="font-size:10px;color:#2f7048">· lag measure</span></div>
+          <div class="flow-item">First reconciliation completed</div>
+          <div class="flow-item lead">7-day activation <span style="font-size:10px;color:var(--green-ink)">· lag measure</span></div>
         </div>
       </div>
       <div class="factors">
         <div class="fcol control"><div class="fcol-h">▣ Control factors</div>
-          <div class="factor">First-screen content (empty vs seeded)</div>
-          <div class="factor">Time-to-first-chart</div>
-          <div class="factor">Invite affordance placement &amp; copy</div>
+          <div class="factor">Security-badging placement</div>
+          <div class="factor">Read-only-access messaging</div>
+          <div class="factor">Connection sequencing (sandbox-first vs primary-first)</div>
+          <div class="factor">Accountant co-sign flow</div>
         </div>
         <div class="fcol noise"><div class="fcol-h">≈ Noise factors</div>
-          <div class="factor">Team size &amp; structure</div>
-          <div class="factor">Data source quality</div>
-          <div class="factor">Admin seniority / mandate</div>
+          <div class="factor">Bank OAuth quality</div>
+          <div class="factor">Past fraud experiences</div>
+          <div class="factor">Press about fintech breaches</div>
         </div>
       </div>
-      <p class="princ" style="margin-top:16px;font-size:14px">Right-to-left: activation needs invites → invites need a non-empty workspace → that needs sample data plus a fast first chart. Build left-to-right.</p>
+      <p class="princ" style="margin-top:16px;font-size:14px">Right-to-left: trusted books need a reconciled feed → a feed needs a primary-account connection → that needs the trust threshold crossed in session one. Build left-to-right.</p>
     </div>
   </div>`; },
 
@@ -1229,11 +1465,11 @@ const BUILDERS = {
           <span class="quad-label ql-bl">Low importance</span>
           <span class="quad-label ql-br">Low importance · known</span>
           <span class="qline v"></span><span class="qline h"></span>
-          <div class="adot" data-ev="suggestive" style="left:24%;top:22%" title="Admins invite after seeing seeded data (TC-07, in flight)"></div>
-          <div class="adot" data-ev="assumption" style="left:14%;top:34%" title="Concierge is wanted (untested)"></div>
-          <div class="adot" data-ev="killed" style="left:30%;top:14%" title="Checklist drives invites — KILLED (TC-04)"></div>
-          <div class="adot" data-ev="validated" style="left:74%;top:30%" title="Teams that activate retain (validated)"></div>
-          <div class="adot" data-ev="assumption" style="left:66%;top:70%" title="Sample data feels relevant (low importance)"></div>
+          <div class="adot" data-ev="suggestive" style="left:24%;top:22%" title="Legible safety → primary connection in session one (TC-08, in flight)"></div>
+          <div class="adot" data-ev="assumption" style="left:14%;top:34%" title="Owners will take a 20-min white-glove call (untested)"></div>
+          <div class="adot" data-ev="killed" style="left:30%;top:14%" title="SOC 2 badge alone moves connection rate — KILLED (TC-03)"></div>
+          <div class="adot" data-ev="validated" style="left:74%;top:30%" title="Activated accounts retain 2.7× at day 90 (validated)"></div>
+          <div class="adot" data-ev="assumption" style="left:66%;top:70%" title="Owners read the inline security page (low importance)"></div>
         </div>
         <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px">${pill('assumption')}${pill('suggestive')}${pill('validated')}${pill('killed')}</div>
       </div>
@@ -1256,34 +1492,34 @@ const BUILDERS = {
 
     <div class="section-rule"><span class="sr-n">5.3</span><h2 class="serif">Test cards</h2><span class="sr-line"></span><span class="mono" style="font-size:11px;color:var(--muted)">threshold locked before results</span></div>
 
-    <div class="testcard" id="tc07" style="margin-bottom:16px">
-      <div class="tc-head">${pill('suggestive')}<span class="tc-id">TC-07</span><span style="font-weight:600;font-size:13.5px">Fake-door “Invite your team” on the seeded workspace</span><span style="margin-left:auto" class="mono" style="font-size:11px;color:var(--muted)">IN FLIGHT</span></div>
+    <div class="testcard" id="tc08" style="margin-bottom:16px">
+      <div class="tc-head">${pill('suggestive')}<span class="tc-id">TC-08</span><span style="font-weight:600;font-size:13.5px">Trust-first connection flow prototype at the connect-your-bank step</span><span style="margin-left:auto" class="mono" style="font-size:11px;color:var(--muted)">IN FLIGHT</span></div>
       <div class="tc-body">
-        <div class="tc-field"><div class="tcf-l">Assumption under test</div><div class="tcf-v">Admins will invite in session one if a populated workspace makes the value legible.</div></div>
-        <div class="tc-field"><div class="tcf-l">Decision it informs</div><div class="tcf-v">Whether to build the seeded-workspace increment, or pivot the solution category.</div></div>
-        <div class="tc-field"><div class="tcf-l">Audience &amp; moment</div><div class="tcf-v">Next 40 new admins, at the empty/seeded first screen.</div></div>
-        <div class="tc-field"><div class="tcf-l">Observed behavior</div><div class="tcf-v">Click “Invite your team,” then complete ≥1 real invite.</div></div>
+        <div class="tc-field"><div class="tcf-l">Assumption under test</div><div class="tcf-v">Founders will connect their primary bank account in session one if the connection flow makes safety legible (read-only framing, granular permissions, disconnect-anytime, inline security page).</div></div>
+        <div class="tc-field"><div class="tcf-l">Decision it informs</div><div class="tcf-v">Whether to ship the trust-first increment, or pivot to the white-glove service path.</div></div>
+        <div class="tc-field"><div class="tcf-l">Audience &amp; moment</div><div class="tcf-v">Next 40 new SMB accounts, at the “Connect your bank” step.</div></div>
+        <div class="tc-field"><div class="tcf-l">Observed behavior</div><div class="tcf-v">Complete a primary-account connection within the first session.</div></div>
         <div class="threshold">
           <div class="th-l">Success threshold — locked
             <span class="lock"><svg width="13" height="13" viewBox="0 0 16 16" fill="none"><rect x="3" y="7" width="10" height="7" rx="1.5" stroke="#c9a24f" stroke-width="1.3"/><path d="M5 7V5a3 3 0 016 0v2" stroke="#c9a24f" stroke-width="1.3"/></svg></span>
           </div>
-          <div class="th-v">≥ 45% of admins complete an invite within the first session</div>
-          <div class="th-result"><span class="res-tag" style="background:#2a2722;color:#c9a24f">awaiting · 23/40 logged</span><span style="color:#bdb6a8">Currently 52% — trending above bar, not yet powered.</span></div>
+          <div class="th-v">≥ 50% complete a primary-account connection in session one (baseline 31%)</div>
+          <div class="th-result"><span class="res-tag" style="background:#2a2722;color:#c9a24f">awaiting · 23/40 logged</span><span style="color:#bdb6a8">Currently 57% — trending above bar, not yet powered. Concierge precursor: 7/10 vs 6/10 bar.</span></div>
         </div>
       </div>
     </div>
 
     <div class="testcard">
-      <div class="tc-head">${pill('killed')}<span class="tc-id">TC-04</span><span style="font-weight:600;font-size:13.5px">Gamified setup checklist drives invites</span><span style="margin-left:auto" class="mono" style="font-size:11px;color:var(--muted)">CLOSED · FAILED → A WIN</span></div>
+      <div class="tc-head">${pill('killed')}<span class="tc-id">TC-05</span><span style="font-weight:600;font-size:13.5px">Fake-door “Connect later — explore with sample data first”</span><span style="margin-left:auto" class="mono" style="font-size:11px;color:var(--muted)">CLOSED · FAILED → A WIN</span></div>
       <div class="tc-body">
-        <div class="tc-field"><div class="tcf-l">Assumption under test</div><div class="tcf-v">A progress-bar checklist creates completion pressure that drives invites.</div></div>
-        <div class="tc-field"><div class="tcf-l">Decision it informed</div><div class="tcf-v">Whether the struggle is motivation (checklist) or legibility (empty board).</div></div>
-        <div class="tc-field"><div class="tcf-l">Audience &amp; moment</div><div class="tcf-v">38 new admins, A/B against control.</div></div>
-        <div class="tc-field"><div class="tcf-l">Observed behavior</div><div class="tcf-v">Invites sent within session one.</div></div>
+        <div class="tc-field"><div class="tcf-l">Assumption under test</div><div class="tcf-v">Deferring the scary step — sandbox mode with sample books first — raises eventual primary-account connection.</div></div>
+        <div class="tc-field"><div class="tcf-l">Decision it informed</div><div class="tcf-v">Whether sandbox-first is a viable solution path, or the struggle must be met at the credential moment itself.</div></div>
+        <div class="tc-field"><div class="tcf-l">Audience &amp; moment</div><div class="tcf-v">52 new accounts offered the fake door at the connect step.</div></div>
+        <div class="tc-field"><div class="tcf-l">Observed behavior</div><div class="tcf-v">Return and complete a real connection within 48 hours.</div></div>
         <div class="threshold">
           <div class="th-l">Success threshold — locked<span class="lock"><svg width="13" height="13" viewBox="0 0 16 16" fill="none"><rect x="3" y="7" width="10" height="7" rx="1.5" stroke="#c9a24f" stroke-width="1.3"/><path d="M5 7V5a3 3 0 016 0v2" stroke="#c9a24f" stroke-width="1.3"/></svg></span></div>
-          <div class="th-v">≥ 40% invite rate vs control</div>
-          <div class="th-result"><span class="res-tag res-fail">RESULT · 24%</span><span style="color:#bdb6a8">Checklist completion rose 2×, invites did <b style="color:#f0a58e">not</b> move. Belief killed — the struggle isn’t motivation, it’s the blank board. We stopped building it. <b style="color:#9fd9a3">A cheap save.</b></span></div>
+          <div class="th-v">≥ 30% of “connect later” users return to connect within 48h</div>
+          <div class="th-result"><span class="res-tag res-fail">RESULT · 9%</span><span style="color:#bdb6a8">Exploration without real data felt pointless — the deferral did <b style="color:#f0a58e">not</b> convert. Belief killed; sandbox-first path closed before a line of production code. <b style="color:#9fd9a3">A cheap save.</b></span></div>
         </div>
       </div>
     </div>
@@ -1292,10 +1528,10 @@ const BUILDERS = {
     <div class="card">
       <div class="scope-cols">
         <div class="scope-col inc"><h4>Included — the kick-ass half</h4>
-          <ul><li>Sample data seeded on workspace creation</li><li>One auto-built starter chart</li><li>In-context invite prompt the moment the chart renders</li><li>Instrumented lead measure: “populated view seen”</li></ul>
+          <ul><li>Read-only framing at the credential step</li><li>Granular permission list, “disconnect anytime” affordance</li><li>Inline security page at the moment of doubt</li><li>Instrumented lead measure: “primary account connected”</li></ul>
         </div>
         <div class="scope-col exc"><h4>Excluded — on purpose</h4>
-          <ul><li>Concierge first-dashboard service</li><li>Template gallery</li><li>Multi-source seeding</li><li>Non-admin onboarding flows</li></ul>
+          <ul><li>Multi-entity support</li><li>Historical-import automation</li><li>White-glove onboarding service</li><li>Sandbox mode with sample data</li></ul>
         </div>
       </div>
       <div class="kickass">
@@ -1307,15 +1543,15 @@ const BUILDERS = {
     <div class="section-rule"><span class="sr-n">5.5</span><h2 class="serif">Impact ladder · four levels</h2><span class="sr-line"></span><span class="mono" style="font-size:11px;color:var(--muted)">expected vs actual</span></div>
     <div class="card">
       <div class="iladder">
-        <div class="irow"><div class="i-rung">L1</div><div class="i-body"><div class="i-name">Assumption behavior</div><div class="i-sub">Invite-on-seeded-workspace rate</div></div><div style="text-align:right"><div class="i-val">52%</div><div class="i-delta iup">▲ vs 45% bar</div></div></div>
+        <div class="irow"><div class="i-rung">L1</div><div class="i-body"><div class="i-name">Assumption behavior</div><div class="i-sub">Primary-account connection in session one</div></div><div style="text-align:right"><div class="i-val">57%</div><div class="i-delta iup">▲ vs 50% bar</div></div></div>
         <div class="iconn"></div>
-        <div class="irow"><div class="i-rung">L2</div><div class="i-body"><div class="i-name">Opportunity relief</div><div class="i-sub">Empty-board stalls at onboarding</div></div><div style="text-align:right"><div class="i-val">−38%</div><div class="i-delta iup">▲ fewer stalls</div></div></div>
+        <div class="irow"><div class="i-rung">L2</div><div class="i-body"><div class="i-name">Opportunity relief</div><div class="i-sub">Trust stalls at “Connect your bank”</div></div><div style="text-align:right"><div class="i-val">−34%</div><div class="i-delta iup">▲ fewer stalls</div></div></div>
         <div class="iconn"></div>
-        <div class="irow"><div class="i-rung">L3</div><div class="i-body"><div class="i-name">Product outcome</div><div class="i-sub">30-day team activation</div></div><div style="text-align:right"><div class="i-val">41 → 49%</div><div class="i-delta iup">▲ toward 60%</div></div></div>
+        <div class="irow"><div class="i-rung">L3</div><div class="i-body"><div class="i-name">Product outcome</div><div class="i-sub">7-day bank-feed activation</div></div><div style="text-align:right"><div class="i-val">34 → 41%</div><div class="i-delta iup">▲ toward 55%</div></div></div>
         <div class="iconn"></div>
-        <div class="irow"><div class="i-rung">L4</div><div class="i-body"><div class="i-name">Business outcome</div><div class="i-sub">Net revenue retention</div></div><div style="text-align:right"><div class="i-val">pending</div><div class="i-delta iflat">— next quarter</div></div></div>
+        <div class="irow"><div class="i-rung">L4</div><div class="i-body"><div class="i-name">Business outcome</div><div class="i-sub">90-day churn of new SMB accounts</div></div><div style="text-align:right"><div class="i-val">pending</div><div class="i-delta iflat">— next quarter</div></div></div>
       </div>
-      <p style="font-size:12px;color:var(--muted);margin-top:14px">Projection from TC-07 partial data. Read at cycle close; if L3 doesn’t move with L2, we revisit the opportunity↔outcome link.</p>
+      <p style="font-size:12px;color:var(--muted);margin-top:14px">Projection from TC-08 partial data — increment not yet shipped. Read at cycle close; if L3 doesn’t move with L2, we revisit the opportunity↔outcome link.</p>
     </div>
   </div>`; },
 
@@ -1327,10 +1563,11 @@ const BUILDERS = {
       <p class="lede">Every decision, its rationale, the evidence behind it, and the trigger that would make us revisit. Beliefs that died are kept — they’re the cheapest progress we made.</p>
     </div>
     <div style="margin-top:26px" class="dlog">
-      <div class="dentry"><div class="d-when">2026-06-09 · Wk 24</div><div class="d-what">Crowned “empty-workspace” as the single target opportunity</div><div class="d-why">Top-right of the demand × ability matrix; recurs unprompted in 7/12 interviews and sits exactly on the activation drop-off.</div><div class="d-trig">Revisit if: TC-07 fails to clear bar, or activation moves without it.</div></div>
-      <div class="dentry killed"><div class="d-when">2026-05-28 · Wk 22</div><div class="d-what">Killed the gamified-checklist solution</div><div class="d-why">TC-04: checklist completion doubled but invites rose only to 24% (bar 40%). The struggle is legibility, not motivation. Stopped building it before a line of production code.</div><div class="d-trig">Revisit if: a future segment shows motivation-driven drop-off.</div></div>
-      <div class="dentry"><div class="d-when">2026-05-20 · Wk 21</div><div class="d-what">Set product outcome at 41% → 60% activation</div><div class="d-why">Negotiated with leadership as the controllable behavior; rejected “invites sent” as a gameable traction metric.</div><div class="d-trig">Revisit at: Q2 outcome negotiation (18 days).</div></div>
-      <div class="dentry"><div class="d-when">2026-05-12 · Wk 20</div><div class="d-what">Inserted the causal map before solution design</div><div class="d-why">Right-to-left analysis showed invites depend on a populated workspace — reframed the whole solution set around legibility.</div><div class="d-trig">Revisit if: noise factors (team size) dominate the signal.</div></div>
+      <div class="dentry"><div class="d-when">2026-06-09 · Wk 24</div><div class="d-what">Crowned bank-connection trust as the single target opportunity</div><div class="d-why">Top-right of the demand × ability matrix; named unprompted in 8/14 interviews and sits exactly on the 7-day activation drop-off.</div><div class="d-trig">Revisit if: TC-08 fails to clear bar, or activation moves without it.</div></div>
+      <div class="dentry killed"><div class="d-when">2026-06-02 · Wk 23</div><div class="d-what">Killed the sandbox-first solution path</div><div class="d-why">TC-05 fake-door: only 9% of “connect later” users returned to connect within 48h (bar 30%). Exploration without real data felt pointless. Closed the path before a line of production code.</div><div class="d-trig">Revisit if: a segment shows strong demo-first demand.</div></div>
+      <div class="dentry killed"><div class="d-when">2026-05-26 · Wk 22</div><div class="d-what">Killed “SOC 2 badge alone moves connection rate”</div><div class="d-why">TC-03 badge-placement A/B: no lift at any placement (Δ +1pt vs +8pt bar). Safety must be legible inside the flow, not certified in the footer.</div><div class="d-trig">Revisit if: an enterprise-adjacent segment enters the funnel.</div></div>
+      <div class="dentry"><div class="d-when">2026-05-18 · Wk 21</div><div class="d-what">Set product outcome at 34% → 55% 7-day bank-feed activation</div><div class="d-why">Negotiated with leadership as the controllable behavior serving 90-day churn; rejected “bank connections started” as a gameable traction metric.</div><div class="d-trig">Revisit at: Q2 outcome negotiation (18 days).</div></div>
+      <div class="dentry"><div class="d-when">2026-05-11 · Wk 20</div><div class="d-what">Inserted the causal map before solution design</div><div class="d-why">Right-to-left analysis showed activation depends on a primary-account connection in session one — reframed the whole solution set around trust legibility.</div><div class="d-trig">Revisit if: noise factors (bank OAuth quality) dominate the signal.</div></div>
     </div>
   </div>`; },
 };
@@ -1348,7 +1585,7 @@ function solCard(key){
 /* ── interactive evidence ladder ── */
 const LADDER_COPY = {
   assumption:'A belief with no weight yet. It costs nothing to hold and everything to ship on.',
-  suggestive:'Some signal has landed — 6 of 9 admins invited after seeing seeded data. Promising, not yet load-bearing. Don’t bet the increment on it.',
+  suggestive:'Some signal has landed — 7 of 10 owners connected with read-only framing (bar 6/10). Promising, not yet load-bearing. Don’t bet the increment on it.',
   validated:'Earned. Behavioral evidence at scale clears the locked bar. Now it can carry weight — build on it.',
   killed:'Disproven by a test. A win: we learned it cheaply and freed the increment from a wrong bet.',
 };
@@ -1372,7 +1609,7 @@ const CMDK = [
   ]},
   {g:'Beliefs & actions',items:[
     {ico:'⚠',t:'Open weakest belief',sub:'NBA',act:()=>{goLoop('tree');setTimeout(()=>openNode('belief'),200)}},
-    {ico:'▸',t:'Open test card TC-07',sub:'in flight',act:openNBATest},
+    {ico:'▸',t:'Open test card TC-08',sub:'in flight',act:openNBATest},
     {ico:'★',t:'View target opportunity',sub:'crowned',act:()=>{goLoop('tree');setTimeout(()=>openNode('oppTarget'),200)}},
     {ico:'≡',t:'Decision Log',sub:'reasoning',act:()=>goLoop('decisions')},
     {ico:'▶',t:'Show the reasoning (walkthrough)',sub:'stakeholder',act:openWalk},
@@ -1406,12 +1643,12 @@ function scrollSel(){ const el=document.querySelector(`.cmdk-item[data-i="${cmdk
 
 /* ════════════════════════════ STAKEHOLDER WALKTHROUGH ════════════════════════════ */
 const WALK = [
-  {step:'01 · The outcome',h:'We are buying one number',body:'This team owns a single product outcome: lift 30-day team activation from <b>41% to 60%</b>. Not a feature list — a controllable behavior, negotiated with leadership. Everything below earns its place by moving this.',ev:'validated',evlabel:'Outcome ratified'},
-  {step:'02 · The progress',h:'People hire us to stop being the bottleneck',body:'Across twelve interviews of real rollouts, the Job is consistent: <b>get the team onto a shared, trusted board in week one</b> so the admin stops fielding data questions and looks credible to their boss.',ev:'validated',evlabel:'9 of 12 interviews'},
-  {step:'03 · The struggle',h:'They won’t invite a team to a blank board',body:'The decisive moment is the first session. Push and pull are strong, but <b>anxiety about an empty workspace</b> — and the trusty old spreadsheet — stall the invite. That stall is exactly where activation leaks.',ev:'suggestive',evlabel:'7 of 12, unprompted'},
-  {step:'04 · The dead end we avoided',h:'We killed a wrong answer cheaply',body:'We suspected motivation was the problem and tested a gamified checklist. Completion doubled — but <b>invites didn’t move</b> (24% vs a 40% bar). The belief died for the price of a fake door. The struggle is legibility, not motivation.',ev:'killed',evlabel:'TC-04 · a cheap save'},
-  {step:'05 · The bet',h:'Make a populated workspace legible',body:'The increment is the kick-ass half of one path: <b>seed the workspace with sample data and one real chart, then prompt the invite the moment value is on screen.</b> Concierge, templates, multi-source — all deliberately excluded.',ev:'suggestive',evlabel:'TC-07 in flight · 52%'},
-  {step:'06 · The proof',h:'And we’ll know, at four levels',body:'Instrumented before launch: assumption behavior → opportunity relief → product outcome → business outcome. Early read shows activation moving <b>41% → 49%</b>, on the way to 60%. If a level doesn’t move, the tree tells us exactly which link to revisit.',ev:'validated',evlabel:'Impact ladder wired'},
+  {step:'01 · The outcome',h:'We are buying one number',body:'This team owns a single product outcome: lift 7-day bank-feed activation — connect a feed AND complete a first reconciliation — from <b>34% to 55%</b>. Not a feature list — a controllable behavior, negotiated with leadership, serving lower 90-day churn.',ev:'validated',evlabel:'Outcome ratified'},
+  {step:'02 · The progress',h:'People hire us to escape spreadsheet chaos',body:'Across fourteen interviews of real past switches, the Job is consistent: when a deadline exposes the mess, owners want <b>trusted, always-current books</b> — money questions answered in minutes, credibility with their accountant and investors.',ev:'validated',evlabel:'11 of 14 interviews'},
+  {step:'03 · The struggle',h:'They won’t hand a startup their bank account',body:'The decisive moment is onboarding. Push and pull are strong, but at “Connect your bank” the owner imagines handing over <b>their business-account credentials</b> — and stalls. That stall is exactly where activation leaks.',ev:'suggestive',evlabel:'8 of 14, unprompted'},
+  {step:'04 · The dead ends we avoided',h:'We killed two wrong answers cheaply',body:'A SOC 2 badge at every placement moved <b>nothing</b> (TC-03). Deferring the scary step into a sample-data sandbox converted <b>9% vs a 30% bar</b> (TC-05) — exploring fake books felt pointless. Both beliefs died for the price of a fake door. Safety must be legible inside the flow.',ev:'killed',evlabel:'TC-03 & TC-05 · cheap saves'},
+  {step:'05 · The bet',h:'Make safety legible at the moment of doubt',body:'The increment is the kick-ass half of one path: <b>read-only framing, granular permissions, “disconnect anytime,” and the security page inline at the credential step</b> — the primary-account moment only. White-glove, sandbox, historical import — all deliberately excluded.',ev:'suggestive',evlabel:'TC-08 in flight · 57%'},
+  {step:'06 · The proof',h:'And we’ll know, at four levels',body:'Instrumented before launch: assumption behavior → opportunity relief → product outcome → business outcome. Early read projects activation moving <b>34% → 41%</b>, on the way to 55%. If a level doesn’t move, the tree tells us exactly which link to revisit.',ev:'validated',evlabel:'Impact ladder wired'},
 ];
 let walkI=0;
 function openWalk(){ walkI=0; buildWalk(); document.getElementById('walkScrim').classList.add('open'); closeCmdk(); }
