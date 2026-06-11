@@ -1,0 +1,1458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Noetic — The Continuous Discovery System</title>
+<!--
+  ════════════════════════════════════════════════════════════════════════
+  NOETIC v3 — DESIGN DIRECTION
+  ────────────────────────────────────────────────────────────────────────
+  Thesis: "A company can build anything. Noetic gives them certainty about
+  what to build." Certainty is the product. The UI makes rising certainty
+  visible and felt: evidence accumulates, beliefs harden or die, the weakest
+  load-bearing belief is always surfaced next.
+
+  AESTHETIC — "Research instrument crossed with a typeset journal."
+  Warm paper-light surfaces, precise ink typography. Not a dark-navy
+  dashboard. The screen reads like a scientific notebook: ruled, calm,
+  evidentiary. Judgment moments are set in a serif; the machinery is grotesque;
+  evidence and data are mono.
+
+  TYPE (3 families, via fonts.bunny.net — GDPR-safe)
+    - Fraunces (serif display) — outcomes, insights, moments of judgment.
+      Optical sizing, tight tracking at large sizes.
+    - Inter (grotesque) — all UI chrome, labels, body.
+    - JetBrains Mono — evidence, quotes-as-data, numbers, test thresholds.
+    Scale (px): 11 12 13 14 16 19 24 32 44 — 1.25-ish ratio, disciplined.
+
+  COLOR — warm paper + ink, one accent (indigo), semantic EVIDENCE colors.
+    Evidence ladder (the spine of the whole product):
+      assumption  → slate, dashed       (a belief, unweighed)
+      suggestive  → amber               (some signal, not enough)
+      validated   → green               (load-bearing, earned)
+      killed      → grey + strikethrough (disproven — a win)
+    Accent indigo for navigation/active. Restrained borders (warm grey).
+
+  SIGNATURE DEVICE — THE CERTAINTY METER.
+    A four-segment ruled bar that appears on EVERY belief. Segments fill
+    left→right as evidence accrues: assumption (1) → suggestive (2) →
+    validated (4). Killed beliefs render struck-through with a grey cap.
+    Same component everywhere — tree nodes, panels, assumption ladder, NBA.
+    It is the felt mechanic of the product.
+
+  SPACING — 4 / 8 px grid. Nothing cramped, nothing floating.
+  MOTION — 150–220ms ease-out. Springy state changes; evidence "lands."
+    prefers-reduced-motion fully respected.
+  ════════════════════════════════════════════════════════════════════════
+-->
+<link rel="preconnect" href="https://fonts.bunny.net" />
+<link href="https://fonts.bunny.net/css?family=fraunces:400,500,600,9..144,400i|inter:400,500,600,700|jetbrains-mono:400,500" rel="stylesheet" />
+<style>
+/* ───────────────────────────── TOKENS ───────────────────────────── */
+:root{
+  --paper:#f6f4ee;        /* warm paper base            */
+  --surface:#fdfcf9;      /* raised card                */
+  --surface-2:#f1eee6;    /* sunken / inset             */
+  --ink:#1c1a17;          /* near-black warm ink        */
+  --ink-2:#4a463f;        /* secondary text             */
+  --ink-3:#86807400;      /* (unused placeholder)       */
+  --muted:#8a8478;        /* tertiary / captions        */
+  --line:#e1ddd2;         /* hairline border            */
+  --line-strong:#cdc7b8;
+  --accent:#4f46c9;       /* indigo                     */
+  --accent-soft:#ecebf9;
+  --accent-ink:#3a32a8;
+
+  /* evidence ladder */
+  --ev-assumption:#9b958a;
+  --ev-assumption-bg:#edeae2;
+  --ev-suggestive:#c98a1e;
+  --ev-suggestive-bg:#faf0dc;
+  --ev-validated:#3f8f5b;
+  --ev-validated-bg:#e6f1e8;
+  --ev-killed:#a59f93;
+  --ev-killed-bg:#ece9e2;
+
+  --shadow-sm:0 1px 2px rgba(40,34,20,.05), 0 1px 1px rgba(40,34,20,.04);
+  --shadow-md:0 4px 16px rgba(40,34,20,.08), 0 1px 3px rgba(40,34,20,.06);
+  --shadow-lg:0 18px 50px rgba(30,26,18,.16), 0 6px 16px rgba(30,26,18,.08);
+
+  --r-sm:6px; --r-md:10px; --r-lg:14px; --r-xl:20px;
+  --ease:cubic-bezier(.2,.7,.2,1);
+  --font-serif:'Fraunces',Georgia,serif;
+  --font-sans:'Inter',system-ui,sans-serif;
+  --font-mono:'JetBrains Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+  font-family:var(--font-sans);
+  background:var(--paper);
+  color:var(--ink);
+  font-size:14px;line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  overflow:hidden;
+}
+::selection{background:var(--accent-soft);color:var(--accent-ink)}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+.mono{font-family:var(--font-mono);font-feature-settings:"tnum" 1;letter-spacing:-.01em}
+.serif{font-family:var(--font-serif)}
+.tnum{font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1}
+
+/* ───────────────────────────── LAYOUT SHELL ───────────────────────────── */
+.app{display:grid;grid-template-columns:230px 1fr;grid-template-rows:1fr;height:100vh}
+
+/* ── Rail ── */
+.rail{
+  background:linear-gradient(180deg,#fbfaf6,#f4f1e9);
+  border-right:1px solid var(--line);
+  display:flex;flex-direction:column;
+  padding:18px 14px;gap:4px;position:relative;z-index:5;
+}
+.brand{display:flex;align-items:center;gap:10px;padding:6px 8px 18px}
+.brand .glyph{
+  width:30px;height:30px;border-radius:8px;flex:none;
+  background:radial-gradient(circle at 30% 30%,#6a61e0,#3a32a8);
+  display:grid;place-items:center;color:#fff;box-shadow:var(--shadow-sm);
+  position:relative;overflow:hidden;
+}
+.brand .glyph::after{content:"";position:absolute;inset:0;
+  background:conic-gradient(from 200deg,transparent,rgba(255,255,255,.35),transparent 60%)}
+.brand .name{font-weight:600;font-size:15px;letter-spacing:-.02em}
+.brand .ver{font-size:10px;color:var(--muted);font-family:var(--font-mono);margin-top:1px}
+
+.rail-label{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+  font-weight:600;padding:14px 8px 6px}
+.nav-loop{
+  display:flex;align-items:center;gap:11px;padding:8px 9px;border-radius:var(--r-sm);
+  color:var(--ink-2);font-weight:500;font-size:13.5px;position:relative;
+  transition:background .15s var(--ease),color .15s var(--ease);
+  text-align:left;width:100%;
+}
+.nav-loop:hover{background:rgba(79,70,201,.06);color:var(--ink)}
+.nav-loop.active{background:var(--accent-soft);color:var(--accent-ink);font-weight:600}
+.nav-loop.active .loop-num{background:var(--accent);color:#fff;border-color:var(--accent)}
+.loop-num{
+  width:21px;height:21px;border-radius:6px;flex:none;display:grid;place-items:center;
+  font-family:var(--font-mono);font-size:11px;font-weight:500;
+  border:1px solid var(--line-strong);color:var(--muted);background:var(--surface);
+  transition:.15s var(--ease);
+}
+.nav-loop .loop-meta{margin-left:auto;font-size:10px;font-family:var(--font-mono);color:var(--muted)}
+.rail-spacer{flex:1}
+.rail-foot{border-top:1px solid var(--line);padding-top:12px;margin-top:4px}
+.kbd-hint{display:flex;align-items:center;gap:8px;padding:6px 8px;font-size:11.5px;color:var(--muted)}
+kbd{font-family:var(--font-mono);font-size:10.5px;background:var(--surface);border:1px solid var(--line-strong);
+  border-bottom-width:2px;border-radius:4px;padding:1px 5px;color:var(--ink-2)}
+
+/* ── Main column ── */
+.main{display:flex;flex-direction:column;min-width:0;height:100vh;overflow:hidden;background:var(--paper)}
+
+/* ── Topbar ── */
+.topbar{
+  height:54px;flex:none;border-bottom:1px solid var(--line);
+  display:flex;align-items:center;gap:14px;padding:0 22px;background:rgba(253,252,249,.82);
+  backdrop-filter:blur(8px);
+}
+.crumbs{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);min-width:0}
+.crumbs .proj{color:var(--ink);font-weight:600}
+.crumbs .sep{opacity:.5}
+.crumbs .here{color:var(--accent-ink);font-weight:500}
+.top-spacer{flex:1}
+.cmdk-btn{
+  display:flex;align-items:center;gap:8px;height:32px;padding:0 10px 0 11px;border-radius:8px;
+  border:1px solid var(--line-strong);background:var(--surface);color:var(--muted);font-size:12.5px;
+  transition:.15s var(--ease);
+}
+.cmdk-btn:hover{border-color:var(--accent);color:var(--ink-2)}
+.cmdk-btn kbd{border-bottom-width:1px}
+.avatar{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,#c9a24f,#9c7b2e);
+  color:#fff;display:grid;place-items:center;font-weight:600;font-size:12px;flex:none;box-shadow:var(--shadow-sm)}
+
+/* ── Cadence ribbon ── */
+.cadence{
+  height:36px;flex:none;display:flex;align-items:center;gap:0;padding:0 22px;
+  background:var(--surface-2);border-bottom:1px solid var(--line);font-size:12px;overflow:hidden;
+}
+.cadence .wk{font-family:var(--font-mono);font-size:11px;color:var(--muted);margin-right:14px;letter-spacing:.02em}
+.cad-item{display:flex;align-items:center;gap:7px;padding:0 14px;color:var(--ink-2);position:relative;white-space:nowrap}
+.cad-item+.cad-item::before{content:"";position:absolute;left:0;top:50%;transform:translateY(-50%);
+  width:1px;height:14px;background:var(--line-strong)}
+.cad-dot{width:7px;height:7px;border-radius:50%;flex:none}
+.cad-done .cad-dot{background:var(--ev-validated)}
+.cad-now .cad-dot{background:var(--ev-suggestive);box-shadow:0 0 0 0 rgba(201,138,30,.5);animation:pulse 2.4s var(--ease) infinite}
+.cad-todo .cad-dot{background:transparent;border:1.5px solid var(--line-strong)}
+.cad-done{color:var(--muted)}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(201,138,30,.45)}70%{box-shadow:0 0 0 6px rgba(201,138,30,0)}100%{box-shadow:0 0 0 0 rgba(201,138,30,0)}}
+.cad-spacer{flex:1}
+.cad-quarter{font-family:var(--font-mono);font-size:11px;color:var(--muted)}
+
+/* ── Scroll body ── */
+.view{flex:1;overflow-y:auto;overflow-x:hidden;scroll-behavior:smooth}
+.view::-webkit-scrollbar{width:11px}
+.view::-webkit-scrollbar-thumb{background:var(--line-strong);border-radius:6px;border:3px solid var(--paper)}
+.view::-webkit-scrollbar-track{background:transparent}
+.screen{display:none;animation:viewIn .28s var(--ease)}
+.screen.active{display:block}
+@keyframes viewIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+/* ───────────────────────────── CERTAINTY METER (signature) ───────────────────────────── */
+.meter{display:inline-flex;gap:2px;vertical-align:middle}
+.meter .seg{width:14px;height:5px;border-radius:1px;background:var(--ev-assumption-bg);
+  box-shadow:inset 0 0 0 1px rgba(0,0,0,.04);transition:background .25s var(--ease)}
+.meter.sz-lg .seg{width:22px;height:7px;border-radius:2px}
+.meter.sz-sm .seg{width:10px;height:4px}
+/* fill rules by state */
+.meter[data-state="assumption"] .seg:nth-child(1){background:repeating-linear-gradient(90deg,var(--ev-assumption) 0 3px,transparent 3px 6px)}
+.meter[data-state="suggestive"] .seg:nth-child(-n+2){background:var(--ev-suggestive)}
+.meter[data-state="validated"] .seg{background:var(--ev-validated)}
+.meter[data-state="killed"] .seg{background:var(--ev-killed-bg);position:relative}
+.meter[data-state="killed"]{position:relative;opacity:.7}
+.meter[data-state="killed"]::after{content:"";position:absolute;top:50%;left:-1px;right:-1px;height:1.5px;
+  background:var(--ev-killed);transform:translateY(-50%)}
+
+/* evidence pill */
+.ev-pill{display:inline-flex;align-items:center;gap:6px;height:22px;padding:0 9px;border-radius:11px;
+  font-size:11px;font-weight:600;letter-spacing:.01em;white-space:nowrap}
+.ev-pill .ev-d{width:6px;height:6px;border-radius:50%;flex:none}
+.ev-assumption{background:var(--ev-assumption-bg);color:#6f695e}.ev-assumption .ev-d{background:var(--ev-assumption)}
+.ev-suggestive{background:var(--ev-suggestive-bg);color:#9a6a12}.ev-suggestive .ev-d{background:var(--ev-suggestive)}
+.ev-validated{background:var(--ev-validated-bg);color:#2f7048}.ev-validated .ev-d{background:var(--ev-validated)}
+.ev-killed{background:var(--ev-killed-bg);color:#7d776c}.ev-killed .ev-d{background:var(--ev-killed)}
+.ev-killed .lbl{text-decoration:line-through}
+
+/* ───────────────────────────── NEXT BEST ACTION (heartbeat) ───────────────────────────── */
+.nba{
+  margin:0 22px;margin-top:18px;border-radius:var(--r-lg);position:relative;overflow:hidden;
+  background:linear-gradient(120deg,#fbf6ea,#faf0dc 60%,#f8ecd2);
+  border:1px solid #ecd9ad;box-shadow:var(--shadow-sm);
+}
+.nba::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--ev-suggestive)}
+.nba-in{display:flex;align-items:center;gap:20px;padding:15px 20px 15px 22px}
+.nba-kicker{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#a4761d;font-weight:700;
+  display:flex;align-items:center;gap:7px}
+.nba-kicker .hb{width:7px;height:7px;border-radius:50%;background:var(--ev-suggestive);
+  animation:pulse 2.2s var(--ease) infinite}
+.nba-belief{font-family:var(--font-serif);font-size:18px;line-height:1.3;color:var(--ink);margin-top:5px;
+  font-weight:500;letter-spacing:-.01em;max-width:62ch}
+.nba-test{font-size:12.5px;color:var(--ink-2);margin-top:5px}
+.nba-test b{color:#9a6a12}
+.nba-right{margin-left:auto;display:flex;flex-direction:column;align-items:flex-end;gap:9px;flex:none}
+.btn{
+  display:inline-flex;align-items:center;gap:7px;height:36px;padding:0 16px;border-radius:9px;
+  font-weight:600;font-size:13px;transition:.15s var(--ease);white-space:nowrap;
+}
+.btn-primary{background:var(--ink);color:#faf8f2;box-shadow:var(--shadow-sm)}
+.btn-primary:hover{background:#000;transform:translateY(-1px);box-shadow:var(--shadow-md)}
+.btn-ghost{background:var(--surface);border:1px solid var(--line-strong);color:var(--ink-2)}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent-ink)}
+.btn-sm{height:30px;padding:0 12px;font-size:12px}
+
+/* ───────────────────────────── TREE (home) ───────────────────────────── */
+.tree-head{padding:24px 22px 8px;display:flex;align-items:flex-end;gap:18px;flex-wrap:wrap}
+.tree-title{font-family:var(--font-serif);font-size:27px;font-weight:500;letter-spacing:-.02em;line-height:1.05}
+.tree-sub{font-size:13px;color:var(--muted);margin-top:5px;max-width:60ch}
+.tree-tools{margin-left:auto;display:flex;align-items:center;gap:8px}
+.filterbar{display:inline-flex;background:var(--surface-2);border:1px solid var(--line);border-radius:9px;padding:3px}
+.fchip{height:26px;padding:0 11px;border-radius:6px;font-size:12px;font-weight:500;color:var(--ink-2);
+  display:inline-flex;align-items:center;gap:6px;transition:.13s var(--ease)}
+.fchip .ev-d{width:6px;height:6px;border-radius:50%}
+.fchip.on{background:var(--surface);box-shadow:var(--shadow-sm);color:var(--ink)}
+.fchip:hover{color:var(--ink)}
+
+.canvas{padding:14px 22px 60px;position:relative}
+/* convergent two-spine layout via grid of "strata" */
+.stratum{margin:0 auto;max-width:1180px;position:relative}
+.stratum-label{display:flex;align-items:center;gap:10px;margin:22px 0 10px}
+.stratum-label .sl-num{font-family:var(--font-mono);font-size:10px;color:var(--muted);
+  border:1px solid var(--line);border-radius:5px;padding:2px 6px}
+.stratum-label .sl-name{font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.stratum-label .sl-line{flex:1;height:1px;background:var(--line)}
+.stratum-label .sl-loop{font-size:10.5px;color:var(--accent-ink);background:var(--accent-soft);
+  border-radius:10px;padding:2px 9px;font-weight:600}
+
+.node{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--r-md);
+  padding:14px 16px;box-shadow:var(--shadow-sm);transition:.16s var(--ease);cursor:pointer;position:relative;
+}
+.node:hover{border-color:var(--line-strong);box-shadow:var(--shadow-md);transform:translateY(-1px)}
+.node:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.node.is-target{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent),var(--shadow-md)}
+.node.is-weakest{border-color:var(--ev-suggestive);box-shadow:0 0 0 1px var(--ev-suggestive),var(--shadow-md)}
+.node.dim{opacity:.32;filter:grayscale(.3)}
+.node-top{display:flex;align-items:center;gap:10px;margin-bottom:7px}
+.node-kind{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.node-crown{margin-left:auto;font-size:10px;font-weight:700;color:var(--accent-ink);background:var(--accent-soft);
+  padding:2px 8px;border-radius:9px;letter-spacing:.04em}
+.node-weak-flag{margin-left:auto;font-size:10px;font-weight:700;color:#9a6a12;background:var(--ev-suggestive-bg);
+  padding:2px 8px;border-radius:9px}
+.node-h{font-size:14.5px;font-weight:600;line-height:1.3;letter-spacing:-.01em}
+.node.lead .node-h{font-family:var(--font-serif);font-size:17px;font-weight:500}
+.node-d{font-size:12px;color:var(--muted);margin-top:4px;line-height:1.45}
+.node-foot{display:flex;align-items:center;gap:10px;margin-top:11px}
+.node-foot .meta{margin-left:auto;font-size:11px;color:var(--muted);font-family:var(--font-mono)}
+
+/* connectors */
+.spine-row{display:grid;gap:16px;position:relative}
+.cols-1{grid-template-columns:minmax(0,720px);justify-content:center}
+.cols-2{grid-template-columns:1fr 1fr;max-width:1180px;margin:0 auto}
+.cols-3{grid-template-columns:repeat(3,1fr);max-width:1180px;margin:0 auto}
+.connector{display:flex;justify-content:center;height:24px;align-items:center}
+.connector::before{content:"";width:2px;height:100%;
+  background:linear-gradient(var(--line-strong),var(--line))}
+.connector.dashed::before{background:none;border-left:2px dashed var(--line-strong)}
+.conv-note{text-align:center;font-size:11px;color:var(--muted);margin:2px 0 -4px;font-style:italic}
+
+/* solution mini-meter row */
+.sol-type{font-family:var(--font-mono);font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+
+/* impact ladder mini */
+.ladder{display:flex;flex-direction:column;gap:5px;margin-top:4px}
+.ladder-step{display:flex;align-items:center;gap:9px;font-size:12px}
+.ladder-step .rung{width:8px;height:8px;border-radius:2px;flex:none}
+.ladder-step .lab{color:var(--ink-2)}
+.ladder-step .val{margin-left:auto;font-family:var(--font-mono);font-size:11.5px;color:var(--ink)}
+
+/* ───────────────────────────── GENERIC LOOP SCREENS ───────────────────────────── */
+.wrap{max-width:1180px;margin:0 auto;padding:26px 22px 70px}
+.screen-head{margin-bottom:8px}
+.eyebrow{font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent-ink);font-weight:700}
+.h1{font-family:var(--font-serif);font-size:30px;font-weight:500;letter-spacing:-.02em;line-height:1.04;margin-top:8px}
+.lede{font-size:14.5px;color:var(--ink-2);margin-top:10px;max-width:66ch;line-height:1.55}
+.princ{font-style:italic;font-family:var(--font-serif);color:var(--ink-2);font-size:15px}
+
+.grid{display:grid;gap:16px}
+.g-2{grid-template-columns:1fr 1fr}
+.g-3{grid-template-columns:repeat(3,1fr)}
+.g-7-5{grid-template-columns:1.4fr 1fr}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:18px 20px;box-shadow:var(--shadow-sm)}
+.card.inset{background:var(--surface-2);box-shadow:none}
+.card-t{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:700;margin-bottom:12px;
+  display:flex;align-items:center;gap:8px}
+.card-t .ct-line{flex:1;height:1px;background:var(--line)}
+
+.section-rule{display:flex;align-items:center;gap:12px;margin:34px 0 16px}
+.section-rule h2{font-family:var(--font-serif);font-size:19px;font-weight:500;letter-spacing:-.01em}
+.section-rule .sr-line{flex:1;height:1px;background:var(--line)}
+.section-rule .sr-n{font-family:var(--font-mono);font-size:11px;color:var(--muted)}
+
+/* interview snapshot */
+.snap{border-left:3px solid var(--line-strong);padding-left:16px;margin-bottom:18px}
+.snap .who{font-weight:600;font-size:13.5px}
+.snap .role{color:var(--muted);font-size:12px}
+.quote{font-family:var(--font-mono);font-size:12.5px;line-height:1.6;color:var(--ink-2);
+  background:var(--surface-2);border-radius:var(--r-sm);padding:11px 13px;margin:9px 0;position:relative}
+.quote::before{content:'"';position:absolute;left:6px;top:-6px;font-size:26px;color:var(--line-strong);font-family:var(--font-serif)}
+
+/* forces */
+.forces{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.force{border:1px solid var(--line);border-radius:var(--r-md);padding:13px 14px;background:var(--surface)}
+.force .f-h{display:flex;align-items:center;gap:8px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;margin-bottom:8px}
+.force .f-arrow{font-size:14px}
+.force.push .f-h{color:#b4533a}.force.pull .f-h{color:#2f7048}
+.force.anxiety .f-h{color:#9a6a12}.force.habit .f-h{color:#5a6b8c}
+.force li{list-style:none;font-size:12.5px;color:var(--ink-2);padding:4px 0 4px 16px;position:relative;line-height:1.4}
+.force li::before{content:"";position:absolute;left:2px;top:11px;width:5px;height:5px;border-radius:50%;background:var(--line-strong)}
+.force.push li::before{background:#b4533a}.force.pull li::before{background:#2f7048}
+.force.anxiety li::before{background:#9a6a12}.force.habit li::before{background:#5a6b8c}
+
+/* timeline */
+.timeline{display:grid;grid-template-columns:repeat(7,1fr);gap:0;margin-top:8px;position:relative}
+.tl-stage{padding:14px 12px;border-top:2px solid var(--line);position:relative;transition:.15s var(--ease);cursor:default}
+.tl-stage::before{content:"";position:absolute;top:-6px;left:14px;width:9px;height:9px;border-radius:50%;background:var(--surface);border:2px solid var(--line-strong)}
+.tl-stage.hot{border-top-color:var(--ev-suggestive)}
+.tl-stage.hot::before{background:var(--ev-suggestive);border-color:var(--ev-suggestive);box-shadow:0 0 0 4px var(--ev-suggestive-bg)}
+.tl-stage .tl-n{font-family:var(--font-mono);font-size:10px;color:var(--muted)}
+.tl-stage .tl-name{font-size:12px;font-weight:600;margin-top:3px;line-height:1.25}
+.tl-stage .tl-note{font-size:11px;color:var(--muted);margin-top:6px;line-height:1.4}
+.tl-stage.hot .tl-name{color:#9a6a12}
+
+/* competitor list */
+.comp-row{display:flex;align-items:center;gap:12px;padding:9px 0;border-bottom:1px dashed var(--line)}
+.comp-row:last-child{border-bottom:none}
+.comp-name{font-weight:600;font-size:13px;min-width:160px}
+.comp-kind{font-family:var(--font-mono);font-size:10.5px;color:var(--muted);background:var(--surface-2);padding:2px 7px;border-radius:5px}
+.comp-note{font-size:12px;color:var(--ink-2)}
+
+/* baseline→target bar */
+.bt{margin-top:6px}
+.bt-track{height:30px;border-radius:8px;background:var(--surface-2);position:relative;overflow:hidden;border:1px solid var(--line)}
+.bt-fill{position:absolute;left:0;top:0;bottom:0;background:linear-gradient(90deg,#dfeee3,#bfe0cb);border-right:2px solid var(--ev-validated)}
+.bt-cur{position:absolute;top:0;bottom:0;border-right:2px dashed var(--accent)}
+.bt-marks{display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:11px;color:var(--muted);margin-top:6px}
+
+/* checklist */
+.check{display:flex;gap:11px;padding:10px 0;border-bottom:1px solid var(--line);align-items:flex-start}
+.check:last-child{border-bottom:none}
+.check .box{width:18px;height:18px;border-radius:5px;border:1.5px solid var(--line-strong);flex:none;margin-top:1px;
+  display:grid;place-items:center;transition:.13s var(--ease)}
+.check.met .box{background:var(--ev-validated);border-color:var(--ev-validated);color:#fff}
+.check.unmet .box{border-color:var(--ev-suggestive);border-style:dashed}
+.check .c-txt{font-size:13px;line-height:1.45}
+.check .c-txt .ct-meta{display:block;font-size:11.5px;color:var(--muted);margin-top:2px}
+
+/* sibling comparison (demand × ability) */
+.matrix{position:relative;aspect-ratio:1.5/1;border:1px solid var(--line);border-radius:var(--r-md);
+  background:linear-gradient(180deg,#fbfaf6,#f4f1e9);overflow:hidden}
+.matrix .axis-x,.matrix .axis-y{position:absolute;font-size:10.5px;color:var(--muted);font-weight:600;letter-spacing:.04em}
+.matrix .axis-x{bottom:8px;left:50%;transform:translateX(-50%)}
+.matrix .axis-y{top:50%;left:8px;transform:translateY(-50%) rotate(-90deg);transform-origin:left}
+.matrix .qline{position:absolute;background:var(--line)}
+.matrix .qline.v{left:50%;top:0;bottom:0;width:1px;border-left:1px dashed var(--line-strong);background:none}
+.matrix .qline.h{top:50%;left:0;right:0;height:1px;border-top:1px dashed var(--line-strong);background:none}
+.dot{position:absolute;transform:translate(-50%,50%);display:flex;flex-direction:column;align-items:center;gap:4px;cursor:default}
+.dot .bub{width:16px;height:16px;border-radius:50%;background:var(--ink-2);box-shadow:var(--shadow-sm);border:2px solid var(--surface)}
+.dot.target .bub{background:var(--accent);width:20px;height:20px;box-shadow:0 0 0 4px var(--accent-soft)}
+.dot .dl{font-size:11px;font-weight:600;background:rgba(253,252,249,.85);padding:1px 6px;border-radius:5px;white-space:nowrap}
+
+/* causal system flow */
+.flow{display:grid;grid-template-columns:repeat(4,1fr);gap:0;align-items:stretch;margin-top:6px}
+.flow-col{padding:14px;position:relative}
+.flow-col+.flow-col{border-left:1px solid var(--line)}
+.flow-col .fc-h{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:700;margin-bottom:9px;display:flex;align-items:center;gap:6px}
+.flow-col .fc-h .arr{color:var(--accent)}
+.flow-item{font-size:12px;background:var(--surface-2);border:1px solid var(--line);border-radius:6px;padding:7px 9px;margin-bottom:7px;line-height:1.35}
+.flow-item.lead{border-color:var(--ev-validated);background:var(--ev-validated-bg)}
+.factors{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
+.fcol .fcol-h{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px}
+.fcol.control .fcol-h{color:var(--accent-ink)}.fcol.noise .fcol-h{color:#9a6a12}
+.factor{font-size:12.5px;padding:6px 0;border-bottom:1px dashed var(--line);color:var(--ink-2)}
+.factor:last-child{border:none}
+
+/* assumption map 2x2 */
+.amap{position:relative;aspect-ratio:1.4/1;border:1px solid var(--line);border-radius:var(--r-md);background:var(--surface)}
+.amap .quad-label{position:absolute;font-size:10px;color:var(--muted);font-weight:600;padding:6px 8px;letter-spacing:.04em}
+.amap .ql-tl{top:0;left:0}.amap .ql-tr{top:0;right:0;text-align:right}
+.amap .ql-bl{bottom:0;left:0}.amap .ql-br{bottom:0;right:0;text-align:right}
+.amap .qline{position:absolute}.amap .qline.v{left:50%;top:0;bottom:0;border-left:1px dashed var(--line-strong)}
+.amap .qline.h{top:50%;left:0;right:0;border-top:1px dashed var(--line-strong)}
+.adot{position:absolute;transform:translate(-50%,-50%);width:14px;height:14px;border-radius:50%;cursor:pointer;
+  border:2px solid var(--surface);box-shadow:var(--shadow-sm);transition:.13s var(--ease)}
+.adot:hover{transform:translate(-50%,-50%) scale(1.35);z-index:2}
+.adot[data-ev="assumption"]{background:var(--ev-assumption)}
+.adot[data-ev="suggestive"]{background:var(--ev-suggestive)}
+.adot[data-ev="validated"]{background:var(--ev-validated)}
+.adot[data-ev="killed"]{background:var(--ev-killed)}
+
+/* test card */
+.testcard{border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;background:var(--surface);box-shadow:var(--shadow-sm)}
+.tc-head{padding:14px 16px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px;background:var(--surface-2)}
+.tc-head .tc-id{font-family:var(--font-mono);font-size:11px;color:var(--muted)}
+.tc-body{padding:16px;display:grid;grid-template-columns:1fr 1fr;gap:14px 22px}
+.tc-field .tcf-l{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700;margin-bottom:4px}
+.tc-field .tcf-v{font-size:13px;line-height:1.45}
+.threshold{grid-column:1/-1;background:#0e0d0b;color:#f4f1e9;border-radius:var(--r-md);padding:14px 16px;position:relative;overflow:hidden}
+.threshold .th-l{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#c9a24f;font-weight:700;display:flex;align-items:center;gap:7px}
+.threshold .th-v{font-family:var(--font-mono);font-size:16px;margin-top:7px;line-height:1.4}
+.threshold .lock{margin-left:auto}
+.threshold .th-result{margin-top:11px;padding-top:11px;border-top:1px solid #2a2722;font-size:12.5px;display:flex;align-items:center;gap:9px}
+.th-result .res-tag{font-family:var(--font-mono);font-size:11px;font-weight:600;padding:2px 8px;border-radius:5px}
+.res-fail{background:#3a2420;color:#f0a58e}.res-pass{background:#21321f;color:#9fd9a3}
+
+/* increment scope */
+.scope-cols{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--line);border-radius:var(--r-md);overflow:hidden}
+.scope-col{padding:14px 16px}
+.scope-col.inc{background:var(--ev-validated-bg)}.scope-col.exc{background:var(--surface-2);border-left:1px solid var(--line)}
+.scope-col h4{font-size:11px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:9px}
+.scope-col.inc h4{color:#2f7048}.scope-col.exc h4{color:var(--muted)}
+.scope-col li{list-style:none;font-size:12.5px;padding:5px 0 5px 18px;position:relative;line-height:1.4;color:var(--ink-2)}
+.scope-col.inc li::before{content:"✓";position:absolute;left:0;color:var(--ev-validated);font-weight:700}
+.scope-col.exc li::before{content:"–";position:absolute;left:2px;color:var(--muted)}
+.kickass{margin-top:14px;padding:13px 16px;border-radius:var(--r-md);background:linear-gradient(120deg,#faf0dc,#f8ecd2);border:1px solid #ecd9ad}
+.kickass .ka-l{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#a4761d;font-weight:700}
+.kickass .ka-v{font-family:var(--font-serif);font-size:15px;color:var(--ink);margin-top:5px;font-style:italic}
+
+/* impact ladder big */
+.iladder{display:flex;flex-direction:column;gap:2px}
+.irow{display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:var(--r-md);background:var(--surface);border:1px solid var(--line);position:relative}
+.irow .i-rung{width:30px;font-family:var(--font-mono);font-size:11px;color:var(--muted);text-align:center}
+.irow .i-body{flex:1}
+.irow .i-name{font-weight:600;font-size:13.5px}
+.irow .i-sub{font-size:12px;color:var(--muted);margin-top:2px}
+.irow .i-val{font-family:var(--font-mono);font-size:14px;font-weight:500}
+.irow .i-delta{font-size:11px;font-family:var(--font-mono)}
+.iup{color:#2f7048}.iflat{color:var(--muted)}
+.iconn{height:14px;width:2px;background:var(--line-strong);margin-left:31px}
+
+/* decision log */
+.dlog{border-left:2px solid var(--line);margin-left:8px}
+.dentry{position:relative;padding:0 0 22px 24px}
+.dentry::before{content:"";position:absolute;left:-5px;top:4px;width:9px;height:9px;border-radius:50%;background:var(--accent);border:2px solid var(--paper)}
+.dentry.killed::before{background:var(--ev-killed)}
+.dentry .d-when{font-family:var(--font-mono);font-size:11px;color:var(--muted)}
+.dentry .d-what{font-weight:600;font-size:14px;margin-top:3px}
+.dentry .d-why{font-size:12.5px;color:var(--ink-2);margin-top:4px;line-height:1.5}
+.dentry .d-trig{font-size:11.5px;color:var(--muted);margin-top:6px;font-style:italic}
+
+/* assumption ladder interactive */
+.ladder-ctrl{display:flex;align-items:center;gap:0;background:var(--surface-2);border:1px solid var(--line);border-radius:9px;padding:3px;width:max-content}
+.lstep{height:30px;padding:0 12px;border-radius:6px;font-size:12px;font-weight:600;color:var(--muted);transition:.13s var(--ease);display:flex;align-items:center;gap:6px}
+.lstep.on{background:var(--surface);box-shadow:var(--shadow-sm)}
+.lstep.on[data-s="assumption"]{color:#6f695e}
+.lstep.on[data-s="suggestive"]{color:#9a6a12}
+.lstep.on[data-s="validated"]{color:#2f7048}
+.lstep.on[data-s="killed"]{color:#7d776c}
+
+/* ───────────────────────────── SLIDE-OVER PANEL ───────────────────────────── */
+.scrim{position:fixed;inset:0;background:rgba(28,24,18,.34);backdrop-filter:blur(2px);opacity:0;pointer-events:none;
+  transition:opacity .2s var(--ease);z-index:40}
+.scrim.open{opacity:1;pointer-events:auto}
+.panel{position:fixed;top:0;right:0;bottom:0;width:min(560px,46vw);background:var(--surface);
+  border-left:1px solid var(--line);box-shadow:var(--shadow-lg);transform:translateX(100%);
+  transition:transform .26s var(--ease);z-index:41;display:flex;flex-direction:column}
+.panel.open{transform:none}
+.panel-head{padding:20px 24px 16px;border-bottom:1px solid var(--line);position:relative}
+.panel-close{position:absolute;top:16px;right:18px;width:30px;height:30px;border-radius:8px;display:grid;place-items:center;
+  color:var(--muted);transition:.13s var(--ease)}
+.panel-close:hover{background:var(--surface-2);color:var(--ink)}
+.panel-kind{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.panel-h{font-family:var(--font-serif);font-size:21px;font-weight:500;line-height:1.2;letter-spacing:-.01em;margin:8px 0 12px;max-width:30ch}
+.panel-body{padding:20px 24px 40px;overflow-y:auto;flex:1}
+.panel-row{padding:14px 0;border-bottom:1px solid var(--line)}
+.panel-row:last-child{border:none}
+.pr-l{font-size:10px;letter-spacing:.11em;text-transform:uppercase;color:var(--muted);font-weight:700;margin-bottom:7px}
+.pr-v{font-size:13.5px;line-height:1.55;color:var(--ink-2)}
+.pr-v b{color:var(--ink)}
+.evidence-list{display:flex;flex-direction:column;gap:8px}
+.ev-item{display:flex;gap:10px;font-size:12.5px;background:var(--surface-2);border-radius:7px;padding:9px 11px;line-height:1.45}
+.ev-item .ev-ico{flex:none;font-family:var(--font-mono);font-size:11px;color:var(--muted);margin-top:1px}
+.panel-cta{padding:16px 24px;border-top:1px solid var(--line);display:flex;gap:10px;background:var(--surface-2)}
+
+/* ───────────────────────────── COMMAND PALETTE ───────────────────────────── */
+.cmdk-scrim{position:fixed;inset:0;background:rgba(28,24,18,.36);backdrop-filter:blur(3px);opacity:0;pointer-events:none;
+  transition:opacity .16s var(--ease);z-index:60;display:flex;align-items:flex-start;justify-content:center;padding-top:13vh}
+.cmdk-scrim.open{opacity:1;pointer-events:auto}
+.cmdk{width:min(580px,92vw);background:var(--surface);border:1px solid var(--line-strong);border-radius:var(--r-lg);
+  box-shadow:var(--shadow-lg);overflow:hidden;transform:translateY(-10px) scale(.98);transition:transform .18s var(--ease)}
+.cmdk-scrim.open .cmdk{transform:none}
+.cmdk-input{width:100%;border:none;padding:16px 18px;font-size:15px;font-family:var(--font-sans);background:none;
+  color:var(--ink);border-bottom:1px solid var(--line)}
+.cmdk-input:focus{outline:none}
+.cmdk-input::placeholder{color:var(--muted)}
+.cmdk-list{max-height:360px;overflow-y:auto;padding:7px}
+.cmdk-group{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:700;padding:9px 11px 5px}
+.cmdk-item{display:flex;align-items:center;gap:12px;padding:9px 11px;border-radius:8px;font-size:13.5px;cursor:pointer}
+.cmdk-item .ci-ico{width:22px;height:22px;border-radius:6px;background:var(--surface-2);display:grid;place-items:center;font-size:12px;flex:none}
+.cmdk-item .ci-sub{margin-left:auto;font-size:11px;color:var(--muted);font-family:var(--font-mono)}
+.cmdk-item.sel,.cmdk-item:hover{background:var(--accent-soft);color:var(--accent-ink)}
+.cmdk-item.sel .ci-ico{background:#fff}
+
+/* ───────────────────────────── STAKEHOLDER WALKTHROUGH ───────────────────────────── */
+.walk-scrim{position:fixed;inset:0;background:var(--paper);opacity:0;pointer-events:none;transition:opacity .3s var(--ease);z-index:55;display:flex;flex-direction:column}
+.walk-scrim.open{opacity:1;pointer-events:auto}
+.walk-top{height:56px;flex:none;display:flex;align-items:center;gap:14px;padding:0 26px;border-bottom:1px solid var(--line)}
+.walk-top .wt-title{font-weight:600;font-size:14px}
+.walk-top .wt-sub{font-size:12px;color:var(--muted)}
+.walk-prog{flex:1;display:flex;gap:5px;justify-content:center}
+.wp-dot{width:30px;height:4px;border-radius:2px;background:var(--line-strong);transition:.2s var(--ease);cursor:pointer}
+.wp-dot.on{background:var(--accent)}
+.walk-stage{flex:1;overflow:hidden;position:relative}
+.walk-page{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:40px;opacity:0;
+  transform:translateY(20px);transition:opacity .4s var(--ease),transform .4s var(--ease);pointer-events:none}
+.walk-page.active{opacity:1;transform:none;pointer-events:auto}
+.walk-card{max-width:760px;text-align:center}
+.walk-card .wc-step{font-family:var(--font-mono);font-size:12px;color:var(--accent-ink);letter-spacing:.08em}
+.walk-card .wc-h{font-family:var(--font-serif);font-size:38px;font-weight:500;letter-spacing:-.025em;line-height:1.1;margin:14px 0 18px}
+.walk-card .wc-body{font-size:16px;line-height:1.65;color:var(--ink-2);max-width:60ch;margin:0 auto}
+.walk-card .wc-body b{color:var(--ink)}
+.walk-evbar{margin:26px auto 0;width:max-content;display:flex;align-items:center;gap:14px;background:var(--surface);
+  border:1px solid var(--line);border-radius:var(--r-lg);padding:13px 20px;box-shadow:var(--shadow-sm)}
+.walk-bottom{height:64px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 26px;border-top:1px solid var(--line)}
+
+.fade-up{opacity:0;transform:translateY(10px);animation:fadeUp .5s var(--ease) forwards}
+@keyframes fadeUp{to{opacity:1;transform:none}}
+
+/* responsive degrade to 1024 */
+@media(max-width:1180px){
+  .app{grid-template-columns:200px 1fr}
+  .cols-2,.cols-3{grid-template-columns:1fr}
+  .g-2,.g-3,.g-7-5{grid-template-columns:1fr}
+  .tc-body{grid-template-columns:1fr}
+  .panel{width:min(520px,72vw)}
+  .timeline{grid-template-columns:repeat(7,minmax(96px,1fr));overflow-x:auto}
+  .flow{grid-template-columns:1fr 1fr}
+  .flow-col:nth-child(odd){border-left:none}
+}
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:.001ms!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <!-- ───────── RAIL ───────── -->
+  <aside class="rail">
+    <div class="brand">
+      <div class="glyph">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="#fff" stroke-width="1.4" opacity=".5"/><circle cx="8" cy="8" r="2.4" fill="#fff"/></svg>
+      </div>
+      <div>
+        <div class="name">Noetic</div>
+        <div class="ver">Discovery System · v3</div>
+      </div>
+    </div>
+
+    <div class="rail-label">The five loops</div>
+    <button class="nav-loop active" data-loop="tree" onclick="goLoop('tree')">
+      <span class="loop-num">◇</span> Tree <span class="loop-meta">home</span>
+    </button>
+    <button class="nav-loop" data-loop="progress" onclick="goLoop('progress')">
+      <span class="loop-num">1</span> Progress
+    </button>
+    <button class="nav-loop" data-loop="outcome" onclick="goLoop('outcome')">
+      <span class="loop-num">2</span> Outcome
+    </button>
+    <button class="nav-loop" data-loop="opportunity" onclick="goLoop('opportunity')">
+      <span class="loop-num">3</span> Opportunity
+    </button>
+    <button class="nav-loop" data-loop="causal" onclick="goLoop('causal')">
+      <span class="loop-num">4</span> Causal Learning
+    </button>
+    <button class="nav-loop" data-loop="delivery" onclick="goLoop('delivery')">
+      <span class="loop-num">5</span> Delivery &amp; Impact
+    </button>
+
+    <div class="rail-spacer"></div>
+
+    <div class="rail-label">Reasoning</div>
+    <button class="nav-loop" data-loop="decisions" onclick="goLoop('decisions')">
+      <span class="loop-num">≡</span> Decision Log
+    </button>
+    <button class="nav-loop" onclick="openWalk()">
+      <span class="loop-num">▸</span> Show the reasoning
+    </button>
+
+    <div class="rail-foot">
+      <div class="kbd-hint"><kbd>⌘</kbd><kbd>K</kbd><span>Command palette</span></div>
+    </div>
+  </aside>
+
+  <!-- ───────── MAIN ───────── -->
+  <main class="main">
+    <div class="topbar">
+      <div class="crumbs">
+        <span class="proj">Atlas · Team Onboarding</span>
+        <span class="sep">/</span>
+        <span class="here" id="crumbHere">Progress-to-Outcome Tree</span>
+      </div>
+      <div class="top-spacer"></div>
+      <button class="cmdk-btn" onclick="openCmdk()">
+        <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.4"/><path d="M11 11l3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+        Search or jump… <kbd>⌘K</kbd>
+      </button>
+      <div class="avatar">PD</div>
+    </div>
+
+    <!-- Cadence ribbon -->
+    <div class="cadence">
+      <span class="wk">WEEK 24 · 2026</span>
+      <div class="cad-item cad-done"><span class="cad-dot"></span>Interview logged — Priya (Tue)</div>
+      <div class="cad-item cad-done"><span class="cad-dot"></span>Tree reviewed</div>
+      <div class="cad-item cad-now"><span class="cad-dot"></span>1 test in flight — TC-07</div>
+      <div class="cad-item cad-todo"><span class="cad-dot"></span>Impact review (Fri)</div>
+      <div class="cad-spacer"></div>
+      <span class="cad-quarter">Q2 outcome negotiation · 18 days</span>
+    </div>
+
+    <!-- Persistent Next Best Action -->
+    <div class="nba" id="nbaCard" onclick="openNBATest()">
+      <div class="nba-in">
+        <div>
+          <div class="nba-kicker"><span class="hb"></span>Next best action · weakest load-bearing belief</div>
+          <div class="nba-belief">“New admins will invite their team within the first session if we make the value of a populated workspace legible.”</div>
+          <div class="nba-test">Smallest test that moves it: <b>TC-07 — fake-door “Invite your team” prompt</b> on the empty workspace, measured over 40 new admins. Threshold locked.</div>
+        </div>
+        <div class="nba-right">
+          <div class="meter sz-lg" data-state="suggestive" title="Suggestive — some signal, not yet load-bearing"><span class="seg"></span><span class="seg"></span><span class="seg"></span><span class="seg"></span></div>
+          <button class="btn btn-primary">Open test card →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ───────── VIEW ───────── -->
+    <div class="view" id="view">
+
+      <!-- ========== SCREEN: TREE ========== -->
+      <section class="screen active" id="screen-tree">
+        <div class="tree-head">
+          <div>
+            <div class="tree-title serif">The Progress-to-Outcome Tree</div>
+            <div class="tree-sub">A living map from desired outcome to the next increment. Every node carries its evidence state. The weakest load-bearing belief is flagged in amber.</div>
+          </div>
+          <div class="tree-tools">
+            <div class="filterbar" id="treeFilter">
+              <button class="fchip on" data-f="all" onclick="filterTree('all',this)">All</button>
+              <button class="fchip" data-f="assumption" onclick="filterTree('assumption',this)"><span class="ev-d" style="background:var(--ev-assumption)"></span>Assumption</button>
+              <button class="fchip" data-f="suggestive" onclick="filterTree('suggestive',this)"><span class="ev-d" style="background:var(--ev-suggestive)"></span>Suggestive</button>
+              <button class="fchip" data-f="validated" onclick="filterTree('validated',this)"><span class="ev-d" style="background:var(--ev-validated)"></span>Validated</button>
+              <button class="fchip" data-f="killed" onclick="filterTree('killed',this)"><span class="ev-d" style="background:var(--ev-killed)"></span>Killed</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="canvas" id="treeCanvas">
+          <!-- nodes injected by JS -->
+        </div>
+      </section>
+
+      <!-- ========== LOOP SCREENS (injected) ========== -->
+      <section class="screen" id="screen-progress"></section>
+      <section class="screen" id="screen-outcome"></section>
+      <section class="screen" id="screen-opportunity"></section>
+      <section class="screen" id="screen-causal"></section>
+      <section class="screen" id="screen-delivery"></section>
+      <section class="screen" id="screen-decisions"></section>
+
+    </div>
+  </main>
+</div>
+
+<!-- ───────── SLIDE-OVER PANEL ───────── -->
+<div class="scrim" id="scrim" onclick="closePanel()"></div>
+<aside class="panel" id="panel" role="dialog" aria-modal="true">
+  <div class="panel-head">
+    <button class="panel-close" onclick="closePanel()" aria-label="Close">
+      <svg width="15" height="15" viewBox="0 0 16 16"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </button>
+    <div class="panel-kind" id="panelKind">Node</div>
+    <div class="panel-h serif" id="panelH">—</div>
+    <div id="panelMeter"></div>
+  </div>
+  <div class="panel-body" id="panelBody"></div>
+  <div class="panel-cta" id="panelCta"></div>
+</aside>
+
+<!-- ───────── COMMAND PALETTE ───────── -->
+<div class="cmdk-scrim" id="cmdkScrim" onclick="if(event.target===this)closeCmdk()">
+  <div class="cmdk" role="dialog" aria-modal="true">
+    <input class="cmdk-input" id="cmdkInput" placeholder="Search loops, artifacts, beliefs…" autocomplete="off" oninput="renderCmdk(this.value)" onkeydown="cmdkKey(event)" />
+    <div class="cmdk-list" id="cmdkList"></div>
+  </div>
+</div>
+
+<!-- ───────── STAKEHOLDER WALKTHROUGH ───────── -->
+<div class="walk-scrim" id="walkScrim">
+  <div class="walk-top">
+    <div>
+      <div class="wt-title serif">The reasoning — outcome to increment</div>
+      <div class="wt-sub">Read-only narrative · the artifact you'd show a CEO</div>
+    </div>
+    <div class="walk-prog" id="walkProg"></div>
+    <button class="btn btn-ghost btn-sm" onclick="closeWalk()">Close · Esc</button>
+  </div>
+  <div class="walk-stage" id="walkStage"></div>
+  <div class="walk-bottom">
+    <button class="btn btn-ghost" id="walkPrev" onclick="walkGo(-1)">← Back</button>
+    <div class="mono" style="color:var(--muted);font-size:12px" id="walkCount"></div>
+    <button class="btn btn-primary" id="walkNext" onclick="walkGo(1)">Next →</button>
+  </div>
+</div>
+
+<script>
+/* ════════════════════════════ DATA — Project "Atlas" ════════════════════════════
+   A B2B SaaS team (collaborative analytics tool) chasing time-to-first-value in
+   team onboarding. One internally-consistent example, evidence at varied states,
+   one KILLED belief and one FAILED test shown as a win. */
+
+const EV = {
+  assumption:{label:'Assumption',cls:'ev-assumption'},
+  suggestive:{label:'Suggestive',cls:'ev-suggestive'},
+  validated:{label:'Validated',cls:'ev-validated'},
+  killed:{label:'Killed',cls:'ev-killed'},
+};
+
+function meter(state,size){
+  const sz = size==='lg'?'sz-lg':size==='sm'?'sz-sm':'';
+  return `<span class="meter ${sz}" data-state="${state}" title="${EV[state].label}"><span class="seg"></span><span class="seg"></span><span class="seg"></span><span class="seg"></span></span>`;
+}
+function pill(state){
+  return `<span class="ev-pill ${EV[state].cls}"><span class="ev-d"></span><span class="lbl">${EV[state].label}</span></span>`;
+}
+
+/* Tree nodes — keyed, with strata for the convergent canvas */
+const NODES = {
+  outcome:{kind:'Desired Outcome', lead:true, ev:'validated',
+    h:'Lift 30-day team activation from 41% to 60%',
+    d:'Product outcome — controllable, behavioral. Negotiated with leadership, not a feature.',
+    detail:{
+      grounding:'Grounded in a progress hypothesis: teams that reach a populated, shared workspace in week one keep using Atlas; teams that don’t, churn quietly.',
+      type:'Product outcome (not a business outcome, not a traction metric).',
+      baseline:'41% of new teams active at day 30 (Q1 cohort, n=212).',
+      target:'60% by end of Q3. Learning-goal mode until the activation driver is validated.',
+      evidence:[
+        ['cohort','Q1 retention curve: activated teams retain 3.1× vs non-activated.'],
+        ['leadership','Outcome ratified in Q2 negotiation — owns the metric, not the roadmap.'],
+      ],
+    }},
+  progress:{kind:'Customer Progress · JTBD', ev:'validated',
+    h:'“Get my team seeing the same numbers — fast — so I stop being the bottleneck.”',
+    d:'The Job a new admin hires Atlas for in their first week.',
+    detail:{
+      grounding:'Job statement (full grammar): When I roll out a new analytics tool to my team, I want everyone looking at the same trusted dashboard within days, so I can stop fielding one-off data questions and look credible to my boss.',
+      type:'Functional + social + emotional motivations all present.',
+      evidence:[
+        ['12 interviews','Recurs in 9 of 12 progress interviews of real past rollouts.'],
+        ['behavior','Admins who invited ≥2 teammates in week 1 activated at 71%.'],
+      ],
+    }},
+  forces:{kind:'Timeline & Forces', ev:'suggestive',
+    h:'Strong push & pull at onboarding; anxiety about an empty workspace stalls invites',
+    d:'Four forces around the “first session” moment in the buyer timeline.',
+    detail:{
+      grounding:'The decisive struggling moment sits at Onboarding: the admin logs in, sees an empty workspace, and hesitates to invite the team to “nothing.”',
+      type:'Push (manual reporting pain) and Pull (shared truth) are strong; Anxiety (looking bad with an empty board) and Habit (the trusty spreadsheet) hold them back.',
+      evidence:[
+        ['quotes','“I’m not inviting eight people to a blank screen.” — Priya, Ops Lead'],
+        ['signal','Drop-off concentrated between first login and first invite.'],
+      ],
+    }},
+  oppTarget:{kind:'Target Opportunity', ev:'suggestive', target:true,
+    h:'The empty-workspace moment: admins won’t invite a team to a blank board',
+    d:'Crowned target opportunity. Demand strength high × ability to win high.',
+    detail:{
+      grounding:'A customer-framed struggling moment, not a feature. Passed all five admission tests.',
+      type:'Timeline moment: Onboarding → first session.',
+      evidence:[
+        ['recurrence','Named, unprompted, in 7 of 12 interviews.'],
+        ['severity','Sits exactly on the activation drop-off.'],
+        ['win','We control the first-session surface — high ability to win.'],
+      ],
+    }},
+  causal:{kind:'Causal System', ev:'suggestive',
+    h:'What must be true for a first session to end in an invite',
+    d:'Inputs → process → outputs → outcome, with control vs noise factors.',
+    detail:{
+      grounding:'Mapped before any solution. Control factors: first-screen content, time-to-first-chart, invite affordance. Noise: team size, data source, admin seniority.',
+      type:'Lead measure: % of sessions reaching a populated view before invite prompt. Lag: 30-day activation.',
+      evidence:[
+        ['model','Right-to-left: activation needs invites → invites need a non-empty workspace → that needs sample data + a fast first chart.'],
+      ],
+    }},
+  belief:{kind:'Load-bearing belief', ev:'suggestive', weakest:true,
+    h:'Make a populated workspace legible and admins invite in session one',
+    d:'The weakest belief the whole increment rests on. Currently suggestive — TC-07 in flight.',
+    detail:{
+      grounding:'If admins can SEE what a live, shared workspace looks like (sample data + a real chart of their own), the empty-board anxiety drops and they invite the team immediately.',
+      type:'Desirability + causal-effectiveness assumption.',
+      evidence:[
+        ['signal','In moderated tests, 6 of 9 admins invited after seeing seeded data.'],
+        ['gap','Not yet behavioral at scale — TC-07 fake-door measures real intent over 40 admins.'],
+      ],
+    }},
+  solA:{kind:'Solution · Product', ev:'suggestive', solType:'PRODUCT',
+    h:'Seeded sample workspace',
+    d:'Pre-populate every new workspace with relevant sample data and one auto-built chart.',
+    detail:{grounding:'Causal theory: removes empty-board anxiety by making value legible on screen one.',type:'Product path.',evidence:[['proto','Clickable prototype shown to 9 admins.']]}},
+  solB:{kind:'Solution · Service', ev:'assumption', solType:'SERVICE',
+    h:'Concierge first-dashboard',
+    d:'A human builds the team’s first dashboard live in a 20-min call before invites go out.',
+    detail:{grounding:'Causal theory: trust + a real artifact beats anything self-serve.',type:'Service path — tests willingness, not scalability yet.',evidence:[['untested','No behavioral evidence yet — pure assumption.']]}},
+  solC:{kind:'Solution · Process', ev:'killed', solType:'PROCESS',
+    h:'Gamified setup checklist',
+    d:'A progress-bar checklist nudging admins through setup steps before inviting.',
+    detail:{grounding:'Hypothesis: completion pressure drives invites. KILLED — a win: we stopped building it.',type:'Process path.',evidence:[['killed','TC-04: checklist raised step-completion but NOT invites (see below). The struggle isn’t motivation, it’s the empty board.']]}},
+  increment:{kind:'Smallest Coherent Increment', ev:'assumption',
+    h:'Seeded workspace + in-context invite prompt — admins only',
+    d:'The kick-ass half of the seeded-workspace path, scoped to one segment.',
+    detail:{
+      grounding:'Included: sample data, one auto-chart, an invite prompt the moment the chart renders. Excluded: concierge, templates gallery, multi-source seeding.',
+      type:'Better + faster over cheaper — we’re buying a clean activation signal.',
+      evidence:[['rationale','Smallest thing that can move the lead measure and be instrumented in one cycle.']],
+    }},
+  impact:{kind:'Impact (4 levels)', ev:'assumption',
+    h:'Assumption → opportunity → product outcome → business outcome',
+    d:'Expected ladder for this increment. Instrumented at release.',
+    detail:{
+      grounding:'Four-level impact ladder, expected vs actual measured each cycle.',
+      type:'Currently projected — increment not yet shipped.',
+      evidence:[['plan','Lead measure wired before launch; lag measure (30-day activation) read at cycle close.']],
+    }},
+};
+
+/* Canvas strata — the convergent two-spine geometry */
+const STRATA = [
+  {n:'01', name:'Desired Outcome', loop:'Outcome', cols:1, nodes:['outcome']},
+  {n:'02', name:'Customer Progress · Timeline & Forces', loop:'Progress', cols:2, nodes:['progress','forces']},
+  {n:'03', name:'Opportunity Space', loop:'Opportunity', cols:1, nodes:['oppTarget'], conv:'Demand and supply converge ↓'},
+  {n:'04', name:'Causal System', loop:'Causal', cols:1, nodes:['causal']},
+  {n:'05', name:'Load-bearing belief', loop:'Delivery', cols:1, nodes:['belief']},
+  {n:'06', name:'Solution Set · 3 materially different paths', loop:'Delivery', cols:3, nodes:['solA','solB','solC']},
+  {n:'07', name:'Increment & Impact', loop:'Delivery', cols:2, nodes:['increment','impact']},
+];
+</script>
+<script>
+/* ════════════════════════════ TREE RENDER ════════════════════════════ */
+function nodeHTML(key){
+  const n = NODES[key];
+  const cls = ['node', n.lead?'lead':'', n.target?'is-target':'', n.weakest?'is-weakest':''].join(' ');
+  let flag='';
+  if(n.target) flag = `<span class="node-crown">★ Target</span>`;
+  else if(n.weakest) flag = `<span class="node-weak-flag">⚠ Weakest belief</span>`;
+  let extra='';
+  if(key==='impact') extra = `
+    <div class="ladder">
+      <div class="ladder-step"><span class="rung" style="background:var(--ev-suggestive)"></span><span class="lab">Assumption behavior</span><span class="val">in test</span></div>
+      <div class="ladder-step"><span class="rung" style="background:var(--ev-assumption)"></span><span class="lab">Opportunity relief</span><span class="val">—</span></div>
+      <div class="ladder-step"><span class="rung" style="background:var(--ev-assumption)"></span><span class="lab">Product outcome</span><span class="val">41→60%</span></div>
+      <div class="ladder-step"><span class="rung" style="background:var(--ev-assumption)"></span><span class="lab">Business outcome</span><span class="val">NRR</span></div>
+    </div>`;
+  if(n.solType) extra = `<div class="node-foot" style="margin-top:8px"><span class="sol-type">${n.solType}</span></div>`;
+  return `<div class="${cls}" data-key="${key}" data-ev="${n.ev}" tabindex="0" role="button"
+            onclick="openNode('${key}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openNode('${key}')}">
+    <div class="node-top">
+      <span class="node-kind">${n.kind}</span>${flag}
+    </div>
+    <div class="node-h">${n.h}</div>
+    <div class="node-d">${n.d}</div>
+    ${extra}
+    <div class="node-foot">
+      ${meter(n.ev)} ${pill(n.ev)}
+      <span class="meta">${key.toUpperCase()}</span>
+    </div>
+  </div>`;
+}
+
+function renderTree(){
+  const c = document.getElementById('treeCanvas');
+  let html='';
+  STRATA.forEach((s,i)=>{
+    html += `<div class="stratum-label"><span class="sl-num">${s.n}</span><span class="sl-name">${s.name}</span><span class="sl-line"></span><span class="sl-loop">${s.loop}</span></div>`;
+    html += `<div class="spine-row cols-${s.cols}">`;
+    s.nodes.forEach(k=> html += nodeHTML(k));
+    html += `</div>`;
+    if(s.conv) html += `<div class="conv-note">${s.conv}</div>`;
+    if(i<STRATA.length-1) html += `<div class="connector ${i===0?'dashed':''}"></div>`;
+  });
+  // dashed challenge-arrow note
+  html += `<div class="conv-note" style="margin-top:18px">↑ Validated demand retains standing to challenge the outcome (the dashed arrow)</div>`;
+  c.innerHTML = html;
+}
+
+let activeFilter='all';
+function filterTree(f, btn){
+  activeFilter=f;
+  document.querySelectorAll('#treeFilter .fchip').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  document.querySelectorAll('#treeCanvas .node').forEach(node=>{
+    const match = f==='all' || node.dataset.ev===f;
+    node.classList.toggle('dim', !match);
+  });
+}
+</script>
+<script>
+/* ════════════════════════════ SLIDE-OVER PANEL ════════════════════════════ */
+function openNode(key){
+  const n = NODES[key]; const d = n.detail||{};
+  document.getElementById('panelKind').textContent = n.kind;
+  document.getElementById('panelH').textContent = n.h;
+  document.getElementById('panelMeter').innerHTML =
+    `<div style="display:flex;align-items:center;gap:12px;margin-top:4px">${meter(n.ev,'lg')} ${pill(n.ev)}</div>`;
+
+  let evHTML='';
+  (d.evidence||[]).forEach(([tag,txt])=>{
+    evHTML += `<div class="ev-item"><span class="ev-ico">[${tag}]</span><span>${txt}</span></div>`;
+  });
+
+  document.getElementById('panelBody').innerHTML = `
+    ${d.grounding?`<div class="panel-row"><div class="pr-l">The belief</div><div class="pr-v">${d.grounding}</div></div>`:''}
+    ${d.type?`<div class="panel-row"><div class="pr-l">Type / framing</div><div class="pr-v">${d.type}</div></div>`:''}
+    ${d.baseline?`<div class="panel-row"><div class="pr-l">Baseline</div><div class="pr-v"><b>${d.baseline}</b></div></div>`:''}
+    ${d.target?`<div class="panel-row"><div class="pr-l">Target</div><div class="pr-v"><b>${d.target}</b></div></div>`:''}
+    ${evHTML?`<div class="panel-row"><div class="pr-l">Evidence sediment</div><div class="evidence-list">${evHTML}</div></div>`:''}
+  `;
+
+  // contextual CTA
+  let cta = `<button class="btn btn-ghost" onclick="closePanel()">Close</button>`;
+  if(key==='belief'||n.weakest) cta = `<button class="btn btn-primary" onclick="closePanel();openNBATest()">Open the test that moves this →</button>` + cta;
+  else if(n.solType) cta = `<button class="btn btn-ghost" onclick="closePanel();goLoop('delivery')">See in Delivery loop</button>`;
+  else if(key==='oppTarget') cta = `<button class="btn btn-ghost" onclick="closePanel();goLoop('opportunity')">See opportunity space</button>`;
+  else if(key==='causal') cta = `<button class="btn btn-ghost" onclick="closePanel();goLoop('causal')">Open causal map</button>`;
+  document.getElementById('panelCta').innerHTML = cta;
+
+  document.getElementById('scrim').classList.add('open');
+  document.getElementById('panel').classList.add('open');
+}
+function closePanel(){
+  document.getElementById('scrim').classList.remove('open');
+  document.getElementById('panel').classList.remove('open');
+}
+function openNBATest(){ goLoop('delivery'); setTimeout(()=>{ const el=document.getElementById('tc07'); if(el){el.scrollIntoView({behavior:'smooth',block:'center'}); el.animate([{boxShadow:'0 0 0 0 rgba(201,138,30,.5)'},{boxShadow:'0 0 0 6px rgba(201,138,30,0)'}],{duration:1200}); } },340); }
+</script>
+<script>
+/* ════════════════════════════ LOOP SCREENS ════════════════════════════ */
+
+const LOOP_TITLES = {
+  tree:'Progress-to-Outcome Tree', progress:'Progress Loop', outcome:'Outcome Loop',
+  opportunity:'Opportunity Loop', causal:'Causal Learning Loop', delivery:'Delivery & Impact Loop',
+  decisions:'Decision Log',
+};
+
+function goLoop(loop){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  const el = document.getElementById('screen-'+loop);
+  if(el){ el.classList.add('active'); if(!el.dataset.built && BUILDERS[loop]){ el.innerHTML=BUILDERS[loop](); el.dataset.built='1'; } }
+  document.querySelectorAll('.nav-loop').forEach(b=>b.classList.toggle('active', b.dataset.loop===loop));
+  document.getElementById('crumbHere').textContent = LOOP_TITLES[loop]||loop;
+  document.getElementById('view').scrollTop=0;
+  closeCmdk(); closePanel();
+}
+
+const BUILDERS = {
+  /* ───── PROGRESS ───── */
+  progress(){ return `<div class="wrap">
+    <div class="screen-head">
+      <div class="eyebrow">Loop 1 · Demand side</div>
+      <h1 class="h1">Understand the progress people are trying to make</h1>
+      <p class="lede">Continuous JTBD interviews of real past rollouts — never hypotheticals. We listen for the struggling moment and the four forces, then render demand as a map the whole team can read.</p>
+    </div>
+
+    <div class="section-rule"><span class="sr-n">3.1</span><h2 class="serif">Interview snapshots</h2><span class="sr-line"></span><span class="mono" style="font-size:11px;color:var(--muted)">12 logged · 1 this week</span></div>
+    <div class="grid g-2">
+      <div class="card">
+        <div class="snap">
+          <div class="who">Priya Nadkarni <span class="role">· Ops Lead, 24-person fintech</span></div>
+          <div class="quote">I rolled it out on a Monday. By Wednesday I still hadn’t invited the team — I’m not inviting eight people to a blank screen and looking like I bought a toy.</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px">${pill('validated')}<span class="ev-pill ev-suggestive"><span class="ev-d"></span>Anxiety: empty board</span></div>
+        </div>
+        <div class="snap" style="margin-bottom:0">
+          <div class="who">Marcus Webb <span class="role">· Head of RevOps, 60-person SaaS</span></div>
+          <div class="quote">The spreadsheet already works. To get me to switch the whole team, day one has to feel obviously better — not like more setup homework.</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px"><span class="ev-pill ev-suggestive"><span class="ev-d"></span>Habit: the spreadsheet</span></div>
+        </div>
+      </div>
+      <div class="card inset">
+        <div class="card-t">Demand Map · The Job<span class="ct-line"></span></div>
+        <p class="serif" style="font-size:16px;line-height:1.5;color:var(--ink)">When I roll out a new analytics tool to my team, I want everyone looking at the <b>same trusted dashboard within days</b>, so I can stop fielding one-off data questions and look credible to my boss.</p>
+        <div class="card-t" style="margin-top:18px">Real competitors<span class="ct-line"></span></div>
+        <div class="comp-row"><span class="comp-name">The existing spreadsheet</span><span class="comp-kind">do-nothing</span><span class="comp-note">Works, trusted, zero rollout risk.</span></div>
+        <div class="comp-row"><span class="comp-name">Screenshots in Slack</span><span class="comp-kind">workaround</span><span class="comp-note">Admin stays the bottleneck.</span></div>
+        <div class="comp-row"><span class="comp-name">Looker / incumbent BI</span><span class="comp-kind">competitor</span><span class="comp-note">Powerful, but heavy to stand up.</span></div>
+      </div>
+    </div>
+
+    <div class="section-rule"><span class="sr-n">3.2</span><h2 class="serif">Four forces · the first-session moment</h2><span class="sr-line"></span></div>
+    <div class="forces">
+      <div class="force push"><div class="f-h"><span class="f-arrow">→</span>Push (away from today)</div>
+        <ul><li>Manual reporting eats the admin’s Monday.</li><li>One-off data questions never stop.</li><li>“Looking credible to my boss” is at stake.</li></ul></div>
+      <div class="force pull"><div class="f-h"><span class="f-arrow">←</span>Pull (toward Atlas)</div>
+        <ul><li>One shared, trusted source of truth.</li><li>Team self-serves; admin stops being asked.</li><li>Looks modern, looks decisive.</li></ul></div>
+      <div class="force anxiety"><div class="f-h">⚠ Anxiety (of switching)</div>
+        <ul><li>“Inviting the team to a blank board.”</li><li>What if the data’s wrong on day one?</li><li>Re-training eight people.</li></ul></div>
+      <div class="force habit"><div class="f-h">⟳ Habit (of today)</div>
+        <ul><li>The spreadsheet already works.</li><li>Muscle memory of the old report.</li><li>“We’ll switch next quarter.”</li></ul></div>
+    </div>
+
+    <div class="section-rule"><span class="sr-n">3.3</span><h2 class="serif">Buyer timeline</h2><span class="sr-line"></span><span class="mono" style="font-size:11px;color:var(--muted)">struggle concentrates at Onboarding</span></div>
+    <div class="card">
+      <div class="timeline">
+        <div class="tl-stage"><div class="tl-n">01</div><div class="tl-name">First Thought</div><div class="tl-note">“Reporting is a mess.”</div></div>
+        <div class="tl-stage"><div class="tl-n">02</div><div class="tl-name">Passive Looking</div><div class="tl-note">Notices peers using BI.</div></div>
+        <div class="tl-stage"><div class="tl-n">03</div><div class="tl-name">Active Looking</div><div class="tl-note">Trials two tools.</div></div>
+        <div class="tl-stage"><div class="tl-n">04</div><div class="tl-name">Deciding</div><div class="tl-note">Picks Atlas, signs up.</div></div>
+        <div class="tl-stage hot"><div class="tl-n">05</div><div class="tl-name">Onboarding</div><div class="tl-note">Empty workspace → stalls before inviting.</div></div>
+        <div class="tl-stage"><div class="tl-n">06</div><div class="tl-name">Ongoing Use</div><div class="tl-note">Team checks dashboards weekly.</div></div>
+        <div class="tl-stage"><div class="tl-n">07</div><div class="tl-name">Renew / Expand</div><div class="tl-note">Adds seats, more sources.</div></div>
+      </div>
+    </div>
+  </div>`; },
+
+  /* ───── OUTCOME ───── */
+  outcome(){ return `<div class="wrap">
+    <div class="screen-head">
+      <div class="eyebrow">Loop 2 · Translate progress into a measurable behavior</div>
+      <h1 class="h1">The Outcome &amp; Progress Brief</h1>
+      <p class="lede princ">“Leadership negotiates outcomes, not solutions.” This brief is the contract — a controllable behavioral target, grounded in customer progress, with non-goals made explicit.</p>
+    </div>
+
+    <div class="grid g-7-5" style="margin-top:22px">
+      <div class="card">
+        <div class="card-t">The three altitudes — keep them distinct<span class="ct-line"></span></div>
+        <div class="grid" style="gap:10px">
+          <div class="card inset" style="border-radius:10px;padding:13px 15px"><div style="display:flex;align-items:center;gap:9px"><span style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)">Business outcome</span>${pill('assumption')}</div><div style="margin-top:6px;font-size:13.5px">Net revenue retention — the thing leadership ultimately cares about. We don’t control it directly.</div></div>
+          <div class="card" style="border-radius:10px;padding:13px 15px;border-color:var(--accent)"><div style="display:flex;align-items:center;gap:9px"><span style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-ink)">Product outcome ★ ours</span>${pill('validated')}</div><div style="margin-top:6px;font-size:14px"><b>30-day team activation: 41% → 60%.</b> Controllable, behavioral, the one metric this team owns.</div></div>
+          <div class="card inset" style="border-radius:10px;padding:13px 15px"><div style="display:flex;align-items:center;gap:9px"><span style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)">Traction metric</span>${pill('killed')}</div><div style="margin-top:6px;font-size:13.5px">“Invites sent” — too narrow. Rejected as the primary: it games easily and doesn’t imply progress.</div></div>
+        </div>
+
+        <div class="card-t" style="margin-top:20px">Baseline → Target<span class="ct-line"></span></div>
+        <div class="bt">
+          <div class="bt-track">
+            <div class="bt-fill" style="width:60%"></div>
+            <div class="bt-cur" style="left:41%"></div>
+          </div>
+          <div class="bt-marks"><span>0%</span><span style="color:var(--accent-ink)">today 41%</span><span style="color:#2f7048">target 60%</span><span>100%</span></div>
+        </div>
+        <p style="font-size:12.5px;color:var(--muted);margin-top:10px">Mode: <b style="color:var(--ink-2)">learning goal</b> until the activation driver is validated, then a committed target for Q3.</p>
+      </div>
+
+      <div class="card inset">
+        <div class="card-t">Suspected Job<span class="ct-line"></span></div>
+        <p style="font-size:13.5px;line-height:1.55">Stop being the data bottleneck in week one — get the team on a shared, trusted board fast.</p>
+        <div class="card-t" style="margin-top:18px">Non-goals<span class="ct-line"></span></div>
+        <ul style="list-style:none;font-size:13px;line-height:1.5">
+          <li style="padding:4px 0 4px 16px;position:relative;color:var(--ink-2)"><span style="position:absolute;left:0;color:var(--muted)">×</span>Single-player power-user features.</li>
+          <li style="padding:4px 0 4px 16px;position:relative;color:var(--ink-2)"><span style="position:absolute;left:0;color:var(--muted)">×</span>Self-serve billing changes.</li>
+          <li style="padding:4px 0 4px 16px;position:relative;color:var(--ink-2)"><span style="position:absolute;left:0;color:var(--muted)">×</span>Enterprise SSO (parked, real-but-later).</li>
+        </ul>
+        <div class="card-t" style="margin-top:18px">Constraints<span class="ct-line"></span></div>
+        <p style="font-size:13px;color:var(--ink-2);line-height:1.5">One delivery cycle. No new data connectors. Must be measurable at release.</p>
+      </div>
+    </div>
+  </div>`; },
+
+  /* ───── OPPORTUNITY ───── */
+  opportunity(){ return `<div class="wrap">
+    <div class="screen-head">
+      <div class="eyebrow">Loop 3 · The opportunity space</div>
+      <h1 class="h1">Organize struggle by timeline moment — crown one target</h1>
+      <p class="lede">Opportunities are customer-framed struggling moments, never solutions. They’re organized by where they sit in the buyer timeline, then prioritized by demand strength × ability to win.</p>
+    </div>
+
+    <div class="section-rule"><span class="sr-n">3.1</span><h2 class="serif">Opportunities by timeline moment</h2><span class="sr-line"></span></div>
+    <div class="grid g-3">
+      <div class="card">
+        <div class="card-t" style="color:var(--ev-suggestive)">Onboarding ★<span class="ct-line"></span></div>
+        <div style="font-weight:600;font-size:14px;margin-bottom:6px">Won’t invite a team to an empty board</div>
+        ${meter('suggestive')} <span style="font-size:11px;color:var(--muted);margin-left:6px">demand high · win high</span>
+        <div style="margin-top:12px;padding-top:12px;border-top:1px dashed var(--line)">
+          <div style="font-size:12.5px;color:var(--ink-2);margin-bottom:4px">↳ Empty-board anxiety</div>
+          <div style="font-size:12.5px;color:var(--ink-2)">↳ “Is the data even right?” doubt</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-t">Active Looking<span class="ct-line"></span></div>
+        <div style="font-weight:600;font-size:14px;margin-bottom:6px">Can’t tell trial dashboards apart</div>
+        ${meter('assumption')} <span style="font-size:11px;color:var(--muted);margin-left:6px">demand med · win med</span>
+        <div style="margin-top:12px;padding-top:12px;border-top:1px dashed var(--line);font-size:12.5px;color:var(--muted)">Parked — real but not addressable this cycle.</div>
+      </div>
+      <div class="card">
+        <div class="card-t">Ongoing Use<span class="ct-line"></span></div>
+        <div style="font-weight:600;font-size:14px;margin-bottom:6px">Dashboards go stale, nobody owns them</div>
+        ${meter('assumption')} <span style="font-size:11px;color:var(--muted);margin-left:6px">demand med · win low</span>
+        <div style="margin-top:12px;padding-top:12px;border-top:1px dashed var(--line);font-size:12.5px;color:var(--muted)">Split into sub-opportunities later.</div>
+      </div>
+    </div>
+
+    <div class="grid g-2" style="margin-top:24px">
+      <div class="card">
+        <div class="card-t">Five admission tests · adding an opportunity<span class="ct-line"></span></div>
+        <div class="check met"><span class="box">✓</span><span class="c-txt">Framed as a customer struggle, not a solution<span class="ct-meta">“Won’t invite to an empty board” — a moment, not a feature.</span></span></div>
+        <div class="check met"><span class="box">✓</span><span class="c-txt">Not a feature request in disguise<span class="ct-meta">Translated from “add sample data” → underlying anxiety.</span></span></div>
+        <div class="check met"><span class="box">✓</span><span class="c-txt">Grounded in real behavior / a real story<span class="ct-meta">Priya, Marcus, + 5 more interviews.</span></span></div>
+        <div class="check met"><span class="box">✓</span><span class="c-txt">Plausibly connects to the desired outcome<span class="ct-meta">Sits on the activation drop-off.</span></span></div>
+        <div class="check met"><span class="box">✓</span><span class="c-txt">Enough evidence to matter<span class="ct-meta">Recurs unprompted in 7 of 12 interviews.</span></span></div>
+      </div>
+      <div class="card">
+        <div class="card-t">Sibling comparison · demand strength × ability to win<span class="ct-line"></span></div>
+        <div class="matrix">
+          <span class="axis-x">Demand strength →</span>
+          <span class="axis-y">Ability to win →</span>
+          <span class="qline v"></span><span class="qline h"></span>
+          <div class="dot target" style="left:78%;bottom:74%"><span class="bub"></span><span class="dl">Empty board ★</span></div>
+          <div class="dot" style="left:52%;bottom:48%"><span class="bub"></span><span class="dl">Trial clarity</span></div>
+          <div class="dot" style="left:55%;bottom:24%"><span class="bub"></span><span class="dl">Stale dashboards</span></div>
+        </div>
+        <p style="font-size:12px;color:var(--muted);margin-top:10px">One target crowned: top-right quadrant — high demand, high ability to win.</p>
+      </div>
+    </div>
+  </div>`; },
+
+  /* ───── CAUSAL ───── */
+  causal(){ return `<div class="wrap">
+    <div class="screen-head">
+      <div class="eyebrow">Loop 4 · Inserted before any solution design</div>
+      <h1 class="h1">Map the causal system that must produce the progress</h1>
+      <p class="lede">Before committing to a solution we model how the system actually works: inputs → process → outputs → outcomes, separating what we control from the noise we must perform despite.</p>
+    </div>
+
+    <div class="card" style="margin-top:22px">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px">
+        <div class="card-t" style="margin:0">Causal System Map · first-session → invite<span class="ct-line"></span></div>
+        <button class="btn btn-ghost btn-sm" onclick="this.textContent = this.textContent.includes('Right')?'Design left → right':'Design right ← left'">Design right ← left</button>
+      </div>
+      <div class="flow">
+        <div class="flow-col"><div class="fc-h">Inputs <span class="arr">→</span></div>
+          <div class="flow-item">New workspace created</div>
+          <div class="flow-item">Sample dataset available</div>
+          <div class="flow-item">Admin identity / team size</div>
+        </div>
+        <div class="flow-col"><div class="fc-h">Process <span class="arr">→</span></div>
+          <div class="flow-item">First-screen renders</div>
+          <div class="flow-item">Auto-build a starter chart</div>
+          <div class="flow-item">Surface invite affordance</div>
+        </div>
+        <div class="flow-col"><div class="fc-h">Outputs <span class="arr">→</span></div>
+          <div class="flow-item lead">Populated workspace seen <span style="font-size:10px;color:#2f7048">· lead measure</span></div>
+          <div class="flow-item">Invite prompt shown</div>
+        </div>
+        <div class="flow-col"><div class="fc-h">Outcome</div>
+          <div class="flow-item">Team invited in session 1</div>
+          <div class="flow-item lead">30-day activation <span style="font-size:10px;color:#2f7048">· lag measure</span></div>
+        </div>
+      </div>
+      <div class="factors">
+        <div class="fcol control"><div class="fcol-h">▣ Control factors</div>
+          <div class="factor">First-screen content (empty vs seeded)</div>
+          <div class="factor">Time-to-first-chart</div>
+          <div class="factor">Invite affordance placement &amp; copy</div>
+        </div>
+        <div class="fcol noise"><div class="fcol-h">≈ Noise factors</div>
+          <div class="factor">Team size &amp; structure</div>
+          <div class="factor">Data source quality</div>
+          <div class="factor">Admin seniority / mandate</div>
+        </div>
+      </div>
+      <p class="princ" style="margin-top:16px;font-size:14px">Right-to-left: activation needs invites → invites need a non-empty workspace → that needs sample data plus a fast first chart. Build left-to-right.</p>
+    </div>
+  </div>`; },
+
+  /* ───── DELIVERY & IMPACT ───── */
+  delivery(){ return `<div class="wrap">
+    <div class="screen-head">
+      <div class="eyebrow">Loop 5 · Generate, test, decide, ship, measure</div>
+      <h1 class="h1">Delivery &amp; Impact</h1>
+      <p class="lede">Three materially different solution paths. Test the riskiest assumptions — not whole ideas — with thresholds locked before results. Ship the smallest coherent increment. Measure all four impact levels.</p>
+    </div>
+
+    <div class="section-rule"><span class="sr-n">5.1</span><h2 class="serif">Solution set · three paths</h2><span class="sr-line"></span></div>
+    <div class="grid g-3">
+      ${solCard('solA')} ${solCard('solB')} ${solCard('solC')}
+    </div>
+
+    <div class="section-rule"><span class="sr-n">5.2</span><h2 class="serif">Assumption map · importance × evidence</h2><span class="sr-line"></span></div>
+    <div class="grid g-2">
+      <div class="card">
+        <div class="amap">
+          <span class="quad-label ql-tl">High importance · weak evidence — test first</span>
+          <span class="quad-label ql-tr">High importance · strong evidence</span>
+          <span class="quad-label ql-bl">Low importance</span>
+          <span class="quad-label ql-br">Low importance · known</span>
+          <span class="qline v"></span><span class="qline h"></span>
+          <div class="adot" data-ev="suggestive" style="left:24%;top:22%" title="Admins invite after seeing seeded data (TC-07, in flight)"></div>
+          <div class="adot" data-ev="assumption" style="left:14%;top:34%" title="Concierge is wanted (untested)"></div>
+          <div class="adot" data-ev="killed" style="left:30%;top:14%" title="Checklist drives invites — KILLED (TC-04)"></div>
+          <div class="adot" data-ev="validated" style="left:74%;top:30%" title="Teams that activate retain (validated)"></div>
+          <div class="adot" data-ev="assumption" style="left:66%;top:70%" title="Sample data feels relevant (low importance)"></div>
+        </div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px">${pill('assumption')}${pill('suggestive')}${pill('validated')}${pill('killed')}</div>
+      </div>
+      <div class="card inset">
+        <div class="card-t">Toggle the belief through the evidence ladder<span class="ct-line"></span></div>
+        <p style="font-size:13px;color:var(--ink-2);line-height:1.5;margin-bottom:14px">Feel the mechanic. Move the load-bearing belief across the certainty chain and watch its meter fill — or strike through when a test kills it.</p>
+        <div class="ladder-ctrl" id="ladderCtrl">
+          <button class="lstep on" data-s="assumption" onclick="setLadder('assumption')">Assumption</button>
+          <button class="lstep" data-s="suggestive" onclick="setLadder('suggestive')">Suggestive</button>
+          <button class="lstep" data-s="validated" onclick="setLadder('validated')">Validated</button>
+          <button class="lstep" data-s="killed" onclick="setLadder('killed')">Killed</button>
+        </div>
+        <div style="margin-top:20px;display:flex;align-items:center;gap:16px">
+          <div id="ladderMeter">${meter('assumption','lg')}</div>
+          <div id="ladderPill">${pill('assumption')}</div>
+        </div>
+        <p id="ladderCopy" style="font-size:12.5px;color:var(--muted);margin-top:14px;line-height:1.5;min-height:34px">A belief with no weight yet. It costs nothing to hold and everything to ship on.</p>
+      </div>
+    </div>
+
+    <div class="section-rule"><span class="sr-n">5.3</span><h2 class="serif">Test cards</h2><span class="sr-line"></span><span class="mono" style="font-size:11px;color:var(--muted)">threshold locked before results</span></div>
+
+    <div class="testcard" id="tc07" style="margin-bottom:16px">
+      <div class="tc-head">${pill('suggestive')}<span class="tc-id">TC-07</span><span style="font-weight:600;font-size:13.5px">Fake-door “Invite your team” on the seeded workspace</span><span style="margin-left:auto" class="mono" style="font-size:11px;color:var(--muted)">IN FLIGHT</span></div>
+      <div class="tc-body">
+        <div class="tc-field"><div class="tcf-l">Assumption under test</div><div class="tcf-v">Admins will invite in session one if a populated workspace makes the value legible.</div></div>
+        <div class="tc-field"><div class="tcf-l">Decision it informs</div><div class="tcf-v">Whether to build the seeded-workspace increment, or pivot the solution category.</div></div>
+        <div class="tc-field"><div class="tcf-l">Audience &amp; moment</div><div class="tcf-v">Next 40 new admins, at the empty/seeded first screen.</div></div>
+        <div class="tc-field"><div class="tcf-l">Observed behavior</div><div class="tcf-v">Click “Invite your team,” then complete ≥1 real invite.</div></div>
+        <div class="threshold">
+          <div class="th-l">Success threshold — locked
+            <span class="lock"><svg width="13" height="13" viewBox="0 0 16 16" fill="none"><rect x="3" y="7" width="10" height="7" rx="1.5" stroke="#c9a24f" stroke-width="1.3"/><path d="M5 7V5a3 3 0 016 0v2" stroke="#c9a24f" stroke-width="1.3"/></svg></span>
+          </div>
+          <div class="th-v">≥ 45% of admins complete an invite within the first session</div>
+          <div class="th-result"><span class="res-tag" style="background:#2a2722;color:#c9a24f">awaiting · 23/40 logged</span><span style="color:#bdb6a8">Currently 52% — trending above bar, not yet powered.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testcard">
+      <div class="tc-head">${pill('killed')}<span class="tc-id">TC-04</span><span style="font-weight:600;font-size:13.5px">Gamified setup checklist drives invites</span><span style="margin-left:auto" class="mono" style="font-size:11px;color:var(--muted)">CLOSED · FAILED → A WIN</span></div>
+      <div class="tc-body">
+        <div class="tc-field"><div class="tcf-l">Assumption under test</div><div class="tcf-v">A progress-bar checklist creates completion pressure that drives invites.</div></div>
+        <div class="tc-field"><div class="tcf-l">Decision it informed</div><div class="tcf-v">Whether the struggle is motivation (checklist) or legibility (empty board).</div></div>
+        <div class="tc-field"><div class="tcf-l">Audience &amp; moment</div><div class="tcf-v">38 new admins, A/B against control.</div></div>
+        <div class="tc-field"><div class="tcf-l">Observed behavior</div><div class="tcf-v">Invites sent within session one.</div></div>
+        <div class="threshold">
+          <div class="th-l">Success threshold — locked<span class="lock"><svg width="13" height="13" viewBox="0 0 16 16" fill="none"><rect x="3" y="7" width="10" height="7" rx="1.5" stroke="#c9a24f" stroke-width="1.3"/><path d="M5 7V5a3 3 0 016 0v2" stroke="#c9a24f" stroke-width="1.3"/></svg></span></div>
+          <div class="th-v">≥ 40% invite rate vs control</div>
+          <div class="th-result"><span class="res-tag res-fail">RESULT · 24%</span><span style="color:#bdb6a8">Checklist completion rose 2×, invites did <b style="color:#f0a58e">not</b> move. Belief killed — the struggle isn’t motivation, it’s the blank board. We stopped building it. <b style="color:#9fd9a3">A cheap save.</b></span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-rule"><span class="sr-n">5.4</span><h2 class="serif">Increment Scope Brief</h2><span class="sr-line"></span></div>
+    <div class="card">
+      <div class="scope-cols">
+        <div class="scope-col inc"><h4>Included — the kick-ass half</h4>
+          <ul><li>Sample data seeded on workspace creation</li><li>One auto-built starter chart</li><li>In-context invite prompt the moment the chart renders</li><li>Instrumented lead measure: “populated view seen”</li></ul>
+        </div>
+        <div class="scope-col exc"><h4>Excluded — on purpose</h4>
+          <ul><li>Concierge first-dashboard service</li><li>Template gallery</li><li>Multi-source seeding</li><li>Non-admin onboarding flows</li></ul>
+        </div>
+      </div>
+      <div class="kickass">
+        <div class="ka-l">Tradeoff · better + faster over cheaper</div>
+        <div class="ka-v">“A kick-ass half, not a half-assed whole — the smallest thing that can move the lead measure and be read in one cycle.”</div>
+      </div>
+    </div>
+
+    <div class="section-rule"><span class="sr-n">5.5</span><h2 class="serif">Impact ladder · four levels</h2><span class="sr-line"></span><span class="mono" style="font-size:11px;color:var(--muted)">expected vs actual</span></div>
+    <div class="card">
+      <div class="iladder">
+        <div class="irow"><div class="i-rung">L1</div><div class="i-body"><div class="i-name">Assumption behavior</div><div class="i-sub">Invite-on-seeded-workspace rate</div></div><div style="text-align:right"><div class="i-val">52%</div><div class="i-delta iup">▲ vs 45% bar</div></div></div>
+        <div class="iconn"></div>
+        <div class="irow"><div class="i-rung">L2</div><div class="i-body"><div class="i-name">Opportunity relief</div><div class="i-sub">Empty-board stalls at onboarding</div></div><div style="text-align:right"><div class="i-val">−38%</div><div class="i-delta iup">▲ fewer stalls</div></div></div>
+        <div class="iconn"></div>
+        <div class="irow"><div class="i-rung">L3</div><div class="i-body"><div class="i-name">Product outcome</div><div class="i-sub">30-day team activation</div></div><div style="text-align:right"><div class="i-val">41 → 49%</div><div class="i-delta iup">▲ toward 60%</div></div></div>
+        <div class="iconn"></div>
+        <div class="irow"><div class="i-rung">L4</div><div class="i-body"><div class="i-name">Business outcome</div><div class="i-sub">Net revenue retention</div></div><div style="text-align:right"><div class="i-val">pending</div><div class="i-delta iflat">— next quarter</div></div></div>
+      </div>
+      <p style="font-size:12px;color:var(--muted);margin-top:14px">Projection from TC-07 partial data. Read at cycle close; if L3 doesn’t move with L2, we revisit the opportunity↔outcome link.</p>
+    </div>
+  </div>`; },
+
+  /* ───── DECISION LOG ───── */
+  decisions(){ return `<div class="wrap">
+    <div class="screen-head">
+      <div class="eyebrow">Reasoning · the audit trail of certainty</div>
+      <h1 class="h1">Decision Log</h1>
+      <p class="lede">Every decision, its rationale, the evidence behind it, and the trigger that would make us revisit. Beliefs that died are kept — they’re the cheapest progress we made.</p>
+    </div>
+    <div style="margin-top:26px" class="dlog">
+      <div class="dentry"><div class="d-when">2026-06-09 · Wk 24</div><div class="d-what">Crowned “empty-workspace” as the single target opportunity</div><div class="d-why">Top-right of the demand × ability matrix; recurs unprompted in 7/12 interviews and sits exactly on the activation drop-off.</div><div class="d-trig">Revisit if: TC-07 fails to clear bar, or activation moves without it.</div></div>
+      <div class="dentry killed"><div class="d-when">2026-05-28 · Wk 22</div><div class="d-what">Killed the gamified-checklist solution</div><div class="d-why">TC-04: checklist completion doubled but invites rose only to 24% (bar 40%). The struggle is legibility, not motivation. Stopped building it before a line of production code.</div><div class="d-trig">Revisit if: a future segment shows motivation-driven drop-off.</div></div>
+      <div class="dentry"><div class="d-when">2026-05-20 · Wk 21</div><div class="d-what">Set product outcome at 41% → 60% activation</div><div class="d-why">Negotiated with leadership as the controllable behavior; rejected “invites sent” as a gameable traction metric.</div><div class="d-trig">Revisit at: Q2 outcome negotiation (18 days).</div></div>
+      <div class="dentry"><div class="d-when">2026-05-12 · Wk 20</div><div class="d-what">Inserted the causal map before solution design</div><div class="d-why">Right-to-left analysis showed invites depend on a populated workspace — reframed the whole solution set around legibility.</div><div class="d-trig">Revisit if: noise factors (team size) dominate the signal.</div></div>
+    </div>
+  </div>`; },
+};
+
+function solCard(key){
+  const n = NODES[key];
+  return `<div class="card" style="cursor:pointer" onclick="openNode('${key}')">
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px"><span class="sol-type">${n.solType}</span><span style="margin-left:auto">${meter(n.ev)}</span></div>
+    <div style="font-weight:600;font-size:15px;letter-spacing:-.01em">${n.h}</div>
+    <div style="font-size:12.5px;color:var(--muted);margin-top:6px;line-height:1.5">${n.d}</div>
+    <div style="margin-top:12px">${pill(n.ev)}</div>
+  </div>`;
+}
+
+/* ── interactive evidence ladder ── */
+const LADDER_COPY = {
+  assumption:'A belief with no weight yet. It costs nothing to hold and everything to ship on.',
+  suggestive:'Some signal has landed — 6 of 9 admins invited after seeing seeded data. Promising, not yet load-bearing. Don’t bet the increment on it.',
+  validated:'Earned. Behavioral evidence at scale clears the locked bar. Now it can carry weight — build on it.',
+  killed:'Disproven by a test. A win: we learned it cheaply and freed the increment from a wrong bet.',
+};
+function setLadder(state){
+  document.querySelectorAll('#ladderCtrl .lstep').forEach(b=>b.classList.toggle('on', b.dataset.s===state));
+  document.getElementById('ladderMeter').innerHTML = meter(state,'lg');
+  document.getElementById('ladderPill').innerHTML = pill(state);
+  document.getElementById('ladderCopy').textContent = LADDER_COPY[state];
+}
+</script>
+<script>
+/* ════════════════════════════ COMMAND PALETTE ════════════════════════════ */
+const CMDK = [
+  {g:'Loops',items:[
+    {ico:'◇',t:'Go to Tree (home)',sub:'home',act:()=>goLoop('tree')},
+    {ico:'1',t:'Progress Loop',sub:'loop 1',act:()=>goLoop('progress')},
+    {ico:'2',t:'Outcome Loop',sub:'loop 2',act:()=>goLoop('outcome')},
+    {ico:'3',t:'Opportunity Loop',sub:'loop 3',act:()=>goLoop('opportunity')},
+    {ico:'4',t:'Causal Learning Loop',sub:'loop 4',act:()=>goLoop('causal')},
+    {ico:'5',t:'Delivery & Impact Loop',sub:'loop 5',act:()=>goLoop('delivery')},
+  ]},
+  {g:'Beliefs & actions',items:[
+    {ico:'⚠',t:'Open weakest belief',sub:'NBA',act:()=>{goLoop('tree');setTimeout(()=>openNode('belief'),200)}},
+    {ico:'▸',t:'Open test card TC-07',sub:'in flight',act:openNBATest},
+    {ico:'★',t:'View target opportunity',sub:'crowned',act:()=>{goLoop('tree');setTimeout(()=>openNode('oppTarget'),200)}},
+    {ico:'≡',t:'Decision Log',sub:'reasoning',act:()=>goLoop('decisions')},
+    {ico:'▶',t:'Show the reasoning (walkthrough)',sub:'stakeholder',act:openWalk},
+  ]},
+];
+let cmdkFlat=[], cmdkSel=0;
+function openCmdk(){ document.getElementById('cmdkScrim').classList.add('open'); const i=document.getElementById('cmdkInput'); i.value=''; renderCmdk(''); setTimeout(()=>i.focus(),30); }
+function closeCmdk(){ document.getElementById('cmdkScrim').classList.remove('open'); }
+function renderCmdk(q){
+  q=q.toLowerCase().trim(); cmdkFlat=[]; let html='';
+  CMDK.forEach(grp=>{
+    const matches = grp.items.filter(it=> it.t.toLowerCase().includes(q)||it.sub.toLowerCase().includes(q));
+    if(!matches.length) return;
+    html += `<div class="cmdk-group">${grp.g}</div>`;
+    matches.forEach(it=>{ const idx=cmdkFlat.length; cmdkFlat.push(it);
+      html += `<div class="cmdk-item" data-i="${idx}" onmouseenter="cmdkSel=${idx};cmdkPaint()" onclick="cmdkRun(${idx})"><span class="ci-ico">${it.ico}</span>${it.t}<span class="ci-sub">${it.sub}</span></div>`;
+    });
+  });
+  if(!cmdkFlat.length) html=`<div style="padding:24px;text-align:center;color:var(--muted);font-size:13px">No matches.</div>`;
+  document.getElementById('cmdkList').innerHTML=html; cmdkSel=0; cmdkPaint();
+}
+function cmdkPaint(){ document.querySelectorAll('.cmdk-item').forEach(el=>el.classList.toggle('sel', +el.dataset.i===cmdkSel)); }
+function cmdkRun(i){ const it=cmdkFlat[i]; closeCmdk(); if(it) it.act(); }
+function cmdkKey(e){
+  if(e.key==='ArrowDown'){e.preventDefault();cmdkSel=Math.min(cmdkSel+1,cmdkFlat.length-1);cmdkPaint();scrollSel();}
+  else if(e.key==='ArrowUp'){e.preventDefault();cmdkSel=Math.max(cmdkSel-1,0);cmdkPaint();scrollSel();}
+  else if(e.key==='Enter'){e.preventDefault();cmdkRun(cmdkSel);}
+  else if(e.key==='Escape'){closeCmdk();}
+}
+function scrollSel(){ const el=document.querySelector(`.cmdk-item[data-i="${cmdkSel}"]`); if(el)el.scrollIntoView({block:'nearest'}); }
+
+/* ════════════════════════════ STAKEHOLDER WALKTHROUGH ════════════════════════════ */
+const WALK = [
+  {step:'01 · The outcome',h:'We are buying one number',body:'This team owns a single product outcome: lift 30-day team activation from <b>41% to 60%</b>. Not a feature list — a controllable behavior, negotiated with leadership. Everything below earns its place by moving this.',ev:'validated',evlabel:'Outcome ratified'},
+  {step:'02 · The progress',h:'People hire us to stop being the bottleneck',body:'Across twelve interviews of real rollouts, the Job is consistent: <b>get the team onto a shared, trusted board in week one</b> so the admin stops fielding data questions and looks credible to their boss.',ev:'validated',evlabel:'9 of 12 interviews'},
+  {step:'03 · The struggle',h:'They won’t invite a team to a blank board',body:'The decisive moment is the first session. Push and pull are strong, but <b>anxiety about an empty workspace</b> — and the trusty old spreadsheet — stall the invite. That stall is exactly where activation leaks.',ev:'suggestive',evlabel:'7 of 12, unprompted'},
+  {step:'04 · The dead end we avoided',h:'We killed a wrong answer cheaply',body:'We suspected motivation was the problem and tested a gamified checklist. Completion doubled — but <b>invites didn’t move</b> (24% vs a 40% bar). The belief died for the price of a fake door. The struggle is legibility, not motivation.',ev:'killed',evlabel:'TC-04 · a cheap save'},
+  {step:'05 · The bet',h:'Make a populated workspace legible',body:'The increment is the kick-ass half of one path: <b>seed the workspace with sample data and one real chart, then prompt the invite the moment value is on screen.</b> Concierge, templates, multi-source — all deliberately excluded.',ev:'suggestive',evlabel:'TC-07 in flight · 52%'},
+  {step:'06 · The proof',h:'And we’ll know, at four levels',body:'Instrumented before launch: assumption behavior → opportunity relief → product outcome → business outcome. Early read shows activation moving <b>41% → 49%</b>, on the way to 60%. If a level doesn’t move, the tree tells us exactly which link to revisit.',ev:'validated',evlabel:'Impact ladder wired'},
+];
+let walkI=0;
+function openWalk(){ walkI=0; buildWalk(); document.getElementById('walkScrim').classList.add('open'); closeCmdk(); }
+function closeWalk(){ document.getElementById('walkScrim').classList.remove('open'); }
+function buildWalk(){
+  const stage=document.getElementById('walkStage'), prog=document.getElementById('walkProg');
+  stage.innerHTML = WALK.map((w,i)=>`
+    <div class="walk-page ${i===0?'active':''}" data-p="${i}">
+      <div class="walk-card">
+        <div class="wc-step">${w.step}</div>
+        <div class="wc-h serif">${w.h}</div>
+        <div class="wc-body">${w.body}</div>
+        <div class="walk-evbar">${meter(w.ev,'lg')} ${pill(w.ev)} <span style="font-family:var(--font-mono);font-size:12px;color:var(--muted)">${w.evlabel}</span></div>
+      </div>
+    </div>`).join('');
+  prog.innerHTML = WALK.map((_,i)=>`<div class="wp-dot ${i===0?'on':''}" data-d="${i}" onclick="walkSet(${i})"></div>`).join('');
+  paintWalk();
+}
+function walkGo(dir){ walkSet(Math.min(Math.max(walkI+dir,0),WALK.length-1)); }
+function walkSet(i){ walkI=i; paintWalk(); }
+function paintWalk(){
+  document.querySelectorAll('.walk-page').forEach(p=>p.classList.toggle('active', +p.dataset.p===walkI));
+  document.querySelectorAll('.wp-dot').forEach(d=>d.classList.toggle('on', +d.dataset.d<=walkI));
+  document.getElementById('walkCount').textContent = `${walkI+1} / ${WALK.length}`;
+  document.getElementById('walkPrev').style.visibility = walkI===0?'hidden':'visible';
+  const next=document.getElementById('walkNext');
+  next.textContent = walkI===WALK.length-1?'Close ✓':'Next →';
+  next.onclick = walkI===WALK.length-1? closeWalk : ()=>walkGo(1);
+}
+
+/* ════════════════════════════ GLOBAL KEYS ════════════════════════════ */
+document.addEventListener('keydown',e=>{
+  if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==='k'){ e.preventDefault(); document.getElementById('cmdkScrim').classList.contains('open')?closeCmdk():openCmdk(); }
+  else if(e.key==='Escape'){ closePanel(); closeCmdk(); closeWalk(); }
+  else if(document.getElementById('walkScrim').classList.contains('open')){
+    if(e.key==='ArrowRight') walkGo(1); else if(e.key==='ArrowLeft') walkGo(-1);
+  }
+});
+
+/* ════════════════════════════ INIT ════════════════════════════ */
+renderTree();
+</script>
+</body>
+</html>
