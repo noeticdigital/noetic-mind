@@ -888,6 +888,89 @@ html.dark .guide-scrim{background:radial-gradient(circle at var(--gx,50%) var(--
 html.dark .tour-btn:hover{color:#0c0f15}
 .tour-btn svg{flex:none}
 
+/* ───────────────────────────── REASONING — SHAREABLE VISUAL DECK (Feature C) ───────────────────────────── */
+/* bespoke per-page visuals, sat under the headline/body, above the evidence bar */
+.wc-visual{margin:24px auto 0;width:max-content;max-width:100%}
+.wc-body+.wc-visual{margin-top:22px}
+
+/* baseline → target bar (step 01) */
+.wv-bt{width:440px;max-width:86vw}
+.wv-bt-track{height:38px;border-radius:10px;background:var(--surface-2);border:1px solid var(--line);position:relative;overflow:hidden}
+.wv-bt-fill{position:absolute;left:0;top:0;bottom:0;width:34%;
+  background:linear-gradient(90deg,var(--green-fill-1),var(--green-fill-2));border-right:2px solid var(--ev-validated);
+  animation:wvGrow 1s var(--ease) both}
+.wv-bt-target{position:absolute;top:0;bottom:0;left:55%;border-right:2px dashed var(--accent)}
+@keyframes wvGrow{from{width:0}}
+.wv-bt-track .wv-lab{position:absolute;top:50%;transform:translateY(-50%);font-family:var(--font-mono);font-size:12px;font-weight:600}
+.wv-bt-track .wv-lab.cur{left:calc(34% + 9px);color:var(--accent-ink)}
+.wv-bt-track .wv-lab.tgt{left:calc(55% + 9px);color:var(--green-ink)}
+.wv-bt-marks{display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:11px;color:var(--muted);margin-top:8px}
+
+/* mini demand × ability matrix with crowned target dot (step 03) */
+.wv-matrix{width:300px;height:200px;max-width:86vw;position:relative;border:1px solid var(--line);border-radius:var(--r-md);
+  background:linear-gradient(180deg,var(--grad-hi),var(--grad-lo));overflow:hidden}
+.wv-matrix .wm-line{position:absolute;background:none}
+.wv-matrix .wm-line.v{left:50%;top:0;bottom:0;border-left:1px dashed var(--line-strong)}
+.wv-matrix .wm-line.h{top:50%;left:0;right:0;border-top:1px dashed var(--line-strong)}
+.wv-matrix .wm-ax{position:absolute;font-size:9.5px;color:var(--muted);font-weight:600;letter-spacing:.03em}
+.wv-matrix .wm-ax.x{bottom:6px;left:50%;transform:translateX(-50%)}
+.wv-matrix .wm-ax.y{top:50%;left:6px;transform:translateY(-50%) rotate(-90deg);transform-origin:left}
+.wv-matrix .wm-dot{position:absolute;width:11px;height:11px;border-radius:50%;background:var(--ink-2);
+  border:2px solid var(--surface);box-shadow:var(--shadow-sm);transform:translate(-50%,50%)}
+.wv-matrix .wm-dot.tgt{width:16px;height:16px;background:var(--accent);box-shadow:0 0 0 5px var(--accent-soft)}
+.wv-matrix .wm-dot .wm-dl{position:absolute;left:50%;bottom:140%;transform:translateX(-50%);white-space:nowrap;
+  font-size:10px;font-weight:600;color:var(--accent-ink);background:var(--label-bg);padding:1px 6px;border-radius:5px}
+
+/* two killed beliefs as struck meters (step 04) */
+.wv-kills{display:flex;gap:16px;flex-wrap:wrap;justify-content:center}
+.wv-kill{display:flex;flex-direction:column;align-items:center;gap:7px;background:var(--surface);border:1px solid var(--line);
+  border-radius:var(--r-md);padding:13px 16px;min-width:180px;box-shadow:var(--shadow-sm)}
+.wv-kill .wk-id{font-family:var(--font-mono);font-size:11px;color:var(--killed-ink);font-weight:600}
+.wv-kill .wk-note{font-size:11px;color:var(--muted);text-align:center;line-height:1.4}
+.wv-kill .wk-note b{color:var(--ev-killed);text-decoration:line-through;text-decoration-color:var(--ev-killed)}
+
+/* four-level impact ladder, compact (step 06) */
+.wv-ladder{display:flex;flex-direction:column;gap:5px;width:400px;max-width:86vw}
+.wv-lrow{display:flex;align-items:center;gap:12px;padding:9px 13px;border-radius:9px;background:var(--surface);
+  border:1px solid var(--line);text-align:left}
+.wv-lrow .wl-rung{font-family:var(--font-mono);font-size:10px;color:var(--muted);width:20px;flex:none}
+.wv-lrow .wl-name{font-size:12px;font-weight:600;flex:1}
+.wv-lrow .wl-val{font-family:var(--font-mono);font-size:12px;font-weight:500}
+.wv-lrow .wl-val.up{color:var(--green-ink)}.wv-lrow .wl-val.flat{color:var(--muted)}
+.wv-lconn{height:8px;width:2px;background:var(--line-strong);margin-left:23px}
+
+/* certainty-progression strip — meters rising across the arc (steps 02,05) */
+.wv-prog{display:flex;align-items:flex-end;gap:9px;width:max-content;max-width:90vw;flex-wrap:wrap;justify-content:center}
+.wv-pstep{display:flex;flex-direction:column;align-items:center;gap:6px}
+.wv-pstep .wp-l{font-size:9px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.wv-pstep.now .wp-l{color:var(--accent-ink)}
+.wv-parrow{color:var(--line-strong);font-size:13px;align-self:center;margin-bottom:10px}
+
+/* SHARE affordance in the walk top bar */
+.walk-top .wt-share{margin-left:auto;display:flex;align-items:center;gap:9px}
+.share-btn{display:inline-flex;align-items:center;gap:7px;height:32px;padding:0 13px;border-radius:8px;
+  border:1px solid var(--line-strong);background:var(--surface);color:var(--ink-2);font-size:12.5px;font-weight:600;
+  transition:.14s var(--ease)}
+.share-btn:hover{border-color:var(--accent);color:var(--accent-ink)}
+.share-btn.copied{border-color:var(--ev-validated);color:var(--green-ink);background:var(--ev-validated-bg)}
+.share-btn svg{flex:none}
+
+/* VIEW-ONLY shared mode — clean, minimal-chrome presentation */
+html.view-only .rail,html.view-only .topbar,html.view-only .cadence,
+html.view-only .chat-fab,html.view-only .chat-panel,html.view-only .guide-nudge{display:none!important}
+html.view-only .app{grid-template-columns:1fr}
+html.view-only .main{height:100vh}
+html.view-only .view{display:none}
+html.view-only body{overflow:hidden}
+.walk-banner{display:none}
+html.view-only .walk-banner{display:flex;align-items:center;gap:10px;justify-content:center;
+  height:34px;flex:none;font-size:11.5px;color:var(--accent-ink);background:var(--accent-soft);
+  border-bottom:1px solid var(--line);letter-spacing:.01em}
+.walk-banner .vb-brand{display:inline-flex;align-items:center;gap:6px;font-weight:600}
+.walk-banner .vb-dot{width:5px;height:5px;border-radius:50%;background:var(--accent);flex:none}
+/* in view-only, the walk is the whole app — keep its own close button hidden */
+html.view-only #walkScrim .wt-close-realapp{display:none}
+
 /* responsive degrade to 1024 */
 @media(max-width:1180px){
   .app{grid-template-columns:200px 1fr}
@@ -1089,13 +1172,23 @@ var VIEW_ONLY = (function(){try{return /(?:^|[?&])share=reasoning(?:&|$)/.test(l
 
 <!-- ───────── STAKEHOLDER WALKTHROUGH ───────── -->
 <div class="walk-scrim" id="walkScrim">
+  <div class="walk-banner" id="walkBanner">
+    <span class="vb-brand"><span class="vb-dot"></span>Noetic</span>
+    <span style="color:var(--muted)">View-only · shared by the Ledgerline team · made with Noetic</span>
+  </div>
   <div class="walk-top">
     <div>
       <div class="wt-title serif">The reasoning — outcome to increment</div>
       <div class="wt-sub">Read-only narrative · the artifact you'd show a CEO</div>
     </div>
     <div class="walk-prog" id="walkProg"></div>
-    <button class="btn btn-ghost btn-sm" onclick="closeWalk()">Close · Esc</button>
+    <div class="wt-share">
+      <button class="share-btn" id="walkShareBtn" onclick="copyShareLink(this)">
+        <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M5.5 9.5l5-3M5.5 6.5l5 3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><circle cx="12" cy="4.5" r="2" stroke="currentColor" stroke-width="1.3"/><circle cx="4" cy="8" r="2" stroke="currentColor" stroke-width="1.3"/><circle cx="12" cy="11.5" r="2" stroke="currentColor" stroke-width="1.3"/></svg>
+        Copy share link
+      </button>
+      <button class="btn btn-ghost btn-sm wt-close-realapp" onclick="closeWalk()">Close · Esc</button>
+    </div>
   </div>
   <div class="walk-stage" id="walkStage"></div>
   <div class="walk-bottom">
@@ -2081,13 +2174,53 @@ function scrollSel(){ const el=document.querySelector(`.cmdk-item[data-i="${cmdk
 
 /* ════════════════════════════ STAKEHOLDER WALKTHROUGH ════════════════════════════ */
 const WALK = [
-  {step:'01 · The outcome',h:'We are buying one number',body:'This team owns a single product outcome: lift 7-day bank-feed activation — connect a feed AND complete a first reconciliation — from <b>34% to 55%</b>. Not a feature list — a controllable behavior, negotiated with leadership, serving lower 90-day churn.',ev:'validated',evlabel:'Outcome ratified'},
-  {step:'02 · The progress',h:'People hire us to escape spreadsheet chaos',body:'Across fourteen interviews of real past switches, the Job is consistent: when a deadline exposes the mess, owners want <b>trusted, always-current books</b> — money questions answered in minutes, credibility with their accountant and investors.',ev:'validated',evlabel:'11 of 14 interviews'},
-  {step:'03 · The struggle',h:'They won’t hand a startup their bank account',body:'The decisive moment is onboarding. Push and pull are strong, but at “Connect your bank” the owner imagines handing over <b>their business-account credentials</b> — and stalls. That stall is exactly where activation leaks.',ev:'suggestive',evlabel:'8 of 14, unprompted'},
-  {step:'04 · The dead ends we avoided',h:'We killed two wrong answers cheaply',body:'A SOC 2 badge at every placement moved <b>nothing</b> (TC-03). Deferring the scary step into a sample-data sandbox converted <b>9% vs a 30% bar</b> (TC-05) — exploring fake books felt pointless. Both beliefs died for the price of a fake door. Safety must be legible inside the flow.',ev:'killed',evlabel:'TC-03 & TC-05 · cheap saves'},
-  {step:'05 · The bet',h:'Make safety legible at the moment of doubt',body:'The increment is the kick-ass half of one path: <b>read-only framing, granular permissions, “disconnect anytime,” and the security page inline at the credential step</b> — the primary-account moment only. White-glove, sandbox, historical import — all deliberately excluded.',ev:'suggestive',evlabel:'TC-08 in flight · 57%'},
-  {step:'06 · The proof',h:'And we’ll know, at four levels',body:'Instrumented before launch: assumption behavior → opportunity relief → product outcome → business outcome. Early read projects activation moving <b>34% → 41%</b>, on the way to 55%. If a level doesn’t move, the tree tells us exactly which link to revisit.',ev:'validated',evlabel:'Impact ladder wired'},
+  {step:'01 · The outcome',h:'We are buying one number',body:'This team owns a single product outcome: lift 7-day bank-feed activation — connect a feed AND complete a first reconciliation — from <b>34% to 55%</b>. Not a feature list — a controllable behavior, negotiated with leadership, serving lower 90-day churn.',ev:'validated',evlabel:'Outcome ratified',
+    vis:()=>`<div class="wc-visual"><div class="wv-bt">
+      <div class="wv-bt-track">
+        <div class="wv-bt-fill"></div>
+        <div class="wv-bt-target"></div>
+        <span class="wv-lab cur">34%</span><span class="wv-lab tgt">55%</span>
+      </div>
+      <div class="wv-bt-marks"><span>baseline today</span><span>committed target · Q3</span></div>
+    </div></div>`},
+  {step:'02 · The progress',h:'People hire us to escape spreadsheet chaos',body:'Across fourteen interviews of real past switches, the Job is consistent: when a deadline exposes the mess, owners want <b>trusted, always-current books</b> — money questions answered in minutes, credibility with their accountant and investors.',ev:'validated',evlabel:'11 of 14 interviews',
+    vis:()=>walkProgStrip(1)},
+  {step:'03 · The struggle',h:'They won’t hand a startup their bank account',body:'The decisive moment is onboarding. Push and pull are strong, but at “Connect your bank” the owner imagines handing over <b>their business-account credentials</b> — and stalls. That stall is exactly where activation leaks.',ev:'suggestive',evlabel:'8 of 14, unprompted',
+    vis:()=>`<div class="wc-visual"><div class="wv-matrix">
+      <span class="wm-line v"></span><span class="wm-line h"></span>
+      <span class="wm-ax x">Demand strength →</span><span class="wm-ax y">Ability to win →</span>
+      <div class="wm-dot tgt" style="left:78%;bottom:74%"><span class="wm-dl">Connection trust ★</span></div>
+      <div class="wm-dot" style="left:52%;bottom:48%"></div>
+      <div class="wm-dot" style="left:55%;bottom:24%"></div>
+    </div></div>`},
+  {step:'04 · The dead ends we avoided',h:'We killed two wrong answers cheaply',body:'A SOC 2 badge at every placement moved <b>nothing</b> (TC-03). Deferring the scary step into a sample-data sandbox converted <b>9% vs a 30% bar</b> (TC-05) — exploring fake books felt pointless. Both beliefs died for the price of a fake door. Safety must be legible inside the flow.',ev:'killed',evlabel:'TC-03 & TC-05 · cheap saves',
+    vis:()=>`<div class="wc-visual"><div class="wv-kills">
+      <div class="wv-kill"><span class="wk-id">TC-03 · killed</span>${meter('killed','lg')}<span class="wk-note">SOC-2 badge alone<br><b>+1pt vs +8pt bar</b></span></div>
+      <div class="wv-kill"><span class="wk-id">TC-05 · killed</span>${meter('killed','lg')}<span class="wk-note">Sandbox-first<br><b>9% vs 30% bar</b></span></div>
+    </div></div>`},
+  {step:'05 · The bet',h:'Make safety legible at the moment of doubt',body:'The increment is the kick-ass half of one path: <b>read-only framing, granular permissions, “disconnect anytime,” and the security page inline at the credential step</b> — the primary-account moment only. White-glove, sandbox, historical import — all deliberately excluded.',ev:'suggestive',evlabel:'TC-08 in flight · 57%',
+    vis:()=>walkProgStrip(4)},
+  {step:'06 · The proof',h:'And we’ll know, at four levels',body:'Instrumented before launch: assumption behavior → opportunity relief → product outcome → business outcome. Early read projects activation moving <b>34% → 41%</b>, on the way to 55%. If a level doesn’t move, the tree tells us exactly which link to revisit.',ev:'validated',evlabel:'Impact ladder wired',
+    vis:()=>`<div class="wc-visual"><div class="wv-ladder">
+      <div class="wv-lrow"><span class="wl-rung">L1</span><span class="wl-name">Assumption behavior · primary connection</span><span class="wl-val up">57%</span></div>
+      <div class="wv-lconn"></div>
+      <div class="wv-lrow"><span class="wl-rung">L2</span><span class="wl-name">Opportunity relief · fewer trust stalls</span><span class="wl-val up">−34%</span></div>
+      <div class="wv-lconn"></div>
+      <div class="wv-lrow"><span class="wl-rung">L3</span><span class="wl-name">Product outcome · 7-day activation</span><span class="wl-val up">34→41%</span></div>
+      <div class="wv-lconn"></div>
+      <div class="wv-lrow"><span class="wl-rung">L4</span><span class="wl-name">Business outcome · 90-day churn</span><span class="wl-val flat">pending</span></div>
+    </div></div>`},
 ];
+/* certainty-progression strip — the four-meter arc, with the current step emphasised */
+function walkProgStrip(now){
+  const arc=[['Outcome','validated'],['Job','validated'],['Target','suggestive'],['Bet','suggestive']];
+  let h='<div class="wc-visual"><div class="wv-prog">';
+  arc.forEach(([lab,ev],i)=>{
+    if(i) h+='<span class="wv-parrow">›</span>';
+    h+=`<div class="wv-pstep ${i===now-1||(now>=arc.length&&i===arc.length-1)?'now':''}">${meter(ev,'lg')}<span class="wp-l">${lab}</span></div>`;
+  });
+  return h+'</div></div>';
+}
 let walkI=0;
 function openWalk(){ walkI=0; buildWalk(); document.getElementById('walkScrim').classList.add('open'); closeCmdk(); }
 function closeWalk(){ document.getElementById('walkScrim').classList.remove('open'); }
@@ -2099,6 +2232,7 @@ function buildWalk(){
         <div class="wc-step">${w.step}</div>
         <div class="wc-h serif">${w.h}</div>
         <div class="wc-body">${w.body}</div>
+        ${w.vis?w.vis():''}
         <div class="walk-evbar">${meter(w.ev,'lg')} ${pill(w.ev)} <span style="font-family:var(--font-mono);font-size:12px;color:var(--muted)">${w.evlabel}</span></div>
       </div>
     </div>`).join('');
@@ -2107,6 +2241,20 @@ function buildWalk(){
 }
 function walkGo(dir){ walkSet(Math.min(Math.max(walkI+dir,0),WALK.length-1)); }
 function walkSet(i){ walkI=i; paintWalk(); }
+/* Share affordance — copy a view-only deep link, confirm inline */
+function copyShareLink(btn){
+  const url = location.origin + location.pathname + '?share=reasoning';
+  const done=()=>{ const orig=btn.innerHTML; btn.classList.add('copied');
+    btn.innerHTML=`<svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3.5 8.5l3 3 6-7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Link copied ✓`;
+    setTimeout(()=>{ btn.classList.remove('copied'); btn.innerHTML=orig; },2000); };
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(url).then(done).catch(()=>fallbackCopy(url,done));
+  } else fallbackCopy(url,done);
+}
+function fallbackCopy(text,cb){
+  try{ const ta=document.createElement('textarea'); ta.value=text; ta.style.position='fixed'; ta.style.opacity='0';
+    document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta); cb(); }catch(e){ cb(); }
+}
 function paintWalk(){
   document.querySelectorAll('.walk-page').forEach(p=>p.classList.toggle('active', +p.dataset.p===walkI));
   document.querySelectorAll('.wp-dot').forEach(d=>d.classList.toggle('on', +d.dataset.d<=walkI));
@@ -2426,6 +2574,15 @@ document.addEventListener('keydown',e=>{
 /* ════════════════════════════ INIT ════════════════════════════ */
 renderTree();
 maybeOfferTour();
+
+/* view-only shared boot (Feature C): ?share=reasoning → clean presentation */
+function bootViewOnly(){
+  document.documentElement.classList.add('view-only');
+  /* persisted theme already applied pre-paint; default light otherwise */
+  openWalk();                       // open the enriched walkthrough full-screen
+  closeChat();                      // belt-and-suspenders: nothing else interactive
+}
+if(VIEW_ONLY) bootViewOnly();
 </script>
 </body>
 </html>
