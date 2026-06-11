@@ -830,6 +830,64 @@ html.dark .chat-head .ch-glyph{background:radial-gradient(circle at 30% 30%,#3f7
 html.dark .chat-send{color:#0c0f15}
 @media(prefers-reduced-motion:reduce){.cm-cursor,.cm-thinking .cm-dot{animation:none}.cm-cursor{opacity:1}}
 
+/* ───────────────────────────── GUIDED MODE (Feature B) ───────────────────────────── */
+/* light spotlight scrim — dims the app without hiding it, so the user SEES real screens */
+.guide-scrim{position:fixed;inset:0;z-index:62;pointer-events:none;opacity:0;
+  transition:opacity .25s var(--ease);
+  background:radial-gradient(circle at var(--gx,50%) var(--gy,50%),
+    rgba(20,30,46,0) 0,rgba(20,30,46,0) var(--gr0,120px),rgba(20,30,46,.30) var(--gr1,260px),rgba(20,30,46,.42) 100%);}
+html.dark .guide-scrim{background:radial-gradient(circle at var(--gx,50%) var(--gy,50%),
+  rgba(0,0,0,0) 0,rgba(0,0,0,0) var(--gr0,120px),rgba(0,0,0,.42) var(--gr1,260px),rgba(0,0,0,.58) 100%);}
+.guide-scrim.on{opacity:1;pointer-events:auto}
+/* the highlighted region gets a soft ring */
+.guide-ring{position:fixed;z-index:63;border-radius:14px;pointer-events:none;opacity:0;
+  box-shadow:0 0 0 2px var(--accent),0 0 0 7px rgba(24,76,132,.18);
+  transition:opacity .25s var(--ease),top .35s var(--ease),left .35s var(--ease),width .35s var(--ease),height .35s var(--ease)}
+.guide-ring.on{opacity:1}
+
+.guide-bubble{position:fixed;z-index:64;width:360px;max-width:calc(100vw - 28px);
+  background:var(--surface);border:1px solid var(--line-strong);border-radius:var(--r-lg);box-shadow:var(--shadow-lg);
+  padding:18px 20px 16px;opacity:0;transform:translateY(8px) scale(.98);pointer-events:none;
+  transition:opacity .25s var(--ease),transform .25s var(--ease),top .35s var(--ease),left .35s var(--ease)}
+.guide-bubble.on{opacity:1;transform:none;pointer-events:auto}
+.guide-bubble .gb-step{font-family:var(--font-mono);font-size:11px;color:var(--accent-ink);letter-spacing:.06em;
+  display:flex;align-items:center;gap:8px}
+.guide-bubble .gb-step .gb-pip{flex:1;height:3px;border-radius:2px;background:var(--line);position:relative;overflow:hidden}
+.guide-bubble .gb-step .gb-pip i{position:absolute;left:0;top:0;bottom:0;background:var(--accent);transition:width .35s var(--ease)}
+.guide-bubble .gb-h{font-family:var(--font-serif);font-size:19px;font-weight:500;letter-spacing:-.01em;line-height:1.2;margin:11px 0 8px}
+.guide-bubble .gb-body{font-size:13px;line-height:1.6;color:var(--ink-2)}
+.guide-bubble .gb-body b{color:var(--ink)}
+.guide-bubble .gb-result{font-size:12px;line-height:1.5;margin-top:10px;padding:9px 11px;border-radius:9px;
+  background:var(--surface-2);border:1px solid var(--line);color:var(--ink-2)}
+.guide-bubble .gb-result b{color:var(--ink)}
+.guide-bubble .gb-result .gb-rk{font-size:9px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--accent-ink);display:block;margin-bottom:3px}
+.guide-foot{display:flex;align-items:center;gap:8px;margin-top:15px}
+.guide-foot .gf-skip{font-size:12px;color:var(--muted);margin-right:auto}
+.guide-foot .gf-skip:hover{color:var(--ink-2)}
+
+/* first-load nudge */
+.guide-nudge{position:fixed;right:24px;bottom:84px;z-index:45;width:268px;
+  background:var(--surface);border:1px solid var(--line-strong);border-radius:var(--r-md);box-shadow:var(--shadow-md);
+  padding:14px 15px 13px;opacity:0;transform:translateY(10px);pointer-events:none;
+  transition:opacity .3s var(--ease),transform .3s var(--ease)}
+.guide-nudge.on{opacity:1;transform:none;pointer-events:auto}
+.guide-nudge .gn-h{font-weight:600;font-size:13px;letter-spacing:-.005em;display:flex;align-items:center;gap:7px}
+.guide-nudge .gn-h .gn-spark{color:var(--accent)}
+.guide-nudge .gn-b{font-size:12px;color:var(--muted);line-height:1.5;margin:6px 0 11px}
+.guide-nudge .gn-row{display:flex;align-items:center;gap:8px}
+.guide-nudge .gn-dismiss{font-size:11.5px;color:var(--muted);margin-left:auto}
+.guide-nudge .gn-dismiss:hover{color:var(--ink-2)}
+.guide-nudge::after{content:"";position:absolute;right:30px;bottom:-7px;width:13px;height:13px;background:var(--surface);
+  border-right:1px solid var(--line-strong);border-bottom:1px solid var(--line-strong);transform:rotate(45deg)}
+
+/* topbar guided-tour entry */
+.tour-btn{display:inline-flex;align-items:center;gap:7px;height:32px;padding:0 13px;border-radius:8px;
+  border:1px solid var(--accent);background:var(--accent-soft);color:var(--accent-ink);font-size:12.5px;font-weight:600;
+  transition:.15s var(--ease)}
+.tour-btn:hover{background:var(--accent);color:#fff}
+html.dark .tour-btn:hover{color:#0c0f15}
+.tour-btn svg{flex:none}
+
 /* responsive degrade to 1024 */
 @media(max-width:1180px){
   .app{grid-template-columns:200px 1fr}
@@ -848,6 +906,8 @@ html.dark .chat-send{color:#0c0f15}
 <script>
 /* theme boot — before paint, no flash. Default light; persisted choice wins. */
 (function(){try{if(localStorage.getItem('noetic-theme')==='dark')document.documentElement.classList.add('dark');}catch(e){}})();
+/* shared view-only boot flag (Feature C) — set before any module reads it */
+var VIEW_ONLY = (function(){try{return /(?:^|[?&])share=reasoning(?:&|$)/.test(location.search);}catch(e){return false;}})();
 </script>
 </head>
 <body>
@@ -922,6 +982,10 @@ html.dark .chat-send{color:#0c0f15}
         <span class="here" id="crumbHere">Progress-to-Outcome Tree</span>
       </div>
       <div class="top-spacer"></div>
+      <button class="tour-btn" onclick="startGuide()" title="Walk me through the project">
+        <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M8 1.5l1.6 3.4 3.7.5-2.7 2.6.7 3.7L8 10.4 4.7 12.2l.7-3.7L2.7 5.9l3.7-.5z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
+        Guided tour
+      </button>
       <button class="cmdk-btn" onclick="openCmdk()">
         <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.4"/><path d="M11 11l3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
         Search or jump… <kbd>⌘K</kbd>
@@ -1072,6 +1136,30 @@ html.dark .chat-send{color:#0c0f15}
     </button>
   </div>
 </aside>
+
+<!-- ───────── GUIDED MODE (Feature B) ───────── -->
+<div class="guide-scrim" id="guideScrim"></div>
+<div class="guide-ring" id="guideRing"></div>
+<div class="guide-bubble" id="guideBubble" role="dialog" aria-modal="false" aria-label="Guided tour">
+  <div class="gb-step"><span id="guideStepLabel">Step 1 of 8</span><span class="gb-pip"><i id="guidePip" style="width:12%"></i></span></div>
+  <div class="gb-h serif" id="guideTitle">—</div>
+  <div class="gb-body" id="guideBody">—</div>
+  <div class="guide-foot">
+    <button class="gf-skip" onclick="endGuide()">Skip tour</button>
+    <button class="btn btn-ghost btn-sm" id="guideBack" onclick="guideStep(-1)">← Back</button>
+    <button class="btn btn-primary btn-sm" id="guideNext" onclick="guideStep(1)">Next →</button>
+  </div>
+</div>
+
+<!-- first-load nudge -->
+<div class="guide-nudge" id="guideNudge">
+  <div class="gn-h"><span class="gn-spark"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M8 1.5l1.6 3.4 3.7.5-2.7 2.6.7 3.7L8 10.4 4.7 12.2l.7-3.7L2.7 5.9l3.7-.5z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg></span>New here?</div>
+  <div class="gn-b">Take the 90-second tour — we'll walk you through the real project, screen by screen.</div>
+  <div class="gn-row">
+    <button class="btn btn-primary btn-sm" onclick="dismissNudge();startGuide()">Start tour</button>
+    <button class="gn-dismiss" onclick="dismissNudge()">Not now</button>
+  </div>
+</div>
 
 <script>
 /* ════════════════════════════ DATA — Project "Ledgerline" ════════════════════════════
@@ -1961,6 +2049,9 @@ const CMDK = [
     {ico:'≡',t:'Decision Log',sub:'reasoning',act:()=>goLoop('decisions')},
     {ico:'▶',t:'Show the reasoning (walkthrough)',sub:'stakeholder',act:openWalk},
   ]},
+  {g:'Guided',items:[
+    {ico:'✶',t:'Guided tour — walk me through the project',sub:'90 sec',act:()=>startGuide()},
+  ]},
 ];
 let cmdkFlat=[], cmdkSel=0;
 function openCmdk(){ document.getElementById('cmdkScrim').classList.add('open'); const i=document.getElementById('cmdkInput'); i.value=''; renderCmdk(''); setTimeout(()=>i.focus(),30); }
@@ -2157,16 +2248,175 @@ function chatStreamAnswer(html){
   }, 420);
 }
 
+/* ════════════════════════════ GUIDED MODE (Feature B) ════════════════════════════
+   A concierge that walks the user through the REAL project by driving the live app
+   and narrating in coach-mark bubbles: what we did, the result, and the next move.
+   Distinct from "Show the reasoning" (Feature C), which is a self-contained deck. */
+const GUIDE = [
+  { title:'The one number we own',
+    body:`Welcome. This is the Ledgerline discovery project. Every team here owns a single <b>product outcome</b> — and ours is one number: lift 7-day bank-feed activation from <b>34% to 55%</b>.`,
+    result:{k:'Where we are',v:`The outcome is <b>validated</b> — ratified with leadership, serving lower 90-day churn.`,
+            next:`Next: see who we're building for.`},
+    run:()=>goLoop('outcome'),
+    anchor:()=>document.querySelector('#screen-outcome .bt')||document.querySelector('#screen-outcome .card') },
+
+  { title:'Why people switch',
+    body:`Before any metric, we learned the <b>Job</b>: across 14 interviews of real past switches, owners want to move from spreadsheet chaos to <b>trusted, always-current books</b>.`,
+    result:{k:'Result',v:`<b>Validated</b> — the Job recurs in 11 of 14 interviews. The decisive struggle lands at "Connect your bank."`,
+            next:`Next: the opportunity space we mapped from that struggle.`},
+    run:()=>goLoop('progress'),
+    anchor:()=>document.querySelector('#screen-progress .timeline .tl-stage.hot')||document.querySelector('#screen-progress .card') },
+
+  { title:'The opportunity we crowned',
+    body:`We organised every struggling moment by timeline, then crowned one target: <b>bank-connection trust</b> — "I won't connect my primary account until I believe this company is safe and serious."`,
+    result:{k:'Result',v:`<b>Suggestive.</b> Top-right on demand × ability to win, named unprompted in 8/14 interviews — sitting exactly on the activation drop-off.`,
+            next:`Next: the causal system we mapped before solving.`},
+    run:()=>{ goLoop('tree'); setTimeout(()=>openCategory('opportunities'),360); },
+    anchor:()=>document.querySelector('#catScrim .cat-modal') },
+
+  { title:'The system before the solution',
+    body:`We refused to jump to features. First we mapped the <b>causal system</b> right-to-left: trusted books need a reconciled feed → a feed needs a primary-account connection → that needs the trust threshold crossed in session one.`,
+    result:{k:'Result',v:`We separated what we <b>control</b> (badging, read-only messaging, connection sequencing) from <b>noise</b> (bank OAuth, breach press).`,
+            next:`Next: the solution paths — and the two we killed cheaply.`},
+    run:()=>{ closeCategory(); goLoop('causal'); },
+    anchor:()=>document.querySelector('#screen-causal .flow')||document.querySelector('#screen-causal .card') },
+
+  { title:'Three paths — two killed cheaply',
+    body:`We generated three materially different paths: a <b>product</b> flow, a <b>service</b> (white-glove), and a <b>hybrid</b> (sandbox-first). Then we tested the riskiest beliefs, not whole ideas.`,
+    result:{k:'Result',v:`Two beliefs <b>killed for the price of a fake door</b>: a SOC-2 badge moved nothing (TC-03), and sandbox-first converted 9% vs a 30% bar (TC-05).`,
+            next:`Next: the bet we actually placed.`},
+    run:()=>goLoop('delivery'),
+    anchor:()=>document.querySelector('#screen-delivery .grid.g-3')||document.querySelector('#screen-delivery .card') },
+
+  { title:'The bet: the kick-ass half',
+    body:`The increment is the <b>trust-first connection flow — the primary-account moment only</b>: read-only framing, granular permissions, "disconnect anytime," and a security page inline at the credential step.`,
+    result:{k:'Result',v:`White-glove, sandbox, and historical import are <b>deliberately excluded</b> — a kick-ass half, not a half-assed whole.`,
+            next:`Next: the test in flight that moves our weakest belief.`},
+    run:()=>{ goLoop('delivery'); setTimeout(()=>{ const el=document.querySelector('#screen-delivery .scope-cols'); if(el) el.scrollIntoView({behavior:'smooth',block:'center'}); },120); },
+    anchor:()=>document.querySelector('#screen-delivery .scope-cols')||document.querySelector('#screen-delivery .kickass') },
+
+  { title:'The test in flight',
+    body:`Our weakest, load-bearing belief — "make safety legible and founders connect in session one" — is under test right now as <b>TC-08</b>, with the success bar locked before any results.`,
+    result:{k:'Result',v:`<b>57%</b> are connecting their primary account in session one, against a locked <b>50%</b> bar — trending above, not yet powered.`,
+            next:`Next: where we are, and the very next move.`},
+    run:()=>{ goLoop('delivery'); setTimeout(()=>{ const el=document.getElementById('tc08'); if(el) el.scrollIntoView({behavior:'smooth',block:'center'}); },140); },
+    anchor:()=>document.getElementById('tc08') },
+
+  { title:"You're caught up",
+    body:`That's the whole arc: a validated number, a proven Job, a crowned opportunity, a mapped system, a scoped bet, and two cheap saves. The reasoning is honest and the certainty is rising.`,
+    result:{k:'The next step',v:`<b>Finish TC-08.</b> When it clears the 50% bar we ship the trust-first increment; if it stalls, we pivot to the white-glove path.`,
+            next:`That's it — you now know what's been learned and exactly what to do next.`},
+    run:()=>{ goLoop('tree'); setTimeout(()=>document.getElementById('nbaCard')&&document.getElementById('nbaCard').classList.add('open'),120); },
+    anchor:()=>document.getElementById('nbaCard') },
+];
+let guideI=0, guideActive=false, guideReduce=false;
+
+function startGuide(){
+  if(guideActive) return;
+  guideActive=true; guideI=0;
+  guideReduce = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  closeCmdk(); closePanel(); closeWalk(); closeChat();
+  dismissNudge(true);
+  document.getElementById('guideScrim').classList.add('on');
+  document.getElementById('guideBubble').classList.add('on');
+  renderGuide();
+}
+function endGuide(){
+  guideActive=false;
+  document.getElementById('guideScrim').classList.remove('on');
+  document.getElementById('guideRing').classList.remove('on');
+  document.getElementById('guideBubble').classList.remove('on');
+  closeCategory();
+}
+function guideStep(dir){
+  const ni=guideI+dir;
+  if(ni<0) return;
+  if(ni>=GUIDE.length){ endGuide(); return; }
+  guideI=ni; renderGuide();
+}
+function renderGuide(){
+  const g=GUIDE[guideI];
+  /* drive the real app */
+  if(g.run) g.run();
+  /* paint the bubble */
+  document.getElementById('guideStepLabel').textContent=`Step ${guideI+1} of ${GUIDE.length}`;
+  document.getElementById('guidePip').style.width=((guideI+1)/GUIDE.length*100)+'%';
+  document.getElementById('guideTitle').textContent=g.title;
+  const r=g.result;
+  document.getElementById('guideBody').innerHTML = g.body +
+    (r?`<div class="gb-result"><span class="gb-rk">${r.k}</span>${r.v}${r.next?`<div style="margin-top:6px;color:var(--accent-ink);font-weight:500">${r.next}</div>`:''}</div>`:'');
+  const back=document.getElementById('guideBack');
+  back.style.visibility = guideI===0?'hidden':'visible';
+  const next=document.getElementById('guideNext');
+  next.textContent = guideI===GUIDE.length-1?'Done ✓':'Next →';
+  /* position the bubble + spotlight near the anchor once navigation settles */
+  const delay = guideReduce?0:380;
+  setTimeout(()=>{ if(guideActive) positionGuide(g); }, delay);
+}
+function positionGuide(g){
+  const bubble=document.getElementById('guideBubble');
+  const ring=document.getElementById('guideRing');
+  const scrim=document.getElementById('guideScrim');
+  const el = g.anchor && g.anchor();
+  const bw=bubble.offsetWidth||360, bh=bubble.offsetHeight||220;
+  const vw=window.innerWidth, vh=window.innerHeight, pad=16;
+  if(el && el.getBoundingClientRect){
+    const r=el.getBoundingClientRect();
+    if(r.width>0 && r.height>0 && r.bottom>0 && r.top<vh){
+      /* ring around the anchor */
+      ring.style.top=(r.top-6)+'px'; ring.style.left=(r.left-6)+'px';
+      ring.style.width=(r.width+12)+'px'; ring.style.height=(r.height+12)+'px';
+      ring.classList.add('on');
+      /* spotlight center + radius follow the anchor */
+      const cx=r.left+r.width/2, cy=r.top+r.height/2;
+      const rad=Math.max(r.width,r.height)/2;
+      scrim.style.setProperty('--gx',cx+'px'); scrim.style.setProperty('--gy',cy+'px');
+      scrim.style.setProperty('--gr0',(rad+20)+'px'); scrim.style.setProperty('--gr1',(rad+140)+'px');
+      /* place bubble: prefer below, else above, else beside */
+      let top, left=Math.min(Math.max(cx-bw/2,pad),vw-bw-pad);
+      if(r.bottom+bh+18<vh) top=r.bottom+14;
+      else if(r.top-bh-18>0) top=r.top-bh-14;
+      else top=Math.min(Math.max(cy-bh/2,pad),vh-bh-pad);
+      /* avoid covering the anchor when placed beside */
+      bubble.style.top=top+'px'; bubble.style.left=left+'px';
+      return;
+    }
+  }
+  /* fallback: bottom-center, neutral spotlight */
+  ring.classList.remove('on');
+  scrim.style.setProperty('--gx','50%'); scrim.style.setProperty('--gy','60%');
+  scrim.style.setProperty('--gr0','160px'); scrim.style.setProperty('--gr1','340px');
+  bubble.style.left=Math.max((vw-bw)/2,pad)+'px';
+  bubble.style.top=(vh-bh-28)+'px';
+}
+window.addEventListener('resize',()=>{ if(guideActive) positionGuide(GUIDE[guideI]); });
+
+/* first-load nudge — remember dismissal/seen in localStorage */
+function dismissNudge(silent){
+  document.getElementById('guideNudge').classList.remove('on');
+  try{ localStorage.setItem('noetic-tour-seen','1'); }catch(e){}
+}
+function maybeOfferTour(){
+  let seen=false; try{ seen=localStorage.getItem('noetic-tour-seen')==='1'; }catch(e){}
+  if(seen) return;
+  if(VIEW_ONLY) return;   // never nudge in shared view-only mode (Feature C)
+  setTimeout(()=>{ if(!guideActive) document.getElementById('guideNudge').classList.add('on'); }, 1400);
+}
+
 /* ════════════════════════════ GLOBAL KEYS ════════════════════════════ */
 document.addEventListener('keydown',e=>{
   if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==='k'){ e.preventDefault(); document.getElementById('cmdkScrim').classList.contains('open')?closeCmdk():openCmdk(); }
   else if(e.key==='Escape'){
     /* close only the topmost open layer */
     if(document.getElementById('cmdkScrim').classList.contains('open')) closeCmdk();
+    else if(guideActive) endGuide();
     else if(document.getElementById('catScrim').classList.contains('open')) closeCategory();
     else if(document.getElementById('panel').classList.contains('open')) closePanel();
     else if(document.getElementById('walkScrim').classList.contains('open')) closeWalk();
     else if(chatIsOpen()) closeChat();
+  }
+  else if(guideActive){
+    if(e.key==='ArrowRight') guideStep(1); else if(e.key==='ArrowLeft') guideStep(-1);
   }
   else if(document.getElementById('walkScrim').classList.contains('open')){
     if(e.key==='ArrowRight') walkGo(1); else if(e.key==='ArrowLeft') walkGo(-1);
@@ -2175,6 +2425,7 @@ document.addEventListener('keydown',e=>{
 
 /* ════════════════════════════ INIT ════════════════════════════ */
 renderTree();
+maybeOfferTour();
 </script>
 </body>
 </html>
