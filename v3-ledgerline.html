@@ -235,17 +235,37 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .proj-menu-sep{height:1px;background:var(--line);margin:5px 4px}
 
 /* ── account + settings (rail bottom) ── */
-.rail-acct-row{display:flex;align-items:center;gap:8px;margin-top:8px}
-.rail-acct{display:flex;align-items:center;gap:9px;flex:1;min-width:0;padding:6px;border-radius:var(--r-sm);
+.rail-acct-wrap{position:relative;margin-top:8px}
+.rail-acct{display:flex;align-items:center;gap:9px;width:100%;min-width:0;padding:6px;border-radius:var(--r-sm);
   cursor:pointer;text-align:left;transition:.12s var(--ease)}
 .rail-acct:hover{background:var(--surface-2)}
 .avatar.sm{width:28px;height:28px;font-size:11px;flex:none}
-.acct-txt{display:flex;flex-direction:column;min-width:0}
+.acct-txt{display:flex;flex-direction:column;min-width:0;flex:1}
 .acct-name{font-weight:600;font-size:12.5px;line-height:1.15;letter-spacing:-.01em}
 .acct-role{font-size:10px;color:var(--muted);line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.rail-set{width:32px;height:32px;flex:none;border-radius:var(--r-sm);display:grid;place-items:center;
-  color:var(--muted);cursor:pointer;transition:.12s var(--ease)}
-.rail-set:hover{background:var(--surface-2);color:var(--ink)}
+.acct-caret{color:var(--muted);flex:none;transition:transform .18s var(--ease)}
+.rail-acct-wrap.open .acct-caret{transform:rotate(180deg)}
+.acct-menu{position:absolute;bottom:calc(100% + 8px);left:0;right:0;z-index:40;
+  background:var(--surface);border:1px solid var(--line-strong);border-radius:var(--r-md);box-shadow:var(--shadow-lg);
+  padding:6px;opacity:0;pointer-events:none;transform:translateY(6px) scale(.98);transform-origin:bottom;
+  transition:.16s var(--ease)}
+.rail-acct-wrap.open .acct-menu{opacity:1;pointer-events:auto;transform:none}
+.acct-card{display:flex;align-items:center;gap:10px;padding:8px 8px 9px}
+.acct-email{font-size:10.5px;color:var(--muted);margin-top:1px}
+.acct-menu-sep{height:1px;background:var(--line);margin:4px 4px}
+.acct-item{display:flex;align-items:center;gap:10px;width:100%;padding:8px 9px;border-radius:var(--r-sm);
+  cursor:pointer;text-align:left;font-size:12.5px;color:var(--ink-2);transition:.12s var(--ease)}
+.acct-item svg{color:var(--muted);flex:none}
+.acct-item:hover{background:var(--surface-2);color:var(--ink)}
+.acct-item:hover svg{color:var(--ink-2)}
+.acct-item.danger{color:var(--ev-killed-ink,#b4543e)}
+.acct-item.danger svg{color:var(--ev-killed-ink,#b4543e)}
+.acct-item.danger:hover{background:rgba(180,84,62,.08)}
+/* tiny ephemeral toast for dummy menu actions */
+.acct-toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(10px);z-index:80;
+  background:var(--ink);color:var(--paper);font-size:12.5px;font-weight:500;padding:9px 16px;border-radius:24px;
+  box-shadow:var(--shadow-lg);opacity:0;pointer-events:none;transition:.2s var(--ease)}
+.acct-toast.on{opacity:1;transform:translateX(-50%)}
 
 .rail-label{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
   font-weight:600;padding:14px 8px 6px}
@@ -419,7 +439,7 @@ html.dark .theme-btn .ico-moon{display:none}
 .spine-side{position:absolute;top:0;height:340px;width:22px;display:flex;align-items:center;justify-content:center}
 .spine-side span{transform:rotate(-90deg);white-space:nowrap;font-size:10px;letter-spacing:.34em;
   text-transform:uppercase;color:var(--muted);font-weight:700}
-.node.tnode{position:absolute}
+.node.tnode{position:absolute;display:flex;flex-direction:column;justify-content:center}
 .node.slim{padding:9px 14px}
 .node.slim .node-top{margin-bottom:4px}
 .node.slim .node-foot{margin-top:7px}
@@ -523,30 +543,25 @@ html.dark .theme-btn .ico-moon{display:none}
   padding:3px 8px;border-radius:7px;line-height:1}
 html.dark .section-rule .sr-n{color:#cfe0f3;background:rgba(46,111,176,.22)}
 
-/* collapsible section blocks, threaded by a glowing blue rail (wired by wireSections) */
-.sec-block{position:relative;padding-left:44px}
-.sec-block::before{content:"";position:absolute;left:15px;top:0;bottom:0;width:2px;border-radius:2px;
-  background:linear-gradient(180deg,var(--accent),rgba(46,111,176,.45));
-  box-shadow:0 0 7px 1px rgba(46,111,176,.45);opacity:.9}
-html.dark .sec-block::before{background:linear-gradient(180deg,#4a92d6,rgba(74,146,214,.4));
-  box-shadow:0 0 9px 1px rgba(74,146,214,.45)}
-/* a soft downward fade on the last block hints "more below / scroll" */
-.sec-block:last-of-type::after{content:"";position:absolute;left:11px;bottom:-14px;width:10px;height:10px;
-  border-right:2px solid var(--accent);border-bottom:2px solid var(--accent);transform:rotate(45deg);
-  opacity:.5;animation:secNudge 1.8s var(--ease) infinite}
-html.dark .sec-block:last-of-type::after{border-color:#4a92d6}
-@keyframes secNudge{0%,100%{transform:rotate(45deg) translate(0,0);opacity:.35}50%{transform:rotate(45deg) translate(3px,3px);opacity:.75}}
+/* collapsible section blocks; a glowing blue rail (SVG, drawn by drawRail) connects the
+   number pills via rounded elbows in the LEFT gutter — it exits/enters each pill on its
+   left edge, never runs through them, and simply extends/retracts when sections collapse */
+.sec-block{position:relative;padding-left:62px}
+.sec-rail{position:absolute;left:0;top:0;pointer-events:none;z-index:0;overflow:visible;
+  filter:drop-shadow(0 0 3px rgba(46,111,176,.45))}
+.sec-rail path{stroke:var(--accent);stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+html.dark .sec-rail{filter:drop-shadow(0 0 5px rgba(74,146,214,.55))}
+html.dark .sec-rail path{stroke:#4a92d6}
 .sec-block > .section-rule{position:relative;margin-top:30px;cursor:pointer}
 .sec-block:first-of-type > .section-rule{margin-top:8px}
-.sec-block .sr-n{position:absolute;left:-44px;top:50%;transform:translateY(-50%);z-index:2;cursor:pointer;
-  min-width:30px;text-align:center;box-shadow:0 0 0 4px var(--paper);transition:.14s var(--ease)}
-.sec-block .sr-n:hover{filter:brightness(1.05);box-shadow:0 0 0 4px var(--paper),0 0 10px 1px rgba(46,111,176,.4)}
-html.dark .sec-block .sr-n:hover{box-shadow:0 0 0 4px var(--paper),0 0 11px 1px rgba(74,146,214,.5)}
+.sec-block .sr-n{position:absolute;left:-42px;top:50%;transform:translateY(-50%);z-index:2;cursor:pointer;
+  min-width:30px;text-align:center;transition:.14s var(--ease)}
+.sec-block .sr-n:hover{filter:brightness(1.06);box-shadow:0 0 10px 1px rgba(46,111,176,.35)}
+html.dark .sec-block .sr-n:hover{box-shadow:0 0 11px 1px rgba(74,146,214,.5)}
 .sec-caret{margin-left:6px;color:var(--muted);display:inline-flex;align-items:center;transition:transform .18s var(--ease);flex:none}
 .sec-block.collapsed .sec-caret{transform:rotate(-90deg)}
 .sec-body{overflow:hidden}
 .sec-block.collapsed .sec-body{display:none}
-@media(prefers-reduced-motion:reduce){.sec-block:last-of-type::after{animation:none}}
 
 /* interview snapshot */
 .snap{border-left:3px solid var(--line-strong);padding-left:16px;margin-bottom:18px}
@@ -1130,7 +1145,9 @@ html.view-only #walkScrim .wt-close-realapp{display:none}
 </style>
 <script>
 /* theme boot — before paint, no flash. Default light; persisted choice wins. */
-(function(){try{if(localStorage.getItem('noetic-theme')==='dark')document.documentElement.classList.add('dark');}catch(e){}})();
+(function(){try{if(localStorage.getItem('noetic-theme')==='dark')document.documentElement.classList.add('dark');}catch(e){}
+  /* demo highlight overlays start OFF */
+  document.documentElement.classList.add('no-fields','no-vars');})();
 /* shared view-only boot flag (Feature C) — set before any module reads it */
 var VIEW_ONLY = (function(){try{return /(?:^|[?&])share=reasoning(?:&|$)/.test(location.search);}catch(e){return false;}})();
 </script>
@@ -1144,8 +1161,8 @@ var VIEW_ONLY = (function(){try{return /(?:^|[?&])share=reasoning(?:&|$)/.test(l
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="#fff" stroke-width="1.4" opacity=".5"/><circle cx="8" cy="8" r="2.4" fill="#fff"/></svg>
       </div>
       <div>
-        <div class="name">Noetic</div>
-        <div class="ver">Discovery System · v3</div>
+        <div class="name">Noetic Mind</div>
+        <div class="ver">Continuous Discovery</div>
       </div>
     </div>
 
@@ -1219,14 +1236,26 @@ var VIEW_ONLY = (function(){try{return /(?:^|[?&])share=reasoning(?:&|$)/.test(l
 
     <div class="rail-foot">
       <div class="kbd-hint"><kbd>⌘</kbd><kbd>K</kbd><span>Command palette</span></div>
-      <div class="rail-acct-row">
-        <button class="rail-acct" onclick="openCmdk()" title="Account">
-          <span class="avatar sm">PD</span>
-          <span class="acct-txt"><span class="acct-name">Priya Devi</span><span class="acct-role">Product · Ledgerline</span></span>
+      <div class="rail-acct-wrap" id="acctWrap">
+        <button class="rail-acct" onclick="toggleAcctMenu(event)" title="Account &amp; settings" aria-haspopup="true" aria-expanded="false">
+          <span class="avatar sm">DD</span>
+          <span class="acct-txt"><span class="acct-name">Demo Davis</span><span class="acct-role">Product · Ledgerline</span></span>
+          <svg class="acct-caret" width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M4 10l4-4 4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
-        <button class="rail-set" onclick="openCmdk()" title="Settings" aria-label="Settings">
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="2.2" stroke="currentColor" stroke-width="1.4"/><path d="M8 1.5v1.7M8 12.8v1.7M14.5 8h-1.7M3.2 8H1.5M12.6 3.4l-1.2 1.2M4.6 11.4l-1.2 1.2M12.6 12.6l-1.2-1.2M4.6 4.6L3.4 3.4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
-        </button>
+        <div class="acct-menu" id="acctMenu" role="menu">
+          <div class="acct-card">
+            <span class="avatar sm">DD</span>
+            <div><div class="acct-name">Demo Davis</div><div class="acct-email">demo@noeticmind.app</div></div>
+          </div>
+          <div class="acct-menu-sep"></div>
+          <button class="acct-item" role="menuitem" onclick="acctToast('Profile')"><svg viewBox="0 0 16 16" width="15" height="15" fill="none"><circle cx="8" cy="5.5" r="2.6" stroke="currentColor" stroke-width="1.3"/><path d="M3 13.2a5 5 0 0110 0" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>Account &amp; profile</button>
+          <button class="acct-item" role="menuitem" onclick="acctToast('Workspace settings')"><svg viewBox="0 0 16 16" width="15" height="15" fill="none"><circle cx="8" cy="8" r="2.2" stroke="currentColor" stroke-width="1.3"/><path d="M8 1.6v1.6M8 12.8v1.6M14.4 8h-1.6M3.2 8H1.6M12.5 3.5l-1.1 1.1M4.6 11.4l-1.1 1.1M12.5 12.5l-1.1-1.1M4.6 4.6L3.5 3.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>Workspace settings</button>
+          <button class="acct-item" role="menuitem" onclick="acctToast('Notifications')"><svg viewBox="0 0 16 16" width="15" height="15" fill="none"><path d="M4 6.5a4 4 0 018 0c0 3 1 4 1.5 4.5h-11C3 10.5 4 9.5 4 6.5z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/><path d="M6.5 13a1.5 1.5 0 003 0" stroke="currentColor" stroke-width="1.3"/></svg>Notifications</button>
+          <button class="acct-item" role="menuitem" onclick="acctToast('Billing')"><svg viewBox="0 0 16 16" width="15" height="15" fill="none"><rect x="2" y="4" width="12" height="8" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M2 6.8h12" stroke="currentColor" stroke-width="1.3"/></svg>Billing &amp; plan</button>
+          <button class="acct-item" role="menuitem" onclick="toggleTheme();closeAcctMenu()"><svg viewBox="0 0 16 16" width="15" height="15" fill="none"><path d="M13.5 9.6A6 6 0 116.4 2.5a4.8 4.8 0 107.1 7.1z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>Toggle theme</button>
+          <div class="acct-menu-sep"></div>
+          <button class="acct-item danger" role="menuitem" onclick="acctToast('Signed out')"><svg viewBox="0 0 16 16" width="15" height="15" fill="none"><path d="M6 2.5H3.5A1.5 1.5 0 002 4v8a1.5 1.5 0 001.5 1.5H6M10.5 11l3-3-3-3M13 8H6" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>Sign out</button>
+        </div>
       </div>
     </div>
   </aside>
@@ -1249,8 +1278,8 @@ var VIEW_ONLY = (function(){try{return /(?:^|[?&])share=reasoning(?:&|$)/.test(l
         Search or jump… <kbd>⌘K</kbd>
       </button>
       <div class="hl-squares" id="hlLegend" aria-label="Demo highlight overlays">
-        <button class="hl-sq fields" aria-pressed="true" onclick="toggleHL('fields',this)" title="Toggle editable-field highlights (green)"></button>
-        <button class="hl-sq vars" aria-pressed="true" onclick="toggleHL('vars',this)" title="Toggle project-specific highlights (pink)"></button>
+        <button class="hl-sq fields" aria-pressed="false" onclick="toggleHL('fields',this)" title="Toggle editable-field highlights (green)"></button>
+        <button class="hl-sq vars" aria-pressed="false" onclick="toggleHL('vars',this)" title="Toggle project-specific highlights (pink)"></button>
       </div>
       <button class="theme-btn" onclick="toggleTheme()" title="Toggle dark mode" aria-label="Toggle dark mode">
         <svg class="ico-moon" width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M13.5 9.6A6 6 0 116.4 2.5a4.8 4.8 0 107.1 7.1z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
@@ -1706,9 +1735,12 @@ function renderTree(){
   let html='';
   Object.keys(TL).forEach(k=> html += nodeHTML(k));
   c.innerHTML = html;
-  /* measure natural heights */
+  /* measure natural heights, then force every card to the SAME height so rows align
+     and the connectors stay straight */
   const H={};
   c.querySelectorAll('.node').forEach(n=>{ H[n.dataset.key]=n.offsetHeight; });
+  const uniformH = Math.max(...Object.keys(H).map(k=>H[k]));
+  Object.keys(H).forEach(k=>{ H[k]=uniformH; });
   /* place vertically */
   const Y={};
   Y.framing=16;                         Y.outcome=Y.framing+H.framing+26;
@@ -1717,14 +1749,14 @@ function renderTree(){
   /* convergence stem sits clearly below BOTH spines so it never overlaps a column */
   Y.causal=Math.max(Y.outcome+H.outcome, Y.opportunities+H.opportunities)+30;
   Y.solutions=Y.causal+H.causal+28;
-  const rowH=Math.max(H.tests,H.increment);
+  const rowH=uniformH;
   Y.tests=Y.increment=Y.solutions+H.solutions+30;
   const demandB=Y.opportunities+H.opportunities;
   TREE_H=Math.max(Y.tests+rowH, demandB)+40;
   c.querySelectorAll('.node').forEach(n=>{
     const k=n.dataset.key;
     n.style.top=Y[k]+'px';
-    if(k==='tests'||k==='increment') n.style.height=rowH+'px';
+    n.style.height=uniformH+'px';
   });
   c.style.height=TREE_H+'px';
   c.insertAdjacentHTML('afterbegin', treeSVG(Y,H,rowH));
@@ -1948,14 +1980,44 @@ function wireSections(root){
       const caret=document.createElement('span'); caret.className='sec-caret';
       caret.innerHTML='<svg viewBox="0 0 16 16" width="11" height="11" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
       rule.appendChild(caret);
-      const toggle=()=>block.classList.toggle('collapsed');
+      const toggle=()=>{ block.classList.toggle('collapsed'); requestAnimationFrame(()=>drawRail(wrap)); };
       const pill=rule.querySelector('.sr-n');
       if(pill){ pill.setAttribute('role','button'); pill.tabIndex=0; pill.title='Collapse / expand this section'; }
       rule.addEventListener('click',toggle);
       rule.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); toggle(); } });
     });
+    drawRail(wrap);
   });
 }
+
+/* draw the connecting rail: a glowing blue SVG path that leaves each number pill on its
+   left edge, rounds 90° into the gutter, runs down, and rounds back into the next pill's
+   left edge. Re-run on collapse/resize so it extends and retracts cleanly. */
+function drawRail(wrap){
+  if(!wrap) return;
+  const old=wrap.querySelector(':scope > .sec-rail'); if(old) old.remove();
+  const pills=[...wrap.querySelectorAll('.sec-block > .section-rule > .sr-n')];
+  if(pills.length<2) return;
+  wrap.style.position='relative';
+  const wr=wrap.getBoundingClientRect();
+  const P=pills.map(p=>{ const r=p.getBoundingClientRect(); return {l:r.left-wr.left, cy:(r.top+r.bottom)/2-wr.top}; });
+  const railX=Math.max(2, Math.min(...P.map(p=>p.l))-16), R=8;
+  let d='';
+  for(let i=0;i<P.length-1;i++){
+    const a=P[i], b=P[i+1], y1=a.cy, y2=b.cy;
+    d+=`M${a.l} ${y1} L${railX+R} ${y1} Q${railX} ${y1} ${railX} ${y1+R} L${railX} ${y2-R} Q${railX} ${y2} ${railX+R} ${y2} L${b.l} ${y2} `;
+  }
+  const h=Math.ceil(P[P.length-1].cy)+8;
+  const NS='http://www.w3.org/2000/svg';
+  const svg=document.createElementNS(NS,'svg');
+  svg.setAttribute('class','sec-rail'); svg.setAttribute('width','64'); svg.setAttribute('height',h);
+  const path=document.createElementNS(NS,'path'); path.setAttribute('d',d.trim());
+  svg.appendChild(path); wrap.insertBefore(svg, wrap.firstChild);
+}
+let _railT=null;
+window.addEventListener('resize',()=>{ clearTimeout(_railT); _railT=setTimeout(()=>{
+  const act=document.querySelector('.screen.active'); if(act) act.querySelectorAll('.wrap').forEach(drawRail);
+},120); });
 
 function goLoop(loop){
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
@@ -2628,6 +2690,25 @@ function toggleProjMenu(e){
 function closeProjMenu(){ const sel=document.getElementById('projSelect'); if(sel){ sel.classList.remove('open'); sel.querySelector('.proj-btn').setAttribute('aria-expanded','false'); } }
 document.addEventListener('click',e=>{ const sel=document.getElementById('projSelect'); if(sel&&sel.classList.contains('open')&&!sel.contains(e.target)) closeProjMenu(); });
 
+/* ── account / settings menu (dummy) ── */
+function toggleAcctMenu(e){
+  if(e) e.stopPropagation();
+  const w=document.getElementById('acctWrap');
+  const open=w.classList.toggle('open');
+  w.querySelector('.rail-acct').setAttribute('aria-expanded', open?'true':'false');
+}
+function closeAcctMenu(){ const w=document.getElementById('acctWrap'); if(w){ w.classList.remove('open'); w.querySelector('.rail-acct').setAttribute('aria-expanded','false'); } }
+document.addEventListener('click',e=>{ const w=document.getElementById('acctWrap'); if(w&&w.classList.contains('open')&&!w.contains(e.target)) closeAcctMenu(); });
+let _acctToastT=null;
+function acctToast(label){
+  closeAcctMenu();
+  let t=document.getElementById('acctToast');
+  if(!t){ t=document.createElement('div'); t.id='acctToast'; t.className='acct-toast'; document.body.appendChild(t); }
+  t.textContent = label==='Signed out' ? 'Signed out (demo)' : `${label} — demo only`;
+  requestAnimationFrame(()=>t.classList.add('on'));
+  clearTimeout(_acctToastT); _acctToastT=setTimeout(()=>t.classList.remove('on'),1900);
+}
+
 /* ── highlight overlay toggles ── */
 function toggleHL(kind,btn){
   const on = btn.getAttribute('aria-pressed')==='true';
@@ -2873,7 +2954,20 @@ function renderGuide(){
   const delay = guideReduce?0:380;
   setTimeout(()=>{ if(guideActive) positionGuide(g); }, delay);
 }
-function positionGuide(g){
+/* centre an element in its nearest genuinely-scrollable ancestor (skips overflow:hidden) */
+function scrollAnchorIntoView(el){
+  let p=el.parentElement, sc=null;
+  while(p){
+    const oy=getComputedStyle(p).overflowY;
+    if((oy==='auto'||oy==='scroll') && p.scrollHeight>p.clientHeight+4){ sc=p; break; }
+    p=p.parentElement;
+  }
+  sc = sc || document.getElementById('view') || document.scrollingElement;
+  if(!sc) return;
+  const sr=sc.getBoundingClientRect(), er=el.getBoundingClientRect();
+  sc.scrollTop += (er.top - sr.top) - (sc.clientHeight/2 - er.height/2);
+}
+function positionGuide(g, tries){
   const bubble=document.getElementById('guideBubble');
   const ring=document.getElementById('guideRing');
   const scrim=document.getElementById('guideScrim');
@@ -2881,7 +2975,13 @@ function positionGuide(g){
   const bw=bubble.offsetWidth||360, bh=bubble.offsetHeight||220;
   const vw=window.innerWidth, vh=window.innerHeight, pad=16;
   if(el && el.getBoundingClientRect){
-    const r=el.getBoundingClientRect();
+    let r=el.getBoundingClientRect();
+    /* if the anchor is off-screen (deep in a loop screen), centre it in its real scroll
+       container first — scrollIntoView gets trapped by the overflow:hidden .sec-body wrappers */
+    if(r.height>0 && (r.top<56 || r.bottom>vh-24)){
+      scrollAnchorIntoView(el);
+      r=el.getBoundingClientRect();
+    }
     if(r.width>0 && r.height>0 && r.bottom>0 && r.top<vh){
       /* ring around the anchor */
       ring.style.top=(r.top-6)+'px'; ring.style.left=(r.left-6)+'px';
