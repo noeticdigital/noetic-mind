@@ -366,12 +366,13 @@ html.dark .theme-btn .ico-moon{display:none}
 .tree-svg .conn{stroke:var(--line-strong);stroke-width:1.5;fill:none}
 .tree-svg .conn.dashed{stroke-dasharray:5 5}
 .tree-svg .conn.accent{stroke:var(--accent);opacity:.85}
-.tree-svg .arrowlab{font-family:var(--font-sans);font-size:10.5px;fill:var(--muted);font-style:italic}
+.tree-svg .arrowlab{font-family:var(--font-sans);font-size:10.5px;fill:var(--muted);font-style:italic;
+  paint-order:stroke;stroke:var(--paper);stroke-width:4.5px;stroke-linejoin:round}
 .tree-svg .arrowlab.accent{fill:var(--accent-ink)}
 .spine-side{position:absolute;top:0;height:340px;width:22px;display:flex;align-items:center;justify-content:center}
 .spine-side span{transform:rotate(-90deg);white-space:nowrap;font-size:10px;letter-spacing:.34em;
   text-transform:uppercase;color:var(--muted);font-weight:700}
-.node.tnode{position:absolute;overflow:hidden}
+.node.tnode{position:absolute}
 .node.slim{padding:9px 14px}
 .node.slim .node-top{margin-bottom:4px}
 .node.slim .node-foot{margin-top:7px}
@@ -591,7 +592,7 @@ html.dark .theme-btn .ico-moon{display:none}
 .scope-col.exc li::before{content:"–";position:absolute;left:2px;color:var(--muted)}
 .kickass{margin-top:14px;padding:13px 16px;border-radius:var(--r-md);background:linear-gradient(120deg,var(--warm-tint-2),var(--warm-tint-3));border:1px solid var(--amber-line)}
 .kickass .ka-l{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-deep);font-weight:700}
-.kickass .ka-v{font-family:var(--font-serif);font-size:15px;color:var(--ink);margin-top:5px;font-style:italic}
+.kickass .ka-v{font-family:var(--font-serif);font-size:14.5px;line-height:1.5;color:var(--ink-2);margin-top:6px;font-style:normal}
 
 /* impact ladder big */
 .iladder{display:flex;flex-direction:column;gap:2px}
@@ -1382,7 +1383,7 @@ const NODES = {
     detail:{grounding:'Hypothesis: deferring the scary step raises eventual connection. KILLED — a win: exploration without real data felt pointless and the deferral never converted.',type:'Hybrid path.',evidence:[['killed','TC-05 fake-door: only 9% of “connect later” users returned to connect within 48h (bar 30%).']]}},
   increment:{kind:'Increment & Impact', ev:'assumption',
     h:'Trust-first connection — the primary-account moment only',
-    d:'The kick-ass half of the product path, scoped to one moment.',
+    d:'The focussed half of the product path, scoped to one moment.',
     detail:{
       grounding:'Included: read-only framing at the credential step, granular permission list, “disconnect anytime” affordance, inline security page, instrumented lead measure. Excluded — on purpose: multi-entity support, historical-import automation, white-glove service, sandbox mode.',
       type:'Better + faster over cheaper — we’re buying a clean activation signal in one cycle.',
@@ -1516,7 +1517,7 @@ function treeSVG(Y,H,rowH){
     <path class="conn" d="M${TL.tests.x+TL.tests.w} ${rcy} H${TL.increment.x-5}" marker-end="url(#arr)"/>
     <!-- re-prioritise loop back to the opportunity space -->
     <path class="conn dashed" d="M${TL.increment.x+TL.increment.w+2} ${rcy} C1108 ${rcy} 1156 ${rcy-110} 1156 ${(rcy+opcy)/2} C1156 ${opcy+60} 1150 ${opcy+10} ${TL.opportunities.x+TL.opportunities.w+8} ${opcy+4}" marker-end="url(#arr)"/>
-    <text class="arrowlab" x="${TL.increment.x+TL.increment.w+44}" y="${rcy+30}" text-anchor="middle">measure impact → re-prioritise</text>
+    <text class="arrowlab" x="1148" y="${(rcy+opcy)/2-4}" text-anchor="end">measure impact → re-prioritise</text>
   </svg>`;
 }
 
@@ -2031,7 +2032,7 @@ const BUILDERS = {
     <div class="section-rule"><span class="sr-n">5.4</span><h2 class="serif">Increment Scope Brief</h2><span class="sr-line"></span></div>
     <div class="card">
       <div class="scope-cols">
-        <div class="scope-col inc"><h4>Included — the kick-ass half</h4>
+        <div class="scope-col inc"><h4>Included — the focussed half</h4>
           <ul><li>Read-only framing at the credential step</li><li>Granular permission list, “disconnect anytime” affordance</li><li>Inline security page at the moment of doubt</li><li>Instrumented lead measure: “primary account connected”</li></ul>
         </div>
         <div class="scope-col exc"><h4>Excluded — on purpose</h4>
@@ -2039,8 +2040,8 @@ const BUILDERS = {
         </div>
       </div>
       <div class="kickass">
-        <div class="ka-l">Tradeoff · better + faster over cheaper</div>
-        <div class="ka-v">“A kick-ass half, not a half-assed whole — the smallest thing that can move the lead measure and be read in one cycle.”</div>
+        <div class="ka-l">Focussed Success vs. Ambiguous Failure</div>
+        <div class="ka-v">Excellence through focus vs. dilution: build half the scope but make that half genuinely great, instead of attempting the whole and watering everything down so it delights no one.</div>
       </div>
     </div>
 
@@ -2188,7 +2189,7 @@ const WALK = [
       <div class="wv-kill"><span class="wk-id">TC-03 · killed</span>${meter('killed','lg')}<span class="wk-note">SOC-2 badge alone<br><b>+1pt vs +8pt bar</b></span></div>
       <div class="wv-kill"><span class="wk-id">TC-05 · killed</span>${meter('killed','lg')}<span class="wk-note">Sandbox-first<br><b>9% vs 30% bar</b></span></div>
     </div></div>`},
-  {step:'05 · The bet',h:'Make safety legible at the moment of doubt',body:'The increment is the kick-ass half of one path: <b>read-only framing, granular permissions, “disconnect anytime,” and the security page inline at the credential step</b> — the primary-account moment only. White-glove, sandbox, historical import — all deliberately excluded.',ev:'suggestive',evlabel:'TC-08 in flight · 57%',
+  {step:'05 · The bet',h:'Make safety legible at the moment of doubt',body:'The increment is the focussed half of one path: <b>read-only framing, granular permissions, “disconnect anytime,” and the security page inline at the credential step</b> — the primary-account moment only. White-glove, sandbox, historical import — all deliberately excluded. <i>Focussed success over ambiguous failure.</i>',ev:'suggestive',evlabel:'TC-08 in flight · 57%',
     vis:()=>walkProgStrip(4)},
   {step:'06 · The proof',h:'And we’ll know, at four levels',body:'Instrumented before launch: assumption behavior → opportunity relief → product outcome → business outcome. Early read projects activation moving <b>34% → 41%</b>, on the way to 55%. If a level doesn’t move, the tree tells us exactly which link to revisit.',ev:'validated',evlabel:'Impact ladder wired',
     vis:()=>`<div class="wc-visual"><div class="wv-ladder">
@@ -2283,7 +2284,7 @@ const CHAT_BANK = [
   { id:'opportunity', kw:['opportunity','target','crown','trust','connection','which problem','focus on','bank connect'],
     a:`The crowned target opportunity is <b>bank-connection trust</b>: "I won't connect my primary account until I believe this company is safe and serious." It sits top-right on demand × ability to win, named unprompted in 8/14 interviews, and lands exactly on the activation drop-off. Open the <b>Opportunity loop</b>.` },
   { id:'increment', kw:['increment','bet','what are you building','ship','scope','solution','kick-ass','kick ass','build'],
-    a:`The bet is the <b>trust-first connection flow — the primary-account moment only</b>: read-only framing, granular permissions, "disconnect anytime," and the security page inline at the credential step. White-glove, sandbox, and historical import are deliberately excluded — a kick-ass half, not a half-assed whole. See the <b>Delivery &amp; Impact loop</b>.` },
+    a:`The bet is the <b>trust-first connection flow — the primary-account moment only</b>: read-only framing, granular permissions, "disconnect anytime," and the security page inline at the credential step. White-glove, sandbox, and historical import are deliberately excluded — focussed success over ambiguous failure: build half the scope but make that half genuinely great. See the <b>Delivery &amp; Impact loop</b>.` },
   { id:'impact', kw:['impact','ladder','four level','4 level','measure','churn','business outcome','how will you know'],
     a:`Impact is instrumented at four levels: <b>assumption behavior</b> (primary connection in session one) → <b>opportunity relief</b> (fewer trust stalls) → <b>product outcome</b> (7-day activation, early read 34→41%) → <b>business outcome</b> (90-day churn, read next quarter). If a level doesn't move, the tree tells us which link to revisit.` },
   { id:'causal', kw:['causal','system','what must be true','chain','control factor','noise'],
@@ -2426,9 +2427,9 @@ const GUIDE = [
     run:()=>goLoop('delivery'),
     anchor:()=>document.querySelector('#screen-delivery .grid.g-3')||document.querySelector('#screen-delivery .card') },
 
-  { title:'The bet: the kick-ass half',
+  { title:'The bet: the focussed half',
     body:`The increment is the <b>trust-first connection flow — the primary-account moment only</b>: read-only framing, granular permissions, "disconnect anytime," and a security page inline at the credential step.`,
-    result:{k:'Result',v:`White-glove, sandbox, and historical import are <b>deliberately excluded</b> — a kick-ass half, not a half-assed whole.`,
+    result:{k:'Result',v:`White-glove, sandbox, and historical import are <b>deliberately excluded</b> — focussed success over ambiguous failure: half the scope, made genuinely great.`,
             next:`Next: the test in flight that moves our weakest belief.`},
     run:()=>{ goLoop('delivery'); setTimeout(()=>{ const el=document.querySelector('#screen-delivery .scope-cols'); if(el) el.scrollIntoView({behavior:'smooth',block:'center'}); },120); },
     anchor:()=>document.querySelector('#screen-delivery .scope-cols')||document.querySelector('#screen-delivery .kickass') },
