@@ -200,6 +200,53 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .brand .name{font-weight:600;font-size:15px;letter-spacing:-.02em}
 .brand .ver{font-size:10px;color:var(--muted);font-family:var(--font-mono);margin-top:1px}
 
+/* ── project selector ── */
+.proj-select{position:relative;margin:2px 0 6px}
+.proj-btn{display:flex;align-items:center;gap:9px;width:100%;padding:9px 10px;border-radius:var(--r-md);
+  background:var(--surface);border:1px solid var(--line-strong);cursor:pointer;text-align:left;
+  transition:.13s var(--ease)}
+.proj-btn:hover{border-color:var(--accent);background:var(--surface-2)}
+.proj-dot{width:8px;height:8px;border-radius:50%;flex:none;background:var(--accent);
+  box-shadow:0 0 0 3px var(--accent-soft)}
+.proj-dot.muted{background:var(--muted);box-shadow:none;opacity:.6}
+.proj-txt{display:flex;flex-direction:column;min-width:0;flex:1}
+.proj-name{font-weight:600;font-size:13.5px;letter-spacing:-.01em;line-height:1.15}
+.proj-sub{font-size:10.5px;color:var(--muted);line-height:1.2;margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.proj-caret{color:var(--muted);flex:none;transition:transform .18s var(--ease)}
+.proj-select.open .proj-caret{transform:rotate(180deg)}
+.proj-menu{position:absolute;top:calc(100% + 6px);left:0;right:0;z-index:30;
+  background:var(--surface);border:1px solid var(--line-strong);border-radius:var(--r-md);
+  box-shadow:var(--shadow-lg);padding:6px;opacity:0;pointer-events:none;transform:translateY(-6px) scale(.98);
+  transform-origin:top;transition:.16s var(--ease)}
+.proj-select.open .proj-menu{opacity:1;pointer-events:auto;transform:none}
+.proj-menu-lab{font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);font-weight:700;padding:6px 8px 4px}
+.proj-opt{display:flex;align-items:center;gap:9px;width:100%;padding:8px 9px;border-radius:var(--r-sm);
+  cursor:pointer;text-align:left;font-size:12.5px;color:var(--ink-2);transition:.12s var(--ease)}
+.proj-opt .po-txt{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.proj-opt b{font-weight:600;color:var(--ink)}
+.proj-opt:not(:disabled):hover{background:var(--surface-2)}
+.proj-opt.active{background:var(--accent-soft)}
+.proj-opt.active b{color:var(--accent-ink)}
+.po-check{color:var(--accent-ink);flex:none}
+.po-soon{font-size:9px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);
+  background:var(--surface-2);border:1px solid var(--line);border-radius:5px;padding:1px 5px;flex:none}
+.proj-opt:disabled{opacity:.55;cursor:default}
+.proj-opt.new{color:var(--accent-ink);font-weight:600;justify-content:flex-start}
+.proj-menu-sep{height:1px;background:var(--line);margin:5px 4px}
+
+/* ── account + settings (rail bottom) ── */
+.rail-acct-row{display:flex;align-items:center;gap:8px;margin-top:8px}
+.rail-acct{display:flex;align-items:center;gap:9px;flex:1;min-width:0;padding:6px;border-radius:var(--r-sm);
+  cursor:pointer;text-align:left;transition:.12s var(--ease)}
+.rail-acct:hover{background:var(--surface-2)}
+.avatar.sm{width:28px;height:28px;font-size:11px;flex:none}
+.acct-txt{display:flex;flex-direction:column;min-width:0}
+.acct-name{font-weight:600;font-size:12.5px;line-height:1.15;letter-spacing:-.01em}
+.acct-role{font-size:10px;color:var(--muted);line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rail-set{width:32px;height:32px;flex:none;border-radius:var(--r-sm);display:grid;place-items:center;
+  color:var(--muted);cursor:pointer;transition:.12s var(--ease)}
+.rail-set:hover{background:var(--surface-2);color:var(--ink)}
+
 .rail-label{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
   font-weight:600;padding:14px 8px 6px}
 .nav-loop{
@@ -818,19 +865,14 @@ html:not(.no-vars) .var b,html:not(.no-vars) b .var{color:var(--var-ink)}
 html:not(.no-vars):not(.no-fields) .field.var{color:var(--var-ink)}
 
 /* highlight legend (bottom-left toggle) */
-.hl-legend{position:fixed;left:18px;bottom:18px;z-index:45;display:flex;align-items:center;gap:4px;
-  background:var(--surface);border:1px solid var(--line-strong);border-radius:24px;padding:5px 7px;
-  box-shadow:var(--shadow-md);font-size:11px}
-.hl-legend button{display:inline-flex;align-items:center;gap:6px;border-radius:20px;padding:5px 11px;cursor:pointer;
-  font-weight:600;color:var(--ink-2);transition:.12s var(--ease);font-size:11px;line-height:1}
-.hl-legend button .dot{width:9px;height:9px;border-radius:3px;flex:none}
-.hl-legend button.fields .dot{box-shadow:0 0 0 1.5px var(--field-green),0 0 0 3px var(--field-glow);background:var(--field-bg)}
-.hl-legend button.vars .dot{background:var(--var-bg);box-shadow:inset 0 0 0 1px var(--var-line)}
-.hl-legend button[aria-pressed="false"]{opacity:.42}
-.hl-legend button:hover{background:var(--surface-2)}
-.hl-legend .hl-lab{color:var(--muted);font-size:10px;padding:0 4px 0 6px;letter-spacing:.02em}
-html.view-only .hl-legend{display:none}
-@media(max-width:1000px){.hl-legend .hl-lab{display:none}}
+/* demo overlay toggles — two small colour squares, top-right of the topbar */
+.hl-squares{display:inline-flex;align-items:center;gap:6px;margin-right:2px}
+.hl-sq{width:18px;height:18px;border-radius:5px;cursor:pointer;flex:none;transition:.12s var(--ease);position:relative}
+.hl-sq.fields{background:var(--field-bg);box-shadow:0 0 0 1.5px var(--field-green),0 0 0 4px var(--field-glow)}
+.hl-sq.vars{background:var(--var-bg);box-shadow:inset 0 0 0 1.5px var(--var-line),0 0 0 1px var(--var-line)}
+.hl-sq:hover{transform:translateY(-1px)}
+.hl-sq[aria-pressed="false"]{opacity:.28;box-shadow:inset 0 0 0 1.5px var(--line-strong)!important;background:transparent!important}
+html.view-only .hl-squares{display:none}
 
 /* centered Ask Noetic (Socratic field helper) */
 .ask-scrim{position:fixed;inset:0;z-index:48;background:rgba(12,18,28,.46);opacity:0;pointer-events:none;
@@ -1107,6 +1149,33 @@ var VIEW_ONLY = (function(){try{return /(?:^|[?&])share=reasoning(?:&|$)/.test(l
       </div>
     </div>
 
+    <!-- ── Project selector ── -->
+    <div class="proj-select" id="projSelect">
+      <button class="proj-btn" onclick="toggleProjMenu(event)" aria-haspopup="true" aria-expanded="false">
+        <span class="proj-dot"></span>
+        <span class="proj-txt">
+          <span class="proj-name">Quench</span>
+          <span class="proj-sub">Daily hydration habit</span>
+        </span>
+        <svg class="proj-caret" width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="proj-menu" id="projMenu" role="menu">
+        <div class="proj-menu-lab">Projects</div>
+        <button class="proj-opt active" role="menuitem" onclick="closeProjMenu()">
+          <span class="proj-dot"></span><span class="po-txt"><b>Quench</b> · Daily hydration habit</span>
+          <svg class="po-check" width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3.5 8.5l3 3 6-6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button class="proj-opt" role="menuitem" disabled>
+          <span class="proj-dot muted"></span><span class="po-txt"><b>Wrenlow Coffee</b> · Subscription retention</span><span class="po-soon">sample</span>
+        </button>
+        <button class="proj-opt" role="menuitem" disabled>
+          <span class="proj-dot muted"></span><span class="po-txt"><b>Atlas Bikes</b> · First-ride confidence</span><span class="po-soon">sample</span>
+        </button>
+        <div class="proj-menu-sep"></div>
+        <button class="proj-opt new" role="menuitem" disabled>＋ New discovery project</button>
+      </div>
+    </div>
+
     <div class="rail-label">The five loops</div>
     <button class="nav-loop active" data-loop="tree" onclick="goLoop('tree')">
       <span class="loop-num">◇</span> Tree <span class="loop-meta">home</span>
@@ -1153,6 +1222,15 @@ var VIEW_ONLY = (function(){try{return /(?:^|[?&])share=reasoning(?:&|$)/.test(l
 
     <div class="rail-foot">
       <div class="kbd-hint"><kbd>⌘</kbd><kbd>K</kbd><span>Command palette</span></div>
+      <div class="rail-acct-row">
+        <button class="rail-acct" onclick="openCmdk()" title="Account">
+          <span class="avatar sm">PD</span>
+          <span class="acct-txt"><span class="acct-name">Priya Devi</span><span class="acct-role">Product · Quench</span></span>
+        </button>
+        <button class="rail-set" onclick="openCmdk()" title="Settings" aria-label="Settings">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="2.2" stroke="currentColor" stroke-width="1.4"/><path d="M8 1.5v1.7M8 12.8v1.7M14.5 8h-1.7M3.2 8H1.5M12.6 3.4l-1.2 1.2M4.6 11.4l-1.2 1.2M12.6 12.6l-1.2-1.2M4.6 4.6L3.4 3.4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+        </button>
+      </div>
     </div>
   </aside>
 
@@ -1173,11 +1251,14 @@ var VIEW_ONLY = (function(){try{return /(?:^|[?&])share=reasoning(?:&|$)/.test(l
         <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.4"/><path d="M11 11l3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
         Search or jump… <kbd>⌘K</kbd>
       </button>
+      <div class="hl-squares" id="hlLegend" aria-label="Demo highlight overlays">
+        <button class="hl-sq fields" aria-pressed="true" onclick="toggleHL('fields',this)" title="Toggle editable-field highlights (green)"></button>
+        <button class="hl-sq vars" aria-pressed="true" onclick="toggleHL('vars',this)" title="Toggle project-specific highlights (pink)"></button>
+      </div>
       <button class="theme-btn" onclick="toggleTheme()" title="Toggle dark mode" aria-label="Toggle dark mode">
         <svg class="ico-moon" width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M13.5 9.6A6 6 0 116.4 2.5a4.8 4.8 0 107.1 7.1z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
         <svg class="ico-sun" width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="3" stroke="currentColor" stroke-width="1.4"/><path d="M8 1v2M8 13v2M1 8h2M13 8h2M3 3l1.4 1.4M11.6 11.6L13 13M13 3l-1.4 1.4M4.4 11.6L3 13" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
       </button>
-      <div class="avatar">PD</div>
     </div>
 
     <!-- Cadence ribbon -->
@@ -1332,12 +1413,6 @@ var VIEW_ONLY = (function(){try{return /(?:^|[?&])share=reasoning(?:&|$)/.test(l
   </div>
 </aside>
 
-<!-- highlight overlay legend -->
-<div class="hl-legend" id="hlLegend" aria-label="Highlight overlays">
-  <button class="fields" aria-pressed="true" onclick="toggleHL('fields',this)" title="Toggle editable-field highlights"><span class="dot"></span>Editable</button>
-  <button class="vars" aria-pressed="true" onclick="toggleHL('vars',this)" title="Toggle project-specific highlights"><span class="dot"></span>Project-specific</button>
-  <span class="hl-lab">overlays</span>
-</div>
 
 <!-- ───────── GUIDED MODE (Feature B) ───────── -->
 <div class="guide-scrim" id="guideScrim"></div>
@@ -2545,6 +2620,16 @@ function closeChat(){
   askState=null;
 }
 function chatIsOpen(){ return document.getElementById('chatPanel').classList.contains('open'); }
+
+/* ── project selector ── */
+function toggleProjMenu(e){
+  if(e) e.stopPropagation();
+  const sel=document.getElementById('projSelect');
+  const open=sel.classList.toggle('open');
+  sel.querySelector('.proj-btn').setAttribute('aria-expanded', open?'true':'false');
+}
+function closeProjMenu(){ const sel=document.getElementById('projSelect'); if(sel){ sel.classList.remove('open'); sel.querySelector('.proj-btn').setAttribute('aria-expanded','false'); } }
+document.addEventListener('click',e=>{ const sel=document.getElementById('projSelect'); if(sel&&sel.classList.contains('open')&&!sel.contains(e.target)) closeProjMenu(); });
 
 /* ── highlight overlay toggles ── */
 function toggleHL(kind,btn){
