@@ -396,6 +396,9 @@ html.dark .theme-btn .ico-moon{display:none}
 .node.is-weakest{border-color:var(--ev-suggestive);box-shadow:0 0 0 1px var(--ev-suggestive),var(--shadow-md)}
 .node.dim{opacity:.32;filter:grayscale(.3)}
 .node-top{display:flex;align-items:center;gap:10px;margin-bottom:7px}
+.node-meter{margin-left:auto;flex:none}
+.node-tags{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:7px}
+.node-tags .node-crown,.node-tags .node-weak-flag{margin-left:0}
 .node-kind{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700}
 .node-crown{margin-left:auto;font-size:10px;font-weight:700;color:var(--accent-ink);background:var(--accent-soft);
   padding:2px 8px;border-radius:9px;letter-spacing:.04em}
@@ -1463,14 +1466,17 @@ function nodeHTML(key){
   else if(n.weakest) flag = `<span class="node-weak-flag">⚠ Weakest</span>`;
   /* category badge (count chip) sits before the meter */
   const badge = cat ? `<span class="node-badge">${n.badge}</span>` : '';
-  /* compact tree cards: kind + flag/badge + meter, then headline — nothing else.
-     Detail lives in the click-opened modal / slide-over, not on the canvas. */
-  const topMeter = `<span style="margin-left:${(flag||badge)?'8px':'auto'}">${meter(n.ev)}</span>`;
+  /* compact tree cards: kind + meter pinned top-right, an optional tags row
+     (flag/badge) beneath, then the headline. Detail lives in the click-opened
+     modal / slide-over, not on the canvas. */
+  const topMeter = `<span class="node-meter">${meter(n.ev)}</span>`;
+  const tags = (flag||badge) ? `<div class="node-tags">${flag}${badge}</div>` : '';
   const open = cat ? `openCategory('${key}')` : `openNode('${key}')`;
   return `<div class="${cls}" style="left:${l.x}px;top:0;width:${l.w}px"
             data-key="${key}" data-ev="${n.ev}" tabindex="0" role="button" title="Click to open"
             onclick="${open}" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();${open}}">
-    <div class="node-top"><span class="node-kind">${n.kind}</span>${flag}${badge}${topMeter}</div>
+    <div class="node-top"><span class="node-kind">${n.kind}</span>${topMeter}</div>
+    ${tags}
     <div class="node-h">${n.h}</div>
   </div>`;
 }
@@ -1480,6 +1486,7 @@ function treeSVG(Y,H,rowH){
   const ob=Y.outcome+H.outcome;                                      // outcome bottom
   const cx=TL.causal.x+TL.causal.w/2;                                // convergence center x
   const cy0=Y.causal, cb=Y.causal+H.causal;                          // causal top/bottom
+  const cyMid=cy0+H.causal/2;                                        // causal vertical center (side entry)
   const opx=TL.opportunities.x+TL.opportunities.w/2;                 // opportunities center x
   const opb=Y.opportunities+H.opportunities;                         // opportunities bottom
   const solx=TL.solutions.x+TL.solutions.w/2;
@@ -1504,15 +1511,15 @@ function treeSVG(Y,H,rowH){
     <path class="conn" d="M${dx} ${Y.forces+H.forces} V${Y.opportunities-4}" marker-end="url(#arr)"/>
     <!-- challenge arrow: validated demand can challenge the outcome -->
     <path class="conn dashed accent" d="M${TL.opportunities.x-4} ${chY1} C600 ${chY1} 540 ${chY2} ${TL.outcome.x+TL.outcome.w+6} ${chY2}" marker-end="url(#arrAcc)"/>
-    <text class="arrowlab accent" x="590" y="${(chY1+chY2)/2-14}" text-anchor="middle">validated demand can challenge the outcome</text>
-    <!-- convergence into the causal bridge -->
-    <path class="conn" d="M${sx} ${ob} C${sx} ${ob+46} ${cx-90} ${cy0-46} ${cx-14} ${cy0-6}" marker-end="url(#arr)"/>
-    <path class="conn" d="M${TL.opportunities.x-4} ${opcy} C${cx+150} ${opcy} ${cx+110} ${cy0-44} ${cx+14} ${cy0-6}" marker-end="url(#arr)"/>
-    <text class="arrowlab" x="${cx}" y="${cy0-54}" text-anchor="middle">supply and demand converge</text>
+    <text class="arrowlab accent" x="590" y="${(chY1+chY2)/2-20}" text-anchor="middle"><tspan x="590" dy="0">validated demand can</tspan><tspan x="590" dy="14">challenge the outcome</tspan></text>
+    <!-- convergence: each spine exits its card BOTTOM and enters a SIDE of the causal card -->
+    <path class="conn" d="M${sx} ${ob} C${sx} ${ob+44} ${TL.causal.x-72} ${cyMid} ${TL.causal.x-3} ${cyMid}" marker-end="url(#arr)"/>
+    <path class="conn" d="M${opx} ${opb} C${opx} ${opb+44} ${TL.causal.x+TL.causal.w+72} ${cyMid} ${TL.causal.x+TL.causal.w+3} ${cyMid}" marker-end="url(#arr)"/>
+    <text class="arrowlab" x="${cx}" y="${cy0-12}" text-anchor="middle">supply and demand converge</text>
     <!-- causal → solutions (category) -->
     <path class="conn" d="M${cx} ${cb} V${Y.solutions-4}" marker-end="url(#arr)"/>
-    <!-- solutions → assumption tests (category) -->
-    <path class="conn" d="M${solx} ${sob} C${solx} ${sob+24} ${tx} ${rowY-24} ${tx} ${rowY-4}" marker-end="url(#arr)"/>
+    <!-- solutions → assumption tests (category): straight drop onto the tests card -->
+    <path class="conn" d="M${tx} ${sob} C${tx} ${sob+18} ${tx} ${rowY-18} ${tx} ${rowY-4}" marker-end="url(#arr)"/>
     <!-- tests → increment -->
     <path class="conn" d="M${TL.tests.x+TL.tests.w} ${rcy} H${TL.increment.x-5}" marker-end="url(#arr)"/>
     <!-- re-prioritise loop back to the opportunity space -->
@@ -1871,11 +1878,10 @@ const BUILDERS = {
     </div>
 
     <div class="grid g-2" style="margin-top:24px">
-      <div class="card exp">
+      <div class="card">
         <div class="card-t">Five admission tests · adding an opportunity<span class="ct-line"></span></div>
-        <div style="display:flex;align-items:center;gap:12px"><span style="font-size:13px;color:var(--ink-2)">All five passed — the target clears admission.</span>
-          <button class="exp-tog" style="margin-left:auto" aria-expanded="false" onclick="toggleExp(this)">See each test <span class="exp-chev">▾</span></button></div>
-        <div class="exp-body">
+        <div style="font-size:13px;color:var(--ink-2);margin-bottom:6px">All five passed — the target clears admission.</div>
+        <div style="margin-top:10px">
           <div class="check met"><span class="box">✓</span><span class="c-txt">Framed as a customer struggle, not a solution<span class="ct-meta">“Won’t connect my primary account” — a moment, not a feature.</span></span></div>
           <div class="check met"><span class="box">✓</span><span class="c-txt">Not a feature request in disguise<span class="ct-meta">Translated from “add more security badges” → the underlying trust threshold.</span></span></div>
           <div class="check met"><span class="box">✓</span><span class="c-txt">Grounded in real behavior / a real story<span class="ct-meta">Rosa, Aisha, + 6 more interviews of real past switches.</span></span></div>
