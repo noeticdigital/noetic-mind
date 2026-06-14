@@ -399,6 +399,8 @@ html.dark .theme-btn .ico-moon{display:none}
 .node-meter{margin-left:auto;flex:none}
 .node-tags{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:7px}
 .node-tags .node-crown,.node-tags .node-weak-flag{margin-left:0}
+.node-tag{font-size:9.5px;font-weight:600;letter-spacing:.02em;color:var(--muted);
+  background:var(--surface-2);border:1px solid var(--line);padding:2px 8px;border-radius:9px;white-space:nowrap}
 .node-kind{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700}
 .node-crown{margin-left:auto;font-size:10px;font-weight:700;color:var(--accent-ink);background:var(--accent-soft);
   padding:2px 8px;border-radius:9px;letter-spacing:.04em}
@@ -469,7 +471,10 @@ html.dark .theme-btn .ico-moon{display:none}
 .section-rule{display:flex;align-items:center;gap:12px;margin:34px 0 16px}
 .section-rule h2{font-family:var(--font-serif);font-size:19px;font-weight:500;letter-spacing:-.01em}
 .section-rule .sr-line{flex:1;height:1px;background:var(--line)}
-.section-rule .sr-n{font-family:var(--font-mono);font-size:11px;color:var(--muted)}
+.section-rule .sr-n{font-family:var(--font-mono);font-size:12px;font-weight:700;letter-spacing:.02em;
+  color:var(--accent-ink);background:var(--accent-soft);border:1px solid var(--accent-line,transparent);
+  padding:3px 8px;border-radius:7px;line-height:1}
+html.dark .section-rule .sr-n{color:#cfe0f3;background:rgba(46,111,176,.22)}
 
 /* interview snapshot */
 .snap{border-left:3px solid var(--line-strong);padding-left:16px;margin-bottom:18px}
@@ -521,6 +526,7 @@ html.dark .theme-btn .ico-moon{display:none}
 .check:last-child{border-bottom:none}
 .check .box{width:18px;height:18px;border-radius:5px;border:1.5px solid var(--line-strong);flex:none;margin-top:1px;
   display:grid;place-items:center;transition:.13s var(--ease)}
+.check .box svg{display:block}
 .check.met .box{background:var(--ev-validated);border-color:var(--ev-validated);color:#fff}
 .check.unmet .box{border-color:var(--ev-suggestive);border-style:dashed}
 .check .c-txt{font-size:13px;line-height:1.45}
@@ -752,6 +758,77 @@ html.dark .theme-btn .ico-moon{display:none}
 @keyframes fadeUp{to{opacity:1;transform:none}}
 
 /* ───────────────────────────── PROJECT CHAT (Feature A) ───────────────────────────── */
+/* ───────────────────────────── EDITABLE FIELDS + VARIABLE HIGHLIGHTS ─────────────────────────────
+   Two demo overlays: green = a user-input field you can edit (and let Ask Noetic fill);
+   pink = content that varies project-to-project (everything not part of the system itself). */
+:root{
+  --field-green:#15a06b; --field-glow:rgba(21,160,107,.22); --field-bg:rgba(21,160,107,.05);
+  --var-ink:#b03b71; --var-line:rgba(176,59,113,.42); --var-bg:rgba(176,59,113,.07);
+}
+html.dark{
+  --field-green:#33c98c; --field-glow:rgba(51,201,140,.20); --field-bg:rgba(51,201,140,.06);
+  --var-ink:#e87bb0; --var-line:rgba(232,123,176,.4); --var-bg:rgba(232,123,176,.10);
+}
+/* editable field */
+.field{position:relative;border-radius:7px;cursor:text;transition:box-shadow .14s var(--ease),background .14s var(--ease)}
+html:not(.no-fields) .field{box-shadow:0 0 0 1.5px var(--field-green),0 0 0 4px var(--field-glow);
+  background:var(--field-bg);padding:.06em .34em;margin:0 .02em}
+html:not(.no-fields) .field:hover{box-shadow:0 0 0 1.5px var(--field-green),0 0 0 5px var(--field-glow)}
+.field:focus{outline:none}
+html:not(.no-fields) .field:focus{box-shadow:0 0 0 2px var(--field-green),0 0 0 6px var(--field-glow);background:var(--field-bg)}
+/* "work through it" affordance — appears on hover of a field, or always for block fields */
+.field-help{display:inline-flex;align-items:center;gap:5px;vertical-align:baseline;margin-left:7px;
+  font-family:var(--font-sans);font-size:10.5px;font-weight:600;color:var(--field-green);
+  background:var(--field-bg);border:1px solid var(--field-green);border-radius:20px;padding:2px 9px;cursor:pointer;
+  white-space:nowrap;opacity:.92;transition:.13s var(--ease)}
+.field-help:hover{opacity:1;transform:translateY(-1px)}
+.field-help svg{width:11px;height:11px;flex:none}
+html.no-fields .field-help{display:none}
+/* variable (project-specific) content */
+html:not(.no-vars) .var{color:var(--var-ink);background:var(--var-bg);
+  box-shadow:inset 0 -1px 0 0 var(--var-line);border-radius:3px;padding:0 .12em;
+  text-decoration:none;font-weight:inherit}
+html:not(.no-vars) .var b,html:not(.no-vars) b .var{color:var(--var-ink)}
+/* a field that also holds variable content reads as green (editable) outside, pink (variable) inside text */
+html:not(.no-vars):not(.no-fields) .field.var{color:var(--var-ink)}
+
+/* highlight legend (bottom-left toggle) */
+.hl-legend{position:fixed;left:18px;bottom:18px;z-index:45;display:flex;align-items:center;gap:4px;
+  background:var(--surface);border:1px solid var(--line-strong);border-radius:24px;padding:5px 7px;
+  box-shadow:var(--shadow-md);font-size:11px}
+.hl-legend button{display:inline-flex;align-items:center;gap:6px;border-radius:20px;padding:5px 11px;cursor:pointer;
+  font-weight:600;color:var(--ink-2);transition:.12s var(--ease);font-size:11px;line-height:1}
+.hl-legend button .dot{width:9px;height:9px;border-radius:3px;flex:none}
+.hl-legend button.fields .dot{box-shadow:0 0 0 1.5px var(--field-green),0 0 0 3px var(--field-glow);background:var(--field-bg)}
+.hl-legend button.vars .dot{background:var(--var-bg);box-shadow:inset 0 0 0 1px var(--var-line)}
+.hl-legend button[aria-pressed="false"]{opacity:.42}
+.hl-legend button:hover{background:var(--surface-2)}
+.hl-legend .hl-lab{color:var(--muted);font-size:10px;padding:0 4px 0 6px;letter-spacing:.02em}
+html.view-only .hl-legend{display:none}
+@media(max-width:1000px){.hl-legend .hl-lab{display:none}}
+
+/* centered Ask Noetic (Socratic field helper) */
+.ask-scrim{position:fixed;inset:0;z-index:48;background:rgba(12,18,28,.46);opacity:0;pointer-events:none;
+  transition:opacity .2s var(--ease)}
+html.dark .ask-scrim{background:rgba(0,0,0,.58)}
+.ask-scrim.on{opacity:1;pointer-events:auto}
+.chat-panel.center{right:50%;bottom:50%;transform:translate(50%,50%) scale(.97);transform-origin:center;
+  width:560px;max-width:calc(100vw - 48px);height:auto;max-height:82vh;min-height:0;z-index:49}
+.chat-panel.center.open{transform:translate(50%,50%)}
+.chat-panel.center .chat-body{min-height:220px}
+/* field-helper "context" strip in the centered assistant */
+.ask-context{flex:none;padding:10px 16px;background:var(--accent-soft);border-bottom:1px solid var(--line);
+  font-size:11.5px;color:var(--accent-ink);display:flex;align-items:center;gap:8px}
+.ask-context b{font-weight:700}
+.ask-insert{display:inline-flex;align-items:center;gap:7px;margin-top:9px;font-family:var(--font-sans);
+  font-size:12.5px;font-weight:600;color:#fff;background:var(--field-green);border-radius:9px;padding:8px 14px;cursor:pointer;
+  transition:.13s var(--ease)}
+.ask-insert:hover{filter:brightness(1.06);transform:translateY(-1px)}
+.ask-draft{margin-top:8px;padding:11px 13px;border-radius:10px;background:var(--surface-2);
+  border:1px dashed var(--field-green);font-size:13px;line-height:1.5;color:var(--ink)}
+.ask-draft .adl{display:block;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;
+  color:var(--field-green);margin-bottom:5px}
+
 .chat-fab{
   position:fixed;right:24px;bottom:24px;z-index:46;display:inline-flex;align-items:center;gap:9px;
   height:46px;padding:0 17px 0 15px;border-radius:23px;cursor:pointer;
@@ -1197,19 +1274,20 @@ var VIEW_ONLY = (function(){try{return /(?:^|[?&])share=reasoning(?:&|$)/.test(l
 </div>
 
 <!-- ───────── PROJECT CHAT (Feature A) ───────── -->
-<button class="chat-fab" id="chatFab" onclick="openChat()" aria-label="Ask about this project">
+<button class="chat-fab" id="chatFab" onclick="openChat()" aria-label="Ask Noetic">
   <span class="cf-glyph">
     <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M2.5 4.2A1.7 1.7 0 014.2 2.5h9.6a1.7 1.7 0 011.7 1.7v6.1a1.7 1.7 0 01-1.7 1.7H7l-3.4 2.8a.5.5 0 01-.8-.4v-2.4H4.2a1.7 1.7 0 01-1.7-1.7z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M6 6.4h6M6 8.8h3.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
   </span>
-  Ask about this project
+  Ask Noetic
 </button>
-<aside class="chat-panel" id="chatPanel" role="dialog" aria-modal="false" aria-label="Project chat">
+<div class="ask-scrim" id="askScrim" onclick="closeChat()"></div>
+<aside class="chat-panel" id="chatPanel" role="dialog" aria-modal="false" aria-label="Ask Noetic">
   <div class="chat-head">
     <div class="ch-top">
       <div class="ch-glyph">
         <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="#fff" stroke-width="1.4" opacity=".5"/><circle cx="8" cy="8" r="2.4" fill="#fff"/></svg>
       </div>
-      <div class="ch-title">Noetic <span class="ch-proj">· Ledgerline project</span></div>
+      <div class="ch-title">Ask Noetic <span class="ch-proj">· Ledgerline project</span></div>
     </div>
     <button class="ch-close" onclick="closeChat()" aria-label="Close chat">
       <svg width="14" height="14" viewBox="0 0 16 16"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
@@ -1219,6 +1297,7 @@ var VIEW_ONLY = (function(){try{return /(?:^|[?&])share=reasoning(?:&|$)/.test(l
       I can only see this discovery project.
     </div>
   </div>
+  <div class="ask-context" id="askContext" style="display:none"></div>
   <div class="chat-body" id="chatBody"></div>
   <div class="chat-foot">
     <textarea class="chat-input" id="chatInput" rows="1" placeholder="Ask about Ledgerline…" oninput="chatAutogrow(this)" onkeydown="chatKey(event)"></textarea>
@@ -1227,6 +1306,13 @@ var VIEW_ONLY = (function(){try{return /(?:^|[?&])share=reasoning(?:&|$)/.test(l
     </button>
   </div>
 </aside>
+
+<!-- highlight overlay legend -->
+<div class="hl-legend" id="hlLegend" aria-label="Highlight overlays">
+  <button class="fields" aria-pressed="true" onclick="toggleHL('fields',this)" title="Toggle editable-field highlights"><span class="dot"></span>Editable</button>
+  <button class="vars" aria-pressed="true" onclick="toggleHL('vars',this)" title="Toggle project-specific highlights"><span class="dot"></span>Project-specific</button>
+  <span class="hl-lab">overlays</span>
+</div>
 
 <!-- ───────── GUIDED MODE (Feature B) ───────── -->
 <div class="guide-scrim" id="guideScrim"></div>
@@ -1301,24 +1387,15 @@ const NODES = {
         ['leadership','Outcome ratified in Q2 negotiation — the team owns the metric, not a roadmap.'],
       ],
     }},
-  jtbd:{kind:'Job to be Done · Customer Progress', ev:'validated',
+  jtbd:{kind:'Job to be Done · Timeline & Forces', ev:'validated', tag:'one demand picture',
     h:'“Move from spreadsheet chaos to trusted, always-current books.”',
-    d:'When tax season or an investor request exposes the mess, owners want to answer money questions in minutes — and look credible.',
+    d:'When tax season or an investor request exposes the mess, owners want to answer money questions in minutes — and look credible. The job, its timeline, and its forces are one demand picture.',
     detail:{
       grounding:'Job statement (full grammar): When tax season or an investor request exposes how messy my books are, I want to move from spreadsheet chaos to trusted, always-current books, so I can answer money questions in minutes, feel in control, and look credible to my accountant and investors.',
-      type:'Functional (current numbers), emotional (in control), social (credible to accountant & investors) — all three motivations present. Segment: founder/owner-operators of <20-person companies doing their own books on spreadsheets + bank-portal exports.',
+      type:'Motivations — functional (current numbers), emotional (in control), social (credible to accountant & investors). Timeline — the decisive struggling moment sits at Onboarding: the owner reaches “Connect your bank,” imagines handing a startup their business-account credentials, and stalls. Forces — push (a deadline exposed the mess) and pull (always-current books) are strong; anxiety (bank credentials, miscategorization) and habit (the spreadsheet ritual they secretly like) hold them back.',
       evidence:[
         ['14 interviews','Recurs in 11 of 14 progress interviews of real past switches.'],
         ['behavior','Owners who connected a feed in week 1 reconciled 3.2× more often in month one.'],
-      ],
-    }},
-  forces:{kind:'Timeline & Forces', ev:'suggestive',
-    h:'A deadline pushes hard; bank-credential anxiety stalls the connection',
-    d:'Four forces around the connect-your-bank moment.',
-    detail:{
-      grounding:'The decisive struggling moment sits at Onboarding: the owner reaches “Connect your bank,” imagines handing a startup their business account credentials, and stalls.',
-      type:'Push (deadline exposed the mess) and Pull (always-current books) are strong; Anxiety (bank credentials, miscategorization) and Habit (the spreadsheet ritual they secretly like) hold them back.',
-      evidence:[
         ['quotes','“I’m not giving a two-year-old startup the keys to my business account.” — Rosa, roastery owner'],
         ['signal','Drop-off concentrates between signup and a completed bank connection.'],
       ],
@@ -1442,7 +1519,6 @@ const TL={
   framing:      {x:96,  w:380, cls:'slim', top:true, nod:true},
   outcome:      {x:96,  w:380, note:'supply hypothesis · revisable'},
   jtbd:         {x:704, w:380, cls:'slim', top:true, nod:true},
-  forces:       {x:704, w:380, cls:'slim', top:true, nod:true},
   opportunities:{x:704, w:380, cls:'slim', top:true, cat:true},
   causal:       {x:400, w:380, cls:'slim', top:true, nod:true},
   solutions:    {x:400, w:380, cls:'slim', top:true, cat:true},
@@ -1466,18 +1542,19 @@ function nodeHTML(key){
   else if(n.weakest) flag = `<span class="node-weak-flag">⚠ Weakest</span>`;
   /* category badge (count chip) sits before the meter */
   const badge = cat ? `<span class="node-badge">${n.badge}</span>` : '';
+  const tag = n.tag ? `<span class="node-tag">${n.tag}</span>` : '';
   /* compact tree cards: kind + meter pinned top-right, an optional tags row
      (flag/badge) beneath, then the headline. Detail lives in the click-opened
      modal / slide-over, not on the canvas. */
   const topMeter = `<span class="node-meter">${meter(n.ev)}</span>`;
-  const tags = (flag||badge) ? `<div class="node-tags">${flag}${badge}</div>` : '';
+  const tags = (flag||badge||tag) ? `<div class="node-tags">${flag}${badge}${tag}</div>` : '';
   const open = cat ? `openCategory('${key}')` : `openNode('${key}')`;
   return `<div class="${cls}" style="left:${l.x}px;top:0;width:${l.w}px"
             data-key="${key}" data-ev="${n.ev}" tabindex="0" role="button" title="Click to open"
             onclick="${open}" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();${open}}">
     <div class="node-top"><span class="node-kind">${n.kind}</span>${topMeter}</div>
     ${tags}
-    <div class="node-h">${n.h}</div>
+    <div class="node-h"><span class="var">${n.h}</span></div>
   </div>`;
 }
 
@@ -1506,9 +1583,8 @@ function treeSVG(Y,H,rowH){
     </defs>
     <!-- supply spine: framing → outcome -->
     <path class="conn" d="M${sx} ${Y.framing+H.framing} V${Y.outcome-4}" marker-end="url(#arr)"/>
-    <!-- demand spine: jtbd → forces → opportunities (category) -->
-    <path class="conn" d="M${dx} ${Y.jtbd+H.jtbd} V${Y.forces-4}" marker-end="url(#arr)"/>
-    <path class="conn" d="M${dx} ${Y.forces+H.forces} V${Y.opportunities-4}" marker-end="url(#arr)"/>
+    <!-- demand spine: jtbd (job + timeline & forces) → opportunities (category) -->
+    <path class="conn" d="M${dx} ${Y.jtbd+H.jtbd} V${Y.opportunities-4}" marker-end="url(#arr)"/>
     <!-- challenge arrow: validated demand can challenge the outcome -->
     <path class="conn dashed accent" d="M${TL.opportunities.x-4} ${chY1} C600 ${chY1} 540 ${chY2} ${TL.outcome.x+TL.outcome.w+6} ${chY2}" marker-end="url(#arrAcc)"/>
     <text class="arrowlab accent" x="590" y="${(chY1+chY2)/2-20}" text-anchor="middle"><tspan x="590" dy="0">validated demand can</tspan><tspan x="590" dy="14">challenge the outcome</tspan></text>
@@ -1539,8 +1615,8 @@ function renderTree(){
   /* place vertically */
   const Y={};
   Y.framing=16;                         Y.outcome=Y.framing+H.framing+26;
-  Y.jtbd=16;                            Y.forces=Y.jtbd+H.jtbd+22;
-  Y.opportunities=Y.forces+H.forces+22;
+  Y.jtbd=16;
+  Y.opportunities=Y.jtbd+H.jtbd+22;
   /* convergence stem sits clearly below BOTH spines so it never overlaps a column */
   Y.causal=Math.max(Y.outcome+H.outcome, Y.opportunities+H.opportunities)+30;
   Y.solutions=Y.causal+H.causal+28;
@@ -1722,10 +1798,44 @@ const LOOP_TITLES = {
   decisions:'Decision Log',
 };
 
+/* mark project-variable data tokens (names, %s, test IDs, sample sizes) inside a freshly
+   rendered screen with .var, so the pink overlay covers content that changes per project.
+   Skips anything already inside a .var/.field/.field-help (those are marked at source). */
+const VAR_RE = /(Rosa Delgado|Aisha Khan|Tom Halloran|Cardinal Coffee Roasters|Brightwork Creative|Solstice Skincare|Ledgerline|\bRosa\b|\bAisha\b|\bTom\b|TC-0\d|n=\d+|\b\d+ of \d+\b|\b\d+\/\d+\b|\b\d+\.\d+×|\b\d+×|\b\d{1,3}%|\b\d+-day\b|\bQ[1-4]\b|\bWk\s?\d+\b)/g;
+function markVariables(root){
+  if(!root) return;
+  const SKIP=new Set(['SCRIPT','STYLE','BUTTON','TEXTAREA','INPUT','SVG','PATH']);
+  const walker=document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+    acceptNode(n){
+      if(!n.nodeValue||!n.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
+      let p=n.parentElement;
+      while(p&&p!==root.parentElement){
+        if(SKIP.has(p.tagName)) return NodeFilter.FILTER_REJECT;
+        if(p.classList&&(p.classList.contains('var')||p.classList.contains('field')||p.classList.contains('field-help'))) return NodeFilter.FILTER_REJECT;
+        p=p.parentElement;
+      }
+      VAR_RE.lastIndex=0;
+      return VAR_RE.test(n.nodeValue)?NodeFilter.FILTER_ACCEPT:NodeFilter.FILTER_REJECT;
+    }
+  });
+  const targets=[]; let node; while(node=walker.nextNode()) targets.push(node);
+  targets.forEach(n=>{
+    const s=n.nodeValue; VAR_RE.lastIndex=0;
+    const frag=document.createDocumentFragment(); let last=0,m;
+    while(m=VAR_RE.exec(s)){
+      if(m.index>last) frag.appendChild(document.createTextNode(s.slice(last,m.index)));
+      const sp=document.createElement('span'); sp.className='var'; sp.textContent=m[0]; frag.appendChild(sp);
+      last=m.index+m[0].length;
+    }
+    if(last<s.length) frag.appendChild(document.createTextNode(s.slice(last)));
+    n.parentNode.replaceChild(frag,n);
+  });
+}
+
 function goLoop(loop){
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
   const el = document.getElementById('screen-'+loop);
-  if(el){ el.classList.add('active'); if(!el.dataset.built && BUILDERS[loop]){ el.innerHTML=BUILDERS[loop](); el.dataset.built='1'; } }
+  if(el){ el.classList.add('active'); if(!el.dataset.built && BUILDERS[loop]){ el.innerHTML=BUILDERS[loop](); el.dataset.built='1'; markVariables(el); } }
   document.querySelectorAll('.nav-loop').forEach(b=>b.classList.toggle('active', b.dataset.loop===loop));
   document.getElementById('crumbHere').textContent = LOOP_TITLES[loop]||loop;
   document.getElementById('view').scrollTop=0;
@@ -1813,7 +1923,7 @@ const BUILDERS = {
         <div class="card-t">The three altitudes — keep them distinct<span class="ct-line"></span></div>
         <div class="grid" style="gap:10px">
           <div class="card inset" style="border-radius:10px;padding:13px 15px"><div style="display:flex;align-items:center;gap:9px"><span style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)">Business outcome</span>${pill('assumption')}</div><div style="margin-top:6px;font-size:13.5px">90-day churn of new SMB accounts — the thing leadership ultimately cares about. We don’t control it directly.</div></div>
-          <div class="card" style="border-radius:10px;padding:13px 15px;border-color:var(--accent)"><div style="display:flex;align-items:center;gap:9px"><span style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-ink)">Product outcome ★ ours</span>${pill('validated')}</div><div style="margin-top:6px;font-size:14px"><b>7-day bank-feed activation: 34% → 55%.</b> Connect a bank feed AND complete a first reconciliation within 7 days. Controllable, behavioral, the one metric this team owns.</div></div>
+          <div class="card" style="border-radius:10px;padding:13px 15px;border-color:var(--accent)"><div style="display:flex;align-items:center;gap:9px"><span style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-ink)">Product outcome ★ ours</span>${pill('validated')}</div><div style="margin-top:6px;font-size:14px"><b class="field var" id="f-outcome" contenteditable="true" spellcheck="false">7-day bank-feed activation: 34% → 55%</b>. Connect a bank feed AND complete a first reconciliation within 7 days. Controllable, behavioral, the one metric this team owns. ${fhelp('outcome')}</div></div>
           <div class="card inset" style="border-radius:10px;padding:13px 15px"><div style="display:flex;align-items:center;gap:9px"><span style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)">Traction metric</span>${pill('killed')}</div><div style="margin-top:6px;font-size:13.5px">“Bank connections started” — too narrow. Rejected as the primary: it games easily and doesn’t imply trusted books.</div></div>
         </div>
 
@@ -1823,14 +1933,14 @@ const BUILDERS = {
             <div class="bt-fill" style="width:55%"></div>
             <div class="bt-cur" style="left:34%"></div>
           </div>
-          <div class="bt-marks"><span>0%</span><span style="color:var(--accent-ink)">today 34%</span><span style="color:var(--green-ink)">target 55%</span><span>100%</span></div>
+          <div class="bt-marks"><span>0%</span><span style="color:var(--accent-ink)">today <span class="field var" id="f-baseline" contenteditable="true" spellcheck="false">34%</span></span><span style="color:var(--green-ink)">target <span class="field var" id="f-target" contenteditable="true" spellcheck="false">55%</span></span><span>100%</span></div>
         </div>
-        <p style="font-size:12.5px;color:var(--muted);margin-top:10px">Mode: <b style="color:var(--ink-2)">learning goal</b> until the trust driver is validated, then a committed target for Q3. Baseline: Q1 cohort, n=418.</p>
+        <p style="font-size:12.5px;color:var(--muted);margin-top:10px">Mode: <b style="color:var(--ink-2)">learning goal</b> until the trust driver is validated, then a committed target for Q3. Baseline: <span class="var">Q1 cohort, n=418</span>. ${fhelp('baseline','Work through baseline')}${fhelp('target','Work through target')}</p>
       </div>
 
       <div class="card inset">
         <div class="card-t">Suspected Job<span class="ct-line"></span></div>
-        <p style="font-size:13.5px;line-height:1.55">Move from spreadsheet chaos to trusted, always-current books — answer money questions in minutes and look credible to accountant &amp; investors.</p>
+        <p style="font-size:13.5px;line-height:1.55"><span class="field var" id="f-job" contenteditable="true" spellcheck="false">Move from spreadsheet chaos to trusted, always-current books — answer money questions in minutes and look credible to accountant &amp; investors.</span> ${fhelp('job')}</p>
         <div class="card-t" style="margin-top:18px">Non-goals<span class="ct-line"></span></div>
         <ul style="list-style:none;font-size:13px;line-height:1.5">
           <li style="padding:4px 0 4px 16px;position:relative;color:var(--ink-2)"><span style="position:absolute;left:0;color:var(--muted)">×</span>Multi-entity consolidation.</li>
@@ -1856,7 +1966,7 @@ const BUILDERS = {
     <div class="grid g-3">
       <div class="card">
         <div class="card-t" style="color:var(--ev-suggestive)">Onboarding · evaluating trust ★<span class="ct-line"></span></div>
-        <div style="font-weight:600;font-size:14px;margin-bottom:6px">Won’t connect the primary bank account until the company feels safe and serious</div>
+        <div style="font-weight:600;font-size:14px;margin-bottom:6px"><span class="field var" id="f-opp" contenteditable="true" spellcheck="false">Won’t connect the primary bank account until the company feels safe and serious</span> ${fhelp('opportunity')}</div>
         ${meter('suggestive')} <span style="font-size:11px;color:var(--muted);margin-left:6px">demand high · win high</span>
         <div style="margin-top:12px;padding-top:12px;border-top:1px dashed var(--line)">
           <div style="font-size:12.5px;color:var(--ink-2);margin-bottom:4px">↳ “Handing over my bank credentials” fear</div>
@@ -1882,11 +1992,11 @@ const BUILDERS = {
         <div class="card-t">Five admission tests · adding an opportunity<span class="ct-line"></span></div>
         <div style="font-size:13px;color:var(--ink-2);margin-bottom:6px">All five passed — the target clears admission.</div>
         <div style="margin-top:10px">
-          <div class="check met"><span class="box">✓</span><span class="c-txt">Framed as a customer struggle, not a solution<span class="ct-meta">“Won’t connect my primary account” — a moment, not a feature.</span></span></div>
-          <div class="check met"><span class="box">✓</span><span class="c-txt">Not a feature request in disguise<span class="ct-meta">Translated from “add more security badges” → the underlying trust threshold.</span></span></div>
-          <div class="check met"><span class="box">✓</span><span class="c-txt">Grounded in real behavior / a real story<span class="ct-meta">Rosa, Aisha, + 6 more interviews of real past switches.</span></span></div>
-          <div class="check met"><span class="box">✓</span><span class="c-txt">Plausibly connects to the desired outcome<span class="ct-meta">Sits exactly on the 7-day activation drop-off.</span></span></div>
-          <div class="check met" style="border-bottom:none"><span class="box">✓</span><span class="c-txt">Enough evidence to matter<span class="ct-meta">Recurs unprompted in 8 of 14 interviews.</span></span></div>
+          <div class="check met"><span class="box"><svg viewBox="0 0 16 16" width="11" height="11" fill="none" aria-hidden="true"><path d="M3.5 8.5l3 3 6-6.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="c-txt">Framed as a customer struggle, not a solution<span class="ct-meta">“Won’t connect my primary account” — a moment, not a feature.</span></span></div>
+          <div class="check met"><span class="box"><svg viewBox="0 0 16 16" width="11" height="11" fill="none" aria-hidden="true"><path d="M3.5 8.5l3 3 6-6.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="c-txt">Not a feature request in disguise<span class="ct-meta">Translated from “add more security badges” → the underlying trust threshold.</span></span></div>
+          <div class="check met"><span class="box"><svg viewBox="0 0 16 16" width="11" height="11" fill="none" aria-hidden="true"><path d="M3.5 8.5l3 3 6-6.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="c-txt">Grounded in real behavior / a real story<span class="ct-meta">Rosa, Aisha, + 6 more interviews of real past switches.</span></span></div>
+          <div class="check met"><span class="box"><svg viewBox="0 0 16 16" width="11" height="11" fill="none" aria-hidden="true"><path d="M3.5 8.5l3 3 6-6.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="c-txt">Plausibly connects to the desired outcome<span class="ct-meta">Sits exactly on the 7-day activation drop-off.</span></span></div>
+          <div class="check met" style="border-bottom:none"><span class="box"><svg viewBox="0 0 16 16" width="11" height="11" fill="none" aria-hidden="true"><path d="M3.5 8.5l3 3 6-6.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="c-txt">Enough evidence to matter<span class="ct-meta">Recurs unprompted in 8 of 14 interviews.</span></span></div>
         </div>
       </div>
       <div class="card">
@@ -2298,6 +2408,52 @@ const CHAT_BANK = [
   { id:'summary', kw:['summarise','summarize','summary','overview','catch me up','where are we','project status','tldr','brief me'],
     a:`Ledgerline owns one number — <b>7-day activation 34% → 55%</b> (validated, serving 90-day churn). The Job is proven: escape spreadsheet chaos for trusted books. The crowned opportunity is <b>bank-connection trust</b>, and the bet is a <b>trust-first connection flow</b> scoped to the primary-account moment. We killed two wrong answers cheaply (SOC-2 badge, sandbox-first). The weakest belief is in test now via <b>TC-08</b> (57% vs 50% bar) — that's the next step.` },
 ];
+/* Socratic field guides — "Ask Noetic" interviews the user to fill an input field, then drafts it.
+   Each: targetId (the .field to write into), the requirement, an intro, ordered steps (with suggested
+   answer chips), and a draft(answers) that composes the value. The draft is editable after insert. */
+const FIELD_GUIDE = {
+  outcome:{ label:'Desired Outcome', req:'one measurable customer behaviour — not a feature, not a business metric', targetId:'f-outcome',
+    intro:`Let's set your <b>desired outcome</b>. The rule: a single controllable <i>customer behaviour</i>, with a baseline and a target. Three quick questions.`,
+    steps:[
+      {q:`What behaviour, if it rose, would prove real progress? (something the customer <i>does</i> — not a feature you ship)`,
+       chips:['connect a bank feed & reconcile in week 1','invite their accountant','complete a first month-end close']},
+      {q:`What's the baseline for that behaviour today?`, chips:['34%','about a quarter','we don\'t measure it yet']},
+      {q:`What target — and roughly by when — would matter to leadership?`, chips:['55%','double it','+15 points this quarter']},
+    ],
+    draft:a=>`Lift <b>7-day ${chatEsc(a[0]||'activation')}</b> from <b>${chatEsc(a[1]||'—')}</b> to <b>${chatEsc(a[2]||'—')}</b>` },
+
+  job:{ label:'Suspected Job', req:'the progress the customer is reaching for, in their words', targetId:'f-job',
+    intro:`A <b>Job to be Done</b> is the progress someone is trying to make — never your product. Let's phrase yours. Two questions.`,
+    steps:[
+      {q:`What situation makes the struggle real? (the moment the search begins)`,
+       chips:['tax season exposes the mess','an investor asks for the numbers','month-end eats a whole weekend']},
+      {q:`What better state are they reaching for?`,
+       chips:['trusted, always-current books','answers in minutes','looking credible to investors']},
+    ],
+    draft:a=>`“When ${chatEsc(a[0]||'…')}, I want <b>${chatEsc(a[1]||'…')}</b> — so I can answer money questions in minutes and look credible.”` },
+
+  opportunity:{ label:'Target Opportunity', req:'a customer-framed struggling moment, not a solution', targetId:'f-opp',
+    intro:`A <b>target opportunity</b> is a struggling moment in the customer's own words — never a feature. Two questions and I'll draft it.`,
+    steps:[
+      {q:`At which moment does the customer stall hardest?`,
+       chips:['at “Connect your bank”','during first reconciliation','when inviting their accountant']},
+      {q:`What belief or fear sits behind the stall?`,
+       chips:['won\'t hand a startup my bank credentials','afraid the numbers will be wrong','not sure it\'s worth switching']},
+    ],
+    draft:a=>`“${chatEsc(a[1]||'…')}” — the struggle <b>${chatEsc(a[0]||'…')}</b>.` },
+
+  baseline:{ label:'Baseline', req:'where the metric stands today', targetId:'f-baseline',
+    intro:`What's the current value of the behaviour you're moving? If you're unsure, tell me how you'd estimate it.`,
+    steps:[{q:`Current value today?`, chips:['34%','~25%','not measured yet']}],
+    draft:a=>`${chatEsc(a[0]||'—')}` },
+
+  target:{ label:'Target', req:'the level that would matter, and by when', targetId:'f-target',
+    intro:`What target would be a genuine win, and by when?`,
+    steps:[{q:`Target value?`, chips:['55%','double the baseline','+15 pts']},
+           {q:`By when?`, chips:['this quarter','90 days','next release']}],
+    draft:a=>`${chatEsc(a[0]||'—')}${a[1]?` <span style="color:var(--muted)">(${chatEsc(a[1])})</span>`:''}` },
+};
+
 let chatThread = [];       // {role, html}
 let chatStreaming = false;
 
@@ -2313,17 +2469,100 @@ function chatMatch(q){
   return `Here's what I can tell you about the Ledgerline project: we're driving <b>7-day bank-feed activation from 34% to 55%</b> by making bank-connection trust legible at the credential moment. Ask me about the next step, what's proven, the weakest belief, or why we killed sandbox-first — or open the <b>Delivery &amp; Impact loop</b> to see the live test.`;
 }
 
+let chatMode='general', askState=null;
 function openChat(){
-  document.getElementById('chatPanel').classList.add('open');
+  const panel=document.getElementById('chatPanel');
+  /* coming back from a field-helper session → reset to a fresh general thread */
+  if(chatMode==='field'){ chatThread=[]; document.getElementById('chatBody').innerHTML=''; }
+  chatMode='general'; askState=null;
+  panel.classList.remove('center');
+  document.getElementById('askScrim').classList.remove('on');
+  document.getElementById('askContext').style.display='none';
+  document.getElementById('chatInput').placeholder='Ask about Ledgerline…';
+  panel.classList.add('open');
   document.getElementById('chatFab').classList.add('hidden');
   if(!chatThread.length) renderChatEmpty();
   setTimeout(()=>document.getElementById('chatInput').focus(),60);
 }
 function closeChat(){
-  document.getElementById('chatPanel').classList.remove('open');
+  const panel=document.getElementById('chatPanel');
+  panel.classList.remove('open','center');
+  document.getElementById('askScrim').classList.remove('on');
   document.getElementById('chatFab').classList.remove('hidden');
+  askState=null;
 }
 function chatIsOpen(){ return document.getElementById('chatPanel').classList.contains('open'); }
+
+/* ── highlight overlay toggles ── */
+function toggleHL(kind,btn){
+  const on = btn.getAttribute('aria-pressed')==='true';
+  btn.setAttribute('aria-pressed', on?'false':'true');
+  document.documentElement.classList.toggle('no-'+kind, on);
+}
+
+/* ════════ ASK NOETIC — centered Socratic field helper (Feature: fill fields by interview) ════════ */
+function genericGuide(label,req){
+  return { label, req, targetId:null,
+    intro:`Let's work through your <b>${label}</b> together. I'll ask a couple of quick questions, then draft it — you can edit anything after.`,
+    steps:[ {q:`In one sentence, what are you trying to capture here?`},
+            {q:`What evidence or real example backs that up?`} ],
+    draft:a=>`${chatEsc(a[0]||'')}` };
+}
+function askNoetic(key){
+  const g = FIELD_GUIDE[key] || genericGuide(key,'');
+  askState={key, guide:g, step:0, answers:[], draft:''};
+  chatMode='field';
+  const panel=document.getElementById('chatPanel');
+  panel.classList.add('open','center');
+  document.getElementById('chatFab').classList.add('hidden');
+  document.getElementById('askScrim').classList.add('on');
+  const ctx=document.getElementById('askContext');
+  ctx.style.display='flex';
+  ctx.innerHTML=`<svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M8 1.8v12.4M1.8 8h12.4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    <span>Working through <b>${g.label}</b>${g.req?` — ${g.req}`:''}</span>`;
+  chatThread=[]; document.getElementById('chatBody').innerHTML='';
+  document.getElementById('chatInput').placeholder='Type your answer…';
+  chatStreamAnswer(g.intro, ()=>setTimeout(askStep,160));
+}
+function askStep(){
+  const g=askState.guide, s=g.steps[askState.step];
+  if(!s){ askPropose(); return; }
+  chatStreamAnswer(s.q, ()=>{
+    if(s.chips&&s.chips.length){
+      const body=document.getElementById('chatBody');
+      body.insertAdjacentHTML('beforeend',
+        `<div class="chat-chips ask-chips">${s.chips.map(c=>`<button class="chat-chip" onclick="askAnswer(this.textContent)">${c}</button>`).join('')}</div>`);
+      chatScroll();
+    }
+  });
+}
+function askAnswer(text){
+  if(!askState||chatStreaming) return;
+  text=(text||'').trim(); if(!text) return;
+  document.querySelectorAll('.ask-chips').forEach(e=>e.remove());
+  const body=document.getElementById('chatBody');
+  body.insertAdjacentHTML('beforeend',
+    `<div class="chat-msg user"><span class="cm-who">You</span><div class="cm-bubble">${chatEsc(text)}</div></div>`);
+  askState.answers.push(text); chatScroll();
+  askState.step++; setTimeout(askStep,200);
+}
+function askPropose(){
+  const g=askState.guide;
+  const draft=g.draft(askState.answers);
+  askState.draft=draft;
+  const html=`${g.outro||"Here's a first draft from your answers. Insert it into the field, then refine inline."}
+    <div class="ask-draft"><span class="adl">Proposed ${g.label}</span>${draft}</div>
+    ${g.targetId?`<button class="ask-insert" onclick="askInsert()"><svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3.5 8.5l3 3 6-6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Insert into field &amp; edit</button>`:''}`;
+  chatStreamAnswer(html);
+}
+function askInsert(){
+  const g=askState.guide, el=g.targetId&&document.getElementById(g.targetId);
+  if(el){ el.innerHTML=askState.draft; }
+  closeChat();
+  if(el) setTimeout(()=>{ el.scrollIntoView({block:'center',behavior:'smooth'}); try{el.focus();}catch(e){} },260);
+}
+/* "work through it" affordance rendered inside builder HTML */
+function fhelp(key,label){ return `<button class="field-help" onclick="askNoetic('${key}')" title="Let Ask Noetic interview you to fill this field"><svg viewBox="0 0 16 16" fill="none"><path d="M11.3 2.4l2.3 2.3L6 12.3l-3 .7.7-3z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>${label||'Help me work through it'}</button>`; }
 
 function renderChatEmpty(){
   const body=document.getElementById('chatBody');
@@ -2347,6 +2586,7 @@ function chatScroll(){ const b=document.getElementById('chatBody'); b.scrollTop=
 
 function chatSend(text){
   if(chatStreaming) return;
+  if(askState){ askAnswer(text); return; }   // field-helper mode routes to the interview
   const body=document.getElementById('chatBody');
   /* drop the empty-state chips once a real thread begins */
   if(!chatThread.length) body.innerHTML='';
@@ -2359,7 +2599,7 @@ function chatSend(text){
 }
 function chatEsc(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 
-function chatStreamAnswer(html){
+function chatStreamAnswer(html, after){
   chatStreaming=true;
   document.getElementById('chatSend').disabled=true;
   const body=document.getElementById('chatBody');
@@ -2371,7 +2611,7 @@ function chatStreamAnswer(html){
   const reduce = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
 
   const finish=()=>{ bubble.innerHTML=html; chatThread.push({role:'assistant',html}); chatStreaming=false;
-    document.getElementById('chatSend').disabled=false; chatScroll(); };
+    document.getElementById('chatSend').disabled=false; chatScroll(); if(after) after(); };
 
   if(reduce){ setTimeout(finish,80); return; }
 
