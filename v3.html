@@ -388,7 +388,8 @@ html.dark .theme-btn .ico-moon{display:none}
   background:var(--surface);border:1px solid var(--line);border-radius:var(--r-md);
   padding:14px 16px;box-shadow:var(--shadow-sm);transition:.16s var(--ease);cursor:pointer;position:relative;
 }
-.node:hover{border-color:var(--line-strong);box-shadow:var(--shadow-md);transform:translateY(-1px)}
+.node:hover{border-color:var(--line-strong);box-shadow:var(--shadow-md);transform:translateY(-3px) scale(1.012)}
+.node:active{transform:translateY(-1px) scale(1.004)}
 .node:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .node.is-target{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent),var(--shadow-md)}
 .node.is-weakest{border-color:var(--ev-suggestive);box-shadow:0 0 0 1px var(--ev-suggestive),var(--shadow-md)}
@@ -415,18 +416,11 @@ html.dark .theme-btn .ico-moon{display:none}
   transform:rotate(-45deg);opacity:.45;transition:.16s var(--ease)}
 .node.is-cat:hover::after{opacity:.8;border-color:var(--accent)}
 
-/* hover-reveal: nodes are calm by default, richer on hover/focus */
-.tnode .node-reveal{
-  max-height:0;opacity:0;overflow:hidden;
-  transition:max-height .22s var(--ease),opacity .18s var(--ease),margin .22s var(--ease);
-}
-.tnode:hover .node-reveal,.tnode:focus-visible .node-reveal,.tnode:focus-within .node-reveal{
-  max-height:80px;opacity:1;margin-top:5px;
-}
-.tnode .node-afford{font-size:10px;font-family:var(--font-mono);color:var(--accent-ink);
-  margin-top:5px;letter-spacing:.02em;opacity:.85}
+/* Tree cards are compact by default and only lift on hover (alive, not expanding).
+   All detail opens in a modal / slide-over on click — see nodeHTML. */
+.tnode{will-change:transform}
 @media(prefers-reduced-motion:reduce){
-  .tnode .node-reveal{transition:none}
+  .node:hover{transform:none}
 }
 
 /* connectors */
@@ -1468,20 +1462,15 @@ function nodeHTML(key){
   else if(n.weakest) flag = `<span class="node-weak-flag">⚠ Weakest</span>`;
   /* category badge (count chip) sits before the meter */
   const badge = cat ? `<span class="node-badge">${n.badge}</span>` : '';
-  const topMeter = l.top ? `<span style="margin-left:${(flag||badge)?'8px':'auto'}">${meter(n.ev)}</span>` : '';
+  /* compact tree cards: kind + flag/badge + meter, then headline — nothing else.
+     Detail lives in the click-opened modal / slide-over, not on the canvas. */
+  const topMeter = `<span style="margin-left:${(flag||badge)?'8px':'auto'}">${meter(n.ev)}</span>`;
   const open = cat ? `openCategory('${key}')` : `openNode('${key}')`;
-  const afford = cat ? 'open ' + (n.badge||'') + ' ↗' : 'click to open ↗';
   return `<div class="${cls}" style="left:${l.x}px;top:0;width:${l.w}px"
-            data-key="${key}" data-ev="${n.ev}" tabindex="0" role="button"
+            data-key="${key}" data-ev="${n.ev}" tabindex="0" role="button" title="Click to open"
             onclick="${open}" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();${open}}">
-    <div class="node-top"><span class="node-kind">${n.kind}</span>${flag}${badge}${topMeter}
-      ${l.note?`<span style="margin-left:auto;font-family:var(--font-mono);font-size:10px;color:var(--muted)">${l.note}</span>`:''}</div>
+    <div class="node-top"><span class="node-kind">${n.kind}</span>${flag}${badge}${topMeter}</div>
     <div class="node-h">${n.h}</div>
-    <div class="node-reveal"><div class="node-d">${n.d}</div>
-      <div class="node-afford">${cat?'open category ↗':'click to open ↗'}</div></div>
-    ${l.top?'':`<div class="node-foot">
-      ${meter(n.ev)} ${pill(n.ev)}
-    </div>`}
   </div>`;
 }
 
@@ -1544,8 +1533,9 @@ function renderTree(){
   Y.framing=16;                         Y.outcome=Y.framing+H.framing+26;
   Y.jtbd=16;                            Y.forces=Y.jtbd+H.jtbd+22;
   Y.opportunities=Y.forces+H.forces+22;
-  Y.causal=Y.outcome+H.outcome+24;
-  Y.solutions=Y.causal+H.causal+26;
+  /* convergence stem sits clearly below BOTH spines so it never overlaps a column */
+  Y.causal=Math.max(Y.outcome+H.outcome, Y.opportunities+H.opportunities)+30;
+  Y.solutions=Y.causal+H.causal+28;
   const rowH=Math.max(H.tests,H.increment);
   Y.tests=Y.increment=Y.solutions+H.solutions+30;
   const demandB=Y.opportunities+H.opportunities;
