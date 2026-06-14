@@ -476,6 +476,31 @@ html.dark .theme-btn .ico-moon{display:none}
   padding:3px 8px;border-radius:7px;line-height:1}
 html.dark .section-rule .sr-n{color:#cfe0f3;background:rgba(46,111,176,.22)}
 
+/* collapsible section blocks, threaded by a glowing blue rail (wired by wireSections) */
+.sec-block{position:relative;padding-left:44px}
+.sec-block::before{content:"";position:absolute;left:15px;top:0;bottom:0;width:2px;border-radius:2px;
+  background:linear-gradient(180deg,var(--accent),rgba(46,111,176,.45));
+  box-shadow:0 0 7px 1px rgba(46,111,176,.45);opacity:.9}
+html.dark .sec-block::before{background:linear-gradient(180deg,#4a92d6,rgba(74,146,214,.4));
+  box-shadow:0 0 9px 1px rgba(74,146,214,.45)}
+/* a soft downward fade on the last block hints "more below / scroll" */
+.sec-block:last-of-type::after{content:"";position:absolute;left:11px;bottom:-14px;width:10px;height:10px;
+  border-right:2px solid var(--accent);border-bottom:2px solid var(--accent);transform:rotate(45deg);
+  opacity:.5;animation:secNudge 1.8s var(--ease) infinite}
+html.dark .sec-block:last-of-type::after{border-color:#4a92d6}
+@keyframes secNudge{0%,100%{transform:rotate(45deg) translate(0,0);opacity:.35}50%{transform:rotate(45deg) translate(3px,3px);opacity:.75}}
+.sec-block > .section-rule{position:relative;margin-top:30px;cursor:pointer}
+.sec-block:first-of-type > .section-rule{margin-top:8px}
+.sec-block .sr-n{position:absolute;left:-44px;top:50%;transform:translateY(-50%);z-index:2;cursor:pointer;
+  min-width:30px;text-align:center;box-shadow:0 0 0 4px var(--paper);transition:.14s var(--ease)}
+.sec-block .sr-n:hover{filter:brightness(1.05);box-shadow:0 0 0 4px var(--paper),0 0 10px 1px rgba(46,111,176,.4)}
+html.dark .sec-block .sr-n:hover{box-shadow:0 0 0 4px var(--paper),0 0 11px 1px rgba(74,146,214,.5)}
+.sec-caret{margin-left:6px;color:var(--muted);display:inline-flex;align-items:center;transition:transform .18s var(--ease);flex:none}
+.sec-block.collapsed .sec-caret{transform:rotate(-90deg)}
+.sec-body{overflow:hidden}
+.sec-block.collapsed .sec-body{display:none}
+@media(prefers-reduced-motion:reduce){.sec-block:last-of-type::after{animation:none}}
+
 /* interview snapshot */
 .snap{border-left:3px solid var(--line-strong);padding-left:16px;margin-bottom:18px}
 .snap .who{font-weight:600;font-size:13.5px}
@@ -1387,7 +1412,7 @@ const NODES = {
         ['leadership','Outcome ratified in Q2 negotiation — the team owns the metric, not a roadmap.'],
       ],
     }},
-  jtbd:{kind:'Job to be Done · Timeline & Forces', ev:'validated', tag:'one demand picture',
+  jtbd:{kind:'Job to be Done · Timeline & Forces', ev:'validated',
     h:'“Move from spreadsheet chaos to trusted, always-current books.”',
     d:'When tax season or an investor request exposes the mess, owners want to answer money questions in minutes — and look credible. The job, its timeline, and its forces are one demand picture.',
     detail:{
@@ -1832,10 +1857,38 @@ function markVariables(root){
   });
 }
 
+/* group each numbered section (a .section-rule + the content until the next one) into a
+   collapsible .sec-block threaded by a glowing blue rail; the numbered pill toggles collapse. */
+function wireSections(root){
+  if(!root) return;
+  root.querySelectorAll('.wrap').forEach(wrap=>{
+    const rules=[...wrap.children].filter(c=>c.classList&&c.classList.contains('section-rule'));
+    rules.forEach(rule=>{
+      const block=document.createElement('div'); block.className='sec-block';
+      wrap.insertBefore(block, rule);
+      block.appendChild(rule);
+      const body=document.createElement('div'); body.className='sec-body';
+      let n=block.nextSibling;
+      while(n && !(n.nodeType===1 && n.classList && n.classList.contains('section-rule'))){
+        const next=n.nextSibling; body.appendChild(n); n=next;
+      }
+      block.appendChild(body);
+      const caret=document.createElement('span'); caret.className='sec-caret';
+      caret.innerHTML='<svg viewBox="0 0 16 16" width="11" height="11" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+      rule.appendChild(caret);
+      const toggle=()=>block.classList.toggle('collapsed');
+      const pill=rule.querySelector('.sr-n');
+      if(pill){ pill.setAttribute('role','button'); pill.tabIndex=0; pill.title='Collapse / expand this section'; }
+      rule.addEventListener('click',toggle);
+      rule.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); toggle(); } });
+    });
+  });
+}
+
 function goLoop(loop){
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
   const el = document.getElementById('screen-'+loop);
-  if(el){ el.classList.add('active'); if(!el.dataset.built && BUILDERS[loop]){ el.innerHTML=BUILDERS[loop](); el.dataset.built='1'; markVariables(el); } }
+  if(el){ el.classList.add('active'); if(!el.dataset.built && BUILDERS[loop]){ el.innerHTML=BUILDERS[loop](); el.dataset.built='1'; markVariables(el); wireSections(el); } }
   document.querySelectorAll('.nav-loop').forEach(b=>b.classList.toggle('active', b.dataset.loop===loop));
   document.getElementById('crumbHere').textContent = LOOP_TITLES[loop]||loop;
   document.getElementById('view').scrollTop=0;
