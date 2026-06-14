@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" type="image/svg+xml" href="noetic-logo.svg">
 <title>Noetic — The Continuous Discovery System</title>
 <!--
   ════════════════════════════════════════════════════════════════════════
@@ -29,14 +30,14 @@
   COLOR — warm paper + ink, one accent (indigo), semantic EVIDENCE colors.
     Evidence ladder (the spine of the whole product):
       assumption  → slate, dashed       (a belief, unweighed)
-      suggestive  → amber               (some signal, not enough)
+      emerging    → amber               (some signal, not enough)
       validated   → green               (load-bearing, earned)
       killed      → grey + strikethrough (disproven — a win)
     Accent indigo for navigation/active. Restrained borders (warm grey).
 
   SIGNATURE DEVICE — THE CERTAINTY METER.
     A four-segment ruled bar that appears on EVERY belief. Segments fill
-    left→right as evidence accrues: assumption (1) → suggestive (2) →
+    left→right as evidence accrues: assumption (1) → emerging (2) →
     validated (4). Killed beliefs render struck-through with a grey cap.
     Same component everywhere — tree nodes, panels, assumption ladder, NBA.
     It is the felt mechanic of the product.
@@ -1158,7 +1159,7 @@ var VIEW_ONLY = (function(){try{return /(?:^|[?&])share=reasoning(?:&|$)/.test(l
   <aside class="rail">
     <div class="brand">
       <div class="glyph">
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="#fff" stroke-width="1.4" opacity=".5"/><circle cx="8" cy="8" r="2.4" fill="#fff"/></svg>
+        <svg viewBox="0 0 2000 2000" width="23" height="23" fill="#fff" aria-hidden="true"><circle cx="1000" cy="1000" r="641" fill="none" stroke="#fff" stroke-width="105"/><rect x="756" y="660" width="96" height="675" rx="18"/><rect x="1149" y="665" width="95" height="674" rx="18"/><rect x="897" y="807" width="80" height="244" rx="17"/><rect x="1023" y="950" width="79" height="243" rx="17"/></svg>
       </div>
       <div>
         <div class="name">Noetic Mind</div>
@@ -1227,7 +1228,7 @@ var VIEW_ONLY = (function(){try{return /(?:^|[?&])share=reasoning(?:&|$)/.test(l
         <span class="rail-nba-caret">▾</span>
       </button>
       <div class="rail-nba-body" id="nbaBody">
-        <div class="meter sz-sm" data-state="suggestive" style="margin-bottom:8px" title="Suggestive — some signal, not yet load-bearing"><span class="seg"></span><span class="seg"></span><span class="seg"></span><span class="seg"></span></div>
+        <div class="meter sz-sm" data-state="suggestive" style="margin-bottom:8px" title="Emerging — some signal, not yet load-bearing"><span class="seg"></span><span class="seg"></span><span class="seg"></span><span class="seg"></span></div>
         <div class="rail-nba-belief">“Tie the first drink to a habit people already have, and they’ll hit their water goal in week one.”</div>
         <div class="rail-nba-test">Smallest test: <b>TC-08 — habit-anchor nudge</b> · 40 new owners · threshold locked.</div>
         <button class="btn btn-primary rail-nba-btn" onclick="openNBATest()">Open test card →</button>
@@ -1312,7 +1313,7 @@ var VIEW_ONLY = (function(){try{return /(?:^|[?&])share=reasoning(?:&|$)/.test(l
             <div class="filterbar" id="treeFilter">
               <button class="fchip on" data-f="all" onclick="filterTree('all',this)">All</button>
               <button class="fchip" data-f="assumption" onclick="filterTree('assumption',this)"><span class="ev-d" style="background:var(--ev-assumption)"></span>Assumption</button>
-              <button class="fchip" data-f="suggestive" onclick="filterTree('suggestive',this)"><span class="ev-d" style="background:var(--ev-suggestive)"></span>Suggestive</button>
+              <button class="fchip" data-f="suggestive" onclick="filterTree('suggestive',this)"><span class="ev-d" style="background:var(--ev-suggestive)"></span>Emerging</button>
               <button class="fchip" data-f="validated" onclick="filterTree('validated',this)"><span class="ev-d" style="background:var(--ev-validated)"></span>Validated</button>
               <button class="fchip" data-f="killed" onclick="filterTree('killed',this)"><span class="ev-d" style="background:var(--ev-killed)"></span>Killed</button>
             </div>
@@ -1417,7 +1418,7 @@ var VIEW_ONLY = (function(){try{return /(?:^|[?&])share=reasoning(?:&|$)/.test(l
   <div class="chat-head">
     <div class="ch-top">
       <div class="ch-glyph">
-        <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="#fff" stroke-width="1.4" opacity=".5"/><circle cx="8" cy="8" r="2.4" fill="#fff"/></svg>
+        <svg viewBox="0 0 2000 2000" width="16" height="16" fill="#fff" aria-hidden="true"><circle cx="1000" cy="1000" r="641" fill="none" stroke="#fff" stroke-width="120"/><rect x="756" y="660" width="96" height="675" rx="18"/><rect x="1149" y="665" width="95" height="674" rx="18"/><rect x="897" y="807" width="80" height="244" rx="17"/><rect x="1023" y="950" width="79" height="243" rx="17"/></svg>
       </div>
       <div class="ch-title">Ask Noetic <span class="ch-proj">· Quench project</span></div>
     </div>
@@ -1475,7 +1476,7 @@ var VIEW_ONLY = (function(){try{return /(?:^|[?&])share=reasoning(?:&|$)/.test(l
 
 const EV = {
   assumption:{label:'Assumption',cls:'ev-assumption'},
-  suggestive:{label:'Suggestive',cls:'ev-suggestive'},
+  suggestive:{label:'Emerging',cls:'ev-suggestive'},
   validated:{label:'Validated',cls:'ev-validated'},
   killed:{label:'Killed',cls:'ev-killed'},
 };
@@ -2148,7 +2149,7 @@ const BUILDERS = {
       <h1 class="h1">Organize struggle by timeline moment — crown one target</h1>
       <p class="lede">Opportunities are customer-framed struggling moments, never solutions.</p>
     </div>
-    ${concierge('suggestive', `<span class="cc-step">Where we are:</span> one target crowned — <b>the missing-cue gap</b> (high demand × high ability to win). <b>Suggestive,</b> not yet validated. <span class="cc-step">Next:</span> the habit-anchor test, <b>TC-08</b>.`)}
+    ${concierge('suggestive', `<span class="cc-step">Where we are:</span> one target crowned — <b>the missing-cue gap</b> (high demand × high ability to win). <b>Emerging,</b> not yet validated. <span class="cc-step">Next:</span> the habit-anchor test, <b>TC-08</b>.`)}
 
     <div class="section-rule"><span class="sr-n">3.1</span><h2 class="serif">Opportunities by timeline moment</h2><span class="sr-line"></span></div>
     <div class="grid g-3">
@@ -2287,7 +2288,7 @@ const BUILDERS = {
         <p style="font-size:13px;color:var(--ink-2);line-height:1.5;margin-bottom:14px">Feel the mechanic. Move the load-bearing belief across the certainty chain and watch its meter fill — or strike through when a test kills it.</p>
         <div class="ladder-ctrl" id="ladderCtrl">
           <button class="lstep on" data-s="assumption" onclick="setLadder('assumption')">Assumption</button>
-          <button class="lstep" data-s="suggestive" onclick="setLadder('suggestive')">Suggestive</button>
+          <button class="lstep" data-s="suggestive" onclick="setLadder('suggestive')">Emerging</button>
           <button class="lstep" data-s="validated" onclick="setLadder('validated')">Validated</button>
           <button class="lstep" data-s="killed" onclick="setLadder('killed')">Killed</button>
         </div>
@@ -2576,11 +2577,11 @@ const CHAT_BANK = [
   { id:'sandbox', kw:['glowing cap','smart cap','glow','light','cap','tc-05','tc05','fake door','hardware','reminder'],
     a:`We killed the glowing smart cap as a cheap win. The <b>TC-05</b> fake-door test offered a "glow reminder" cap — only <b>9%</b> still wanted it after a week, against a <b>30%</b> bar. People ignored or covered the light and it never changed how much they drank, so the path closed before a line of production code. The lesson: the cue has to come from a habit people already have, not a gadget.` },
   { id:'unproven', kw:['unproven','weakest','still prove','not proven','riskiest','risky','what if','assumption','uncertain','suggestive'],
-    a:`The weakest, load-bearing belief is: <b>"tie the first drink to a habit people already have and they'll hit their goal in week one."</b> It's only <b>suggestive</b> — a 7/10 concierge signal, not yet behavioral at scale. <b>TC-08</b> is the test measuring exactly this. Until it clears, the increment rests on an unproven bet.` },
+    a:`The weakest, load-bearing belief is: <b>"tie the first drink to a habit people already have and they'll hit their goal in week one."</b> It's only <b>emerging</b> — a 7/10 concierge signal, not yet behavioral at scale. <b>TC-08</b> is the test measuring exactly this. Until it clears, the increment rests on an unproven bet.` },
   { id:'kill', kw:['killed','dead end','what did you kill','beliefs you killed','tc-03','tc03','streak','badge','gamification','points'],
     a:`Two beliefs died cheaply. <b>TC-03</b>: a streak counter and badges moved <b>nothing</b> (+1pt vs an +8pt bar) — points aren't a real cue. <b>TC-05</b>: the glowing smart cap converted <b>9% vs a 30% bar</b>. Both were killed for the price of a fake door, which is the cheapest progress we made.` },
   { id:'proven', kw:['proven','validated','what do we know','what is proven','certain','load-bearing','evidence'],
-    a:`Two things are validated. The <b>outcome</b> is ratified: week-1 trial-to-paid conversion, <b>34% → 55%</b>, owned by this team. And the <b>Job</b> is consistent — across 14 interviews of real attempts, 11 confirm people hire us to make staying hydrated effortless. Everything downstream of the habit bet is still suggestive.` },
+    a:`Two things are validated. The <b>outcome</b> is ratified: week-1 trial-to-paid conversion, <b>34% → 55%</b>, owned by this team. And the <b>Job</b> is consistent — across 14 interviews of real attempts, 11 confirm people hire us to make staying hydrated effortless. Everything downstream of the habit bet is still emerging.` },
   { id:'outcome', kw:['outcome','34','55','goal hit','metric','number','goal','target number','hit rate'],
     a:`The one number we own is <b>week-1 trial-to-paid conversion: 34% → 55%</b> — new owners who upgrade their free trial to a paid plan in their first week. It's a supply-side conversion (a purchase) negotiated with leadership, driven by the hydration habit and serving long-term retention. See the <b>Outcome loop</b>.` },
   { id:'job', kw:['job','jtbd','progress','why switch','why do people','interview','customer'],
@@ -2867,11 +2868,11 @@ const GUIDE = [
     result:{k:'Result',v:`<b>Validated</b> — the Job recurs in 11 of 14 interviews. The decisive struggle lands in the afternoon, when they realise they've had no water.`,
             next:`Next: the opportunity space we mapped from that struggle.`},
     run:()=>goLoop('progress'),
-    anchor:()=>document.querySelector('#screen-progress .timeline .tl-stage.hot')||document.querySelector('#screen-progress .card') },
+    anchor:()=>document.querySelector('#screen-progress .card.inset')||document.querySelector('#screen-progress .card') },
 
   { title:'The opportunity we crowned',
     body:`We organised every struggling moment by timeline, then crowned one target: <b>the missing-cue gap</b> — "drinking water stays a good intention because nothing reminds me at the moment I'd actually drink."`,
-    result:{k:'Result',v:`<b>Suggestive.</b> Top-right on demand × ability to win, named unprompted in 8/14 interviews — sitting exactly on the week-1 drop-off.`,
+    result:{k:'Result',v:`<b>Emerging.</b> Top-right on demand × ability to win, named unprompted in 8/14 interviews — sitting exactly on the week-1 drop-off.`,
             next:`Next: the causal system we mapped before solving.`},
     run:()=>{ goLoop('tree'); setTimeout(()=>openCategory('opportunities'),360); },
     anchor:()=>document.querySelector('#catScrim .cat-modal') },
@@ -2911,7 +2912,7 @@ const GUIDE = [
     run:()=>{ goLoop('tree'); setTimeout(()=>document.getElementById('nbaCard')&&document.getElementById('nbaCard').classList.add('open'),120); },
     anchor:()=>document.getElementById('nbaCard') },
 ];
-let guideI=0, guideActive=false, guideReduce=false;
+let guideI=0, guideActive=false, guideReduce=false, guidePollTimer=null;
 
 function startGuide(){
   if(guideActive) return;
@@ -2951,9 +2952,19 @@ function renderGuide(){
   back.style.visibility = guideI===0?'hidden':'visible';
   const next=document.getElementById('guideNext');
   next.textContent = guideI===GUIDE.length-1?'Done ✓':'Next →';
-  /* position the bubble + spotlight near the anchor once navigation settles */
-  const delay = guideReduce?0:380;
-  setTimeout(()=>{ if(guideActive) positionGuide(g); }, delay);
+  /* Reset the ring and POLL-position it: navigation, modal opening, scroll and screen
+     transitions all settle at different times, so re-measure every ~90ms for ~1s and lock
+     the ring on the anchor the moment it's ready (and keep tracking as it settles). */
+  document.getElementById('guideRing').classList.remove('on');
+  clearInterval(guidePollTimer);
+  if(guideReduce){ positionGuide(g, true); return; }
+  let n=0;
+  guidePollTimer=setInterval(()=>{
+    if(!guideActive){ clearInterval(guidePollTimer); return; }
+    n++;
+    positionGuide(g, n>=11);          // last tick → allow neutral fallback if still not ready
+    if(n>=11) clearInterval(guidePollTimer);
+  }, 90);
 }
 /* centre an element in its nearest genuinely-scrollable ancestor (skips overflow:hidden) */
 function scrollAnchorIntoView(el){
@@ -2968,49 +2979,53 @@ function scrollAnchorIntoView(el){
   const sr=sc.getBoundingClientRect(), er=el.getBoundingClientRect();
   sc.scrollTop += (er.top - sr.top) - (sc.clientHeight/2 - er.height/2);
 }
-function positionGuide(g, tries){
+function positionGuide(g, isFinal){
   const bubble=document.getElementById('guideBubble');
   const ring=document.getElementById('guideRing');
   const scrim=document.getElementById('guideScrim');
   const el = g.anchor && g.anchor();
   const bw=bubble.offsetWidth||360, bh=bubble.offsetHeight||220;
   const vw=window.innerWidth, vh=window.innerHeight, pad=16;
+  let r=null;
   if(el && el.getBoundingClientRect){
-    let r=el.getBoundingClientRect();
-    /* if the anchor is off-screen (deep in a loop screen), centre it in its real scroll
-       container first — scrollIntoView gets trapped by the overflow:hidden .sec-body wrappers */
-    if(r.height>0 && (r.top<56 || r.bottom>vh-24)){
+    r=el.getBoundingClientRect();
+    /* only scroll anchors that live INSIDE the scrolling loop area — never a fixed modal,
+       the rail, or the topbar (that would scroll the background). scrollIntoView is avoided
+       because it gets trapped by the overflow:hidden .sec-body wrappers. */
+    const view=document.getElementById('view');
+    if(view && view.contains(el) && r.height>0 && (r.top<70 || r.bottom>vh-24)){
       scrollAnchorIntoView(el);
       r=el.getBoundingClientRect();
     }
-    if(r.width>0 && r.height>0 && r.bottom>0 && r.top<vh){
-      /* ring around the anchor */
-      ring.style.top=(r.top-6)+'px'; ring.style.left=(r.left-6)+'px';
-      ring.style.width=(r.width+12)+'px'; ring.style.height=(r.height+12)+'px';
-      ring.classList.add('on');
-      /* spotlight center + radius follow the anchor */
-      const cx=r.left+r.width/2, cy=r.top+r.height/2;
-      const rad=Math.max(r.width,r.height)/2;
-      scrim.style.setProperty('--gx',cx+'px'); scrim.style.setProperty('--gy',cy+'px');
-      scrim.style.setProperty('--gr0',(rad+20)+'px'); scrim.style.setProperty('--gr1',(rad+140)+'px');
-      /* place bubble: prefer below, else above, else beside */
-      let top, left=Math.min(Math.max(cx-bw/2,pad),vw-bw-pad);
-      if(r.bottom+bh+18<vh) top=r.bottom+14;
-      else if(r.top-bh-18>0) top=r.top-bh-14;
-      else top=Math.min(Math.max(cy-bh/2,pad),vh-bh-pad);
-      /* avoid covering the anchor when placed beside */
-      bubble.style.top=top+'px'; bubble.style.left=left+'px';
-      return;
-    }
   }
-  /* fallback: bottom-center, neutral spotlight */
+  const ready = r && r.width>4 && r.height>4 && r.bottom>4 && r.top<vh-4;
+  if(ready){
+    /* ring around the anchor */
+    ring.style.top=(r.top-6)+'px'; ring.style.left=(r.left-6)+'px';
+    ring.style.width=(r.width+12)+'px'; ring.style.height=(r.height+12)+'px';
+    ring.classList.add('on');
+    /* spotlight center + radius follow the anchor */
+    const cx=r.left+r.width/2, cy=r.top+r.height/2;
+    const rad=Math.max(r.width,r.height)/2;
+    scrim.style.setProperty('--gx',cx+'px'); scrim.style.setProperty('--gy',cy+'px');
+    scrim.style.setProperty('--gr0',(rad+20)+'px'); scrim.style.setProperty('--gr1',(rad+140)+'px');
+    /* place bubble: prefer below, else above, else beside */
+    let top, left=Math.min(Math.max(cx-bw/2,pad),vw-bw-pad);
+    if(r.bottom+bh+18<vh) top=r.bottom+14;
+    else if(r.top-bh-18>0) top=r.top-bh-14;
+    else top=Math.min(Math.max(cy-bh/2,pad),vh-bh-pad);
+    bubble.style.top=top+'px'; bubble.style.left=left+'px';
+    return;
+  }
+  /* not ready yet — keep waiting (ring stays hidden) unless this is the final attempt */
+  if(!isFinal) return;
   ring.classList.remove('on');
   scrim.style.setProperty('--gx','50%'); scrim.style.setProperty('--gy','60%');
   scrim.style.setProperty('--gr0','160px'); scrim.style.setProperty('--gr1','340px');
   bubble.style.left=Math.max((vw-bw)/2,pad)+'px';
   bubble.style.top=(vh-bh-28)+'px';
 }
-window.addEventListener('resize',()=>{ if(guideActive) positionGuide(GUIDE[guideI]); });
+window.addEventListener('resize',()=>{ if(guideActive) positionGuide(GUIDE[guideI], true); });
 
 /* first-load nudge — remember dismissal/seen in localStorage */
 function dismissNudge(silent){
