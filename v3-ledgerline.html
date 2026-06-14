@@ -1697,7 +1697,7 @@ function treeSVG(Y,H,rowH){
   const sob=Y.solutions+H.solutions;                                 // solutions bottom
   const tx=TL.tests.x+TL.tests.w/2;
   const rowY=Y.tests, rcy=rowY+rowH/2;
-  const chY1=Y.opportunities+34, chY2=Y.outcome+50;                  // challenge arrow y's
+  const chY=Math.round((Y.outcome+Y.opportunities)/2 + H.outcome/2); // challenge arrow — single y → straight horizontal line
   const opcy=Y.opportunities+H.opportunities/2;                      // opportunities center y
   return `<svg class="tree-svg" viewBox="0 0 ${TREE_W} ${TREE_H}" preserveAspectRatio="xMidYMin meet" xmlns="http://www.w3.org/2000/svg">
     <defs>
@@ -1713,8 +1713,8 @@ function treeSVG(Y,H,rowH){
     <!-- demand spine: jtbd (job + timeline & forces) → opportunities (category) -->
     <path class="conn" d="M${dx} ${Y.jtbd+H.jtbd} V${Y.opportunities-4}" marker-end="url(#arr)"/>
     <!-- challenge arrow: validated demand can challenge the outcome -->
-    <path class="conn dashed accent" d="M${TL.opportunities.x-4} ${chY1} C600 ${chY1} 540 ${chY2} ${TL.outcome.x+TL.outcome.w+6} ${chY2}" marker-end="url(#arrAcc)"/>
-    <text class="arrowlab accent" x="590" y="${(chY1+chY2)/2-20}" text-anchor="middle"><tspan x="590" dy="0">validated demand can</tspan><tspan x="590" dy="14">challenge the outcome</tspan></text>
+    <path class="conn dashed accent" d="M${TL.opportunities.x-4} ${chY} H${TL.outcome.x+TL.outcome.w+6}" marker-end="url(#arrAcc)"/>
+    <text class="arrowlab accent" x="590" y="${chY-32}" text-anchor="middle"><tspan x="590" dy="0">validated demand can</tspan><tspan x="590" dy="14">challenge the outcome</tspan></text>
     <!-- convergence: each spine exits its card BOTTOM and enters a SIDE of the causal card -->
     <path class="conn" d="M${sx} ${ob} C${sx} ${ob+44} ${TL.causal.x-72} ${cyMid} ${TL.causal.x-3} ${cyMid}" marker-end="url(#arr)"/>
     <path class="conn" d="M${opx} ${opb} C${opx} ${opb+44} ${TL.causal.x+TL.causal.w+72} ${cyMid} ${TL.causal.x+TL.causal.w+3} ${cyMid}" marker-end="url(#arr)"/>
