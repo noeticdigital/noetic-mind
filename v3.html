@@ -786,6 +786,40 @@ html.dark .scrim{background:rgba(4,7,12,.6)}
 .cat-foot{padding:14px 20px;border-top:1px solid var(--line);background:var(--surface-2);display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 .cat-foot .cf-note{font-size:12px;color:var(--muted);flex:1;min-width:0}
 
+/* JTBD action buttons + info modal (interview scheduling / capture extension) */
+.jtbd-actions{display:flex;gap:10px;margin:16px 0 2px;flex-wrap:wrap}
+.imodal-scrim{position:fixed;inset:0;background:rgba(28,24,18,.4);backdrop-filter:blur(2px);opacity:0;pointer-events:none;
+  transition:opacity .2s var(--ease);z-index:52;display:flex;align-items:center;justify-content:center;padding:40px}
+html.dark .imodal-scrim{background:rgba(4,7,12,.62)}
+.imodal-scrim.open{opacity:1;pointer-events:auto}
+.imodal{width:min(560px,94vw);max-height:86vh;background:var(--surface);border:1px solid var(--line-strong);
+  border-radius:var(--r-lg);box-shadow:var(--shadow-lg);overflow:hidden;display:flex;flex-direction:column;
+  transform:translateY(8px) scale(.985);transition:transform .22s var(--ease)}
+.imodal-scrim.open .imodal{transform:none}
+.imodal-head{display:flex;align-items:center;gap:11px;padding:15px 18px;border-bottom:1px solid var(--line);background:var(--surface-2)}
+.imodal-ico{width:30px;height:30px;border-radius:8px;flex:none;display:grid;place-items:center;color:#fff;
+  background:radial-gradient(circle at 30% 30%,#2f6fb0,#184c84)}
+html.dark .imodal-ico{background:radial-gradient(circle at 30% 30%,#3f7cc0,#184c84)}
+.imodal-t{font-size:17px;font-weight:500;letter-spacing:-.01em;flex:1;line-height:1.2}
+.imodal-close{width:30px;height:30px;border-radius:8px;display:grid;place-items:center;color:var(--muted);cursor:pointer;transition:.13s var(--ease)}
+.imodal-close:hover{background:var(--surface);color:var(--ink)}
+.imodal-body{padding:18px 20px 22px;overflow-y:auto}
+.imodal-body p{font-size:13.5px;line-height:1.6;color:var(--ink-2);margin:0 0 13px}
+.imodal-body p:last-child{margin-bottom:0}
+.imodal-body b{color:var(--ink)}
+.im-card{border:1px solid var(--line);border-radius:11px;padding:13px 15px;background:var(--surface-2);margin:0 0 13px}
+.im-card-t{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700;margin-bottom:7px}
+.im-row{display:flex;gap:10px;font-size:13px;padding:4px 0;color:var(--ink-2);line-height:1.4}
+.im-row .im-k{color:var(--muted);min-width:84px;flex:none}
+.im-steps{display:flex;flex-direction:column;gap:11px;margin:2px 0 0;counter-reset:ims}
+.im-step{display:flex;gap:11px;font-size:13.5px;line-height:1.5;color:var(--ink-2)}
+.im-step::before{counter-increment:ims;content:counter(ims);flex:none;width:22px;height:22px;border-radius:50%;
+  background:var(--accent);color:#fff;display:grid;place-items:center;font-size:11px;font-weight:700;margin-top:1px}
+.imodal-cta{display:flex;gap:10px;margin-top:4px;flex-wrap:wrap}
+.im-pool{display:flex;align-items:center;gap:10px}
+.im-pool .imp-bar{flex:1;height:7px;border-radius:4px;background:var(--line);overflow:hidden}
+.im-pool .imp-fill{height:100%;background:var(--ev-validated);border-radius:4px}
+
 /* ───────────────────────────── EXPANDABLE CARD (click to expand) ───────────────────────────── */
 .exp-tog{display:inline-flex;align-items:center;gap:6px;background:none;border:none;font-family:var(--font-mono);
   font-size:11px;color:var(--accent-ink);padding:4px 0;cursor:pointer;letter-spacing:.02em}
@@ -1481,6 +1515,20 @@ var VIEW_ONLY = (function(){try{return /(?:^|[?&])share=reasoning(?:&|$)/.test(l
   </div>
 </div>
 
+<!-- ───────── INFO MODAL (JTBD scheduling / extension guide) ───────── -->
+<div class="imodal-scrim" id="imodalScrim" onclick="if(event.target===this)closeImodal()">
+  <div class="imodal" role="dialog" aria-modal="true" aria-labelledby="imodalTitle">
+    <div class="imodal-head">
+      <span class="imodal-ico" id="imodalIco"></span>
+      <div class="imodal-t serif" id="imodalTitle"></div>
+      <button class="imodal-close" onclick="closeImodal()" aria-label="Close">
+        <svg width="15" height="15" viewBox="0 0 16 16"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+    <div class="imodal-body" id="imodalBody"></div>
+  </div>
+</div>
+
 <!-- ───────── COMMAND PALETTE ───────── -->
 <div class="cmdk-scrim" id="cmdkScrim" onclick="if(event.target===this)closeCmdk()">
   <div class="cmdk" role="dialog" aria-modal="true">
@@ -2041,6 +2089,53 @@ function openCategory(catKey){
 }
 function openCategoryMember(key){ closeCategory(); setTimeout(()=>openNode(key),120); }
 function closeCategory(){ document.getElementById('catScrim').classList.remove('open'); }
+
+/* ── JTBD info modal: interview scheduling + capture-extension guide (methodology, not project data) ── */
+const ICO_CAL='<svg width="17" height="17" viewBox="0 0 16 16" fill="none"><rect x="2.2" y="3" width="11.6" height="11" rx="1.6" stroke="#fff" stroke-width="1.3"/><path d="M2.2 6h11.6M5.3 1.8v2.4M10.7 1.8v2.4" stroke="#fff" stroke-width="1.3" stroke-linecap="round"/></svg>';
+const ICO_EXT='<svg width="17" height="17" viewBox="0 0 16 16" fill="none"><path d="M6.2 2.4a1.4 1.4 0 012.8 0v.9h2.3a1 1 0 011 1v2.3h.9a1.4 1.4 0 010 2.8h-.9V12a1 1 0 01-1 1H9v-.9a1.4 1.4 0 00-2.8 0V13H3.7a1 1 0 01-1-1V9.6h.9a1.4 1.4 0 000-2.8h-.9V4.3a1 1 0 011-1H6.2z" stroke="#fff" stroke-width="1.2" stroke-linejoin="round"/></svg>';
+const IMODAL = {
+  schedule:{ ico:ICO_CAL, title:'Schedule a JTBD interview', body:`
+    <p>Discovery runs on a <b>steady trickle</b> of interviews about real, recent switches, run by the team itself. The assistant keeps the pipeline full and tells you exactly <b>who to talk to next</b>, so the cadence never stalls.</p>
+    <div class="im-card"><div class="im-card-t">Recommended screener · who to recruit next</div>
+      <div class="im-row"><span class="im-k">Profile</span><span>Someone who made a <b>real switch in the last 30 days</b> in this space.</span></div>
+      <div class="im-row"><span class="im-k">Behaviour</span><span>Has tried and <b>abandoned</b> a solution before, your under-sampled cluster.</span></div>
+      <div class="im-row"><span class="im-k">Avoid</span><span>People with no real struggle to learn from, and hypothetical "would you" types.</span></div>
+    </div>
+    <div class="im-card"><div class="im-card-t">Screened pool</div>
+      <div class="im-pool"><span class="mono" style="font-size:12px">18 screened</span><span class="imp-bar"><span class="imp-fill" style="width:64%"></span></span><span class="mono" style="font-size:12px;color:var(--muted)">6 booked</span></div>
+      <p style="margin:9px 0 0;font-size:12.5px;color:var(--muted)">A standing pipeline, refreshed automatically, is what makes a <b>weekly cadence</b> survivable.</p>
+    </div>
+    <div class="imodal-cta">
+      <button class="btn btn-primary btn-sm" onclick="imToast('Screener sent to 4 candidates')">Send the screener</button>
+      <button class="btn btn-ghost btn-sm" onclick="imToast('Invite drafted for Thu, 2:00pm')">Book a slot</button>
+    </div>`},
+  ext:{ ico:ICO_EXT, title:'Interview-capture extension', body:`
+    <p>The Noetic capture extension rides along on your video calls. It <b>records and transcribes</b> the conversation, tags the <b>four forces</b> and the <b>functional / emotional / social</b> motivations as they surface, and drops a finished <b>interview snapshot</b> straight into this project.</p>
+    <div class="im-steps">
+      <div class="im-step">Add it to Chrome, one click, no account needed yet.</div>
+      <div class="im-step">Pin it so it's ready on every call.</div>
+      <div class="im-step">Sign in and pick this discovery project.</div>
+      <div class="im-step">Start your call, capture begins automatically; the snapshot appears in <b>Interview snapshots</b> when you hang up.</div>
+    </div>
+    <div class="imodal-cta" style="margin-top:16px">
+      <button class="btn btn-primary btn-sm" onclick="imToast('Opening the Chrome Web Store…')">Add to Chrome</button>
+      <button class="btn btn-ghost btn-sm" onclick="imToast('Full setup guide opened')">View full guide</button>
+    </div>`},
+};
+function openImodal(which){
+  const c=IMODAL[which]; if(!c) return;
+  document.getElementById('imodalIco').innerHTML=c.ico;
+  document.getElementById('imodalTitle').textContent=c.title;
+  document.getElementById('imodalBody').innerHTML=c.body;
+  document.getElementById('imodalScrim').classList.add('open');
+}
+function closeImodal(){ document.getElementById('imodalScrim').classList.remove('open'); }
+function imToast(msg){
+  let t=document.getElementById('imToastEl');
+  if(!t){ t=document.createElement('div'); t.id='imToastEl'; t.className='acct-toast'; document.body.appendChild(t); }
+  t.textContent=msg+' (demo)'; requestAnimationFrame(()=>t.classList.add('on'));
+  clearTimeout(window._imt); window._imt=setTimeout(()=>t.classList.remove('on'),1900);
+}
 function openNBATest(){ goLoop('delivery'); setTimeout(()=>{ const el=document.getElementById('tc08'); if(el){el.scrollIntoView({behavior:'smooth',block:'center'}); el.animate([{boxShadow:'0 0 0 0 rgba(201,138,30,.5)'},{boxShadow:'0 0 0 6px rgba(201,138,30,0)'}],{duration:1200}); } },340); }
 function toggleNBA(){
   const card=document.getElementById('nbaCard');
@@ -2182,6 +2277,17 @@ const BUILDERS = {
       <p class="lede">Continuous JTBD interviews of real past switches, never hypotheticals.</p>
     </div>
     ${concierge('validated', `<span class="cc-step">Where we are:</span> 14 interviews logged, the Job is consistent across 11 of them. <b>Proven:</b> people hire us to make staying hydrated effortless. <span class="cc-step">Next:</span> the struggle concentrates in the afternoon, when they forget to drink, carried into the opportunity space.`)}
+
+    <div class="jtbd-actions">
+      <button class="btn btn-primary btn-sm" onclick="openImodal('schedule')">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><rect x="2.2" y="3" width="11.6" height="11" rx="1.6" stroke="currentColor" stroke-width="1.3"/><path d="M2.2 6h11.6M5.3 1.8v2.4M10.7 1.8v2.4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+        Schedule a JTBD interview
+      </button>
+      <button class="btn btn-ghost btn-sm" onclick="openImodal('ext')">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M6.2 2.4a1.4 1.4 0 012.8 0v.9h2.3a1 1 0 011 1v2.3h.9a1.4 1.4 0 010 2.8h-.9V12a1 1 0 01-1 1H9v-.9a1.4 1.4 0 00-2.8 0V13H3.7a1 1 0 01-1-1V9.6h.9a1.4 1.4 0 000-2.8h-.9V4.3a1 1 0 011-1H6.2z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg>
+        Interview-capture extension
+      </button>
+    </div>
 
     <div class="section-rule"><span class="sr-n">3.1</span><h2 class="serif">Interview snapshots</h2><span class="sr-line"></span><span class="mono" style="font-size:11px;color:var(--muted)">14 logged · 1 this week</span></div>
     <div class="grid g-2">
