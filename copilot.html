@@ -231,6 +231,31 @@ a{color:inherit;text-decoration:none}
 .btn.primary:hover{background:#fff}
 html:not(.dark) .btn.primary{background:#1c1a17;color:#faf8f2}
 
+/* segmented Full / Focus toggle */
+.seg{display:inline-flex;background:var(--surface-2);border:1px solid var(--line-strong);border-radius:9px;padding:2px}
+.seg-b{height:26px;padding:0 13px;border-radius:7px;font-size:11.5px;font-weight:600;color:var(--muted);transition:.14s var(--ease)}
+.seg-b.active{background:var(--surface);color:var(--ink);box-shadow:var(--shadow-sm)}
+
+/* focus view — glanceable, advice-only HUD */
+.focusview{display:none;flex-direction:column;padding:30px 34px 24px}
+.win.focus{width:min(720px,92vw);height:auto}
+.win.focus .cbody,.win.focus .consent{display:none}
+.win.focus .focusview{display:flex}
+.win.focus .cfoot .who,.win.focus .cfoot .fmeta{display:none}
+.fv-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.fv-kick{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--amber-ink);font-weight:700;display:flex;align-items:center;gap:8px}
+.fv-kick .spark{width:13px;height:13px}
+.fv-dots{display:flex;gap:6px}
+.fv-dots i{width:8px;height:8px;border-radius:50%;background:var(--surface);border:1.5px solid var(--line-strong);transition:.3s var(--ease)}
+.fv-dots i.on{background:var(--accent);border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.fv-q{font-family:var(--font-serif);font-size:27px;line-height:1.3;color:var(--ink);font-weight:500;letter-spacing:-.01em}
+.fv-q.flip{animation:flipin .34s var(--ease)}
+.fv-w{font-size:14px;line-height:1.5;color:var(--ink-2);margin-top:14px}
+.fv-foot{display:flex;align-items:center;gap:12px;margin-top:24px;padding-top:14px;border-top:1px solid var(--line);font-size:11.5px;color:var(--muted)}
+.fv-foot .fv-job{display:flex;align-items:center;gap:9px}
+.fv-foot em{font-style:normal;color:var(--ink-2);font-weight:600}
+.fv-foot .fv-meta{margin-left:auto;font-family:var(--font-mono)}
+
 /* end toast */
 .toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(12px);z-index:60;
   background:var(--ink);color:var(--paper);font-size:12.5px;font-weight:500;padding:10px 17px;border-radius:24px;
@@ -330,6 +355,20 @@ html:not(.dark) .btn.primary{background:#1c1a17;color:#faf8f2}
       </div>
     </div>
 
+    <!-- focus / advice-only HUD (hidden until toggled) -->
+    <div class="focusview" id="focusView">
+      <div class="fv-top">
+        <span class="fv-kick"><svg class="spark" viewBox="0 0 16 16" fill="none"><path d="M8 1.5l1.6 4.3L14 7.4l-4.4 1.6L8 13.4 6.4 9 2 7.4l4.4-1.6z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg>Ask this next</span>
+        <span class="fv-dots"><i data-step="first-thought"></i><i data-step="passive"></i><i data-step="active"></i><i data-step="deciding"></i><i data-step="first-use"></i></span>
+      </div>
+      <div class="fv-q" id="fvQ">Anchor the first thought. Ask for the specific moment something needed to change, not a general reason.</div>
+      <div class="fv-w" id="fvW">Open the timeline at the beginning. You want the trigger, in their words.</div>
+      <div class="fv-foot">
+        <span class="fv-job">Job so far <span class="meter" id="fvMeter" data-state="assumption"><span class="seg"></span><span class="seg"></span><span class="seg"></span><span class="seg"></span></span> <em id="fvJobState">assumption</em></span>
+        <span class="fv-meta">Maya · interview 14</span>
+      </div>
+    </div>
+
     <div class="cfoot">
       <div class="who">
         <div class="av">M</div>
@@ -337,6 +376,10 @@ html:not(.dark) .btn.primary{background:#1c1a17;color:#faf8f2}
       </div>
       <span class="fmeta" id="qCount">Q 0</span>
       <div class="fspace"></div>
+      <div class="seg" title="Full copilot, or a glanceable ask-this-next view for live interviewing">
+        <button class="seg-b active" id="segFull" onclick="setMode('full')">Full</button>
+        <button class="seg-b" id="segFocus" onclick="setMode('focus')">Focus</button>
+      </div>
       <button class="btn ghost" id="playBtn" onclick="togglePlay()">Pause</button>
       <button class="btn ghost" onclick="restart()" title="Replay the interview">Replay</button>
       <button class="btn primary" onclick="endInterview()">End &amp; synthesize →</button>
@@ -411,19 +454,29 @@ function addLine(who,text){
 }
 
 function setPrompt(q,w){
-  const p=$('prompt'); $('promptQ').textContent=q; $('promptW').textContent=w;
-  p.classList.remove('flip'); void p.offsetWidth; p.classList.add('flip');
+  $('promptQ').textContent=q; $('promptW').textContent=w;
+  $('fvQ').textContent=q; $('fvW').textContent=w;
+  ['prompt','fvQ'].forEach(id=>{const el=$(id);el.classList.remove('flip');void el.offsetWidth;el.classList.add('flip');});
 }
 function setJob(state,text){
   $('jobMeter').setAttribute('data-state',state);
+  $('fvMeter').setAttribute('data-state',state);
   const jt=$('jobText'); jt.textContent=text; jt.classList.remove('bump'); void jt.offsetWidth; jt.classList.add('bump');
   const label = state==='suggestive' ? 'emerging' : state;
   $('jobState').innerHTML = `State: <b>${label}</b> · one interview can suggest, the pattern across many validates.`;
+  $('fvJobState').textContent = label;
 }
 function activateStage(id,quote){
+  const fd=document.querySelector(`.fv-dots i[data-step="${id}"]`); if(fd) fd.classList.add('on');
   const el=document.querySelector(`.step[data-step="${id}"]`); if(!el||el.classList.contains('on'))return;
   el.classList.add('on'); el.querySelector('.squote').textContent='“'+quote+'”';
   stepsDone.add(id); $('stepCount').textContent=stepsDone.size+' / 5';
+}
+function setMode(m){
+  const focus = m==='focus';
+  $('win').classList.toggle('focus', focus);
+  $('segFull').classList.toggle('active', !focus);
+  $('segFocus').classList.toggle('active', focus);
 }
 function addForce(key,snip){
   const el=document.querySelector(`.force[data-force="${key}"]`); if(!el)return;
@@ -466,6 +519,7 @@ function restart(){
   idx=0; qn=0; secs=0; stepsDone.clear(); forcesDone.clear();
   document.querySelectorAll('.tline').forEach(n=>n.remove());
   document.querySelectorAll('.step.on').forEach(n=>{n.classList.remove('on');n.querySelector('.squote').textContent='';});
+  document.querySelectorAll('.fv-dots i.on').forEach(n=>n.classList.remove('on'));
   document.querySelectorAll('.force.on').forEach(n=>{n.classList.remove('on');n.querySelector('.fsnip').textContent='';});
   $('stepCount').textContent='0 / 5'; $('forceCount').textContent='0 / 4'; $('qCount').textContent='Q 0';
   $('recTime').textContent='00:00'; $('recDot').style.background='#e0584a';
