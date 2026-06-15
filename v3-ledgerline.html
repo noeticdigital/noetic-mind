@@ -64,6 +64,7 @@
   --accent:#184c84;       /* deep navy (brand)          */
   --accent-soft:#e6edf6;
   --accent-ink:#123a66;
+  --navy-deep:#0a1a38;    /* deep brand navy · R10 G26 B56 */
 
   /* evidence ladder */
   --ev-assumption:#9b958a;
@@ -111,16 +112,16 @@
    elevation tints/borders. */
 html.dark{
   color-scheme:dark;
-  --paper:#10141b;        /* deep cool navy-charcoal page */
-  --surface:#171c25;      /* raised card                 */
-  --surface-2:#0c0f15;    /* sunken / inset              */
+  --paper:#0a1a38;        /* deep brand navy page (R10 G26 B56) */
+  --surface:#122347;      /* raised card (navy lift)     */
+  --surface-2:#081530;    /* sunken / inset (deeper navy)*/
   --ink:#e7eaf0;          /* cool creamy ink             */
   --ink-2:#aeb4c1;
   --muted:#7c8493;
-  --line:#262d39;
-  --line-strong:#39414f;
+  --line:#1f3458;
+  --line-strong:#2c4670;
   --accent:#5e95d8;       /* navy, lifted for contrast   */
-  --accent-soft:#17304d;
+  --accent-soft:#173360;
   --accent-ink:#8fb6e6;
 
   --ev-assumption:#8d8779;
@@ -146,13 +147,13 @@ html.dark{
   --killed-ink:#979082;
   --amber-line:#4a3d21;
   --warm-tint-1:#241f15; --warm-tint-2:#2b2415; --warm-tint-3:#2f2817;
-  --grad-hi:#1a2029; --grad-lo:#11151c;
+  --grad-hi:#10224a; --grad-lo:#0a1a38;
   --green-fill-1:#1c3328; --green-fill-2:#274736;
-  --label-bg:rgba(23,28,37,.85);
-  --topbar-bg:rgba(16,20,27,.82);
+  --label-bg:rgba(18,35,71,.85);
+  --topbar-bg:rgba(10,26,56,.84);
   --btn-primary-bg:#e7eaf0; --btn-primary-ink:#10141b; --btn-primary-hover:#ffffff;
 }
-html.dark .brand .glyph{background:radial-gradient(circle at 30% 30%,#3f7cc0,#184c84)}
+html.dark .brand .glyph{background:radial-gradient(circle at 30% 30%,#3f7cc0,#0a1a38)}
 html.dark .nav-loop:hover{background:rgba(94,149,216,.10)}
 html.dark .nav-loop.active .loop-num{color:#0c0f15}
 html.dark .scrim{background:rgba(4,7,12,.58)}
@@ -192,7 +193,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .brand{display:flex;align-items:center;gap:10px;padding:6px 8px 18px}
 .brand .glyph{
   width:30px;height:30px;border-radius:8px;flex:none;
-  background:radial-gradient(circle at 30% 30%,#2f6fb0,#184c84);
+  background:radial-gradient(circle at 30% 30%,#2f6fb0,#0a1a38);
   display:grid;place-items:center;color:#fff;box-shadow:var(--shadow-sm);
   position:relative;overflow:hidden;
 }
@@ -797,8 +798,8 @@ html.dark .imodal-scrim{background:rgba(4,7,12,.62)}
 .imodal-scrim.open .imodal{transform:none}
 .imodal-head{display:flex;align-items:center;gap:11px;padding:15px 18px;border-bottom:1px solid var(--line);background:var(--surface-2)}
 .imodal-ico{width:30px;height:30px;border-radius:8px;flex:none;display:grid;place-items:center;color:#fff;
-  background:radial-gradient(circle at 30% 30%,#2f6fb0,#184c84)}
-html.dark .imodal-ico{background:radial-gradient(circle at 30% 30%,#3f7cc0,#184c84)}
+  background:radial-gradient(circle at 30% 30%,#2f6fb0,#0a1a38)}
+html.dark .imodal-ico{background:radial-gradient(circle at 30% 30%,#3f7cc0,#0a1a38)}
 .imodal-t{font-size:17px;font-weight:500;letter-spacing:-.01em;flex:1;line-height:1.2}
 .imodal-close{width:30px;height:30px;border-radius:8px;display:grid;place-items:center;color:var(--muted);cursor:pointer;transition:.13s var(--ease)}
 .imodal-close:hover{background:var(--surface);color:var(--ink)}
@@ -974,8 +975,8 @@ html.dark .chat-fab{background:#1e5fa6;box-shadow:0 8px 26px rgba(0,0,0,.5),0 0 
 .chat-head{flex:none;padding:14px 16px;border-bottom:1px solid var(--line);background:var(--surface-2);position:relative}
 .chat-head .ch-top{display:flex;align-items:center;gap:9px}
 .chat-head .ch-glyph{width:26px;height:26px;border-radius:7px;flex:none;display:grid;place-items:center;color:#fff;
-  background:radial-gradient(circle at 30% 30%,#2f6fb0,#184c84)}
-html.dark .chat-head .ch-glyph{background:radial-gradient(circle at 30% 30%,#3f7cc0,#184c84)}
+  background:radial-gradient(circle at 30% 30%,#2f6fb0,#0a1a38)}
+html.dark .chat-head .ch-glyph{background:radial-gradient(circle at 30% 30%,#3f7cc0,#0a1a38)}
 .chat-head .ch-title{font-weight:600;font-size:13.5px;letter-spacing:-.01em;line-height:1.2}
 .chat-head .ch-title .ch-proj{color:var(--muted);font-weight:500}
 .chat-head .ch-close{position:absolute;top:11px;right:12px;width:28px;height:28px;border-radius:7px;display:grid;place-items:center;
@@ -1109,8 +1110,8 @@ html.dark .method-scrim{background:rgba(0,0,0,.64)}
 .method.on{opacity:1;pointer-events:auto;transform:translate(-50%,-50%)}
 .method-head{flex:none;display:flex;align-items:center;gap:12px;padding:15px 18px;border-bottom:1px solid var(--line);background:var(--surface)}
 .method-head .mh-ico{width:32px;height:32px;border-radius:9px;flex:none;display:grid;place-items:center;color:#fff;
-  background:radial-gradient(circle at 30% 30%,#2f6fb0,#184c84)}
-html.dark .method-head .mh-ico{background:radial-gradient(circle at 30% 30%,#3f7cc0,#184c84)}
+  background:radial-gradient(circle at 30% 30%,#2f6fb0,#0a1a38)}
+html.dark .method-head .mh-ico{background:radial-gradient(circle at 30% 30%,#3f7cc0,#0a1a38)}
 .method-head .mh-t{font-weight:600;font-size:14.5px;letter-spacing:-.01em}
 .method-head .mh-s{font-size:11.5px;color:var(--muted);margin-top:1px}
 .method-close{margin-left:auto;width:30px;height:30px;border-radius:8px;display:grid;place-items:center;color:var(--muted);
