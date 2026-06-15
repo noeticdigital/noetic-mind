@@ -1933,7 +1933,7 @@ function treeSVG(Y,H,rowH,ex){
       </marker>
     </defs>
     <!-- external context (weak, pre-frame input) feeds the framing assumption -->
-    ${ex?`<path class="conn dashed" d="M${ex.x+ex.w/2} ${ex.y+ex.h} C${ex.x+ex.w/2} ${ex.y+ex.h+22} ${sx} ${Y.framing-26} ${sx} ${Y.framing-4}" marker-end="url(#arr)"/>`:''}
+    ${ex?`<path class="conn dashed" d="M${ex.x} ${ex.y+ex.h/2} C${ex.x-46} ${ex.y+ex.h/2} ${sx} ${Y.framing-30} ${sx} ${Y.framing-4}" marker-end="url(#arr)"/>`:''}
     <!-- supply spine: framing → outcome -->
     <path class="conn" d="M${sx} ${Y.framing+H.framing} V${Y.outcome-4}" marker-end="url(#arr)"/>
     <!-- demand spine: jtbd (job + timeline & forces) → opportunities (category) -->
@@ -1971,7 +1971,7 @@ function renderTree(){
   /* External-context card: a compact, dashed, pre-frame input that FEEDS the framing
      assumption (weak signal; opens the Define view). Rendered manually so it keeps its
      own small height instead of the uniform node height. */
-  const exW=232, exX=Math.round(TREE_W/2-exW/2), exY=16;   // top-centre of the tree
+  const exW=232, exX=Math.round(TREE_W/2-exW/2-130), exY=16;   // top, a touch left of centre
   c.insertAdjacentHTML('beforeend',
     `<div class="ext-card" style="left:${exX}px;top:${exY}px;width:${exW}px" onclick="goLoop('define')" tabindex="0" role="button" title="Open the Define / Foundation view" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();goLoop('define')}">
       <div class="exc-kind">External context</div>
