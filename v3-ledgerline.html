@@ -1862,19 +1862,17 @@ const CATS = {
    measured node heights so nothing ever clips. The whole canvas scales to fit.
    Decluttered: multi-item layers collapse into category nodes (opportunities,
    solutions, tests) that open centered modals. */
-const TREE_W=1320; let TREE_H=690;
-/* All x shifted right by a 140px left gutter so the External-context card can sit
-   to the LEFT of the framing assumption. SVG label x-values below are computed from
-   TL, so the gutter stays self-consistent. */
+const TREE_W=1180; let TREE_H=690;
+/* SVG label x-values below are computed from TL so the geometry stays self-consistent. */
 const TL={
-  framing:      {x:236, w:380, cls:'slim', top:true, nod:true},
-  outcome:      {x:236, w:380, note:'supply hypothesis · revisable'},
-  jtbd:         {x:844, w:380, cls:'slim', top:true, nod:true},
-  opportunities:{x:844, w:380, cls:'slim', top:true, cat:true},
-  causal:       {x:540, w:380, cls:'slim', top:true, nod:true},
-  solutions:    {x:540, w:380, cls:'slim', top:true, cat:true},
-  tests:        {x:370, w:360, cls:'slim', top:true, cat:true},
-  increment:    {x:740, w:360, cls:'slim', top:true, nod:true},
+  framing:      {x:96, w:380, cls:'slim', top:true, nod:true},
+  outcome:      {x:96, w:380, note:'supply hypothesis · revisable'},
+  jtbd:         {x:704, w:380, cls:'slim', top:true, nod:true},
+  opportunities:{x:704, w:380, cls:'slim', top:true, cat:true},
+  causal:       {x:400, w:380, cls:'slim', top:true, nod:true},
+  solutions:    {x:400, w:380, cls:'slim', top:true, cat:true},
+  tests:        {x:230, w:360, cls:'slim', top:true, cat:true},
+  increment:    {x:600, w:360, cls:'slim', top:true, nod:true},
 };
 </script>
 <script>
@@ -1935,7 +1933,7 @@ function treeSVG(Y,H,rowH,ex){
       </marker>
     </defs>
     <!-- external context (weak, pre-frame input) feeds the framing assumption -->
-    ${ex?`<path class="conn dashed" d="M${ex.x+ex.w} ${ex.y+ex.h/2} H${TL.framing.x-4}" marker-end="url(#arr)"/>`:''}
+    ${ex?`<path class="conn dashed" d="M${ex.x+ex.w/2} ${ex.y+ex.h} C${ex.x+ex.w/2} ${ex.y+ex.h+22} ${sx} ${Y.framing-26} ${sx} ${Y.framing-4}" marker-end="url(#arr)"/>`:''}
     <!-- supply spine: framing → outcome -->
     <path class="conn" d="M${sx} ${Y.framing+H.framing} V${Y.outcome-4}" marker-end="url(#arr)"/>
     <!-- demand spine: jtbd (job + timeline & forces) → opportunities (category) -->
@@ -1973,7 +1971,7 @@ function renderTree(){
   /* External-context card: a compact, dashed, pre-frame input that FEEDS the framing
      assumption (weak signal; opens the Define view). Rendered manually so it keeps its
      own small height instead of the uniform node height. */
-  const exX=8, exW=200, exY=16;
+  const exW=232, exX=Math.round(TREE_W/2-exW/2), exY=16;   // top-centre of the tree
   c.insertAdjacentHTML('beforeend',
     `<div class="ext-card" style="left:${exX}px;top:${exY}px;width:${exW}px" onclick="goLoop('define')" tabindex="0" role="button" title="Open the Define / Foundation view" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();goLoop('define')}">
       <div class="exc-kind">External context</div>
@@ -1981,11 +1979,12 @@ function renderTree(){
       <div class="exc-foot">sharpens the frame · not evidence</div>
     </div>`);
   const exH=c.querySelector('.ext-card').offsetHeight;
-  /* framing stays at the top — the ext-card sits to its LEFT in the gutter and
-     feeds it with a horizontal dashed connector */
+  /* the ext-card floats at the top-centre; both top cards drop below it so it sits
+     clear of the spines and feeds the framing assumption with a single arrow */
+  const topRow=exY+exH+30;
   const Y={};
-  Y.framing=16;                         Y.outcome=Y.framing+H.framing+26;
-  Y.jtbd=16;
+  Y.framing=topRow;                     Y.outcome=Y.framing+H.framing+26;
+  Y.jtbd=topRow;
   Y.opportunities=Y.jtbd+H.jtbd+22;
   /* convergence stem sits clearly below BOTH spines so it never overlaps a column */
   Y.causal=Math.max(Y.outcome+H.outcome, Y.opportunities+H.opportunities)+30;
@@ -2001,11 +2000,9 @@ function renderTree(){
   });
   c.style.height=TREE_H+'px';
   c.insertAdjacentHTML('afterbegin', treeSVG(Y,H,rowH,{x:exX,y:exY,w:exW,h:exH}));
-  /* spine labels drop below the ext-card (which now occupies the top of the gutter) */
-  const sideTop=exY+exH+12;
   c.insertAdjacentHTML('beforeend',
-    `<div class="spine-side" style="left:6px;top:${sideTop}px;height:${Y.outcome+H.outcome-sideTop}px"><span>Supply</span></div>`+
-    `<div class="spine-side" style="right:6px;top:${sideTop}px;height:${demandB-sideTop}px"><span>Demand</span></div>`);
+    `<div class="spine-side" style="left:6px;top:${Y.framing}px;height:${Y.outcome+H.outcome-Y.framing}px"><span>Supply</span></div>`+
+    `<div class="spine-side" style="right:6px;top:${Y.jtbd}px;height:${demandB-Y.jtbd}px"><span>Demand</span></div>`);
   if(typeof activeFilter!=='undefined' && activeFilter!=='all')
     c.querySelectorAll('.node').forEach(n=>n.classList.toggle('dim', n.dataset.ev!==activeFilter));
   fitTree();
