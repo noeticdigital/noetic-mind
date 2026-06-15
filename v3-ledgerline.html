@@ -112,16 +112,16 @@
    elevation tints/borders. */
 html.dark{
   color-scheme:dark;
-  --paper:#0a1a38;        /* deep brand navy page (R10 G26 B56) */
-  --surface:#122347;      /* raised card (navy lift)     */
-  --surface-2:#081530;    /* sunken / inset (deeper navy)*/
+  --paper:#10141b;        /* deep cool navy-charcoal page */
+  --surface:#171c25;      /* raised card                 */
+  --surface-2:#0c0f15;    /* sunken / inset              */
   --ink:#e7eaf0;          /* cool creamy ink             */
   --ink-2:#aeb4c1;
   --muted:#7c8493;
-  --line:#1f3458;
-  --line-strong:#2c4670;
+  --line:#262d39;
+  --line-strong:#39414f;
   --accent:#5e95d8;       /* navy, lifted for contrast   */
-  --accent-soft:#173360;
+  --accent-soft:#17304d;
   --accent-ink:#8fb6e6;
 
   --ev-assumption:#8d8779;
@@ -147,10 +147,10 @@ html.dark{
   --killed-ink:#979082;
   --amber-line:#4a3d21;
   --warm-tint-1:#241f15; --warm-tint-2:#2b2415; --warm-tint-3:#2f2817;
-  --grad-hi:#10224a; --grad-lo:#0a1a38;
+  --grad-hi:#1a2029; --grad-lo:#11151c;
   --green-fill-1:#1c3328; --green-fill-2:#274736;
-  --label-bg:rgba(18,35,71,.85);
-  --topbar-bg:rgba(10,26,56,.84);
+  --label-bg:rgba(23,28,37,.85);
+  --topbar-bg:rgba(16,20,27,.82);
   --btn-primary-bg:#e7eaf0; --btn-primary-ink:#10141b; --btn-primary-hover:#ffffff;
 }
 html.dark .brand .glyph{background:radial-gradient(circle at 30% 30%,#3f7cc0,#0a1a38)}
@@ -820,6 +820,32 @@ html.dark .imodal-ico{background:radial-gradient(circle at 30% 30%,#3f7cc0,#0a1a
 .im-pool .imp-bar{flex:1;height:7px;border-radius:4px;background:var(--line);overflow:hidden}
 .im-pool .imp-fill{height:100%;background:var(--ev-validated);border-radius:4px}
 
+/* Define / Foundation view */
+.ext-note{font-size:12.5px;line-height:1.5;color:var(--ink-2);background:var(--ev-assumption-bg);border:1px solid var(--line);
+  border-radius:10px;padding:11px 14px;margin:0 0 14px}
+.ext-note b{color:var(--ink)}
+.ext-item{display:flex;gap:10px;font-size:12.5px;line-height:1.45;color:var(--ink-2);padding:8px 0;border-top:1px solid var(--line)}
+.ext-item:first-of-type{border-top:none}
+.ext-item .ext-ico{flex:none;font-family:var(--font-mono);font-size:9px;font-weight:700;color:var(--muted);
+  background:var(--surface-2);border:1px solid var(--line);border-radius:5px;padding:2px 5px;height:fit-content;margin-top:1px;letter-spacing:.03em}
+.ext-weak{font-size:9px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--amber-ink);background:var(--ev-suggestive-bg);border-radius:5px;padding:1px 6px;margin-left:6px}
+.fes{display:flex;align-items:center;gap:9px;font-size:12.5px;color:var(--ink-2);padding:5px 0}
+.fes-k{flex:none;font-size:9px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;border-radius:5px;padding:3px 7px;width:74px;text-align:center}
+.fes-k.func{color:var(--green-ink);background:var(--ev-validated-bg)}
+.fes-k.emo{color:var(--amber-ink);background:var(--ev-suggestive-bg)}
+.fes-k.soc{color:var(--accent-ink);background:var(--accent-soft)}
+
+/* tree External-context card (left gutter, feeds the framing assumption) */
+.ext-card{position:absolute;border:1px dashed var(--line-strong);border-radius:var(--r-md);background:var(--surface-2);
+  padding:11px 13px;cursor:pointer;transition:.14s var(--ease);box-shadow:var(--shadow-sm)}
+.ext-card:hover{border-color:var(--accent);box-shadow:var(--shadow-md);transform:translateY(-2px)}
+.ext-card .exc-kind{font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent-ink);font-weight:700;display:flex;align-items:center;gap:6px}
+.ext-card .exc-kind::before{content:"";width:7px;height:7px;border-radius:2px;background:var(--navy-deep);flex:none}
+html.dark .ext-card .exc-kind::before{background:var(--accent)}
+.ext-card .exc-h{font-size:12.5px;line-height:1.35;color:var(--ink-2);margin-top:6px}
+.ext-card .exc-foot{font-size:10px;color:var(--muted);margin-top:7px;font-style:italic}
+
 /* ───────────────────────────── EXPANDABLE CARD (click to expand) ───────────────────────────── */
 .exp-tog{display:inline-flex;align-items:center;gap:6px;background:none;border:none;font-family:var(--font-mono);
   font-size:11px;color:var(--accent-ink);padding:4px 0;cursor:pointer;letter-spacing:.02em}
@@ -1332,6 +1358,11 @@ var VIEW_ONLY = (function(){try{return /(?:^|[?&])share=reasoning(?:&|$)/.test(l
       </div>
     </div>
 
+    <div class="rail-label">Foundation</div>
+    <button class="nav-loop" data-loop="define" onclick="goLoop('define')">
+      <span class="loop-num">◆</span> Define <span class="loop-meta">setup</span>
+    </button>
+
     <div class="rail-label">The five loops</div>
     <button class="nav-loop active" data-loop="tree" onclick="goLoop('tree')">
       <span class="loop-num">◇</span> Tree <span class="loop-meta">home</span>
@@ -1479,6 +1510,7 @@ var VIEW_ONLY = (function(){try{return /(?:^|[?&])share=reasoning(?:&|$)/.test(l
       <section class="screen" id="screen-causal"></section>
       <section class="screen" id="screen-delivery"></section>
       <section class="screen" id="screen-decisions"></section>
+      <section class="screen" id="screen-define"></section>
 
     </div>
   </main>
@@ -1874,7 +1906,7 @@ function nodeHTML(key){
   </div>`;
 }
 
-function treeSVG(Y,H,rowH){
+function treeSVG(Y,H,rowH,ex){
   const sx=TL.framing.x+TL.framing.w/2, dx=TL.jtbd.x+TL.jtbd.w/2;   // spine centers
   const ob=Y.outcome+H.outcome;                                      // outcome bottom
   const cx=TL.causal.x+TL.causal.w/2;                                // convergence center x
@@ -1897,6 +1929,8 @@ function treeSVG(Y,H,rowH){
         <path d="M0 0L8 4L0 8z" fill="var(--accent)"/>
       </marker>
     </defs>
+    <!-- external context (weak, pre-frame input) feeds the framing assumption -->
+    ${ex?`<path class="conn dashed" d="M${ex.x+ex.w/2} ${ex.y+ex.h} V${Y.framing-4}" marker-end="url(#arr)"/>`:''}
     <!-- supply spine: framing → outcome -->
     <path class="conn" d="M${sx} ${Y.framing+H.framing} V${Y.outcome-4}" marker-end="url(#arr)"/>
     <!-- demand spine: jtbd (job + timeline & forces) → opportunities (category) -->
@@ -1931,9 +1965,20 @@ function renderTree(){
   c.querySelectorAll('.node').forEach(n=>{ H[n.dataset.key]=n.offsetHeight; });
   const uniformH = Math.max(...Object.keys(H).map(k=>H[k]));
   Object.keys(H).forEach(k=>{ H[k]=uniformH; });
-  /* place vertically */
+  /* External-context card: a compact, dashed, pre-frame input that FEEDS the framing
+     assumption (weak signal; opens the Define view). Rendered manually so it keeps its
+     own small height instead of the uniform node height. */
+  const exX=TL.framing.x, exW=232, exY=16;
+  c.insertAdjacentHTML('beforeend',
+    `<div class="ext-card" style="left:${exX}px;top:${exY}px;width:${exW}px" onclick="goLoop('define')" tabindex="0" role="button" title="Open the Define / Foundation view" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();goLoop('define')}">
+      <div class="exc-kind">External context</div>
+      <div class="exc-h">Docs, web, social signals &amp; a model challenge</div>
+      <div class="exc-foot">sharpens the frame · not evidence</div>
+    </div>`);
+  const exH=c.querySelector('.ext-card').offsetHeight;
+  /* place vertically (the supply spine is pushed below the ext-card) */
   const Y={};
-  Y.framing=16;                         Y.outcome=Y.framing+H.framing+26;
+  Y.framing=exY+exH+24;                 Y.outcome=Y.framing+H.framing+26;
   Y.jtbd=16;
   Y.opportunities=Y.jtbd+H.jtbd+22;
   /* convergence stem sits clearly below BOTH spines so it never overlaps a column */
@@ -1949,7 +1994,7 @@ function renderTree(){
     n.style.height=uniformH+'px';
   });
   c.style.height=TREE_H+'px';
-  c.insertAdjacentHTML('afterbegin', treeSVG(Y,H,rowH));
+  c.insertAdjacentHTML('afterbegin', treeSVG(Y,H,rowH,{x:exX,y:exY,w:exW,h:exH}));
   c.insertAdjacentHTML('beforeend',
     `<div class="spine-side" style="left:6px;height:${Y.outcome+H.outcome}px"><span>Supply</span></div>`+
     `<div class="spine-side" style="right:6px;height:${demandB}px"><span>Demand</span></div>`);
@@ -2160,7 +2205,7 @@ function toggleTheme(){
 const LOOP_TITLES = {
   tree:'Progress-to-Outcome Tree', progress:'Progress Loop', outcome:'Outcome Loop',
   opportunity:'Opportunity Loop', causal:'Causal Learning Loop', delivery:'Delivery & Impact Loop',
-  decisions:'Decision Log',
+  decisions:'Decision Log', define:'Define · Foundation',
 };
 
 /* mark project-variable data tokens (names, %s, test IDs, sample sizes) inside a freshly
@@ -2267,6 +2312,83 @@ function goLoop(loop){
 }
 
 const BUILDERS = {
+  /* ───── DEFINE (foundation / entry point) ───── */
+  define(){ return `<div class="wrap">
+    <div class="screen-head">
+      <div class="eyebrow">Foundation · before the loops</div>
+      <h1 class="h1">Define the project</h1>
+      <p class="lede">Set the starting frame, gather the context that sharpens it, and name who you're studying. Everything here is a hypothesis the loops will test, not proof.</p>
+    </div>
+    ${concierge('assumption', `<span class="cc-step">Status:</span> the frame is a <b>working hypothesis</b>. External context tells us <b>where to look</b> and what to challenge, it does not validate anything. <span class="cc-step">Next:</span> the Progress loop tests it against real interviews.`)}
+
+    <div class="section-rule"><span class="sr-n">0.1</span><h2 class="serif">The frame</h2><span class="sr-line"></span><span class="mono" style="font-size:11px;color:var(--muted)">revisable hypothesis</span></div>
+    <div class="grid g-2">
+      <div class="card">
+        <div class="card-t">Framing assumption<span class="ct-line"></span></div>
+        <p class="serif" style="font-size:16px;line-height:1.5;color:var(--ink)">Books that never become trustworthy are why SMBs churn, so early activation (a connected feed plus a first reconciliation) is the controllable driver of 90-day retention.</p>
+        <div style="margin-top:9px">${meter('suggestive')} <span style="font-size:11px;color:var(--muted);margin-left:6px">held consciously, will be tested</span></div>
+        <div class="card-t" style="margin-top:18px">Direction from leadership<span class="ct-line"></span></div>
+        <p style="font-size:13.5px;line-height:1.55;color:var(--ink-2)">Lower 90-day churn of new SMB accounts (the business outcome). The team owns the <i>how</i>, and derives the product outcome that serves it (see the Outcome loop).</p>
+      </div>
+      <div class="card inset">
+        <div class="card-t">Constraints<span class="ct-line"></span></div>
+        <p style="font-size:13px;color:var(--ink-2);line-height:1.5">One delivery cycle. No new banking-data aggregator. Must be measurable at release.</p>
+        <div class="card-t" style="margin-top:16px">Non-goals<span class="ct-line"></span></div>
+        <ul style="list-style:none;font-size:13px;line-height:1.5">
+          <li style="padding:4px 0 4px 16px;position:relative;color:var(--ink-2)"><span style="position:absolute;left:0;color:var(--muted)">×</span>Multi-entity consolidation.</li>
+          <li style="padding:4px 0 4px 16px;position:relative;color:var(--ink-2)"><span style="position:absolute;left:0;color:var(--muted)">×</span>Payroll &amp; invoicing automation.</li>
+          <li style="padding:4px 0 4px 16px;position:relative;color:var(--ink-2)"><span style="position:absolute;left:0;color:var(--muted)">×</span>Historical-import automation (parked, real-but-later).</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section-rule"><span class="sr-n">0.2</span><h2 class="serif">External context</h2><span class="sr-line"></span><span class="mono" style="font-size:11px;color:var(--muted)">what sharpens the frame</span></div>
+    <div class="ext-note"><b>A weak, supply-side signal.</b> It points us at where to look and what to stress-test, never what's true. The frame stays an <b>Assumption</b> until interviews say otherwise.</div>
+    <div class="grid g-3">
+      <div class="card">
+        <div class="card-t">Docs &amp; web<span class="ct-line"></span></div>
+        <div class="ext-item"><span class="ext-ico">PDF</span><span>SMB churn studies extracted. Key line: <b>trust at the first bank connection is the make-or-break moment</b>.</span></div>
+        <div class="ext-item"><span class="ext-ico">WEB</span><span>Searches for "is this fintech safe to connect my bank" up <b>YoY</b>.</span></div>
+      </div>
+      <div class="card">
+        <div class="card-t">Social signals <span class="ext-weak">weak</span><span class="ct-line"></span></div>
+        <div class="ext-item"><span class="ext-ico">SOC</span><span>Forums &amp; reviews repeat one phrase: <b>"I'm not giving a two-year-old startup my bank login."</b></span></div>
+        <div class="ext-item"><span class="ext-ico">SOC</span><span>Aggregate and unprompted, with no real story behind it. A hint, not evidence.</span></div>
+      </div>
+      <div class="card">
+        <div class="card-t">Challenge the frame<span class="ct-line"></span></div>
+        <p style="font-size:12.5px;color:var(--ink-2);line-height:1.5;margin:0 0 8px">Four models red-teamed the starting frame.</p>
+        <div class="ext-item"><span class="ext-ico">3/4</span><span><b>Consensus:</b> the trust threshold at connection is the gap.</span></div>
+        <div class="ext-item"><span class="ext-ico">1/4</span><span><b>Dissent:</b> onboarding friction (importing the mess) may matter more. Both became things to test.</span></div>
+      </div>
+    </div>
+
+    <div class="section-rule"><span class="sr-n">0.3</span><h2 class="serif">Who we're studying</h2><span class="sr-line"></span><span class="mono" style="font-size:11px;color:var(--muted)">demand segments, by shared Job not personas</span></div>
+    <div class="grid g-3">
+      <div class="card">
+        <div class="card-t" style="color:var(--ev-suggestive)">The burned switcher<span class="ct-line"></span></div>
+        <p style="font-size:13px;color:var(--ink-2);line-height:1.5">Tried a fintech tool before; got spooked at the bank-login step and bailed.</p>
+        <div class="fes"><span class="fes-k func">Functional</span>connect safely</div>
+        <div class="fes"><span class="fes-k emo">Emotional</span>not feel reckless</div>
+        <div class="fes"><span class="fes-k soc">Social</span>look prudent to partners</div>
+      </div>
+      <div class="card">
+        <div class="card-t">The deadline-driven owner<span class="ct-line"></span></div>
+        <p style="font-size:13px;color:var(--ink-2);line-height:1.5">An investor or tax deadline just exposed how messy the books are.</p>
+        <div class="fes"><span class="fes-k func">Functional</span>answer money questions fast</div>
+        <div class="fes"><span class="fes-k emo">Emotional</span>feel in control</div>
+        <div class="fes"><span class="fes-k soc">Social</span>look credible to investors</div>
+      </div>
+      <div class="card">
+        <div class="card-t">The spreadsheet loyalist<span class="ct-line"></span></div>
+        <p style="font-size:13px;color:var(--ink-2);line-height:1.5">Secretly likes the Sunday-night spreadsheet ritual; switching feels like a loss.</p>
+        <div class="fes"><span class="fes-k func">Functional</span>current numbers, less chore</div>
+        <div class="fes"><span class="fes-k emo">Emotional</span>keep the sense of control</div>
+        <div class="fes"><span class="fes-k soc">Social</span>be the on-top-of-it founder</div>
+      </div>
+    </div>
+  </div>`; },
+
   /* ───── PROGRESS ───── */
   progress(){ return `<div class="wrap">
     <div class="screen-head">
