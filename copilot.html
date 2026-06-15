@@ -74,6 +74,7 @@ a{color:inherit;text-decoration:none}
 .menubar .mb-link{display:inline-flex;align-items:center;gap:5px;color:#aebfd6;font-weight:600;padding:3px 9px;border-radius:7px;
   border:1px solid rgba(255,255,255,.08);transition:.14s var(--ease)}
 .menubar .mb-link:hover{background:rgba(94,149,216,.16);color:#dce8f8}
+.menubar .mb-sound.on{background:rgba(98,168,125,.16);color:#9fe3bb;border-color:rgba(98,168,125,.4)}
 
 /* ── split-screen stage (macOS Split View): call | copilot ── */
 .stage{display:flex;gap:4px;height:calc(100vh - 30px);overflow:hidden;background:#000}
@@ -275,6 +276,10 @@ html:not(.dark) .btn.primary{background:#1c1a17;color:#faf8f2}
   <div class="mb-app"><span class="mg">N</span> Noetic Copilot</div>
   <span class="mi">File</span><span class="mi">Interview</span><span class="mi">View</span><span class="mi">Help</span>
   <div class="mb-spacer"></div>
+  <button class="mb-link mb-sound" id="soundBtn" onclick="toggleSound()" title="Play the interview audio (uses your Mac's voices)">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M16.5 8.6a4 4 0 010 6.8M19 6a8 8 0 010 12"/></svg>
+    <span id="soundLbl">Play with sound</span>
+  </button>
   <div class="mb-stat"><span class="mb-rec" id="mbRec"></span> on-device capture</div>
   <a class="mb-link" href="v3.html" title="Open the Noetic Mind web app">Noetic Mind
     <svg width="11" height="11" viewBox="0 0 16 16" fill="none"><path d="M5.5 3.5h7v7M12.5 3.5L4 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -457,8 +462,22 @@ const SCRIPT=[
 ];
 
 const $=id=>document.getElementById(id);
-let idx=0, playing=true, stepTimer=null, secTimer=null, secs=0, qn=0;
+let idx=0, playing=true, stepTimer=null, safetyTimer=null, secTimer=null, secs=0, qn=0;
 const stepsDone=new Set(), forcesDone=new Set();
+
+/* ── voice (Web Speech API): a different voice for the interviewer vs Ian ── */
+let soundOn=false, voiceInt=null, voicePar=null;
+const SS = window.speechSynthesis || null;
+function pickVoices(){
+  if(!SS) return;
+  const vs=SS.getVoices(); if(!vs.length) return;
+  const en=vs.filter(v=>/^en(-|_|$)/i.test(v.lang)); const pool=en.length?en:vs;
+  const find=names=>pool.find(v=>names.some(n=>v.name.toLowerCase().includes(n)));
+  voicePar = find(['daniel','arthur','google uk english male','alex','fred','rishi','oliver']) || pool[0] || null;
+  voiceInt = find(['samantha','karen','google uk english female','tessa','moira','serena','victoria','kate']) || pool.find(v=>v!==voicePar) || pool[0] || null;
+}
+if(SS){ pickVoices(); SS.onvoiceschanged=pickVoices; }
+function stopSpeech(){ if(SS){ try{SS.cancel();}catch(e){} } }
 
 function fmt(s){return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0');}
 function tickSecs(){ secs++; $('recTime').textContent=fmt(secs); }
@@ -521,10 +540,26 @@ function runNext(){
   const e=SCRIPT[idx];
   showTyping(e.who);
   stepTimer=setTimeout(()=>{
-    hideTyping(); addLine(e.who,e.text); applyFx(e.fx); idx++;
+    hideTyping(); addLine(e.who,e.text); applyFx(e.fx); idx++; advance(e);
+  }, soundOn?360:760);
+}
+/* advance to the next line: paced by spoken audio when sound is on, by a timer otherwise */
+function advance(e){
+  const next=()=>{ if(playing) runNext(); };
+  if(soundOn && SS){
+    let moved=false;
+    const go=()=>{ if(moved)return; moved=true; clearTimeout(safetyTimer); stepTimer=setTimeout(next,240); };
+    const u=new SpeechSynthesisUtterance(e.text);
+    if(e.who==='int'){ if(voiceInt)u.voice=voiceInt; u.rate=1.02; u.pitch=1.0; }
+    else { if(voicePar)u.voice=voicePar; u.rate=1.0; u.pitch=0.92; }
+    u.onend=go; u.onerror=go;
+    try{ SS.speak(u); }catch(err){ go(); return; }
+    /* safety: if onend never fires, advance on an estimated duration */
+    safetyTimer=setTimeout(go, Math.min(13000, 1900 + e.text.length*58));
+  } else {
     const dwell=Math.min(4600, 1500 + e.text.length*20);
-    if(playing) stepTimer=setTimeout(runNext, dwell);
-  }, 760);
+    stepTimer=setTimeout(next, dwell);
+  }
 }
 function done(){
   $('typing').classList.remove('on');
@@ -536,10 +571,11 @@ function togglePlay(){
   playing=!playing;
   $('playBtn').textContent=playing?'Pause':'Resume';
   document.body.classList.toggle('paused',!playing);
-  if(playing){ secTimer=secTimer||setInterval(tickSecs,1000); runNext(); }
+  if(!playing){ clearTimeout(stepTimer); clearTimeout(safetyTimer); stopSpeech(); }
+  else { secTimer=secTimer||setInterval(tickSecs,1000); runNext(); }
 }
 function restart(){
-  clearTimeout(stepTimer);
+  clearTimeout(stepTimer); clearTimeout(safetyTimer); stopSpeech();
   idx=0; qn=0; secs=0; stepsDone.clear(); forcesDone.clear();
   document.querySelectorAll('.tline').forEach(n=>n.remove());
   document.querySelectorAll('.step.on').forEach(n=>{n.classList.remove('on');n.querySelector('.squote').textContent='';});
@@ -552,8 +588,14 @@ function restart(){
   playing=true; $('playBtn').textContent='Pause'; document.body.classList.remove('paused');
   runNext();
 }
+function toggleSound(){
+  soundOn=!soundOn;
+  const b=$('soundBtn');
+  if(soundOn){ b.classList.add('on'); $('soundLbl').textContent='Sound on'; restart(); }
+  else { b.classList.remove('on'); $('soundLbl').textContent='Play with sound'; stopSpeech(); }
+}
 function endInterview(){
-  playing=false; clearTimeout(stepTimer); $('playBtn').textContent='Resume';
+  playing=false; clearTimeout(stepTimer); clearTimeout(safetyTimer); stopSpeech(); $('playBtn').textContent='Resume';
   const t=$('toast');
   t.innerHTML='✓ Synthesis sent to the Progress loop. <a href="v3.html">Open in Noetic Mind →</a>';
   t.classList.add('on'); setTimeout(()=>t.classList.remove('on'),4200);
