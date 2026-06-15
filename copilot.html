@@ -54,11 +54,7 @@ html.dark{
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%}
 body{font-family:var(--font-sans);color:var(--ink);font-size:14px;line-height:1.5;
-  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow:hidden;
-  background:
-    radial-gradient(1200px 700px at 78% -8%, rgba(94,149,216,.16), transparent 60%),
-    radial-gradient(900px 600px at 8% 108%, rgba(201,138,30,.10), transparent 55%),
-    linear-gradient(160deg,#0b0f15,#0e1219 55%,#0a0d13);}
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow:hidden;background:#16181c;}
 .mono{font-family:var(--font-mono);font-feature-settings:"tnum" 1;letter-spacing:-.01em}
 .serif{font-family:var(--font-serif)}
 button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
@@ -80,29 +76,39 @@ a{color:inherit;text-decoration:none}
 .menubar .mb-link:hover{background:rgba(94,149,216,.16);color:#dce8f8}
 
 /* ── desktop stage ── */
-.stage{height:calc(100vh - 30px);display:grid;place-items:center;padding:22px;position:relative}
+.stage{position:relative;height:calc(100vh - 30px);overflow:hidden}
 
-/* participant PiP (the live call, native, beside the copilot) */
-.pip{position:absolute;top:20px;right:24px;width:208px;border-radius:12px;overflow:hidden;z-index:6;
-  background:linear-gradient(150deg,#1c2433,#10151d);box-shadow:0 16px 40px rgba(0,0,0,.5),0 0 0 1px rgba(255,255,255,.06)}
-.pip .pv{height:128px;display:grid;place-items:center;position:relative;
-  background:radial-gradient(120px 120px at 50% 38%, #25304a, #131a26)}
-.pip .pav{width:58px;height:58px;border-radius:50%;display:grid;place-items:center;font-weight:600;font-size:20px;color:#fff;
-  background:linear-gradient(135deg,#c9a24f,#9c7b2e);box-shadow:0 6px 16px rgba(0,0,0,.4)}
-.pip .pmeet{position:absolute;top:8px;left:9px;font-size:9.5px;font-family:var(--font-mono);color:#aeb8c8;
-  background:rgba(0,0,0,.4);padding:2px 7px;border-radius:20px;letter-spacing:.02em}
-.pip .pbar{display:flex;align-items:center;gap:8px;padding:8px 11px;background:rgba(8,11,16,.7)}
-.pip .pnm{font-size:12px;font-weight:600;color:#e7eaf0;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.wave{display:flex;align-items:center;gap:2px;height:14px}
-.wave i{width:2.5px;border-radius:2px;background:#62a87d;height:5px;animation:wv 1s ease-in-out infinite}
-.wave i:nth-child(2){animation-delay:.12s}.wave i:nth-child(3){animation-delay:.24s}.wave i:nth-child(4){animation-delay:.36s}.wave i:nth-child(5){animation-delay:.48s}
-@keyframes wv{0%,100%{height:4px}50%{height:13px}}
-.paused .wave i{animation-play-state:paused}
+/* ── the JTBD call behind it: Google Meet, video off ── */
+.meet{position:absolute;inset:0;background:#202124;z-index:1}
+.meet-speaker{position:absolute;left:0;right:0;top:0;display:flex;flex-direction:column;align-items:center;padding-top:5vh}
+.meet-av{width:122px;height:122px;border-radius:50%;display:grid;place-items:center;font-size:46px;font-weight:600;color:#fff;
+  background:linear-gradient(135deg,#c9a24f,#9c7b2e)}
+.meet-av.ring{animation:spkring 2.4s var(--ease) infinite}
+@keyframes spkring{0%,100%{box-shadow:0 0 0 4px #2a2b2e,0 0 0 6px rgba(98,168,125,.22)}50%{box-shadow:0 0 0 4px #2a2b2e,0 0 0 12px rgba(98,168,125,.5)}}
+.meet-name{margin-top:18px;color:#e8eaed;font-size:17px;font-weight:500}
+.meet-sub{color:#9aa0a6;font-size:12.5px;margin-top:4px}
+.meet-self{position:absolute;top:18px;right:24px;width:212px;height:126px;border-radius:12px;background:#3c4043;
+  display:grid;place-items:center;box-shadow:0 6px 20px rgba(0,0,0,.45);overflow:hidden;z-index:2}
+.meet-self .sav{width:52px;height:52px;border-radius:50%;background:#5f6368;display:grid;place-items:center;color:#e8eaed;font-weight:600;font-size:17px}
+.meet-self .sname{position:absolute;left:10px;bottom:9px;color:#e8eaed;font-size:11.5px;font-weight:500;display:flex;align-items:center;gap:6px}
+.meet-self .smic{width:19px;height:19px;border-radius:50%;background:rgba(0,0,0,.5);display:grid;place-items:center;color:#fff}
+.meet-time{position:absolute;left:26px;bottom:30px;color:#cdd0d4;font-size:13px;font-family:var(--font-mono);z-index:2}
+.meet-right{position:absolute;right:26px;bottom:28px;display:flex;gap:6px;z-index:2}
+.meet-right .mr{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;color:#cdd0d4;transition:.14s var(--ease)}
+.meet-right .mr:hover{background:#3c4043}
+.meet-bar{position:absolute;left:0;right:0;bottom:0;height:80px;display:flex;align-items:center;justify-content:center;gap:11px;
+  background:linear-gradient(180deg,rgba(32,33,36,0),#16181c 55%);z-index:1}
+.mbtn{width:46px;height:46px;border-radius:50%;background:#3c4043;display:grid;place-items:center;color:#e8eaed;transition:.14s var(--ease)}
+.mbtn:hover{background:#4a4e52}
+.mbtn.off{background:#ea4335;color:#fff}.mbtn.off:hover{background:#f05545}
+.mbtn.leave{width:60px;border-radius:23px;background:#ea4335;color:#fff}.mbtn.leave:hover{background:#f05545}
+.paused .meet-av.ring{animation-play-state:paused}
 .paused .mb-rec{animation-play-state:paused;opacity:.5}
 
-/* ── copilot window ── */
-.win{width:min(1180px,94vw);height:min(770px,86vh);border-radius:14px;display:flex;flex-direction:column;overflow:hidden;
-  background:var(--surface);box-shadow:0 40px 100px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.07);position:relative}
+/* ── copilot window (floats over the call) ── */
+.win{position:absolute;left:50%;bottom:100px;transform:translateX(-50%);z-index:5;
+  width:min(1100px,92vw);height:min(602px,70vh);border-radius:14px;display:flex;flex-direction:column;overflow:hidden;
+  background:var(--surface);box-shadow:0 44px 120px rgba(0,0,0,.72),0 0 0 1px rgba(255,255,255,.08)}
 .titlebar{height:42px;flex:none;display:flex;align-items:center;gap:12px;padding:0 14px;position:relative;
   background:linear-gradient(180deg,#1b212c,#161b24);border-bottom:1px solid var(--line)}
 .tl{display:flex;gap:8px}
@@ -279,11 +285,31 @@ html:not(.dark) .btn.primary{background:#1c1a17;color:#faf8f2}
 
 <div class="stage" id="stage">
 
-  <!-- the live call, running natively beside the copilot -->
-  <div class="pip" id="pip">
-    <div class="pv"><span class="pmeet">Google Meet</span><div class="pav">M</div></div>
-    <div class="pbar"><span class="pnm">Maya Okonkwo</span>
-      <span class="wave"><i></i><i></i><i></i><i></i><i></i></span>
+  <!-- the JTBD interview call: Google Meet, video off -->
+  <div class="meet" id="meet">
+    <div class="meet-speaker">
+      <div class="meet-av ring">M</div>
+      <div class="meet-name">Maya Okonkwo</div>
+      <div class="meet-sub">Primary-school teacher · camera off</div>
+    </div>
+    <div class="meet-self">
+      <div class="sav">DD</div>
+      <div class="sname"><span class="smic"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0014 0M12 18v3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>You</div>
+    </div>
+    <div class="meet-time" id="meetTime">2:14 PM&nbsp; ·&nbsp; jtbd-quench</div>
+    <div class="meet-right">
+      <span class="mr" title="Meeting details"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 7.6v.1" stroke-linecap="round"/></svg></span>
+      <span class="mr" title="People"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="8" r="3"/><path d="M3.5 19a5.5 5.5 0 0111 0M16 6a3 3 0 010 6M17 19a5.5 5.5 0 00-1.5-3.7" stroke-linecap="round"/></svg></span>
+      <span class="mr" title="Chat"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 5h16v11H9l-4 3v-3H4z" stroke-linejoin="round"/></svg></span>
+    </div>
+    <div class="meet-bar">
+      <div class="mbtn" title="Microphone on"><svg width="21" height="21" viewBox="0 0 24 24" fill="currentColor"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0014 0M12 18v3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+      <div class="mbtn off" title="Camera off"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M15 8.5V7a1 1 0 00-1-1H6m-3 .3V17a1 1 0 001 1h10a1 1 0 001-1v-2l5 3V6l-5 3"/><path d="M3 3l18 18"/></svg></div>
+      <div class="mbtn" title="Captions"><svg width="22" height="22" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M9.5 11a1.6 1.6 0 100 2.2M15.5 11a1.6 1.6 0 100 2.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div>
+      <div class="mbtn" title="Raise hand"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M8 11V5.6a1.4 1.4 0 012.8 0V11M10.8 11V4.6a1.4 1.4 0 012.8 0V11M13.6 11V6a1.4 1.4 0 012.8 0v6.5c0 3.6-2.3 6.5-6 6.5-2.6 0-4.4-1.3-5.6-3.6l-1.4-2.7a1.3 1.3 0 012.2-1.4L8 13"/></svg></div>
+      <div class="mbtn" title="Present now"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="12" rx="2"/><path d="M12 8v4M10 10l2-2 2 2"/></svg></div>
+      <div class="mbtn" title="More options"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><circle cx="6" cy="12" r="1.7"/><circle cx="12" cy="12" r="1.7"/><circle cx="18" cy="12" r="1.7"/></svg></div>
+      <div class="mbtn leave" title="Leave call"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 11.3C18.3 9.4 15.3 8.3 12 8.3s-6.3 1.1-8.5 3c-.5.5-.6 1.3-.1 1.9l1.7 2c.4.5 1.1.6 1.6.3.7-.4 1.4-.9 2-1.4.3-.3.5-.7.5-1.1v-1.3c1.8-.6 3.8-.6 5.6 0v1.3c0 .4.2.8.5 1.1.6.5 1.3 1 2 1.4.5.3 1.2.2 1.6-.3l1.7-2c.5-.6.4-1.4-.1-1.9z"/></svg></div>
     </div>
   </div>
 
