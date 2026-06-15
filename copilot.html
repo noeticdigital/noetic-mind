@@ -75,12 +75,12 @@ a{color:inherit;text-decoration:none}
   border:1px solid rgba(255,255,255,.08);transition:.14s var(--ease)}
 .menubar .mb-link:hover{background:rgba(94,149,216,.16);color:#dce8f8}
 
-/* ── desktop stage ── */
-.stage{position:relative;height:calc(100vh - 30px);overflow:hidden}
+/* ── split-screen stage (macOS Split View): call | copilot ── */
+.stage{display:flex;gap:4px;height:calc(100vh - 30px);overflow:hidden;background:#000}
 
-/* ── the JTBD call behind it: Google Meet, video off ── */
-.meet{position:absolute;inset:0;background:#202124;z-index:1}
-.meet-speaker{position:absolute;left:0;right:0;top:0;display:flex;flex-direction:column;align-items:center;padding-top:5vh}
+/* ── left pane: the JTBD call, Google Meet, video off ── */
+.meet{position:relative;flex:1 1 50%;min-width:0;background:#202124;overflow:hidden}
+.meet-speaker{position:absolute;inset:0 0 40px;display:flex;flex-direction:column;justify-content:center;align-items:center}
 .meet-av{width:122px;height:122px;border-radius:50%;display:grid;place-items:center;font-size:46px;font-weight:600;color:#fff;
   background:linear-gradient(135deg,#c9a24f,#9c7b2e)}
 .meet-av.ring{animation:spkring 2.4s var(--ease) infinite}
@@ -105,10 +105,9 @@ a{color:inherit;text-decoration:none}
 .paused .meet-av.ring{animation-play-state:paused}
 .paused .mb-rec{animation-play-state:paused;opacity:.5}
 
-/* ── copilot window (floats over the call) ── */
-.win{position:absolute;left:50%;bottom:100px;transform:translateX(-50%);z-index:5;
-  width:min(1100px,92vw);height:min(602px,70vh);border-radius:14px;display:flex;flex-direction:column;overflow:hidden;
-  background:var(--surface);box-shadow:0 44px 120px rgba(0,0,0,.72),0 0 0 1px rgba(255,255,255,.08)}
+/* ── right pane: the copilot, tiled beside the call ── */
+.win{position:relative;flex:1 1 50%;min-width:0;height:100%;display:flex;flex-direction:column;overflow:hidden;
+  background:var(--surface)}
 .titlebar{height:42px;flex:none;display:flex;align-items:center;gap:12px;padding:0 14px;position:relative;
   background:linear-gradient(180deg,#1b212c,#161b24);border-bottom:1px solid var(--line)}
 .tl{display:flex;gap:8px}
@@ -128,7 +127,7 @@ a{color:inherit;text-decoration:none}
 .consent .cnote{margin-left:auto;font-size:10.5px;color:var(--muted);font-family:var(--font-mono)}
 
 /* body grid */
-.cbody{flex:1;display:grid;grid-template-columns:minmax(0,460px) 1fr;min-height:0}
+.cbody{flex:1;display:grid;grid-template-columns:minmax(0,40%) minmax(0,1fr);min-height:0}
 .tcol{border-right:1px solid var(--line);display:flex;flex-direction:column;min-height:0;background:var(--surface-2)}
 .scol{display:flex;flex-direction:column;min-height:0;overflow-y:auto}
 .colhead{flex:none;display:flex;align-items:center;gap:9px;padding:11px 16px 9px;font-size:10px;letter-spacing:.13em;
@@ -243,10 +242,9 @@ html:not(.dark) .btn.primary{background:#1c1a17;color:#faf8f2}
 .seg-b.active{background:var(--surface);color:var(--ink);box-shadow:var(--shadow-sm)}
 
 /* focus view — glanceable, advice-only HUD */
-.focusview{display:none;flex-direction:column;padding:30px 34px 24px}
-.win.focus{width:min(720px,92vw);height:auto}
+.focusview{display:none;flex-direction:column;justify-content:center;padding:30px 36px 26px}
 .win.focus .cbody,.win.focus .consent{display:none}
-.win.focus .focusview{display:flex}
+.win.focus .focusview{display:flex;flex:1}
 .win.focus .cfoot .who,.win.focus .cfoot .fmeta{display:none}
 .fv-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
 .fv-kick{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--amber-ink);font-weight:700;display:flex;align-items:center;gap:8px}
@@ -288,8 +286,8 @@ html:not(.dark) .btn.primary{background:#1c1a17;color:#faf8f2}
   <!-- the JTBD interview call: Google Meet, video off -->
   <div class="meet" id="meet">
     <div class="meet-speaker">
-      <div class="meet-av ring">M</div>
-      <div class="meet-name">Maya Okonkwo</div>
+      <div class="meet-av ring">I</div>
+      <div class="meet-name">Ian Turvue</div>
       <div class="meet-sub">Primary-school teacher · camera off</div>
     </div>
     <div class="meet-self">
@@ -351,7 +349,7 @@ html:not(.dark) .btn.primary{background:#1c1a17;color:#faf8f2}
         <div class="sblock">
           <div class="jobc">
             <div class="jk">Job to be done<span class="meter" id="jobMeter" data-state="assumption"><span class="seg"></span><span class="seg"></span><span class="seg"></span><span class="seg"></span></span></div>
-            <div class="jt" id="jobText">Listening for the progress Maya is reaching for…</div>
+            <div class="jt" id="jobText">Listening for the progress Ian is reaching for…</div>
             <div class="jstate" id="jobState">State: <b>assumption</b> · one interview can suggest, the pattern across many validates.</div>
           </div>
         </div>
@@ -391,14 +389,14 @@ html:not(.dark) .btn.primary{background:#1c1a17;color:#faf8f2}
       <div class="fv-w" id="fvW">Open the timeline at the beginning. You want the trigger, in their words.</div>
       <div class="fv-foot">
         <span class="fv-job">Job so far <span class="meter" id="fvMeter" data-state="assumption"><span class="seg"></span><span class="seg"></span><span class="seg"></span><span class="seg"></span></span> <em id="fvJobState">assumption</em></span>
-        <span class="fv-meta">Maya · interview 14</span>
+        <span class="fv-meta">Ian · interview 14</span>
       </div>
     </div>
 
     <div class="cfoot">
       <div class="who">
-        <div class="av">M</div>
-        <div><div class="wn">Maya Okonkwo</div><div class="wr">Primary-school teacher · interview 14</div></div>
+        <div class="av">I</div>
+        <div><div class="wn">Ian Turvue</div><div class="wr">Primary-school teacher · interview 14</div></div>
       </div>
       <span class="fmeta" id="qCount">Q 0</span>
       <div class="fspace"></div>
@@ -416,30 +414,30 @@ html:not(.dark) .btn.primary{background:#1c1a17;color:#faf8f2}
 <div class="toast" id="toast"></div>
 
 <script>
-/* ── scripted JTBD interview (Quench · Maya). Plays back so the copilot looks live. ── */
+/* ── scripted JTBD interview (Quench · Ian). Plays back so the copilot looks live. ── */
 const SCRIPT=[
-  {who:'int',text:"Thanks for making the time, Maya. I'd love to walk through the actual story of how you ended up with a bottle you genuinely use. Take me back, when did you first start thinking something needed to change?"},
+  {who:'int',text:"Thanks for making the time, Ian. I'd love to walk through the actual story of how you ended up with a bottle you genuinely use. Take me back, when did you first start thinking something needed to change?"},
   {who:'par',text:"Honestly it crept up on me. I'm a teacher, on my feet all day, and by mid-afternoon I'd get this fog, a dull headache behind my eyes. I realised I'd had coffee and basically nothing else.",
-    fx:{stage:['first-thought',"by mid-afternoon I'd get this fog… coffee and basically nothing else"], force:[['push',"afternoon fog + headache, no water all day"],['habit',"runs on coffee, water never crosses her mind"]],
+    fx:{stage:['first-thought',"by mid-afternoon I'd get this fog… coffee and basically nothing else"], force:[['push',"afternoon fog + headache, no water all day"],['habit',"runs on coffee, water never crosses his mind"]],
         job:['assumption',"Get through the day without the afternoon crash."],
         prompt:["That's the push. Now make it concrete, ask for the one day it stuck.","A vague reason won't anchor the timeline. You want a specific moment."]}},
   {who:'par',text:"There was one day, parents' evening. I nearly snapped at a parent because I felt so wiped, and I thought, this isn't me. I want to be the person who's actually got it together.",
     fx:{force:[['pull',"wants to be 'the person who's got it together'"]],
         job:['assumption',"Feel clear-headed enough to be the version of myself I want to be."],
-        prompt:["Good, a real moment and a pull. Move to what she did next.","She's gone from feeling it to noticing it. Track the shift to passive looking."]}},
+        prompt:["Good, a real moment and a pull. Move to what he did next.","He's gone from feeling it to noticing it. Track the shift to passive looking."]}},
   {who:'int',text:"So you started paying attention. What happened next, did you do anything about it?"},
   {who:'par',text:"Not really. I just started noticing everyone else had these bottles. Colleagues, parents at pickup, the markings on the side. I clocked it but I didn't act.",
     fx:{stage:['passive',"started noticing everyone else had these bottles… clocked it but didn't act"],
-        prompt:["She's passively looking. Before she goes active, surface the history.","Ask if she's tried before, the failed attempts are where the anxiety lives."]}},
+        prompt:["He's passively looking. Before he goes active, surface the history.","Ask if he's tried before, the failed attempts are where the anxiety lives."]}},
   {who:'int',text:"Had you tried to fix this before?"},
   {who:'par',text:"That's the thing. I've bought lovely bottles before. They look great for a week then live at the back of a cupboard. So part of me thought, why would this time be any different.",
     fx:{force:[['anx',"bought bottles before, they end up in a cupboard. 'why would this be different'"]],
-        prompt:["There's the anxiety, the fear it won't stick. Find what flipped her to actually looking.","Don't reassure her. Ask what made her go and research properly."]}},
+        prompt:["There's the anxiety, the fear it won't stick. Find what flipped him to actually looking.","Don't reassure him. Ask what made him go and research properly."]}},
   {who:'int',text:"What finally made you go looking properly?"},
   {who:'par',text:"My sister got one with time markers up the side and wouldn't stop going on about it. That made it feel less like willpower and more like a system. I actually started reading about them.",
     fx:{stage:['active',"my sister's one with time markers… less like willpower, more like a system"],
         force:[['pull',"wants a system, not more willpower"]],
-        prompt:["She's actively looking now. Get the trade-off she made when deciding.","At deciding, the criteria reveal the real Job. Ask what mattered most."]}},
+        prompt:["He's actively looking now. Get the trade-off he made when deciding.","At deciding, the criteria reveal the real Job. Ask what mattered most."]}},
   {who:'int',text:"When you were comparing options, what mattered most?"},
   {who:'par',text:"I didn't want another pretty thing I'd ignore. I wanted something that nudged me. The markers, and one I could grab on the way out the door without even thinking.",
     fx:{stage:['deciding',"not another pretty thing I'd ignore… something that nudged me, grab without thinking"],
@@ -451,11 +449,11 @@ const SCRIPT=[
     fx:{stage:['first-use',"left it next to my keys… refilling without thinking. The fog lifted. I felt like me again"],
         force:[['pull',"'felt like me again' once the habit held"]],
         job:['suggestive',"Make staying hydrated effortless, so I feel clear-headed and like someone who looks after themselves."],
-        prompt:["She said it held, and why, the anchor by the keys. Land the Job in her words.","One question left: get her one-sentence version, then stop talking."]}},
+        prompt:["He said it held, and why, the anchor by the keys. Land the Job in his words.","One question left: get his one-sentence version, then stop talking."]}},
   {who:'int',text:"If you had to say what this is really doing for you, in your own words?"},
   {who:'par',text:"Making it effortless to stay hydrated, so I feel clear and like someone who actually looks after themselves. The anchor by the keys is the whole thing, honestly.",
     fx:{job:['suggestive',"“Make staying hydrated effortless, so I feel clear-headed and like someone who looks after themselves.”"],
-        prompt:["Job captured, in her language, with the mechanism (the keys anchor). Probe the anchor or close.","Strong emerging signal. This is the 11th interview pointing the same way."]}},
+        prompt:["Job captured, in his language, with the mechanism (the keys anchor). Probe the anchor or close.","Strong emerging signal. This is the 11th interview pointing the same way."]}},
 ];
 
 const $=id=>document.getElementById(id);
@@ -466,7 +464,7 @@ function fmt(s){return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60)
 function tickSecs(){ secs++; $('recTime').textContent=fmt(secs); }
 
 function showTyping(who){
-  const t=$('typing'); $('typingWho').textContent = who==='int'?'Interviewer':'Maya';
+  const t=$('typing'); $('typingWho').textContent = who==='int'?'Interviewer':'Ian';
   t.classList.add('on'); $('tscroll').appendChild(t); scrollT();
 }
 function hideTyping(){ $('typing').classList.remove('on'); }
@@ -474,7 +472,7 @@ function scrollT(){ const s=$('tscroll'); s.scrollTop=s.scrollHeight; }
 
 function addLine(who,text){
   const d=document.createElement('div'); d.className='tline '+who;
-  d.innerHTML=`<div class="tspk"><span class="sd"></span>${who==='int'?'Interviewer':'Maya'}</div><div class="txt">${text}</div>`;
+  d.innerHTML=`<div class="tspk"><span class="sd"></span>${who==='int'?'Interviewer':'Ian'}</div><div class="txt">${text}</div>`;
   $('tscroll').appendChild(d); scrollT();
   if(who==='int'){ qn++; $('qCount').textContent='Q '+qn; }
 }
@@ -549,7 +547,7 @@ function restart(){
   document.querySelectorAll('.force.on').forEach(n=>{n.classList.remove('on');n.querySelector('.fsnip').textContent='';});
   $('stepCount').textContent='0 / 5'; $('forceCount').textContent='0 / 4'; $('qCount').textContent='Q 0';
   $('recTime').textContent='00:00'; $('recDot').style.background='#e0584a';
-  setJob('assumption','Listening for the progress Maya is reaching for…');
+  setJob('assumption','Listening for the progress Ian is reaching for…');
   setPrompt('Anchor the first thought. Ask for the specific moment something needed to change, not a general reason.','Open the timeline at the beginning. You want the trigger, in their words.');
   playing=true; $('playBtn').textContent='Pause'; document.body.classList.remove('paused');
   runNext();
