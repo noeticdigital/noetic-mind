@@ -723,20 +723,24 @@ html.dark .sec-block .sr-n:hover{box-shadow:0 0 11px 1px rgba(74,146,214,.5)}
 .lstep.on[data-s="killed"]{color:var(--killed-ink)}
 
 /* ───────────────────────────── SLIDE-OVER PANEL ───────────────────────────── */
-.scrim{position:fixed;inset:0;background:rgba(28,24,18,.34);backdrop-filter:blur(2px);opacity:0;pointer-events:none;
-  transition:opacity .2s var(--ease);z-index:40}
+.scrim{position:fixed;inset:0;background:rgba(28,24,18,.4);backdrop-filter:blur(2px);opacity:0;pointer-events:none;
+  transition:opacity .2s var(--ease);z-index:50}
+html.dark .scrim{background:rgba(4,7,12,.6)}
 .scrim.open{opacity:1;pointer-events:auto}
-.panel{position:fixed;top:0;right:0;bottom:0;width:min(560px,46vw);background:var(--surface);
-  border-left:1px solid var(--line);box-shadow:var(--shadow-lg);transform:translateX(100%);
-  transition:transform .26s var(--ease);z-index:41;display:flex;flex-direction:column}
-.panel.open{transform:none}
-.panel-head{padding:20px 24px 16px;border-bottom:1px solid var(--line);position:relative}
+/* node detail is a CENTERED popup modal (matches the category/solutions modals) */
+.panel{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%) scale(.985);
+  width:min(620px,calc(100vw - 44px));max-height:86vh;background:var(--surface);
+  border:1px solid var(--line-strong);border-radius:var(--r-lg);box-shadow:var(--shadow-lg);
+  opacity:0;pointer-events:none;z-index:51;display:flex;flex-direction:column;overflow:hidden;
+  transition:opacity .2s var(--ease),transform .22s var(--ease)}
+.panel.open{transform:translate(-50%,-50%);opacity:1;pointer-events:auto}
+.panel-head{padding:20px 24px 16px;border-bottom:1px solid var(--line);position:relative;flex:none}
 .panel-close{position:absolute;top:16px;right:18px;width:30px;height:30px;border-radius:8px;display:grid;place-items:center;
   color:var(--muted);transition:.13s var(--ease)}
 .panel-close:hover{background:var(--surface-2);color:var(--ink)}
 .panel-kind{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:700}
 .panel-h{font-family:var(--font-serif);font-size:21px;font-weight:500;line-height:1.2;letter-spacing:-.01em;margin:8px 0 12px;max-width:30ch}
-.panel-body{padding:20px 24px 40px;overflow-y:auto;flex:1}
+.panel-body{padding:20px 24px 28px;overflow-y:auto;flex:1;min-height:0}
 .panel-row{padding:14px 0;border-bottom:1px solid var(--line)}
 .panel-row:last-child{border:none}
 .pr-l{font-size:10px;letter-spacing:.11em;text-transform:uppercase;color:var(--muted);font-weight:700;margin-bottom:7px}
@@ -745,7 +749,7 @@ html.dark .sec-block .sr-n:hover{box-shadow:0 0 11px 1px rgba(74,146,214,.5)}
 .evidence-list{display:flex;flex-direction:column;gap:8px}
 .ev-item{display:flex;gap:10px;font-size:12.5px;background:var(--surface-2);border-radius:7px;padding:9px 11px;line-height:1.45}
 .ev-item .ev-ico{flex:none;font-family:var(--font-mono);font-size:11px;color:var(--muted);margin-top:1px}
-.panel-cta{padding:16px 24px;border-top:1px solid var(--line);display:flex;gap:10px;background:var(--surface-2)}
+.panel-cta{padding:16px 24px;border-top:1px solid var(--line);display:flex;gap:10px;background:var(--surface-2);flex:none}
 
 /* ───────────────────────────── CATEGORY MODAL (centered overlay) ───────────────────────────── */
 .cat-scrim{position:fixed;inset:0;background:rgba(28,24,18,.34);backdrop-filter:blur(2px);opacity:0;pointer-events:none;
@@ -993,18 +997,23 @@ html.dark .chat-send{color:#0c0f15}
 .guide-scrim{position:fixed;inset:0;z-index:62;pointer-events:none;opacity:0;
   transition:opacity .25s var(--ease);
   background:radial-gradient(circle at var(--gx,50%) var(--gy,50%),
-    rgba(20,30,46,0) 0,rgba(20,30,46,0) var(--gr0,120px),rgba(20,30,46,.30) var(--gr1,260px),rgba(20,30,46,.42) 100%);}
+    rgba(20,30,46,0) 0,rgba(20,30,46,0) var(--gr0,120px),rgba(20,30,46,.5) var(--gr1,260px),rgba(20,30,46,.7) 100%);}
 html.dark .guide-scrim{background:radial-gradient(circle at var(--gx,50%) var(--gy,50%),
-  rgba(0,0,0,0) 0,rgba(0,0,0,0) var(--gr0,120px),rgba(0,0,0,.42) var(--gr1,260px),rgba(0,0,0,.58) 100%);}
+  rgba(0,0,0,0) 0,rgba(0,0,0,0) var(--gr0,120px),rgba(0,0,0,.64) var(--gr1,260px),rgba(0,0,0,.85) 100%);}
 .guide-scrim.on{opacity:1;pointer-events:auto}
-/* the highlighted region gets a soft ring */
+/* the highlighted region gets a glowing GREEN ring */
 .guide-ring{position:fixed;z-index:63;border-radius:14px;pointer-events:none;opacity:0;
-  box-shadow:0 0 0 2px var(--accent),0 0 0 7px rgba(24,76,132,.18);
+  box-shadow:0 0 0 2px #2fbf86,0 0 0 6px rgba(47,191,134,.22),0 0 24px 4px rgba(47,191,134,.5);
   transition:opacity .25s var(--ease),top .35s var(--ease),left .35s var(--ease),width .35s var(--ease),height .35s var(--ease)}
-.guide-ring.on{opacity:1}
+.guide-ring.on{opacity:1;animation:guideGlow 1.9s ease-in-out infinite}
+@keyframes guideGlow{
+  0%,100%{box-shadow:0 0 0 2px #2fbf86,0 0 0 6px rgba(47,191,134,.20),0 0 20px 3px rgba(47,191,134,.42)}
+  50%{box-shadow:0 0 0 2px #3ad79a,0 0 0 7px rgba(47,191,134,.30),0 0 32px 7px rgba(47,191,134,.62)}}
+@media(prefers-reduced-motion:reduce){.guide-ring.on{animation:none}}
 
 .guide-bubble{position:fixed;z-index:64;width:360px;max-width:calc(100vw - 28px);
-  background:var(--surface);border:1px solid var(--line-strong);border-radius:var(--r-lg);box-shadow:var(--shadow-lg);
+  background:var(--surface);border:1px solid #2fbf86;border-radius:var(--r-lg);
+  box-shadow:var(--shadow-lg),0 0 0 1px rgba(47,191,134,.45),0 0 28px 0 rgba(47,191,134,.28);
   padding:18px 20px 16px;opacity:0;transform:translateY(8px) scale(.98);pointer-events:none;
   transition:opacity .25s var(--ease),transform .25s var(--ease),top .35s var(--ease),left .35s var(--ease)}
 .guide-bubble.on{opacity:1;transform:none;pointer-events:auto}
@@ -1372,9 +1381,9 @@ var VIEW_ONLY = (function(){try{return /(?:^|[?&])share=reasoning(?:&|$)/.test(l
         <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M8 2.2c-1.5-1-3.2-1-4.6-.2-.3.16-.4.46-.4.78v8.7c0 .5.5.85.95.6 1.2-.62 2.7-.55 4.05.3 1.35-.85 2.85-.92 4.05-.3.45.25.95-.1.95-.6V2.78c0-.32-.13-.62-.4-.78-1.4-.8-3.1-.8-4.6.2z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/><path d="M8 2.2v10.4" stroke="currentColor" stroke-width="1.3"/></svg>
         How it works
       </button>
-      <button class="tour-btn" onclick="startGuide()" title="Walk me through the project">
+      <button class="tour-btn" onclick="startGuide()" title="Walk through the project, step by step">
         <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M8 1.5l1.6 3.4 3.7.5-2.7 2.6.7 3.7L8 10.4 4.7 12.2l.7-3.7L2.7 5.9l3.7-.5z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
-        Guided tour
+        Walkthrough
       </button>
       <button class="cmdk-btn" onclick="openCmdk()">
         <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.4"/><path d="M11 11l3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
@@ -1546,12 +1555,12 @@ var VIEW_ONLY = (function(){try{return /(?:^|[?&])share=reasoning(?:&|$)/.test(l
 <!-- ───────── GUIDED MODE (Feature B) ───────── -->
 <div class="guide-scrim" id="guideScrim"></div>
 <div class="guide-ring" id="guideRing"></div>
-<div class="guide-bubble" id="guideBubble" role="dialog" aria-modal="false" aria-label="Guided tour">
+<div class="guide-bubble" id="guideBubble" role="dialog" aria-modal="false" aria-label="Walkthrough">
   <div class="gb-step"><span id="guideStepLabel">Step 1 of 8</span><span class="gb-pip"><i id="guidePip" style="width:12%"></i></span></div>
   <div class="gb-h serif" id="guideTitle"></div>
   <div class="gb-body" id="guideBody"></div>
   <div class="guide-foot">
-    <button class="gf-skip" onclick="endGuide()">Skip tour</button>
+    <button class="gf-skip" onclick="endGuide()">Skip walkthrough</button>
     <button class="btn btn-ghost btn-sm" id="guideBack" onclick="guideStep(-1)">← Back</button>
     <button class="btn btn-primary btn-sm" id="guideNext" onclick="guideStep(1)">Next →</button>
   </div>
@@ -1560,9 +1569,9 @@ var VIEW_ONLY = (function(){try{return /(?:^|[?&])share=reasoning(?:&|$)/.test(l
 <!-- first-load nudge -->
 <div class="guide-nudge" id="guideNudge">
   <div class="gn-h"><span class="gn-spark"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M8 1.5l1.6 3.4 3.7.5-2.7 2.6.7 3.7L8 10.4 4.7 12.2l.7-3.7L2.7 5.9l3.7-.5z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg></span>New here?</div>
-  <div class="gn-b">Take the 90-second tour, we'll walk you through the real project, screen by screen.</div>
+  <div class="gn-b">Take the 90-second walkthrough, we'll walk you through the real project, screen by screen.</div>
   <div class="gn-row">
-    <button class="btn btn-primary btn-sm" onclick="dismissNudge();startGuide()">Start tour</button>
+    <button class="btn btn-primary btn-sm" onclick="dismissNudge();startGuide()">Start walkthrough</button>
     <button class="gn-dismiss" onclick="dismissNudge()">Not now</button>
   </div>
 </div>
@@ -2571,7 +2580,7 @@ const CMDK = [
     {ico:'▶',t:'Show the reasoning (walkthrough)',sub:'stakeholder',act:openWalk},
   ]},
   {g:'Guided',items:[
-    {ico:'✶',t:'Guided tour, walk me through the project',sub:'90 sec',act:()=>startGuide()},
+    {ico:'✶',t:'Walkthrough, walk me through the project',sub:'90 sec',act:()=>startGuide()},
   ]},
 ];
 let cmdkFlat=[], cmdkSel=0;
@@ -3141,12 +3150,26 @@ function positionGuide(g, isFinal){
     const rad=Math.max(r.width,r.height)/2;
     scrim.style.setProperty('--gx',cx+'px'); scrim.style.setProperty('--gy',cy+'px');
     scrim.style.setProperty('--gr0',(rad+20)+'px'); scrim.style.setProperty('--gr1',(rad+140)+'px');
-    /* place bubble: prefer below, else above, else beside */
-    let top, left=Math.min(Math.max(cx-bw/2,pad),vw-bw-pad);
-    if(r.bottom+bh+18<vh) top=r.bottom+14;
-    else if(r.top-bh-18>0) top=r.top-bh-14;
-    else top=Math.min(Math.max(cy-bh/2,pad),vh-bh-pad);
-    bubble.style.top=top+'px'; bubble.style.left=left+'px';
+    /* place the bubble so it NEVER overlaps the highlighted card: try below, above,
+       right, left; pick the first that fits on-screen and clears the anchor. */
+    const gap=16;
+    const cl=(v,a,b)=>Math.min(Math.max(v,a),b);
+    const cxL=cl(cx-bw/2,pad,vw-bw-pad), cyT=cl(cy-bh/2,pad,vh-bh-pad);
+    const cands=[
+      {t:r.bottom+gap, l:cxL},      // below
+      {t:r.top-bh-gap, l:cxL},      // above
+      {t:cyT, l:r.right+gap},       // right
+      {t:cyT, l:r.left-bw-gap},     // left
+    ];
+    const onscreen=(t,l)=>l>=pad-1 && l+bw<=vw-pad+1 && t>=pad-1 && t+bh<=vh-pad+1;
+    const clears=(t,l)=>(l+bw<=r.left+1)||(l>=r.right-1)||(t+bh<=r.top+1)||(t>=r.bottom-1);
+    let pick=cands.find(c=>onscreen(c.t,c.l)&&clears(c.t,c.l));
+    if(!pick){
+      /* anchor fills most of the screen: drop the bubble into whichever side has more room */
+      const l = (vw-r.right)>=r.left ? cl(vw-bw-pad,pad,vw-bw-pad) : pad;
+      pick={t:cl(pad+8,pad,vh-bh-pad), l};
+    }
+    bubble.style.top=pick.t+'px'; bubble.style.left=pick.l+'px';
     return;
   }
   /* not ready yet, keep waiting (ring stays hidden) unless this is the final attempt */
