@@ -79,9 +79,9 @@ a{color:inherit;text-decoration:none}
 .stage{display:flex;gap:4px;height:calc(100vh - 30px);overflow:hidden;background:#000}
 
 /* ── left pane: the JTBD call, Google Meet, video off ── */
-.meet{position:relative;flex:1 1 50%;min-width:0;background:#202124;overflow:hidden}
+.meet{position:relative;flex:1 1 60%;min-width:0;order:1;background:#202124;overflow:hidden}
 .meet-speaker{position:absolute;inset:0 0 40px;display:flex;flex-direction:column;justify-content:center;align-items:center}
-.meet-av{width:122px;height:122px;border-radius:50%;display:grid;place-items:center;font-size:46px;font-weight:600;color:#fff;
+.meet-av{width:122px;height:122px;border-radius:50%;display:grid;place-items:center;font-size:40px;font-weight:600;letter-spacing:.01em;color:#fff;
   background:linear-gradient(135deg,#c9a24f,#9c7b2e)}
 .meet-av.ring{animation:spkring 2.4s var(--ease) infinite}
 @keyframes spkring{0%,100%{box-shadow:0 0 0 4px #2a2b2e,0 0 0 6px rgba(98,168,125,.22)}50%{box-shadow:0 0 0 4px #2a2b2e,0 0 0 12px rgba(98,168,125,.5)}}
@@ -106,7 +106,7 @@ a{color:inherit;text-decoration:none}
 .paused .mb-rec{animation-play-state:paused;opacity:.5}
 
 /* ── right pane: the copilot, tiled beside the call ── */
-.win{position:relative;flex:1 1 50%;min-width:0;height:100%;display:flex;flex-direction:column;overflow:hidden;
+.win{position:relative;flex:0 0 40%;min-width:0;order:0;height:100%;display:flex;flex-direction:column;overflow:hidden;
   background:var(--surface)}
 .titlebar{height:42px;flex:none;display:flex;align-items:center;gap:12px;padding:0 14px;position:relative;
   background:linear-gradient(180deg,#1b212c,#161b24);border-bottom:1px solid var(--line)}
@@ -127,7 +127,7 @@ a{color:inherit;text-decoration:none}
 .consent .cnote{margin-left:auto;font-size:10.5px;color:var(--muted);font-family:var(--font-mono)}
 
 /* body grid */
-.cbody{flex:1;display:grid;grid-template-columns:minmax(0,40%) minmax(0,1fr);min-height:0}
+.cbody{flex:1;display:grid;grid-template-columns:minmax(0,36%) minmax(0,1fr);min-height:0}
 .tcol{border-right:1px solid var(--line);display:flex;flex-direction:column;min-height:0;background:var(--surface-2)}
 .scol{display:flex;flex-direction:column;min-height:0;overflow-y:auto}
 .colhead{flex:none;display:flex;align-items:center;gap:9px;padding:11px 16px 9px;font-size:10px;letter-spacing:.13em;
@@ -166,8 +166,8 @@ a{color:inherit;text-decoration:none}
 .prompt::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--ev-suggestive)}
 .prompt .pk{font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--amber-ink);font-weight:700;display:flex;align-items:center;gap:7px}
 .prompt .pk .spark{width:12px;height:12px}
-.prompt .pq{font-family:var(--font-serif);font-size:15.5px;line-height:1.4;color:var(--ink);margin-top:7px;font-weight:500}
-.prompt .pw{font-size:11.5px;color:var(--ink-2);margin-top:6px;line-height:1.45}
+.prompt .pq{font-family:var(--font-serif);font-size:20px;line-height:1.3;color:var(--ink);margin-top:5px;font-weight:500}
+.prompt .pw{font-size:11px;color:var(--amber-ink);font-weight:600;letter-spacing:.01em;margin-top:7px}
 .prompt.flip{animation:flipin .34s var(--ease)}
 @keyframes flipin{from{opacity:.2;transform:translateY(-5px)}to{opacity:1;transform:none}}
 
@@ -189,7 +189,7 @@ a{color:inherit;text-decoration:none}
 .meter[data-state="validated"] .seg{background:var(--ev-validated)}
 
 /* two-up: timeline + forces */
-.twoup{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
+.twoup{display:grid;grid-template-columns:1fr;gap:12px;margin-top:14px}
 .panel{border-radius:var(--r-md);background:var(--surface-2);border:1px solid var(--line);padding:13px 14px}
 .panel .ph{font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:8px}
 .panel .ph .pc{margin-left:auto;font-family:var(--font-mono);font-size:10px;color:var(--muted)}
@@ -221,14 +221,14 @@ a{color:inherit;text-decoration:none}
 .force.habit.on{border-color:var(--blue-habit)}.force.habit.on .fdot{background:var(--blue-habit)}.force.habit.on .fl{color:var(--blue-habit)}
 
 /* footer controls */
-.cfoot{flex:none;display:flex;align-items:center;gap:14px;padding:10px 16px;background:linear-gradient(180deg,#161b24,#11151c);border-top:1px solid var(--line)}
+.cfoot{flex:none;display:flex;align-items:center;gap:8px;padding:9px 12px;background:linear-gradient(180deg,#161b24,#11151c);border-top:1px solid var(--line)}
 .cfoot .who{display:flex;align-items:center;gap:10px;min-width:0}
 .cfoot .av{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,#c9a24f,#9c7b2e);color:#fff;display:grid;place-items:center;font-weight:600;font-size:12px;flex:none}
 .cfoot .wn{font-size:12.5px;font-weight:600;color:var(--ink);line-height:1.15}
 .cfoot .wr{font-size:10.5px;color:var(--muted)}
 .cfoot .fmeta{font-family:var(--font-mono);font-size:11px;color:var(--muted);margin-left:6px}
 .cfoot .fspace{flex:1}
-.btn{display:inline-flex;align-items:center;gap:7px;height:32px;padding:0 13px;border-radius:8px;font-size:12px;font-weight:600;
+.btn{display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 11px;border-radius:8px;font-size:12px;font-weight:600;white-space:nowrap;
   transition:.15s var(--ease)}
 .btn.ghost{background:var(--surface);border:1px solid var(--line-strong);color:var(--ink-2)}
 .btn.ghost:hover{border-color:var(--accent);color:var(--accent-ink)}
@@ -252,9 +252,9 @@ html:not(.dark) .btn.primary{background:#1c1a17;color:#faf8f2}
 .fv-dots{display:flex;gap:6px}
 .fv-dots i{width:8px;height:8px;border-radius:50%;background:var(--surface);border:1.5px solid var(--line-strong);transition:.3s var(--ease)}
 .fv-dots i.on{background:var(--accent);border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
-.fv-q{font-family:var(--font-serif);font-size:27px;line-height:1.3;color:var(--ink);font-weight:500;letter-spacing:-.01em}
+.fv-q{font-family:var(--font-serif);font-size:28px;line-height:1.28;color:var(--ink);font-weight:500;letter-spacing:-.01em}
 .fv-q.flip{animation:flipin .34s var(--ease)}
-.fv-w{font-size:14px;line-height:1.5;color:var(--ink-2);margin-top:14px}
+.fv-w{font-size:12.5px;color:var(--amber-ink);font-weight:600;letter-spacing:.01em;margin-bottom:14px}
 .fv-foot{display:flex;align-items:center;gap:12px;margin-top:24px;padding-top:14px;border-top:1px solid var(--line);font-size:11.5px;color:var(--muted)}
 .fv-foot .fv-job{display:flex;align-items:center;gap:9px}
 .fv-foot em{font-style:normal;color:var(--ink-2);font-weight:600}
@@ -286,7 +286,7 @@ html:not(.dark) .btn.primary{background:#1c1a17;color:#faf8f2}
   <!-- the JTBD interview call: Google Meet, video off -->
   <div class="meet" id="meet">
     <div class="meet-speaker">
-      <div class="meet-av ring">I</div>
+      <div class="meet-av ring">IT</div>
       <div class="meet-name">Ian Turvue</div>
       <div class="meet-sub">Primary-school teacher · camera off</div>
     </div>
@@ -341,8 +341,8 @@ html:not(.dark) .btn.primary{background:#1c1a17;color:#faf8f2}
         <div class="sblock">
           <div class="prompt" id="prompt">
             <div class="pk"><svg class="spark" viewBox="0 0 16 16" fill="none"><path d="M8 1.5l1.6 4.3L14 7.4l-4.4 1.6L8 13.4 6.4 9 2 7.4l4.4-1.6z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg>Ask this next</div>
-            <div class="pq" id="promptQ">Anchor the first thought. Ask for the specific moment something needed to change, not a general reason.</div>
-            <div class="pw" id="promptW">Open the timeline at the beginning. You want the trigger, in their words.</div>
+            <div class="pw" id="promptW">Start at the beginning</div>
+            <div class="pq" id="promptQ">When did you first start thinking something needed to change?</div>
           </div>
         </div>
 
@@ -385,8 +385,8 @@ html:not(.dark) .btn.primary{background:#1c1a17;color:#faf8f2}
         <span class="fv-kick"><svg class="spark" viewBox="0 0 16 16" fill="none"><path d="M8 1.5l1.6 4.3L14 7.4l-4.4 1.6L8 13.4 6.4 9 2 7.4l4.4-1.6z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg>Ask this next</span>
         <span class="fv-dots"><i data-step="first-thought"></i><i data-step="passive"></i><i data-step="active"></i><i data-step="deciding"></i><i data-step="first-use"></i></span>
       </div>
-      <div class="fv-q" id="fvQ">Anchor the first thought. Ask for the specific moment something needed to change, not a general reason.</div>
-      <div class="fv-w" id="fvW">Open the timeline at the beginning. You want the trigger, in their words.</div>
+      <div class="fv-w" id="fvW">Start at the beginning</div>
+      <div class="fv-q" id="fvQ">When did you first start thinking something needed to change?</div>
       <div class="fv-foot">
         <span class="fv-job">Job so far <span class="meter" id="fvMeter" data-state="assumption"><span class="seg"></span><span class="seg"></span><span class="seg"></span><span class="seg"></span></span> <em id="fvJobState">assumption</em></span>
         <span class="fv-meta">Ian · interview 14</span>
@@ -395,8 +395,8 @@ html:not(.dark) .btn.primary{background:#1c1a17;color:#faf8f2}
 
     <div class="cfoot">
       <div class="who">
-        <div class="av">I</div>
-        <div><div class="wn">Ian Turvue</div><div class="wr">Primary-school teacher · interview 14</div></div>
+        <div class="av">IT</div>
+        <div><div class="wn">Ian Turvue</div><div class="wr">interview 14</div></div>
       </div>
       <span class="fmeta" id="qCount">Q 0</span>
       <div class="fspace"></div>
@@ -406,7 +406,7 @@ html:not(.dark) .btn.primary{background:#1c1a17;color:#faf8f2}
       </div>
       <button class="btn ghost" id="playBtn" onclick="togglePlay()">Pause</button>
       <button class="btn ghost" onclick="restart()" title="Replay the interview">Replay</button>
-      <button class="btn primary" onclick="endInterview()">End &amp; synthesize →</button>
+      <button class="btn primary" onclick="endInterview()" title="End &amp; synthesize">End →</button>
     </div>
   </div>
 </div>
@@ -420,40 +420,40 @@ const SCRIPT=[
   {who:'par',text:"Honestly it crept up on me. I'm a teacher, on my feet all day, and by mid-afternoon I'd get this fog, a dull headache behind my eyes. I realised I'd had coffee and basically nothing else.",
     fx:{stage:['first-thought',"by mid-afternoon I'd get this fog… coffee and basically nothing else"], force:[['push',"afternoon fog + headache, no water all day"],['habit',"runs on coffee, water never crosses his mind"]],
         job:['assumption',"Get through the day without the afternoon crash."],
-        prompt:["That's the push. Now make it concrete, ask for the one day it stuck.","A vague reason won't anchor the timeline. You want a specific moment."]}},
+        prompt:["Was there a particular day that stuck with you?","Pin the push to one real moment"]}},
   {who:'par',text:"There was one day, parents' evening. I nearly snapped at a parent because I felt so wiped, and I thought, this isn't me. I want to be the person who's actually got it together.",
     fx:{force:[['pull',"wants to be 'the person who's got it together'"]],
         job:['assumption',"Feel clear-headed enough to be the version of myself I want to be."],
-        prompt:["Good, a real moment and a pull. Move to what he did next.","He's gone from feeling it to noticing it. Track the shift to passive looking."]}},
+        prompt:["So what did you do next?","Track the shift to looking"]}},
   {who:'int',text:"So you started paying attention. What happened next, did you do anything about it?"},
   {who:'par',text:"Not really. I just started noticing everyone else had these bottles. Colleagues, parents at pickup, the markings on the side. I clocked it but I didn't act.",
     fx:{stage:['passive',"started noticing everyone else had these bottles… clocked it but didn't act"],
-        prompt:["He's passively looking. Before he goes active, surface the history.","Ask if he's tried before, the failed attempts are where the anxiety lives."]}},
+        prompt:["Had you tried to fix this before?","Surface past attempts, where the anxiety lives"]}},
   {who:'int',text:"Had you tried to fix this before?"},
   {who:'par',text:"That's the thing. I've bought lovely bottles before. They look great for a week then live at the back of a cupboard. So part of me thought, why would this time be any different.",
     fx:{force:[['anx',"bought bottles before, they end up in a cupboard. 'why would this be different'"]],
-        prompt:["There's the anxiety, the fear it won't stick. Find what flipped him to actually looking.","Don't reassure him. Ask what made him go and research properly."]}},
+        prompt:["What finally made you go looking properly?","Find what flipped him to active looking"]}},
   {who:'int',text:"What finally made you go looking properly?"},
   {who:'par',text:"My sister got one with time markers up the side and wouldn't stop going on about it. That made it feel less like willpower and more like a system. I actually started reading about them.",
     fx:{stage:['active',"my sister's one with time markers… less like willpower, more like a system"],
         force:[['pull',"wants a system, not more willpower"]],
-        prompt:["He's actively looking now. Get the trade-off he made when deciding.","At deciding, the criteria reveal the real Job. Ask what mattered most."]}},
+        prompt:["When you compared options, what mattered most?","Get the trade-off he made"]}},
   {who:'int',text:"When you were comparing options, what mattered most?"},
   {who:'par',text:"I didn't want another pretty thing I'd ignore. I wanted something that nudged me. The markers, and one I could grab on the way out the door without even thinking.",
     fx:{stage:['deciding',"not another pretty thing I'd ignore… something that nudged me, grab without thinking"],
         force:[['pull',"wants a nudge + zero-friction grab-and-go"]],
         job:['suggestive',"Make staying hydrated effortless, so I feel clear and on top of things."],
-        prompt:["The Job is sharpening. Now confirm it stuck, the first week is the proof.","Ask about first use. Did the new behaviour actually hold?"]}},
+        prompt:["What happened in the first week with it?","Confirm it actually stuck"]}},
   {who:'int',text:"And the first week with it, what actually happened?"},
   {who:'par',text:"First few days I forgot it twice. But I left it next to my keys and that fixed it. By the end of the week I was refilling without thinking. The fog lifted, genuinely. I felt like me again.",
     fx:{stage:['first-use',"left it next to my keys… refilling without thinking. The fog lifted. I felt like me again"],
         force:[['pull',"'felt like me again' once the habit held"]],
         job:['suggestive',"Make staying hydrated effortless, so I feel clear-headed and like someone who looks after themselves."],
-        prompt:["He said it held, and why, the anchor by the keys. Land the Job in his words.","One question left: get his one-sentence version, then stop talking."]}},
+        prompt:["In your own words, what is this really doing for you?","Land the Job in his words"]}},
   {who:'int',text:"If you had to say what this is really doing for you, in your own words?"},
   {who:'par',text:"Making it effortless to stay hydrated, so I feel clear and like someone who actually looks after themselves. The anchor by the keys is the whole thing, honestly.",
     fx:{job:['suggestive',"“Make staying hydrated effortless, so I feel clear-headed and like someone who looks after themselves.”"],
-        prompt:["Job captured, in his language, with the mechanism (the keys anchor). Probe the anchor or close.","Strong emerging signal. This is the 11th interview pointing the same way."]}},
+        prompt:["Tell me more about the anchor by your keys.","Job captured, probe the mechanism"]}},
 ];
 
 const $=id=>document.getElementById(id);
@@ -548,7 +548,7 @@ function restart(){
   $('stepCount').textContent='0 / 5'; $('forceCount').textContent='0 / 4'; $('qCount').textContent='Q 0';
   $('recTime').textContent='00:00'; $('recDot').style.background='#e0584a';
   setJob('assumption','Listening for the progress Ian is reaching for…');
-  setPrompt('Anchor the first thought. Ask for the specific moment something needed to change, not a general reason.','Open the timeline at the beginning. You want the trigger, in their words.');
+  setPrompt('When did you first start thinking something needed to change?','Start at the beginning');
   playing=true; $('playBtn').textContent='Pause'; document.body.classList.remove('paused');
   runNext();
 }
