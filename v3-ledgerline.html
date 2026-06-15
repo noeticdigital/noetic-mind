@@ -1862,16 +1862,19 @@ const CATS = {
    measured node heights so nothing ever clips. The whole canvas scales to fit.
    Decluttered: multi-item layers collapse into category nodes (opportunities,
    solutions, tests) that open centered modals. */
-const TREE_W=1180; let TREE_H=690;
+const TREE_W=1320; let TREE_H=690;
+/* All x shifted right by a 140px left gutter so the External-context card can sit
+   to the LEFT of the framing assumption. SVG label x-values below are computed from
+   TL, so the gutter stays self-consistent. */
 const TL={
-  framing:      {x:96, w:380, cls:'slim', top:true, nod:true},
-  outcome:      {x:96, w:380, note:'supply hypothesis · revisable'},
-  jtbd:         {x:704, w:380, cls:'slim', top:true, nod:true},
-  opportunities:{x:704, w:380, cls:'slim', top:true, cat:true},
-  causal:       {x:400, w:380, cls:'slim', top:true, nod:true},
-  solutions:    {x:400, w:380, cls:'slim', top:true, cat:true},
-  tests:        {x:230, w:360, cls:'slim', top:true, cat:true},
-  increment:    {x:600, w:360, cls:'slim', top:true, nod:true},
+  framing:      {x:236, w:380, cls:'slim', top:true, nod:true},
+  outcome:      {x:236, w:380, note:'supply hypothesis · revisable'},
+  jtbd:         {x:844, w:380, cls:'slim', top:true, nod:true},
+  opportunities:{x:844, w:380, cls:'slim', top:true, cat:true},
+  causal:       {x:540, w:380, cls:'slim', top:true, nod:true},
+  solutions:    {x:540, w:380, cls:'slim', top:true, cat:true},
+  tests:        {x:370, w:360, cls:'slim', top:true, cat:true},
+  increment:    {x:740, w:360, cls:'slim', top:true, nod:true},
 };
 </script>
 <script>
@@ -1920,6 +1923,8 @@ function treeSVG(Y,H,rowH,ex){
   const rowY=Y.tests, rcy=rowY+rowH/2;
   const chY=Math.round((Y.outcome+Y.opportunities)/2 + H.outcome/2); // challenge arrow, single y → straight horizontal line
   const opcy=Y.opportunities+H.opportunities/2;                      // opportunities center y
+  const chMidX=Math.round((TL.outcome.x+TL.outcome.w+TL.opportunities.x)/2); // challenge-label midpoint
+  const loopX=TL.opportunities.x+TL.opportunities.w+72;              // re-prioritise loop outer x
   return `<svg class="tree-svg" viewBox="0 0 ${TREE_W} ${TREE_H}" preserveAspectRatio="xMidYMin meet" xmlns="http://www.w3.org/2000/svg">
     <defs>
       <marker id="arr" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
@@ -1930,14 +1935,14 @@ function treeSVG(Y,H,rowH,ex){
       </marker>
     </defs>
     <!-- external context (weak, pre-frame input) feeds the framing assumption -->
-    ${ex?`<path class="conn dashed" d="M${ex.x+ex.w/2} ${ex.y+ex.h} V${Y.framing-4}" marker-end="url(#arr)"/>`:''}
+    ${ex?`<path class="conn dashed" d="M${ex.x+ex.w} ${ex.y+ex.h/2} H${TL.framing.x-4}" marker-end="url(#arr)"/>`:''}
     <!-- supply spine: framing → outcome -->
     <path class="conn" d="M${sx} ${Y.framing+H.framing} V${Y.outcome-4}" marker-end="url(#arr)"/>
     <!-- demand spine: jtbd (job + timeline & forces) → opportunities (category) -->
     <path class="conn" d="M${dx} ${Y.jtbd+H.jtbd} V${Y.opportunities-4}" marker-end="url(#arr)"/>
     <!-- challenge arrow: validated demand can challenge the outcome -->
     <path class="conn dashed accent" d="M${TL.opportunities.x-4} ${chY} H${TL.outcome.x+TL.outcome.w+6}" marker-end="url(#arrAcc)"/>
-    <text class="arrowlab accent" x="590" y="${chY-32}" text-anchor="middle"><tspan x="590" dy="0">validated demand can</tspan><tspan x="590" dy="14">challenge the outcome</tspan></text>
+    <text class="arrowlab accent" x="${chMidX}" y="${chY-32}" text-anchor="middle"><tspan x="${chMidX}" dy="0">validated demand can</tspan><tspan x="${chMidX}" dy="14">challenge the outcome</tspan></text>
     <!-- convergence: each spine exits its card BOTTOM and enters a SIDE of the causal card -->
     <path class="conn" d="M${sx} ${ob} C${sx} ${ob+44} ${TL.causal.x-72} ${cyMid} ${TL.causal.x-3} ${cyMid}" marker-end="url(#arr)"/>
     <path class="conn" d="M${opx} ${opb} C${opx} ${opb+44} ${TL.causal.x+TL.causal.w+72} ${cyMid} ${TL.causal.x+TL.causal.w+3} ${cyMid}" marker-end="url(#arr)"/>
@@ -1949,8 +1954,8 @@ function treeSVG(Y,H,rowH,ex){
     <!-- tests → increment -->
     <path class="conn" d="M${TL.tests.x+TL.tests.w} ${rcy} H${TL.increment.x-5}" marker-end="url(#arr)"/>
     <!-- re-prioritise loop back to the opportunity space -->
-    <path class="conn dashed" d="M${TL.increment.x+TL.increment.w+2} ${rcy} C1108 ${rcy} 1156 ${rcy-110} 1156 ${(rcy+opcy)/2} C1156 ${opcy+60} 1150 ${opcy+10} ${TL.opportunities.x+TL.opportunities.w+8} ${opcy+4}" marker-end="url(#arr)"/>
-    <text class="arrowlab" x="1148" y="${(rcy+opcy)/2-4}" text-anchor="end">measure impact → re-prioritise</text>
+    <path class="conn dashed" d="M${TL.increment.x+TL.increment.w+2} ${rcy} C${loopX-48} ${rcy} ${loopX} ${rcy-110} ${loopX} ${(rcy+opcy)/2} C${loopX} ${opcy+60} ${loopX-6} ${opcy+10} ${TL.opportunities.x+TL.opportunities.w+8} ${opcy+4}" marker-end="url(#arr)"/>
+    <text class="arrowlab" x="${loopX-8}" y="${(rcy+opcy)/2-4}" text-anchor="end">measure impact → re-prioritise</text>
   </svg>`;
 }
 
@@ -1968,7 +1973,7 @@ function renderTree(){
   /* External-context card: a compact, dashed, pre-frame input that FEEDS the framing
      assumption (weak signal; opens the Define view). Rendered manually so it keeps its
      own small height instead of the uniform node height. */
-  const exX=TL.framing.x, exW=232, exY=16;
+  const exX=8, exW=200, exY=16;
   c.insertAdjacentHTML('beforeend',
     `<div class="ext-card" style="left:${exX}px;top:${exY}px;width:${exW}px" onclick="goLoop('define')" tabindex="0" role="button" title="Open the Define / Foundation view" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();goLoop('define')}">
       <div class="exc-kind">External context</div>
@@ -1976,9 +1981,10 @@ function renderTree(){
       <div class="exc-foot">sharpens the frame · not evidence</div>
     </div>`);
   const exH=c.querySelector('.ext-card').offsetHeight;
-  /* place vertically (the supply spine is pushed below the ext-card) */
+  /* framing stays at the top — the ext-card sits to its LEFT in the gutter and
+     feeds it with a horizontal dashed connector */
   const Y={};
-  Y.framing=exY+exH+24;                 Y.outcome=Y.framing+H.framing+26;
+  Y.framing=16;                         Y.outcome=Y.framing+H.framing+26;
   Y.jtbd=16;
   Y.opportunities=Y.jtbd+H.jtbd+22;
   /* convergence stem sits clearly below BOTH spines so it never overlaps a column */
@@ -1995,9 +2001,11 @@ function renderTree(){
   });
   c.style.height=TREE_H+'px';
   c.insertAdjacentHTML('afterbegin', treeSVG(Y,H,rowH,{x:exX,y:exY,w:exW,h:exH}));
+  /* spine labels drop below the ext-card (which now occupies the top of the gutter) */
+  const sideTop=exY+exH+12;
   c.insertAdjacentHTML('beforeend',
-    `<div class="spine-side" style="left:6px;height:${Y.outcome+H.outcome}px"><span>Supply</span></div>`+
-    `<div class="spine-side" style="right:6px;height:${demandB}px"><span>Demand</span></div>`);
+    `<div class="spine-side" style="left:6px;top:${sideTop}px;height:${Y.outcome+H.outcome-sideTop}px"><span>Supply</span></div>`+
+    `<div class="spine-side" style="right:6px;top:${sideTop}px;height:${demandB-sideTop}px"><span>Demand</span></div>`);
   if(typeof activeFilter!=='undefined' && activeFilter!=='all')
     c.querySelectorAll('.node').forEach(n=>n.classList.toggle('dim', n.dataset.ev!==activeFilter));
   fitTree();
@@ -2315,18 +2323,26 @@ const BUILDERS = {
   /* ───── DEFINE (foundation / entry point) ───── */
   define(){ return `<div class="wrap">
     <div class="screen-head">
-      <div class="eyebrow">Foundation · before the loops</div>
-      <h1 class="h1">Define the project</h1>
-      <p class="lede">Set the starting frame, gather the context that sharpens it, and name who you're studying. Everything here is a hypothesis the loops will test, not proof.</p>
+      <div class="eyebrow">Foundation · your brief, before discovery</div>
+      <h1 class="h1">Your project brief</h1>
+      <p class="lede">What you bring before discovery starts: the change you want, who you think struggles, and why. Noetic interviews you to capture it, so the loops open from a sharp, stated hypothesis instead of a blank page. Everything here is a hypothesis the loops will test, not proof.</p>
     </div>
-    ${concierge('assumption', `<span class="cc-step">Status:</span> the frame is a <b>working hypothesis</b>. External context tells us <b>where to look</b> and what to challenge, it does not validate anything. <span class="cc-step">Next:</span> the Progress loop tests it against real interviews.`)}
+    ${concierge('assumption', `<span class="cc-step">Whose thinking this is:</span> yours, the client's, captured as a <b>working frame</b>. Noetic interviewed you to set it; external context only points at <b>where to look</b>. <span class="cc-step">Next:</span> the Progress loop tests it against real interviews.`)}
+
+    <div class="jtbd-actions">
+      <button class="btn btn-primary btn-sm" onclick="askNoetic('brief')">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M2.6 3.4h10.8v7H7.2l-3 2.3V10.4H2.6z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
+        Have Noetic interview you
+      </button>
+      <span style="font-size:12px;color:var(--muted);align-self:center">a short Socratic intake that drafts your starting frame</span>
+    </div>
 
     <div class="section-rule"><span class="sr-n">0.1</span><h2 class="serif">The frame</h2><span class="sr-line"></span><span class="mono" style="font-size:11px;color:var(--muted)">revisable hypothesis</span></div>
     <div class="grid g-2">
       <div class="card">
         <div class="card-t">Framing assumption<span class="ct-line"></span></div>
-        <p class="serif" style="font-size:16px;line-height:1.5;color:var(--ink)">Books that never become trustworthy are why SMBs churn, so early activation (a connected feed plus a first reconciliation) is the controllable driver of 90-day retention.</p>
-        <div style="margin-top:9px">${meter('suggestive')} <span style="font-size:11px;color:var(--muted);margin-left:6px">held consciously, will be tested</span></div>
+        <p class="serif" style="font-size:16px;line-height:1.5;color:var(--ink)"><span class="field var" id="f-define-frame" contenteditable="true" spellcheck="false">Books that never become trustworthy are why SMBs churn, so early activation (a connected feed plus a first reconciliation) is the controllable driver of 90-day retention.</span></p>
+        <div style="margin-top:9px">${meter('suggestive')} <span style="font-size:11px;color:var(--muted);margin-left:6px">your hypothesis, held consciously, will be tested</span> ${fhelp('brief','Have Noetic interview you')}</div>
         <div class="card-t" style="margin-top:18px">Direction from leadership<span class="ct-line"></span></div>
         <p style="font-size:13.5px;line-height:1.55;color:var(--ink-2)">Lower 90-day churn of new SMB accounts (the business outcome). The team owns the <i>how</i>, and derives the product outcome that serves it (see the Outcome loop).</p>
       </div>
@@ -2968,6 +2984,19 @@ const CHAT_BANK = [
    Each: targetId (the .field to write into), the requirement, an intro, ordered steps (with suggested
    answer chips), and a draft(answers) that composes the value. The draft is editable after insert. */
 const FIELD_GUIDE = {
+  brief:{ label:'your brief', req:'your pre-project thinking, a frame to test, not proof', targetId:'f-define-frame',
+    intro:`Let's capture your <b>brief</b>, what you bring before discovery starts. I'll ask three quick questions, then draft a starting frame. It stays a hypothesis the loops will test.`,
+    steps:[
+      {q:`What change does leadership want? (the business outcome)`,
+       chips:['lower 90-day SMB churn','more accounts activated','win back churned books']},
+      {q:`Who do you think struggles most, and when?`,
+       chips:['new SMB accounts in week one','owners who switched then stalled','spreadsheet holdouts']},
+      {q:`What's your hunch about the real driver?`,
+       chips:['the bank feed never connects','no first reconciliation','trust at the first connection']},
+    ],
+    outro:`Here's a starting frame from what you told me. Drop it in, then edit. The loops test it against real interviews, where it earns or loses evidence.`,
+    draft:a=>`<b>${chatEsc(a[1]||'the people we serve')}</b> are the ones who decide whether we ${chatEsc(a[0]||'hit the outcome')}, so <b>${chatEsc(a[2]||'the real driver')}</b> is the controllable driver. A working frame, to be tested.` },
+
   outcome:{ label:'Desired Outcome', req:'one measurable customer behaviour, not a feature, not a business metric', targetId:'f-outcome',
     intro:`Let's set your <b>desired outcome</b>. The rule: a single controllable <i>customer behaviour</i>, with a baseline and a target. Three quick questions.`,
     steps:[
