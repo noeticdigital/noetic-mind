@@ -3245,11 +3245,11 @@ const VIS_ALT=`<div class="mvis"><div class="mv-alt">
   <div class="mv-altrow"><span class="mva-k">Traction / vanity</span><span class="mva-d">Too narrow, or games easily. Means little on its own.</span></div>
 </div><div class="mvis-cap">Steer by the product outcome; it is a leading indicator of the business outcome.</div></div>`;
 const VIS_CHAIN=`<div class="mvis"><div class="mv-chain">
-  <span class="mvc-box out">Outcome</span><span class="mvc-arr">←</span>
-  <span class="mvc-box">required result</span><span class="mvc-arr">←</span>
-  <span class="mvc-box">required behaviour</span><span class="mvc-arr">←</span>
-  <span class="mvc-box">what makes it happen</span>
-</div><div class="mvis-cap">Reason right-to-left from the outcome; then build left-to-right.</div></div>`;
+  <span class="mvc-box">what makes it happen</span><span class="mvc-arr">&rarr;</span>
+  <span class="mvc-box">required behaviour</span><span class="mvc-arr">&rarr;</span>
+  <span class="mvc-box">required result</span><span class="mvc-arr">&rarr;</span>
+  <span class="mvc-box out">Outcome</span>
+</div><div class="mvis-cap">Reason right-to-left, starting from the outcome; then build left-to-right toward it.</div></div>`;
 const VIS_MATRIX=`<div class="mvis"><div class="mv-matrix">
   <span class="mvm-vl"></span><span class="mvm-hl"></span>
   <span class="mvm-ax" style="left:9px;top:7px">ability to win ↑</span>
@@ -3316,8 +3316,11 @@ const METHOD = [
   {phase:'Deliver & learn', title:'Invent several genuinely different solutions', body:`
     <p>Only now do you design solutions, and you deliberately generate a <b>few that are materially different</b>, not three flavours of one idea.</p>
     <p>One might be a product feature, another a human service, another an automation or a change to a process. Multiple paths keep you from marrying the first idea, and they make the next steps, mapping and testing, actually meaningful.</p>`},
+  {phase:'Deliver & learn', title:'Story-map each solution', body:`
+    <p>For each promising solution, lay out the <b>story</b> of how a person actually reaches value: step by step, who does what, in what order, from first touch to the moment the job is done. This is a <b>story map</b>.</p>
+    <p>It turns a vague idea into a concrete sequence, and it surfaces the seams, the handoffs, the waiting, the places a real person could drop out. That sequence is what you reason about next.</p>`},
   {phase:'Deliver & learn', title:'Surface the assumptions you are betting on', body:`
-    <p>To find what each solution is betting on, <b>walk it as a story</b>: step by step, who does what to reach value (a "story map"). The <b>assumptions fall out of the gaps</b> in that story, the moments where you are quietly assuming something will go right (people will want it, they can use it, you can build it, it pays off, it is safe).</p>
+    <p>Now read the story map for <b>gaps</b>: the moments where you are quietly assuming something will go right (people will want this, they can use it, you can build it, it pays off, it is safe). Each of those is an <b>assumption</b>.</p>
     <p>List them, then sort by two things: how <b>important</b> each is, and how much <b>evidence</b> you already have. The dangerous ones are important <i>and</i> unproven. Those go first.</p>`},
   {phase:'Deliver & learn', title:'Test the riskiest belief cheaply', body:`
     <p>You don't build the whole solution to see if it works. You design the <b>smallest test that produces real behaviour</b> about the single riskiest assumption: a fake door, a concierge run, a rough prototype.</p>
