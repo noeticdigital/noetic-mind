@@ -1582,8 +1582,8 @@ var VIEW_ONLY = (function(){try{return /(?:^|[?&])share=reasoning(?:&|$)/.test(l
   <div class="method-head">
     <span class="mh-ico"><svg width="17" height="17" viewBox="0 0 16 16" fill="none"><path d="M8 2.2c-1.5-1-3.2-1-4.6-.2-.3.16-.4.46-.4.78v8.7c0 .5.5.85.95.6 1.2-.62 2.7-.55 4.05.3 1.35-.85 2.85-.92 4.05-.3.45.25.95-.1.95-.6V2.78c0-.32-.13-.62-.4-.78-1.4-.8-3.1-.8-4.6.2z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/><path d="M8 2.2v10.4" stroke="currentColor" stroke-width="1.3"/></svg></span>
     <div class="mh-tt">
-      <div class="mh-t">How continuous discovery works</div>
-      <div class="mh-s">The whole methodology, end to end, explained plainly, with no project data.</div>
+      <div class="mh-t">How the discovery system works</div>
+      <div class="mh-s">Jobs-to-be-Done (demand) unified with continuous discovery (the operating system), end to end, with no project data.</div>
     </div>
     <button class="method-close" onclick="closeMethod()" aria-label="Close">
       <svg width="15" height="15" viewBox="0 0 16 16"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
@@ -3230,7 +3230,7 @@ const VIS_LOOPS=`<div class="mvis"><div class="mv-loops">
   <div class="mv-loop"><span class="mvl-n">1</span><span class="mvl-t">Progress</span><span class="mvl-d">what customers are trying to achieve</span></div>
   <div class="mv-loop"><span class="mvl-n">2</span><span class="mvl-t">Outcome</span><span class="mvl-d">one number you own</span></div>
   <div class="mv-loop"><span class="mvl-n">3</span><span class="mvl-t">Opportunity</span><span class="mvl-d">where they struggle</span></div>
-  <div class="mv-loop"><span class="mvl-n">4</span><span class="mvl-t">Causal learning</span><span class="mvl-d">how the system really works</span></div>
+  <div class="mv-loop"><span class="mvl-n">4</span><span class="mvl-t">Causal learning</span><span class="mvl-d">how the system works (added layer)</span></div>
   <div class="mv-loop"><span class="mvl-n">5</span><span class="mvl-t">Delivery &amp; impact</span><span class="mvl-d">build, test, measure</span></div>
 </div><div class="mvis-cap">Five loops you return to continuously, not a one-time sequence.</div></div>`;
 const VIS_FORCES=`<div class="mvis"><div class="mv-forces">
@@ -3238,12 +3238,12 @@ const VIS_FORCES=`<div class="mvis"><div class="mv-forces">
   <div class="mv-force go"><div class="mvf-h">→ Pull</div>The appeal of something better draws them in.</div>
   <div class="mv-force stop"><div class="mvf-h">⚠ Anxiety</div>Fear of the new thing holds them back.</div>
   <div class="mv-force stop"><div class="mvf-h">⟳ Habit</div>Comfort of the old thing holds them back.</div>
-</div><div class="mvis-cap">People change only when push + pull beats anxiety + habit.</div></div>`;
+</div><div class="mvis-cap">Change happens only when push and pull overcome anxiety and habit.</div></div>`;
 const VIS_ALT=`<div class="mvis"><div class="mv-alt">
-  <div class="mv-altrow"><span class="mva-k">Business outcome</span><span class="mva-d">What leadership wants (revenue, retention). You don't control it directly.</span></div>
-  <div class="mv-altrow mid"><span class="mva-k">★ Product outcome</span><span class="mva-d">A customer behaviour you CAN influence that drives the business. Pick this one.</span></div>
-  <div class="mv-altrow"><span class="mva-k">Traction metric</span><span class="mva-d">Easy to game, means little on its own (signups, clicks).</span></div>
-</div><div class="mvis-cap">Aim between the two extremes, at the controllable behaviour.</div></div>`;
+  <div class="mv-altrow"><span class="mva-k">Business outcome</span><span class="mva-d">What leadership cares about (revenue, retention). The destination, not your steering wheel.</span></div>
+  <div class="mv-altrow mid"><span class="mva-k">★ Product outcome</span><span class="mva-d">A behaviour you can move that leads to the business outcome. Steer by this.</span></div>
+  <div class="mv-altrow"><span class="mva-k">Traction / vanity</span><span class="mva-d">Too narrow, or games easily. Means little on its own.</span></div>
+</div><div class="mvis-cap">Steer by the product outcome; it is a leading indicator of the business outcome.</div></div>`;
 const VIS_CHAIN=`<div class="mvis"><div class="mv-chain">
   <span class="mvc-box out">Outcome</span><span class="mvc-arr">←</span>
   <span class="mvc-box">required result</span><span class="mvc-arr">←</span>
@@ -3257,7 +3257,7 @@ const VIS_MATRIX=`<div class="mvis"><div class="mv-matrix">
   <span class="mvm-q" style="right:12px;top:8px">★ focus here</span>
   <div class="mvm-dot" style="left:76%;bottom:70%"></div>
   <span class="mvm-lab" style="left:55%;top:20%">target</span>
-</div><div class="mvis-cap">Crown the opportunity that is high demand AND high ability to win.</div></div>`;
+</div><div class="mvis-cap">A pragmatic call: crown the sibling that is high demand and high ability to win.</div></div>`;
 const VIS_LADDER=`<div class="mvis"><div class="mv-ladder">
   <div class="mv-rung"><span class="mvr-n">L1</span><span class="mvr-t">Assumption behaviour</span><span class="mvr-d">did people do the thing?</span></div>
   <div class="mv-rung"><span class="mvr-n">L2</span><span class="mvr-t">Opportunity relief</span><span class="mvr-d">did the struggle ease?</span></div>
@@ -3267,80 +3267,83 @@ const VIS_LADDER=`<div class="mvis"><div class="mv-ladder">
 
 const METHOD = [
   {phase:'Start here', title:'What this system is for', vis:VIS_LOOPS, body:`
-    <p>Any company can build things. The hard part is knowing <b>what</b> to build. This is a system for earning that knowledge, for moving, step by step, from a guess to genuine certainty about what's worth building and why.</p>
+    <p>Any company can build things. The hard part is knowing <b>what</b> to build. This is a system for earning that knowledge, for moving step by step from a guess to genuine certainty about what's worth building and why.</p>
     <p>It works by alternating between two questions: <b>what progress are customers trying to make?</b> and <b>what can we build that helps them make it, in a way that moves a number we care about?</b></p>
-    <p>Everything that follows is one full lap, from opening a fresh project to shipping something and learning whether it worked. Then you go again.</p>`},
+    <p>Everything that follows is one full lap, from opening a fresh project to shipping something and learning whether it worked. Then you go again.</p>
+    <div class="m-takeaway"><b>Where this comes from:</b> it unifies two bodies of work, <b>Jobs to be Done</b> (the demand engine, Christensen and Moesta) and <b>continuous discovery</b> (the operating system, the Teresa Torres lineage). Each step below leans on one side or the other, and we will say which.</div>`},
   {phase:'Start here', title:'Set up the team, and one rule', body:`
-    <p>A project starts with a small, <b>stable, cross-functional team</b>, the people who will talk to customers, design, build, and measure, together, over time.</p>
-    <p>The single rule that makes everything else work: leadership hands the team an <b>outcome to move, never a feature to build</b>. "Reduce churn" or "get more people to their first win", not "build dashboard X". The team owns the <i>how</i>.</p>
-    <div class="m-takeaway"><b>Why it matters:</b> that one boundary is what turns the team into a discovery engine instead of an order-taking factory.</div>`},
+    <p>A project starts with a small, <b>stable, cross-functional team</b>, the people who decide together: typically product, design, and engineering (Torres calls this the <b>product trio</b>). They talk to customers, build, and measure as one unit.</p>
+    <p>The rule that makes everything else work: leadership hands the team a <b>business outcome or direction to move, never a feature to build</b>. "Reduce churn", not "build dashboard X". The team owns the <i>how</i>, and (next step) derives its own product outcome to steer by.</p>
+    <div class="m-takeaway"><b>Why it matters:</b> that one boundary turns the team into a discovery engine instead of an order-taking factory.</div>`},
   {phase:'Start here', title:'The five loops you move through', vis:VIS_LOOPS, body:`
-    <p>The work isn't a straight line; it's five nested loops you keep returning to.</p>
-    <p>You rarely finish one and never touch it again, a surprise in delivery sends you back to progress; a fresh interview reshapes the opportunity tree. The loops are how the system stays alive instead of becoming a plan you execute once.</p>`},
+    <p>The work isn't a straight line; it's five nested loops you keep returning to: <b>1) Progress</b> (understand the customer), <b>2) Outcome</b> (pick one number), <b>3) Opportunity</b> (find where they struggle), <b>4) Causal Learning</b> (understand the system), and <b>5) Delivery &amp; Impact</b> (build, test, measure).</p>
+    <p>Four of these come straight from the continuous-discovery operating system. The <b>Causal Learning</b> loop is <i>added</i> from the engineering and JTBD side; it is the bridge that keeps the demand and supply halves honest, and we will flag it again when we reach it.</p>
+    <p>You rarely finish a loop and never touch it again: a surprise in delivery sends you back to progress, a fresh interview reshapes the tree.</p>`},
 
   {phase:'Understand demand', title:'Start with progress, not products', body:`
     <p>Before any feature talk, you learn the <b>Job to be Done</b>: the progress a person is trying to make in their life or work.</p>
-    <p>People don't really want products; they "hire" a product to make progress, to move from a frustrating situation to a better one. So you study the <b>situation and the desired progress</b>, in the customer's words, not your product's.</p>
-    <div class="m-takeaway">Get this wrong and everything downstream is built on sand.</div>`},
+    <p>People don't really want products; they "hire" a product to make progress, to move from a frustrating situation to a better one. And that progress is never only practical, it is <b>functional, emotional, and social</b> at once: what I get done, how I want to feel, and how I want to be seen. Miss the emotional and social sides and you miss why people actually switch.</p>
+    <div class="m-takeaway">Study the situation and the desired progress in the customer's words, not your product's. Get this wrong and everything downstream is built on sand.</div>`},
   {phase:'Understand demand', title:'Interview real past decisions', body:`
-    <p>You learn the Job by interviewing people about things that <b>actually happened</b>, the last time they switched, struggled, gave up, or rigged a workaround.</p>
-    <p>Never "would you…?"; always "walk me through what happened." Real past behaviour is evidence; predictions about the future are not.</p>
-    <p>And you do this <b>continuously</b>, a steady trickle of conversations run by the team itself, not outsourced to a research department once a year.</p>`},
+    <p>You learn the Job by interviewing people about things that <b>actually happened</b>: the last time they switched, struggled, gave up, or rigged a workaround. Never "would you...?"; always "walk me through what happened." Real past behaviour is evidence; predictions about the future are not.</p>
+    <p>Capture each interview as a <b>single concrete story</b> while it's fresh. The opportunity map you build later comes from clustering those stories, not from memory.</p>
+    <div class="m-takeaway">The trick that makes weekly interviews survive contact with reality is <b>automating recruitment</b>: a standing pipeline of customers, not a fresh scramble each week. This is the part that quietly kills most discovery efforts.</div>`},
   {phase:'Understand demand', title:'Map the forces and the timeline', vis:VIS_FORCES, body:`
-    <p>Every switch is a tug-of-war between four forces. Two push people toward change; two hold them back.</p>
+    <p>Every switch is a tug-of-war between four forces. Two move people toward change: the <b>push</b> of the current problem and the <b>pull</b> of something better. Two hold them in place: the <b>anxiety</b> of the new thing and the <b>habit</b> of the old. Change happens only when the forces toward a new solution overcome the forces holding people where they are (it is directional, not a sum you score).</p>
     <p>You also map the <b>timeline</b> of the decision, from the first faint thought, through actively looking, to deciding, onboarding, and ongoing use, so you can see exactly <i>where</i> people stall.</p>`},
 
   {phase:'Define the outcome', title:'Turn progress into one number you can move', vis:VIS_ALT, body:`
-    <p>Now translate all that understanding into a single, <b>measurable outcome</b>, and be picky about which one. There are three altitudes, and only the middle one is right.</p>
-    <p>You pick <b>one product outcome</b>, agree it with leadership, and that becomes the number the whole project is judged on. One team, one number.</p>`},
+    <p>Now you choose the number the project steers by. Picture three altitudes.</p>
+    <p>The <b>business outcome</b> (revenue, retention) is what leadership ultimately cares about, but you do not move it directly. A <b>too-narrow traction metric</b> (one feature's clicks) is real but says little on its own, and a <b>vanity metric</b> games easily. In between sits the <b>product outcome</b>: a customer behaviour you <i>can</i> directly influence <b>and</b> that is a leading indicator of the business outcome. That is the one you pick.</p>
+    <p>Leadership negotiates the business outcome; the <b>team derives the product outcome</b> that serves it, and agrees it. Pick one to steer by, pair it with a couple of <b>guardrail metrics</b> so you don't win the number while breaking something else, and treat it as a <b>hypothesis you may revise</b> as the opportunity space comes into focus.</p>`},
 
   {phase:'Find the opportunity', title:'Organise the struggles into a tree', body:`
-    <p>From all those interviews you'll have a pile of struggling moments, unmet needs, workarounds, and anxieties. You organise them into a <b>tree</b>, a map of the opportunity space, usually grouped by where they fall on the customer's timeline.</p>
-    <p>The tree turns scattered insight into a structured set of options, every one framed as a <b>customer problem, never a solution</b>.</p>`},
+    <p>From all those interviews you will have a pile of struggling moments, unmet needs, workarounds, anxieties, and <b>people not solving the problem at all (nonconsumption)</b>. You organise them into a <b>tree</b>, a map of the opportunity space, usually grouped by where they fall on the customer's timeline.</p>
+    <p>Everything is framed as a <b>customer problem, never a solution</b>, and that difference is the whole game. "Customers keep asking for a CSV export" is a <i>request</i>; the opportunity behind it is "I can't get my data into my own reporting", which several different solutions could serve.</p>`},
   {phase:'Find the opportunity', title:'Admission tests: what earns a place', body:`
-    <p>Not every complaint is an opportunity. Each one has to pass a few tests before it goes on the tree:</p>
-    <p>it's framed as a <b>customer struggle</b>, not a feature request in disguise; it's <b>grounded in something that really happened</b>; it <b>plausibly connects</b> to the outcome you chose; and there's <b>enough evidence</b>, it recurs, it's severe, or it's strategically important, for it to matter.</p>
+    <p>Not every complaint earns a place on the tree. Each opportunity has to pass a few tests:</p>
+    <p>it is framed as a <b>customer struggle</b>, not a feature request in disguise (translate requests back into the underlying need); it is <b>grounded in something that really happened</b>; it <b>plausibly connects</b> to the outcome you chose; and there is <b>enough evidence</b>, through recurrence, severity, or strategic importance, for it to matter.</p>
     <div class="m-takeaway">This keeps the tree honest and stops it filling up with wishlist items.</div>`},
   {phase:'Find the opportunity', title:'Pick ONE target opportunity', vis:VIS_MATRIX, body:`
-    <p>You can't chase everything, so you crown a <b>single target</b>. The choice weighs two things against each other: how <b>strong the demand</b> is (how much customers struggle here) versus your <b>ability to win</b> (how well you can actually solve it).</p>
-    <p>The top-right of that trade-off, strong demand, high ability to win, is where you focus. Everything else is parked, split for later, or dropped. <b>Focus is the point.</b></p>`},
+    <p>You can't chase everything, so you crown a <b>single target</b>. You do it by <b>comparing sibling opportunities</b> on the same branch: how big the opportunity is (how many customers, how often, how severely, that is <b>sizing</b>), how well it fits the outcome you chose, and how well placed you are to solve it.</p>
+    <p>This tool draws that comparison as a simple call: strong <b>demand</b> against your <b>ability to win</b>, crown the top-right. Treat the grid as a <i>pragmatic</i> way to decide, not a precise score; the real work is the honest comparison behind it. Everything not crowned is parked, split for later, or dropped. <b>Focus is the point.</b></p>`},
 
   {phase:'Map the system', title:'Understand the system before you solve it', vis:VIS_CHAIN, body:`
-    <p>Before jumping to solutions, you map how the system actually <b>produces the outcome</b>, working backwards from the result you want to the things that must be true for it to happen.</p>
-    <p>You separate the factors you <b>control</b> (which you can design around) from the <b>noise</b> you don't (weather, mood, the economy). And you pick a <b>lead measure</b>, an early signal you can watch now, versus the <b>lag measure</b>, the real outcome, which arrives later.</p>
+    <p>This step is <b>added</b> to the standard discovery loop, from the engineering and JTBD side. Before designing anything, you get explicit about the chain from your action to the outcome, otherwise you will measure the wrong thing later.</p>
+    <p>You map the system <b>backwards from the outcome</b>: what must be true for it to happen? You separate the factors you <b>control</b> (and can design around) from the <b>noise</b> you don't (weather, mood, the economy). And you name two measures you will reuse for the rest of the project: a <b>lead measure</b>, an early signal you can watch now (for example, "share of new users who finish setup this week"), versus the <b>lag measure</b>, the real outcome that arrives later (for example, "90-day retention").</p>
     <div class="m-takeaway"><b>Why it matters:</b> this is the step that stops a confident team from building the wrong thing beautifully.</div>`},
 
   {phase:'Deliver & learn', title:'Invent several genuinely different solutions', body:`
     <p>Only now do you design solutions, and you deliberately generate a <b>few that are materially different</b>, not three flavours of one idea.</p>
-    <p>One might be a product feature, another a human service, another an automation or a tweak to a process. Multiple paths keep you from marrying the first idea, and they make the next step, testing, actually meaningful.</p>`},
+    <p>One might be a product feature, another a human service, another an automation or a change to a process. Multiple paths keep you from marrying the first idea, and they make the next steps, mapping and testing, actually meaningful.</p>`},
   {phase:'Deliver & learn', title:'Surface the assumptions you are betting on', body:`
-    <p>Every solution rests on <b>assumptions</b>, things that must be true for it to work: people will want it, they can use it, you can build it, it makes business sense, it's safe.</p>
-    <p>You list them and sort by two things: how <b>important</b> each is, and how much <b>evidence</b> you already have. The dangerous ones are important <i>and</i> unproven. Those are what you test first.</p>`},
+    <p>To find what each solution is betting on, <b>walk it as a story</b>: step by step, who does what to reach value (a "story map"). The <b>assumptions fall out of the gaps</b> in that story, the moments where you are quietly assuming something will go right (people will want it, they can use it, you can build it, it pays off, it is safe).</p>
+    <p>List them, then sort by two things: how <b>important</b> each is, and how much <b>evidence</b> you already have. The dangerous ones are important <i>and</i> unproven. Those go first.</p>`},
   {phase:'Deliver & learn', title:'Test the riskiest belief cheaply', body:`
-    <p>You don't build the whole solution to see if it works. You design the <b>smallest test that produces real behaviour</b> about the single riskiest assumption, a fake door, a concierge run, a rough prototype.</p>
-    <p>Crucially, you write down the <b>success bar before you see any results</b>, so you can't move the goalposts afterwards.</p>
+    <p>You don't build the whole solution to see if it works. You design the <b>smallest test that produces real behaviour</b> about the single riskiest assumption: a fake door, a concierge run, a rough prototype.</p>
+    <p>Two disciplines make a test worth running. Write down the <b>success bar before you see results</b> (so you can't move the goalposts), and write down <b>what decision the result will change</b> (if no answer changes a decision, don't run the test).</p>
     <div class="m-takeaway">Often the best result is <b>killing a belief cheaply</b>: learning a path won't work <i>before</i> you build it is a win, not a failure.</div>`},
   {phase:'Deliver & learn', title:'Decide what to leave out, on purpose', body:`
-    <p>You can't have everything, better, faster, and cheaper; pick two. So you make the <b>trade-offs explicit</b>: what's in, what's deliberately out, and what's product versus service versus automation versus human judgement.</p>
-    <p>The goal is a focused <b>half done genuinely well</b>, rather than the whole thing done weakly. Naming what you're <i>not</i> doing matters as much as naming what you are.</p>`},
+    <p>You usually can't max everything at once: better, faster, and cheaper tend to trade against each other, so you choose deliberately. You make the <b>trade-offs explicit</b>: what's in, what's out, and what's product versus service versus automation versus human judgement.</p>
+    <p>The goal is a focused <b>half done genuinely well</b>, rather than the whole thing done weakly. Naming what you are <i>not</i> doing matters as much as naming what you are.</p>`},
   {phase:'Deliver & learn', title:'Ship the smallest coherent increment', body:`
-    <p>You release the <b>smallest version that's still whole enough</b> to deliver real value and produce a clean signal on your lead measure. Not a prototype, not the grand vision, the smallest honest slice.</p>
+    <p>You release the <b>smallest version that's still whole enough</b> to deliver real value and produce a clean signal on your <b>lead measure</b>. Not a prototype, not the grand vision, the smallest honest slice.</p>
     <p>And you <b>instrument it before launch</b>, so you can actually read what happened the moment it's live.</p>`},
   {phase:'Deliver & learn', title:'Measure impact at four levels', vis:VIS_LADDER, body:`
-    <p>After shipping, you check impact at four connected levels. Reading all four tells you not just <i>whether</i> it worked, but <b>where the chain broke</b> if it didn't, which link to go back and revisit.</p>`},
+    <p>After shipping, you check impact at four connected levels: <b>1) assumption behaviour</b> (did people do the thing?), <b>2) opportunity relief</b> (did the struggle ease?), <b>3) product outcome</b> (did your number move?), and <b>4) business outcome</b> (did the business move?).</p>
+    <p>Reading all four tells you not just <i>whether</i> it worked, but <b>where the chain broke</b> if it didn't, which is the exact link to go back and revisit.</p>`},
 
   {phase:'Loop & endpoint', title:'Update the map and choose the next move', body:`
-    <p>Whatever you learned, a validated belief, a killed path, a surprising result, goes <b>back onto the tree</b>. The map of certainty updates.</p>
+    <p>Whatever you learned, a validated belief, a killed path, a surprising result, goes <b>back onto the tree</b>. The map of certainty updates, and validated demand can even <b>challenge the outcome</b> you chose: the number isn't sacred.</p>
     <p>Then you <b>re-prioritise</b>: pick the next riskiest, highest-value thing to learn or build. This is the moment the loop closes and reopens.</p>`},
   {phase:'Loop & endpoint', title:'The rhythm that keeps it alive', body:`
-    <p>None of this is a one-off plan; it runs on a <b>cadence</b>: a steady trickle of customer conversations, a weekly look at the tree, continuous small tests with bars set in advance, an impact review each delivery cycle, and periodic outcome check-ins with leadership.</p>
+    <p>None of this is a one-off plan; it runs on a <b>cadence</b>: a steady trickle of customer conversations (kept alive by that standing recruitment pipeline), a weekly look at the tree, continuous small tests with bars set in advance, an impact review each delivery cycle, and periodic outcome check-ins with leadership.</p>
     <p>The rhythm is what turns discovery from an <i>event</i> into a <b>habit</b>.</p>`},
   {phase:'Loop & endpoint', title:'Where it ends (and why it does not)', body:`
     <p>A discovery project doesn't really "finish"; it <b>converges</b>. With each lap, your certainty about what's worth building rises, the evidence gets stronger, and the gap between what you <i>believe</i> and what you've <i>proven</i> shrinks.</p>
     <p>At any moment you can show a stakeholder the <b>reasoning</b>, here's what we believe, here's how sure we are, here's exactly what we're doing next, instead of a roadmap of guesses.</p>
     <div class="m-takeaway">That clarity, continuously refreshed, is the whole point: a company can build anything, this is how you stay certain you're building the <b>right</b> thing.</div>`},
 ];
-
 let methodI=0, methodOpen=false; const methodSeen=new Set();
 function openMethod(){
   methodOpen=true;
