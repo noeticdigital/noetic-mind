@@ -2140,7 +2140,7 @@ function openCategoryMember(key){ closeCategory(); setTimeout(()=>openNode(key),
 function closeCategory(){ document.getElementById('catScrim').classList.remove('open'); }
 /* ── JTBD info modal: interview scheduling + capture-extension guide (methodology, not project data) ── */
 const ICO_CAL='<svg width="17" height="17" viewBox="0 0 16 16" fill="none"><rect x="2.2" y="3" width="11.6" height="11" rx="1.6" stroke="#fff" stroke-width="1.3"/><path d="M2.2 6h11.6M5.3 1.8v2.4M10.7 1.8v2.4" stroke="#fff" stroke-width="1.3" stroke-linecap="round"/></svg>';
-const ICO_EXT='<svg width="17" height="17" viewBox="0 0 16 16" fill="none"><path d="M6.2 2.4a1.4 1.4 0 012.8 0v.9h2.3a1 1 0 011 1v2.3h.9a1.4 1.4 0 010 2.8h-.9V12a1 1 0 01-1 1H9v-.9a1.4 1.4 0 00-2.8 0V13H3.7a1 1 0 01-1-1V9.6h.9a1.4 1.4 0 000-2.8h-.9V4.3a1 1 0 011-1H6.2z" stroke="#fff" stroke-width="1.2" stroke-linejoin="round"/></svg>';
+const ICO_APP='<svg width="17" height="17" viewBox="0 0 16 16" fill="none"><path d="M8 2v7.4M5.2 6.9 8 9.7l2.8-2.8" stroke="#fff" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 11.3v1.3a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1.3" stroke="#fff" stroke-width="1.3" stroke-linecap="round"/></svg>';
 const IMODAL = {
   schedule:{ ico:ICO_CAL, title:'Schedule a JTBD interview', body:`
     <p>Discovery runs on a <b>steady trickle</b> of interviews about real, recent switches, run by the team itself. The assistant keeps the pipeline full and tells you exactly <b>who to talk to next</b>, so the cadence never stalls.</p>
@@ -2157,16 +2157,16 @@ const IMODAL = {
       <button class="btn btn-primary btn-sm" onclick="imToast('Screener sent to 4 candidates')">Send the screener</button>
       <button class="btn btn-ghost btn-sm" onclick="imToast('Invite drafted for Thu, 2:00pm')">Book a slot</button>
     </div>`},
-  ext:{ ico:ICO_EXT, title:'Interview-capture extension', body:`
-    <p>The Noetic capture extension rides along on your video calls. It <b>records and transcribes</b> the conversation, tags the <b>four forces</b> and the <b>functional / emotional / social</b> motivations as they surface, and drops a finished <b>interview snapshot</b> straight into this project.</p>
+  ext:{ ico:ICO_APP, title:'Interview capture · Mac app', body:`
+    <p>The Noetic capture app is a <b>lightweight, on-device Mac app</b> that sits beside your call. It <b>records and transcribes locally</b>, no bot joins the meeting, tags the <b>four forces</b> and the <b>functional / emotional / social</b> motivations as they surface, and drops a finished <b>interview snapshot</b> straight into this project. It is the same engine behind the <b>live interview copilot</b>.</p>
     <div class="im-steps">
-      <div class="im-step">Add it to Chrome, one click, no account needed yet.</div>
-      <div class="im-step">Pin it so it's ready on every call.</div>
+      <div class="im-step">Download the Mac app, a notarized installer, no account needed yet.</div>
+      <div class="im-step">Grant microphone &amp; system-audio access, capture stays on your machine.</div>
       <div class="im-step">Sign in and pick this discovery project.</div>
-      <div class="im-step">Start your call, capture begins automatically; the snapshot appears in <b>Interview snapshots</b> when you hang up.</div>
+      <div class="im-step">Start your call on Zoom, Meet or Teams, capture runs on-device; the snapshot appears in <b>Interview snapshots</b> when you hang up.</div>
     </div>
     <div class="imodal-cta" style="margin-top:16px">
-      <button class="btn btn-primary btn-sm" onclick="imToast('Opening the Chrome Web Store…')">Add to Chrome</button>
+      <button class="btn btn-primary btn-sm" onclick="imToast('Downloading Noetic for Mac…')">Download for Mac</button>
       <button class="btn btn-ghost btn-sm" onclick="imToast('Full setup guide opened')">View full guide</button>
     </div>`},
 };
@@ -2417,8 +2417,8 @@ const BUILDERS = {
         Schedule a JTBD interview
       </button>
       <button class="btn btn-ghost btn-sm" onclick="openImodal('ext')">
-        <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M6.2 2.4a1.4 1.4 0 012.8 0v.9h2.3a1 1 0 011 1v2.3h.9a1.4 1.4 0 010 2.8h-.9V12a1 1 0 01-1 1H9v-.9a1.4 1.4 0 00-2.8 0V13H3.7a1 1 0 01-1-1V9.6h.9a1.4 1.4 0 000-2.8h-.9V4.3a1 1 0 011-1H6.2z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg>
-        Interview-capture extension
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M8 2v7.3M5.3 6.8 8 9.5l2.7-2.7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/><path d="M3.2 11.4v1.1a1 1 0 0 0 1 1h7.6a1 1 0 0 0 1-1v-1.1" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+        Get the capture app
       </button>
     </div>
 
