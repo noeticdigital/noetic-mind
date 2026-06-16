@@ -1468,7 +1468,7 @@ var VIEW_ONLY = (function(){try{return /(?:^|[?&])share=reasoning(?:&|$)/.test(l
     <!-- Cadence ribbon -->
     <div class="cadence">
       <span class="wk">WEEK 24 · 2026</span>
-      <div class="cad-item cad-done"><span class="cad-dot"></span>Interview logged, Maya (Tue)</div>
+      <div class="cad-item cad-done"><span class="cad-dot"></span>Interview logged, Ian (Tue)</div>
       <div class="cad-item cad-done"><span class="cad-dot"></span>Tree reviewed</div>
       <div class="cad-item cad-now"><span class="cad-dot"></span>1 test in flight, TC-08</div>
       <div class="cad-item cad-todo"><span class="cad-dot"></span>Impact review (Fri)</div>
@@ -1746,7 +1746,7 @@ const NODES = {
       evidence:[
         ['14 interviews','Recurs in 11 of 14 progress interviews of real past attempts.'],
         ['behavior','People who kept a bottle within arm’s reach drank 3.2× more often.'],
-        ['quotes','“I buy a lovely bottle, use it for three days, then it lives at the back of a cupboard.”, Maya, primary-school teacher'],
+        ['quotes','“I buy a lovely bottle, use it for three days, then it lives at the back of a cupboard.”, Ian, operations manager'],
         ['signal','Drop-off concentrates in the afternoon, when the day’s gone by without water.'],
       ],
     }},
@@ -2219,7 +2219,7 @@ const LOOP_TITLES = {
 /* mark project-variable data tokens (names, %s, test IDs, sample sizes) inside a freshly
    rendered screen with .var, so the pink overlay covers content that changes per project.
    Skips anything already inside a .var/.field/.field-help (those are marked at source). */
-const VAR_RE = /(Maya Okonkwo|Leo Brandt|Priya Raman|Quench|\bMaya\b|\bLeo\b|\bPriya\b|TC-0\d|n=\d+|\b\d+ of \d+\b|\b\d+\/\d+\b|\b\d+\.\d+×|\b\d+×|\b\d{1,3}%|\b\d+-day\b|\bQ[1-4]\b|\bWk\s?\d+\b)/g;
+const VAR_RE = /(Ian Turvue|Leo Brandt|Priya Raman|Quench|\bIan\b|\bLeo\b|\bPriya\b|TC-0\d|n=\d+|\b\d+ of \d+\b|\b\d+\/\d+\b|\b\d+\.\d+×|\b\d+×|\b\d{1,3}%|\b\d+-day\b|\bQ[1-4]\b|\bWk\s?\d+\b)/g;
 function markVariables(root){
   if(!root) return;
   const SKIP=new Set(['SCRIPT','STYLE','BUTTON','TEXTAREA','INPUT','SVG','PATH']);
@@ -2433,7 +2433,7 @@ const BUILDERS = {
     <div class="grid g-2">
       <div class="card">
         <div class="snap exp">
-          <div class="who">Maya Okonkwo <span class="role">· primary-school teacher</span></div>
+          <div class="who">Ian Turvue <span class="role">· operations manager</span></div>
           <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:6px">${pill('validated')}<span class="ev-pill ev-suggestive"><span class="ev-d"></span>Habit: forgetting it exists</span><button class="exp-tog" style="margin-left:auto" aria-expanded="false" onclick="toggleExp(this)">Full quote <span class="exp-chev">▾</span></button></div>
           <div class="exp-body"><div class="quote">I buy a lovely bottle, use it for three days, then it lives at the back of a cupboard. It’s never the bottle, I just forget it exists.</div></div>
         </div>
@@ -2570,7 +2570,7 @@ const BUILDERS = {
         <div style="margin-top:10px">
           <div class="check met"><span class="box"><svg viewBox="0 0 16 16" width="11" height="11" fill="none" aria-hidden="true"><path d="M3.5 8.5l3 3 6-6.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="c-txt">Framed as a customer struggle, not a solution<span class="ct-meta">“Nothing reminds me at the moment I’d drink”, a moment, not a feature.</span></span></div>
           <div class="check met"><span class="box"><svg viewBox="0 0 16 16" width="11" height="11" fill="none" aria-hidden="true"><path d="M3.5 8.5l3 3 6-6.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="c-txt">Not a feature request in disguise<span class="ct-meta">Translated from “add a reminder alarm” → the underlying missing-cue gap.</span></span></div>
-          <div class="check met"><span class="box"><svg viewBox="0 0 16 16" width="11" height="11" fill="none" aria-hidden="true"><path d="M3.5 8.5l3 3 6-6.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="c-txt">Grounded in real behavior / a real story<span class="ct-meta">Maya, Priya, + 6 more interviews of real past attempts.</span></span></div>
+          <div class="check met"><span class="box"><svg viewBox="0 0 16 16" width="11" height="11" fill="none" aria-hidden="true"><path d="M3.5 8.5l3 3 6-6.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="c-txt">Grounded in real behavior / a real story<span class="ct-meta">Ian, Priya, + 6 more interviews of real past attempts.</span></span></div>
           <div class="check met"><span class="box"><svg viewBox="0 0 16 16" width="11" height="11" fill="none" aria-hidden="true"><path d="M3.5 8.5l3 3 6-6.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="c-txt">Plausibly connects to the desired outcome<span class="ct-meta">Sits exactly on the week-1 drop-off.</span></span></div>
           <div class="check met" style="border-bottom:none"><span class="box"><svg viewBox="0 0 16 16" width="11" height="11" fill="none" aria-hidden="true"><path d="M3.5 8.5l3 3 6-6.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="c-txt">Enough evidence to matter<span class="ct-meta">Recurs unprompted in 8 of 14 interviews.</span></span></div>
         </div>
