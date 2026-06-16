@@ -27,30 +27,33 @@
     </filter>
   </defs>
 
-  <g filter="url(#iconShadow)">
-    <rect x="116" y="88" width="792" height="824" rx="104" fill="url(#navy)"/>
-    <rect x="116" y="88" width="792" height="824" rx="104" fill="url(#topLight)"/>
-    <rect x="117.5" y="89.5" width="789" height="821" rx="102.5" stroke="#284C7B" stroke-opacity="0.32" stroke-width="3"/>
-  </g>
+  <!-- squash the icon vertically (824->792 tall) so the rounded shape is a true square, then re-centre -->
+  <g transform="translate(0 116) scale(1 0.96117) translate(0 -88)">
+    <g filter="url(#iconShadow)">
+      <rect x="116" y="88" width="792" height="824" rx="104" fill="url(#navy)"/>
+      <rect x="116" y="88" width="792" height="824" rx="104" fill="url(#topLight)"/>
+      <rect x="117.5" y="89.5" width="789" height="821" rx="102.5" stroke="#284C7B" stroke-opacity="0.32" stroke-width="3"/>
+    </g>
 
-  <g filter="url(#barDrop)">
-    <rect x="286" y="183" width="94" height="621" rx="20" fill="url(#barFill)"/>
-    <rect x="415" y="328" width="80" height="240" rx="18" fill="url(#barFill)"/>
-    <rect x="540" y="468" width="80" height="238" rx="18" fill="url(#barFill)"/>
-    <rect x="661" y="215" width="93" height="606" rx="20" fill="url(#barFill)"/>
-  </g>
+    <g filter="url(#barDrop)">
+      <rect x="286" y="183" width="94" height="621" rx="20" fill="url(#barFill)"/>
+      <rect x="415" y="328" width="80" height="240" rx="18" fill="url(#barFill)"/>
+      <rect x="540" y="468" width="80" height="238" rx="18" fill="url(#barFill)"/>
+      <rect x="661" y="215" width="93" height="606" rx="20" fill="url(#barFill)"/>
+    </g>
 
-  <g opacity="0.45">
-    <rect x="291" y="188" width="84" height="12" rx="6" fill="#FFFFFF"/>
-    <rect x="420" y="333" width="70" height="10" rx="5" fill="#FFFFFF"/>
-    <rect x="545" y="473" width="70" height="10" rx="5" fill="#FFFFFF"/>
-    <rect x="666" y="220" width="83" height="12" rx="6" fill="#FFFFFF"/>
-  </g>
+    <g opacity="0.45">
+      <rect x="291" y="188" width="84" height="12" rx="6" fill="#FFFFFF"/>
+      <rect x="420" y="333" width="70" height="10" rx="5" fill="#FFFFFF"/>
+      <rect x="545" y="473" width="70" height="10" rx="5" fill="#FFFFFF"/>
+      <rect x="666" y="220" width="83" height="12" rx="6" fill="#FFFFFF"/>
+    </g>
 
-  <g opacity="0.18">
-    <rect x="291" y="788" width="84" height="10" rx="5" fill="#CAD2DC"/>
-    <rect x="420" y="552" width="70" height="9" rx="4.5" fill="#CAD2DC"/>
-    <rect x="545" y="690" width="70" height="9" rx="4.5" fill="#CAD2DC"/>
-    <rect x="666" y="805" width="83" height="10" rx="5" fill="#CAD2DC"/>
+    <g opacity="0.18">
+      <rect x="291" y="788" width="84" height="10" rx="5" fill="#CAD2DC"/>
+      <rect x="420" y="552" width="70" height="9" rx="4.5" fill="#CAD2DC"/>
+      <rect x="545" y="690" width="70" height="9" rx="4.5" fill="#CAD2DC"/>
+      <rect x="666" y="805" width="83" height="10" rx="5" fill="#CAD2DC"/>
+    </g>
   </g>
 </svg>
