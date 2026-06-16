@@ -11,8 +11,8 @@
       ELEVENLABS_API_KEY=sk_xxx node tools/gen-voices.mjs
 
   OPTIONAL overrides (any voice ID from your ElevenLabs library):
-      ELEVEN_VOICE_INT  voice for the Interviewer   (default: Lily,   warm British female)
-      ELEVEN_VOICE_PAR  voice for Ian (participant)  (default: George, warm British male)
+      ELEVEN_VOICE_INT  voice for the Interviewer   (default: lcMyyd2HUfFzxdCaC4Ta)
+      ELEVEN_VOICE_PAR  voice for Ian (participant)  (default: cjVigY5qzO86Huf0OWal)
       ELEVEN_MODEL      model id (default: eleven_multilingual_v2)
       ELEVEN_STABILITY  0=loose/casual … 1=flat/formal (default: 0.32)
       ELEVEN_STYLE      delivery expressiveness 0–1     (default: 0.45)
@@ -29,8 +29,8 @@ if (!KEY) {
   process.exit(1);
 }
 
-const VOICE_INT = process.env.ELEVEN_VOICE_INT || 'pFZP5JQG7iQjIQuC4Bku'; // Lily   · warm British female · Interviewer
-const VOICE_PAR = process.env.ELEVEN_VOICE_PAR || 'JBFqnCBsd6RMkjVDRZzb'; // George · warm British male   · Ian
+const VOICE_INT = process.env.ELEVEN_VOICE_INT || 'lcMyyd2HUfFzxdCaC4Ta'; // Interviewer
+const VOICE_PAR = process.env.ELEVEN_VOICE_PAR || 'cjVigY5qzO86Huf0OWal'; // Ian Turvue
 const MODEL     = process.env.ELEVEN_MODEL     || 'eleven_multilingual_v2';
 // Casual delivery: lower stability = looser/chattier, a bit more style = more character.
 const STABILITY = process.env.ELEVEN_STABILITY ? Number(process.env.ELEVEN_STABILITY) : 0.32;
