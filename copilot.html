@@ -14,6 +14,10 @@
   scripted interview plays back so it LOOKS real. Local capture (Granola
   model), no bot in the call. Linked to/from the client demo (v3.html); same
   design system (Fraunces / Inter / JetBrains Mono, brand navy, default dark).
+
+  Optional voiced playback: prefers hi-fi clips audio/line-NN.mp3 (render them
+  with tools/gen-voices.mjs via ElevenLabs), and falls back to the browser's
+  built-in Web Speech voices when the clips are not present.
   ════════════════════════════════════════════════════════════════════════
 -->
 <link rel="preconnect" href="https://fonts.bunny.net" />
@@ -466,7 +470,7 @@ let idx=0, playing=true, stepTimer=null, safetyTimer=null, secTimer=null, secs=0
 const stepsDone=new Set(), forcesDone=new Set();
 
 /* ── voice (Web Speech API): a different voice for the interviewer vs Ian ── */
-let soundOn=false, voiceInt=null, voicePar=null;
+let soundOn=false, voiceInt=null, voicePar=null, curAudio=null;
 const SS = window.speechSynthesis || null;
 function pickVoices(){
   if(!SS) return;
@@ -478,6 +482,7 @@ function pickVoices(){
 }
 if(SS){ pickVoices(); SS.onvoiceschanged=pickVoices; }
 function stopSpeech(){ if(SS){ try{SS.cancel();}catch(e){} } }
+function stopAudio(){ if(curAudio){ try{curAudio.pause();}catch(e){} curAudio=null; } }
 
 function fmt(s){return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0');}
 function tickSecs(){ secs++; $('recTime').textContent=fmt(secs); }
@@ -540,26 +545,30 @@ function runNext(){
   const e=SCRIPT[idx];
   showTyping(e.who);
   stepTimer=setTimeout(()=>{
-    hideTyping(); addLine(e.who,e.text); applyFx(e.fx); idx++; advance(e);
+    hideTyping(); addLine(e.who,e.text); applyFx(e.fx); const li=idx; idx++; advance(e, li);
   }, soundOn?360:760);
 }
-/* advance to the next line: paced by spoken audio when sound is on, by a timer otherwise */
-function advance(e){
+/* advance to the next line. Sound on: play the bundled hi-fi clip if present,
+   else speak with the OS voice; paced by whichever finishes. Sound off: timer. */
+function advance(e, li){
   const next=()=>{ if(playing) runNext(); };
-  if(soundOn && SS){
-    let moved=false;
-    const go=()=>{ if(moved)return; moved=true; clearTimeout(safetyTimer); stepTimer=setTimeout(next,240); };
+  if(!soundOn){ stepTimer=setTimeout(next, Math.min(4600, 1500 + e.text.length*20)); return; }
+  let moved=false, fellBack=false;
+  const go=()=>{ if(moved)return; moved=true; clearTimeout(safetyTimer); stepTimer=setTimeout(next,240); };
+  const speak=()=>{
+    if(fellBack)return; fellBack=true;
+    if(!SS){ go(); return; }
     const u=new SpeechSynthesisUtterance(e.text);
     if(e.who==='int'){ if(voiceInt)u.voice=voiceInt; u.rate=1.02; u.pitch=1.0; }
     else { if(voicePar)u.voice=voicePar; u.rate=1.0; u.pitch=0.92; }
     u.onend=go; u.onerror=go;
-    try{ SS.speak(u); }catch(err){ go(); return; }
-    /* safety: if onend never fires, advance on an estimated duration */
-    safetyTimer=setTimeout(go, Math.min(13000, 1900 + e.text.length*58));
-  } else {
-    const dwell=Math.min(4600, 1500 + e.text.length*20);
-    stepTimer=setTimeout(next, dwell);
-  }
+    try{ SS.speak(u); }catch(err){ go(); }
+  };
+  const a=new Audio(`audio/line-${String(li).padStart(2,'0')}.mp3`);
+  curAudio=a; a.onended=go; a.onerror=speak;
+  const p=a.play(); if(p&&p.catch) p.catch(speak);
+  /* safety: if neither the clip nor the fallback signals end, advance anyway */
+  safetyTimer=setTimeout(go, Math.min(25000, 3000 + e.text.length*78));
 }
 function done(){
   $('typing').classList.remove('on');
@@ -571,11 +580,11 @@ function togglePlay(){
   playing=!playing;
   $('playBtn').textContent=playing?'Pause':'Resume';
   document.body.classList.toggle('paused',!playing);
-  if(!playing){ clearTimeout(stepTimer); clearTimeout(safetyTimer); stopSpeech(); }
+  if(!playing){ clearTimeout(stepTimer); clearTimeout(safetyTimer); stopSpeech(); stopAudio(); }
   else { secTimer=secTimer||setInterval(tickSecs,1000); runNext(); }
 }
 function restart(){
-  clearTimeout(stepTimer); clearTimeout(safetyTimer); stopSpeech();
+  clearTimeout(stepTimer); clearTimeout(safetyTimer); stopSpeech(); stopAudio();
   idx=0; qn=0; secs=0; stepsDone.clear(); forcesDone.clear();
   document.querySelectorAll('.tline').forEach(n=>n.remove());
   document.querySelectorAll('.step.on').forEach(n=>{n.classList.remove('on');n.querySelector('.squote').textContent='';});
@@ -592,10 +601,10 @@ function toggleSound(){
   soundOn=!soundOn;
   const b=$('soundBtn');
   if(soundOn){ b.classList.add('on'); $('soundLbl').textContent='Sound on'; restart(); }
-  else { b.classList.remove('on'); $('soundLbl').textContent='Play with sound'; stopSpeech(); }
+  else { b.classList.remove('on'); $('soundLbl').textContent='Play with sound'; stopSpeech(); stopAudio(); }
 }
 function endInterview(){
-  playing=false; clearTimeout(stepTimer); clearTimeout(safetyTimer); stopSpeech(); $('playBtn').textContent='Resume';
+  playing=false; clearTimeout(stepTimer); clearTimeout(safetyTimer); stopSpeech(); stopAudio(); $('playBtn').textContent='Resume';
   const t=$('toast');
   t.innerHTML='✓ Synthesis sent to the Progress loop. <a href="v3.html">Open in Noetic Mind →</a>';
   t.classList.add('on'); setTimeout(()=>t.classList.remove('on'),4200);
