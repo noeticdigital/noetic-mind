@@ -11,9 +11,11 @@
       ELEVENLABS_API_KEY=sk_xxx node tools/gen-voices.mjs
 
   OPTIONAL overrides (any voice ID from your ElevenLabs library):
-      ELEVEN_VOICE_INT  voice for the Interviewer   (default: Alice,  British female)
-      ELEVEN_VOICE_PAR  voice for Ian (participant)  (default: Daniel, British male)
+      ELEVEN_VOICE_INT  voice for the Interviewer   (default: Lily,   warm British female)
+      ELEVEN_VOICE_PAR  voice for Ian (participant)  (default: George, warm British male)
       ELEVEN_MODEL      model id (default: eleven_multilingual_v2)
+      ELEVEN_STABILITY  0=loose/casual … 1=flat/formal (default: 0.32)
+      ELEVEN_STYLE      delivery expressiveness 0–1     (default: 0.45)
 
   Needs Node 18+ (global fetch). ~16 short lines, a few thousand characters total.
 */
@@ -27,9 +29,12 @@ if (!KEY) {
   process.exit(1);
 }
 
-const VOICE_INT = process.env.ELEVEN_VOICE_INT || 'Xb7hH8MSUJpSbSDYk0k2'; // Alice  · British female · Interviewer
-const VOICE_PAR = process.env.ELEVEN_VOICE_PAR || 'onwK4e9ZLuTAKqWW03F9'; // Daniel · British male   · Ian
+const VOICE_INT = process.env.ELEVEN_VOICE_INT || 'pFZP5JQG7iQjIQuC4Bku'; // Lily   · warm British female · Interviewer
+const VOICE_PAR = process.env.ELEVEN_VOICE_PAR || 'JBFqnCBsd6RMkjVDRZzb'; // George · warm British male   · Ian
 const MODEL     = process.env.ELEVEN_MODEL     || 'eleven_multilingual_v2';
+// Casual delivery: lower stability = looser/chattier, a bit more style = more character.
+const STABILITY = process.env.ELEVEN_STABILITY ? Number(process.env.ELEVEN_STABILITY) : 0.32;
+const STYLE     = process.env.ELEVEN_STYLE     ? Number(process.env.ELEVEN_STYLE)     : 0.45;
 
 const here    = path.dirname(new URL(import.meta.url).pathname);
 const htmlPath = path.join(here, '..', 'copilot.html');
@@ -51,7 +56,7 @@ async function tts(text, voice, file) {
       body: JSON.stringify({
         text,
         model_id: MODEL,
-        voice_settings: { stability: 0.45, similarity_boost: 0.8, style: 0.15, use_speaker_boost: true },
+        voice_settings: { stability: STABILITY, similarity_boost: 0.75, style: STYLE, use_speaker_boost: true },
       }),
     }
   );
