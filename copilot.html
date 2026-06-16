@@ -472,6 +472,7 @@ const stepsDone=new Set(), forcesDone=new Set();
 /* ── voice (Web Speech API): a different voice for the interviewer vs Ian ── */
 let soundOn=false, voiceInt=null, voicePar=null, curAudio=null;
 const SS = window.speechSynthesis || null;
+const AUDIO_CB = Date.now();   // cache-bust the clips so a re-render is always heard
 function pickVoices(){
   if(!SS) return;
   const vs=SS.getVoices(); if(!vs.length) return;
@@ -564,7 +565,7 @@ function advance(e, li){
     u.onend=go; u.onerror=go;
     try{ SS.speak(u); }catch(err){ go(); }
   };
-  const a=new Audio(`audio/line-${String(li).padStart(2,'0')}.mp3`);
+  const a=new Audio(`audio/line-${String(li).padStart(2,'0')}.mp3?cb=${AUDIO_CB}`);
   curAudio=a; a.onended=go; a.onerror=speak;
   const p=a.play(); if(p&&p.catch) p.catch(speak);
   /* safety: if neither the clip nor the fallback signals end, advance anyway */
