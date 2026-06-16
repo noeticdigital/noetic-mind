@@ -68,8 +68,7 @@ a{color:inherit;text-decoration:none}
 .menubar{height:30px;display:flex;align-items:center;gap:18px;padding:0 16px;font-size:12.5px;color:#cfd5e0;
   background:rgba(10,13,19,.6);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.05);position:relative;z-index:10}
 .menubar .mb-app{display:flex;align-items:center;gap:8px;font-weight:600}
-.menubar .mb-app .mg{width:15px;height:15px;border-radius:4px;background:radial-gradient(circle at 30% 30%,#3f7cc0,#0a1a38);
-  display:grid;place-items:center;font-family:var(--font-serif);font-size:9px;font-weight:600;color:#fff}
+.menubar .mb-app .mg{width:17px;height:17px;display:block}
 .menubar .mi{color:#9aa3b2;font-weight:500}
 .menubar .mb-spacer{flex:1}
 .menubar .mb-stat{display:flex;align-items:center;gap:7px;font-family:var(--font-mono);font-size:11px;color:#9aa3b2}
@@ -277,7 +276,7 @@ html:not(.dark) .btn.primary{background:#1c1a17;color:#faf8f2}
 <body>
 
 <div class="menubar">
-  <div class="mb-app"><span class="mg">N</span> Noetic Copilot</div>
+  <div class="mb-app"><img class="mg" src="noetic-logo.svg" alt="Noetic"> Noetic Copilot</div>
   <span class="mi">File</span><span class="mi">Interview</span><span class="mi">View</span><span class="mi">Help</span>
   <div class="mb-spacer"></div>
   <button class="mb-link mb-sound" id="soundBtn" onclick="toggleSound()" title="Play the interview audio (uses your Mac's voices)">

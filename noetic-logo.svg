@@ -1,10 +1,56 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2000 2000" width="2000" height="2000" role="img" aria-label="Noetic logo">
-  <rect width="2000" height="2000" fill="#000000"/>
-  <g fill="#ffffff" stroke="#ffffff">
-    <circle cx="1000" cy="1000" r="641" fill="none" stroke-width="43"/>
-    <rect x="756" y="660" width="96" height="675" rx="18"/>
-    <rect x="1149" y="665" width="95" height="674" rx="18"/>
-    <rect x="897" y="807" width="80" height="244" rx="17"/>
-    <rect x="1023" y="950" width="79" height="243" rx="17"/>
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="navy" x1="190" y1="130" x2="840" y2="890" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#16396E"/>
+      <stop offset="0.52" stop-color="#0B2A56"/>
+      <stop offset="1" stop-color="#061B3A"/>
+    </linearGradient>
+
+    <radialGradient id="topLight" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(360 230) rotate(50) scale(620 700)">
+      <stop offset="0" stop-color="#2A528B" stop-opacity="0.42"/>
+      <stop offset="0.5" stop-color="#153B70" stop-opacity="0.12"/>
+      <stop offset="1" stop-color="#071C3B" stop-opacity="0"/>
+    </radialGradient>
+
+    <linearGradient id="barFill" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="0.65" stop-color="#FBFBFB"/>
+      <stop offset="1" stop-color="#EEF1F5"/>
+    </linearGradient>
+
+    <filter id="iconShadow" x="70" y="60" width="884" height="914" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="24" stdDeviation="28" flood-color="#061225" flood-opacity="0.26"/>
+    </filter>
+
+    <filter id="barDrop" x="-18%" y="-10%" width="136%" height="128%" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="9" stdDeviation="6" flood-color="#031126" flood-opacity="0.36"/>
+    </filter>
+  </defs>
+
+  <g filter="url(#iconShadow)">
+    <rect x="116" y="88" width="792" height="824" rx="104" fill="url(#navy)"/>
+    <rect x="116" y="88" width="792" height="824" rx="104" fill="url(#topLight)"/>
+    <rect x="117.5" y="89.5" width="789" height="821" rx="102.5" stroke="#284C7B" stroke-opacity="0.32" stroke-width="3"/>
+  </g>
+
+  <g filter="url(#barDrop)">
+    <rect x="286" y="183" width="94" height="621" rx="20" fill="url(#barFill)"/>
+    <rect x="415" y="328" width="80" height="240" rx="18" fill="url(#barFill)"/>
+    <rect x="540" y="468" width="80" height="238" rx="18" fill="url(#barFill)"/>
+    <rect x="661" y="215" width="93" height="606" rx="20" fill="url(#barFill)"/>
+  </g>
+
+  <g opacity="0.45">
+    <rect x="291" y="188" width="84" height="12" rx="6" fill="#FFFFFF"/>
+    <rect x="420" y="333" width="70" height="10" rx="5" fill="#FFFFFF"/>
+    <rect x="545" y="473" width="70" height="10" rx="5" fill="#FFFFFF"/>
+    <rect x="666" y="220" width="83" height="12" rx="6" fill="#FFFFFF"/>
+  </g>
+
+  <g opacity="0.18">
+    <rect x="291" y="788" width="84" height="10" rx="5" fill="#CAD2DC"/>
+    <rect x="420" y="552" width="70" height="9" rx="4.5" fill="#CAD2DC"/>
+    <rect x="545" y="690" width="70" height="9" rx="4.5" fill="#CAD2DC"/>
+    <rect x="666" y="805" width="83" height="10" rx="5" fill="#CAD2DC"/>
   </g>
 </svg>

@@ -66,7 +66,7 @@ html.dark{
   --grad-hi:#1a2029; --grad-lo:#11151c;
   --topbar-bg:rgba(16,20,27,.82);
 }
-html.dark .brand .glyph{background:radial-gradient(circle at 30% 30%,#3f7cc0,#0a1a38)}
+html.dark .brand .glyph{background:none}
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%}
 body{font-family:var(--font-sans);background:var(--paper);color:var(--ink);font-size:14px;line-height:1.5;
@@ -84,8 +84,9 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .brand .glyph{width:30px;height:30px;border-radius:8px;flex:none;
   background:radial-gradient(circle at 30% 30%,#2f6fb0,#0a1a38);display:grid;place-items:center;color:#fff;
   box-shadow:var(--shadow-sm);position:relative;overflow:hidden;font-family:var(--font-serif);font-size:16px;font-weight:600}
-.brand .glyph::after{content:"";position:absolute;inset:0;
-  background:conic-gradient(from 200deg,transparent,rgba(255,255,255,.35),transparent 60%)}
+.brand .glyph{background:none;box-shadow:none;overflow:visible}
+.brand .glyph::after{display:none}
+.brand .glyph img{width:32px;height:32px;display:block}
 .brand .name{font-weight:600;font-size:15px;letter-spacing:-.02em}
 .brand .ver{font-size:10px;color:var(--muted);font-family:var(--font-mono);margin-top:1px}
 
@@ -238,7 +239,7 @@ html.dark .theme-btn .ico-moon{display:none}
   <!-- ───────── rail ───────── -->
   <aside class="rail">
     <div class="brand">
-      <div class="glyph">N</div>
+      <div class="glyph"><img src="noetic-logo.svg" width="30" height="30" alt="Noetic"></div>
       <div><div class="name">Noetic Mind</div><div class="ver">internal · toolbox</div></div>
     </div>
 
