@@ -1339,25 +1339,25 @@ var VIEW_ONLY = (function(){try{return /(?:^|[?&])share=reasoning(?:&|$)/.test(l
       <button class="proj-btn" onclick="toggleProjMenu(event)" aria-haspopup="true" aria-expanded="false">
         <span class="proj-dot"></span>
         <span class="proj-txt">
-          <span class="proj-name">Quench</span>
-          <span class="proj-sub">Daily hydration habit</span>
+          <span class="proj-name">MTPROJ</span>
+          <span class="proj-sub">New project</span>
         </span>
         <svg class="proj-caret" width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
       <div class="proj-menu" id="projMenu" role="menu">
         <div class="proj-menu-lab">Projects</div>
         <button class="proj-opt active" role="menuitem" onclick="closeProjMenu()">
-          <span class="proj-dot"></span><span class="po-txt"><b>Quench</b> · Daily hydration habit</span>
+          <span class="proj-dot"></span><span class="po-txt"><b>MTPROJ</b> · New project</span>
           <svg class="po-check" width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3.5 8.5l3 3 6-6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
+        <a class="proj-opt" role="menuitem" href="v3.html">
+          <span class="proj-dot muted"></span><span class="po-txt"><b>Quench</b> · Daily hydration habit</span><span class="po-soon">demo</span>
+        </a>
         <a class="proj-opt" role="menuitem" href="v3-ledgerline.html">
           <span class="proj-dot muted"></span><span class="po-txt"><b>Ledgerline</b> · Bank-feed activation</span><span class="po-soon">demo</span>
         </a>
         <a class="proj-opt" role="menuitem" href="v3-klptproj.html">
           <span class="proj-dot muted"></span><span class="po-txt"><b>KLPTPROJ</b> · New project</span><span class="po-soon">demo</span>
-        </a>
-        <a class="proj-opt" role="menuitem" href="v3-mtproj.html">
-          <span class="proj-dot muted"></span><span class="po-txt"><b>MTPROJ</b> · New project</span><span class="po-soon">demo</span>
         </a>
         <div class="proj-menu-sep"></div>
         <button class="proj-opt new" role="menuitem" disabled>＋ New discovery project</button>
@@ -1418,7 +1418,7 @@ var VIEW_ONLY = (function(){try{return /(?:^|[?&])share=reasoning(?:&|$)/.test(l
       <div class="rail-acct-wrap" id="acctWrap">
         <button class="rail-acct" onclick="toggleAcctMenu(event)" title="Account &amp; settings" aria-haspopup="true" aria-expanded="false">
           <span class="avatar sm">DD</span>
-          <span class="acct-txt"><span class="acct-name">Demo Davis</span><span class="acct-role">Product · Quench</span></span>
+          <span class="acct-txt"><span class="acct-name">Demo Davis</span><span class="acct-role">Product · MTPROJ</span></span>
           <svg class="acct-caret" width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M4 10l4-4 4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
         <div class="acct-menu" id="acctMenu" role="menu">
@@ -1443,7 +1443,7 @@ var VIEW_ONLY = (function(){try{return /(?:^|[?&])share=reasoning(?:&|$)/.test(l
   <main class="main">
     <div class="topbar">
       <div class="crumbs">
-        <span class="proj">Quench · Daily Hydration Habit</span>
+        <span class="proj">MTPROJ · New Project</span>
         <span class="sep">/</span>
         <span class="here" id="crumbHere">Progress-to-Outcome Tree</span>
       </div>
@@ -1579,7 +1579,7 @@ var VIEW_ONLY = (function(){try{return /(?:^|[?&])share=reasoning(?:&|$)/.test(l
 <div class="walk-scrim" id="walkScrim">
   <div class="walk-banner" id="walkBanner">
     <span class="vb-brand"><span class="vb-dot"></span>Noetic</span>
-    <span style="color:var(--muted)">View-only · shared by the Quench team · made with Noetic</span>
+    <span style="color:var(--muted)">View-only · shared by the MTPROJ team · made with Noetic</span>
   </div>
   <div class="walk-top">
     <div>
@@ -1617,7 +1617,7 @@ var VIEW_ONLY = (function(){try{return /(?:^|[?&])share=reasoning(?:&|$)/.test(l
       <div class="ch-glyph">
         <svg viewBox="0 0 2000 2000" width="16" height="16" fill="#fff" aria-hidden="true"><circle cx="1000" cy="1000" r="641" fill="none" stroke="#fff" stroke-width="120"/><rect x="756" y="660" width="96" height="675" rx="18"/><rect x="1149" y="665" width="95" height="674" rx="18"/><rect x="897" y="807" width="80" height="244" rx="17"/><rect x="1023" y="950" width="79" height="243" rx="17"/></svg>
       </div>
-      <div class="ch-title">Ask Noetic <span class="ch-proj">· Quench project</span></div>
+      <div class="ch-title">Ask Noetic <span class="ch-proj">· MTPROJ project</span></div>
     </div>
     <button class="ch-close" onclick="closeChat()" aria-label="Close chat">
       <svg width="14" height="14" viewBox="0 0 16 16"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
@@ -1630,7 +1630,7 @@ var VIEW_ONLY = (function(){try{return /(?:^|[?&])share=reasoning(?:&|$)/.test(l
   <div class="ask-context" id="askContext" style="display:none"></div>
   <div class="chat-body" id="chatBody"></div>
   <div class="chat-foot">
-    <textarea class="chat-input" id="chatInput" rows="1" placeholder="Ask about Quench…" oninput="chatAutogrow(this)" onkeydown="chatKey(event)"></textarea>
+    <textarea class="chat-input" id="chatInput" rows="1" placeholder="Ask about MTPROJ…" oninput="chatAutogrow(this)" onkeydown="chatKey(event)"></textarea>
     <button class="chat-send" id="chatSend" onclick="chatSubmit()" aria-label="Send">
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2.5 8h9M8 4.5L11.5 8 8 11.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </button>
@@ -1693,7 +1693,7 @@ var VIEW_ONLY = (function(){try{return /(?:^|[?&])share=reasoning(?:&|$)/.test(l
 </aside>
 
 <script>
-/* ════════════════════════════ DATA, Project "Quench" ════════════════════════════
+/* ════════════════════════════ DATA, Project "MTPROJ" ════════════════════════════
    A reusable water bottle with a tiny companion app that helps people actually
    drink enough water. The team chases week-1 trial-to-paid conversion (hit your
    daily water goal on 4+ of your first 7 days): 34% → 55%, serving the business
@@ -1731,7 +1731,7 @@ const NODES = {
     }},
   outcome:{kind:'Desired Outcome', lead:true, ev:'validated',
     h:'Lift week-1 trial-to-paid conversion from 34% to 55%',
-    d:'% of new owners who upgrade their free trial to a paid Quench+ plan within their first 7 days.',
+    d:'% of new owners who upgrade their free trial to a paid MTPROJ+ plan within their first 7 days.',
     detail:{
       grounding:'Grounded in a progress hypothesis: owners who build the water habit in week one feel the value and upgrade to paid; those who leave the bottle empty in a cupboard churn. A supply-side outcome, sign-ups and purchases, driven by the demand-side habit.',
       type:'Product outcome, a controllable conversion the team owns (not the business revenue, not a vanity metric). Negotiated with leadership.',
@@ -2224,7 +2224,7 @@ const LOOP_TITLES = {
 /* mark project-variable data tokens (names, %s, test IDs, sample sizes) inside a freshly
    rendered screen with .var, so the pink overlay covers content that changes per project.
    Skips anything already inside a .var/.field/.field-help (those are marked at source). */
-const VAR_RE = /(Ian Turvue|Leo Brandt|Priya Raman|Quench|\bIan\b|\bLeo\b|\bPriya\b|TC-0\d|n=\d+|\b\d+ of \d+\b|\b\d+\/\d+\b|\b\d+\.\d+×|\b\d+×|\b\d{1,3}%|\b\d+-day\b|\bQ[1-4]\b|\bWk\s?\d+\b)/g;
+const VAR_RE = /(Ian Turvue|Leo Brandt|Priya Raman|MTPROJ|\bIan\b|\bLeo\b|\bPriya\b|TC-0\d|n=\d+|\b\d+ of \d+\b|\b\d+\/\d+\b|\b\d+\.\d+×|\b\d+×|\b\d{1,3}%|\b\d+-day\b|\bQ[1-4]\b|\bWk\s?\d+\b)/g;
 function markVariables(root){
   if(!root) return;
   const SKIP=new Set(['SCRIPT','STYLE','BUTTON','TEXTAREA','INPUT','SVG','PATH']);
@@ -2468,7 +2468,7 @@ const BUILDERS = {
     <div class="forces">
       <div class="force push"><div class="f-h"><span class="f-arrow">→</span>Push (away from today)</div>
         <ul><li>Afternoon headache and brain fog.</li><li>Guilt at another day with no water.</li><li>Old bottles sat empty in a cupboard.</li></ul></div>
-      <div class="force pull"><div class="f-h"><span class="f-arrow">←</span>Pull (toward Quench)</div>
+      <div class="force pull"><div class="f-h"><span class="f-arrow">←</span>Pull (toward MTPROJ)</div>
         <ul><li>Feeling clear-headed and energetic.</li><li>Staying hydrated without thinking.</li><li>Being someone who looks after themselves.</li></ul></div>
       <div class="force anxiety"><div class="f-h">⚠ Anxiety (of switching)</div>
         <ul><li>“I always forget within a week.”</li><li>“My old bottles sat empty in a cupboard.”</li><li>Worried a new habit won’t stick.</li></ul></div>
@@ -2955,7 +2955,7 @@ function paintWalk(){
 
 /* ════════════════════════════ PROJECT CHAT (Feature A) ════════════════════════════
    A contained, project-scoped Claude-style chat. Streams canned, intent-matched
-   intelligence keyed to Quench facts. All state in JS, no network. */
+   intelligence keyed to MTPROJ facts. All state in JS, no network. */
 const CHAT_PROMPTS = [
   "What's the next step?",
   "Why was the glowing cap killed?",
@@ -2987,7 +2987,7 @@ const CHAT_BANK = [
   { id:'causal', kw:['causal','system','what must be true','chain','control factor','noise'],
     a:`Before any solution we mapped the causal system right-to-left: hitting the goal needs regular drinking → regular drinking needs a cue at the right moment → the cue needs the bottle within reach and drinking to feel easy and a bit rewarding. Control factors include when the cue fires, bottle within reach, and progress feedback; noise includes weather and how busy the day is. See the <b>Causal Learning loop</b>.` },
   { id:'summary', kw:['summarise','summarize','summary','overview','catch me up','where are we','project status','tldr','brief me'],
-    a:`Quench owns one number, <b>week-1 trial→paid conversion 34% → 55%</b> (validated, serving day-90 retention). The Job is proven: make staying hydrated effortless. The crowned opportunity is <b>the missing-cue gap</b>, and the bet is a <b>habit-anchor nudge</b> scoped to the morning-coffee moment. We killed two wrong answers cheaply (streaks &amp; badges, glowing smart cap). The weakest belief is in test now via <b>TC-08</b> (57% vs 50% bar), that's the next step.` },
+    a:`MTPROJ owns one number, <b>week-1 trial→paid conversion 34% → 55%</b> (validated, serving day-90 retention). The Job is proven: make staying hydrated effortless. The crowned opportunity is <b>the missing-cue gap</b>, and the bet is a <b>habit-anchor nudge</b> scoped to the morning-coffee moment. We killed two wrong answers cheaply (streaks &amp; badges, glowing smart cap). The weakest belief is in test now via <b>TC-08</b> (57% vs 50% bar), that's the next step.` },
 ];
 /* Socratic field guides, "Ask Noetic" interviews the user to fill an input field, then drafts it.
    Each: targetId (the .field to write into), the requirement, an intro, ordered steps (with suggested
@@ -3060,7 +3060,7 @@ function chatMatch(q){
     if(s>bestScore){ bestScore=s; best=e; }
   });
   if(best) return best.a;
-  return `Here's what I can tell you about the Quench project: we're driving <b>week-1 trial-to-paid conversion from 34% to 55%</b> by anchoring the first drink to a habit people already have. Ask me about the next step, what's proven, the weakest belief, or why we killed the glowing cap, or open the <b>Delivery &amp; Impact loop</b> to see the live test.`;
+  return `Here's what I can tell you about the MTPROJ project: we're driving <b>week-1 trial-to-paid conversion from 34% to 55%</b> by anchoring the first drink to a habit people already have. Ask me about the next step, what's proven, the weakest belief, or why we killed the glowing cap, or open the <b>Delivery &amp; Impact loop</b> to see the live test.`;
 }
 
 let chatMode='general', askState=null;
@@ -3072,7 +3072,7 @@ function openChat(){
   panel.classList.remove('center');
   document.getElementById('askScrim').classList.remove('on');
   document.getElementById('askContext').style.display='none';
-  document.getElementById('chatInput').placeholder='Ask about Quench…';
+  document.getElementById('chatInput').placeholder='Ask about MTPROJ…';
   panel.classList.add('open');
   document.getElementById('chatFab').classList.add('hidden');
   if(!chatThread.length) renderChatEmpty();
@@ -3190,7 +3190,7 @@ function fhelp(key,label){ return `<button class="field-help" onclick="askNoetic
 function renderChatEmpty(){
   const body=document.getElementById('chatBody');
   body.innerHTML = `<div class="chat-msg assistant"><span class="cm-who">Noetic</span>
-      <div class="cm-bubble">I'm scoped to the <b>Quench</b> discovery project. Ask me where we are, what's proven, or what to do next.</div></div>
+      <div class="cm-bubble">I'm scoped to the <b>MTPROJ</b> discovery project. Ask me where we are, what's proven, or what to do next.</div></div>
     <div><div class="chat-empty-lead">Try one of these:</div>
       <div class="chat-chips">${CHAT_PROMPTS.map(p=>`<button class="chat-chip" onclick="chatChip(this)">${p}</button>`).join('')}</div></div>`;
 }
@@ -3262,7 +3262,7 @@ function chatStreamAnswer(html, after){
    Distinct from "Show the reasoning" (Feature C), which is a self-contained deck. */
 const GUIDE = [
   { title:'The one number we own',
-    body:`Welcome. This is the Quench discovery project. Every team here owns a single <b>product outcome</b>, and ours is one number: lift week-1 trial-to-paid conversion from <b>34% to 55%</b>.`,
+    body:`Welcome. This is the MTPROJ discovery project. Every team here owns a single <b>product outcome</b>, and ours is one number: lift week-1 trial-to-paid conversion from <b>34% to 55%</b>.`,
     result:{k:'Where we are',v:`The outcome is <b>validated</b>, ratified with leadership, serving day-90 retention.`,
             next:`Next: see who we're building for.`},
     run:()=>goLoop('outcome'),
