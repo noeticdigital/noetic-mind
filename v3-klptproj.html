@@ -1340,14 +1340,14 @@ var VIEW_ONLY = (function(){try{return /(?:^|[?&])share=reasoning(?:&|$)/.test(l
         <span class="proj-dot"></span>
         <span class="proj-txt">
           <span class="proj-name">KLPTPROJ</span>
-          <span class="proj-sub">New project</span>
+          <span class="proj-sub">Visual capture for learners</span>
         </span>
         <svg class="proj-caret" width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
       <div class="proj-menu" id="projMenu" role="menu">
         <div class="proj-menu-lab">Projects</div>
         <button class="proj-opt active" role="menuitem" onclick="closeProjMenu()">
-          <span class="proj-dot"></span><span class="po-txt"><b>KLPTPROJ</b> · New project</span>
+          <span class="proj-dot"></span><span class="po-txt"><b>KLPTPROJ</b> · Visual capture for learners</span>
           <svg class="po-check" width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3.5 8.5l3 3 6-6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
         <a class="proj-opt" role="menuitem" href="v3.html">
@@ -1406,10 +1406,10 @@ var VIEW_ONLY = (function(){try{return /(?:^|[?&])share=reasoning(?:&|$)/.test(l
         <span class="rail-nba-caret">▾</span>
       </button>
       <div class="rail-nba-body" id="nbaBody">
-        <div class="meter sz-sm" data-state="suggestive" style="margin-bottom:8px" title="Emerging, some signal, not yet load-bearing"><span class="seg"></span><span class="seg"></span><span class="seg"></span><span class="seg"></span></div>
-        <div class="rail-nba-belief">“Tie the first drink to a habit people already have, and they’ll hit their water goal in week one.”</div>
-        <div class="rail-nba-test">Smallest test: <b>TC-08, habit-anchor nudge</b> · 40 new owners · threshold locked.</div>
-        <button class="btn btn-primary rail-nba-btn" onclick="openNBATest()">Open test card →</button>
+        <div class="meter sz-sm" data-state="assumption" style="margin-bottom:8px" title="Assumption, no weight yet, the value risk"><span class="seg"></span><span class="seg"></span><span class="seg"></span><span class="seg"></span></div>
+        <div class="rail-nba-belief">“Losing on-screen visual content hurts enough that people will switch to, or pay for, a tool that solves it.”</div>
+        <div class="rail-nba-test">First test: <b>≈15 JTBD switch interviews</b> · watch whether visual-content loss surfaces unprompted.</div>
+        <button class="btn btn-primary rail-nba-btn" onclick="openNBATest()">Open first test →</button>
       </div>
     </div>
 
@@ -1443,7 +1443,7 @@ var VIEW_ONLY = (function(){try{return /(?:^|[?&])share=reasoning(?:&|$)/.test(l
   <main class="main">
     <div class="topbar">
       <div class="crumbs">
-        <span class="proj">KLPTPROJ · New Project</span>
+        <span class="proj">KLPTPROJ · Definition Phase</span>
         <span class="sep">/</span>
         <span class="here" id="crumbHere">Progress-to-Outcome Tree</span>
       </div>
@@ -1472,13 +1472,13 @@ var VIEW_ONLY = (function(){try{return /(?:^|[?&])share=reasoning(?:&|$)/.test(l
 
     <!-- Cadence ribbon -->
     <div class="cadence">
-      <span class="wk">WEEK 24 · 2026</span>
-      <div class="cad-item cad-done"><span class="cad-dot"></span>Interview logged, Ian (Tue)</div>
-      <div class="cad-item cad-done"><span class="cad-dot"></span>Tree reviewed</div>
-      <div class="cad-item cad-now"><span class="cad-dot"></span>1 test in flight, TC-08</div>
-      <div class="cad-item cad-todo"><span class="cad-dot"></span>Impact review (Fri)</div>
+      <span class="wk">DEFINITION PHASE</span>
+      <div class="cad-item cad-done"><span class="cad-dot"></span>Brief &amp; frame captured</div>
+      <div class="cad-item cad-done"><span class="cad-dot"></span>Desk research logged</div>
+      <div class="cad-item cad-now"><span class="cad-dot"></span>Scope &amp; budget to sign</div>
+      <div class="cad-item cad-todo"><span class="cad-dot"></span>Recruit ≈15 interviews</div>
       <div class="cad-spacer"></div>
-      <span class="cad-quarter">Q2 outcome negotiation · 18 days</span>
+      <span class="cad-quarter">Value risk · first to test</span>
     </div>
 
     <!-- ───────── VIEW ───────── -->
@@ -1693,13 +1693,18 @@ var VIEW_ONLY = (function(){try{return /(?:^|[?&])share=reasoning(?:&|$)/.test(l
 </aside>
 
 <script>
-/* ════════════════════════════ DATA, Project "KLPTPROJ" ════════════════════════════
-   A reusable water bottle with a tiny companion app that helps people actually
-   drink enough water. The team chases week-1 trial-to-paid conversion (hit your
-   daily water goal on 4+ of your first 7 days): 34% → 55%, serving the business
-   outcome of keeping owners using the bottle past day 90. One internally-consistent
-   example with evidence at varied states, one KILLED belief and one FAILED test
-   framed as a cheap win. */
+/* ════════════════════════════ DATA, Project "KLPT" ════════════════════════════
+   KLPT — a zero-touch screen-observation capture tool for learners. It watches the
+   screen during video lectures, recorded talks and online courseware and captures a
+   clean image of each slide or visual the moment it changes, pairing it with a running
+   transcript and AI notes. Name: homonym for "clipped"; backronym for Knowledge Library
+   for Pictures and Text. It is NOT a meeting notetaker.
+   This is the DEFINITION PHASE. Almost nothing here is validated. The supply spine is
+   recorded as revisable hypotheses; the demand spine is deliberately thin, because
+   filling it with real customer progress is the entire point of the research that follows.
+   Every node is a belief to be put under load, not a finding. Evidence states: ASSUMPTION
+   (team belief) and a few DESK-supported market signals. Nothing is validated or killed
+   yet — no interviews have been run. */
 
 const EV = {
   assumption:{label:'Assumption',cls:'ev-assumption'},
@@ -1718,119 +1723,132 @@ function pill(state){
 
 /* Tree nodes, keyed, positioned on the two-spine convergent canvas */
 const NODES = {
-  framing:{kind:'Framing Assumptions', ev:'suggestive',
-    h:'People who build the water habit in week one are the ones who stick with it',
-    d:'Supply-side frame: building the water habit early is the controllable driver of paid conversion.',
+  framing:{kind:'Framing Assumptions', ev:'assumption',
+    h:'Visual knowledge gets trapped inside educational video and courseware',
+    d:'Supply-side frame: the diagram, worked example and chart on screen are lost because transcript-first tools don’t preserve them.',
     detail:{
-      grounding:'We assume the chain runs: a cue at the right moment → regular drinking → the habit sticks in week one → owners upgrade to a paid plan and stay. If the chain is wrong, the outcome below is wrong.',
-      type:'Framing assumption, held consciously, revisable.',
+      grounding:'We assume the chain runs: learners hit something visual that matters during a lecture → screenshotting, cropping, labelling and filing it is too much effort → so the knowledge is lost the moment the slide changes. If that struggle isn’t real, the outcome below is wrong. Held consciously, recorded so it can be challenged rather than absorbed.',
+      type:'Framing assumption, supply-side, revisable. [ASSUMPTION]',
       evidence:[
-        ['cohort','Launch cohort: owners who built the habit in week 1 converted to paid 2.7× more often.'],
-        ['caveat','Correlation so far, causal direction not yet isolated.'],
+        ['desk','Slid’s reviewers openly describe their prior manual routines, screenshot, crop, paste into folders with separate note files. Secondary, not primary. [DESK]'],
+        ['caveat','No customer interview data yet. The whole point of the research is to confirm or kill this. [TO VALIDATE]'],
       ],
     }},
-  outcome:{kind:'Desired Outcome', lead:true, ev:'validated',
-    h:'Lift week-1 trial-to-paid conversion from 34% to 55%',
-    d:'% of new owners who upgrade their free trial to a paid KLPTPROJ+ plan within their first 7 days.',
+  outcome:{kind:'Desired Outcome', lead:true, ev:'assumption',
+    h:'Learners retain and reuse the visual knowledge locked inside educational video',
+    d:'…without the manual labour of screenshotting, cropping, labelling and filing it themselves. Held as a hypothesis, not a north star.',
     detail:{
-      grounding:'Grounded in a progress hypothesis: owners who build the water habit in week one feel the value and upgrade to paid; those who leave the bottle empty in a cupboard churn. A supply-side outcome, sign-ups and purchases, driven by the demand-side habit.',
-      type:'Product outcome, a controllable conversion the team owns (not the business revenue, not a vanity metric). Negotiated with leadership.',
-      baseline:'34% of new owners convert to a paid plan in week 1 (launch cohort, n=418).',
-      target:'55% by end of Q3. Learning-goal mode until the habit driver is validated.',
+      grounding:'A supply-side hypothesis. If the interviews reveal the felt job is something adjacent, “pass an assessment I can’t resit,” or “build a personal reference I trust at work”, the outcome is revised to match the demand, not defended.',
+      type:'Desired outcome, held as a revisable hypothesis. Validated demand carries the authority to rewrite it. [ASSUMPTION, TO VALIDATE]',
+      baseline:'No product metric yet, KLPT has no measured discovery cohort. Recorded honestly as a starting belief.',
+      target:'To be set once the felt job is confirmed. Until then this is a north-star hypothesis, watched for cracks.',
       evidence:[
-        ['cohort','Owners who build the habit in week 1 convert to paid 2.7× more often.'],
-        ['leadership','Outcome ratified in Q2 negotiation, the team owns the metric, not a roadmap.'],
+        ['hypothesis','The product owner’s intent, plus desk research into the surrounding market. Carries no authority over the tree until the market says otherwise.'],
+        ['challenge','If visual-content loss doesn’t surface unprompted across the interviews, the wedge, and this outcome, fail. A cheap, early answer worth a fortnight.'],
       ],
     }},
-  jtbd:{kind:'Job to be Done · Timeline & Forces', ev:'validated',
-    h:'“Make staying hydrated effortless, so I feel clear and look after myself.”',
-    d:'When mid-afternoon hits and they’ve barely had any water, people want staying hydrated to become automatic, to feel clear and energetic. The job, its timeline, and its forces are one demand picture.',
+  jtbd:{kind:'Job to be Done · candidate', ev:'assumption',
+    h:'“Capture the visual that matters so the knowledge survives past the moment it appeared.”',
+    d:'A candidate job hypothesis. The timeline and the four forces are deliberately empty, they are the deliverable of the research, not of this seed.',
     detail:{
-      grounding:'Job statement (full grammar): When I get to mid-afternoon and notice I’ve barely had any water, foggy, headachy, a bit guilty, I want staying hydrated to become automatic, so I can feel clear-headed and energetic and be the kind of person who looks after themselves.',
-      type:'Motivations, functional (become hydrated, kill the afternoon slump), emotional (feel clear, refreshed, less guilty), social/identity (a healthy, self-caring person; reusable not throwaway plastic). Timeline, the struggle concentrates in the afternoon, when they realise the day’s gone by without water. Forces, push (afternoon headache/fog, guilt) and pull (feeling clear and energetic) are strong; anxiety (“I always forget,” “my old bottles sat empty in a cupboard”) and habit (reaching for coffee instead) hold them back.',
+      grounding:'Candidate job statement: When a learner is working through video or courseware and hits something visual that matters, a slide, diagram, worked example, they want to capture it faithfully and find it again later, so the knowledge survives past the moment it appeared on screen.',
+      type:'A candidate structure only, to be confirmed, reshaped or discarded by the data. The forces, push (struggle that made screenshotting intolerable), pull (what they hired), anxiety (price, trust, capture quality), habit (their existing method), are currently empty and will be reconstructed on a timeline from real switches. [ASSUMPTION, TO VALIDATE]',
       evidence:[
-        ['14 interviews','Recurs in 11 of 14 progress interviews of real past attempts.'],
-        ['behavior','People who kept a bottle within arm’s reach drank 3.2× more often.'],
-        ['quotes','“I buy a lovely bottle, use it for three days, then it lives at the back of a cupboard.”, Ian, operations manager'],
-        ['signal','Drop-off concentrates in the afternoon, when the day’s gone by without water.'],
+        ['to populate','Forces of progress are empty. The interviews exist to fill them. [TO VALIDATE]'],
+        ['segments','Two candidate populations, students and lifelong learners / professionals. A hypothesis to break, not a bucket to fill: if both describe the same job, the split collapses. [TO VALIDATE]'],
       ],
     }},
-  oppTarget:{kind:'Target Opportunity', ev:'suggestive', target:true,
-    h:'“Drinking water stays a good intention because nothing reminds me at the moment I’d actually drink.”',
-    d:'The forgetting / missing-cue gap · demand high × ability to win high.',
+  oppTarget:{kind:'Candidate Opportunity · lead', ev:'assumption', firstTest:true,
+    h:'“Visual knowledge from lectures is lost because transcript-first tools don’t preserve it well.”',
+    d:'The value-risk candidate · the wedge, and the first thing the interviews must confirm or kill.',
     detail:{
-      grounding:'A customer-framed struggling moment, not a feature. Passed all five admission tests. The missing cue, not the bottle itself, is the struggle.',
-      type:'Timeline moment: through the day → forgetting to drink.',
+      grounding:'A candidate opportunity, not a confirmed one. Logged to be confirmed only if it surfaces, unprompted, while learners reconstruct their last capture experience. If it does not, that is the cheap, early answer.',
+      type:'Candidate struggling moment. Carries the highest-risk belief: that losing on-screen visual content hurts enough to switch or pay. [TO VALIDATE]',
       evidence:[
-        ['recurrence','Named, unprompted, in 8 of 14 interviews.'],
-        ['severity','Sits exactly on the week-1 drop-off.'],
-        ['win','We control the cue surface (cap + app) end-to-end, high ability to win.'],
+        ['weakest belief','This is the value risk, the weakest load-bearing belief in the whole project.'],
+        ['discipline','No one mentions slide capture or pitches KLPT in the interview. If the loss is real, learners raise it themselves.'],
       ],
     }},
-  opp2:{kind:'Opportunity', ev:'assumption',
-    h:'“Plain water is boring, so I reach for something with flavour.”',
-    d:'Taste moment, parked this cycle.',
+  opp2:{kind:'Candidate Opportunity', ev:'assumption',
+    h:'“Manual capture, screenshot, crop, label, file, is high-effort and I abandon it.”',
+    d:'Candidate · the effort of the do-it-yourself routine.',
     detail:{
-      grounding:'People skip water for something with flavour, but this is downstream of the forgetting problem: they only reach for a drink once something reminds them.',
-      type:'Timeline moment: the taste moment. Real but not addressable this cycle, parked.',
-      evidence:[['interviews','Named in 5 of 14 interviews, but downstream of the forgetting problem.']],
+      grounding:'Workaround builders, manual screenshot-and-file routines, are the highest-value recruits because they have a real, datable story of sacrifice.',
+      type:'Candidate struggling moment, to be confirmed by the data. [TO VALIDATE]',
+      evidence:[['desk','Slid reviewers describe exactly this manual routine before they switched. [DESK]']],
     }},
-  opp3:{kind:'Opportunity', ev:'assumption',
-    h:'“When my routine breaks, the habit collapses.”',
-    d:'Travel/busy weeks, split later.',
+  opp3:{kind:'Candidate Opportunity', ev:'assumption',
+    h:'“Captured material is hard to find again later, when I actually need it.”',
+    d:'Candidate · retrieval, the “Library” half of the backronym.',
     detail:{
-      grounding:'A travel or busy week wipes out the young habit before it takes hold, a retention risk later in life.',
-      type:'Timeline moment: routine breaks. Large and hard, will be split into sub-opportunities.',
-      evidence:[['interviews','Recurs among week-3+ owners; weak signal in new owners.']],
+      grounding:'Capture is only half the job; a learner has to find it again when the knowledge is needed, in revision, at work, before an assessment.',
+      type:'Candidate struggling moment, to be confirmed by the data. [TO VALIDATE]',
+      evidence:[['to validate','Unconfirmed. Watch whether retrieval pain surfaces unprompted.']],
     }},
-  causal:{kind:'Causal System', ev:'suggestive',
-    h:'What must be true for someone to hit their water goal in week one',
-    d:'Inputs → process → outputs → outcome · the slim bridge where spines converge.',
+  opp4:{kind:'Candidate Opportunity', ev:'assumption',
+    h:'“Existing paid tools frustrate me on price and capture quality.”',
+    d:'Candidate · the switch away from incumbents like Slid.',
     detail:{
-      grounding:'Mapped before any solution. Control factors: when the cue fires, bottle within reach, how easy/pleasant drinking feels, progress feedback. Noise: weather, how busy the day is, how thirsty someone naturally runs.',
-      type:'Lead measure: % of days a person drinks at their anchor moment. Lag: week-1 trial→paid conversion.',
+      grounding:'Slid’s reviews show real dissatisfaction with subscription price and complaints about lag and screenshot quality. Recent switchers carry the richest causal stories.',
+      type:'Candidate struggling moment, desk-sourced. [DESK, TO VALIDATE]',
+      evidence:[['desk','App Store / Chrome Web Store reviews on price and capture quality. [DESK]']],
+    }},
+  opp5:{kind:'Candidate Opportunity', ev:'assumption',
+    h:'“The value of capture is concentrated in a single course, enough to pay per course.”',
+    d:'Candidate · the single-course willingness-to-pay question. Shapes the whole pricing spine.',
+    detail:{
+      grounding:'Is the pain concentrated enough in one course to open a wallet, or only meaningful cumulatively across many? This is the second-weakest belief after value risk.',
+      type:'Candidate struggling moment, drives the business-model hypothesis. [TO VALIDATE]',
+      evidence:[['business risk','Single-course, low-price indie economics rest on this. [TO VALIDATE]']],
+    }},
+  causal:{kind:'Causal System · to map', ev:'assumption',
+    h:'What would have to be true for captured visual knowledge to survive and be reused',
+    d:'A candidate skeleton only. The real map gets drawn once demand lands, before any solution is committed.',
+    detail:{
+      grounding:'Mapped before solution design, but the real version waits on validated demand. Candidate control factors: when a capture fires, how clean the captured image is, how findable it is later. Candidate noise: the messy variety of video players and courseware, the learner’s own filing discipline.',
+      type:'To be reconstructed from the demand spine. Lead and lag measures undecided until the felt job is confirmed. [ASSUMPTION]',
       evidence:[
-        ['model','Right-to-left: hitting the goal needs regular drinking → regular drinking needs a cue at the right moment → the cue needs the bottle within reach and drinking to feel easy and a bit rewarding.'],
+        ['placeholder','Right-to-left, candidate: knowledge survives → it was captured cleanly and is findable → capture fired automatically at the moment the visual mattered. Hypothesis only.'],
       ],
     }},
-  belief:{kind:'Belief under test', ev:'suggestive', weakest:true,
-    h:'Tie the first drink to a habit people already have and they’ll hit their goal in week one',
-    d:'The weakest belief the increment rests on. TC-08 in flight.',
+  belief:{kind:'Weakest belief · value risk', ev:'assumption', weakest:true,
+    h:'Losing on-screen visual content hurts enough that people will switch to, or pay for, a tool that solves it',
+    d:'The highest-risk, load-bearing belief. Untested. The first thing the interviews go after.',
     detail:{
-      grounding:'If the first drink is anchored to making their morning coffee, the cue fires reliably, the habit starts, and people hit their water goal in week one.',
-      type:'Desirability + causal-effectiveness assumption.',
+      grounding:'Cagan’s value risk, named highest. If this does not surface unprompted across the interviews, the wedge fails. Everything else waits on it.',
+      type:'Value risk (highest). No test run yet, the interviews are the test. [TO VALIDATE]',
       evidence:[
-        ['signal','Concierge test: 7 of 10 people who anchored drinking to their coffee hit their goal that week (bar was 6/10).'],
-        ['gap','Not yet behavioral at scale, TC-08 measures the self-serve nudge over 40 new owners.'],
+        ['no data','Nothing measured yet. The ~15 JTBD switch interviews are designed to confirm or kill this first.'],
+        ['cheap answer','If learners don’t raise visual-content loss themselves, that’s a fortnight spent, not a roadmap.'],
       ],
     }},
-  solA:{kind:'Solution · Product', ev:'suggestive', solType:'PRODUCT',
-    h:'Habit-anchor nudge in the app',
-    d:'Pair the first drink with your morning coffee; a simple progress ring through the day.',
-    detail:{grounding:'Causal theory: the cue fires reliably when it’s tied to a habit people already have, not left to willpower.',type:'Product path.',evidence:[['concierge','10-person concierge test: 7/10 hit their goal vs 6/10 bar, validated the coffee anchor.']]}},
-  solB:{kind:'Solution · Service', ev:'assumption', solType:'SERVICE',
-    h:'A 7-day human hydration coach',
-    d:'A real person texts you reminders and check-ins for your first week.',
-    detail:{grounding:'Causal theory: a real person nudging in real time beats any app for building a new habit, tests willingness, not scalability yet.',type:'Service path.',evidence:[['untested','No behavioral evidence yet, pure assumption.']]}},
-  solC:{kind:'Solution · Hybrid', ev:'killed', solType:'HYBRID',
-    h:'Glowing smart cap that reminds you',
-    d:'A cap that lights up when it’s time to drink.',
-    detail:{grounding:'Hypothesis: a light on the bottle reminds you to drink. KILLED, a win: people ignored or covered the light; it never changed how much they drank.',type:'Hybrid path.',evidence:[['killed','TC-05 fake-door: only 9% of “glow reminder” sign-ups still wanted it after a week (bar 30%).']]}},
-  increment:{kind:'Increment & Impact', ev:'assumption',
-    h:'Habit-anchor nudge, the morning-coffee moment only',
-    d:'The focussed half of the product path, scoped to one moment.',
+  solA:{kind:'Solution · Product', ev:'assumption', solType:'PRODUCT',
+    h:'Zero-touch automatic capture',
+    d:'Observe the screen, detect each slide/visual change, capture a clean image automatically, no decision to keep required.',
+    detail:{grounding:'Core mechanic: capture is zero-touch, distinct from one-click tools (e.g. Slid) that make the user decide what to keep. That gap is itself a thing to test, the act of choosing what to keep may be part of the job for some learners.',type:'Product path. Usability risk lives here. [ASSUMPTION, TO VALIDATE]',evidence:[['feasibility','Reliable slide-change detection across the messy variety of real players is unproven. [ASSUMPTION]']]}},
+  solB:{kind:'Solution · Product', ev:'assumption', solType:'PRODUCT',
+    h:'Live Notes — captures paired with transcript & AI notes',
+    d:'Each captured image paired with a running transcript and AI-generated notes.',
+    detail:{grounding:'Live Notes exists and performs reasonably in early use; the product owner describes the underlying process as in its infancy.',type:'Product path. Feasibility risk, immature. [ASSUMPTION]',evidence:[['early','Promising but immature, no evidence at scale. [ASSUMPTION]']]}},
+  solC:{kind:'Solution · Growth track', ev:'assumption', solType:'PARKED',
+    h:'Server-side ingestion of public talks → UGC library',
+    d:'A server-side capture pipeline ingests public TED / YouTube lectures to generate library content automatically.',
+    detail:{grounding:'A distribution idea, not a demand hypothesis. Deliberately PARKED outside the validation work so it doesn’t muddy what we’re learning about the core job. Fair use needs a proper legal look before anything ships.',type:'Growth track, parked until the core job is confirmed. [ASSUMPTION, PARKED]',evidence:[['parked','Revisit once the core job holds. Fair-use review required before build.']]}},
+  increment:{kind:'Discovery Increment', ev:'assumption',
+    h:'≈15 JTBD switch interviews, value risk first',
+    d:'The increment this cycle is the research itself, not a product build.',
     detail:{
-      grounding:'Included: anchor the first drink to morning coffee, a one-tap “done,” a simple progress ring, an instrumented anchor-moment measure. Excluded, on purpose: full gamification & streaks, social sharing, flavour subscription, multi-goal tracking, smart-cap hardware.',
-      type:'Better + faster over cheaper, we’re buying a clean habit signal in one cycle.',
-      evidence:[['rationale','Smallest thing that can move the lead measure (drinks at the anchor moment) and be read in one cycle.']],
+      grounding:'Included: ~15 switch interviews of recent, real decisions, 8 recent payers (2–3 from Slid), 4 effortful workaround builders, 3 recent cancellers; recruit on demonstrated sacrifice, not payment alone. Excluded, on purpose: the UGC / TED-ingestion track (parked), and any panel spend before the scope-and-budget document is signed.',
+      type:'Better evidence over speed, we’re buying a clean read on the value risk before anything is built.',
+      evidence:[['rationale','The smallest thing that can confirm or kill the value risk and be read in a fortnight. No recruitment spend ahead of sign-off.']],
     }},
-  impact:{kind:'Impact (4 levels)', ev:'assumption',
-    h:'Assumption → opportunity → product outcome → business outcome',
-    d:'Expected ladder for this increment. Instrumented at release.',
+  impact:{kind:'Risk ladder · what we learn', ev:'assumption',
+    h:'Value → usability → feasibility → business viability',
+    d:'Cagan’s four risks, ordered weakest-first. The discovery targets the value risk before the rest.',
     detail:{
-      grounding:'Four-level impact ladder, expected vs actual measured each cycle: drinks at the anchor moment → fewer “forgot to drink” days → week-1 trial→paid conversion (34→55%) → day-90 retention.',
-      type:'Currently projected, increment not yet shipped.',
-      evidence:[['plan','Lead measure wired before launch; lag measure (week-1 trial→paid conversion) read at cycle close; retention read next quarter.']],
+      grounding:'Four-risk ladder, attacked in order of weakest load-bearing belief: value (does the loss hurt enough to switch/pay) → usability (is zero-touch a relief or a loss of control) → feasibility (clean slide-change detection across messy players) → business viability (single-course low-price economics + cheap acquisition).',
+      type:'A learning ladder, not an impact projection, nothing is shipped. [ASSUMPTION]',
+      evidence:[['plan','Value risk read first from the interviews; the rest sequenced behind it, each only when its predecessor holds.']],
     }},
 };
 
@@ -1838,30 +1856,30 @@ const NODES = {
    a centered modal listing its members. Members keep their full NODES data. */
 const CATS = {
   opportunities:{
-    kind:'Opportunities', badge:'3 · 1 target',
-    h:'Struggling moments, organised by timeline',
-    d:'Three live opportunities, one crowned target. Open to compare demand × ability to win.',
-    ev:'suggestive',                      // inherits the crowned target's state
-    target:true,                          // show the crown on the tree node
-    members:['oppTarget','opp2','opp3'],
+    kind:'Candidate Opportunities', badge:'5 candidates · none crowned',
+    h:'Candidate struggling moments, to be extracted from real progress',
+    d:'Five candidates, none confirmed. Each is logged only as a belief; the interviews decide which survive. Open to compare.',
+    ev:'assumption',                      // all candidates are assumptions in the definition phase
+    target:false,                         // no crown yet, nothing validated
+    members:['oppTarget','opp2','opp3','opp4','opp5'],
   },
   solutions:{
-    kind:'Solutions', badge:'3 paths',
-    h:'Three materially different paths',
-    d:'Product, service, and a killed hybrid. Open to compare the evidence behind each.',
-    ev:'suggestive',
+    kind:'Solutions', badge:'2 product · 1 parked',
+    h:'Candidate solution directions',
+    d:'Two product bets (zero-touch capture, Live Notes) and a parked growth track. Open to compare the load-bearing belief behind each.',
+    ev:'assumption',
     summary:'sol',                        // render a stacked-meter summary
     members:['solA','solB','solC'],
   },
   tests:{
-    kind:'Assumption Tests', badge:'2 cards · TC-08 in flight',
-    h:'Riskiest assumptions, threshold-locked',
-    d:'TC-08 is in flight (57% vs 50% bar). TC-05 was killed as a cheap win.', // numbers kept as-is
-    ev:'suggestive',
+    kind:'Assumption Tests · none run', badge:'value risk · first to test',
+    h:'Riskiest assumptions, weakest-first',
+    d:'No tests have been run yet. The value risk is named as the weakest load-bearing belief; the ~15 interviews are the first test.',
+    ev:'assumption',
     weakest:true,                         // the load-bearing layer
-    flight:true,
-    members:['belief'],                   // belief is the weakest, surfaced as TC-08 context
-    cards:['tc08','tc05'],
+    flight:false,
+    members:['belief'],                   // belief is the value risk, surfaced as the first test
+    cards:['tcValue'],
   },
 };
 
@@ -1981,8 +1999,8 @@ function renderTree(){
   const exW=232, exX=Math.round(TREE_W/2-exW/2-130), exY=16;   // top, a touch left of centre
   c.insertAdjacentHTML('beforeend',
     `<div class="ext-card" style="left:${exX}px;top:${exY}px;width:${exW}px" onclick="goLoop('define')" tabindex="0" role="button" title="Open the Define / Foundation view" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();goLoop('define')}">
-      <div class="exc-kind">External context</div>
-      <div class="exc-h">Docs, web, social signals &amp; a model challenge</div>
+      <div class="exc-kind">External context · desk</div>
+      <div class="exc-h">Slid reviews, adjacent tools &amp; market timing</div>
       <div class="exc-foot">sharpens the frame · not evidence</div>
     </div>`);
   const exH=c.querySelector('.ext-card').offsetHeight;
@@ -2102,32 +2120,23 @@ function openCategory(catKey){
     </button>`;
   });
 
-  /* Tests category: show the two test-card summaries instead of raw beliefs */
+  /* Tests category: show the planned first test + the value-risk belief */
   if(catKey==='tests'){
     rows = `<button class="cat-row" onclick="closeCategory();openNBATest()">
-      <span class="cr-meter">${meter('suggestive')}</span>
+      <span class="cr-meter">${meter('assumption')}</span>
       <span class="cr-main">
-        <span class="cr-kind">TC-08 · in flight <span class="cr-crown" style="color:var(--amber-ink);background:var(--ev-suggestive-bg)">⚠ load-bearing</span></span>
-        <span class="cr-h">Habit-anchor nudge, drink when you make your morning coffee</span>
-        <span class="cr-d">Threshold ≥ 50% locked before results · currently 57% (23/40 logged), trending above bar.</span>
-        <span class="cr-view">Open in Delivery loop →</span>
-      </span>
-    </button>
-    <button class="cat-row" onclick="closeCategory();openNBATest()">
-      <span class="cr-meter">${meter('killed')}</span>
-      <span class="cr-main">
-        <span class="cr-kind">TC-05 · closed</span>
-        <span class="cr-h">Glowing smart-cap reminder, killed as a cheap win</span>
-        <span class="cr-d">Only 9% still wanted it after a week vs a 30% bar. Path closed before a line of production code.</span>
+        <span class="cr-kind">TC-V · planned <span class="cr-crown" style="color:var(--amber-ink);background:var(--ev-suggestive-bg)">⚠ value risk</span></span>
+        <span class="cr-h">Does visual-content loss surface unprompted in the interviews?</span>
+        <span class="cr-d">Success signal set before results · 0 of ≈15 run. The interviews are the test.</span>
         <span class="cr-view">Open in Delivery loop →</span>
       </span>
     </button>
     <button class="cat-row" onclick="openCategoryMember('belief')">
-      <span class="cr-meter">${meter('suggestive')}</span>
+      <span class="cr-meter">${meter('assumption')}</span>
       <span class="cr-main">
-        <span class="cr-kind">The belief under test</span>
-        <span class="cr-h">Tie the first drink to a habit people already have and they’ll hit their goal in week one</span>
-        <span class="cr-d">The weakest belief the increment rests on, what TC-08 is measuring.</span>
+        <span class="cr-kind">The weakest belief</span>
+        <span class="cr-h">Losing on-screen visual content hurts enough that people will switch to, or pay for, a tool that solves it</span>
+        <span class="cr-d">Cagan’s value risk, named highest. Untested, everything else waits on it.</span>
         <span class="cr-view">View detail →</span>
       </span>
     </button>`;
@@ -2136,9 +2145,9 @@ function openCategory(catKey){
   document.getElementById('catBody').innerHTML = rows;
 
   let foot = `<span class="cf-note">Click any member to open its full detail.</span>`;
-  if(catKey==='opportunities') foot = `<span class="cf-note">Crowned target sits top-right of demand × ability to win.</span><button class="btn btn-ghost btn-sm" onclick="closeCategory();goLoop('opportunity')">Open opportunity space →</button>`;
-  else if(catKey==='solutions') foot = `<span class="cf-note">Three paths · one killed as a cheap save.</span><button class="btn btn-ghost btn-sm" onclick="closeCategory();goLoop('delivery')">See in Delivery loop →</button>`;
-  else if(catKey==='tests') foot = `<span class="cf-note">Thresholds locked before results.</span><button class="btn btn-primary btn-sm" onclick="closeCategory();openNBATest()">Open TC-08 →</button>`;
+  if(catKey==='opportunities') foot = `<span class="cf-note">No candidate is crowned, the interviews decide which survive.</span><button class="btn btn-ghost btn-sm" onclick="closeCategory();goLoop('opportunity')">Open opportunity space →</button>`;
+  else if(catKey==='solutions') foot = `<span class="cf-note">Two product bets · one parked growth track. Nothing tested.</span><button class="btn btn-ghost btn-sm" onclick="closeCategory();goLoop('delivery')">See in Delivery loop →</button>`;
+  else if(catKey==='tests') foot = `<span class="cf-note">Success signal set before results.</span><button class="btn btn-primary btn-sm" onclick="closeCategory();openNBATest()">Open the first test →</button>`;
   document.getElementById('catFoot').innerHTML = foot;
 
   document.getElementById('catScrim').classList.add('open');
@@ -2224,7 +2233,7 @@ const LOOP_TITLES = {
 /* mark project-variable data tokens (names, %s, test IDs, sample sizes) inside a freshly
    rendered screen with .var, so the pink overlay covers content that changes per project.
    Skips anything already inside a .var/.field/.field-help (those are marked at source). */
-const VAR_RE = /(Ian Turvue|Leo Brandt|Priya Raman|KLPTPROJ|\bIan\b|\bLeo\b|\bPriya\b|TC-0\d|n=\d+|\b\d+ of \d+\b|\b\d+\/\d+\b|\b\d+\.\d+×|\b\d+×|\b\d{1,3}%|\b\d+-day\b|\bQ[1-4]\b|\bWk\s?\d+\b)/g;
+const VAR_RE = /(KLPTPROJ|\bKLPT\b|\bSlid\b|\bOtter\b|\bGranola\b|\bPaul\b|\bTED\b|TC-[A-Za-z0-9]+|n=\d+|\b\d+ of \d+\b|\b\d+\/\d+\b|\b\d+\.\d+×|\b\d+×|\b\d{1,3}%|\b\d+-day\b|\bQ[1-4]\b|\bWk\s?\d+\b|≈?15 interviews|\$\d+[–-]\d+)/g;
 function markVariables(root){
   if(!root) return;
   const SKIP=new Set(['SCRIPT','STYLE','BUTTON','TEXTAREA','INPUT','SVG','PATH']);
@@ -2332,7 +2341,7 @@ const BUILDERS = {
       <h1 class="h1">Your project brief</h1>
       <p class="lede">What you bring before discovery starts: the change you want, who you think struggles, and why. Noetic interviews you to capture it, so the loops open from a sharp, stated hypothesis instead of a blank page. Everything here is a hypothesis the loops will test, not proof.</p>
     </div>
-    ${concierge('assumption', `<span class="cc-step">Whose thinking this is:</span> yours, the client's, captured as a <b>working frame</b>. Noetic interviewed you to set it; external context only points at <b>where to look</b>. <span class="cc-step">Next:</span> the Progress loop tests it against real interviews.`)}
+    ${concierge('assumption', `<span class="cc-step">Whose thinking this is:</span> the product owner's intent plus desk research, captured as a <b>working frame</b>. Under bias-in-bias-out, it carries <b>no authority over the tree</b> until the market says otherwise. <span class="cc-step">Next:</span> the Progress loop fills the demand spine with real switch interviews.`)}
 
     <div class="jtbd-actions">
       <button class="btn btn-primary btn-sm" onclick="askNoetic('brief')">
@@ -2346,66 +2355,60 @@ const BUILDERS = {
     <div class="grid g-2">
       <div class="card">
         <div class="card-t">Framing assumption<span class="ct-line"></span></div>
-        <p class="serif" style="font-size:16px;line-height:1.5;color:var(--ink)"><span class="field var" id="f-define-frame" contenteditable="true" spellcheck="false">People who build the water habit in week one are the ones who stick with it, so early habit is the controllable driver of paid conversion.</span></p>
-        <div style="margin-top:9px">${meter('suggestive')} <span style="font-size:11px;color:var(--muted);margin-left:6px">your hypothesis, held consciously, will be tested</span> ${fhelp('brief','Have Noetic interview you')}</div>
-        <div class="card-t" style="margin-top:18px">Direction from leadership<span class="ct-line"></span></div>
-        <p style="font-size:13.5px;line-height:1.55;color:var(--ink-2)">Lower 90-day churn of new bottle owners (the business outcome). The team owns the <i>how</i>, and derives the product outcome that serves it (see the Outcome loop).</p>
+        <p class="serif" style="font-size:16px;line-height:1.5;color:var(--ink)"><span class="field var" id="f-define-frame" contenteditable="true" spellcheck="false">Visual knowledge gets trapped inside educational video and courseware, the diagram, the worked example, the chart, none of which a transcript-first tool preserves. KLPT captures it automatically.</span></p>
+        <div style="margin-top:9px">${meter('assumption')} <span style="font-size:11px;color:var(--muted);margin-left:6px">a working frame, held consciously, will be tested, not absorbed</span> ${fhelp('brief','Have Noetic interview you')}</div>
+        <div class="card-t" style="margin-top:18px">Product owner's intent<span class="ct-line"></span></div>
+        <p style="font-size:13.5px;line-height:1.55;color:var(--ink-2)">Paul holds the product vision and the budget. The desired outcome, learners retain and reuse the visual knowledge locked in lectures without screenshotting and filing it themselves, is held as a <i>hypothesis</i>, revised to match demand once the interviews land (see the Outcome loop).</p>
       </div>
       <div class="card inset">
         <div class="card-t">Constraints<span class="ct-line"></span></div>
-        <p style="font-size:13px;color:var(--ink-2);line-height:1.5">One delivery cycle. No new hardware. Must be measurable at release.</p>
+        <p style="font-size:13px;color:var(--ink-2);line-height:1.5">English-first. Indie product economics, priced so it’s worth buying even for a single course. A scope-and-budget document is agreed in writing, and a 50% invoice issued, before any panel spend. No recruitment spend ahead of sign-off.</p>
         <div class="card-t" style="margin-top:16px">Non-goals<span class="ct-line"></span></div>
         <ul style="list-style:none;font-size:13px;line-height:1.5">
-          <li style="padding:4px 0 4px 16px;position:relative;color:var(--ink-2)"><span style="position:absolute;left:0;color:var(--muted)">×</span>Full gamification &amp; streaks.</li>
-          <li style="padding:4px 0 4px 16px;position:relative;color:var(--ink-2)"><span style="position:absolute;left:0;color:var(--muted)">×</span>Social sharing &amp; flavour subscription.</li>
-          <li style="padding:4px 0 4px 16px;position:relative;color:var(--ink-2)"><span style="position:absolute;left:0;color:var(--muted)">×</span>Smart-cap hardware (parked, real-but-later).</li>
+          <li style="padding:4px 0 4px 16px;position:relative;color:var(--ink-2)"><span style="position:absolute;left:0;color:var(--muted)">×</span>It is <b>not</b> a meeting notetaker, and won’t be positioned as one.</li>
+          <li style="padding:4px 0 4px 16px;position:relative;color:var(--ink-2)"><span style="position:absolute;left:0;color:var(--muted)">×</span>The UGC / TED-ingestion growth track (parked, fair-use review first).</li>
+          <li style="padding:4px 0 4px 16px;position:relative;color:var(--ink-2)"><span style="position:absolute;left:0;color:var(--muted)">×</span>Designing for Japan (an unweighted screener signal only, for now).</li>
         </ul>
       </div>
     </div>
 
-    <div class="section-rule"><span class="sr-n">0.2</span><h2 class="serif">External context</h2><span class="sr-line"></span><span class="mono" style="font-size:11px;color:var(--muted)">what sharpens the frame</span></div>
-    <div class="ext-note"><b>A weak, supply-side signal.</b> It points us at where to look and what to stress-test, never what's true. The frame stays an <b>Assumption</b> until interviews say otherwise.</div>
+    <div class="section-rule"><span class="sr-n">0.2</span><h2 class="serif">External context · desk research</h2><span class="sr-line"></span><span class="mono" style="font-size:11px;color:var(--muted)">what sharpens the frame</span></div>
+    <div class="ext-note"><b>A weak, supply-side signal.</b> It points us at where to look and who to recruit, never what's true. The frame stays an <b>Assumption</b> until the interviews say otherwise. [DESK]</div>
     <div class="grid g-3">
       <div class="card">
-        <div class="card-t">Docs &amp; web<span class="ct-line"></span></div>
-        <div class="ext-item"><span class="ext-ico">PDF</span><span>3 habit-formation studies extracted. Key line: <b>habits anchored to an existing routine stick 2 to 3× better</b>.</span></div>
-        <div class="ext-item"><span class="ext-ico">WEB</span><span>Searches for "how to remember to drink water" up <b>40% YoY</b>.</span></div>
+        <div class="card-t">Closest analogue<span class="ct-line"></span></div>
+        <div class="ext-item"><span class="ext-ico">SLID</span><span><b>Slid</b> captures slides while watching online videos, with transcription and AI notes. Reviews show real dissatisfaction with <b>price</b> and complaints about <b>lag and screenshot quality</b>. One-click; KLPT is automatic.</span></div>
+        <div class="ext-item"><span class="ext-ico">WEB</span><span>Slid’s reviewers describe their prior <b>manual routines</b>, screenshot, crop, file, the highest-value recruits.</span></div>
       </div>
       <div class="card">
-        <div class="card-t">Social signals <span class="ext-weak">weak</span><span class="ct-line"></span></div>
-        <div class="ext-item"><span class="ext-ico">SOC</span><span>Forums &amp; bottle reviews repeat one phrase: <b>"I forget it exists, it lives in a cupboard."</b></span></div>
-        <div class="ext-item"><span class="ext-ico">SOC</span><span>Aggregate and unprompted, with no real story behind it. A hint, not evidence.</span></div>
+        <div class="card-t">Adjacent incumbents<span class="ct-line"></span></div>
+        <div class="ext-item"><span class="ext-ico">MTG</span><span><b>Otter</b> now auto-captures slides <i>inside meetings</i>, so automatic capture is table stakes there. KLPT’s territory is everything a bot can’t join: LMS players, YouTube, courseware.</span></div>
+        <div class="ext-item"><span class="ext-ico">STU</span><span>Student tools (Turbo&nbsp;AI, Coconote, Mindgrasp, StudyFetch) charge <b>~£20/mo</b>, students do pay in this space.</span></div>
       </div>
       <div class="card">
-        <div class="card-t">Challenge the frame<span class="ct-line"></span></div>
-        <p style="font-size:12.5px;color:var(--ink-2);line-height:1.5;margin:0 0 8px">Four models red-teamed the starting frame.</p>
-        <div class="ext-item"><span class="ext-ico">3/4</span><span><b>Consensus:</b> the missing cue is the gap, a reminder needs an anchor.</span></div>
-        <div class="ext-item"><span class="ext-ico">1/4</span><span><b>Dissent:</b> taste, not memory, may be the real barrier. Both became things to test.</span></div>
+        <div class="card-t">Timing signal<span class="ct-line"></span></div>
+        <p style="font-size:12.5px;color:var(--ink-2);line-height:1.5;margin:0 0 8px">Why now is a good moment to recruit.</p>
+        <div class="ext-item"><span class="ext-ico">2026</span><span><b>Google Meet</b> began blocking third-party notetaker bots by default in early 2026, a wave of fresh, datable cancellations and switches.</span></div>
+        <div class="ext-item"><span class="ext-ico">!</span><span>Rich supply of recent switchers makes the study cheap to recruit.</span></div>
       </div>
     </div>
 
-    <div class="section-rule"><span class="sr-n">0.3</span><h2 class="serif">Who we're studying</h2><span class="sr-line"></span><span class="mono" style="font-size:11px;color:var(--muted)">demand segments, by shared Job not personas</span></div>
-    <div class="grid g-3">
+    <div class="section-rule"><span class="sr-n">0.3</span><h2 class="serif">Who we're studying</h2><span class="sr-line"></span><span class="mono" style="font-size:11px;color:var(--muted)">candidate segments, a hypothesis to break</span></div>
+    <div class="ext-note">Two populations are named as a <b>hypothesis to pressure-test</b>, not a settled segmentation. If both describe the same job, the split collapses and shouldn’t drive the roadmap. If they differ, that divergence is the segmentation, earned from data. [TO VALIDATE]</div>
+    <div class="grid g-2">
       <div class="card">
-        <div class="card-t" style="color:var(--ev-suggestive)">The afternoon-slump worker<span class="ct-line"></span></div>
-        <p style="font-size:13px;color:var(--ink-2);line-height:1.5">At a desk; realises mid-afternoon they've had no water and feel foggy.</p>
-        <div class="fes"><span class="fes-k func">Functional</span>clear the fog</div>
-        <div class="fes"><span class="fes-k emo">Emotional</span>feel sharp, less guilty</div>
-        <div class="fes"><span class="fes-k soc">Social</span>someone who looks after themselves</div>
+        <div class="card-t" style="color:var(--ev-assumption)">Students<span class="ct-line"></span></div>
+        <p style="font-size:13px;color:var(--ink-2);line-height:1.5">Working through recorded lectures and courseware; an assessment may be on the line.</p>
+        <div class="fes"><span class="fes-k func">Functional</span>keep the visual that matters</div>
+        <div class="fes"><span class="fes-k emo">Emotional</span>not lose it when the slide changes</div>
+        <div class="fes"><span class="fes-k soc">Social</span>a learner who’s on top of it</div>
       </div>
       <div class="card">
-        <div class="card-t">The serial restarter<span class="ct-line"></span></div>
-        <p style="font-size:13px;color:var(--ink-2);line-height:1.5">Has bought lovely bottles before; they sit empty within a week.</p>
-        <div class="fes"><span class="fes-k func">Functional</span>actually keep the habit</div>
-        <div class="fes"><span class="fes-k emo">Emotional</span>stop feeling like a quitter</div>
-        <div class="fes"><span class="fes-k soc">Social</span>prove they can stick with it</div>
-      </div>
-      <div class="card">
-        <div class="card-t">The on-the-go forgetter<span class="ct-line"></span></div>
-        <p style="font-size:13px;color:var(--ink-2);line-height:1.5">Mobile and busy (nurse, parent); no desk, no cue, no fixed moment.</p>
-        <div class="fes"><span class="fes-k func">Functional</span>drink without thinking</div>
-        <div class="fes"><span class="fes-k emo">Emotional</span>not crash on a long day</div>
-        <div class="fes"><span class="fes-k soc">Social</span>model good habits</div>
+        <div class="card-t">Lifelong learners / professionals doing courses<span class="ct-line"></span></div>
+        <p style="font-size:13px;color:var(--ink-2);line-height:1.5">Building a personal reference they trust, from webinars, talks and online courses.</p>
+        <div class="fes"><span class="fes-k func">Functional</span>build a reference they reuse</div>
+        <div class="fes"><span class="fes-k emo">Emotional</span>trust they can find it again</div>
+        <div class="fes"><span class="fes-k soc">Social</span>capable at their work</div>
       </div>
     </div>
   </div>`; },
@@ -2417,7 +2420,7 @@ const BUILDERS = {
       <h1 class="h1">Understand the progress people are trying to make</h1>
       <p class="lede">Continuous JTBD interviews of real past switches, never hypotheticals.</p>
     </div>
-    ${concierge('validated', `<span class="cc-step">Where we are:</span> 14 interviews logged, the Job is consistent across 11 of them. <b>Proven:</b> people hire us to make staying hydrated effortless. <span class="cc-step">Next:</span> the struggle concentrates in the afternoon, when they forget to drink, carried into the opportunity space.`)}
+    ${concierge('assumption', `<span class="cc-step">Where we are:</span> <b>no interviews run yet.</b> This is the deliberately thin half of the tree, the half the research exists to fill. <span class="cc-step">Next:</span> recruit ~15 recent switchers on demonstrated sacrifice and reconstruct their last capture experience on a timeline.`)}
 
     <div class="jtbd-actions">
       <a class="btn btn-primary btn-sm" href="copilot.html" title="Open the on-device JTBD interview copilot (native Mac app)">
@@ -2434,58 +2437,50 @@ const BUILDERS = {
       </button>
     </div>
 
-    <div class="section-rule"><span class="sr-n">3.1</span><h2 class="serif">Interview snapshots</h2><span class="sr-line"></span><span class="mono" style="font-size:11px;color:var(--muted)">14 logged · 1 this week</span></div>
+    <div class="section-rule"><span class="sr-n">3.1</span><h2 class="serif">Interview plan</h2><span class="sr-line"></span><span class="mono" style="font-size:11px;color:var(--muted)">0 logged · ≈15 to recruit</span></div>
     <div class="grid g-2">
       <div class="card">
-        <div class="snap exp">
-          <div class="who">Ian Turvue <span class="role">· operations manager</span></div>
-          <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:6px">${pill('validated')}<span class="ev-pill ev-suggestive"><span class="ev-d"></span>Habit: forgetting it exists</span><button class="exp-tog" style="margin-left:auto" aria-expanded="false" onclick="toggleExp(this)">Full quote <span class="exp-chev">▾</span></button></div>
-          <div class="exp-body"><div class="quote">I buy a lovely bottle, use it for three days, then it lives at the back of a cupboard. It’s never the bottle, I just forget it exists.</div></div>
-        </div>
-        <div class="snap exp">
-          <div class="who">Leo Brandt <span class="role">· software developer</span></div>
-          <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:6px"><span class="ev-pill ev-suggestive"><span class="ev-d"></span>Push: the afternoon slump</span><button class="exp-tog" style="margin-left:auto" aria-expanded="false" onclick="toggleExp(this)">Full quote <span class="exp-chev">▾</span></button></div>
-          <div class="exp-body"><div class="quote">By the time my head’s pounding it’s 4pm and I’ve had two coffees and no water. I never notice until it’s too late to catch up.</div></div>
-        </div>
-        <div class="snap exp" style="margin-bottom:0">
-          <div class="who">Priya Raman <span class="role">· A&amp;E nurse</span></div>
-          <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:6px"><span class="ev-pill ev-suggestive"><span class="ev-d"></span>Anxiety: no cue at all</span><button class="exp-tog" style="margin-left:auto" aria-expanded="false" onclick="toggleExp(this)">Full quote <span class="exp-chev">▾</span></button></div>
-          <div class="exp-body"><div class="quote">On shift I don’t think about drinking until I’m dizzy. There’s no moment that reminds me.</div></div>
-        </div>
+        <div class="card-t">Sample · ≈15, recruit on demonstrated sacrifice<span class="ct-line"></span></div>
+        <div class="comp-row"><span class="comp-name">8 recent payers</span><span class="comp-kind">2–3 from Slid</span><span class="comp-note">Switched to an adjacent tool in the last ~90 days.</span></div>
+        <div class="comp-row"><span class="comp-name">4 workaround builders</span><span class="comp-kind">effortful</span><span class="comp-note">Manual screenshot-and-file routines; DIY capture rigs.</span></div>
+        <div class="comp-row"><span class="comp-name">3 recent cancellers</span><span class="comp-kind">abundant</span><span class="comp-note">The bundling-and-bot-blocking wave makes these easy to find.</span></div>
+        <div class="card-t" style="margin-top:16px">Channels<span class="ct-line"></span></div>
+        <p style="font-size:12.5px;color:var(--ink-2);line-height:1.55">Research panel (Respondent / User Interviews) as the workhorse · Reddit &amp; Discord product communities · App Store &amp; Chrome Web Store reviewers (Slid’s reviews are a ready-made recruit list) · WWDC dev threads for the workaround quota · a light, unweighted Japan question in the screener.</p>
+        <div class="card-t" style="margin-top:16px">Screener<span class="ct-line"></span></div>
+        <p style="font-size:12.5px;color:var(--ink-2);line-height:1.55">Qualify on a datable switch in the last ~90 days, plus a behaviour probe: <i>“Do you regularly screenshot or photograph slides during online lectures, and what do you do with the captures afterwards?”</i> Pay <b>$40–60</b> / 45 min, over-recruit ~40% for no-shows.</p>
       </div>
       <div class="card inset">
-        <div class="card-t">Demand Map · The Job<span class="ct-line"></span></div>
-        <p class="serif" style="font-size:16px;line-height:1.5;color:var(--ink)">When mid-afternoon hits and I notice I’ve barely had any water, I want staying hydrated to become <b>automatic</b>, so I can feel clear-headed and energetic and be the kind of person who looks after themselves.</p>
-        <div class="card-t" style="margin-top:18px">Real competitors<span class="ct-line"></span></div>
-        <div class="comp-row"><span class="comp-name">Tap water at the sink</span><span class="comp-kind">do-nothing</span><span class="comp-note">Free and fine, but out of sight, out of mind.</span></div>
-        <div class="comp-row"><span class="comp-name">Coffee &amp; tea</span><span class="comp-kind">substitute</span><span class="comp-note">Warm, wet, a ritual, but they don’t hydrate the same.</span></div>
-        <div class="comp-row"><span class="comp-name">Fizzy &amp; energy drinks</span><span class="comp-kind">workaround</span><span class="comp-note">A hit of something, with sugar they don’t really want.</span></div>
-        <div class="comp-row"><span class="comp-name">Just powering through</span><span class="comp-kind">nonconsumption</span><span class="comp-note">They tell themselves they’ll catch up later. They don’t.</span></div>
+        <div class="card-t">Demand Map · candidate Job<span class="ct-line"></span></div>
+        <p class="serif" style="font-size:16px;line-height:1.5;color:var(--ink)">When I’m working through a lecture and hit something visual that matters, a slide, diagram, worked example, I want to <b>capture it faithfully and find it again later</b>, so the knowledge survives past the moment it appeared on screen.</p>
+        <div style="margin-top:8px">${pill('assumption')} <span style="font-size:11px;color:var(--muted);margin-left:6px">a candidate hypothesis, to be confirmed or reshaped by the data</span></div>
+        <div class="card-t" style="margin-top:18px">What gets fired (competitors, by what’s replaced)<span class="ct-line"></span></div>
+        <div class="comp-row"><span class="comp-name">Manual screenshot &amp; file</span><span class="comp-kind">do-it-yourself</span><span class="comp-note">High-effort routine that gets abandoned.</span></div>
+        <div class="comp-row"><span class="comp-name">Slid</span><span class="comp-kind">one-click incumbent</span><span class="comp-note">Closest analogue; price &amp; capture-quality gripes.</span></div>
+        <div class="comp-row"><span class="comp-name">Transcript-first notetakers</span><span class="comp-kind">substitute</span><span class="comp-note">Don’t preserve the visual well.</span></div>
+        <div class="comp-row"><span class="comp-name">Just watching, capturing nothing</span><span class="comp-kind">nonconsumption</span><span class="comp-note">The knowledge is lost when the slide changes.</span></div>
       </div>
     </div>
 
-    <div class="section-rule"><span class="sr-n">3.2</span><h2 class="serif">Four forces · the afternoon moment</h2><span class="sr-line"></span></div>
+    <div class="section-rule"><span class="sr-n">3.2</span><h2 class="serif">Four forces · to be populated from interviews</h2><span class="sr-line"></span><span class="mono" style="font-size:11px;color:var(--muted)">empty by design</span></div>
     <div class="forces">
       <div class="force push"><div class="f-h"><span class="f-arrow">→</span>Push (away from today)</div>
-        <ul><li>Afternoon headache and brain fog.</li><li>Guilt at another day with no water.</li><li>Old bottles sat empty in a cupboard.</li></ul></div>
-      <div class="force pull"><div class="f-h"><span class="f-arrow">←</span>Pull (toward KLPTPROJ)</div>
-        <ul><li>Feeling clear-headed and energetic.</li><li>Staying hydrated without thinking.</li><li>Being someone who looks after themselves.</li></ul></div>
+        <ul><li>The struggle that made screenshotting-and-filing intolerable.</li><li><i>Reconstructed from real switches.</i></li></ul></div>
+      <div class="force pull"><div class="f-h"><span class="f-arrow">←</span>Pull (toward what they hired)</div>
+        <ul><li>What attracted them to a tool, extension, or routine.</li><li><i>Reconstructed from real switches.</i></li></ul></div>
       <div class="force anxiety"><div class="f-h">⚠ Anxiety (of switching)</div>
-        <ul><li>“I always forget within a week.”</li><li>“My old bottles sat empty in a cupboard.”</li><li>Worried a new habit won’t stick.</li></ul></div>
+        <ul><li>Price, trust, effort to learn, quality of capture.</li><li><i>Reconstructed from real switches.</i></li></ul></div>
       <div class="force habit"><div class="f-h">⟳ Habit (of today)</div>
-        <ul><li>Reaching for coffee instead of water.</li><li>Only drinking once they’re already thirsty.</li><li>“I’ll catch up later”, they don’t.</li></ul></div>
+        <ul><li>What they’d give up; the inertia of their existing method.</li><li><i>Reconstructed from real switches.</i></li></ul></div>
     </div>
 
-    <div class="section-rule"><span class="sr-n">3.3</span><h2 class="serif">Daily timeline</h2><span class="sr-line"></span><span class="mono" style="font-size:11px;color:var(--muted)">struggle concentrates in the afternoon · forgetting to drink</span></div>
+    <div class="section-rule"><span class="sr-n">3.3</span><h2 class="serif">Core research questions</h2><span class="sr-line"></span><span class="mono" style="font-size:11px;color:var(--muted)">what the interviews must answer</span></div>
     <div class="card">
       <div class="timeline">
-        <div class="tl-stage"><div class="tl-n">01</div><div class="tl-name">Wake up</div><div class="tl-note">Coffee first; water forgotten.</div></div>
-        <div class="tl-stage"><div class="tl-n">02</div><div class="tl-name">Morning</div><div class="tl-note">Busy; bottle stays in the bag.</div></div>
-        <div class="tl-stage"><div class="tl-n">03</div><div class="tl-name">Midday</div><div class="tl-note">A few sips with lunch, then forgotten.</div></div>
-        <div class="tl-stage"><div class="tl-n">04</div><div class="tl-name">Early afternoon</div><div class="tl-note">Focus dips; still no water.</div></div>
-        <div class="tl-stage hot"><div class="tl-n">05</div><div class="tl-name">Mid-afternoon</div><div class="tl-note">Headache, fog → realises they’ve had nothing.</div></div>
-        <div class="tl-stage"><div class="tl-n">06</div><div class="tl-name">Evening</div><div class="tl-note">Tries to catch up; too late to.</div></div>
-        <div class="tl-stage"><div class="tl-n">07</div><div class="tl-name">Next day</div><div class="tl-note">Same again, habit never forms.</div></div>
+        <div class="tl-stage"><div class="tl-n">01</div><div class="tl-name">The real job</div><div class="tl-note">What are learners hiring a capture/notes tool to do?</div></div>
+        <div class="tl-stage hot"><div class="tl-n">02</div><div class="tl-name">Value risk</div><div class="tl-note">Does losing on-screen visual content surface unprompted?</div></div>
+        <div class="tl-stage"><div class="tl-n">03</div><div class="tl-name">Single vs cumulative</div><div class="tl-note">Is the pain in one course, or only across many?</div></div>
+        <div class="tl-stage"><div class="tl-n">04</div><div class="tl-name">Segments</div><div class="tl-note">Do students &amp; lifelong learners share a job?</div></div>
+        <div class="tl-stage"><div class="tl-n">05</div><div class="tl-name">What gets fired</div><div class="tl-note">What do people fire to hire KLPT?</div></div>
       </div>
     </div>
   </div>`; },
@@ -2495,41 +2490,41 @@ const BUILDERS = {
     <div class="screen-head">
       <div class="eyebrow">Loop 2 · Translate progress into a measurable behavior</div>
       <h1 class="h1">The Outcome &amp; Progress Brief</h1>
-      <p class="lede princ">“Leadership negotiates outcomes, not solutions.”</p>
+      <p class="lede princ">“The desired outcome is a hypothesis, not a north star.”</p>
     </div>
-    ${concierge('validated', `<span class="cc-step">Where we are:</span> the contract is set. <b>Proven:</b> week-1 trial-to-paid conversion, <b>34% → 55%</b>, is the supply-side conversion this team owns, ratified with leadership. <span class="cc-step">Next:</span> learning-goal mode until the habit driver clears its test.`)}
+    ${concierge('assumption', `<span class="cc-step">Where we are:</span> the outcome is held as a <b>supply-side hypothesis</b>, no product metric exists yet. <span class="cc-step">Next:</span> validated demand carries the authority to revise it, including replacing it, if the felt job turns out to be something adjacent.`)}
 
     <div class="grid g-7-5" style="margin-top:22px">
       <div class="card">
         <div class="card-t">The three altitudes, keep them distinct<span class="ct-line"></span></div>
         <div class="grid" style="gap:10px">
-          <div class="card inset" style="border-radius:10px;padding:13px 15px"><div style="display:flex;align-items:center;gap:9px"><span style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)">Business outcome</span>${pill('assumption')}</div><div style="margin-top:6px;font-size:13.5px">Long-term revenue &amp; day-90 retention, the thing leadership ultimately cares about. We don’t control it directly.</div></div>
-          <div class="card" style="border-radius:10px;padding:13px 15px;border-color:var(--accent)"><div style="display:flex;align-items:center;gap:9px"><span style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-ink)">Product outcome ★ ours</span>${pill('validated')}</div><div style="margin-top:6px;font-size:14px"><b class="field var" id="f-outcome" contenteditable="true" spellcheck="false">week-1 trial→paid: 34% → 55%</b>. New owners who upgrade their free trial to a paid plan in week one. A supply-side conversion, the one number this team owns. ${fhelp('outcome')}</div></div>
-          <div class="card inset" style="border-radius:10px;padding:13px 15px"><div style="display:flex;align-items:center;gap:9px"><span style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)">Traction metric</span>${pill('killed')}</div><div style="margin-top:6px;font-size:13.5px">“App opens”, too narrow. Rejected as the primary: it games easily and doesn’t imply a paid, lasting customer.</div></div>
+          <div class="card inset" style="border-radius:10px;padding:13px 15px"><div style="display:flex;align-items:center;gap:9px"><span style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)">Business outcome</span>${pill('assumption')}</div><div style="margin-top:6px;font-size:13.5px">An indie product that sustains itself: single-course, low-price economics with cheap acquisition. We don’t control it directly. [TO VALIDATE]</div></div>
+          <div class="card" style="border-radius:10px;padding:13px 15px;border-color:var(--accent)"><div style="display:flex;align-items:center;gap:9px"><span style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-ink)">Desired outcome ★ hypothesis</span>${pill('assumption')}</div><div style="margin-top:6px;font-size:14px"><b class="field var" id="f-outcome" contenteditable="true" spellcheck="false">Learners retain and reuse the visual knowledge locked in lectures, without the manual labour of screenshotting and filing</b>. A supply-side hypothesis, revised to match demand. ${fhelp('outcome')}</div></div>
+          <div class="card inset" style="border-radius:10px;padding:13px 15px"><div style="display:flex;align-items:center;gap:9px"><span style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)">Adjacent job, to watch for</span>${pill('assumption')}</div><div style="margin-top:6px;font-size:13.5px">“Pass an assessment I can’t resit,” or “build a personal reference I trust at work.” If one of these is the felt job, the outcome is revised to match.</div></div>
         </div>
 
         <div class="card-t" style="margin-top:20px">Baseline → Target<span class="ct-line"></span></div>
         <div class="bt">
           <div class="bt-track">
-            <div class="bt-fill" style="width:55%"></div>
-            <div class="bt-cur" style="left:34%"></div>
+            <div class="bt-fill" style="width:0%"></div>
+            <div class="bt-cur" style="left:0%"></div>
           </div>
-          <div class="bt-marks"><span>0%</span><span style="color:var(--accent-ink)">today <span class="field var" id="f-baseline" contenteditable="true" spellcheck="false">34%</span></span><span style="color:var(--green-ink)">target <span class="field var" id="f-target" contenteditable="true" spellcheck="false">55%</span></span><span>100%</span></div>
+          <div class="bt-marks"><span>0%</span><span style="color:var(--accent-ink)">today <span class="field var" id="f-baseline" contenteditable="true" spellcheck="false">not measured yet</span></span><span style="color:var(--green-ink)">target <span class="field var" id="f-target" contenteditable="true" spellcheck="false">set after demand lands</span></span><span>100%</span></div>
         </div>
-        <p style="font-size:12.5px;color:var(--muted);margin-top:10px">Mode: <b style="color:var(--ink-2)">learning goal</b> until the habit driver is validated, then a committed target for Q3. Baseline: <span class="var">launch cohort, n=418</span>. ${fhelp('baseline','Work through baseline')}${fhelp('target','Work through target')}</p>
+        <p style="font-size:12.5px;color:var(--muted);margin-top:10px">Mode: <b style="color:var(--ink-2)">hypothesis</b>. KLPT has no measured discovery cohort, so there is no baseline yet; a target is set once the felt job is confirmed. ${fhelp('baseline','Work through baseline')}${fhelp('target','Work through target')}</p>
       </div>
 
       <div class="card inset">
-        <div class="card-t">Suspected Job<span class="ct-line"></span></div>
-        <p style="font-size:13.5px;line-height:1.55"><span class="field var" id="f-job" contenteditable="true" spellcheck="false">Make staying hydrated effortless, feel clear-headed and energetic, and be the kind of person who looks after themselves.</span> ${fhelp('job')}</p>
+        <div class="card-t">Candidate Job<span class="ct-line"></span></div>
+        <p style="font-size:13.5px;line-height:1.55"><span class="field var" id="f-job" contenteditable="true" spellcheck="false">Capture the visual that matters faithfully and find it again later, so the knowledge survives past the moment it appeared on screen.</span> ${fhelp('job')}</p>
+        <div class="card-t" style="margin-top:18px">Business-model hypothesis<span class="ct-line"></span></div>
+        <p style="font-size:13px;color:var(--ink-2);line-height:1.5">Indie economics: cheap to run (no transcription-and-meeting overhead), priced so it’s worth buying <b>even for a single course</b>. Potential to evolve later; the starting bet is small, self-serve, inexpensive.</p>
         <div class="card-t" style="margin-top:18px">Non-goals<span class="ct-line"></span></div>
         <ul style="list-style:none;font-size:13px;line-height:1.5">
-          <li style="padding:4px 0 4px 16px;position:relative;color:var(--ink-2)"><span style="position:absolute;left:0;color:var(--muted)">×</span>Full gamification &amp; streaks.</li>
-          <li style="padding:4px 0 4px 16px;position:relative;color:var(--ink-2)"><span style="position:absolute;left:0;color:var(--muted)">×</span>Social sharing &amp; flavour subscription.</li>
-          <li style="padding:4px 0 4px 16px;position:relative;color:var(--ink-2)"><span style="position:absolute;left:0;color:var(--muted)">×</span>Smart-cap hardware (parked, real-but-later).</li>
+          <li style="padding:4px 0 4px 16px;position:relative;color:var(--ink-2)"><span style="position:absolute;left:0;color:var(--muted)">×</span>A meeting notetaker.</li>
+          <li style="padding:4px 0 4px 16px;position:relative;color:var(--ink-2)"><span style="position:absolute;left:0;color:var(--muted)">×</span>The UGC / TED-ingestion track (parked).</li>
+          <li style="padding:4px 0 4px 16px;position:relative;color:var(--ink-2)"><span style="position:absolute;left:0;color:var(--muted)">×</span>Designing for Japan (unweighted signal only).</li>
         </ul>
-        <div class="card-t" style="margin-top:18px">Constraints<span class="ct-line"></span></div>
-        <p style="font-size:13px;color:var(--ink-2);line-height:1.5">One delivery cycle. No new hardware. Must be measurable at release.</p>
       </div>
     </div>
   </div>`; },
@@ -2538,59 +2533,68 @@ const BUILDERS = {
   opportunity(){ return `<div class="wrap">
     <div class="screen-head">
       <div class="eyebrow">Loop 3 · The opportunity space</div>
-      <h1 class="h1">Organize struggle by timeline moment, crown one target</h1>
-      <p class="lede">Opportunities are customer-framed struggling moments, never solutions.</p>
+      <h1 class="h1">Log candidate struggling moments, crown none until the data does</h1>
+      <p class="lede">Opportunities are extracted from real customer progress, never invented on the supply side.</p>
     </div>
-    ${concierge('suggestive', `<span class="cc-step">Where we are:</span> one target crowned, <b>the missing-cue gap</b> (high demand × high ability to win). <b>Emerging,</b> not yet validated. <span class="cc-step">Next:</span> the habit-anchor test, <b>TC-08</b>.`)}
+    ${concierge('assumption', `<span class="cc-step">Where we are:</span> <b>five candidate opportunities, none crowned.</b> Each is a belief, confirmed only if it surfaces unprompted in interviews. <span class="cc-step">Next:</span> the value-risk candidate is the first the interviews go after.`)}
 
-    <div class="section-rule"><span class="sr-n">3.1</span><h2 class="serif">Opportunities by timeline moment</h2><span class="sr-line"></span></div>
+    <div class="section-rule"><span class="sr-n">3.1</span><h2 class="serif">Candidate opportunities</h2><span class="sr-line"></span><span class="mono" style="font-size:11px;color:var(--muted)">all [TO VALIDATE]</span></div>
     <div class="grid g-3">
       <div class="card">
-        <div class="card-t" style="color:var(--ev-suggestive)">Through the day · forgetting to drink ★<span class="ct-line"></span></div>
-        <div style="font-weight:600;font-size:14px;margin-bottom:6px"><span class="field var" id="f-opp" contenteditable="true" spellcheck="false">Won’t keep the habit going because nothing reminds me at the moment I’d actually drink</span> ${fhelp('opportunity')}</div>
-        ${meter('suggestive')} <span style="font-size:11px;color:var(--muted);margin-left:6px">demand high · win high</span>
-        <div style="margin-top:12px;padding-top:12px;border-top:1px dashed var(--line)">
-          <div style="font-size:12.5px;color:var(--ink-2);margin-bottom:4px">↳ “I always forget within a week” fear</div>
-          <div style="font-size:12.5px;color:var(--ink-2)">↳ “There’s no moment that reminds me” gap</div>
-        </div>
+        <div class="card-t" style="color:var(--ev-assumption)">Visual knowledge is lost ◆ first to test<span class="ct-line"></span></div>
+        <div style="font-weight:600;font-size:14px;margin-bottom:6px"><span class="field var" id="f-opp" contenteditable="true" spellcheck="false">Visual knowledge from lectures is lost because transcript-first tools don’t preserve it well</span> ${fhelp('opportunity')}</div>
+        ${meter('assumption')} <span style="font-size:11px;color:var(--muted);margin-left:6px">value risk · highest</span>
+        <div style="margin-top:12px;padding-top:12px;border-top:1px dashed var(--line);font-size:12.5px;color:var(--ink-2)">The wedge. If this doesn’t surface unprompted, it fails, a cheap, early answer.</div>
       </div>
       <div class="card">
-        <div class="card-t">The taste moment<span class="ct-line"></span></div>
-        <div style="font-weight:600;font-size:14px;margin-bottom:6px">Plain water is boring, so I reach for something with flavour</div>
-        ${meter('assumption')} <span style="font-size:11px;color:var(--muted);margin-left:6px">demand med · win med</span>
-        <div style="margin-top:12px;padding-top:12px;border-top:1px dashed var(--line);font-size:12.5px;color:var(--muted)">Parked, real but downstream of the forgetting problem.</div>
+        <div class="card-t">Manual capture is abandoned<span class="ct-line"></span></div>
+        <div style="font-weight:600;font-size:14px;margin-bottom:6px">Screenshot, crop, label, file is high-effort and gets abandoned</div>
+        ${meter('assumption')} <span style="font-size:11px;color:var(--muted);margin-left:6px">candidate</span>
+        <div style="margin-top:12px;padding-top:12px;border-top:1px dashed var(--line);font-size:12.5px;color:var(--muted)">Workaround builders carry the richest causal story.</div>
       </div>
       <div class="card">
-        <div class="card-t">Routine breaks<span class="ct-line"></span></div>
-        <div style="font-weight:600;font-size:14px;margin-bottom:6px">When my routine breaks, the habit collapses</div>
-        ${meter('assumption')} <span style="font-size:11px;color:var(--muted);margin-left:6px">demand med · win low</span>
-        <div style="margin-top:12px;padding-top:12px;border-top:1px dashed var(--line);font-size:12.5px;color:var(--muted)">Large and hard, split into sub-opportunities later.</div>
+        <div class="card-t">Hard to find again<span class="ct-line"></span></div>
+        <div style="font-weight:600;font-size:14px;margin-bottom:6px">Captured material is hard to find again later when it’s actually needed</div>
+        ${meter('assumption')} <span style="font-size:11px;color:var(--muted);margin-left:6px">candidate</span>
+        <div style="margin-top:12px;padding-top:12px;border-top:1px dashed var(--line);font-size:12.5px;color:var(--muted)">The “Library” half of the backronym, retrieval.</div>
+      </div>
+      <div class="card">
+        <div class="card-t">Paid tools frustrate<span class="ct-line"></span></div>
+        <div style="font-weight:600;font-size:14px;margin-bottom:6px">Existing paid tools (e.g. Slid) frustrate on price and capture quality</div>
+        ${meter('assumption')} <span style="font-size:11px;color:var(--muted);margin-left:6px">candidate · desk-sourced</span>
+        <div style="margin-top:12px;padding-top:12px;border-top:1px dashed var(--line);font-size:12.5px;color:var(--muted)">Recent switchers carry datable stories.</div>
+      </div>
+      <div class="card">
+        <div class="card-t">Single-course value<span class="ct-line"></span></div>
+        <div style="font-weight:600;font-size:14px;margin-bottom:6px">The value of capture is concentrated in one course, enough to pay per course</div>
+        ${meter('assumption')} <span style="font-size:11px;color:var(--muted);margin-left:6px">candidate · shapes pricing</span>
+        <div style="margin-top:12px;padding-top:12px;border-top:1px dashed var(--line);font-size:12.5px;color:var(--muted)">Or is value only cumulative across many? Second-weakest belief.</div>
       </div>
     </div>
 
     <div class="grid g-2" style="margin-top:24px">
       <div class="card">
-        <div class="card-t">Five admission tests · adding an opportunity<span class="ct-line"></span></div>
-        <div style="font-size:13px;color:var(--ink-2);margin-bottom:6px">All five passed, the target clears admission.</div>
+        <div class="card-t">Five admission tests · to be applied once interviews land<span class="ct-line"></span></div>
+        <div style="font-size:13px;color:var(--ink-2);margin-bottom:6px">None applied yet, no opportunity is admitted to the tree until it clears all five from real data.</div>
         <div style="margin-top:10px">
-          <div class="check met"><span class="box"><svg viewBox="0 0 16 16" width="11" height="11" fill="none" aria-hidden="true"><path d="M3.5 8.5l3 3 6-6.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="c-txt">Framed as a customer struggle, not a solution<span class="ct-meta">“Nothing reminds me at the moment I’d drink”, a moment, not a feature.</span></span></div>
-          <div class="check met"><span class="box"><svg viewBox="0 0 16 16" width="11" height="11" fill="none" aria-hidden="true"><path d="M3.5 8.5l3 3 6-6.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="c-txt">Not a feature request in disguise<span class="ct-meta">Translated from “add a reminder alarm” → the underlying missing-cue gap.</span></span></div>
-          <div class="check met"><span class="box"><svg viewBox="0 0 16 16" width="11" height="11" fill="none" aria-hidden="true"><path d="M3.5 8.5l3 3 6-6.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="c-txt">Grounded in real behavior / a real story<span class="ct-meta">Ian, Priya, + 6 more interviews of real past attempts.</span></span></div>
-          <div class="check met"><span class="box"><svg viewBox="0 0 16 16" width="11" height="11" fill="none" aria-hidden="true"><path d="M3.5 8.5l3 3 6-6.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="c-txt">Plausibly connects to the desired outcome<span class="ct-meta">Sits exactly on the week-1 drop-off.</span></span></div>
-          <div class="check met" style="border-bottom:none"><span class="box"><svg viewBox="0 0 16 16" width="11" height="11" fill="none" aria-hidden="true"><path d="M3.5 8.5l3 3 6-6.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="c-txt">Enough evidence to matter<span class="ct-meta">Recurs unprompted in 8 of 14 interviews.</span></span></div>
+          <div class="check"><span class="box"></span><span class="c-txt">Framed as a customer struggle, not a solution<span class="ct-meta">A struggling moment in the learner’s words, not a feature.</span></span></div>
+          <div class="check"><span class="box"></span><span class="c-txt">Not a feature request in disguise<span class="ct-meta">“Auto-capture slides” must translate back to an underlying struggle.</span></span></div>
+          <div class="check"><span class="box"></span><span class="c-txt">Grounded in a real story<span class="ct-meta">A recent, datable switch, reconstructed on a timeline.</span></span></div>
+          <div class="check"><span class="box"></span><span class="c-txt">Plausibly connects to the desired outcome<span class="ct-meta">Or revises it, if demand says so.</span></span></div>
+          <div class="check" style="border-bottom:none"><span class="box"></span><span class="c-txt">Enough evidence to matter<span class="ct-meta">Surfaces unprompted across the interviews.</span></span></div>
         </div>
       </div>
       <div class="card">
-        <div class="card-t">Sibling comparison · demand strength × ability to win<span class="ct-line"></span></div>
+        <div class="card-t">Sibling comparison · positions are hypotheses<span class="ct-line"></span></div>
         <div class="matrix">
           <span class="axis-x">Demand strength →</span>
           <span class="axis-y">Ability to win →</span>
           <span class="qline v"></span><span class="qline h"></span>
-          <div class="dot target" style="left:78%;bottom:74%"><span class="bub"></span><span class="dl">Missing cue ★</span></div>
-          <div class="dot" style="left:52%;bottom:48%"><span class="bub"></span><span class="dl">Taste moment</span></div>
-          <div class="dot" style="left:55%;bottom:24%"><span class="bub"></span><span class="dl">Routine breaks</span></div>
+          <div class="dot" style="left:50%;bottom:50%"><span class="bub"></span><span class="dl">Visual lost ◆</span></div>
+          <div class="dot" style="left:50%;bottom:50%;opacity:.55"><span class="bub"></span><span class="dl">Manual effort</span></div>
+          <div class="dot" style="left:50%;bottom:50%;opacity:.55"><span class="bub"></span><span class="dl">Retrieval</span></div>
         </div>
-        <p style="font-size:12px;color:var(--muted);margin-top:10px">One target crowned: top-right quadrant, high demand, high ability to win.</p>
+        <p style="font-size:12px;color:var(--muted);margin-top:10px">Unplaced, on purpose: no candidate has demand or ability-to-win evidence yet. The matrix fills as interviews land.</p>
       </div>
     </div>
   </div>`; },
@@ -2603,45 +2607,47 @@ const BUILDERS = {
       <p class="lede">Before committing to a solution we model how the system actually works: inputs → process → outputs → outcomes, separating what we control from the noise we must perform despite.</p>
     </div>
 
+    ${concierge('assumption', `<span class="cc-step">Where we are:</span> a <b>candidate skeleton only.</b> The real causal map gets drawn once the demand spine is filled, before any solution is committed. Everything below is a hypothesis. <span class="cc-step">Next:</span> reconstruct it from validated forces.`)}
+
     <div class="card" style="margin-top:22px">
       <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px">
-        <div class="card-t" style="margin:0">Causal System Map · a cue → hitting the water goal in week one<span class="ct-line"></span></div>
+        <div class="card-t" style="margin:0">Causal System Map · candidate · captured visual knowledge survives &amp; is reused<span class="ct-line"></span></div>
         <button class="btn btn-ghost btn-sm" onclick="this.textContent = this.textContent.includes('Right')?'Design left → right':'Design right ← left'">Design right ← left</button>
       </div>
       <div class="flow">
         <div class="flow-col"><div class="fc-h">Inputs <span class="arr">→</span></div>
-          <div class="flow-item">A habit they already have (morning coffee)</div>
-          <div class="flow-item">The bottle within arm’s reach</div>
-          <div class="flow-item">Drinking that feels easy &amp; a bit rewarding</div>
+          <div class="flow-item">A learner working through video / courseware</div>
+          <div class="flow-item">A visual that matters appears on screen</div>
+          <div class="flow-item">Screen observation running on-device</div>
         </div>
         <div class="flow-col"><div class="fc-h">Process <span class="arr">→</span></div>
-          <div class="flow-item">A cue that fires at the right moment</div>
-          <div class="flow-item">Anchor the first drink to making coffee</div>
-          <div class="flow-item">One-tap “done,” a simple progress ring</div>
+          <div class="flow-item">Detect the slide / visual change</div>
+          <div class="flow-item">Capture a clean image automatically (zero-touch)</div>
+          <div class="flow-item">Pair it with transcript &amp; AI notes</div>
         </div>
         <div class="flow-col"><div class="fc-h">Outputs <span class="arr">→</span></div>
-          <div class="flow-item lead">Drinks at the anchor moment <span style="font-size:10px;color:var(--green-ink)">· lead measure</span></div>
-          <div class="flow-item">Regular drinking through the day</div>
+          <div class="flow-item lead">A faithful, findable capture <span style="font-size:10px;color:var(--green-ink)">· candidate lead</span></div>
+          <div class="flow-item">A searchable knowledge library</div>
         </div>
         <div class="flow-col"><div class="fc-h">Outcome</div>
-          <div class="flow-item">Fewer “forgot to drink” days</div>
-          <div class="flow-item lead">Week-1 trial→paid conversion <span style="font-size:10px;color:var(--green-ink)">· lag measure</span></div>
+          <div class="flow-item">The knowledge survives past the moment</div>
+          <div class="flow-item lead">Retained &amp; reused visual knowledge <span style="font-size:10px;color:var(--green-ink)">· candidate lag</span></div>
         </div>
       </div>
       <div class="factors">
-        <div class="fcol control"><div class="fcol-h">▣ Control factors</div>
-          <div class="factor">When the cue fires</div>
-          <div class="factor">Bottle within reach</div>
-          <div class="factor">How easy/pleasant drinking feels</div>
-          <div class="factor">Progress feedback</div>
+        <div class="fcol control"><div class="fcol-h">▣ Candidate control factors</div>
+          <div class="factor">When a capture fires</div>
+          <div class="factor">How clean the captured image is</div>
+          <div class="factor">How findable it is later</div>
+          <div class="factor">Whether choosing what to keep is part of the job</div>
         </div>
-        <div class="fcol noise"><div class="fcol-h">≈ Noise factors</div>
-          <div class="factor">Weather</div>
-          <div class="factor">How busy the day is</div>
-          <div class="factor">How thirsty someone naturally runs</div>
+        <div class="fcol noise"><div class="fcol-h">≈ Candidate noise factors</div>
+          <div class="factor">The messy variety of players &amp; courseware</div>
+          <div class="factor">The learner’s own filing discipline</div>
+          <div class="factor">Course type &amp; pace</div>
         </div>
       </div>
-      <p class="princ" style="margin-top:16px;font-size:14px">Right-to-left: hitting the goal needs regular drinking → regular drinking needs a cue at the right moment → the cue needs the bottle within reach and drinking to feel easy and a bit rewarding. Build left-to-right.</p>
+      <p class="princ" style="margin-top:16px;font-size:14px">Right-to-left, candidate: knowledge survives → it was captured cleanly and is findable → capture fired automatically at the moment the visual mattered. A hypothesis to redraw from real demand, not a finding.</p>
     </div>
   </div>`; },
 
@@ -2650,15 +2656,15 @@ const BUILDERS = {
     <div class="screen-head">
       <div class="eyebrow">Loop 5 · Generate, test, decide, ship, measure</div>
       <h1 class="h1">Delivery &amp; Impact</h1>
-      <p class="lede">Three materially different solution paths. Test the riskiest assumptions, not whole ideas, with thresholds locked before results. Ship the smallest coherent increment. Measure all four impact levels.</p>
+      <p class="lede">Candidate solution directions, recorded as bets. Nothing is tested yet, so the riskiest assumptions are named, weakest-first, and the interviews go after the value risk before anything is built.</p>
     </div>
 
-    <div class="section-rule"><span class="sr-n">5.1</span><h2 class="serif">Solution set · three paths</h2><span class="sr-line"></span></div>
+    <div class="section-rule"><span class="sr-n">5.1</span><h2 class="serif">Solution set · candidate directions</h2><span class="sr-line"></span></div>
     <div class="grid g-3">
       ${solCard('solA')} ${solCard('solB')} ${solCard('solC')}
     </div>
 
-    <div class="section-rule"><span class="sr-n">5.2</span><h2 class="serif">Assumption map · importance × evidence</h2><span class="sr-line"></span></div>
+    <div class="section-rule"><span class="sr-n">5.2</span><h2 class="serif">Risk map · Cagan’s four risks, weakest-first</h2><span class="sr-line"></span></div>
     <div class="grid g-2">
       <div class="card">
         <div class="amap">
@@ -2667,93 +2673,77 @@ const BUILDERS = {
           <span class="quad-label ql-bl">Low importance</span>
           <span class="quad-label ql-br">Low importance · known</span>
           <span class="qline v"></span><span class="qline h"></span>
-          <div class="adot" data-ev="suggestive" style="left:24%;top:22%" title="Coffee anchor → hit the goal in week one (TC-08, in flight)"></div>
-          <div class="adot" data-ev="assumption" style="left:14%;top:34%" title="People will take a 7-day human coach (untested)"></div>
-          <div class="adot" data-ev="killed" style="left:30%;top:14%" title="A glowing cap alone gets people to drink, KILLED (TC-03)"></div>
-          <div class="adot" data-ev="validated" style="left:74%;top:30%" title="Week-1 habit-builders convert to paid 2.7× more often (validated)"></div>
-          <div class="adot" data-ev="assumption" style="left:66%;top:70%" title="People read the progress ring (low importance)"></div>
+          <div class="adot" data-ev="assumption" style="left:18%;top:14%" title="VALUE (highest): losing on-screen visual content hurts enough to switch or pay"></div>
+          <div class="adot" data-ev="assumption" style="left:30%;top:28%" title="USABILITY: zero-touch capture is a relief, not a loss of control"></div>
+          <div class="adot" data-ev="assumption" style="left:26%;top:40%" title="FEASIBILITY: clean slide-change detection across messy players"></div>
+          <div class="adot" data-ev="assumption" style="left:22%;top:52%" title="BUSINESS VIABILITY: single-course low-price economics can sustain it"></div>
         </div>
-        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px">${pill('assumption')}${pill('suggestive')}${pill('validated')}${pill('killed')}</div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;align-items:center">${pill('assumption')}<span style="font-size:12px;color:var(--muted)">All four sit top-left: important, unproven. Value is highest.</span></div>
       </div>
       <div class="card inset">
-        <div class="card-t">Toggle the belief through the evidence ladder<span class="ct-line"></span></div>
-        <p style="font-size:13px;color:var(--ink-2);line-height:1.5;margin-bottom:14px">Feel the mechanic. Move the load-bearing belief across the certainty chain and watch its meter fill, or strike through when a test kills it.</p>
-        <div class="ladder-ctrl" id="ladderCtrl">
-          <button class="lstep on" data-s="assumption" onclick="setLadder('assumption')">Assumption</button>
-          <button class="lstep" data-s="suggestive" onclick="setLadder('suggestive')">Emerging</button>
-          <button class="lstep" data-s="validated" onclick="setLadder('validated')">Validated</button>
-          <button class="lstep" data-s="killed" onclick="setLadder('killed')">Killed</button>
-        </div>
-        <div style="margin-top:20px;display:flex;align-items:center;gap:16px">
-          <div id="ladderMeter">${meter('assumption','lg')}</div>
-          <div id="ladderPill">${pill('assumption')}</div>
-        </div>
-        <p id="ladderCopy" style="font-size:12.5px;color:var(--muted);margin-top:14px;line-height:1.5;min-height:34px">A belief with no weight yet. It costs nothing to hold and everything to ship on.</p>
+        <div class="card-t">The four risks, named<span class="ct-line"></span></div>
+        <div class="comp-row"><span class="comp-name">Value</span><span class="comp-kind">highest</span><span class="comp-note">Does losing visual content hurt enough to switch or pay?</span></div>
+        <div class="comp-row"><span class="comp-name">Usability</span><span class="comp-kind">risk</span><span class="comp-note">Is zero-touch a relief, or a loss of control?</span></div>
+        <div class="comp-row"><span class="comp-name">Feasibility</span><span class="comp-kind">risk</span><span class="comp-note">Clean slide-change detection across messy players. Live Notes is immature.</span></div>
+        <div class="comp-row"><span class="comp-name">Business viability</span><span class="comp-kind">risk</span><span class="comp-note">Single-course, low-price economics + cheap acquisition.</span></div>
+        <p style="font-size:12.5px;color:var(--muted);margin-top:12px;line-height:1.5">Discipline: target the weakest load-bearing belief first. If the value risk fails, the rest don’t matter.</p>
       </div>
     </div>
 
-    <div class="section-rule"><span class="sr-n">5.3</span><h2 class="serif">Test cards</h2><span class="sr-line"></span><span class="mono" style="font-size:11px;color:var(--muted)">threshold locked before results</span></div>
+    <div class="section-rule"><span class="sr-n">5.3</span><h2 class="serif">First test · planned</h2><span class="sr-line"></span><span class="mono" style="font-size:11px;color:var(--muted)">the interviews are the test</span></div>
 
     <div class="testcard" id="tc08" style="margin-bottom:16px">
-      <div class="tc-head">${pill('suggestive')}<span class="tc-id">TC-08</span><span style="font-weight:600;font-size:13.5px">Habit-anchor nudge, drink when you make your morning coffee</span><span style="margin-left:auto" class="mono" style="font-size:11px;color:var(--muted)">IN FLIGHT</span></div>
+      <div class="tc-head">${pill('assumption')}<span class="tc-id">TC-V</span><span style="font-weight:600;font-size:13.5px">Does visual-content loss surface unprompted?</span><span style="margin-left:auto" class="mono" style="font-size:11px;color:var(--muted)">PLANNED · NOT RUN</span></div>
       <div class="tc-body">
-        <div class="tc-field"><div class="tcf-l">Assumption under test</div><div class="tcf-v">People will hit their water goal in week one if the first drink is anchored to a habit they already have, making their morning coffee, so the cue fires reliably.</div></div>
-        <div class="tc-field"><div class="tcf-l">Decision it informs</div><div class="tcf-v">Whether to ship the habit-anchor nudge increment, or pivot to the human-coach service path.</div></div>
-        <div class="tc-field"><div class="tcf-l">Audience &amp; moment</div><div class="tcf-v">Next 40 new owners, at the morning-coffee moment.</div></div>
-        <div class="tc-field"><div class="tcf-l">Observed behavior</div><div class="tcf-v">Hit their daily water goal on at least 4 of their first 7 days.</div></div>
+        <div class="tc-field"><div class="tcf-l">Assumption under test</div><div class="tcf-v">Losing on-screen visual content hurts enough that learners will switch to, or pay for, a tool that solves it, the value risk.</div></div>
+        <div class="tc-field"><div class="tcf-l">Decision it informs</div><div class="tcf-v">Whether the KLPT wedge is real and worth building, or the project stops here, a cheap, early answer.</div></div>
+        <div class="tc-field"><div class="tcf-l">Audience &amp; moment</div><div class="tcf-v">≈15 recent switchers, reconstructing their last real capture experience. No one mentions slide capture or pitches KLPT.</div></div>
+        <div class="tc-field"><div class="tcf-l">Observed signal</div><div class="tcf-v">Learners raise visual-content loss <i>themselves</i>, unprompted, while telling their story.</div></div>
         <div class="threshold">
-          <div class="th-l">Success threshold, locked
+          <div class="th-l">Success signal, set before results
             <span class="lock"><svg width="13" height="13" viewBox="0 0 16 16" fill="none"><rect x="3" y="7" width="10" height="7" rx="1.5" stroke="#c9a24f" stroke-width="1.3"/><path d="M5 7V5a3 3 0 016 0v2" stroke="#c9a24f" stroke-width="1.3"/></svg></span>
           </div>
-          <div class="th-v">≥ 50% hit their goal in week one (baseline 31%)</div>
-          <div class="th-result"><span class="res-tag" style="background:#2a2722;color:#c9a24f">awaiting · 23/40 logged</span><span style="color:#bdb6a8">Currently 57%, trending above bar, not yet powered. Concierge precursor: 7/10 vs 6/10 bar.</span></div>
+          <div class="th-v">Visual-content loss surfaces unprompted across a clear majority of interviews</div>
+          <div class="th-result"><span class="res-tag" style="background:#2a2722;color:#c9a24f">awaiting · 0 of ≈15 run</span><span style="color:#bdb6a8">No data yet. Scope &amp; budget to be signed before any panel spend; the 50% invoice begins the work.</span></div>
         </div>
       </div>
     </div>
 
-    <div class="testcard">
-      <div class="tc-head">${pill('killed')}<span class="tc-id">TC-05</span><span style="font-weight:600;font-size:13.5px">Fake-door “Glowing smart-cap reminder”</span><span style="margin-left:auto" class="mono" style="font-size:11px;color:var(--muted)">CLOSED · FAILED → A WIN</span></div>
-      <div class="tc-body">
-        <div class="tc-field"><div class="tcf-l">Assumption under test</div><div class="tcf-v">A cap that lights up when it’s time to drink will get people drinking and hitting their goal.</div></div>
-        <div class="tc-field"><div class="tcf-l">Decision it informed</div><div class="tcf-v">Whether the glowing smart cap is a viable solution path, or the cue must come from a habit people already have.</div></div>
-        <div class="tc-field"><div class="tcf-l">Audience &amp; moment</div><div class="tcf-v">52 new owners offered the “glow reminder” sign-up.</div></div>
-        <div class="tc-field"><div class="tcf-l">Observed behavior</div><div class="tcf-v">Still want the glow reminder after a week of use.</div></div>
-        <div class="threshold">
-          <div class="th-l">Success threshold, locked<span class="lock"><svg width="13" height="13" viewBox="0 0 16 16" fill="none"><rect x="3" y="7" width="10" height="7" rx="1.5" stroke="#c9a24f" stroke-width="1.3"/><path d="M5 7V5a3 3 0 016 0v2" stroke="#c9a24f" stroke-width="1.3"/></svg></span></div>
-          <div class="th-v">≥ 30% of “glow reminder” sign-ups still want it after a week</div>
-          <div class="th-result"><span class="res-tag res-fail">RESULT · 9%</span><span style="color:#bdb6a8">People ignored or covered the light, it did <b style="color:#f0a58e">not</b> change how much they drank. Belief killed; the glowing-cap path closed before a line of production code. <b style="color:#9fd9a3">A cheap save.</b></span></div>
-        </div>
-      </div>
+    <div class="card" style="margin-bottom:4px">
+      <div class="card-t">Then, in order, only if value holds<span class="ct-line"></span></div>
+      <div class="comp-row"><span class="comp-name">Usability</span><span class="comp-kind">later</span><span class="comp-note">Prototype test: is zero-touch capture experienced as relief or loss of control?</span></div>
+      <div class="comp-row"><span class="comp-name">Feasibility</span><span class="comp-kind">later</span><span class="comp-note">Technical: reliable slide-change detection across real players.</span></div>
+      <div class="comp-row"><span class="comp-name">Single-course WTP</span><span class="comp-kind">later</span><span class="comp-note">Does one course hurt enough to open a wallet, or only cumulatively?</span></div>
     </div>
 
-    <div class="section-rule"><span class="sr-n">5.4</span><h2 class="serif">Increment Scope Brief</h2><span class="sr-line"></span></div>
+    <div class="section-rule"><span class="sr-n">5.4</span><h2 class="serif">Discovery Scope Brief</h2><span class="sr-line"></span></div>
     <div class="card">
       <div class="scope-cols">
-        <div class="scope-col inc"><h4>Included, the focussed half</h4>
-          <ul><li>Anchor the first drink to morning coffee</li><li>A one-tap “done”</li><li>A simple progress ring through the day</li><li>Instrumented lead measure: “drinks at the anchor moment”</li></ul>
+        <div class="scope-col inc"><h4>In scope, this cycle</h4>
+          <ul><li>≈15 JTBD switch interviews (8 payers, 4 workaround builders, 3 cancellers)</li><li>Recruit on demonstrated sacrifice, not payment alone</li><li>Guided-mode copilot to keep interviewers on the timeline</li><li>Synthesis into the demand spine, forces &amp; opportunities</li></ul>
         </div>
-        <div class="scope-col exc"><h4>Excluded, on purpose</h4>
-          <ul><li>Full gamification &amp; streaks</li><li>Social sharing</li><li>Flavour subscription &amp; multi-goal tracking</li><li>Smart-cap hardware</li></ul>
+        <div class="scope-col exc"><h4>Out of scope, on purpose</h4>
+          <ul><li>The UGC / TED-ingestion growth track (parked)</li><li>Any product build before the value risk holds</li><li>Demand interviews with the product owner’s classmates</li><li>Any panel spend before scope &amp; budget are signed</li></ul>
         </div>
       </div>
       <div class="kickass">
-        <div class="ka-l">Focussed Success vs. Ambiguous Failure</div>
-        <div class="ka-v">Excellence through focus vs. dilution: build half the scope but make that half genuinely great, instead of attempting the whole and watering everything down so it delights no one.</div>
+        <div class="ka-l">A cheap, early answer over a roadmap</div>
+        <div class="ka-v">If visual-content loss is real, learners raise it themselves while reconstructing their last capture experience. If they don’t, that’s a fortnight spent, not a roadmap, the cheapest progress we can make.</div>
       </div>
     </div>
 
-    <div class="section-rule"><span class="sr-n">5.5</span><h2 class="serif">Impact ladder · four levels</h2><span class="sr-line"></span><span class="mono" style="font-size:11px;color:var(--muted)">expected vs actual</span></div>
+    <div class="section-rule"><span class="sr-n">5.5</span><h2 class="serif">Risk ladder · what we learn, in order</h2><span class="sr-line"></span><span class="mono" style="font-size:11px;color:var(--muted)">weakest-first</span></div>
     <div class="card">
       <div class="iladder">
-        <div class="irow"><div class="i-rung">L1</div><div class="i-body"><div class="i-name">Assumption behavior</div><div class="i-sub">Drinks at the anchor moment</div></div><div style="text-align:right"><div class="i-val">57%</div><div class="i-delta iup">▲ vs 50% bar</div></div></div>
+        <div class="irow"><div class="i-rung">L1</div><div class="i-body"><div class="i-name">Value risk</div><div class="i-sub">Does the loss hurt enough to switch or pay?</div></div><div style="text-align:right"><div class="i-val">first</div><div class="i-delta iflat">interviews</div></div></div>
         <div class="iconn"></div>
-        <div class="irow"><div class="i-rung">L2</div><div class="i-body"><div class="i-name">Opportunity relief</div><div class="i-sub">“Forgot to drink” days</div></div><div style="text-align:right"><div class="i-val">−34%</div><div class="i-delta iup">▲ fewer forgotten days</div></div></div>
+        <div class="irow"><div class="i-rung">L2</div><div class="i-body"><div class="i-name">Usability risk</div><div class="i-sub">Zero-touch: relief or loss of control?</div></div><div style="text-align:right"><div class="i-val">then</div><div class="i-delta iflat">prototype</div></div></div>
         <div class="iconn"></div>
-        <div class="irow"><div class="i-rung">L3</div><div class="i-body"><div class="i-name">Product outcome</div><div class="i-sub">Week-1 trial→paid conversion</div></div><div style="text-align:right"><div class="i-val">34 → 41%</div><div class="i-delta iup">▲ toward 55%</div></div></div>
+        <div class="irow"><div class="i-rung">L3</div><div class="i-body"><div class="i-name">Feasibility risk</div><div class="i-sub">Clean detection across messy players</div></div><div style="text-align:right"><div class="i-val">then</div><div class="i-delta iflat">technical</div></div></div>
         <div class="iconn"></div>
-        <div class="irow"><div class="i-rung">L4</div><div class="i-body"><div class="i-name">Business outcome</div><div class="i-sub">Day-90 retention of new owners</div></div><div style="text-align:right"><div class="i-val">pending</div><div class="i-delta iflat">next quarter</div></div></div>
+        <div class="irow"><div class="i-rung">L4</div><div class="i-body"><div class="i-name">Business viability</div><div class="i-sub">Single-course, low-price economics</div></div><div style="text-align:right"><div class="i-val">last</div><div class="i-delta iflat">pricing</div></div></div>
       </div>
-      <p style="font-size:12px;color:var(--muted);margin-top:14px">Projection from TC-08 partial data, increment not yet shipped. Read at cycle close; if L3 doesn’t move with L2, we revisit the opportunity↔outcome link.</p>
+      <p style="font-size:12px;color:var(--muted);margin-top:14px">Nothing measured yet. Each risk is attacked only once its predecessor holds; the value risk is the gate on everything below it.</p>
     </div>
   </div>`; },
 
@@ -2765,11 +2755,12 @@ const BUILDERS = {
       <p class="lede">Every decision, its rationale, the evidence behind it, and the trigger that would make us revisit. Beliefs that died are kept, they’re the cheapest progress we made.</p>
     </div>
     <div style="margin-top:26px" class="dlog">
-      <div class="dentry"><div class="d-when">2026-06-09 · Wk 24</div><div class="d-what">Crowned the missing-cue gap as the single target opportunity</div><div class="d-why">Top-right of the demand × ability matrix; named unprompted in 8/14 interviews and sits exactly on the week-1 drop-off.</div><div class="d-trig">Revisit if: TC-08 fails to clear bar, or the conversion moves without it.</div></div>
-      <div class="dentry killed"><div class="d-when">2026-06-02 · Wk 23</div><div class="d-what">Killed the glowing smart-cap solution path</div><div class="d-why">TC-05 fake-door: only 9% of “glow reminder” sign-ups still wanted it after a week (bar 30%). People ignored or covered the light. Closed the path before a line of production code.</div><div class="d-trig">Revisit if: a segment shows strong demand for a hardware reminder.</div></div>
-      <div class="dentry killed"><div class="d-when">2026-05-26 · Wk 22</div><div class="d-what">Killed “a streak counter &amp; badges will build the habit”</div><div class="d-why">TC-03 gamification A/B: badges and streaks moved nothing (Δ +1pt vs +8pt bar). The habit must come from a real cue, not points.</div><div class="d-trig">Revisit if: a more game-motivated segment enters the funnel.</div></div>
-      <div class="dentry"><div class="d-when">2026-05-18 · Wk 21</div><div class="d-what">Set product outcome at 34% → 55% week-1 trial→paid conversion</div><div class="d-why">Negotiated with leadership as the controllable behavior serving day-90 retention; rejected “app opens” as a gameable traction metric.</div><div class="d-trig">Revisit at: Q2 outcome negotiation (18 days).</div></div>
-      <div class="dentry"><div class="d-when">2026-05-11 · Wk 20</div><div class="d-what">Inserted the causal map before solution design</div><div class="d-why">Right-to-left analysis showed the conversion depends on the hydration habit, which depends on a cue at the right moment, reframed the whole solution set around anchoring the first drink to an existing habit.</div><div class="d-trig">Revisit if: noise factors (weather, how busy the day is) dominate the signal.</div></div>
+      <div class="dentry"><div class="d-when">Definition · seed</div><div class="d-what">Named the value risk as the weakest load-bearing belief</div><div class="d-why">Under Cagan’s four risks, whether losing on-screen visual content hurts enough to switch or pay is the belief everything else rests on. The interviews go after it first.</div><div class="d-trig">Revisit if: value surfaces unprompted, then sequence usability, feasibility, business viability behind it.</div></div>
+      <div class="dentry"><div class="d-when">Definition · seed</div><div class="d-what">Held the demand spine deliberately thin</div><div class="d-why">Opportunities are extracted from real customer progress, not invented on the supply side. Populating the tree with our own guesswork as fact would make it a beautifully structured record of guesswork.</div><div class="d-trig">Revisit as: interviews land and forces / opportunities earn their place.</div></div>
+      <div class="dentry"><div class="d-when">Definition · seed</div><div class="d-what">Parked the UGC / TED-ingestion growth track</div><div class="d-why">A distribution idea, not a demand hypothesis. Mixing it into discovery would muddy what we’re learning about the core job. Fair-use review required before any build.</div><div class="d-trig">Revisit if: the core job is confirmed to hold.</div></div>
+      <div class="dentry"><div class="d-when">Definition · seed</div><div class="d-what">Recruit on demonstrated sacrifice; classmates for pilot, not demand</div><div class="d-why">Passive free users have no causal story to excavate. The product owner’s leadership-course classmates pilot the discussion guide and later usability-test; relationship-driven generosity corrupts switch data and no caveat fixes it.</div><div class="d-trig">Revisit if: a classmate genuinely passes the screener, then Noetic interviews them, not the product owner.</div></div>
+      <div class="dentry"><div class="d-when">Definition · seed</div><div class="d-what">Logged Japan as an unweighted screener signal only</div><div class="d-why">English-first market entry. The product owner’s hunch that the need may be unusually strong in Japan is collected cheaply during recruitment, not designed for.</div><div class="d-trig">Revisit if: the screener data warrants weighting it.</div></div>
+      <div class="dentry"><div class="d-when">Definition · guardrail</div><div class="d-what">No panel spend before scope &amp; budget are signed</div><div class="d-why">A scope-and-budget document is agreed in writing and a 50% invoice issued to begin; out-of-pocket panel costs are covered by the product owner against agreed scope.</div><div class="d-trig">Revisit at: sign-off, which releases recruitment.</div></div>
     </div>
   </div>`; },
 };
@@ -2800,10 +2791,10 @@ function concierge(state, html){
 
 /* ── interactive evidence ladder ── */
 const LADDER_COPY = {
-  assumption:'A belief with no weight yet. It costs nothing to hold and everything to ship on.',
-  suggestive:'Some signal has landed, 7 of 10 people who anchored drinking to their coffee hit their goal that week (bar 6/10). Promising, not yet load-bearing. Don’t bet the increment on it.',
-  validated:'Earned. Behavioral evidence at scale clears the locked bar. Now it can carry weight, build on it.',
-  killed:'Disproven by a test. A win: we learned it cheaply and freed the increment from a wrong bet.',
+  assumption:'Where the whole tree sits right now. A belief with no weight yet, it costs nothing to hold and everything to build on. The value risk lives here.',
+  suggestive:'Where a belief moves once interviews land, visual-content loss surfacing unprompted in a clear majority. Promising, not yet load-bearing. Don’t build the product on it.',
+  validated:'Earned. Real switch stories at scale confirm the felt job. Now it can carry weight, design against it.',
+  killed:'Disproven by the interviews. A win: a cheap, early answer, a fortnight spent rather than a roadmap built on a wrong bet.',
 };
 function setLadder(state){
   document.querySelectorAll('#ladderCtrl .lstep').forEach(b=>b.classList.toggle('on', b.dataset.s===state));
@@ -2825,8 +2816,8 @@ const CMDK = [
   ]},
   {g:'Beliefs & actions',items:[
     {ico:'⚠',t:'Open weakest belief',sub:'NBA',act:()=>{goLoop('tree');setTimeout(()=>openNode('belief'),200)}},
-    {ico:'▸',t:'Open test card TC-08',sub:'in flight',act:openNBATest},
-    {ico:'★',t:'View target opportunity',sub:'crowned',act:()=>{goLoop('tree');setTimeout(()=>openNode('oppTarget'),200)}},
+    {ico:'▸',t:'Open the first test (value risk)',sub:'planned',act:openNBATest},
+    {ico:'◆',t:'View lead candidate opportunity',sub:'first to test',act:()=>{goLoop('tree');setTimeout(()=>openNode('oppTarget'),200)}},
     {ico:'≡',t:'Decision Log',sub:'reasoning',act:()=>goLoop('decisions')},
     {ico:'▶',t:'Show the reasoning (walkthrough)',sub:'stakeholder',act:openWalk},
   ]},
@@ -2862,46 +2853,44 @@ function scrollSel(){ const el=document.querySelector(`.cmdk-item[data-i="${cmdk
 
 /* ════════════════════════════ STAKEHOLDER WALKTHROUGH ════════════════════════════ */
 const WALK = [
-  {step:'01 · The outcome',h:'We are buying one number',body:'This team owns a single product outcome: lift week-1 <b>trial-to-paid conversion</b>, new owners who upgrade to a paid plan in their first week, from <b>34% to 55%</b>. A supply-side number (a purchase), driven by the hydration habit, serving long-term retention.',ev:'validated',evlabel:'Outcome ratified',
+  {step:'01 · The product',h:'KLPT captures the visual knowledge transcripts lose',body:'KLPT watches the screen during lectures and courseware and captures a clean image of each slide the moment it changes, paired with transcript and AI notes. It is <b>not</b> a meeting notetaker. Its reason to exist is the diagram, worked example and chart that a transcript-first tool can’t preserve.',ev:'assumption',evlabel:'Framing assumption',
     vis:()=>`<div class="wc-visual"><div class="wv-bt">
       <div class="wv-bt-track">
-        <div class="wv-bt-fill"></div>
+        <div class="wv-bt-fill" style="width:0"></div>
         <div class="wv-bt-target"></div>
-        <span class="wv-lab cur">34%</span><span class="wv-lab tgt">55%</span>
+        <span class="wv-lab cur">no baseline</span><span class="wv-lab tgt">set later</span>
       </div>
-      <div class="wv-bt-marks"><span>baseline today</span><span>committed target · Q3</span></div>
+      <div class="wv-bt-marks"><span>no measured cohort yet</span><span>target after demand lands</span></div>
     </div></div>`},
-  {step:'02 · The progress',h:'People hire us to make staying hydrated effortless',body:'Across fourteen interviews of real past attempts, the Job is consistent: when the afternoon slump hits and they’ve had no water, people want staying hydrated to become <b>automatic</b>, to feel clear and energetic, and look after themselves.',ev:'validated',evlabel:'11 of 14 interviews',
+  {step:'02 · The outcome, as a hypothesis',h:'A desired outcome, held to be challenged',body:'The supply-side hypothesis: learners <b>retain and reuse the visual knowledge</b> locked in lectures, without screenshotting and filing it themselves. It carries no authority over the tree until the market says so, if the felt job is adjacent, the outcome is revised, not defended.',ev:'assumption',evlabel:'Held as a hypothesis',
     vis:()=>walkProgStrip(1)},
-  {step:'03 · The struggle',h:'Nothing reminds them at the moment they’d drink',body:'The decisive moment is the afternoon. Push and pull are strong, but the day goes by and <b>nothing reminds them to drink</b> until they’re already foggy and headachy. That missing cue is exactly where the habit leaks.',ev:'suggestive',evlabel:'8 of 14, unprompted',
+  {step:'03 · The demand spine is thin, on purpose',h:'We refuse to invent the demand',body:'The candidate job, <b>capture the visual that matters and find it again later</b>, and five candidate opportunities are logged as beliefs, not findings. The four forces are empty. Filling them with real customer progress is the entire point of the research that follows.',ev:'assumption',evlabel:'5 candidates · none crowned',
     vis:()=>`<div class="wc-visual"><div class="wv-matrix">
       <span class="wm-line v"></span><span class="wm-line h"></span>
       <span class="wm-ax x">Demand strength →</span><span class="wm-ax y">Ability to win →</span>
-      <div class="wm-dot tgt" style="left:78%;bottom:74%"><span class="wm-dl">Missing cue ★</span></div>
-      <div class="wm-dot" style="left:52%;bottom:48%"></div>
-      <div class="wm-dot" style="left:55%;bottom:24%"></div>
+      <div class="wm-dot" style="left:50%;bottom:50%"><span class="wm-dl">Unplaced ◆</span></div>
     </div></div>`},
-  {step:'04 · The dead ends we avoided',h:'We killed two wrong answers cheaply',body:'A streak counter and badges moved <b>nothing</b> (TC-03). A glowing smart cap that lights up when it’s time to drink converted <b>9% vs a 30% bar</b> (TC-05), people ignored or covered the light. Both beliefs died for the price of a fake door. The cue must come from a habit people already have.',ev:'killed',evlabel:'TC-03 & TC-05 · cheap saves',
+  {step:'04 · The competition, by what gets fired',h:'We map switching, not features',body:'Competitors are defined by what a learner would <b>fire</b> to hire KLPT: the manual screenshot-and-file routine, one-click incumbents like <b>Slid</b> (price &amp; capture-quality gripes), and transcript-first notetakers. Otter made auto-capture table stakes <i>inside meetings</i>, so KLPT’s territory is everything a bot can’t join.',ev:'assumption',evlabel:'Desk research [DESK]',
     vis:()=>`<div class="wc-visual"><div class="wv-kills">
-      <div class="wv-kill"><span class="wk-id">TC-03 · killed</span>${meter('killed','lg')}<span class="wk-note">Streaks &amp; badges<br><b>+1pt vs +8pt bar</b></span></div>
-      <div class="wv-kill"><span class="wk-id">TC-05 · killed</span>${meter('killed','lg')}<span class="wk-note">Glowing smart cap<br><b>9% vs 30% bar</b></span></div>
+      <div class="wv-kill"><span class="wk-id">Slid · incumbent</span>${meter('assumption','lg')}<span class="wk-note">One-click capture<br><b>price &amp; quality gripes</b></span></div>
+      <div class="wv-kill"><span class="wk-id">Manual · routine</span>${meter('assumption','lg')}<span class="wk-note">Screenshot &amp; file<br><b>high-effort, abandoned</b></span></div>
     </div></div>`},
-  {step:'05 · The bet',h:'Anchor the first drink to a habit they already have',body:'The increment is the focussed half of one path: <b>anchor the first drink to making your morning coffee, a one-tap “done,” and a simple progress ring</b>, the morning-coffee moment only. Gamification, social, flavour, smart-cap hardware, all deliberately excluded. <i>Focussed success over ambiguous failure.</i>',ev:'suggestive',evlabel:'TC-08 in flight · 57%',
+  {step:'05 · The weakest belief',h:'The value risk is the gate',body:'Cagan’s value risk is named highest: <b>does losing on-screen visual content hurt enough to switch or pay?</b> If it doesn’t surface unprompted across the interviews, the wedge fails. Usability, feasibility and business viability are sequenced behind it, each tested only if its predecessor holds.',ev:'assumption',evlabel:'Value risk · first to test',
     vis:()=>walkProgStrip(4)},
-  {step:'06 · The proof',h:'And we’ll know, at four levels',body:'Instrumented before launch: assumption behavior → opportunity relief → product outcome → business outcome. Early read projects the conversion moving <b>34% → 41%</b>, on the way to 55%. If a level doesn’t move, the tree tells us exactly which link to revisit.',ev:'validated',evlabel:'Impact ladder wired',
+  {step:'06 · The plan',h:'A cheap, early answer over a roadmap',body:'≈15 JTBD switch interviews of recent, real decisions, 8 payers (2–3 from Slid), 4 workaround builders, 3 cancellers, recruited on demonstrated sacrifice. The discipline: <b>no one mentions slide capture or pitches KLPT</b>. If the loss is real, learners raise it themselves. A fortnight, not a roadmap.',ev:'assumption',evlabel:'Discovery increment',
     vis:()=>`<div class="wc-visual"><div class="wv-ladder">
-      <div class="wv-lrow"><span class="wl-rung">L1</span><span class="wl-name">Assumption behavior · drinks at the anchor moment</span><span class="wl-val up">57%</span></div>
+      <div class="wv-lrow"><span class="wl-rung">L1</span><span class="wl-name">Value · does the loss hurt enough to switch or pay?</span><span class="wl-val flat">first</span></div>
       <div class="wv-lconn"></div>
-      <div class="wv-lrow"><span class="wl-rung">L2</span><span class="wl-name">Opportunity relief · fewer “forgot to drink” days</span><span class="wl-val up">−34%</span></div>
+      <div class="wv-lrow"><span class="wl-rung">L2</span><span class="wl-name">Usability · zero-touch: relief or loss of control?</span><span class="wl-val flat">then</span></div>
       <div class="wv-lconn"></div>
-      <div class="wv-lrow"><span class="wl-rung">L3</span><span class="wl-name">Product outcome · week-1 trial→paid conversion</span><span class="wl-val up">34→41%</span></div>
+      <div class="wv-lrow"><span class="wl-rung">L3</span><span class="wl-name">Feasibility · clean detection across messy players</span><span class="wl-val flat">then</span></div>
       <div class="wv-lconn"></div>
-      <div class="wv-lrow"><span class="wl-rung">L4</span><span class="wl-name">Business outcome · day-90 retention</span><span class="wl-val flat">pending</span></div>
+      <div class="wv-lrow"><span class="wl-rung">L4</span><span class="wl-name">Business viability · single-course economics</span><span class="wl-val flat">last</span></div>
     </div></div>`},
 ];
 /* certainty-progression strip, the four-meter arc, with the current step emphasised */
 function walkProgStrip(now){
-  const arc=[['Outcome','validated'],['Job','validated'],['Target','suggestive'],['Bet','suggestive']];
+  const arc=[['Product','assumption'],['Outcome','assumption'],['Job','assumption'],['Value risk','assumption']];
   let h='<div class="wc-visual"><div class="wv-prog">';
   arc.forEach(([lab,ev],i)=>{
     if(i) h+='<span class="wv-parrow">›</span>';
@@ -2958,94 +2947,94 @@ function paintWalk(){
    intelligence keyed to KLPTPROJ facts. All state in JS, no network. */
 const CHAT_PROMPTS = [
   "What's the next step?",
-  "Why was the glowing cap killed?",
-  "What's still unproven?",
+  "What's the weakest belief?",
+  "Why is the demand spine empty?",
   "Summarise the project",
 ];
 /* intent bank: keyword sets → concierge answer (with an optional loop pointer) */
 const CHAT_BANK = [
-  { id:'next', kw:['next step','what next',"what's next",'next move','what should','do next','now what','nba','next best'],
-    a:`The next move is <b>TC-08</b>, the habit-anchor nudge test. It's in flight across 40 new owners, currently <b>57%</b> hitting their water goal in week one against a locked <b>50%</b> bar. It moves our weakest belief, so finishing it is what unlocks the increment. Open the <b>Delivery &amp; Impact loop</b> to watch it.` },
-  { id:'sandbox', kw:['glowing cap','smart cap','glow','light','cap','tc-05','tc05','fake door','hardware','reminder'],
-    a:`We killed the glowing smart cap as a cheap win. The <b>TC-05</b> fake-door test offered a "glow reminder" cap, only <b>9%</b> still wanted it after a week, against a <b>30%</b> bar. People ignored or covered the light and it never changed how much they drank, so the path closed before a line of production code. The lesson: the cue has to come from a habit people already have, not a gadget.` },
-  { id:'unproven', kw:['unproven','weakest','still prove','not proven','riskiest','risky','what if','assumption','uncertain','suggestive'],
-    a:`The weakest, load-bearing belief is: <b>"tie the first drink to a habit people already have and they'll hit their goal in week one."</b> It's only <b>emerging</b>, a 7/10 concierge signal, not yet behavioral at scale. <b>TC-08</b> is the test measuring exactly this. Until it clears, the increment rests on an unproven bet.` },
-  { id:'kill', kw:['killed','dead end','what did you kill','beliefs you killed','tc-03','tc03','streak','badge','gamification','points'],
-    a:`Two beliefs died cheaply. <b>TC-03</b>: a streak counter and badges moved <b>nothing</b> (+1pt vs an +8pt bar), points aren't a real cue. <b>TC-05</b>: the glowing smart cap converted <b>9% vs a 30% bar</b>. Both were killed for the price of a fake door, which is the cheapest progress we made.` },
-  { id:'proven', kw:['proven','validated','what do we know','what is proven','certain','load-bearing','evidence'],
-    a:`Two things are validated. The <b>outcome</b> is ratified: week-1 trial-to-paid conversion, <b>34% → 55%</b>, owned by this team. And the <b>Job</b> is consistent, across 14 interviews of real attempts, 11 confirm people hire us to make staying hydrated effortless. Everything downstream of the habit bet is still emerging.` },
-  { id:'outcome', kw:['outcome','34','55','goal hit','metric','number','goal','target number','hit rate'],
-    a:`The one number we own is <b>week-1 trial-to-paid conversion: 34% → 55%</b>, new owners who upgrade their free trial to a paid plan in their first week. It's a supply-side conversion (a purchase) negotiated with leadership, driven by the hydration habit and serving long-term retention. See the <b>Outcome loop</b>.` },
-  { id:'job', kw:['job','jtbd','progress','why switch','why do people','interview','customer'],
-    a:`The Job: <b>"make staying hydrated effortless"</b>, so people feel clear-headed and energetic and look after themselves. It recurs in 11 of 14 interviews of real past attempts. The decisive struggle lands in the afternoon, when they realise the day's gone by without water. See the <b>Progress loop</b>.` },
-  { id:'opportunity', kw:['opportunity','target','crown','cue','remind','forget','which problem','focus on','missing cue'],
-    a:`The crowned target opportunity is <b>the missing-cue gap</b>: "drinking water stays a good intention because nothing reminds me at the moment I'd actually drink." It sits top-right on demand × ability to win, named unprompted in 8/14 interviews, and lands exactly on the week-1 drop-off. Open the <b>Opportunity loop</b>.` },
-  { id:'increment', kw:['increment','bet','what are you building','ship','scope','solution','focused half','focussed half','build'],
-    a:`The bet is the <b>habit-anchor nudge, the morning-coffee moment only</b>: anchor the first drink to making your coffee, a one-tap "done," and a simple progress ring. Gamification, social sharing, flavour subscription, and smart-cap hardware are deliberately excluded, focussed success over ambiguous failure: build half the scope but make that half genuinely great. See the <b>Delivery &amp; Impact loop</b>.` },
-  { id:'impact', kw:['impact','ladder','four level','4 level','measure','retention','business outcome','how will you know'],
-    a:`Impact is instrumented at four levels: <b>assumption behavior</b> (drinks at the anchor moment) → <b>opportunity relief</b> (fewer "forgot to drink" days) → <b>product outcome</b> (week-1 trial→paid conversion, early read 34→41%) → <b>business outcome</b> (day-90 retention, read next quarter). If a level doesn't move, the tree tells us which link to revisit.` },
-  { id:'causal', kw:['causal','system','what must be true','chain','control factor','noise'],
-    a:`Before any solution we mapped the causal system right-to-left: hitting the goal needs regular drinking → regular drinking needs a cue at the right moment → the cue needs the bottle within reach and drinking to feel easy and a bit rewarding. Control factors include when the cue fires, bottle within reach, and progress feedback; noise includes weather and how busy the day is. See the <b>Causal Learning loop</b>.` },
+  { id:'next', kw:['next step','what next',"what's next",'next move','what should','do next','now what','nba','next best','first test'],
+    a:`The next move is to <b>run the interviews</b>. Once the scope-and-budget document is signed (a 50% invoice begins the work), recruit ≈15 recent switchers and reconstruct their last capture experience. The first thing to watch: does <b>visual-content loss surface unprompted</b>, the value risk. Everything else waits on that. Open the <b>Progress loop</b> for the plan.` },
+  { id:'parked', kw:['ugc','ted','youtube','ingestion','growth','server-side','server side','parked','distribution'],
+    a:`The <b>server-side UGC track</b> (ingesting public TED / YouTube talks to generate library content) is deliberately <b>parked outside the validation work</b>. It's a distribution idea, not a demand hypothesis, and mixing it into discovery would muddy what we're learning about the core job. Fair use needs a proper legal look before anything ships. Revisit once the core job is confirmed.` },
+  { id:'unproven', kw:['unproven','weakest','still prove','not proven','riskiest','risky','what if','value risk','uncertain','assumption','load-bearing'],
+    a:`The weakest, load-bearing belief is the <b>value risk</b>: "losing on-screen visual content hurts enough that people will switch to, or pay for, a tool that solves it." Nothing is tested yet, the ~15 interviews are the test. If it doesn't surface unprompted, the wedge fails, a cheap, early answer worth a fortnight. See the <b>Delivery loop</b>.` },
+  { id:'thin', kw:['empty','thin','demand spine','no interviews','why empty','forces empty','candidate','nothing validated'],
+    a:`On purpose. Under bias-in-bias-out, <b>opportunities are extracted from real customer progress, not invented on the supply side</b>. If we filled the tree with our own guesswork as fact, it would become a beautifully structured record of guesswork. The forces and opportunities stay empty until the interviews earn them.` },
+  { id:'competition', kw:['competitor','competition','slid','otter','granola','fireflies','fathom','rivals','alternative','who else'],
+    a:`Competitors are defined by what gets <b>fired</b>, not feature similarity. Closest analogue is <b>Slid</b> (one-click slide capture; reviews gripe on price &amp; capture quality), KLPT is automatic. <b>Otter</b> made auto-capture table stakes <i>inside meetings</i>, so our territory is everything a bot can't join: LMS players, YouTube, courseware. Student tools (Turbo AI, Coconote, etc.) show students do pay. [DESK]` },
+  { id:'outcome', kw:['outcome','goal','metric','number','target','what do you want','retain','reuse'],
+    a:`The desired outcome is a <b>hypothesis</b>, not a number: learners <b>retain and reuse the visual knowledge</b> locked in lectures, without screenshotting and filing it themselves. There's no baseline yet, KLPT has no measured cohort. Validated demand can revise it; if the felt job is adjacent ("pass an assessment," "build a work reference"), the outcome changes. See the <b>Outcome loop</b>.` },
+  { id:'job', kw:['job','jtbd','progress','why switch','why do people','interview','customer','plan','sample','recruit'],
+    a:`The candidate Job: <b>"capture the visual that matters and find it again later, so the knowledge survives past the moment."</b> It's a hypothesis to confirm or reshape. The plan: ≈15 switch interviews, 8 payers (2–3 from Slid), 4 workaround builders, 3 cancellers, recruited on demonstrated sacrifice. See the <b>Progress loop</b>.` },
+  { id:'opportunity', kw:['opportunity','crown','which problem','focus on','five','candidates','wedge'],
+    a:`There are <b>five candidate opportunities, none crowned</b>, each logged only as a belief to be confirmed if it surfaces unprompted: visual knowledge lost (the wedge / value risk), manual capture abandoned, hard to find again, paid tools frustrate, single-course willingness-to-pay. Open the <b>Opportunity loop</b>.` },
+  { id:'increment', kw:['increment','bet','what are you building','ship','scope','solution','build','product'],
+    a:`The increment this cycle is the <b>research itself</b>, not a build: ≈15 JTBD switch interviews, value risk first. The product directions logged as bets are <b>zero-touch automatic capture</b> and <b>Live Notes</b> (transcript + AI notes, early/immature); the UGC growth track is parked. No product is built before the value risk holds. See the <b>Delivery loop</b>.` },
+  { id:'impact', kw:['impact','ladder','four level','4 level','measure','risk','how will you know','cagan'],
+    a:`We attack <b>Cagan's four risks weakest-first</b>: value (does the loss hurt enough to switch/pay) → usability (is zero-touch a relief or a loss of control) → feasibility (clean slide-change detection across messy players) → business viability (single-course low-price economics). Each is tested only once its predecessor holds. See the <b>Delivery loop</b>.` },
+  { id:'causal', kw:['causal','system','what must be true','chain','control factor','noise','map'],
+    a:`The causal map is a <b>candidate skeleton only</b>, redrawn once demand lands. Candidate right-to-left: knowledge survives → it was captured cleanly and is findable → capture fired automatically at the moment the visual mattered. Candidate noise: the messy variety of players and the learner's own filing discipline. See the <b>Causal Learning loop</b>.` },
   { id:'summary', kw:['summarise','summarize','summary','overview','catch me up','where are we','project status','tldr','brief me'],
-    a:`KLPTPROJ owns one number, <b>week-1 trial→paid conversion 34% → 55%</b> (validated, serving day-90 retention). The Job is proven: make staying hydrated effortless. The crowned opportunity is <b>the missing-cue gap</b>, and the bet is a <b>habit-anchor nudge</b> scoped to the morning-coffee moment. We killed two wrong answers cheaply (streaks &amp; badges, glowing smart cap). The weakest belief is in test now via <b>TC-08</b> (57% vs 50% bar), that's the next step.` },
+    a:`KLPT is a <b>zero-touch screen-capture tool for learners</b>, in its <b>definition phase</b>. The desired outcome (retain &amp; reuse visual knowledge from lectures) is held as a hypothesis. The demand spine is deliberately thin: a candidate job, five candidate opportunities, none crowned, empty forces. The weakest belief is the <b>value risk</b>. Next step: run ≈15 JTBD switch interviews and watch whether visual-content loss surfaces unprompted, a cheap, early answer.` },
 ];
 /* Socratic field guides, "Ask Noetic" interviews the user to fill an input field, then drafts it.
    Each: targetId (the .field to write into), the requirement, an intro, ordered steps (with suggested
    answer chips), and a draft(answers) that composes the value. The draft is editable after insert. */
 const FIELD_GUIDE = {
   brief:{ label:'your brief', req:'your pre-project thinking, a frame to test, not proof', targetId:'f-define-frame',
-    intro:`Let's capture your <b>brief</b>, what you bring before discovery starts. I'll ask three quick questions, then draft a starting frame. It stays a hypothesis the loops will test.`,
+    intro:`Let's capture your <b>brief</b>, what you bring before discovery starts. I'll ask three quick questions, then draft a starting frame. It stays a hypothesis the loops will test, not absorb.`,
     steps:[
-      {q:`What change does leadership want? (the business outcome)`,
-       chips:['lower 90-day churn','more trial-to-paid','win back lapsed users']},
-      {q:`Who do you think struggles most, and when?`,
-       chips:['new owners in week one','people who restart then quit','on-the-go users with no routine']},
-      {q:`What's your hunch about the real driver?`,
-       chips:['no cue at the right moment','the first week decides it','taste, not memory']},
+      {q:`What knowledge do you think is getting lost, and where?`,
+       chips:['visual content in lectures','slides in online courseware','diagrams in recorded talks']},
+      {q:`Who do you think struggles most?`,
+       chips:['students working through courseware','professionals doing courses','anyone who screenshots slides']},
+      {q:`What's your hunch about why current tools fail them?`,
+       chips:['transcript-first tools don\'t preserve visuals','manual capture is too much effort','captures are hard to find again']},
     ],
-    outro:`Here's a starting frame from what you told me. Drop it in, then edit. The loops test it against real interviews, where it earns or loses evidence.`,
-    draft:a=>`<b>${chatEsc(a[1]||'the people we serve')}</b> are the ones who decide whether we ${chatEsc(a[0]||'hit the outcome')}, so <b>${chatEsc(a[2]||'the real driver')}</b> is the controllable driver. A working frame, to be tested.` },
+    outro:`Here's a starting frame from what you told me. Drop it in, then edit. It carries no authority over the tree until the interviews say otherwise.`,
+    draft:a=>`<b>${chatEsc(a[1]||'the learners we serve')}</b> lose <b>${chatEsc(a[0]||'the knowledge that matters')}</b> because <b>${chatEsc(a[2]||'current tools fail them')}</b>. A working frame, held consciously, to be tested.` },
 
-  outcome:{ label:'Desired Outcome', req:'one controllable conversion the team owns, a sign-up or purchase, not a vanity metric', targetId:'f-outcome',
-    intro:`Let's set your <b>desired outcome</b>. The rule: a single controllable conversion (a sign-up or purchase), with a baseline and a target. Three quick questions.`,
+  outcome:{ label:'Desired Outcome', req:'the progress you want learners to make, held as a revisable hypothesis', targetId:'f-outcome',
+    intro:`Let's set your <b>desired outcome</b>. In the definition phase this is a hypothesis, not a metric, validated demand can revise it. Three quick questions.`,
     steps:[
-      {q:`Which sign-up or purchase, if it rose, would prove real progress?`,
-       chips:['trial-to-paid conversion','second-bottle purchase','referral sign-ups']},
-      {q:`What's the baseline for that today?`, chips:['34%','about a third','we don\'t measure it yet']},
-      {q:`What target, and roughly by when, would matter to leadership?`, chips:['55%','double it','+15 points this quarter']},
+      {q:`What do you want learners to be able to do that they can't today?`,
+       chips:['retain visual knowledge from lectures','reuse captured material later','stop manually screenshotting & filing']},
+      {q:`Do you have a baseline measure for that yet?`, chips:['no measured cohort yet','not measured yet','only desk research']},
+      {q:`What adjacent job should you watch for in case it's the real one?`, chips:['pass an assessment I can\'t resit','build a work reference I trust','none, the wedge is the wedge']},
     ],
-    draft:a=>`Lift <b>week-1 ${chatEsc(a[0]||'trial-to-paid conversion')}</b> from <b>${chatEsc(a[1]||', ')}</b> to <b>${chatEsc(a[2]||', ')}</b>` },
+    draft:a=>`Learners <b>${chatEsc(a[0]||'retain and reuse the visual knowledge locked in lectures')}</b>, without the manual labour of screenshotting and filing. A hypothesis (${chatEsc(a[1]||'no baseline yet')}); revise if the felt job is <b>${chatEsc(a[2]||'something adjacent')}</b>.` },
 
-  job:{ label:'Suspected Job', req:'the progress the customer is reaching for, in their words', targetId:'f-job',
-    intro:`A <b>Job to be Done</b> is the progress someone is trying to make, never your product. Let's phrase yours. Two questions.`,
+  job:{ label:'Candidate Job', req:'the progress the learner is reaching for, in their words', targetId:'f-job',
+    intro:`A <b>Job to be Done</b> is the progress someone is trying to make, never your product. Let's phrase the candidate. Two questions.`,
     steps:[
-      {q:`What situation makes the struggle real? (the moment the search begins)`,
-       chips:['the afternoon slump hits and I\'ve had no water','I notice my old bottles sit empty','my head aches by 4pm']},
+      {q:`What situation makes the struggle real? (the moment it begins)`,
+       chips:['a slide with a diagram appears mid-lecture','a worked example flashes by','the courseware moves to the next slide']},
       {q:`What better state are they reaching for?`,
-       chips:['staying hydrated feels automatic','I feel clear and energetic','I look after myself without thinking']},
+       chips:['capture it faithfully and find it later','keep the visual past the moment','build a library they can search']},
     ],
-    draft:a=>`“When ${chatEsc(a[0]||'…')}, I want <b>${chatEsc(a[1]||'…')}</b>, so I feel clear-headed and like I take care of myself.”` },
+    draft:a=>`“When ${chatEsc(a[0]||'…')}, I want to <b>${chatEsc(a[1]||'…')}</b>, so the knowledge survives past the moment it appeared on screen.” A candidate, to confirm or reshape.` },
 
-  opportunity:{ label:'Target Opportunity', req:'a customer-framed struggling moment, not a solution', targetId:'f-opp',
-    intro:`A <b>target opportunity</b> is a struggling moment in the customer's own words, never a feature. Two questions and I'll draft it.`,
+  opportunity:{ label:'Candidate Opportunity', req:'a learner-framed struggling moment, not a solution', targetId:'f-opp',
+    intro:`A <b>candidate opportunity</b> is a struggling moment in the learner's own words, never a feature, and it's confirmed only if it surfaces unprompted. Two questions and I'll draft it.`,
     steps:[
-      {q:`At which moment does the customer stall hardest?`,
-       chips:['through the day, when I forget to drink','at my desk in the afternoon','when my routine breaks']},
-      {q:`What belief or fear sits behind the stall?`,
-       chips:['nothing reminds me at the right moment','plain water is boring','I always forget within a week']},
+      {q:`At which moment does the learner stall hardest?`,
+       chips:['when the slide changes and it\'s gone','when they try to find a capture later','when a paid tool frustrates them']},
+      {q:`What belief or frustration sits behind the stall?`,
+       chips:['transcripts don\'t preserve the visual','manual capture is too much effort','price and capture quality are poor']},
     ],
-    draft:a=>`“${chatEsc(a[1]||'…')}”, the struggle <b>${chatEsc(a[0]||'…')}</b>.` },
+    draft:a=>`“${chatEsc(a[1]||'…')}”, the struggle <b>${chatEsc(a[0]||'…')}</b>. A candidate [TO VALIDATE].` },
 
-  baseline:{ label:'Baseline', req:'where the metric stands today', targetId:'f-baseline',
-    intro:`What's the current value of the behaviour you're moving? If you're unsure, tell me how you'd estimate it.`,
-    steps:[{q:`Current value today?`, chips:['34%','~25%','not measured yet']}],
-    draft:a=>`${chatEsc(a[0]||', ')}` },
+  baseline:{ label:'Baseline', req:'where the measure stands today (likely none yet)', targetId:'f-baseline',
+    intro:`What's the current measure for the outcome? In the definition phase there's usually no product cohort yet, that's fine to say.`,
+    steps:[{q:`Current value today?`, chips:['not measured yet','no discovery cohort','only desk research']}],
+    draft:a=>`${chatEsc(a[0]||'not measured yet')}` },
 
-  target:{ label:'Target', req:'the level that would matter, and by when', targetId:'f-target',
-    intro:`What target would be a genuine win, and by when?`,
-    steps:[{q:`Target value?`, chips:['55%','double the baseline','+15 pts']},
-           {q:`By when?`, chips:['this quarter','90 days','next release']}],
-    draft:a=>`${chatEsc(a[0]||', ')}${a[1]?` <span style="color:var(--muted)">(${chatEsc(a[1])})</span>`:''}` },
+  target:{ label:'Target', req:'the level that would matter, set after demand lands', targetId:'f-target',
+    intro:`What target would matter, and when can you honestly set it? In the definition phase, that's usually after the felt job is confirmed.`,
+    steps:[{q:`Target value?`, chips:['set after demand lands','TBD post-interviews','depends on the felt job']},
+           {q:`By when?`, chips:['after the ~15 interviews','once the value risk holds','next discovery cycle']}],
+    draft:a=>`${chatEsc(a[0]||'set after demand lands')}${a[1]?` <span style="color:var(--muted)">(${chatEsc(a[1])})</span>`:''}` },
 };
 
 let chatThread = [];       // {role, html}
@@ -3060,7 +3049,7 @@ function chatMatch(q){
     if(s>bestScore){ bestScore=s; best=e; }
   });
   if(best) return best.a;
-  return `Here's what I can tell you about the KLPTPROJ project: we're driving <b>week-1 trial-to-paid conversion from 34% to 55%</b> by anchoring the first drink to a habit people already have. Ask me about the next step, what's proven, the weakest belief, or why we killed the glowing cap, or open the <b>Delivery &amp; Impact loop</b> to see the live test.`;
+  return `Here's what I can tell you about the KLPT project: it's a <b>zero-touch screen-capture tool for learners</b>, in its <b>definition phase</b>, the demand spine is deliberately thin until the interviews run. Ask me about the next step, the weakest belief (the value risk), why the demand spine is empty, the competition, or open the <b>Progress loop</b> to see the interview plan.`;
 }
 
 let chatMode='general', askState=null;
@@ -3190,7 +3179,7 @@ function fhelp(key,label){ return `<button class="field-help" onclick="askNoetic
 function renderChatEmpty(){
   const body=document.getElementById('chatBody');
   body.innerHTML = `<div class="chat-msg assistant"><span class="cm-who">Noetic</span>
-      <div class="cm-bubble">I'm scoped to the <b>KLPTPROJ</b> discovery project. Ask me where we are, what's proven, or what to do next.</div></div>
+      <div class="cm-bubble">I'm scoped to the <b>KLPT</b> discovery project. Ask me where we are, the weakest belief, or what to do next.</div></div>
     <div><div class="chat-empty-lead">Try one of these:</div>
       <div class="chat-chips">${CHAT_PROMPTS.map(p=>`<button class="chat-chip" onclick="chatChip(this)">${p}</button>`).join('')}</div></div>`;
 }
@@ -3261,59 +3250,59 @@ function chatStreamAnswer(html, after){
    and narrating in coach-mark bubbles: what we did, the result, and the next move.
    Distinct from "Show the reasoning" (Feature C), which is a self-contained deck. */
 const GUIDE = [
-  { title:'The one number we own',
-    body:`Welcome. This is the KLPTPROJ discovery project. Every team here owns a single <b>product outcome</b>, and ours is one number: lift week-1 trial-to-paid conversion from <b>34% to 55%</b>.`,
-    result:{k:'Where we are',v:`The outcome is <b>validated</b>, ratified with leadership, serving day-90 retention.`,
-            next:`Next: see who we're building for.`},
+  { title:'The product, and the phase',
+    body:`Welcome. This is the <b>KLPT</b> discovery project, a zero-touch screen-capture tool for learners, and it's in its <b>definition phase</b>. Nothing here is validated yet; it's the set of beliefs we're starting with, recorded honestly so they can be challenged.`,
+    result:{k:'Where we are',v:`The desired outcome, <b>learners retain and reuse the visual knowledge</b> locked in lectures, is held as a hypothesis, not a north star.`,
+            next:`Next: why that outcome is deliberately revisable.`},
     run:()=>goLoop('outcome'),
     anchor:()=>document.querySelector('#screen-outcome .bt')||document.querySelector('#screen-outcome .card') },
 
-  { title:'Why people want this',
-    body:`Before any metric, we learned the <b>Job</b>: across 14 interviews of real past attempts, people want to make staying hydrated <b>effortless</b>, to feel clear and energetic.`,
-    result:{k:'Result',v:`<b>Validated</b>, the Job recurs in 11 of 14 interviews. The decisive struggle lands in the afternoon, when they realise they've had no water.`,
-            next:`Next: the opportunity space we mapped from that struggle.`},
+  { title:'The outcome is a hypothesis',
+    body:`The outcome is a <b>supply-side hypothesis</b>. It carries no authority over the tree until the market says otherwise. If the felt job turns out to be adjacent, "pass an assessment," "build a work reference", the outcome is revised, not defended.`,
+    result:{k:'Where we are',v:`No baseline, KLPT has no measured cohort. A target is set only once the felt job is confirmed.`,
+            next:`Next: the demand spine, deliberately thin.`},
     run:()=>goLoop('progress'),
     anchor:()=>document.querySelector('#screen-progress .card.inset')||document.querySelector('#screen-progress .card') },
 
-  { title:'The opportunity we crowned',
-    body:`We organised every struggling moment by timeline, then crowned one target: <b>the missing-cue gap</b>, "drinking water stays a good intention because nothing reminds me at the moment I'd actually drink."`,
-    result:{k:'Result',v:`<b>Emerging.</b> Top-right on demand × ability to win, named unprompted in 8/14 interviews, sitting exactly on the week-1 drop-off.`,
-            next:`Next: the causal system we mapped before solving.`},
+  { title:'The demand spine is thin, on purpose',
+    body:`Opportunities are <b>extracted from real customer progress, not invented on the supply side</b>. So the candidate job is logged as a belief, the four forces are empty, and five opportunities sit as candidates. Filling them is the entire point of the research.`,
+    result:{k:'Candidates',v:`<b>Five candidate opportunities, none crowned.</b> Each is confirmed only if it surfaces unprompted in interviews.`,
+            next:`Next: which one the interviews go after first.`},
     run:()=>{ goLoop('tree'); setTimeout(()=>openCategory('opportunities'),360); },
     anchor:()=>document.querySelector('#catScrim .cat-modal') },
 
-  { title:'The system before the solution',
-    body:`We refused to jump to features. First we mapped the <b>causal system</b> right-to-left: hitting the goal needs regular drinking → regular drinking needs a cue at the right moment → the cue needs the bottle within reach and drinking to feel easy.`,
-    result:{k:'Result',v:`We separated what we <b>control</b> (when the cue fires, bottle within reach, progress feedback) from <b>noise</b> (weather, how busy the day is).`,
-            next:`Next: the solution paths, and the two we killed cheaply.`},
+  { title:'The map waits on the data',
+    body:`We refuse to jump to features. The <b>causal system</b> is only a candidate skeleton, redrawn once demand lands: knowledge survives → it was captured cleanly and is findable → capture fired automatically at the right moment.`,
+    result:{k:'Candidate only',v:`Candidate control factors (when a capture fires, how clean, how findable) and noise (messy players, filing discipline), all hypotheses.`,
+            next:`Next: the solution directions, recorded as bets.`},
     run:()=>{ closeCategory(); goLoop('causal'); },
     anchor:()=>document.querySelector('#screen-causal .flow')||document.querySelector('#screen-causal .card') },
 
-  { title:'Three paths, two killed cheaply',
-    body:`We generated three materially different paths: a <b>product</b> nudge, a <b>service</b> (human coach), and a <b>hybrid</b> (glowing smart cap). Then we tested the riskiest beliefs, not whole ideas.`,
-    result:{k:'Result',v:`Two beliefs <b>killed for the price of a fake door</b>: streaks &amp; badges moved nothing (TC-03), and the glowing cap converted 9% vs a 30% bar (TC-05).`,
-            next:`Next: the bet we actually placed.`},
+  { title:'Solution directions, as bets',
+    body:`Three candidate directions are logged: <b>zero-touch automatic capture</b>, <b>Live Notes</b> (transcript + AI notes, early and immature), and a <b>parked</b> server-side UGC growth track. Nothing is tested, so nothing is killed.`,
+    result:{k:'Discipline',v:`KLPT is a solution node. We test the <b>riskiest belief</b>, not whole ideas, and the UGC track stays out of the discovery so it doesn't muddy the core job.`,
+            next:`Next: the four risks, named and ordered.`},
     run:()=>goLoop('delivery'),
     anchor:()=>document.querySelector('#screen-delivery .grid.g-3')||document.querySelector('#screen-delivery .card') },
 
-  { title:'The bet: the focussed half',
-    body:`The increment is the <b>habit-anchor nudge, the morning-coffee moment only</b>: anchor the first drink to making your coffee, a one-tap "done," and a simple progress ring.`,
-    result:{k:'Result',v:`Gamification, social sharing, flavour subscription, and smart-cap hardware are <b>deliberately excluded</b>, focussed success over ambiguous failure: half the scope, made genuinely great.`,
-            next:`Next: the test in flight that moves our weakest belief.`},
+  { title:'The discovery increment',
+    body:`The increment this cycle is the <b>research itself</b>, not a build: ≈15 JTBD switch interviews, 8 payers (2–3 from Slid), 4 workaround builders, 3 cancellers, recruited on demonstrated sacrifice.`,
+    result:{k:'Out of scope',v:`The UGC growth track, any product build before the value risk holds, and any panel spend before scope &amp; budget are signed, <b>deliberately excluded</b>.`,
+            next:`Next: the weakest belief everything rests on.`},
     run:()=>{ goLoop('delivery'); setTimeout(()=>{ const el=document.querySelector('#screen-delivery .scope-cols'); if(el) el.scrollIntoView({behavior:'smooth',block:'center'}); },120); },
     anchor:()=>document.querySelector('#screen-delivery .scope-cols')||document.querySelector('#screen-delivery .kickass') },
 
-  { title:'The test in flight',
-    body:`Our weakest, load-bearing belief, "tie the first drink to a habit people already have and they'll hit their goal in week one", is under test right now as <b>TC-08</b>, with the success bar locked before any results.`,
-    result:{k:'Result',v:`<b>57%</b> are hitting their water goal in week one, against a locked <b>50%</b> bar, trending above, not yet powered.`,
+  { title:'The first test: the value risk',
+    body:`The weakest, load-bearing belief is the <b>value risk</b>: "losing on-screen visual content hurts enough that people will switch to, or pay for, a tool that solves it." The interviews are the test, and <b>no one mentions slide capture or pitches KLPT</b>.`,
+    result:{k:'Not run yet',v:`<b>0 of ≈15</b> interviews run. The success signal is set before results: visual-content loss surfaces unprompted across a clear majority.`,
             next:`Next: where we are, and the very next move.`},
     run:()=>{ goLoop('delivery'); setTimeout(()=>{ const el=document.getElementById('tc08'); if(el) el.scrollIntoView({behavior:'smooth',block:'center'}); },140); },
     anchor:()=>document.getElementById('tc08') },
 
   { title:"You're caught up",
-    body:`That's the whole arc: a validated number, a proven Job, a crowned opportunity, a mapped system, a scoped bet, and two cheap saves. The reasoning is honest and the certainty is rising.`,
-    result:{k:'The next step',v:`<b>Finish TC-08.</b> When it clears the 50% bar we ship the habit-anchor increment; if it stalls, we pivot to the human-coach path.`,
-            next:`That's it, you now know what's been learned and exactly what to do next.`},
+    body:`That's the whole definition: a product, a hypothesised outcome, a deliberately thin demand spine, five candidate opportunities, candidate solutions, and the four risks named weakest-first. Every node is a belief to put under load.`,
+    result:{k:'The next step',v:`<b>Run the interviews.</b> Once scope &amp; budget are signed, recruit ≈15 switchers and watch whether visual-content loss surfaces unprompted, a cheap, early answer worth a fortnight.`,
+            next:`That's it, you now know the starting beliefs and exactly what to do next.`},
     run:()=>{ goLoop('tree'); setTimeout(()=>document.getElementById('nbaCard')&&document.getElementById('nbaCard').classList.add('open'),120); },
     anchor:()=>document.getElementById('nbaCard') },
 ];
