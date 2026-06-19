@@ -1339,7 +1339,7 @@ var VIEW_ONLY = (function(){try{return /(?:^|[?&])share=reasoning(?:&|$)/.test(l
       <button class="proj-btn" onclick="toggleProjMenu(event)" aria-haspopup="true" aria-expanded="false">
         <span class="proj-dot"></span>
         <span class="proj-txt">
-          <span class="proj-name">KLPTPROJ</span>
+          <span class="proj-name">KLPT</span>
           <span class="proj-sub">Visual capture for learners</span>
         </span>
         <svg class="proj-caret" width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -1347,7 +1347,7 @@ var VIEW_ONLY = (function(){try{return /(?:^|[?&])share=reasoning(?:&|$)/.test(l
       <div class="proj-menu" id="projMenu" role="menu">
         <div class="proj-menu-lab">Projects</div>
         <button class="proj-opt active" role="menuitem" onclick="closeProjMenu()">
-          <span class="proj-dot"></span><span class="po-txt"><b>KLPTPROJ</b> · Visual capture for learners</span>
+          <span class="proj-dot"></span><span class="po-txt"><b>KLPT</b> · Visual capture for learners</span>
           <svg class="po-check" width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3.5 8.5l3 3 6-6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
         <a class="proj-opt" role="menuitem" href="v3.html">
@@ -1418,7 +1418,7 @@ var VIEW_ONLY = (function(){try{return /(?:^|[?&])share=reasoning(?:&|$)/.test(l
       <div class="rail-acct-wrap" id="acctWrap">
         <button class="rail-acct" onclick="toggleAcctMenu(event)" title="Account &amp; settings" aria-haspopup="true" aria-expanded="false">
           <span class="avatar sm">DD</span>
-          <span class="acct-txt"><span class="acct-name">Demo Davis</span><span class="acct-role">Product · KLPTPROJ</span></span>
+          <span class="acct-txt"><span class="acct-name">Demo Davis</span><span class="acct-role">Product · KLPT</span></span>
           <svg class="acct-caret" width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M4 10l4-4 4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
         <div class="acct-menu" id="acctMenu" role="menu">
@@ -1443,7 +1443,7 @@ var VIEW_ONLY = (function(){try{return /(?:^|[?&])share=reasoning(?:&|$)/.test(l
   <main class="main">
     <div class="topbar">
       <div class="crumbs">
-        <span class="proj">KLPTPROJ · Definition Phase</span>
+        <span class="proj">KLPT · Definition Phase</span>
         <span class="sep">/</span>
         <span class="here" id="crumbHere">Progress-to-Outcome Tree</span>
       </div>
@@ -1579,7 +1579,7 @@ var VIEW_ONLY = (function(){try{return /(?:^|[?&])share=reasoning(?:&|$)/.test(l
 <div class="walk-scrim" id="walkScrim">
   <div class="walk-banner" id="walkBanner">
     <span class="vb-brand"><span class="vb-dot"></span>Noetic</span>
-    <span style="color:var(--muted)">View-only · shared by the KLPTPROJ team · made with Noetic</span>
+    <span style="color:var(--muted)">View-only · shared by the KLPT team · made with Noetic</span>
   </div>
   <div class="walk-top">
     <div>
@@ -1617,7 +1617,7 @@ var VIEW_ONLY = (function(){try{return /(?:^|[?&])share=reasoning(?:&|$)/.test(l
       <div class="ch-glyph">
         <svg viewBox="0 0 2000 2000" width="16" height="16" fill="#fff" aria-hidden="true"><circle cx="1000" cy="1000" r="641" fill="none" stroke="#fff" stroke-width="120"/><rect x="756" y="660" width="96" height="675" rx="18"/><rect x="1149" y="665" width="95" height="674" rx="18"/><rect x="897" y="807" width="80" height="244" rx="17"/><rect x="1023" y="950" width="79" height="243" rx="17"/></svg>
       </div>
-      <div class="ch-title">Ask Noetic <span class="ch-proj">· KLPTPROJ project</span></div>
+      <div class="ch-title">Ask Noetic <span class="ch-proj">· KLPT project</span></div>
     </div>
     <button class="ch-close" onclick="closeChat()" aria-label="Close chat">
       <svg width="14" height="14" viewBox="0 0 16 16"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
@@ -1630,7 +1630,7 @@ var VIEW_ONLY = (function(){try{return /(?:^|[?&])share=reasoning(?:&|$)/.test(l
   <div class="ask-context" id="askContext" style="display:none"></div>
   <div class="chat-body" id="chatBody"></div>
   <div class="chat-foot">
-    <textarea class="chat-input" id="chatInput" rows="1" placeholder="Ask about KLPTPROJ…" oninput="chatAutogrow(this)" onkeydown="chatKey(event)"></textarea>
+    <textarea class="chat-input" id="chatInput" rows="1" placeholder="Ask about KLPT…" oninput="chatAutogrow(this)" onkeydown="chatKey(event)"></textarea>
     <button class="chat-send" id="chatSend" onclick="chatSubmit()" aria-label="Send">
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2.5 8h9M8 4.5L11.5 8 8 11.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </button>
@@ -2233,7 +2233,7 @@ const LOOP_TITLES = {
 /* mark project-variable data tokens (names, %s, test IDs, sample sizes) inside a freshly
    rendered screen with .var, so the pink overlay covers content that changes per project.
    Skips anything already inside a .var/.field/.field-help (those are marked at source). */
-const VAR_RE = /(KLPTPROJ|\bKLPT\b|\bSlid\b|\bOtter\b|\bGranola\b|\bPaul\b|\bTED\b|TC-[A-Za-z0-9]+|n=\d+|\b\d+ of \d+\b|\b\d+\/\d+\b|\b\d+\.\d+×|\b\d+×|\b\d{1,3}%|\b\d+-day\b|\bQ[1-4]\b|\bWk\s?\d+\b|≈?15 interviews|\$\d+[–-]\d+)/g;
+const VAR_RE = /(\bKLPT\b|\bSlid\b|\bOtter\b|\bGranola\b|\bPaul\b|\bTED\b|TC-[A-Za-z0-9]+|n=\d+|\b\d+ of \d+\b|\b\d+\/\d+\b|\b\d+\.\d+×|\b\d+×|\b\d{1,3}%|\b\d+-day\b|\bQ[1-4]\b|\bWk\s?\d+\b|≈?15 interviews|\$\d+[–-]\d+)/g;
 function markVariables(root){
   if(!root) return;
   const SKIP=new Set(['SCRIPT','STYLE','BUTTON','TEXTAREA','INPUT','SVG','PATH']);
@@ -2944,7 +2944,7 @@ function paintWalk(){
 
 /* ════════════════════════════ PROJECT CHAT (Feature A) ════════════════════════════
    A contained, project-scoped Claude-style chat. Streams canned, intent-matched
-   intelligence keyed to KLPTPROJ facts. All state in JS, no network. */
+   intelligence keyed to KLPT facts. All state in JS, no network. */
 const CHAT_PROMPTS = [
   "What's the next step?",
   "What's the weakest belief?",
@@ -3061,7 +3061,7 @@ function openChat(){
   panel.classList.remove('center');
   document.getElementById('askScrim').classList.remove('on');
   document.getElementById('askContext').style.display='none';
-  document.getElementById('chatInput').placeholder='Ask about KLPTPROJ…';
+  document.getElementById('chatInput').placeholder='Ask about KLPT…';
   panel.classList.add('open');
   document.getElementById('chatFab').classList.add('hidden');
   if(!chatThread.length) renderChatEmpty();
