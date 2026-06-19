@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" type="image/svg+xml" href="noetic-logo.svg">
+<title>Noetic · System Map (everything we're working with)</title>
+<!--
+  ════════════════════════════════════════════════════════════════════════
+  NOETIC · SYSTEM MAP  —  internal, living architecture graph
+  ────────────────────────────────────────────────────────────────────────
+  An interactive graph of the whole system: the client demo (4 silos, loops,
+  modules, functions), the JTBD interview copilot, the internal methodology
+  toolbox, files/assets, external connections, the real noeticapp SaaS
+  codebase + infra, the vault/gbrain, the Gstack skill framework, and the
+  business/vision layer. Drag nodes, zoom, filter layers, click for detail,
+  search. Graph engine: vis-network (CDN). Hand-authored from a repo scan.
+  ════════════════════════════════════════════════════════════════════════
+-->
+<link rel="preconnect" href="https://fonts.bunny.net" />
+<link href="https://fonts.bunny.net/css?family=fraunces:400,500,600|inter:400,500,600,700|jetbrains-mono:400,500" rel="stylesheet" />
+<script src="https://unpkg.com/vis-network@9.1.9/standalone/umd/vis-network.min.js"></script>
+<style>
+:root{
+  --paper:#0d1118; --surface:#161b24; --surface-2:#10141b; --ink:#e7eaf0; --ink-2:#aeb4c1; --muted:#7c8493;
+  --line:#262d39; --line-strong:#39414f; --accent:#5e95d8; --accent-ink:#8fb6e6;
+  --font-serif:'Fraunces',Georgia,serif; --font-sans:'Inter',system-ui,sans-serif; --font-mono:'JetBrains Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{font-family:var(--font-sans);background:var(--paper);color:var(--ink);overflow:hidden;
+  -webkit-font-smoothing:antialiased}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+.mono{font-family:var(--font-mono)}
+
+/* top bar */
+.bar{height:54px;display:flex;align-items:center;gap:14px;padding:0 18px;border-bottom:1px solid var(--line);
+  background:linear-gradient(180deg,#11151c,#0d1118);position:relative;z-index:6}
+.bar .brand{display:flex;align-items:center;gap:10px}
+.bar .brand img{width:26px;height:26px;display:block}
+.bar .ttl{font-family:var(--font-serif);font-size:18px;font-weight:500;letter-spacing:-.01em}
+.bar .sub{font-size:11px;color:var(--muted);font-family:var(--font-mono);margin-top:1px}
+.bar .sp{flex:1}
+.search{display:flex;align-items:center;gap:8px;height:34px;padding:0 12px;border-radius:8px;border:1px solid var(--line-strong);
+  background:var(--surface);color:var(--ink-2)}
+.search input{background:none;border:none;outline:none;color:var(--ink);font-size:13px;width:200px}
+.search input::placeholder{color:var(--muted)}
+.tbtn{height:34px;padding:0 13px;border-radius:8px;border:1px solid var(--line-strong);background:var(--surface);
+  color:var(--ink-2);font-size:12.5px;font-weight:500;transition:.13s}
+.tbtn:hover{border-color:var(--accent);color:var(--accent-ink)}
+
+/* layout */
+.wrap{position:absolute;top:54px;left:0;right:0;bottom:0;display:flex}
+#graph{flex:1;min-width:0;background:
+  radial-gradient(1100px 700px at 60% 20%, rgba(94,149,216,.06), transparent 60%), var(--paper)}
+
+/* legend / filters */
+.legend{width:248px;flex:none;border-right:1px solid var(--line);background:var(--surface-2);overflow-y:auto;padding:14px 12px}
+.legend h3{font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:700;margin:6px 4px 8px}
+.lrow{display:flex;align-items:center;gap:9px;width:100%;padding:6px 7px;border-radius:7px;font-size:12px;color:var(--ink-2);
+  text-align:left;transition:.12s}
+.lrow:hover{background:rgba(94,149,216,.08)}
+.lrow .sw{width:11px;height:11px;border-radius:3px;flex:none;border:1px solid rgba(255,255,255,.15)}
+.lrow .cnt{margin-left:auto;font-family:var(--font-mono);font-size:10px;color:var(--muted)}
+.lrow.off{opacity:.4}
+.lrow.off .lbl{text-decoration:line-through}
+.legend .lall{display:flex;gap:6px;margin:4px 4px 12px}
+.legend .lall button{flex:1;font-size:11px;padding:5px;border-radius:6px;border:1px solid var(--line-strong);
+  background:var(--surface);color:var(--ink-2)}
+.legend .lall button:hover{border-color:var(--accent);color:var(--accent-ink)}
+.legend .note{font-size:10.5px;color:var(--muted);line-height:1.5;padding:10px 6px 4px;border-top:1px solid var(--line);margin-top:10px}
+
+/* detail panel */
+.detail{position:absolute;top:70px;right:16px;width:300px;max-height:calc(100% - 90px);overflow-y:auto;
+  background:var(--surface);border:1px solid var(--line-strong);border-radius:12px;box-shadow:0 24px 60px rgba(0,0,0,.55);
+  padding:16px 17px;z-index:5;opacity:0;pointer-events:none;transform:translateY(-6px);transition:.16s}
+.detail.on{opacity:1;pointer-events:auto;transform:none}
+.detail .dk{display:inline-flex;align-items:center;gap:7px;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;
+  font-weight:700;color:var(--muted)}
+.detail .dk .sw{width:9px;height:9px;border-radius:3px}
+.detail h2{font-family:var(--font-serif);font-size:19px;font-weight:500;margin:9px 0 4px;line-height:1.2}
+.detail p{font-size:13px;line-height:1.55;color:var(--ink-2)}
+.detail .dconn{margin-top:13px;border-top:1px solid var(--line);padding-top:11px}
+.detail .dconn .dl{font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:700;margin-bottom:7px}
+.detail .dconn a{display:block;font-size:12px;color:var(--accent-ink);padding:3px 0;cursor:pointer}
+.detail .dconn a:hover{text-decoration:underline}
+.detail .dclose{position:absolute;top:11px;right:12px;color:var(--muted);font-size:16px;line-height:1}
+
+.loading{position:absolute;inset:54px 0 0 248px;display:grid;place-items:center;color:var(--muted);font-size:14px;z-index:1}
+.loading.gone{display:none}
+.vis-network:focus{outline:none}
+</style>
+</head>
+<body>
+<div class="bar">
+  <div class="brand"><img src="noetic-logo.svg" alt="Noetic"><div><div class="ttl">System Map</div><div class="sub">everything we're working with · living graph</div></div></div>
+  <div class="sp"></div>
+  <div class="search"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.5"/><path d="M11 11l3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg><input id="q" placeholder="Search nodes…" autocomplete="off"></div>
+  <button class="tbtn" onclick="NET&&NET.fit({animation:true})">Fit</button>
+  <button class="tbtn" id="physBtn" onclick="togglePhysics()">Physics: on</button>
+</div>
+
+<div class="wrap">
+  <aside class="legend">
+    <h3>Layers · click to toggle</h3>
+    <div class="lall"><button onclick="setAll(true)">All</button><button onclick="setAll(false)">None</button></div>
+    <div id="legendRows"></div>
+    <div class="note">Drag to rearrange · scroll to zoom · click a node for detail · search to jump. Hand-mapped from a repo scan; a snapshot, not auto-generated.</div>
+  </aside>
+  <div id="graph"></div>
+  <div class="loading" id="loading">Loading graph engine…</div>
+</div>
+
+<div class="detail" id="detail">
+  <button class="dclose" onclick="closeDetail()">✕</button>
+  <span class="dk" id="dKind"><span class="sw"></span><span id="dKindLbl"></span></span>
+  <h2 id="dTitle"></h2>
+  <p id="dDesc"></p>
+  <div class="dconn" id="dConn"></div>
+</div>
+
+<script>
+/* ───────────────────────── layer groups (colour + label) ───────────────────────── */
+const GROUPS = {
+  root:        {c:'#5e95d8', l:'Noetic Mind (root)'},
+  demo:        {c:'#8fb6e6', l:'Client app · Continuous Discovery'},
+  silo:        {c:'#62a87d', l:'Project silos (4)'},
+  loop:        {c:'#7e9be0', l:'Loops & Define'},
+  module:      {c:'#c2a35e', l:'App modules'},
+  copilot:     {c:'#d9a23f', l:'JTBD interview copilot'},
+  toolbox:     {c:'#a98bd0', l:'Methodology toolbox (internal)'},
+  file:        {c:'#8a94a6', l:'Files & assets'},
+  fn:          {c:'#69727f', l:'Key functions'},
+  external:    {c:'#d8836c', l:'External connections'},
+  saas:        {c:'#54b394', l:'SaaS codebase · noeticapp'},
+  infra:       {c:'#3f9690', l:'Infrastructure'},
+  vault:       {c:'#9a8f5a', l:'Vault & gbrain'},
+  gstack:      {c:'#9b7fd4', l:'Gstack framework'},
+  'gstack-skill':{c:'#c3aceb', l:'Gstack skills'},
+  vision:      {c:'#cf8a66', l:'Business & vision'},
+};
+
+/* ───────────────────────── nodes ───────────────────────── */
+const N = (id,label,group,size,title)=>({id,label,group,size,title});
+const NODES = [
+  N('noetic','Noetic Mind','root',34,'Continuous product-discovery system: unifies JTBD (demand) with Continuous Discovery / OST (supply). The learning loop is the moat.'),
+
+  /* ── client demo ── */
+  N('ccs','Continuous Discovery System','demo',28,'The client-facing web demo (v3). Define + five loops, evidence-driven Progress-to-Outcome tree. Default dark, Fraunces/Inter/JetBrains.'),
+  N('switcher','Project switcher','module',16,'Dropdown that cross-links all four siloed projects; each file links to the other three.'),
+  N('silo-quench','Quench','silo',18,'Daily hydration habit — the reference project. v3.html'),
+  N('silo-ledger','Ledgerline','silo',16,'Bank-feed activation · fintech. Fully distinct content. v3-ledgerline.html'),
+  N('silo-klpt','KLPTPROJ','silo',14,'Placeholder silo (cloned from Quench, awaiting real content). v3-klptproj.html'),
+  N('silo-mt','MTPROJ','silo',14,'Placeholder silo (cloned from Quench, awaiting real content). v3-mtproj.html'),
+
+  N('define','Define · Foundation','loop',16,"The client's brief, established by a Noetic interview: framing assumption, external context, demand segments."),
+  N('loop-tree','Tree (home)','loop',18,'Two-spine convergent Progress-to-Outcome tree. Supply (framing→outcome) + Demand (jtbd→opportunities) converge at the causal system.'),
+  N('loop-progress','1 · Progress','loop',16,'Continuous JTBD interviews of real past switches (demand side). Yields the Job.'),
+  N('loop-outcome','2 · Outcome','loop',14,'One controllable outcome metric + baseline/target.'),
+  N('loop-opp','3 · Opportunity','loop',14,'Struggling moments organised by timeline; prioritised.'),
+  N('loop-causal','4 · Causal Learning','loop',14,'Causal system + riskiest, threshold-locked assumptions.'),
+  N('loop-delivery','5 · Delivery & Impact','loop',14,'Solutions, assumption tests, increment, measure → re-prioritise loop.'),
+
+  N('ext-context','External-context card','module',13,'Weak, pre-frame signal (docs/web/social + model challenge) feeding the framing assumption. Never inflates evidence.'),
+  N('evidence','Evidence ladder','module',15,'assumption → emerging → validated → killed. The spine of the whole product.'),
+  N('meter','Certainty meter','module',13,'Signature 4-segment bar on every belief; fills as evidence accrues.'),
+  N('ask-noetic','Ask Noetic (Socratic)','module',15,'Centered field-helper that interviews you to fill a field or the whole brief (FIELD_GUIDE intake).'),
+  N('walkthrough','Walkthrough','module',12,'21-step methodology guide (METHOD). Pure methodology, no project data.'),
+  N('howitworks','How it works','module',11,'Methodology explainer modal.'),
+  N('decisionlog','Decision Log','module',11,'Reasoning trail / "show the reasoning".'),
+  N('nba','Next Best Action','module',12,'Surfaces the weakest load-bearing belief to test next.'),
+  N('cmdk','Command palette','module',10,'⌘K jump-to.'),
+  N('snapshots','Interview snapshots','module',12,'Logged JTBD interviews (e.g. Ian Turvue, operations manager).'),
+  N('imodal-sched','Schedule a JTBD interview','module',11,'Pipeline + screener modal.'),
+  N('imodal-app','Get the capture app (Mac)','module',12,'On-device native Mac capture app, no bot joins the call. Same engine as the copilot.'),
+
+  /* ── copilot ── */
+  N('copilot','JTBD Interview Copilot','copilot',24,'Native macOS app — the live face of the Progress loop. Scripted demo plays back so it looks real. copilot.html'),
+  N('cop-split','Google Meet split view','copilot',12,'Side-by-side macOS Split View: the video-off call (60%) + copilot (40%).'),
+  N('cop-modes','Full / Focus modes','copilot',12,'Focus = glanceable, advice-only HUD (a small reason + the big verbatim question).'),
+  N('cop-transcript','Live transcript','copilot',11,'Speaker-attributed, streaming.'),
+  N('cop-timeline','JTBD timeline (5 stages)','copilot',12,'first thought → passive → active → deciding → first use; captures quotes.'),
+  N('cop-forces','Four forces','copilot',12,'push / pull / anxiety / habit, populated live.'),
+  N('cop-job','Job certainty','copilot',11,'Job statement hardens assumption → emerging on the meter.'),
+  N('cop-prompts','Ask-this-next prompts','copilot',12,'Small reason + big verbatim question to read aloud.'),
+  N('cop-consent','On-device capture + consent','copilot',11,'"Recording on-device. No bot joined the call."'),
+  N('cop-voice','Voiced playback','copilot',13,'ElevenLabs clips (preferred) with a Web Speech fallback; Play-with-sound toggle.'),
+
+  /* ── toolbox (internal) ── */
+  N('toolbox','Methodology Toolbox','toolbox',20,'Internal, Noetic-only. The supply-side instruments behind the client system. Unlinked from the demos. toolbox.html'),
+  N('tb-mpi','Market Potential Index','toolbox',12,'Quant sizing survey. Moderate signal — sizes, never proves.'),
+  N('tb-cdi','Consumer Directed Insight','toolbox',12,'Consumer-led discovery survey. Emerging signal.'),
+  N('tb-tribe','Tribe Map','toolbox',12,'Identity/belonging segmentation + recruiting map. A lens, not evidence.'),
+  N('tb-video','AI-moderated Video Interviews','toolbox',13,'Scaled qualitative interviews — the one instrument that can validate.'),
+  N('tb-gradient','Signal gradient','toolbox',12,'Organising axis: weak stated → strong observed behaviour.'),
+
+  /* ── files & assets ── */
+  N('files','Files & assets','file',16,'The demo repo: noeticdigital/noetic-mind.'),
+  N('f-logo','noetic-logo.svg','file',11,'Square navy bar mark; favicon + brand glyph on every page.'),
+  N('f-gen','tools/gen-voices.mjs','file',12,'Node generator: reads the copilot SCRIPT, renders ElevenLabs clips.'),
+  N('f-audio','audio/line-NN.mp3 (×15)','file',11,'Rendered interview voices (Eric / interviewer).'),
+
+  /* ── key functions ── */
+  N('fn-goloop','goLoop() · BUILDERS','fn',12,'Renders each loop/Define screen from a per-loop builder.'),
+  N('fn-tree','renderTree · treeSVG · fitTree','fn',12,'Builds the two-spine canvas, measures, places, draws connectors, fits one panel.'),
+  N('fn-meter','meter() · markVariables()','fn',11,'Certainty meter + variable highlighting.'),
+  N('fn-field','FIELD_GUIDE · askNoetic()','fn',11,'Socratic field/brief intake (incl. the "brief" guide).'),
+  N('fn-imodal','IMODAL · openImodal()','fn',10,'Schedule / capture-app modals.'),
+  N('fn-method','METHOD · buildWalk()','fn',10,'Walkthrough engine.'),
+  N('fn-chat','CHAT_BANK · chatMatch()','fn',10,'Ask Noetic chat responses.'),
+  N('fn-cop','advance() · toggleSound()','fn',11,'Copilot playback pacing + voice selection (clip → speech fallback).'),
+
+  /* ── external ── */
+  N('ext-fonts','fonts.bunny.net','external',12,'Fraunces / Inter / JetBrains Mono (GDPR-safe webfonts).'),
+  N('ext-eleven','ElevenLabs API','external',13,'Text-to-speech; pre-rendered to bundled clips (key kept in env, never committed).'),
+  N('ext-speech','Web Speech API','external',11,'Browser on-device TTS — the copilot voice fallback.'),
+  N('ext-meet','Google Meet','external',12,'The interview call surface (video off for JTBD).'),
+  N('ext-github','GitHub · noetic-mind','external',12,'Demo repo; pushed on every change.'),
+  N('ext-vis','vis-network (CDN)','external',10,'This map\'s graph engine (unpkg).'),
+  N('ext-llm','Anthropic / OpenAI APIs','external',13,'LLMs powering the SaaS (and Claude Code / Gstack).'),
+
+  /* ── SaaS codebase (the real product) ── */
+  N('saas','noeticapp (Next.js SaaS)','saas',24,'The real product codebase (separate worktree): Next.js App Router + Drizzle + Postgres.'),
+  N('saas-app','src/app (App Router)','saas',14,'Routes, pages, server components.'),
+  N('saas-admin','Admin · review + categories','saas',13,'Extraction review queue (George-facing) + category management.'),
+  N('saas-api','API routes (/api/admin/…)','saas',12,'Server endpoints.'),
+  N('saas-components','Components (AdminSidebar…)','saas',11,'React UI components.'),
+  N('saas-lib','src/lib','saas',11,'Shared helpers.'),
+  N('saas-auth','Auth (next-auth, bcryptjs)','saas',11,'Session + credentials.'),
+  N('saas-ai','AI SDKs (anthropic, openai)','saas',12,'@anthropic-ai/sdk + openai for extraction/synthesis.'),
+  N('saas-db','Drizzle ORM · schema.ts','saas',13,'src/db: index / schema / setup / with-client. Postgres via drizzle-orm + postgres.'),
+  N('saas-val','zod · uuid','saas',10,'Validation + ids.'),
+
+  /* ── infra ── */
+  N('infra','Infrastructure','infra',18,'Local + EC2.'),
+  N('infra-pg','Postgres','infra',13,'docker-compose service + drizzle migrations.'),
+  N('infra-redis','Redis','infra',11,'docker-compose service.'),
+  N('infra-docker','docker-compose.yml','infra',11,'postgres + redis (+ volume).'),
+  N('infra-ec2','EC2 services','infra',13,'systemd: noetic-flyproxy, noetic-orchestrator, noetic-vault-sync (+ timer).'),
+  N('infra-drizzle','drizzle/migrations','infra',11,'Schema migrations.'),
+
+  /* ── vault & gbrain ── */
+  N('vault','vault/ (knowledge base)','vault',16,'knowledge-base, projects, _system, reports. Synced by noetic-vault-sync.'),
+  N('gbrain','gbrain (semantic brain)','vault',14,'Local PGLite brain; gbrain search/query/code-def over the repo + vault.'),
+
+  /* ── Gstack framework ── */
+  N('gstack','Gstack (AI builder framework)','gstack',22,'Garry-Tan-shaped skill system running inside Claude Code. "Boil the Lake" completeness. Governs how this whole project is built.'),
+  N('gs-routing','CLAUDE.md skill routing','gstack',13,'Maps user intent → the right skill (ship, qa, investigate, …).'),
+  N('gs-brain','gbrain · learnings · telemetry','gstack',12,'Per-project memory, learnings log, optional telemetry.'),
+  N('gs-overlays','Model overlays','gstack',10,'Per-model behaviour patches (claude overlay active).'),
+  N('gs-plan','Planning skills','gstack-skill',13,'plan-ceo / plan-eng / plan-design / plan-devex-review · autoplan · spec · plan-tune.'),
+  N('gs-ship','Ship skills','gstack-skill',12,'ship · land-and-deploy · setup-deploy · canary · landing-report.'),
+  N('gs-quality','Quality skills','gstack-skill',13,'qa · qa-only · review · investigate · health · devex-review · benchmark · codex.'),
+  N('gs-design','Design skills','gstack-skill',12,'design-consultation · design-html · design-review · design-shotgun.'),
+  N('gs-docs','Docs & knowledge skills','gstack-skill',12,'document-generate · document-release · learn · retro · context-save / context-restore.'),
+  N('gs-browser','Browser skills','gstack-skill',12,'browse · connect-chrome · scrape · skillify · pair-agent · setup-browser-cookies.'),
+  N('gs-safety','Safety skills','gstack-skill',11,'careful · guard · freeze · unfreeze · cso.'),
+  N('gs-gbrainskill','gbrain skills','gstack-skill',11,'setup-gbrain · sync-gbrain.'),
+  N('gs-ios','iOS skills','gstack-skill',11,'ios-qa · ios-fix · ios-design-review · ios-clean · ios-sync.'),
+  N('gs-misc','office-hours · make-pdf · upgrade','gstack-skill',11,'office-hours · make-pdf · gstack-upgrade.'),
+
+  /* ── business & vision ── */
+  N('vision','Noetic Digital (the business)','vision',18,'George Reed. Sells a managed continuous-discovery loop, not deliverables. The learning loop is the moat.'),
+  N('v-interviewers','JTBD interviewers','vision',12,'Plan to staff interviews with BetterHelp-style therapists (Socratic + empathy).'),
+  N('v-research','Autoresearch loop','vision',12,'Karpathy keep-or-discard "dream cycle" adapted for auto-research.'),
+  N('v-firecrawl','Firecrawl web-data layer','vision',12,'web → LLM-ready data; desk-research runner + web layer for the OS.'),
+  N('v-playbook','Solo founder playbook','vision',11,'Verified deep-research on running Noetic solo (lives in vault + gbrain).'),
+  N('v-security','Security hardening backlog','vision',12,'Lethal-trifecta risk, secrets-in-config, superuser DB — hardening backlog.'),
+  N('v-cos','CoS AI panel insights','vision',11,'Design guidance for the chief-of-staff AI, mined from a real working-CoS panel.'),
+];
+
+/* ───────────────────────── edges ───────────────────────── */
+const E=(f,t,d)=>({from:f,to:t,dashes:!!d});
+const EDGES = [
+  // root → layers
+  E('noetic','ccs'),E('noetic','copilot'),E('noetic','toolbox'),E('noetic','files'),
+  E('noetic','saas'),E('noetic','gstack'),E('noetic','vision'),E('noetic','vault'),
+  // client app
+  E('ccs','switcher'),E('ccs','define'),E('ccs','loop-tree'),E('ccs','loop-progress'),
+  E('ccs','loop-outcome'),E('ccs','loop-opp'),E('ccs','loop-causal'),E('ccs','loop-delivery'),
+  E('switcher','silo-quench'),E('switcher','silo-ledger'),E('switcher','silo-klpt'),E('switcher','silo-mt'),
+  E('ccs','evidence'),E('ccs','meter'),E('ccs','ask-noetic'),E('ccs','walkthrough'),E('ccs','howitworks'),
+  E('ccs','decisionlog'),E('ccs','nba'),E('ccs','cmdk'),E('ccs','snapshots'),E('ccs','imodal-sched'),E('ccs','imodal-app'),
+  E('define','ext-context'),E('loop-tree','ext-context'),E('ask-noetic','define',1),E('meter','evidence'),
+  E('loop-progress','snapshots'),E('imodal-app','copilot',1),
+  // copilot
+  E('copilot','cop-split'),E('copilot','cop-modes'),E('copilot','cop-transcript'),E('copilot','cop-timeline'),
+  E('copilot','cop-forces'),E('copilot','cop-job'),E('copilot','cop-prompts'),E('copilot','cop-consent'),E('copilot','cop-voice'),
+  E('copilot','loop-progress',1),E('silo-quench','copilot',1),
+  E('cop-split','ext-meet',1),E('cop-voice','ext-eleven',1),E('cop-voice','ext-speech',1),E('cop-voice','f-audio',1),
+  // toolbox
+  E('toolbox','tb-mpi'),E('toolbox','tb-cdi'),E('toolbox','tb-tribe'),E('toolbox','tb-video'),E('toolbox','tb-gradient'),
+  E('tb-video','loop-progress',1),E('tb-mpi','loop-opp',1),E('tb-tribe','define',1),E('tb-cdi','ext-context',1),
+  // files
+  E('files','silo-quench'),E('files','silo-ledger'),E('files','silo-klpt'),E('files','silo-mt'),
+  E('files','toolbox'),E('files','copilot'),E('files','f-logo'),E('files','f-gen'),E('files','f-audio'),
+  E('f-gen','ext-eleven',1),E('f-gen','f-audio'),E('files','ext-github',1),E('files','ext-fonts',1),
+  // functions
+  E('ccs','fn-goloop'),E('fn-goloop','loop-tree'),E('fn-tree','loop-tree'),E('fn-meter','meter'),
+  E('fn-field','ask-noetic'),E('fn-imodal','imodal-app'),E('fn-method','walkthrough'),E('fn-chat','ask-noetic'),E('fn-cop','copilot'),
+  // saas
+  E('saas','saas-app'),E('saas','saas-lib'),E('saas','saas-db'),E('saas','saas-auth'),E('saas','saas-ai'),
+  E('saas','saas-val'),E('saas','infra'),E('saas-app','saas-admin'),E('saas-app','saas-api'),E('saas-app','saas-components'),
+  E('saas-db','infra-pg'),E('saas-ai','ext-llm',1),E('saas','ext-github',1),
+  // infra
+  E('infra','infra-pg'),E('infra','infra-redis'),E('infra','infra-docker'),E('infra','infra-ec2'),E('infra','infra-drizzle'),
+  E('infra-ec2','vault',1),
+  // vault
+  E('vault','gbrain'),E('gbrain','saas',1),E('gbrain','vault'),
+  // gstack
+  E('gstack','gs-routing'),E('gstack','gs-brain'),E('gstack','gs-overlays'),
+  E('gstack','gs-plan'),E('gstack','gs-ship'),E('gstack','gs-quality'),E('gstack','gs-design'),
+  E('gstack','gs-docs'),E('gstack','gs-browser'),E('gstack','gs-safety'),E('gstack','gs-gbrainskill'),E('gstack','gs-ios'),E('gstack','gs-misc'),
+  E('gstack','noetic',1),E('gstack','ext-llm',1),E('gs-gbrainskill','gbrain',1),E('gs-brain','gbrain',1),
+  E('gs-ship','ext-github',1),
+  // vision
+  E('vision','noetic'),E('vision','v-interviewers'),E('vision','v-research'),E('vision','v-firecrawl'),
+  E('vision','v-playbook'),E('vision','v-security'),E('vision','v-cos'),
+  E('v-interviewers','loop-progress',1),E('v-research','vault',1),E('v-firecrawl','ext-context',1),
+  E('v-security','saas',1),E('v-cos','saas',1),
+];
+
+/* ───────────────────────── render ───────────────────────── */
+let NET, nodesDS, edgesDS, hidden=new Set();
+const $=id=>document.getElementById(id);
+
+function boot(){
+  if(!window.vis){ $('loading').textContent='Could not load the graph engine (vis-network CDN). Check the connection and reload.'; return; }
+  const visGroups={}; Object.keys(GROUPS).forEach(g=>{ visGroups[g]={color:{background:GROUPS[g].c,border:'#ffffff22',highlight:{background:GROUPS[g].c,border:GROUPS[g].c}},
+    font:{color:'#dfe4ec'}}; });
+  nodesDS=new vis.DataSet(NODES.map(n=>({id:n.id,label:n.label,group:n.group,size:n.size,title:n.title})));
+  edgesDS=new vis.DataSet(EDGES.map((e,i)=>({id:'e'+i,from:e.from,to:e.to,dashes:e.dashes})));
+  NET=new vis.Network($('graph'),{nodes:nodesDS,edges:edgesDS},{
+    nodes:{shape:'dot',borderWidth:2,font:{face:'Inter',size:13,strokeWidth:0,color:'#dfe4ec'},
+      scaling:{label:{enabled:true,min:11,max:20}}},
+    edges:{color:{color:'#313a48',highlight:'#5e95d8',hover:'#5e95d8',opacity:0.85},width:1,selectionWidth:2,
+      smooth:{type:'continuous',roundness:0.4},arrows:{to:{enabled:true,scaleFactor:0.42}}},
+    groups:visGroups,
+    physics:{solver:'barnesHut',barnesHut:{gravitationalConstant:-9500,centralGravity:0.25,springLength:120,springConstant:0.035,damping:0.45,avoidOverlap:0.15},
+      stabilization:{iterations:300},minVelocity:0.6},
+    interaction:{hover:true,tooltipDelay:140,navigationButtons:true,keyboard:false,multiselect:false},
+  });
+  NET.once('stabilizationIterationsDone',()=>{ $('loading').classList.add('gone'); });
+  setTimeout(()=>$('loading').classList.add('gone'),3500);
+  NET.on('click',p=>{ if(p.nodes.length) showDetail(p.nodes[0]); else closeDetail(); });
+  buildLegend();
+}
+
+function buildLegend(){
+  const host=$('legendRows'); const counts={};
+  NODES.forEach(n=>counts[n.group]=(counts[n.group]||0)+1);
+  host.innerHTML=Object.keys(GROUPS).map(g=>
+    `<button class="lrow" data-g="${g}" onclick="toggleGroup('${g}')">
+       <span class="sw" style="background:${GROUPS[g].c}"></span><span class="lbl">${GROUPS[g].l}</span>
+       <span class="cnt">${counts[g]||0}</span>
+     </button>`).join('');
+}
+function toggleGroup(g){
+  if(hidden.has(g)) hidden.delete(g); else hidden.add(g);
+  document.querySelector(`.lrow[data-g="${g}"]`).classList.toggle('off',hidden.has(g));
+  applyFilter();
+}
+function setAll(on){
+  hidden = on ? new Set() : new Set(Object.keys(GROUPS));
+  document.querySelectorAll('.lrow').forEach(r=>r.classList.toggle('off',!on));
+  applyFilter();
+}
+function applyFilter(){
+  nodesDS.update(NODES.map(n=>({id:n.id,hidden:hidden.has(n.group)})));
+}
+
+/* detail panel */
+function showDetail(id){
+  const n=NODES.find(x=>x.id===id); if(!n) return;
+  const g=GROUPS[n.group];
+  $('dKind').querySelector('.sw').style.background=g.c;
+  $('dKindLbl').textContent=g.l;
+  $('dTitle').textContent=n.label;
+  $('dDesc').textContent=n.title||'';
+  const conn=[...new Set(EDGES.filter(e=>e.from===id||e.to===id).map(e=>e.from===id?e.to:e.from))]
+    .map(cid=>{const c=NODES.find(x=>x.id===cid);return c?`<a onclick="showDetail('${cid}');NET.focus('${cid}',{scale:1.1,animation:true})">${c.label}</a>`:''}).join('');
+  $('dConn').innerHTML = conn ? `<div class="dl">Connected (${EDGES.filter(e=>e.from===id||e.to===id).length})</div>${conn}` : '';
+  $('detail').classList.add('on');
+  NET.selectNodes([id]);
+}
+function closeDetail(){ $('detail').classList.remove('on'); }
+
+/* search */
+$('q').addEventListener('keydown',e=>{ if(e.key!=='Enter') return;
+  const q=e.target.value.trim().toLowerCase(); if(!q) return;
+  const hit=NODES.find(n=>n.label.toLowerCase().includes(q)) || NODES.find(n=>(n.title||'').toLowerCase().includes(q));
+  if(hit){ NET.selectNodes([hit.id]); NET.focus(hit.id,{scale:1.2,animation:true}); showDetail(hit.id); }
+});
+
+/* physics toggle */
+let phys=true;
+function togglePhysics(){ phys=!phys; NET.setOptions({physics:{enabled:phys}}); $('physBtn').textContent='Physics: '+(phys?'on':'off'); }
+
+boot();
+</script>
+</body>
+</html>
