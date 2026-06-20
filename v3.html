@@ -4,6 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link rel="icon" type="image/svg+xml" href="noetic-logo.svg">
+<script src="projects.js"></script>
 <title>Noetic, The Continuous Discovery System</title>
 <!--
   ════════════════════════════════════════════════════════════════════════
@@ -1346,19 +1347,7 @@ var VIEW_ONLY = (function(){try{return /(?:^|[?&])share=reasoning(?:&|$)/.test(l
       </button>
       <div class="proj-menu" id="projMenu" role="menu">
         <div class="proj-menu-lab">Projects</div>
-        <button class="proj-opt active" role="menuitem" onclick="closeProjMenu()">
-          <span class="proj-dot"></span><span class="po-txt"><b>Quench</b> · Daily hydration habit</span>
-          <svg class="po-check" width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3.5 8.5l3 3 6-6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
-        <a class="proj-opt" role="menuitem" href="v3-ledgerline.html">
-          <span class="proj-dot muted"></span><span class="po-txt"><b>Ledgerline</b> · Bank-feed activation</span><span class="po-soon">demo</span>
-        </a>
-        <a class="proj-opt" role="menuitem" href="v3-klptproj.html">
-          <span class="proj-dot muted"></span><span class="po-txt"><b>KLPT</b> · Visual capture for learners</span><span class="po-soon">demo</span>
-        </a>
-        <a class="proj-opt" role="menuitem" href="v3-mtproj.html">
-          <span class="proj-dot muted"></span><span class="po-txt"><b>Moneytree Personal</b> · New project</span><span class="po-soon">demo</span>
-        </a>
+        <div id="projItems"></div>
         <div class="proj-menu-sep"></div>
         <button class="proj-opt new" role="menuitem" disabled>＋ New discovery project</button>
       </div>
@@ -3666,5 +3655,6 @@ document.addEventListener('keydown',e=>{
 
 if(VIEW_ONLY) bootViewOnly();
 </script>
+<script>renderProjMenu('quench')</script>
 </body>
 </html>
