@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- SILOED SHARE BUILD — standalone Ledgerline demo. Host in isolation. Frozen; edit v3-ledgerline.html, then re-build. -->
+<!-- SILOED SHARE BUILD — host in isolation. Frozen; edit v3-ledgerline.html, then re-build. -->
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAyNCIgaGVpZ2h0PSIxMDI0IiB2aWV3Qm94PSIwIDAgMTAyNCAxMDI0IiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogIDxkZWZzPgogICAgPGxpbmVhckdyYWRpZW50IGlkPSJuYXZ5IiB4MT0iMTkwIiB5MT0iMTMwIiB4Mj0iODQwIiB5Mj0iODkwIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iIzE2Mzk2RSIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjAuNTIiIHN0b3AtY29sb3I9IiMwQjJBNTYiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjMDYxQjNBIi8+CiAgICA8L2xpbmVhckdyYWRpZW50PgoKICAgIDxyYWRpYWxHcmFkaWVudCBpZD0idG9wTGlnaHQiIGN4PSIwIiBjeT0iMCIgcj0iMSIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiIGdyYWRpZW50VHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzYwIDIzMCkgcm90YXRlKDUwKSBzY2FsZSg2MjAgNzAwKSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iIzJBNTI4QiIgc3RvcC1vcGFjaXR5PSIwLjQyIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMC41IiBzdG9wLWNvbG9yPSIjMTUzQjcwIiBzdG9wLW9wYWNpdHk9IjAuMTIiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjMDcxQzNCIiBzdG9wLW9wYWNpdHk9IjAiLz4KICAgIDwvcmFkaWFsR3JhZGllbnQ+CgogICAgPGxpbmVhckdyYWRpZW50IGlkPSJiYXJGaWxsIiB4MT0iMCIgeTE9IjAiIHgyPSIwIiB5Mj0iMSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iI0ZGRkZGRiIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjAuNjUiIHN0b3AtY29sb3I9IiNGQkZCRkIiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjRUVGMUY1Ii8+CiAgICA8L2xpbmVhckdyYWRpZW50PgoKICAgIDxmaWx0ZXIgaWQ9Imljb25TaGFkb3ciIHg9IjcwIiB5PSI2MCIgd2lkdGg9Ijg4NCIgaGVpZ2h0PSI5MTQiIGZpbHRlclVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgY29sb3ItaW50ZXJwb2xhdGlvbi1maWx0ZXJzPSJzUkdCIj4KICAgICAgPGZlRHJvcFNoYWRvdyBkeD0iMCIgZHk9IjI0IiBzdGREZXZpYXRpb249IjI4IiBmbG9vZC1jb2xvcj0iIzA2MTIyNSIgZmxvb2Qtb3BhY2l0eT0iMC4yNiIvPgogICAgPC9maWx0ZXI+CgogICAgPGZpbHRlciBpZD0iYmFyRHJvcCIgeD0iLTE4JSIgeT0iLTEwJSIgd2lkdGg9IjEzNiUiIGhlaWdodD0iMTI4JSIgY29sb3ItaW50ZXJwb2xhdGlvbi1maWx0ZXJzPSJzUkdCIj4KICAgICAgPGZlRHJvcFNoYWRvdyBkeD0iMCIgZHk9IjkiIHN0ZERldmlhdGlvbj0iNiIgZmxvb2QtY29sb3I9IiMwMzExMjYiIGZsb29kLW9wYWNpdHk9IjAuMzYiLz4KICAgIDwvZmlsdGVyPgogIDwvZGVmcz4KCiAgPCEtLSBzcXVhc2ggdGhlIGljb24gdmVydGljYWxseSAoODI0LT43OTIgdGFsbCkgc28gdGhlIHJvdW5kZWQgc2hhcGUgaXMgYSB0cnVlIHNxdWFyZSwgdGhlbiByZS1jZW50cmUgLS0+CiAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMCAxMTYpIHNjYWxlKDEgMC45NjExNykgdHJhbnNsYXRlKDAgLTg4KSI+CiAgICA8ZyBmaWx0ZXI9InVybCgjaWNvblNoYWRvdykiPgogICAgICA8cmVjdCB4PSIxMTYiIHk9Ijg4IiB3aWR0aD0iNzkyIiBoZWlnaHQ9IjgyNCIgcng9IjEwNCIgZmlsbD0idXJsKCNuYXZ5KSIvPgogICAgICA8cmVjdCB4PSIxMTYiIHk9Ijg4IiB3aWR0aD0iNzkyIiBoZWlnaHQ9IjgyNCIgcng9IjEwNCIgZmlsbD0idXJsKCN0b3BMaWdodCkiLz4KICAgICAgPHJlY3QgeD0iMTE3LjUiIHk9Ijg5LjUiIHdpZHRoPSI3ODkiIGhlaWdodD0iODIxIiByeD0iMTAyLjUiIHN0cm9rZT0iIzI4NEM3QiIgc3Ryb2tlLW9wYWNpdHk9IjAuMzIiIHN0cm9rZS13aWR0aD0iMyIvPgogICAgPC9nPgoKICAgIDxnIGZpbHRlcj0idXJsKCNiYXJEcm9wKSI+CiAgICAgIDxyZWN0IHg9IjI4NiIgeT0iMTgzIiB3aWR0aD0iOTQiIGhlaWdodD0iNjIxIiByeD0iMjAiIGZpbGw9InVybCgjYmFyRmlsbCkiLz4KICAgICAgPHJlY3QgeD0iNDE1IiB5PSIzMjgiIHdpZHRoPSI4MCIgaGVpZ2h0PSIyNDAiIHJ4PSIxOCIgZmlsbD0idXJsKCNiYXJGaWxsKSIvPgogICAgICA8cmVjdCB4PSI1NDAiIHk9IjQ2OCIgd2lkdGg9IjgwIiBoZWlnaHQ9IjIzOCIgcng9IjE4IiBmaWxsPSJ1cmwoI2JhckZpbGwpIi8+CiAgICAgIDxyZWN0IHg9IjY2MSIgeT0iMjE1IiB3aWR0aD0iOTMiIGhlaWdodD0iNjA2IiByeD0iMjAiIGZpbGw9InVybCgjYmFyRmlsbCkiLz4KICAgIDwvZz4KCiAgICA8ZyBvcGFjaXR5PSIwLjQ1Ij4KICAgICAgPHJlY3QgeD0iMjkxIiB5PSIxODgiIHdpZHRoPSI4NCIgaGVpZ2h0PSIxMiIgcng9IjYiIGZpbGw9IiNGRkZGRkYiLz4KICAgICAgPHJlY3QgeD0iNDIwIiB5PSIzMzMiIHdpZHRoPSI3MCIgaGVpZ2h0PSIxMCIgcng9IjUiIGZpbGw9IiNGRkZGRkYiLz4KICAgICAgPHJlY3QgeD0iNTQ1IiB5PSI0NzMiIHdpZHRoPSI3MCIgaGVpZ2h0PSIxMCIgcng9IjUiIGZpbGw9IiNGRkZGRkYiLz4KICAgICAgPHJlY3QgeD0iNjY2IiB5PSIyMjAiIHdpZHRoPSI4MyIgaGVpZ2h0PSIxMiIgcng9IjYiIGZpbGw9IiNGRkZGRkYiLz4KICAgIDwvZz4KCiAgICA8ZyBvcGFjaXR5PSIwLjE4Ij4KICAgICAgPHJlY3QgeD0iMjkxIiB5PSI3ODgiIHdpZHRoPSI4NCIgaGVpZ2h0PSIxMCIgcng9IjUiIGZpbGw9IiNDQUQyREMiLz4KICAgICAgPHJlY3QgeD0iNDIwIiB5PSI1NTIiIHdpZHRoPSI3MCIgaGVpZ2h0PSI5IiByeD0iNC41IiBmaWxsPSIjQ0FEMkRDIi8+CiAgICAgIDxyZWN0IHg9IjU0NSIgeT0iNjkwIiB3aWR0aD0iNzAiIGhlaWdodD0iOSIgcng9IjQuNSIgZmlsbD0iI0NBRDJEQyIvPgogICAgICA8cmVjdCB4PSI2NjYiIHk9IjgwNSIgd2lkdGg9IjgzIiBoZWlnaHQ9IjEwIiByeD0iNSIgZmlsbD0iI0NBRDJEQyIvPgogICAgPC9nPgogIDwvZz4KPC9zdmc+">
@@ -1788,7 +1788,7 @@ const NODES = {
       type:'Motivations, functional (current numbers), emotional (in control), social (credible to accountant & investors). Timeline, the decisive struggling moment sits at Onboarding: the owner reaches “Connect your bank,” imagines handing a startup their business-account credentials, and stalls. Forces, push (a deadline exposed the mess) and pull (always-current books) are strong; anxiety (bank credentials, miscategorization) and habit (the spreadsheet ritual they secretly like) hold them back.',
       evidence:[
         ['14 interviews','Recurs in 11 of 14 progress interviews of real past switches.'],
-        ['behavior','Owners who connected a feed in week 1 reconciled 3.2× more often in month one.'],
+        ['behaviour','Owners who connected a feed in week 1 reconciled 3.2× more often in month one.'],
         ['quotes','“I’m not giving a two-year-old startup the keys to my business account.”, Rosa, roastery owner'],
         ['signal','Drop-off concentrates between signup and a completed bank connection.'],
       ],
@@ -1839,7 +1839,7 @@ const NODES = {
       type:'Desirability + causal-effectiveness assumption.',
       evidence:[
         ['signal','Concierge test: 7 of 10 owners completed connection with read-only framing (bar was 6/10).'],
-        ['gap','Not yet behavioral at scale, TC-08 measures the self-serve flow over 40 new accounts.'],
+        ['gap','Not yet behavioural at scale, TC-08 measures the self-serve flow over 40 new accounts.'],
       ],
     }},
   solA:{kind:'Solution · Product', ev:'suggestive', solType:'PRODUCT',
@@ -1849,7 +1849,7 @@ const NODES = {
   solB:{kind:'Solution · Service', ev:'assumption', solType:'SERVICE',
     h:'White-glove first connection',
     d:'A human connects the feed with the owner on a 20-minute onboarding call.',
-    detail:{grounding:'Causal theory: a person vouching in real time beats any UI for trust, tests willingness, not scalability yet.',type:'Service path.',evidence:[['untested','No behavioral evidence yet, pure assumption.']]}},
+    detail:{grounding:'Causal theory: a person vouching in real time beats any UI for trust, tests willingness, not scalability yet.',type:'Service path.',evidence:[['untested','No behavioural evidence yet, pure assumption.']]}},
   solC:{kind:'Solution · Hybrid', ev:'killed', solType:'HYBRID',
     h:'Sandbox-first with sample data',
     d:'Explore on sample books first; guided primary connection after first aha.',
@@ -2526,18 +2526,18 @@ const BUILDERS = {
   /* ───── OUTCOME ───── */
   outcome(){ return `<div class="wrap">
     <div class="screen-head">
-      <div class="eyebrow">Loop 2 · Translate progress into a measurable behavior</div>
+      <div class="eyebrow">Loop 2 · Translate progress into a measurable behaviour</div>
       <h1 class="h1">The Outcome &amp; Progress Brief</h1>
       <p class="lede princ">“Leadership negotiates outcomes, not solutions.”</p>
     </div>
-    ${concierge('validated', `<span class="cc-step">Where we are:</span> the contract is set. <b>Proven:</b> 7-day bank-feed activation, <b>34% → 55%</b>, is the controllable behavior this team owns, ratified with leadership. <span class="cc-step">Next:</span> learning-goal mode until the trust driver clears its test.`)}
+    ${concierge('validated', `<span class="cc-step">Where we are:</span> the contract is set. <b>Proven:</b> 7-day bank-feed activation, <b>34% → 55%</b>, is the controllable behaviour this team owns, ratified with leadership. <span class="cc-step">Next:</span> learning-goal mode until the trust driver clears its test.`)}
 
     <div class="grid g-7-5" style="margin-top:22px">
       <div class="card">
         <div class="card-t">The three altitudes, keep them distinct<span class="ct-line"></span></div>
         <div class="grid" style="gap:10px">
           <div class="card inset" style="border-radius:10px;padding:13px 15px"><div style="display:flex;align-items:center;gap:9px"><span style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)">Business outcome</span>${pill('assumption')}</div><div style="margin-top:6px;font-size:13.5px">90-day churn of new SMB accounts, the thing leadership ultimately cares about. We don’t control it directly.</div></div>
-          <div class="card" style="border-radius:10px;padding:13px 15px;border-color:var(--accent)"><div style="display:flex;align-items:center;gap:9px"><span style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-ink)">Product outcome ★ ours</span>${pill('validated')}</div><div style="margin-top:6px;font-size:14px"><b class="field var" id="f-outcome" contenteditable="true" spellcheck="false">7-day bank-feed activation: 34% → 55%</b>. Connect a bank feed AND complete a first reconciliation within 7 days. Controllable, behavioral, the one metric this team owns. ${fhelp('outcome')}</div></div>
+          <div class="card" style="border-radius:10px;padding:13px 15px;border-color:var(--accent)"><div style="display:flex;align-items:center;gap:9px"><span style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-ink)">Product outcome ★ ours</span>${pill('validated')}</div><div style="margin-top:6px;font-size:14px"><b class="field var" id="f-outcome" contenteditable="true" spellcheck="false">7-day bank-feed activation: 34% → 55%</b>. Connect a bank feed AND complete a first reconciliation within 7 days. Controllable, behavioural, the one metric this team owns. ${fhelp('outcome')}</div></div>
           <div class="card inset" style="border-radius:10px;padding:13px 15px"><div style="display:flex;align-items:center;gap:9px"><span style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)">Traction metric</span>${pill('killed')}</div><div style="margin-top:6px;font-size:13.5px">“Bank connections started”, too narrow. Rejected as the primary: it games easily and doesn’t imply trusted books.</div></div>
         </div>
 
@@ -2571,7 +2571,7 @@ const BUILDERS = {
   opportunity(){ return `<div class="wrap">
     <div class="screen-head">
       <div class="eyebrow">Loop 3 · The opportunity space</div>
-      <h1 class="h1">Organize struggle by timeline moment, prioritise one target</h1>
+      <h1 class="h1">Organise struggle by timeline moment, prioritise one target</h1>
       <p class="lede">Opportunities are customer-framed struggling moments, never solutions.</p>
     </div>
     ${concierge('suggestive', `<span class="cc-step">Where we are:</span> one target prioritised, <b>bank-connection trust</b> (high demand × high ability to win). <b>Emerging,</b> not yet validated. <span class="cc-step">Next:</span> the trust-legibility test, <b>TC-08</b>.`)}
@@ -2608,7 +2608,7 @@ const BUILDERS = {
         <div style="margin-top:10px">
           <div class="check met"><span class="box"><svg viewBox="0 0 16 16" width="11" height="11" fill="none" aria-hidden="true"><path d="M3.5 8.5l3 3 6-6.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="c-txt">Framed as a customer struggle, not a solution<span class="ct-meta">“Won’t connect my primary account”, a moment, not a feature.</span></span></div>
           <div class="check met"><span class="box"><svg viewBox="0 0 16 16" width="11" height="11" fill="none" aria-hidden="true"><path d="M3.5 8.5l3 3 6-6.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="c-txt">Not a feature request in disguise<span class="ct-meta">Translated from “add more security badges” → the underlying trust threshold.</span></span></div>
-          <div class="check met"><span class="box"><svg viewBox="0 0 16 16" width="11" height="11" fill="none" aria-hidden="true"><path d="M3.5 8.5l3 3 6-6.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="c-txt">Grounded in real behavior / a real story<span class="ct-meta">Rosa, Aisha, + 6 more interviews of real past switches.</span></span></div>
+          <div class="check met"><span class="box"><svg viewBox="0 0 16 16" width="11" height="11" fill="none" aria-hidden="true"><path d="M3.5 8.5l3 3 6-6.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="c-txt">Grounded in real behaviour / a real story<span class="ct-meta">Rosa, Aisha, + 6 more interviews of real past switches.</span></span></div>
           <div class="check met"><span class="box"><svg viewBox="0 0 16 16" width="11" height="11" fill="none" aria-hidden="true"><path d="M3.5 8.5l3 3 6-6.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="c-txt">Plausibly connects to the desired outcome<span class="ct-meta">Sits exactly on the 7-day activation drop-off.</span></span></div>
           <div class="check met" style="border-bottom:none"><span class="box"><svg viewBox="0 0 16 16" width="11" height="11" fill="none" aria-hidden="true"><path d="M3.5 8.5l3 3 6-6.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="c-txt">Enough evidence to matter<span class="ct-meta">Recurs unprompted in 8 of 14 interviews.</span></span></div>
         </div>
@@ -2733,7 +2733,7 @@ const BUILDERS = {
         <div class="tc-field"><div class="tcf-l">Assumption under test</div><div class="tcf-v">Founders will connect their primary bank account in session one if the connection flow makes safety legible (read-only framing, granular permissions, disconnect-anytime, inline security page).</div></div>
         <div class="tc-field"><div class="tcf-l">Decision it informs</div><div class="tcf-v">Whether to ship the trust-first increment, or pivot to the white-glove service path.</div></div>
         <div class="tc-field"><div class="tcf-l">Audience &amp; moment</div><div class="tcf-v">Next 40 new SMB accounts, at the “Connect your bank” step.</div></div>
-        <div class="tc-field"><div class="tcf-l">Observed behavior</div><div class="tcf-v">Complete a primary-account connection within the first session.</div></div>
+        <div class="tc-field"><div class="tcf-l">Observed behaviour</div><div class="tcf-v">Complete a primary-account connection within the first session.</div></div>
         <div class="threshold">
           <div class="th-l">Success threshold, locked
             <span class="lock"><svg width="13" height="13" viewBox="0 0 16 16" fill="none"><rect x="3" y="7" width="10" height="7" rx="1.5" stroke="#c9a24f" stroke-width="1.3"/><path d="M5 7V5a3 3 0 016 0v2" stroke="#c9a24f" stroke-width="1.3"/></svg></span>
@@ -2750,7 +2750,7 @@ const BUILDERS = {
         <div class="tc-field"><div class="tcf-l">Assumption under test</div><div class="tcf-v">Deferring the scary step, sandbox mode with sample books first, raises eventual primary-account connection.</div></div>
         <div class="tc-field"><div class="tcf-l">Decision it informed</div><div class="tcf-v">Whether sandbox-first is a viable solution path, or the struggle must be met at the credential moment itself.</div></div>
         <div class="tc-field"><div class="tcf-l">Audience &amp; moment</div><div class="tcf-v">52 new accounts offered the fake door at the connect step.</div></div>
-        <div class="tc-field"><div class="tcf-l">Observed behavior</div><div class="tcf-v">Return and complete a real connection within 48 hours.</div></div>
+        <div class="tc-field"><div class="tcf-l">Observed behaviour</div><div class="tcf-v">Return and complete a real connection within 48 hours.</div></div>
         <div class="threshold">
           <div class="th-l">Success threshold, locked<span class="lock"><svg width="13" height="13" viewBox="0 0 16 16" fill="none"><rect x="3" y="7" width="10" height="7" rx="1.5" stroke="#c9a24f" stroke-width="1.3"/><path d="M5 7V5a3 3 0 016 0v2" stroke="#c9a24f" stroke-width="1.3"/></svg></span></div>
           <div class="th-v">≥ 30% of “connect later” users return to connect within 48h</div>
@@ -2778,7 +2778,7 @@ const BUILDERS = {
     <div class="section-rule"><span class="sr-n">5.5</span><h2 class="serif">Impact ladder · four levels</h2><span class="sr-line"></span><span class="mono" style="font-size:11px;color:var(--muted)">expected vs actual</span></div>
     <div class="card">
       <div class="iladder">
-        <div class="irow"><div class="i-rung">L1</div><div class="i-body"><div class="i-name">Assumption behavior</div><div class="i-sub">Primary-account connection in session one</div></div><div style="text-align:right"><div class="i-val">57%</div><div class="i-delta iup">▲ vs 50% bar</div></div></div>
+        <div class="irow"><div class="i-rung">L1</div><div class="i-body"><div class="i-name">Assumption behaviour</div><div class="i-sub">Primary-account connection in session one</div></div><div style="text-align:right"><div class="i-val">57%</div><div class="i-delta iup">▲ vs 50% bar</div></div></div>
         <div class="iconn"></div>
         <div class="irow"><div class="i-rung">L2</div><div class="i-body"><div class="i-name">Opportunity relief</div><div class="i-sub">Trust stalls at “Connect your bank”</div></div><div style="text-align:right"><div class="i-val">−34%</div><div class="i-delta iup">▲ fewer stalls</div></div></div>
         <div class="iconn"></div>
@@ -2801,7 +2801,7 @@ const BUILDERS = {
       <div class="dentry"><div class="d-when">2026-06-09 · Wk 24</div><div class="d-what">Prioritised bank-connection trust as the single target opportunity</div><div class="d-why">Top-right of the demand × ability matrix; named unprompted in 8/14 interviews and sits exactly on the 7-day activation drop-off.</div><div class="d-trig">Revisit if: TC-08 fails to clear bar, or activation moves without it.</div></div>
       <div class="dentry killed"><div class="d-when">2026-06-02 · Wk 23</div><div class="d-what">Disproved the sandbox-first solution path</div><div class="d-why">TC-05 fake-door: only 9% of “connect later” users returned to connect within 48h (bar 30%). Exploration without real data felt pointless. Closed the path before a line of production code.</div><div class="d-trig">Revisit if: a segment shows strong demo-first demand.</div></div>
       <div class="dentry killed"><div class="d-when">2026-05-26 · Wk 22</div><div class="d-what">Disproved “SOC 2 badge alone moves connection rate”</div><div class="d-why">TC-03 badge-placement A/B: no lift at any placement (Δ +1pt vs +8pt bar). Safety must be legible inside the flow, not certified in the footer.</div><div class="d-trig">Revisit if: an enterprise-adjacent segment enters the funnel.</div></div>
-      <div class="dentry"><div class="d-when">2026-05-18 · Wk 21</div><div class="d-what">Set product outcome at 34% → 55% 7-day bank-feed activation</div><div class="d-why">Negotiated with leadership as the controllable behavior serving 90-day churn; rejected “bank connections started” as a gameable traction metric.</div><div class="d-trig">Revisit at: Q2 outcome negotiation (18 days).</div></div>
+      <div class="dentry"><div class="d-when">2026-05-18 · Wk 21</div><div class="d-what">Set product outcome at 34% → 55% 7-day bank-feed activation</div><div class="d-why">Negotiated with leadership as the controllable behaviour serving 90-day churn; rejected “bank connections started” as a gameable traction metric.</div><div class="d-trig">Revisit at: Q2 outcome negotiation (18 days).</div></div>
       <div class="dentry"><div class="d-when">2026-05-11 · Wk 20</div><div class="d-what">Inserted the causal map before solution design</div><div class="d-why">Right-to-left analysis showed activation depends on a primary-account connection in session one, reframed the whole solution set around trust legibility.</div><div class="d-trig">Revisit if: noise factors (bank OAuth quality) dominate the signal.</div></div>
     </div>
   </div>`; },
@@ -2835,7 +2835,7 @@ function concierge(state, html){
 const LADDER_COPY = {
   assumption:'A belief with no weight yet. It costs nothing to hold and everything to ship on.',
   suggestive:'Some signal has landed, 7 of 10 owners connected with read-only framing (bar 6/10). Promising, not yet load-bearing. Don’t bet the increment on it.',
-  validated:'Earned. Behavioral evidence at scale clears the locked bar. Now it can carry weight, build on it.',
+  validated:'Earned. Behavioural evidence at scale clears the locked bar. Now it can carry weight, build on it.',
   killed:'Disproven by a test. A win: we learned it cheaply and freed the increment from a wrong bet.',
 };
 function setLadder(state){
@@ -2895,7 +2895,7 @@ function scrollSel(){ const el=document.querySelector(`.cmdk-item[data-i="${cmdk
 
 /* ════════════════════════════ STAKEHOLDER WALKTHROUGH ════════════════════════════ */
 const WALK = [
-  {step:'01 · The outcome',h:'We are buying one number',body:'This team owns a single product outcome: lift 7-day bank-feed activation, connect a feed AND complete a first reconciliation, from <b>34% to 55%</b>. Not a feature list, a controllable behavior, negotiated with leadership, serving lower 90-day churn.',ev:'validated',evlabel:'Outcome ratified',
+  {step:'01 · The outcome',h:'We are buying one number',body:'This team owns a single product outcome: lift 7-day bank-feed activation, connect a feed AND complete a first reconciliation, from <b>34% to 55%</b>. Not a feature list, a controllable behaviour, negotiated with leadership, serving lower 90-day churn.',ev:'validated',evlabel:'Outcome ratified',
     vis:()=>`<div class="wc-visual"><div class="wv-bt">
       <div class="wv-bt-track">
         <div class="wv-bt-fill"></div>
@@ -2921,9 +2921,9 @@ const WALK = [
     </div></div>`},
   {step:'05 · The bet',h:'Make safety legible at the moment of doubt',body:'The increment is the focussed half of one path: <b>read-only framing, granular permissions, “disconnect anytime,” and the security page inline at the credential step</b>, the primary-account moment only. White-glove, sandbox, historical import, all deliberately excluded. <i>Focussed success over ambiguous failure.</i>',ev:'suggestive',evlabel:'TC-08 in flight · 57%',
     vis:()=>walkProgStrip(4)},
-  {step:'06 · The proof',h:'And we’ll know, at four levels',body:'Instrumented before launch: assumption behavior → opportunity relief → product outcome → business outcome. Early read projects activation moving <b>34% → 41%</b>, on the way to 55%. If a level doesn’t move, the tree tells us exactly which link to revisit.',ev:'validated',evlabel:'Impact ladder wired',
+  {step:'06 · The proof',h:'And we’ll know, at four levels',body:'Instrumented before launch: assumption behaviour → opportunity relief → product outcome → business outcome. Early read projects activation moving <b>34% → 41%</b>, on the way to 55%. If a level doesn’t move, the tree tells us exactly which link to revisit.',ev:'validated',evlabel:'Impact ladder wired',
     vis:()=>`<div class="wc-visual"><div class="wv-ladder">
-      <div class="wv-lrow"><span class="wl-rung">L1</span><span class="wl-name">Assumption behavior · primary connection</span><span class="wl-val up">57%</span></div>
+      <div class="wv-lrow"><span class="wl-rung">L1</span><span class="wl-name">Assumption behaviour · primary connection</span><span class="wl-val up">57%</span></div>
       <div class="wv-lconn"></div>
       <div class="wv-lrow"><span class="wl-rung">L2</span><span class="wl-name">Opportunity relief · fewer trust stalls</span><span class="wl-val up">−34%</span></div>
       <div class="wv-lconn"></div>
@@ -3002,13 +3002,13 @@ const CHAT_BANK = [
   { id:'sandbox', kw:['sandbox','connect later','sample data','tc-05','tc05','fake door','defer','deferr'],
     a:`We disproved sandbox-first as a cheap win. The <b>TC-05</b> fake-door test offered "explore with sample data first", only <b>9%</b> returned to connect within 48h, against a <b>30%</b> bar. Exploring fake books felt pointless, so the path closed before a line of production code. The lesson: safety has to be legible <i>at</i> the credential moment, not deferred around it.` },
   { id:'unproven', kw:['unproven','weakest','still prove','not proven','riskiest','risky','what if','assumption','uncertain','suggestive'],
-    a:`The weakest, load-bearing belief is: <b>"make safety legible and founders will connect the primary account in session one."</b> It's only <b>emerging</b>, a 7/10 concierge signal, not yet behavioral at scale. <b>TC-08</b> is the test measuring exactly this. Until it clears, the increment rests on an unproven bet.` },
+    a:`The weakest, load-bearing belief is: <b>"make safety legible and founders will connect the primary account in session one."</b> It's only <b>emerging</b>, a 7/10 concierge signal, not yet behavioural at scale. <b>TC-08</b> is the test measuring exactly this. Until it clears, the increment rests on an unproven bet.` },
   { id:'kill', kw:['killed','disproven','dead end','what did you kill','beliefs you killed','tc-03','tc03','soc 2','soc-2','badge'],
     a:`Two beliefs died cheaply. <b>TC-03</b>: a SOC-2 badge at every placement moved <b>nothing</b> (+1pt vs an +8pt bar), certification in the footer isn't trust. <b>TC-05</b>: sandbox-first converted <b>9% vs a 30% bar</b>. Both were disproved for the price of a fake door, which is the cheapest progress we made.` },
   { id:'proven', kw:['proven','validated','what do we know','what is proven','certain','load-bearing','evidence'],
     a:`Two things are validated. The <b>outcome</b> is ratified: 7-day bank-feed activation, <b>34% → 55%</b>, owned by this team. And the <b>Job</b> is consistent, across 14 interviews of real switches, 11 confirm people hire us to escape spreadsheet chaos for trusted, always-current books. Everything downstream of the trust bet is still emerging.` },
   { id:'outcome', kw:['outcome','34','55','activation','metric','number','goal','target number'],
-    a:`The one number we own is <b>7-day bank-feed activation: 34% → 55%</b>, connect a feed AND complete a first reconciliation within a week. It's a controllable behavior negotiated with leadership, serving the business outcome of lower 90-day churn. See the <b>Outcome loop</b>.` },
+    a:`The one number we own is <b>7-day bank-feed activation: 34% → 55%</b>, connect a feed AND complete a first reconciliation within a week. It's a controllable behaviour negotiated with leadership, serving the business outcome of lower 90-day churn. See the <b>Outcome loop</b>.` },
   { id:'job', kw:['job','jtbd','progress','why switch','why do people','interview','customer'],
     a:`The Job: <b>"move from spreadsheet chaos to trusted, always-current books"</b>, so owners answer money questions in minutes and look credible to their accountant and investors. It recurs in 11 of 14 interviews of real past switches. The decisive struggle lands at onboarding, on "Connect your bank." See the <b>Progress loop</b>.` },
   { id:'opportunity', kw:['opportunity','target','crown','prioritise','trust','connection','which problem','focus on','bank connect'],
@@ -3016,7 +3016,7 @@ const CHAT_BANK = [
   { id:'increment', kw:['increment','bet','what are you building','ship','scope','solution','focused half','focussed half','build'],
     a:`The bet is the <b>trust-first connection flow, the primary-account moment only</b>: read-only framing, granular permissions, "disconnect anytime," and the security page inline at the credential step. White-glove, sandbox, and historical import are deliberately excluded, focussed success over ambiguous failure: build half the scope but make that half genuinely great. See the <b>Delivery &amp; Impact loop</b>.` },
   { id:'impact', kw:['impact','ladder','four level','4 level','measure','churn','business outcome','how will you know'],
-    a:`Impact is instrumented at four levels: <b>assumption behavior</b> (primary connection in session one) → <b>opportunity relief</b> (fewer trust stalls) → <b>product outcome</b> (7-day activation, early read 34→41%) → <b>business outcome</b> (90-day churn, read next quarter). If a level doesn't move, the tree tells us which link to revisit.` },
+    a:`Impact is instrumented at four levels: <b>assumption behaviour</b> (primary connection in session one) → <b>opportunity relief</b> (fewer trust stalls) → <b>product outcome</b> (7-day activation, early read 34→41%) → <b>business outcome</b> (90-day churn, read next quarter). If a level doesn't move, the tree tells us which link to revisit.` },
   { id:'causal', kw:['causal','system','what must be true','chain','control factor','noise'],
     a:`Before any solution we mapped the causal system right-to-left: trusted books need a reconciled feed → a feed needs a primary-account connection → that needs the trust threshold crossed in session one. Control factors include badging placement, read-only messaging, and connection sequencing; noise includes bank OAuth quality and fintech-breach press. See the <b>Causal Learning loop</b>.` },
   { id:'summary', kw:['summarise','summarize','summary','overview','catch me up','where are we','project status','tldr','brief me'],

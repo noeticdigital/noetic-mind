@@ -1739,7 +1739,7 @@ const NODES = {
       type:'Motivations, functional (become hydrated, kill the afternoon slump), emotional (feel clear, refreshed, less guilty), social/identity (a healthy, self-caring person; reusable not throwaway plastic). Timeline, the struggle concentrates in the afternoon, when they realise the day’s gone by without water. Forces, push (afternoon headache/fog, guilt) and pull (feeling clear and energetic) are strong; anxiety (“I always forget,” “my old bottles sat empty in a cupboard”) and habit (reaching for coffee instead) hold them back.',
       evidence:[
         ['14 interviews','Recurs in 11 of 14 progress interviews of real past attempts.'],
-        ['behavior','People who kept a bottle within arm’s reach drank 3.2× more often.'],
+        ['behaviour','People who kept a bottle within arm’s reach drank 3.2× more often.'],
         ['quotes','“I buy a lovely bottle, use it for three days, then it lives at the back of a cupboard.”, Ian, operations manager'],
         ['signal','Drop-off concentrates in the afternoon, when the day’s gone by without water.'],
       ],
@@ -1790,7 +1790,7 @@ const NODES = {
       type:'Desirability + causal-effectiveness assumption.',
       evidence:[
         ['signal','Concierge test: 7 of 10 people who anchored drinking to their coffee hit their goal that week (bar was 6/10).'],
-        ['gap','Not yet behavioral at scale, TC-08 measures the self-serve nudge over 40 new owners.'],
+        ['gap','Not yet behavioural at scale, TC-08 measures the self-serve nudge over 40 new owners.'],
       ],
     }},
   solA:{kind:'Solution · Product', ev:'suggestive', solType:'PRODUCT',
@@ -1800,7 +1800,7 @@ const NODES = {
   solB:{kind:'Solution · Service', ev:'assumption', solType:'SERVICE',
     h:'A 7-day human hydration coach',
     d:'A real person texts you reminders and check-ins for your first week.',
-    detail:{grounding:'Causal theory: a real person nudging in real time beats any app for building a new habit, tests willingness, not scalability yet.',type:'Service path.',evidence:[['untested','No behavioral evidence yet, pure assumption.']]}},
+    detail:{grounding:'Causal theory: a real person nudging in real time beats any app for building a new habit, tests willingness, not scalability yet.',type:'Service path.',evidence:[['untested','No behavioural evidence yet, pure assumption.']]}},
   solC:{kind:'Solution · Hybrid', ev:'killed', solType:'HYBRID',
     h:'Glowing smart cap that reminds you',
     d:'A cap that lights up when it’s time to drink.',
@@ -2482,7 +2482,7 @@ const BUILDERS = {
   /* ───── OUTCOME ───── */
   outcome(){ return `<div class="wrap">
     <div class="screen-head">
-      <div class="eyebrow">Loop 2 · Translate progress into a measurable behavior</div>
+      <div class="eyebrow">Loop 2 · Translate progress into a measurable behaviour</div>
       <h1 class="h1">The Outcome &amp; Progress Brief</h1>
       <p class="lede princ">“Leadership negotiates outcomes, not solutions.”</p>
     </div>
@@ -2527,7 +2527,7 @@ const BUILDERS = {
   opportunity(){ return `<div class="wrap">
     <div class="screen-head">
       <div class="eyebrow">Loop 3 · The opportunity space</div>
-      <h1 class="h1">Organize struggle by timeline moment, prioritise one target</h1>
+      <h1 class="h1">Organise struggle by timeline moment, prioritise one target</h1>
       <p class="lede">Opportunities are customer-framed struggling moments, never solutions.</p>
     </div>
     ${concierge('suggestive', `<span class="cc-step">Where we are:</span> one target prioritised, <b>the missing-cue gap</b> (high demand × high ability to win). <b>Emerging,</b> not yet validated. <span class="cc-step">Next:</span> the habit-anchor test, <b>TC-08</b>.`)}
@@ -2564,7 +2564,7 @@ const BUILDERS = {
         <div style="margin-top:10px">
           <div class="check met"><span class="box"><svg viewBox="0 0 16 16" width="11" height="11" fill="none" aria-hidden="true"><path d="M3.5 8.5l3 3 6-6.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="c-txt">Framed as a customer struggle, not a solution<span class="ct-meta">“Nothing reminds me at the moment I’d drink”, a moment, not a feature.</span></span></div>
           <div class="check met"><span class="box"><svg viewBox="0 0 16 16" width="11" height="11" fill="none" aria-hidden="true"><path d="M3.5 8.5l3 3 6-6.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="c-txt">Not a feature request in disguise<span class="ct-meta">Translated from “add a reminder alarm” → the underlying missing-cue gap.</span></span></div>
-          <div class="check met"><span class="box"><svg viewBox="0 0 16 16" width="11" height="11" fill="none" aria-hidden="true"><path d="M3.5 8.5l3 3 6-6.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="c-txt">Grounded in real behavior / a real story<span class="ct-meta">Ian, Priya, + 6 more interviews of real past attempts.</span></span></div>
+          <div class="check met"><span class="box"><svg viewBox="0 0 16 16" width="11" height="11" fill="none" aria-hidden="true"><path d="M3.5 8.5l3 3 6-6.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="c-txt">Grounded in real behaviour / a real story<span class="ct-meta">Ian, Priya, + 6 more interviews of real past attempts.</span></span></div>
           <div class="check met"><span class="box"><svg viewBox="0 0 16 16" width="11" height="11" fill="none" aria-hidden="true"><path d="M3.5 8.5l3 3 6-6.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="c-txt">Plausibly connects to the desired outcome<span class="ct-meta">Sits exactly on the week-1 drop-off.</span></span></div>
           <div class="check met" style="border-bottom:none"><span class="box"><svg viewBox="0 0 16 16" width="11" height="11" fill="none" aria-hidden="true"><path d="M3.5 8.5l3 3 6-6.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="c-txt">Enough evidence to matter<span class="ct-meta">Recurs unprompted in 8 of 14 interviews.</span></span></div>
         </div>
@@ -2689,7 +2689,7 @@ const BUILDERS = {
         <div class="tc-field"><div class="tcf-l">Assumption under test</div><div class="tcf-v">People will hit their water goal in week one if the first drink is anchored to a habit they already have, making their morning coffee, so the cue fires reliably.</div></div>
         <div class="tc-field"><div class="tcf-l">Decision it informs</div><div class="tcf-v">Whether to ship the habit-anchor nudge increment, or pivot to the human-coach service path.</div></div>
         <div class="tc-field"><div class="tcf-l">Audience &amp; moment</div><div class="tcf-v">Next 40 new owners, at the morning-coffee moment.</div></div>
-        <div class="tc-field"><div class="tcf-l">Observed behavior</div><div class="tcf-v">Hit their daily water goal on at least 4 of their first 7 days.</div></div>
+        <div class="tc-field"><div class="tcf-l">Observed behaviour</div><div class="tcf-v">Hit their daily water goal on at least 4 of their first 7 days.</div></div>
         <div class="threshold">
           <div class="th-l">Success threshold, locked
             <span class="lock"><svg width="13" height="13" viewBox="0 0 16 16" fill="none"><rect x="3" y="7" width="10" height="7" rx="1.5" stroke="#c9a24f" stroke-width="1.3"/><path d="M5 7V5a3 3 0 016 0v2" stroke="#c9a24f" stroke-width="1.3"/></svg></span>
@@ -2706,7 +2706,7 @@ const BUILDERS = {
         <div class="tc-field"><div class="tcf-l">Assumption under test</div><div class="tcf-v">A cap that lights up when it’s time to drink will get people drinking and hitting their goal.</div></div>
         <div class="tc-field"><div class="tcf-l">Decision it informed</div><div class="tcf-v">Whether the glowing smart cap is a viable solution path, or the cue must come from a habit people already have.</div></div>
         <div class="tc-field"><div class="tcf-l">Audience &amp; moment</div><div class="tcf-v">52 new owners offered the “glow reminder” sign-up.</div></div>
-        <div class="tc-field"><div class="tcf-l">Observed behavior</div><div class="tcf-v">Still want the glow reminder after a week of use.</div></div>
+        <div class="tc-field"><div class="tcf-l">Observed behaviour</div><div class="tcf-v">Still want the glow reminder after a week of use.</div></div>
         <div class="threshold">
           <div class="th-l">Success threshold, locked<span class="lock"><svg width="13" height="13" viewBox="0 0 16 16" fill="none"><rect x="3" y="7" width="10" height="7" rx="1.5" stroke="#c9a24f" stroke-width="1.3"/><path d="M5 7V5a3 3 0 016 0v2" stroke="#c9a24f" stroke-width="1.3"/></svg></span></div>
           <div class="th-v">≥ 30% of “glow reminder” sign-ups still want it after a week</div>
@@ -2734,7 +2734,7 @@ const BUILDERS = {
     <div class="section-rule"><span class="sr-n">5.5</span><h2 class="serif">Impact ladder · four levels</h2><span class="sr-line"></span><span class="mono" style="font-size:11px;color:var(--muted)">expected vs actual</span></div>
     <div class="card">
       <div class="iladder">
-        <div class="irow"><div class="i-rung">L1</div><div class="i-body"><div class="i-name">Assumption behavior</div><div class="i-sub">Drinks at the anchor moment</div></div><div style="text-align:right"><div class="i-val">57%</div><div class="i-delta iup">▲ vs 50% bar</div></div></div>
+        <div class="irow"><div class="i-rung">L1</div><div class="i-body"><div class="i-name">Assumption behaviour</div><div class="i-sub">Drinks at the anchor moment</div></div><div style="text-align:right"><div class="i-val">57%</div><div class="i-delta iup">▲ vs 50% bar</div></div></div>
         <div class="iconn"></div>
         <div class="irow"><div class="i-rung">L2</div><div class="i-body"><div class="i-name">Opportunity relief</div><div class="i-sub">“Forgot to drink” days</div></div><div style="text-align:right"><div class="i-val">−34%</div><div class="i-delta iup">▲ fewer forgotten days</div></div></div>
         <div class="iconn"></div>
@@ -2757,7 +2757,7 @@ const BUILDERS = {
       <div class="dentry"><div class="d-when">2026-06-09 · Wk 24</div><div class="d-what">Prioritised the missing-cue gap as the single target opportunity</div><div class="d-why">Top-right of the demand × ability matrix; named unprompted in 8/14 interviews and sits exactly on the week-1 drop-off.</div><div class="d-trig">Revisit if: TC-08 fails to clear bar, or the conversion moves without it.</div></div>
       <div class="dentry killed"><div class="d-when">2026-06-02 · Wk 23</div><div class="d-what">Disproved the glowing smart-cap solution path</div><div class="d-why">TC-05 fake-door: only 9% of “glow reminder” sign-ups still wanted it after a week (bar 30%). People ignored or covered the light. Closed the path before a line of production code.</div><div class="d-trig">Revisit if: a segment shows strong demand for a hardware reminder.</div></div>
       <div class="dentry killed"><div class="d-when">2026-05-26 · Wk 22</div><div class="d-what">Disproved “a streak counter &amp; badges will build the habit”</div><div class="d-why">TC-03 gamification A/B: badges and streaks moved nothing (Δ +1pt vs +8pt bar). The habit must come from a real cue, not points.</div><div class="d-trig">Revisit if: a more game-motivated segment enters the funnel.</div></div>
-      <div class="dentry"><div class="d-when">2026-05-18 · Wk 21</div><div class="d-what">Set product outcome at 34% → 55% week-1 trial→paid conversion</div><div class="d-why">Negotiated with leadership as the controllable behavior serving day-90 retention; rejected “app opens” as a gameable traction metric.</div><div class="d-trig">Revisit at: Q2 outcome negotiation (18 days).</div></div>
+      <div class="dentry"><div class="d-when">2026-05-18 · Wk 21</div><div class="d-what">Set product outcome at 34% → 55% week-1 trial→paid conversion</div><div class="d-why">Negotiated with leadership as the controllable behaviour serving day-90 retention; rejected “app opens” as a gameable traction metric.</div><div class="d-trig">Revisit at: Q2 outcome negotiation (18 days).</div></div>
       <div class="dentry"><div class="d-when">2026-05-11 · Wk 20</div><div class="d-what">Inserted the causal map before solution design</div><div class="d-why">Right-to-left analysis showed the conversion depends on the hydration habit, which depends on a cue at the right moment, reframed the whole solution set around anchoring the first drink to an existing habit.</div><div class="d-trig">Revisit if: noise factors (weather, how busy the day is) dominate the signal.</div></div>
     </div>
   </div>`; },
@@ -2791,7 +2791,7 @@ function concierge(state, html){
 const LADDER_COPY = {
   assumption:'A belief with no weight yet. It costs nothing to hold and everything to ship on.',
   suggestive:'Some signal has landed, 7 of 10 people who anchored drinking to their coffee hit their goal that week (bar 6/10). Promising, not yet load-bearing. Don’t bet the increment on it.',
-  validated:'Earned. Behavioral evidence at scale clears the locked bar. Now it can carry weight, build on it.',
+  validated:'Earned. Behavioural evidence at scale clears the locked bar. Now it can carry weight, build on it.',
   killed:'Disproven by a test. A win: we learned it cheaply and freed the increment from a wrong bet.',
 };
 function setLadder(state){
@@ -2877,9 +2877,9 @@ const WALK = [
     </div></div>`},
   {step:'05 · The bet',h:'Anchor the first drink to a habit they already have',body:'The increment is the focussed half of one path: <b>anchor the first drink to making your morning coffee, a one-tap “done,” and a simple progress ring</b>, the morning-coffee moment only. Gamification, social, flavour, smart-cap hardware, all deliberately excluded. <i>Focussed success over ambiguous failure.</i>',ev:'suggestive',evlabel:'TC-08 in flight · 57%',
     vis:()=>walkProgStrip(4)},
-  {step:'06 · The proof',h:'And we’ll know, at four levels',body:'Instrumented before launch: assumption behavior → opportunity relief → product outcome → business outcome. Early read projects the conversion moving <b>34% → 41%</b>, on the way to 55%. If a level doesn’t move, the tree tells us exactly which link to revisit.',ev:'validated',evlabel:'Impact ladder wired',
+  {step:'06 · The proof',h:'And we’ll know, at four levels',body:'Instrumented before launch: assumption behaviour → opportunity relief → product outcome → business outcome. Early read projects the conversion moving <b>34% → 41%</b>, on the way to 55%. If a level doesn’t move, the tree tells us exactly which link to revisit.',ev:'validated',evlabel:'Impact ladder wired',
     vis:()=>`<div class="wc-visual"><div class="wv-ladder">
-      <div class="wv-lrow"><span class="wl-rung">L1</span><span class="wl-name">Assumption behavior · drinks at the anchor moment</span><span class="wl-val up">57%</span></div>
+      <div class="wv-lrow"><span class="wl-rung">L1</span><span class="wl-name">Assumption behaviour · drinks at the anchor moment</span><span class="wl-val up">57%</span></div>
       <div class="wv-lconn"></div>
       <div class="wv-lrow"><span class="wl-rung">L2</span><span class="wl-name">Opportunity relief · fewer “forgot to drink” days</span><span class="wl-val up">−34%</span></div>
       <div class="wv-lconn"></div>
@@ -2958,7 +2958,7 @@ const CHAT_BANK = [
   { id:'sandbox', kw:['glowing cap','smart cap','glow','light','cap','tc-05','tc05','fake door','hardware','reminder'],
     a:`We disproved the glowing smart cap as a cheap win. The <b>TC-05</b> fake-door test offered a "glow reminder" cap, only <b>9%</b> still wanted it after a week, against a <b>30%</b> bar. People ignored or covered the light and it never changed how much they drank, so the path closed before a line of production code. The lesson: the cue has to come from a habit people already have, not a gadget.` },
   { id:'unproven', kw:['unproven','weakest','still prove','not proven','riskiest','risky','what if','assumption','uncertain','suggestive'],
-    a:`The weakest, load-bearing belief is: <b>"tie the first drink to a habit people already have and they'll hit their goal in week one."</b> It's only <b>emerging</b>, a 7/10 concierge signal, not yet behavioral at scale. <b>TC-08</b> is the test measuring exactly this. Until it clears, the increment rests on an unproven bet.` },
+    a:`The weakest, load-bearing belief is: <b>"tie the first drink to a habit people already have and they'll hit their goal in week one."</b> It's only <b>emerging</b>, a 7/10 concierge signal, not yet behavioural at scale. <b>TC-08</b> is the test measuring exactly this. Until it clears, the increment rests on an unproven bet.` },
   { id:'kill', kw:['killed','disproven','dead end','what did you kill','beliefs you killed','tc-03','tc03','streak','badge','gamification','points'],
     a:`Two beliefs died cheaply. <b>TC-03</b>: a streak counter and badges moved <b>nothing</b> (+1pt vs an +8pt bar), points aren't a real cue. <b>TC-05</b>: the glowing smart cap converted <b>9% vs a 30% bar</b>. Both were disproved for the price of a fake door, which is the cheapest progress we made.` },
   { id:'proven', kw:['proven','validated','what do we know','what is proven','certain','load-bearing','evidence'],
@@ -2972,7 +2972,7 @@ const CHAT_BANK = [
   { id:'increment', kw:['increment','bet','what are you building','ship','scope','solution','focused half','focussed half','build'],
     a:`The bet is the <b>habit-anchor nudge, the morning-coffee moment only</b>: anchor the first drink to making your coffee, a one-tap "done," and a simple progress ring. Gamification, social sharing, flavour subscription, and smart-cap hardware are deliberately excluded, focussed success over ambiguous failure: build half the scope but make that half genuinely great. See the <b>Delivery &amp; Impact loop</b>.` },
   { id:'impact', kw:['impact','ladder','four level','4 level','measure','retention','business outcome','how will you know'],
-    a:`Impact is instrumented at four levels: <b>assumption behavior</b> (drinks at the anchor moment) → <b>opportunity relief</b> (fewer "forgot to drink" days) → <b>product outcome</b> (week-1 trial→paid conversion, early read 34→41%) → <b>business outcome</b> (day-90 retention, read next quarter). If a level doesn't move, the tree tells us which link to revisit.` },
+    a:`Impact is instrumented at four levels: <b>assumption behaviour</b> (drinks at the anchor moment) → <b>opportunity relief</b> (fewer "forgot to drink" days) → <b>product outcome</b> (week-1 trial→paid conversion, early read 34→41%) → <b>business outcome</b> (day-90 retention, read next quarter). If a level doesn't move, the tree tells us which link to revisit.` },
   { id:'causal', kw:['causal','system','what must be true','chain','control factor','noise'],
     a:`Before any solution we mapped the causal system right-to-left: hitting the goal needs regular drinking → regular drinking needs a cue at the right moment → the cue needs the bottle within reach and drinking to feel easy and a bit rewarding. Control factors include when the cue fires, bottle within reach, and progress feedback; noise includes weather and how busy the day is. See the <b>Causal Learning loop</b>.` },
   { id:'summary', kw:['summarise','summarize','summary','overview','catch me up','where are we','project status','tldr','brief me'],
