@@ -1880,7 +1880,7 @@ const CATS = {
     h:'Struggling moments, organised by timeline',
     d:'Three live opportunities, one prioritised target. Open to compare demand × ability to win.',
     ev:'suggestive',                      // inherits the prioritised target's state
-    target:true,                          // show the prioritise on the tree node
+    target:true,                          // show the target on the tree node
     members:['oppTarget','opp2','opp3'],
   },
   solutions:{
@@ -2128,7 +2128,7 @@ function openCategory(catKey){
   let rows='';
   (c.members||[]).forEach(m=>{
     const n = NODES[m]; if(!n) return;
-    const prioritise = n.target?`<span class="cr-crown">★ Target</span>`:(n.weakest?`<span class="cr-crown" style="color:var(--amber-ink);background:var(--ev-suggestive-bg)">⚠ Weakest</span>`:'');
+    const crown = n.target?`<span class="cr-crown">★ Target</span>`:(n.weakest?`<span class="cr-crown" style="color:var(--amber-ink);background:var(--ev-suggestive-bg)">⚠ Weakest</span>`:'');
     rows += `<button class="cat-row ${n.target?'is-target':''}" onclick="openCategoryMember('${m}')">
       <span class="cr-meter">${meter(n.ev)}</span>
       <span class="cr-main">
