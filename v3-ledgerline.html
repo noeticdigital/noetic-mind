@@ -1233,7 +1233,7 @@ html.dark .method-text .m-takeaway{background:rgba(46,111,176,.16)}
 .wv-bt-track .wv-lab.tgt{left:calc(55% + 9px);color:var(--green-ink)}
 .wv-bt-marks{display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:11px;color:var(--muted);margin-top:8px}
 
-/* mini demand × ability matrix with crowned target dot (step 03) */
+/* mini demand × ability matrix with prioritised target dot (step 03) */
 .wv-matrix{width:300px;height:200px;max-width:86vw;position:relative;border:1px solid var(--line);border-radius:var(--r-md);
   background:linear-gradient(180deg,var(--grad-hi),var(--grad-lo));overflow:hidden}
 .wv-matrix .wm-line{position:absolute;background:none}
@@ -1827,9 +1827,9 @@ const CATS = {
   opportunities:{
     kind:'Opportunities', badge:'3 · 1 target',
     h:'Struggling moments, organised by timeline',
-    d:'Three live opportunities, one crowned target. Open to compare demand × ability to win.',
-    ev:'suggestive',                      // inherits the crowned target's state
-    target:true,                          // show the crown on the tree node
+    d:'Three live opportunities, one prioritised target. Open to compare demand × ability to win.',
+    ev:'suggestive',                      // inherits the prioritised target's state
+    target:true,                          // show the prioritise on the tree node
     members:['oppTarget','opp2','opp3'],
   },
   solutions:{
@@ -2077,7 +2077,7 @@ function openCategory(catKey){
   let rows='';
   (c.members||[]).forEach(m=>{
     const n = NODES[m]; if(!n) return;
-    const crown = n.target?`<span class="cr-crown">★ Target</span>`:(n.weakest?`<span class="cr-crown" style="color:var(--amber-ink);background:var(--ev-suggestive-bg)">⚠ Weakest</span>`:'');
+    const prioritise = n.target?`<span class="cr-crown">★ Target</span>`:(n.weakest?`<span class="cr-crown" style="color:var(--amber-ink);background:var(--ev-suggestive-bg)">⚠ Weakest</span>`:'');
     rows += `<button class="cat-row ${n.target?'is-target':''}" onclick="openCategoryMember('${m}')">
       <span class="cr-meter">${meter(n.ev)}</span>
       <span class="cr-main">
@@ -2123,7 +2123,7 @@ function openCategory(catKey){
   document.getElementById('catBody').innerHTML = rows;
 
   let foot = `<span class="cf-note">Click any member to open its full detail.</span>`;
-  if(catKey==='opportunities') foot = `<span class="cf-note">Crowned target sits top-right of demand × ability to win.</span><button class="btn btn-ghost btn-sm" onclick="closeCategory();goLoop('opportunity')">Open opportunity space →</button>`;
+  if(catKey==='opportunities') foot = `<span class="cf-note">Prioritised target sits top-right of demand × ability to win.</span><button class="btn btn-ghost btn-sm" onclick="closeCategory();goLoop('opportunity')">Open opportunity space →</button>`;
   else if(catKey==='solutions') foot = `<span class="cf-note">Three paths · one disproven as a cheap save.</span><button class="btn btn-ghost btn-sm" onclick="closeCategory();goLoop('delivery')">See in Delivery loop →</button>`;
   else if(catKey==='tests') foot = `<span class="cf-note">Thresholds locked before results.</span><button class="btn btn-primary btn-sm" onclick="closeCategory();openNBATest()">Open TC-08 →</button>`;
   document.getElementById('catFoot').innerHTML = foot;
@@ -2520,10 +2520,10 @@ const BUILDERS = {
   opportunity(){ return `<div class="wrap">
     <div class="screen-head">
       <div class="eyebrow">Loop 3 · The opportunity space</div>
-      <h1 class="h1">Organize struggle by timeline moment, crown one target</h1>
+      <h1 class="h1">Organize struggle by timeline moment, prioritise one target</h1>
       <p class="lede">Opportunities are customer-framed struggling moments, never solutions.</p>
     </div>
-    ${concierge('suggestive', `<span class="cc-step">Where we are:</span> one target crowned, <b>bank-connection trust</b> (high demand × high ability to win). <b>Emerging,</b> not yet validated. <span class="cc-step">Next:</span> the trust-legibility test, <b>TC-08</b>.`)}
+    ${concierge('suggestive', `<span class="cc-step">Where we are:</span> one target prioritised, <b>bank-connection trust</b> (high demand × high ability to win). <b>Emerging,</b> not yet validated. <span class="cc-step">Next:</span> the trust-legibility test, <b>TC-08</b>.`)}
 
     <div class="section-rule"><span class="sr-n">3.1</span><h2 class="serif">Opportunities by timeline moment</h2><span class="sr-line"></span></div>
     <div class="grid g-3">
@@ -2572,7 +2572,7 @@ const BUILDERS = {
           <div class="dot" style="left:52%;bottom:48%"><span class="bub"></span><span class="dl">Historical import</span></div>
           <div class="dot" style="left:55%;bottom:24%"><span class="bub"></span><span class="dl">Reconciliation drift</span></div>
         </div>
-        <p style="font-size:12px;color:var(--muted);margin-top:10px">One target crowned: top-right quadrant, high demand, high ability to win.</p>
+        <p style="font-size:12px;color:var(--muted);margin-top:10px">One target prioritised: top-right quadrant, high demand, high ability to win.</p>
       </div>
     </div>
   </div>`; },
@@ -2747,7 +2747,7 @@ const BUILDERS = {
       <p class="lede">Every decision, its rationale, the evidence behind it, and the trigger that would make us revisit. Beliefs that died are kept, they’re the cheapest progress we made.</p>
     </div>
     <div style="margin-top:26px" class="dlog">
-      <div class="dentry"><div class="d-when">2026-06-09 · Wk 24</div><div class="d-what">Crowned bank-connection trust as the single target opportunity</div><div class="d-why">Top-right of the demand × ability matrix; named unprompted in 8/14 interviews and sits exactly on the 7-day activation drop-off.</div><div class="d-trig">Revisit if: TC-08 fails to clear bar, or activation moves without it.</div></div>
+      <div class="dentry"><div class="d-when">2026-06-09 · Wk 24</div><div class="d-what">Prioritised bank-connection trust as the single target opportunity</div><div class="d-why">Top-right of the demand × ability matrix; named unprompted in 8/14 interviews and sits exactly on the 7-day activation drop-off.</div><div class="d-trig">Revisit if: TC-08 fails to clear bar, or activation moves without it.</div></div>
       <div class="dentry killed"><div class="d-when">2026-06-02 · Wk 23</div><div class="d-what">Disproved the sandbox-first solution path</div><div class="d-why">TC-05 fake-door: only 9% of “connect later” users returned to connect within 48h (bar 30%). Exploration without real data felt pointless. Closed the path before a line of production code.</div><div class="d-trig">Revisit if: a segment shows strong demo-first demand.</div></div>
       <div class="dentry killed"><div class="d-when">2026-05-26 · Wk 22</div><div class="d-what">Disproved “SOC 2 badge alone moves connection rate”</div><div class="d-why">TC-03 badge-placement A/B: no lift at any placement (Δ +1pt vs +8pt bar). Safety must be legible inside the flow, not certified in the footer.</div><div class="d-trig">Revisit if: an enterprise-adjacent segment enters the funnel.</div></div>
       <div class="dentry"><div class="d-when">2026-05-18 · Wk 21</div><div class="d-what">Set product outcome at 34% → 55% 7-day bank-feed activation</div><div class="d-why">Negotiated with leadership as the controllable behavior serving 90-day churn; rejected “bank connections started” as a gameable traction metric.</div><div class="d-trig">Revisit at: Q2 outcome negotiation (18 days).</div></div>
@@ -2808,7 +2808,7 @@ const CMDK = [
   {g:'Beliefs & actions',items:[
     {ico:'⚠',t:'Open weakest belief',sub:'NBA',act:()=>{goLoop('tree');setTimeout(()=>openNode('belief'),200)}},
     {ico:'▸',t:'Open test card TC-08',sub:'in flight',act:openNBATest},
-    {ico:'★',t:'View target opportunity',sub:'crowned',act:()=>{goLoop('tree');setTimeout(()=>openNode('oppTarget'),200)}},
+    {ico:'★',t:'View target opportunity',sub:'prioritised',act:()=>{goLoop('tree');setTimeout(()=>openNode('oppTarget'),200)}},
     {ico:'≡',t:'Decision Log',sub:'reasoning',act:()=>goLoop('decisions')},
     {ico:'▶',t:'Show the reasoning (walkthrough)',sub:'stakeholder',act:openWalk},
   ]},
@@ -2960,8 +2960,8 @@ const CHAT_BANK = [
     a:`The one number we own is <b>7-day bank-feed activation: 34% → 55%</b>, connect a feed AND complete a first reconciliation within a week. It's a controllable behavior negotiated with leadership, serving the business outcome of lower 90-day churn. See the <b>Outcome loop</b>.` },
   { id:'job', kw:['job','jtbd','progress','why switch','why do people','interview','customer'],
     a:`The Job: <b>"move from spreadsheet chaos to trusted, always-current books"</b>, so owners answer money questions in minutes and look credible to their accountant and investors. It recurs in 11 of 14 interviews of real past switches. The decisive struggle lands at onboarding, on "Connect your bank." See the <b>Progress loop</b>.` },
-  { id:'opportunity', kw:['opportunity','target','crown','trust','connection','which problem','focus on','bank connect'],
-    a:`The crowned target opportunity is <b>bank-connection trust</b>: "I won't connect my primary account until I believe this company is safe and serious." It sits top-right on demand × ability to win, named unprompted in 8/14 interviews, and lands exactly on the activation drop-off. Open the <b>Opportunity loop</b>.` },
+  { id:'opportunity', kw:['opportunity','target','crown','prioritise','trust','connection','which problem','focus on','bank connect'],
+    a:`The prioritised target opportunity is <b>bank-connection trust</b>: "I won't connect my primary account until I believe this company is safe and serious." It sits top-right on demand × ability to win, named unprompted in 8/14 interviews, and lands exactly on the activation drop-off. Open the <b>Opportunity loop</b>.` },
   { id:'increment', kw:['increment','bet','what are you building','ship','scope','solution','focused half','focussed half','build'],
     a:`The bet is the <b>trust-first connection flow, the primary-account moment only</b>: read-only framing, granular permissions, "disconnect anytime," and the security page inline at the credential step. White-glove, sandbox, and historical import are deliberately excluded, focussed success over ambiguous failure: build half the scope but make that half genuinely great. See the <b>Delivery &amp; Impact loop</b>.` },
   { id:'impact', kw:['impact','ladder','four level','4 level','measure','churn','business outcome','how will you know'],
@@ -2969,7 +2969,7 @@ const CHAT_BANK = [
   { id:'causal', kw:['causal','system','what must be true','chain','control factor','noise'],
     a:`Before any solution we mapped the causal system right-to-left: trusted books need a reconciled feed → a feed needs a primary-account connection → that needs the trust threshold crossed in session one. Control factors include badging placement, read-only messaging, and connection sequencing; noise includes bank OAuth quality and fintech-breach press. See the <b>Causal Learning loop</b>.` },
   { id:'summary', kw:['summarise','summarize','summary','overview','catch me up','where are we','project status','tldr','brief me'],
-    a:`Ledgerline owns one number, <b>7-day activation 34% → 55%</b> (validated, serving 90-day churn). The Job is proven: escape spreadsheet chaos for trusted books. The crowned opportunity is <b>bank-connection trust</b>, and the bet is a <b>trust-first connection flow</b> scoped to the primary-account moment. We disproved two wrong answers cheaply (SOC-2 badge, sandbox-first). The weakest belief is in test now via <b>TC-08</b> (57% vs 50% bar), that's the next step.` },
+    a:`Ledgerline owns one number, <b>7-day activation 34% → 55%</b> (validated, serving 90-day churn). The Job is proven: escape spreadsheet chaos for trusted books. The prioritised opportunity is <b>bank-connection trust</b>, and the bet is a <b>trust-first connection flow</b> scoped to the primary-account moment. We disproved two wrong answers cheaply (SOC-2 badge, sandbox-first). The weakest belief is in test now via <b>TC-08</b> (57% vs 50% bar), that's the next step.` },
 ];
 /* Socratic field guides, "Ask Noetic" interviews the user to fill an input field, then drafts it.
    Each: targetId (the .field to write into), the requirement, an intro, ordered steps (with suggested
@@ -3257,8 +3257,8 @@ const GUIDE = [
     run:()=>goLoop('progress'),
     anchor:()=>document.querySelector('#screen-progress .card.inset')||document.querySelector('#screen-progress .card') },
 
-  { title:'The opportunity we crowned',
-    body:`We organised every struggling moment by timeline, then crowned one target: <b>bank-connection trust</b>, "I won't connect my primary account until I believe this company is safe and serious."`,
+  { title:'The opportunity we prioritised',
+    body:`We organised every struggling moment by timeline, then prioritised one target: <b>bank-connection trust</b>, "I won't connect my primary account until I believe this company is safe and serious."`,
     result:{k:'Result',v:`<b>Emerging.</b> Top-right on demand × ability to win, named unprompted in 8/14 interviews, sitting exactly on the activation drop-off.`,
             next:`Next: the causal system we mapped before solving.`},
     run:()=>{ goLoop('tree'); setTimeout(()=>openCategory('opportunities'),360); },
@@ -3293,7 +3293,7 @@ const GUIDE = [
     anchor:()=>document.getElementById('tc08') },
 
   { title:"You're caught up",
-    body:`That's the whole arc: a validated number, a proven Job, a crowned opportunity, a mapped system, a scoped bet, and two cheap saves. The reasoning is honest and the certainty is rising.`,
+    body:`That's the whole arc: a validated number, a proven Job, a prioritised opportunity, a mapped system, a scoped bet, and two cheap saves. The reasoning is honest and the certainty is rising.`,
     result:{k:'The next step',v:`<b>Finish TC-08.</b> When it clears the 50% bar we ship the trust-first increment; if it stalls, we pivot to the white-glove path.`,
             next:`That's it, you now know what's been learned and exactly what to do next.`},
     run:()=>{ goLoop('tree'); setTimeout(()=>document.getElementById('nbaCard')&&document.getElementById('nbaCard').classList.add('open'),120); },
@@ -3503,7 +3503,7 @@ const VIS_MATRIX=`<div class="mvis"><div class="mv-matrix">
   <span class="mvm-q" style="right:12px;top:8px">★ focus here</span>
   <div class="mvm-dot" style="left:76%;bottom:70%"></div>
   <span class="mvm-lab" style="left:55%;top:20%">target</span>
-</div><div class="mvis-cap">A pragmatic call: crown the sibling that is high demand and high ability to win.</div></div>`;
+</div><div class="mvis-cap">A pragmatic call: prioritise the sibling that is high demand and high ability to win.</div></div>`;
 const VIS_LADDER=`<div class="mvis"><div class="mv-ladder">
   <div class="mv-rung"><span class="mvr-n">L1</span><span class="mvr-t">Assumption behaviour</span><span class="mvr-d">did people do the thing?</span></div>
   <div class="mv-rung"><span class="mvr-n">L2</span><span class="mvr-t">Opportunity relief</span><span class="mvr-d">did the struggle ease?</span></div>
@@ -3551,8 +3551,8 @@ const METHOD = [
     <p>it is framed as a <b>customer struggle</b>, not a feature request in disguise (translate requests back into the underlying need); it is <b>grounded in something that really happened</b>; it <b>plausibly connects</b> to the outcome you chose; and there is <b>enough evidence</b>, through recurrence, severity, or strategic importance, for it to matter.</p>
     <div class="m-takeaway">This keeps the tree honest and stops it filling up with wishlist items.</div>`},
   {phase:'Find the opportunity', title:'Pick ONE target opportunity', vis:VIS_MATRIX, body:`
-    <p>You can't chase everything, so you crown a <b>single target</b>. You do it by <b>comparing sibling opportunities</b> on the same branch: how big the opportunity is (how many customers, how often, how severely, that is <b>sizing</b>), how well it fits the outcome you chose, and how well placed you are to solve it.</p>
-    <p>This tool draws that comparison as a simple call: strong <b>demand</b> against your <b>ability to win</b>, crown the top-right. Treat the grid as a <i>pragmatic</i> way to decide, not a precise score; the real work is the honest comparison behind it. Everything not crowned is parked, split for later, or dropped. <b>Focus is the point.</b></p>`},
+    <p>You can't chase everything, so you prioritise a <b>single target</b>. You do it by <b>comparing sibling opportunities</b> on the same branch: how big the opportunity is (how many customers, how often, how severely, that is <b>sizing</b>), how well it fits the outcome you chose, and how well placed you are to solve it.</p>
+    <p>This tool draws that comparison as a simple call: strong <b>demand</b> against your <b>ability to win</b>, prioritise the top-right. Treat the grid as a <i>pragmatic</i> way to decide, not a precise score; the real work is the honest comparison behind it. Everything not prioritised is parked, split for later, or dropped. <b>Focus is the point.</b></p>`},
 
   {phase:'Map the system', title:'Understand the system before you solve it', vis:VIS_CHAIN, body:`
     <p>This step is <b>added</b> to the standard discovery loop, from the engineering and JTBD side. Before designing anything, you get explicit about the chain from your action to the outcome, otherwise you will measure the wrong thing later.</p>

@@ -1,10 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- SILOED SHARE BUILD — standalone Ledgerline demo. No switcher, no other
-     projects, no supply-side methodology; walkthrough trimmed to the 5-loop overview.
-     Self-contained (logo inlined). HOST THIS FILE IN ISOLATION. Frozen copy: edit
-     v3-ledgerline.html, then re-run the build. -->
+<!-- SILOED SHARE BUILD — standalone Ledgerline demo. Host in isolation. Frozen; edit v3-ledgerline.html, then re-build. -->
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAyNCIgaGVpZ2h0PSIxMDI0IiB2aWV3Qm94PSIwIDAgMTAyNCAxMDI0IiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogIDxkZWZzPgogICAgPGxpbmVhckdyYWRpZW50IGlkPSJuYXZ5IiB4MT0iMTkwIiB5MT0iMTMwIiB4Mj0iODQwIiB5Mj0iODkwIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iIzE2Mzk2RSIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjAuNTIiIHN0b3AtY29sb3I9IiMwQjJBNTYiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjMDYxQjNBIi8+CiAgICA8L2xpbmVhckdyYWRpZW50PgoKICAgIDxyYWRpYWxHcmFkaWVudCBpZD0idG9wTGlnaHQiIGN4PSIwIiBjeT0iMCIgcj0iMSIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiIGdyYWRpZW50VHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzYwIDIzMCkgcm90YXRlKDUwKSBzY2FsZSg2MjAgNzAwKSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iIzJBNTI4QiIgc3RvcC1vcGFjaXR5PSIwLjQyIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMC41IiBzdG9wLWNvbG9yPSIjMTUzQjcwIiBzdG9wLW9wYWNpdHk9IjAuMTIiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjMDcxQzNCIiBzdG9wLW9wYWNpdHk9IjAiLz4KICAgIDwvcmFkaWFsR3JhZGllbnQ+CgogICAgPGxpbmVhckdyYWRpZW50IGlkPSJiYXJGaWxsIiB4MT0iMCIgeTE9IjAiIHgyPSIwIiB5Mj0iMSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iI0ZGRkZGRiIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjAuNjUiIHN0b3AtY29sb3I9IiNGQkZCRkIiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjRUVGMUY1Ii8+CiAgICA8L2xpbmVhckdyYWRpZW50PgoKICAgIDxmaWx0ZXIgaWQ9Imljb25TaGFkb3ciIHg9IjcwIiB5PSI2MCIgd2lkdGg9Ijg4NCIgaGVpZ2h0PSI5MTQiIGZpbHRlclVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgY29sb3ItaW50ZXJwb2xhdGlvbi1maWx0ZXJzPSJzUkdCIj4KICAgICAgPGZlRHJvcFNoYWRvdyBkeD0iMCIgZHk9IjI0IiBzdGREZXZpYXRpb249IjI4IiBmbG9vZC1jb2xvcj0iIzA2MTIyNSIgZmxvb2Qtb3BhY2l0eT0iMC4yNiIvPgogICAgPC9maWx0ZXI+CgogICAgPGZpbHRlciBpZD0iYmFyRHJvcCIgeD0iLTE4JSIgeT0iLTEwJSIgd2lkdGg9IjEzNiUiIGhlaWdodD0iMTI4JSIgY29sb3ItaW50ZXJwb2xhdGlvbi1maWx0ZXJzPSJzUkdCIj4KICAgICAgPGZlRHJvcFNoYWRvdyBkeD0iMCIgZHk9IjkiIHN0ZERldmlhdGlvbj0iNiIgZmxvb2QtY29sb3I9IiMwMzExMjYiIGZsb29kLW9wYWNpdHk9IjAuMzYiLz4KICAgIDwvZmlsdGVyPgogIDwvZGVmcz4KCiAgPCEtLSBzcXVhc2ggdGhlIGljb24gdmVydGljYWxseSAoODI0LT43OTIgdGFsbCkgc28gdGhlIHJvdW5kZWQgc2hhcGUgaXMgYSB0cnVlIHNxdWFyZSwgdGhlbiByZS1jZW50cmUgLS0+CiAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMCAxMTYpIHNjYWxlKDEgMC45NjExNykgdHJhbnNsYXRlKDAgLTg4KSI+CiAgICA8ZyBmaWx0ZXI9InVybCgjaWNvblNoYWRvdykiPgogICAgICA8cmVjdCB4PSIxMTYiIHk9Ijg4IiB3aWR0aD0iNzkyIiBoZWlnaHQ9IjgyNCIgcng9IjEwNCIgZmlsbD0idXJsKCNuYXZ5KSIvPgogICAgICA8cmVjdCB4PSIxMTYiIHk9Ijg4IiB3aWR0aD0iNzkyIiBoZWlnaHQ9IjgyNCIgcng9IjEwNCIgZmlsbD0idXJsKCN0b3BMaWdodCkiLz4KICAgICAgPHJlY3QgeD0iMTE3LjUiIHk9Ijg5LjUiIHdpZHRoPSI3ODkiIGhlaWdodD0iODIxIiByeD0iMTAyLjUiIHN0cm9rZT0iIzI4NEM3QiIgc3Ryb2tlLW9wYWNpdHk9IjAuMzIiIHN0cm9rZS13aWR0aD0iMyIvPgogICAgPC9nPgoKICAgIDxnIGZpbHRlcj0idXJsKCNiYXJEcm9wKSI+CiAgICAgIDxyZWN0IHg9IjI4NiIgeT0iMTgzIiB3aWR0aD0iOTQiIGhlaWdodD0iNjIxIiByeD0iMjAiIGZpbGw9InVybCgjYmFyRmlsbCkiLz4KICAgICAgPHJlY3QgeD0iNDE1IiB5PSIzMjgiIHdpZHRoPSI4MCIgaGVpZ2h0PSIyNDAiIHJ4PSIxOCIgZmlsbD0idXJsKCNiYXJGaWxsKSIvPgogICAgICA8cmVjdCB4PSI1NDAiIHk9IjQ2OCIgd2lkdGg9IjgwIiBoZWlnaHQ9IjIzOCIgcng9IjE4IiBmaWxsPSJ1cmwoI2JhckZpbGwpIi8+CiAgICAgIDxyZWN0IHg9IjY2MSIgeT0iMjE1IiB3aWR0aD0iOTMiIGhlaWdodD0iNjA2IiByeD0iMjAiIGZpbGw9InVybCgjYmFyRmlsbCkiLz4KICAgIDwvZz4KCiAgICA8ZyBvcGFjaXR5PSIwLjQ1Ij4KICAgICAgPHJlY3QgeD0iMjkxIiB5PSIxODgiIHdpZHRoPSI4NCIgaGVpZ2h0PSIxMiIgcng9IjYiIGZpbGw9IiNGRkZGRkYiLz4KICAgICAgPHJlY3QgeD0iNDIwIiB5PSIzMzMiIHdpZHRoPSI3MCIgaGVpZ2h0PSIxMCIgcng9IjUiIGZpbGw9IiNGRkZGRkYiLz4KICAgICAgPHJlY3QgeD0iNTQ1IiB5PSI0NzMiIHdpZHRoPSI3MCIgaGVpZ2h0PSIxMCIgcng9IjUiIGZpbGw9IiNGRkZGRkYiLz4KICAgICAgPHJlY3QgeD0iNjY2IiB5PSIyMjAiIHdpZHRoPSI4MyIgaGVpZ2h0PSIxMiIgcng9IjYiIGZpbGw9IiNGRkZGRkYiLz4KICAgIDwvZz4KCiAgICA8ZyBvcGFjaXR5PSIwLjE4Ij4KICAgICAgPHJlY3QgeD0iMjkxIiB5PSI3ODgiIHdpZHRoPSI4NCIgaGVpZ2h0PSIxMCIgcng9IjUiIGZpbGw9IiNDQUQyREMiLz4KICAgICAgPHJlY3QgeD0iNDIwIiB5PSI1NTIiIHdpZHRoPSI3MCIgaGVpZ2h0PSI5IiByeD0iNC41IiBmaWxsPSIjQ0FEMkRDIi8+CiAgICAgIDxyZWN0IHg9IjU0NSIgeT0iNjkwIiB3aWR0aD0iNzAiIGhlaWdodD0iOSIgcng9IjQuNSIgZmlsbD0iI0NBRDJEQyIvPgogICAgICA8cmVjdCB4PSI2NjYiIHk9IjgwNSIgd2lkdGg9IjgzIiBoZWlnaHQ9IjEwIiByeD0iNSIgZmlsbD0iI0NBRDJEQyIvPgogICAgPC9nPgogIDwvZz4KPC9zdmc+">
@@ -1236,7 +1233,7 @@ html.dark .method-text .m-takeaway{background:rgba(46,111,176,.16)}
 .wv-bt-track .wv-lab.tgt{left:calc(55% + 9px);color:var(--green-ink)}
 .wv-bt-marks{display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:11px;color:var(--muted);margin-top:8px}
 
-/* mini demand × ability matrix with crowned target dot (step 03) */
+/* mini demand × ability matrix with prioritised target dot (step 03) */
 .wv-matrix{width:300px;height:200px;max-width:86vw;position:relative;border:1px solid var(--line);border-radius:var(--r-md);
   background:linear-gradient(180deg,var(--grad-hi),var(--grad-lo));overflow:hidden}
 .wv-matrix .wm-line{position:absolute;background:none}
@@ -1881,9 +1878,9 @@ const CATS = {
   opportunities:{
     kind:'Opportunities', badge:'3 · 1 target',
     h:'Struggling moments, organised by timeline',
-    d:'Three live opportunities, one crowned target. Open to compare demand × ability to win.',
-    ev:'suggestive',                      // inherits the crowned target's state
-    target:true,                          // show the crown on the tree node
+    d:'Three live opportunities, one prioritised target. Open to compare demand × ability to win.',
+    ev:'suggestive',                      // inherits the prioritised target's state
+    target:true,                          // show the prioritise on the tree node
     members:['oppTarget','opp2','opp3'],
   },
   solutions:{
@@ -2131,7 +2128,7 @@ function openCategory(catKey){
   let rows='';
   (c.members||[]).forEach(m=>{
     const n = NODES[m]; if(!n) return;
-    const crown = n.target?`<span class="cr-crown">★ Target</span>`:(n.weakest?`<span class="cr-crown" style="color:var(--amber-ink);background:var(--ev-suggestive-bg)">⚠ Weakest</span>`:'');
+    const prioritise = n.target?`<span class="cr-crown">★ Target</span>`:(n.weakest?`<span class="cr-crown" style="color:var(--amber-ink);background:var(--ev-suggestive-bg)">⚠ Weakest</span>`:'');
     rows += `<button class="cat-row ${n.target?'is-target':''}" onclick="openCategoryMember('${m}')">
       <span class="cr-meter">${meter(n.ev)}</span>
       <span class="cr-main">
@@ -2177,7 +2174,7 @@ function openCategory(catKey){
   document.getElementById('catBody').innerHTML = rows;
 
   let foot = `<span class="cf-note">Click any member to open its full detail.</span>`;
-  if(catKey==='opportunities') foot = `<span class="cf-note">Crowned target sits top-right of demand × ability to win.</span><button class="btn btn-ghost btn-sm" onclick="closeCategory();goLoop('opportunity')">Open opportunity space →</button>`;
+  if(catKey==='opportunities') foot = `<span class="cf-note">Prioritised target sits top-right of demand × ability to win.</span><button class="btn btn-ghost btn-sm" onclick="closeCategory();goLoop('opportunity')">Open opportunity space →</button>`;
   else if(catKey==='solutions') foot = `<span class="cf-note">Three paths · one disproven as a cheap save.</span><button class="btn btn-ghost btn-sm" onclick="closeCategory();goLoop('delivery')">See in Delivery loop →</button>`;
   else if(catKey==='tests') foot = `<span class="cf-note">Thresholds locked before results.</span><button class="btn btn-primary btn-sm" onclick="closeCategory();openNBATest()">Open TC-08 →</button>`;
   document.getElementById('catFoot').innerHTML = foot;
@@ -2574,10 +2571,10 @@ const BUILDERS = {
   opportunity(){ return `<div class="wrap">
     <div class="screen-head">
       <div class="eyebrow">Loop 3 · The opportunity space</div>
-      <h1 class="h1">Organize struggle by timeline moment, crown one target</h1>
+      <h1 class="h1">Organize struggle by timeline moment, prioritise one target</h1>
       <p class="lede">Opportunities are customer-framed struggling moments, never solutions.</p>
     </div>
-    ${concierge('suggestive', `<span class="cc-step">Where we are:</span> one target crowned, <b>bank-connection trust</b> (high demand × high ability to win). <b>Emerging,</b> not yet validated. <span class="cc-step">Next:</span> the trust-legibility test, <b>TC-08</b>.`)}
+    ${concierge('suggestive', `<span class="cc-step">Where we are:</span> one target prioritised, <b>bank-connection trust</b> (high demand × high ability to win). <b>Emerging,</b> not yet validated. <span class="cc-step">Next:</span> the trust-legibility test, <b>TC-08</b>.`)}
 
     <div class="section-rule"><span class="sr-n">3.1</span><h2 class="serif">Opportunities by timeline moment</h2><span class="sr-line"></span></div>
     <div class="grid g-3">
@@ -2626,7 +2623,7 @@ const BUILDERS = {
           <div class="dot" style="left:52%;bottom:48%"><span class="bub"></span><span class="dl">Historical import</span></div>
           <div class="dot" style="left:55%;bottom:24%"><span class="bub"></span><span class="dl">Reconciliation drift</span></div>
         </div>
-        <p style="font-size:12px;color:var(--muted);margin-top:10px">One target crowned: top-right quadrant, high demand, high ability to win.</p>
+        <p style="font-size:12px;color:var(--muted);margin-top:10px">One target prioritised: top-right quadrant, high demand, high ability to win.</p>
       </div>
     </div>
   </div>`; },
@@ -2801,7 +2798,7 @@ const BUILDERS = {
       <p class="lede">Every decision, its rationale, the evidence behind it, and the trigger that would make us revisit. Beliefs that died are kept, they’re the cheapest progress we made.</p>
     </div>
     <div style="margin-top:26px" class="dlog">
-      <div class="dentry"><div class="d-when">2026-06-09 · Wk 24</div><div class="d-what">Crowned bank-connection trust as the single target opportunity</div><div class="d-why">Top-right of the demand × ability matrix; named unprompted in 8/14 interviews and sits exactly on the 7-day activation drop-off.</div><div class="d-trig">Revisit if: TC-08 fails to clear bar, or activation moves without it.</div></div>
+      <div class="dentry"><div class="d-when">2026-06-09 · Wk 24</div><div class="d-what">Prioritised bank-connection trust as the single target opportunity</div><div class="d-why">Top-right of the demand × ability matrix; named unprompted in 8/14 interviews and sits exactly on the 7-day activation drop-off.</div><div class="d-trig">Revisit if: TC-08 fails to clear bar, or activation moves without it.</div></div>
       <div class="dentry killed"><div class="d-when">2026-06-02 · Wk 23</div><div class="d-what">Disproved the sandbox-first solution path</div><div class="d-why">TC-05 fake-door: only 9% of “connect later” users returned to connect within 48h (bar 30%). Exploration without real data felt pointless. Closed the path before a line of production code.</div><div class="d-trig">Revisit if: a segment shows strong demo-first demand.</div></div>
       <div class="dentry killed"><div class="d-when">2026-05-26 · Wk 22</div><div class="d-what">Disproved “SOC 2 badge alone moves connection rate”</div><div class="d-why">TC-03 badge-placement A/B: no lift at any placement (Δ +1pt vs +8pt bar). Safety must be legible inside the flow, not certified in the footer.</div><div class="d-trig">Revisit if: an enterprise-adjacent segment enters the funnel.</div></div>
       <div class="dentry"><div class="d-when">2026-05-18 · Wk 21</div><div class="d-what">Set product outcome at 34% → 55% 7-day bank-feed activation</div><div class="d-why">Negotiated with leadership as the controllable behavior serving 90-day churn; rejected “bank connections started” as a gameable traction metric.</div><div class="d-trig">Revisit at: Q2 outcome negotiation (18 days).</div></div>
@@ -2862,7 +2859,7 @@ const CMDK = [
   {g:'Beliefs & actions',items:[
     {ico:'⚠',t:'Open weakest belief',sub:'NBA',act:()=>{goLoop('tree');setTimeout(()=>openNode('belief'),200)}},
     {ico:'▸',t:'Open test card TC-08',sub:'in flight',act:openNBATest},
-    {ico:'★',t:'View target opportunity',sub:'crowned',act:()=>{goLoop('tree');setTimeout(()=>openNode('oppTarget'),200)}},
+    {ico:'★',t:'View target opportunity',sub:'prioritised',act:()=>{goLoop('tree');setTimeout(()=>openNode('oppTarget'),200)}},
     {ico:'≡',t:'Decision Log',sub:'reasoning',act:()=>goLoop('decisions')},
     {ico:'▶',t:'Show the reasoning (walkthrough)',sub:'stakeholder',act:openWalk},
   ]},
@@ -3014,8 +3011,8 @@ const CHAT_BANK = [
     a:`The one number we own is <b>7-day bank-feed activation: 34% → 55%</b>, connect a feed AND complete a first reconciliation within a week. It's a controllable behavior negotiated with leadership, serving the business outcome of lower 90-day churn. See the <b>Outcome loop</b>.` },
   { id:'job', kw:['job','jtbd','progress','why switch','why do people','interview','customer'],
     a:`The Job: <b>"move from spreadsheet chaos to trusted, always-current books"</b>, so owners answer money questions in minutes and look credible to their accountant and investors. It recurs in 11 of 14 interviews of real past switches. The decisive struggle lands at onboarding, on "Connect your bank." See the <b>Progress loop</b>.` },
-  { id:'opportunity', kw:['opportunity','target','crown','trust','connection','which problem','focus on','bank connect'],
-    a:`The crowned target opportunity is <b>bank-connection trust</b>: "I won't connect my primary account until I believe this company is safe and serious." It sits top-right on demand × ability to win, named unprompted in 8/14 interviews, and lands exactly on the activation drop-off. Open the <b>Opportunity loop</b>.` },
+  { id:'opportunity', kw:['opportunity','target','crown','prioritise','trust','connection','which problem','focus on','bank connect'],
+    a:`The prioritised target opportunity is <b>bank-connection trust</b>: "I won't connect my primary account until I believe this company is safe and serious." It sits top-right on demand × ability to win, named unprompted in 8/14 interviews, and lands exactly on the activation drop-off. Open the <b>Opportunity loop</b>.` },
   { id:'increment', kw:['increment','bet','what are you building','ship','scope','solution','focused half','focussed half','build'],
     a:`The bet is the <b>trust-first connection flow, the primary-account moment only</b>: read-only framing, granular permissions, "disconnect anytime," and the security page inline at the credential step. White-glove, sandbox, and historical import are deliberately excluded, focussed success over ambiguous failure: build half the scope but make that half genuinely great. See the <b>Delivery &amp; Impact loop</b>.` },
   { id:'impact', kw:['impact','ladder','four level','4 level','measure','churn','business outcome','how will you know'],
@@ -3023,7 +3020,7 @@ const CHAT_BANK = [
   { id:'causal', kw:['causal','system','what must be true','chain','control factor','noise'],
     a:`Before any solution we mapped the causal system right-to-left: trusted books need a reconciled feed → a feed needs a primary-account connection → that needs the trust threshold crossed in session one. Control factors include badging placement, read-only messaging, and connection sequencing; noise includes bank OAuth quality and fintech-breach press. See the <b>Causal Learning loop</b>.` },
   { id:'summary', kw:['summarise','summarize','summary','overview','catch me up','where are we','project status','tldr','brief me'],
-    a:`Ledgerline owns one number, <b>7-day activation 34% → 55%</b> (validated, serving 90-day churn). The Job is proven: escape spreadsheet chaos for trusted books. The crowned opportunity is <b>bank-connection trust</b>, and the bet is a <b>trust-first connection flow</b> scoped to the primary-account moment. We disproved two wrong answers cheaply (SOC-2 badge, sandbox-first). The weakest belief is in test now via <b>TC-08</b> (57% vs 50% bar), that's the next step.` },
+    a:`Ledgerline owns one number, <b>7-day activation 34% → 55%</b> (validated, serving 90-day churn). The Job is proven: escape spreadsheet chaos for trusted books. The prioritised opportunity is <b>bank-connection trust</b>, and the bet is a <b>trust-first connection flow</b> scoped to the primary-account moment. We disproved two wrong answers cheaply (SOC-2 badge, sandbox-first). The weakest belief is in test now via <b>TC-08</b> (57% vs 50% bar), that's the next step.` },
 ];
 /* Socratic field guides, "Ask Noetic" interviews the user to fill an input field, then drafts it.
    Each: targetId (the .field to write into), the requirement, an intro, ordered steps (with suggested
@@ -3311,8 +3308,8 @@ const GUIDE = [
     run:()=>goLoop('progress'),
     anchor:()=>document.querySelector('#screen-progress .card.inset')||document.querySelector('#screen-progress .card') },
 
-  { title:'The opportunity we crowned',
-    body:`We organised every struggling moment by timeline, then crowned one target: <b>bank-connection trust</b>, "I won't connect my primary account until I believe this company is safe and serious."`,
+  { title:'The opportunity we prioritised',
+    body:`We organised every struggling moment by timeline, then prioritised one target: <b>bank-connection trust</b>, "I won't connect my primary account until I believe this company is safe and serious."`,
     result:{k:'Result',v:`<b>Emerging.</b> Top-right on demand × ability to win, named unprompted in 8/14 interviews, sitting exactly on the activation drop-off.`,
             next:`Next: the causal system we mapped before solving.`},
     run:()=>{ goLoop('tree'); setTimeout(()=>openCategory('opportunities'),360); },
@@ -3347,7 +3344,7 @@ const GUIDE = [
     anchor:()=>document.getElementById('tc08') },
 
   { title:"You're caught up",
-    body:`That's the whole arc: a validated number, a proven Job, a crowned opportunity, a mapped system, a scoped bet, and two cheap saves. The reasoning is honest and the certainty is rising.`,
+    body:`That's the whole arc: a validated number, a proven Job, a prioritised opportunity, a mapped system, a scoped bet, and two cheap saves. The reasoning is honest and the certainty is rising.`,
     result:{k:'The next step',v:`<b>Finish TC-08.</b> When it clears the 50% bar we ship the trust-first increment; if it stalls, we pivot to the white-glove path.`,
             next:`That's it, you now know what's been learned and exactly what to do next.`},
     run:()=>{ goLoop('tree'); setTimeout(()=>document.getElementById('nbaCard')&&document.getElementById('nbaCard').classList.add('open'),120); },
@@ -3557,7 +3554,7 @@ const VIS_MATRIX=`<div class="mvis"><div class="mv-matrix">
   <span class="mvm-q" style="right:12px;top:8px">★ focus here</span>
   <div class="mvm-dot" style="left:76%;bottom:70%"></div>
   <span class="mvm-lab" style="left:55%;top:20%">target</span>
-</div><div class="mvis-cap">A pragmatic call: crown the sibling that is high demand and high ability to win.</div></div>`;
+</div><div class="mvis-cap">A pragmatic call: prioritise the sibling that is high demand and high ability to win.</div></div>`;
 const VIS_LADDER=`<div class="mvis"><div class="mv-ladder">
   <div class="mv-rung"><span class="mvr-n">L1</span><span class="mvr-t">Assumption behaviour</span><span class="mvr-d">did people do the thing?</span></div>
   <div class="mv-rung"><span class="mvr-n">L2</span><span class="mvr-t">Opportunity relief</span><span class="mvr-d">did the struggle ease?</span></div>
