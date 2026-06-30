@@ -33,13 +33,13 @@
       assumption  → slate, dashed       (a belief, unweighed)
       emerging    → amber               (some signal, not enough)
       validated   → green               (load-bearing, earned)
-      killed      → grey + strikethrough (disproven, a win)
+      disproven   → grey + strikethrough (disproven, a win)
     Accent indigo for navigation/active. Restrained borders (warm grey).
 
   SIGNATURE DEVICE, THE CERTAINTY METER.
     A four-segment ruled bar that appears on EVERY belief. Segments fill
     left→right as evidence accrues: assumption (1) → emerging (2) →
-    validated (4). Killed beliefs render struck-through with a grey cap.
+    validated (4). Disproven beliefs render struck-through with a grey cap.
     Same component everywhere, tree nodes, panels, assumption ladder, NBA.
     It is the felt mechanic of the product.
 
@@ -1249,7 +1249,7 @@ html.dark .method-text .m-takeaway{background:rgba(46,111,176,.16)}
 .wv-matrix .wm-dot .wm-dl{position:absolute;left:50%;bottom:140%;transform:translateX(-50%);white-space:nowrap;
   font-size:10px;font-weight:600;color:var(--accent-ink);background:var(--label-bg);padding:1px 6px;border-radius:5px}
 
-/* two killed beliefs as struck meters (step 04) */
+/* two disproven beliefs as struck meters (step 04) */
 .wv-kills{display:flex;gap:16px;flex-wrap:wrap;justify-content:center}
 .wv-kill{display:flex;flex-direction:column;align-items:center;gap:7px;background:var(--surface);border:1px solid var(--line);
   border-radius:var(--r-md);padding:13px 16px;min-width:180px;box-shadow:var(--shadow-sm)}
@@ -1486,7 +1486,7 @@ var VIEW_ONLY = (function(){try{return /(?:^|[?&])share=reasoning(?:&|$)/.test(l
               <button class="fchip" data-f="assumption" onclick="filterTree('assumption',this)"><span class="ev-d" style="background:var(--ev-assumption)"></span>Assumption</button>
               <button class="fchip" data-f="suggestive" onclick="filterTree('suggestive',this)"><span class="ev-d" style="background:var(--ev-suggestive)"></span>Emerging</button>
               <button class="fchip" data-f="validated" onclick="filterTree('validated',this)"><span class="ev-d" style="background:var(--ev-validated)"></span>Validated</button>
-              <button class="fchip" data-f="killed" onclick="filterTree('killed',this)"><span class="ev-d" style="background:var(--ev-killed)"></span>Killed</button>
+              <button class="fchip" data-f="killed" onclick="filterTree('killed',this)"><span class="ev-d" style="background:var(--ev-killed)"></span>Disproven</button>
             </div>
           </div>
         </div>
@@ -1694,7 +1694,7 @@ const EV = {
   assumption:{label:'Assumption',cls:'ev-assumption'},
   suggestive:{label:'Emerging',cls:'ev-suggestive'},
   validated:{label:'Validated',cls:'ev-validated'},
-  killed:{label:'Killed',cls:'ev-killed'},
+  killed:{label:'Disproven',cls:'ev-killed'},
 };
 
 function meter(state,size){
@@ -1837,7 +1837,7 @@ const CATS = {
   solutions:{
     kind:'Solutions', badge:'3 paths',
     h:'Three materially different paths',
-    d:'Product, service, and a killed hybrid. Open to compare the evidence behind each.',
+    d:'Product, service, and a disproven hybrid. Open to compare the evidence behind each.',
     ev:'suggestive',
     summary:'sol',                        // render a stacked-meter summary
     members:['solA','solB','solC'],
@@ -1845,7 +1845,7 @@ const CATS = {
   tests:{
     kind:'Assumption Tests', badge:'2 cards · TC-08 in flight',
     h:'Riskiest assumptions, threshold-locked',
-    d:'TC-08 is in flight (57% vs 50% bar). TC-05 was killed as a cheap win.', // numbers kept as-is
+    d:'TC-08 is in flight (57% vs 50% bar). TC-05 was disproven as a cheap win.', // numbers kept as-is
     ev:'suggestive',
     weakest:true,                         // the load-bearing layer
     flight:true,
@@ -2106,7 +2106,7 @@ function openCategory(catKey){
       <span class="cr-meter">${meter('killed')}</span>
       <span class="cr-main">
         <span class="cr-kind">TC-05 · closed</span>
-        <span class="cr-h">Glowing smart-cap reminder, killed as a cheap win</span>
+        <span class="cr-h">Glowing smart-cap reminder, disproven as a cheap win</span>
         <span class="cr-d">Only 9% still wanted it after a week vs a 30% bar. Path closed before a line of production code.</span>
         <span class="cr-view">Open in Delivery loop →</span>
       </span>
@@ -2126,7 +2126,7 @@ function openCategory(catKey){
 
   let foot = `<span class="cf-note">Click any member to open its full detail.</span>`;
   if(catKey==='opportunities') foot = `<span class="cf-note">Crowned target sits top-right of demand × ability to win.</span><button class="btn btn-ghost btn-sm" onclick="closeCategory();goLoop('opportunity')">Open opportunity space →</button>`;
-  else if(catKey==='solutions') foot = `<span class="cf-note">Three paths · one killed as a cheap save.</span><button class="btn btn-ghost btn-sm" onclick="closeCategory();goLoop('delivery')">See in Delivery loop →</button>`;
+  else if(catKey==='solutions') foot = `<span class="cf-note">Three paths · one disproven as a cheap save.</span><button class="btn btn-ghost btn-sm" onclick="closeCategory();goLoop('delivery')">See in Delivery loop →</button>`;
   else if(catKey==='tests') foot = `<span class="cf-note">Thresholds locked before results.</span><button class="btn btn-primary btn-sm" onclick="closeCategory();openNBATest()">Open TC-08 →</button>`;
   document.getElementById('catFoot').innerHTML = foot;
 
@@ -2671,7 +2671,7 @@ const BUILDERS = {
           <button class="lstep on" data-s="assumption" onclick="setLadder('assumption')">Assumption</button>
           <button class="lstep" data-s="suggestive" onclick="setLadder('suggestive')">Emerging</button>
           <button class="lstep" data-s="validated" onclick="setLadder('validated')">Validated</button>
-          <button class="lstep" data-s="killed" onclick="setLadder('killed')">Killed</button>
+          <button class="lstep" data-s="killed" onclick="setLadder('killed')">Disproven</button>
         </div>
         <div style="margin-top:20px;display:flex;align-items:center;gap:16px">
           <div id="ladderMeter">${meter('assumption','lg')}</div>
@@ -2710,7 +2710,7 @@ const BUILDERS = {
         <div class="threshold">
           <div class="th-l">Success threshold, locked<span class="lock"><svg width="13" height="13" viewBox="0 0 16 16" fill="none"><rect x="3" y="7" width="10" height="7" rx="1.5" stroke="#c9a24f" stroke-width="1.3"/><path d="M5 7V5a3 3 0 016 0v2" stroke="#c9a24f" stroke-width="1.3"/></svg></span></div>
           <div class="th-v">≥ 30% of “glow reminder” sign-ups still want it after a week</div>
-          <div class="th-result"><span class="res-tag res-fail">RESULT · 9%</span><span style="color:#bdb6a8">People ignored or covered the light, it did <b style="color:#f0a58e">not</b> change how much they drank. Belief killed; the glowing-cap path closed before a line of production code. <b style="color:#9fd9a3">A cheap save.</b></span></div>
+          <div class="th-result"><span class="res-tag res-fail">RESULT · 9%</span><span style="color:#bdb6a8">People ignored or covered the light, it did <b style="color:#f0a58e">not</b> change how much they drank. Belief disproven; the glowing-cap path closed before a line of production code. <b style="color:#9fd9a3">A cheap save.</b></span></div>
         </div>
       </div>
     </div>
@@ -2755,8 +2755,8 @@ const BUILDERS = {
     </div>
     <div style="margin-top:26px" class="dlog">
       <div class="dentry"><div class="d-when">2026-06-09 · Wk 24</div><div class="d-what">Crowned the missing-cue gap as the single target opportunity</div><div class="d-why">Top-right of the demand × ability matrix; named unprompted in 8/14 interviews and sits exactly on the week-1 drop-off.</div><div class="d-trig">Revisit if: TC-08 fails to clear bar, or the conversion moves without it.</div></div>
-      <div class="dentry killed"><div class="d-when">2026-06-02 · Wk 23</div><div class="d-what">Killed the glowing smart-cap solution path</div><div class="d-why">TC-05 fake-door: only 9% of “glow reminder” sign-ups still wanted it after a week (bar 30%). People ignored or covered the light. Closed the path before a line of production code.</div><div class="d-trig">Revisit if: a segment shows strong demand for a hardware reminder.</div></div>
-      <div class="dentry killed"><div class="d-when">2026-05-26 · Wk 22</div><div class="d-what">Killed “a streak counter &amp; badges will build the habit”</div><div class="d-why">TC-03 gamification A/B: badges and streaks moved nothing (Δ +1pt vs +8pt bar). The habit must come from a real cue, not points.</div><div class="d-trig">Revisit if: a more game-motivated segment enters the funnel.</div></div>
+      <div class="dentry killed"><div class="d-when">2026-06-02 · Wk 23</div><div class="d-what">Disproved the glowing smart-cap solution path</div><div class="d-why">TC-05 fake-door: only 9% of “glow reminder” sign-ups still wanted it after a week (bar 30%). People ignored or covered the light. Closed the path before a line of production code.</div><div class="d-trig">Revisit if: a segment shows strong demand for a hardware reminder.</div></div>
+      <div class="dentry killed"><div class="d-when">2026-05-26 · Wk 22</div><div class="d-what">Disproved “a streak counter &amp; badges will build the habit”</div><div class="d-why">TC-03 gamification A/B: badges and streaks moved nothing (Δ +1pt vs +8pt bar). The habit must come from a real cue, not points.</div><div class="d-trig">Revisit if: a more game-motivated segment enters the funnel.</div></div>
       <div class="dentry"><div class="d-when">2026-05-18 · Wk 21</div><div class="d-what">Set product outcome at 34% → 55% week-1 trial→paid conversion</div><div class="d-why">Negotiated with leadership as the controllable behavior serving day-90 retention; rejected “app opens” as a gameable traction metric.</div><div class="d-trig">Revisit at: Q2 outcome negotiation (18 days).</div></div>
       <div class="dentry"><div class="d-when">2026-05-11 · Wk 20</div><div class="d-what">Inserted the causal map before solution design</div><div class="d-why">Right-to-left analysis showed the conversion depends on the hydration habit, which depends on a cue at the right moment, reframed the whole solution set around anchoring the first drink to an existing habit.</div><div class="d-trig">Revisit if: noise factors (weather, how busy the day is) dominate the signal.</div></div>
     </div>
@@ -2870,10 +2870,10 @@ const WALK = [
       <div class="wm-dot" style="left:52%;bottom:48%"></div>
       <div class="wm-dot" style="left:55%;bottom:24%"></div>
     </div></div>`},
-  {step:'04 · The dead ends we avoided',h:'We killed two wrong answers cheaply',body:'A streak counter and badges moved <b>nothing</b> (TC-03). A glowing smart cap that lights up when it’s time to drink converted <b>9% vs a 30% bar</b> (TC-05), people ignored or covered the light. Both beliefs died for the price of a fake door. The cue must come from a habit people already have.',ev:'killed',evlabel:'TC-03 & TC-05 · cheap saves',
+  {step:'04 · The dead ends we avoided',h:'We disproved two wrong answers cheaply',body:'A streak counter and badges moved <b>nothing</b> (TC-03). A glowing smart cap that lights up when it’s time to drink converted <b>9% vs a 30% bar</b> (TC-05), people ignored or covered the light. Both beliefs died for the price of a fake door. The cue must come from a habit people already have.',ev:'killed',evlabel:'TC-03 & TC-05 · cheap saves',
     vis:()=>`<div class="wc-visual"><div class="wv-kills">
-      <div class="wv-kill"><span class="wk-id">TC-03 · killed</span>${meter('killed','lg')}<span class="wk-note">Streaks &amp; badges<br><b>+1pt vs +8pt bar</b></span></div>
-      <div class="wv-kill"><span class="wk-id">TC-05 · killed</span>${meter('killed','lg')}<span class="wk-note">Glowing smart cap<br><b>9% vs 30% bar</b></span></div>
+      <div class="wv-kill"><span class="wk-id">TC-03 · disproven</span>${meter('killed','lg')}<span class="wk-note">Streaks &amp; badges<br><b>+1pt vs +8pt bar</b></span></div>
+      <div class="wv-kill"><span class="wk-id">TC-05 · disproven</span>${meter('killed','lg')}<span class="wk-note">Glowing smart cap<br><b>9% vs 30% bar</b></span></div>
     </div></div>`},
   {step:'05 · The bet',h:'Anchor the first drink to a habit they already have',body:'The increment is the focussed half of one path: <b>anchor the first drink to making your morning coffee, a one-tap “done,” and a simple progress ring</b>, the morning-coffee moment only. Gamification, social, flavour, smart-cap hardware, all deliberately excluded. <i>Focussed success over ambiguous failure.</i>',ev:'suggestive',evlabel:'TC-08 in flight · 57%',
     vis:()=>walkProgStrip(4)},
@@ -2956,11 +2956,11 @@ const CHAT_BANK = [
   { id:'next', kw:['next step','what next',"what's next",'next move','what should','do next','now what','nba','next best'],
     a:`The next move is <b>TC-08</b>, the habit-anchor nudge test. It's in flight across 40 new owners, currently <b>57%</b> hitting their water goal in week one against a locked <b>50%</b> bar. It moves our weakest belief, so finishing it is what unlocks the increment. Open the <b>Delivery &amp; Impact loop</b> to watch it.` },
   { id:'sandbox', kw:['glowing cap','smart cap','glow','light','cap','tc-05','tc05','fake door','hardware','reminder'],
-    a:`We killed the glowing smart cap as a cheap win. The <b>TC-05</b> fake-door test offered a "glow reminder" cap, only <b>9%</b> still wanted it after a week, against a <b>30%</b> bar. People ignored or covered the light and it never changed how much they drank, so the path closed before a line of production code. The lesson: the cue has to come from a habit people already have, not a gadget.` },
+    a:`We disproved the glowing smart cap as a cheap win. The <b>TC-05</b> fake-door test offered a "glow reminder" cap, only <b>9%</b> still wanted it after a week, against a <b>30%</b> bar. People ignored or covered the light and it never changed how much they drank, so the path closed before a line of production code. The lesson: the cue has to come from a habit people already have, not a gadget.` },
   { id:'unproven', kw:['unproven','weakest','still prove','not proven','riskiest','risky','what if','assumption','uncertain','suggestive'],
     a:`The weakest, load-bearing belief is: <b>"tie the first drink to a habit people already have and they'll hit their goal in week one."</b> It's only <b>emerging</b>, a 7/10 concierge signal, not yet behavioral at scale. <b>TC-08</b> is the test measuring exactly this. Until it clears, the increment rests on an unproven bet.` },
-  { id:'kill', kw:['killed','dead end','what did you kill','beliefs you killed','tc-03','tc03','streak','badge','gamification','points'],
-    a:`Two beliefs died cheaply. <b>TC-03</b>: a streak counter and badges moved <b>nothing</b> (+1pt vs an +8pt bar), points aren't a real cue. <b>TC-05</b>: the glowing smart cap converted <b>9% vs a 30% bar</b>. Both were killed for the price of a fake door, which is the cheapest progress we made.` },
+  { id:'kill', kw:['killed','disproven','dead end','what did you kill','beliefs you killed','tc-03','tc03','streak','badge','gamification','points'],
+    a:`Two beliefs died cheaply. <b>TC-03</b>: a streak counter and badges moved <b>nothing</b> (+1pt vs an +8pt bar), points aren't a real cue. <b>TC-05</b>: the glowing smart cap converted <b>9% vs a 30% bar</b>. Both were disproved for the price of a fake door, which is the cheapest progress we made.` },
   { id:'proven', kw:['proven','validated','what do we know','what is proven','certain','load-bearing','evidence'],
     a:`Two things are validated. The <b>outcome</b> is ratified: week-1 trial-to-paid conversion, <b>34% → 55%</b>, owned by this team. And the <b>Job</b> is consistent, across 14 interviews of real attempts, 11 confirm people hire us to make staying hydrated effortless. Everything downstream of the habit bet is still emerging.` },
   { id:'outcome', kw:['outcome','34','55','goal hit','metric','number','goal','target number','hit rate'],
@@ -2976,7 +2976,7 @@ const CHAT_BANK = [
   { id:'causal', kw:['causal','system','what must be true','chain','control factor','noise'],
     a:`Before any solution we mapped the causal system right-to-left: hitting the goal needs regular drinking → regular drinking needs a cue at the right moment → the cue needs the bottle within reach and drinking to feel easy and a bit rewarding. Control factors include when the cue fires, bottle within reach, and progress feedback; noise includes weather and how busy the day is. See the <b>Causal Learning loop</b>.` },
   { id:'summary', kw:['summarise','summarize','summary','overview','catch me up','where are we','project status','tldr','brief me'],
-    a:`Quench owns one number, <b>week-1 trial→paid conversion 34% → 55%</b> (validated, serving day-90 retention). The Job is proven: make staying hydrated effortless. The crowned opportunity is <b>the missing-cue gap</b>, and the bet is a <b>habit-anchor nudge</b> scoped to the morning-coffee moment. We killed two wrong answers cheaply (streaks &amp; badges, glowing smart cap). The weakest belief is in test now via <b>TC-08</b> (57% vs 50% bar), that's the next step.` },
+    a:`Quench owns one number, <b>week-1 trial→paid conversion 34% → 55%</b> (validated, serving day-90 retention). The Job is proven: make staying hydrated effortless. The crowned opportunity is <b>the missing-cue gap</b>, and the bet is a <b>habit-anchor nudge</b> scoped to the morning-coffee moment. We disproved two wrong answers cheaply (streaks &amp; badges, glowing smart cap). The weakest belief is in test now via <b>TC-08</b> (57% vs 50% bar), that's the next step.` },
 ];
 /* Socratic field guides, "Ask Noetic" interviews the user to fill an input field, then drafts it.
    Each: targetId (the .field to write into), the requirement, an intro, ordered steps (with suggested
@@ -3049,7 +3049,7 @@ function chatMatch(q){
     if(s>bestScore){ bestScore=s; best=e; }
   });
   if(best) return best.a;
-  return `Here's what I can tell you about the Quench project: we're driving <b>week-1 trial-to-paid conversion from 34% to 55%</b> by anchoring the first drink to a habit people already have. Ask me about the next step, what's proven, the weakest belief, or why we killed the glowing cap, or open the <b>Delivery &amp; Impact loop</b> to see the live test.`;
+  return `Here's what I can tell you about the Quench project: we're driving <b>week-1 trial-to-paid conversion from 34% to 55%</b> by anchoring the first drink to a habit people already have. Ask me about the next step, what's proven, the weakest belief, or why we disproved the glowing cap, or open the <b>Delivery &amp; Impact loop</b> to see the live test.`;
 }
 
 let chatMode='general', askState=null;
@@ -3274,13 +3274,13 @@ const GUIDE = [
   { title:'The system before the solution',
     body:`We refused to jump to features. First we mapped the <b>causal system</b> right-to-left: hitting the goal needs regular drinking → regular drinking needs a cue at the right moment → the cue needs the bottle within reach and drinking to feel easy.`,
     result:{k:'Result',v:`We separated what we <b>control</b> (when the cue fires, bottle within reach, progress feedback) from <b>noise</b> (weather, how busy the day is).`,
-            next:`Next: the solution paths, and the two we killed cheaply.`},
+            next:`Next: the solution paths, and the two we disproved cheaply.`},
     run:()=>{ closeCategory(); goLoop('causal'); },
     anchor:()=>document.querySelector('#screen-causal .flow')||document.querySelector('#screen-causal .card') },
 
-  { title:'Three paths, two killed cheaply',
+  { title:'Three paths, two disproven cheaply',
     body:`We generated three materially different paths: a <b>product</b> nudge, a <b>service</b> (human coach), and a <b>hybrid</b> (glowing smart cap). Then we tested the riskiest beliefs, not whole ideas.`,
-    result:{k:'Result',v:`Two beliefs <b>killed for the price of a fake door</b>: streaks &amp; badges moved nothing (TC-03), and the glowing cap converted 9% vs a 30% bar (TC-05).`,
+    result:{k:'Result',v:`Two beliefs <b>disproved for the price of a fake door</b>: streaks &amp; badges moved nothing (TC-03), and the glowing cap converted 9% vs a 30% bar (TC-05).`,
             next:`Next: the bet we actually placed.`},
     run:()=>goLoop('delivery'),
     anchor:()=>document.querySelector('#screen-delivery .grid.g-3')||document.querySelector('#screen-delivery .card') },
@@ -3590,7 +3590,7 @@ const METHOD = [
     <p>Reading all four tells you not just <i>whether</i> it worked, but <b>where the chain broke</b> if it didn't, which is the exact link to go back and revisit.</p>`},
 
   {phase:'Loop & endpoint', title:'Update the map and choose the next move', body:`
-    <p>Whatever you learned, a validated belief, a killed path, a surprising result, goes <b>back onto the tree</b>. The map of certainty updates, and validated demand can even <b>challenge the outcome</b> you chose: the number isn't sacred.</p>
+    <p>Whatever you learned, a validated belief, a disproven path, a surprising result, goes <b>back onto the tree</b>. The map of certainty updates, and validated demand can even <b>challenge the outcome</b> you chose: the number isn't sacred.</p>
     <p>Then you <b>re-prioritise</b>: pick the next riskiest, highest-value thing to learn or build. This is the moment the loop closes and reopens.</p>`},
   {phase:'Loop & endpoint', title:'The rhythm that keeps it alive', body:`
     <p>None of this is a one-off plan; it runs on a <b>cadence</b>: a steady trickle of customer conversations (kept alive by that standing recruitment pipeline), a weekly look at the tree, continuous small tests with bars set in advance, an impact review each delivery cycle, and periodic outcome check-ins with leadership.</p>

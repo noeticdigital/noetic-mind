@@ -3,8 +3,8 @@
 <head>
 <!-- SILOED SHARE BUILD — standalone Ledgerline demo. No switcher, no other
      projects, no supply-side methodology; walkthrough trimmed to the 5-loop overview.
-     Self-contained (logo inlined). HOST THIS FILE IN ISOLATION, not beside the other
-     demos. Frozen copy: edit the live v3-ledgerline.html, then re-run the build. -->
+     Self-contained (logo inlined). HOST THIS FILE IN ISOLATION. Frozen copy: edit
+     v3-ledgerline.html, then re-run the build. -->
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAyNCIgaGVpZ2h0PSIxMDI0IiB2aWV3Qm94PSIwIDAgMTAyNCAxMDI0IiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogIDxkZWZzPgogICAgPGxpbmVhckdyYWRpZW50IGlkPSJuYXZ5IiB4MT0iMTkwIiB5MT0iMTMwIiB4Mj0iODQwIiB5Mj0iODkwIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iIzE2Mzk2RSIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjAuNTIiIHN0b3AtY29sb3I9IiMwQjJBNTYiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjMDYxQjNBIi8+CiAgICA8L2xpbmVhckdyYWRpZW50PgoKICAgIDxyYWRpYWxHcmFkaWVudCBpZD0idG9wTGlnaHQiIGN4PSIwIiBjeT0iMCIgcj0iMSIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiIGdyYWRpZW50VHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzYwIDIzMCkgcm90YXRlKDUwKSBzY2FsZSg2MjAgNzAwKSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iIzJBNTI4QiIgc3RvcC1vcGFjaXR5PSIwLjQyIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMC41IiBzdG9wLWNvbG9yPSIjMTUzQjcwIiBzdG9wLW9wYWNpdHk9IjAuMTIiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjMDcxQzNCIiBzdG9wLW9wYWNpdHk9IjAiLz4KICAgIDwvcmFkaWFsR3JhZGllbnQ+CgogICAgPGxpbmVhckdyYWRpZW50IGlkPSJiYXJGaWxsIiB4MT0iMCIgeTE9IjAiIHgyPSIwIiB5Mj0iMSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iI0ZGRkZGRiIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjAuNjUiIHN0b3AtY29sb3I9IiNGQkZCRkIiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjRUVGMUY1Ii8+CiAgICA8L2xpbmVhckdyYWRpZW50PgoKICAgIDxmaWx0ZXIgaWQ9Imljb25TaGFkb3ciIHg9IjcwIiB5PSI2MCIgd2lkdGg9Ijg4NCIgaGVpZ2h0PSI5MTQiIGZpbHRlclVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgY29sb3ItaW50ZXJwb2xhdGlvbi1maWx0ZXJzPSJzUkdCIj4KICAgICAgPGZlRHJvcFNoYWRvdyBkeD0iMCIgZHk9IjI0IiBzdGREZXZpYXRpb249IjI4IiBmbG9vZC1jb2xvcj0iIzA2MTIyNSIgZmxvb2Qtb3BhY2l0eT0iMC4yNiIvPgogICAgPC9maWx0ZXI+CgogICAgPGZpbHRlciBpZD0iYmFyRHJvcCIgeD0iLTE4JSIgeT0iLTEwJSIgd2lkdGg9IjEzNiUiIGhlaWdodD0iMTI4JSIgY29sb3ItaW50ZXJwb2xhdGlvbi1maWx0ZXJzPSJzUkdCIj4KICAgICAgPGZlRHJvcFNoYWRvdyBkeD0iMCIgZHk9IjkiIHN0ZERldmlhdGlvbj0iNiIgZmxvb2QtY29sb3I9IiMwMzExMjYiIGZsb29kLW9wYWNpdHk9IjAuMzYiLz4KICAgIDwvZmlsdGVyPgogIDwvZGVmcz4KCiAgPCEtLSBzcXVhc2ggdGhlIGljb24gdmVydGljYWxseSAoODI0LT43OTIgdGFsbCkgc28gdGhlIHJvdW5kZWQgc2hhcGUgaXMgYSB0cnVlIHNxdWFyZSwgdGhlbiByZS1jZW50cmUgLS0+CiAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMCAxMTYpIHNjYWxlKDEgMC45NjExNykgdHJhbnNsYXRlKDAgLTg4KSI+CiAgICA8ZyBmaWx0ZXI9InVybCgjaWNvblNoYWRvdykiPgogICAgICA8cmVjdCB4PSIxMTYiIHk9Ijg4IiB3aWR0aD0iNzkyIiBoZWlnaHQ9IjgyNCIgcng9IjEwNCIgZmlsbD0idXJsKCNuYXZ5KSIvPgogICAgICA8cmVjdCB4PSIxMTYiIHk9Ijg4IiB3aWR0aD0iNzkyIiBoZWlnaHQ9IjgyNCIgcng9IjEwNCIgZmlsbD0idXJsKCN0b3BMaWdodCkiLz4KICAgICAgPHJlY3QgeD0iMTE3LjUiIHk9Ijg5LjUiIHdpZHRoPSI3ODkiIGhlaWdodD0iODIxIiByeD0iMTAyLjUiIHN0cm9rZT0iIzI4NEM3QiIgc3Ryb2tlLW9wYWNpdHk9IjAuMzIiIHN0cm9rZS13aWR0aD0iMyIvPgogICAgPC9nPgoKICAgIDxnIGZpbHRlcj0idXJsKCNiYXJEcm9wKSI+CiAgICAgIDxyZWN0IHg9IjI4NiIgeT0iMTgzIiB3aWR0aD0iOTQiIGhlaWdodD0iNjIxIiByeD0iMjAiIGZpbGw9InVybCgjYmFyRmlsbCkiLz4KICAgICAgPHJlY3QgeD0iNDE1IiB5PSIzMjgiIHdpZHRoPSI4MCIgaGVpZ2h0PSIyNDAiIHJ4PSIxOCIgZmlsbD0idXJsKCNiYXJGaWxsKSIvPgogICAgICA8cmVjdCB4PSI1NDAiIHk9IjQ2OCIgd2lkdGg9IjgwIiBoZWlnaHQ9IjIzOCIgcng9IjE4IiBmaWxsPSJ1cmwoI2JhckZpbGwpIi8+CiAgICAgIDxyZWN0IHg9IjY2MSIgeT0iMjE1IiB3aWR0aD0iOTMiIGhlaWdodD0iNjA2IiByeD0iMjAiIGZpbGw9InVybCgjYmFyRmlsbCkiLz4KICAgIDwvZz4KCiAgICA8ZyBvcGFjaXR5PSIwLjQ1Ij4KICAgICAgPHJlY3QgeD0iMjkxIiB5PSIxODgiIHdpZHRoPSI4NCIgaGVpZ2h0PSIxMiIgcng9IjYiIGZpbGw9IiNGRkZGRkYiLz4KICAgICAgPHJlY3QgeD0iNDIwIiB5PSIzMzMiIHdpZHRoPSI3MCIgaGVpZ2h0PSIxMCIgcng9IjUiIGZpbGw9IiNGRkZGRkYiLz4KICAgICAgPHJlY3QgeD0iNTQ1IiB5PSI0NzMiIHdpZHRoPSI3MCIgaGVpZ2h0PSIxMCIgcng9IjUiIGZpbGw9IiNGRkZGRkYiLz4KICAgICAgPHJlY3QgeD0iNjY2IiB5PSIyMjAiIHdpZHRoPSI4MyIgaGVpZ2h0PSIxMiIgcng9IjYiIGZpbGw9IiNGRkZGRkYiLz4KICAgIDwvZz4KCiAgICA8ZyBvcGFjaXR5PSIwLjE4Ij4KICAgICAgPHJlY3QgeD0iMjkxIiB5PSI3ODgiIHdpZHRoPSI4NCIgaGVpZ2h0PSIxMCIgcng9IjUiIGZpbGw9IiNDQUQyREMiLz4KICAgICAgPHJlY3QgeD0iNDIwIiB5PSI1NTIiIHdpZHRoPSI3MCIgaGVpZ2h0PSI5IiByeD0iNC41IiBmaWxsPSIjQ0FEMkRDIi8+CiAgICAgIDxyZWN0IHg9IjU0NSIgeT0iNjkwIiB3aWR0aD0iNzAiIGhlaWdodD0iOSIgcng9IjQuNSIgZmlsbD0iI0NBRDJEQyIvPgogICAgICA8cmVjdCB4PSI2NjYiIHk9IjgwNSIgd2lkdGg9IjgzIiBoZWlnaHQ9IjEwIiByeD0iNSIgZmlsbD0iI0NBRDJEQyIvPgogICAgPC9nPgogIDwvZz4KPC9zdmc+">
@@ -36,13 +36,13 @@
       assumption  → slate, dashed       (a belief, unweighed)
       emerging    → amber               (some signal, not enough)
       validated   → green               (load-bearing, earned)
-      killed      → grey + strikethrough (disproven, a win)
+      disproven   → grey + strikethrough (disproven, a win)
     Accent indigo for navigation/active. Restrained borders (warm grey).
 
   SIGNATURE DEVICE, THE CERTAINTY METER.
     A four-segment ruled bar that appears on EVERY belief. Segments fill
     left→right as evidence accrues: assumption (1) → emerging (2) →
-    validated (4). Killed beliefs render struck-through with a grey cap.
+    validated (4). Disproven beliefs render struck-through with a grey cap.
     Same component everywhere, tree nodes, panels, assumption ladder, NBA.
     It is the felt mechanic of the product.
 
@@ -1251,7 +1251,7 @@ html.dark .method-text .m-takeaway{background:rgba(46,111,176,.16)}
 .wv-matrix .wm-dot .wm-dl{position:absolute;left:50%;bottom:140%;transform:translateX(-50%);white-space:nowrap;
   font-size:10px;font-weight:600;color:var(--accent-ink);background:var(--label-bg);padding:1px 6px;border-radius:5px}
 
-/* two killed beliefs as struck meters (step 04) */
+/* two disproven beliefs as struck meters (step 04) */
 .wv-kills{display:flex;gap:16px;flex-wrap:wrap;justify-content:center}
 .wv-kill{display:flex;flex-direction:column;align-items:center;gap:7px;background:var(--surface);border:1px solid var(--line);
   border-radius:var(--r-md);padding:13px 16px;min-width:180px;box-shadow:var(--shadow-sm)}
@@ -1539,7 +1539,7 @@ var VIEW_ONLY = (function(){try{return /(?:^|[?&])share=reasoning(?:&|$)/.test(l
               <button class="fchip" data-f="assumption" onclick="filterTree('assumption',this)"><span class="ev-d" style="background:var(--ev-assumption)"></span>Assumption</button>
               <button class="fchip" data-f="suggestive" onclick="filterTree('suggestive',this)"><span class="ev-d" style="background:var(--ev-suggestive)"></span>Emerging</button>
               <button class="fchip" data-f="validated" onclick="filterTree('validated',this)"><span class="ev-d" style="background:var(--ev-validated)"></span>Validated</button>
-              <button class="fchip" data-f="killed" onclick="filterTree('killed',this)"><span class="ev-d" style="background:var(--ev-killed)"></span>Killed</button>
+              <button class="fchip" data-f="killed" onclick="filterTree('killed',this)"><span class="ev-d" style="background:var(--ev-killed)"></span>Disproven</button>
             </div>
           </div>
         </div>
@@ -1746,7 +1746,7 @@ const EV = {
   assumption:{label:'Assumption',cls:'ev-assumption'},
   suggestive:{label:'Emerging',cls:'ev-suggestive'},
   validated:{label:'Validated',cls:'ev-validated'},
-  killed:{label:'Killed',cls:'ev-killed'},
+  killed:{label:'Disproven',cls:'ev-killed'},
 };
 
 function meter(state,size){
@@ -1889,7 +1889,7 @@ const CATS = {
   solutions:{
     kind:'Solutions', badge:'3 paths',
     h:'Three materially different paths',
-    d:'Product, service, and a killed hybrid. Open to compare the evidence behind each.',
+    d:'Product, service, and a disproven hybrid. Open to compare the evidence behind each.',
     ev:'suggestive',
     summary:'sol',                        // render a stacked-meter summary
     members:['solA','solB','solC'],
@@ -1897,7 +1897,7 @@ const CATS = {
   tests:{
     kind:'Assumption Tests', badge:'2 cards · TC-08 in flight',
     h:'Riskiest assumptions, threshold-locked',
-    d:'TC-08 is in flight (57% vs 50% bar). TC-05 was killed as a cheap win.',
+    d:'TC-08 is in flight (57% vs 50% bar). TC-05 was disproven as a cheap win.',
     ev:'suggestive',
     weakest:true,                         // the load-bearing layer
     flight:true,
@@ -2158,7 +2158,7 @@ function openCategory(catKey){
       <span class="cr-meter">${meter('killed')}</span>
       <span class="cr-main">
         <span class="cr-kind">TC-05 · closed</span>
-        <span class="cr-h">Sandbox-first fake door, killed as a cheap win</span>
+        <span class="cr-h">Sandbox-first fake door, disproven as a cheap win</span>
         <span class="cr-d">Only 9% returned to connect within 48h vs a 30% bar. Path closed before a line of production code.</span>
         <span class="cr-view">Open in Delivery loop →</span>
       </span>
@@ -2178,7 +2178,7 @@ function openCategory(catKey){
 
   let foot = `<span class="cf-note">Click any member to open its full detail.</span>`;
   if(catKey==='opportunities') foot = `<span class="cf-note">Crowned target sits top-right of demand × ability to win.</span><button class="btn btn-ghost btn-sm" onclick="closeCategory();goLoop('opportunity')">Open opportunity space →</button>`;
-  else if(catKey==='solutions') foot = `<span class="cf-note">Three paths · one killed as a cheap save.</span><button class="btn btn-ghost btn-sm" onclick="closeCategory();goLoop('delivery')">See in Delivery loop →</button>`;
+  else if(catKey==='solutions') foot = `<span class="cf-note">Three paths · one disproven as a cheap save.</span><button class="btn btn-ghost btn-sm" onclick="closeCategory();goLoop('delivery')">See in Delivery loop →</button>`;
   else if(catKey==='tests') foot = `<span class="cf-note">Thresholds locked before results.</span><button class="btn btn-primary btn-sm" onclick="closeCategory();openNBATest()">Open TC-08 →</button>`;
   document.getElementById('catFoot').innerHTML = foot;
 
@@ -2718,7 +2718,7 @@ const BUILDERS = {
           <button class="lstep on" data-s="assumption" onclick="setLadder('assumption')">Assumption</button>
           <button class="lstep" data-s="suggestive" onclick="setLadder('suggestive')">Emerging</button>
           <button class="lstep" data-s="validated" onclick="setLadder('validated')">Validated</button>
-          <button class="lstep" data-s="killed" onclick="setLadder('killed')">Killed</button>
+          <button class="lstep" data-s="killed" onclick="setLadder('killed')">Disproven</button>
         </div>
         <div style="margin-top:20px;display:flex;align-items:center;gap:16px">
           <div id="ladderMeter">${meter('assumption','lg')}</div>
@@ -2757,7 +2757,7 @@ const BUILDERS = {
         <div class="threshold">
           <div class="th-l">Success threshold, locked<span class="lock"><svg width="13" height="13" viewBox="0 0 16 16" fill="none"><rect x="3" y="7" width="10" height="7" rx="1.5" stroke="#c9a24f" stroke-width="1.3"/><path d="M5 7V5a3 3 0 016 0v2" stroke="#c9a24f" stroke-width="1.3"/></svg></span></div>
           <div class="th-v">≥ 30% of “connect later” users return to connect within 48h</div>
-          <div class="th-result"><span class="res-tag res-fail">RESULT · 9%</span><span style="color:#bdb6a8">Exploration without real data felt pointless, the deferral did <b style="color:#f0a58e">not</b> convert. Belief killed; sandbox-first path closed before a line of production code. <b style="color:#9fd9a3">A cheap save.</b></span></div>
+          <div class="th-result"><span class="res-tag res-fail">RESULT · 9%</span><span style="color:#bdb6a8">Exploration without real data felt pointless, the deferral did <b style="color:#f0a58e">not</b> convert. Belief disproven; sandbox-first path closed before a line of production code. <b style="color:#9fd9a3">A cheap save.</b></span></div>
         </div>
       </div>
     </div>
@@ -2802,8 +2802,8 @@ const BUILDERS = {
     </div>
     <div style="margin-top:26px" class="dlog">
       <div class="dentry"><div class="d-when">2026-06-09 · Wk 24</div><div class="d-what">Crowned bank-connection trust as the single target opportunity</div><div class="d-why">Top-right of the demand × ability matrix; named unprompted in 8/14 interviews and sits exactly on the 7-day activation drop-off.</div><div class="d-trig">Revisit if: TC-08 fails to clear bar, or activation moves without it.</div></div>
-      <div class="dentry killed"><div class="d-when">2026-06-02 · Wk 23</div><div class="d-what">Killed the sandbox-first solution path</div><div class="d-why">TC-05 fake-door: only 9% of “connect later” users returned to connect within 48h (bar 30%). Exploration without real data felt pointless. Closed the path before a line of production code.</div><div class="d-trig">Revisit if: a segment shows strong demo-first demand.</div></div>
-      <div class="dentry killed"><div class="d-when">2026-05-26 · Wk 22</div><div class="d-what">Killed “SOC 2 badge alone moves connection rate”</div><div class="d-why">TC-03 badge-placement A/B: no lift at any placement (Δ +1pt vs +8pt bar). Safety must be legible inside the flow, not certified in the footer.</div><div class="d-trig">Revisit if: an enterprise-adjacent segment enters the funnel.</div></div>
+      <div class="dentry killed"><div class="d-when">2026-06-02 · Wk 23</div><div class="d-what">Disproved the sandbox-first solution path</div><div class="d-why">TC-05 fake-door: only 9% of “connect later” users returned to connect within 48h (bar 30%). Exploration without real data felt pointless. Closed the path before a line of production code.</div><div class="d-trig">Revisit if: a segment shows strong demo-first demand.</div></div>
+      <div class="dentry killed"><div class="d-when">2026-05-26 · Wk 22</div><div class="d-what">Disproved “SOC 2 badge alone moves connection rate”</div><div class="d-why">TC-03 badge-placement A/B: no lift at any placement (Δ +1pt vs +8pt bar). Safety must be legible inside the flow, not certified in the footer.</div><div class="d-trig">Revisit if: an enterprise-adjacent segment enters the funnel.</div></div>
       <div class="dentry"><div class="d-when">2026-05-18 · Wk 21</div><div class="d-what">Set product outcome at 34% → 55% 7-day bank-feed activation</div><div class="d-why">Negotiated with leadership as the controllable behavior serving 90-day churn; rejected “bank connections started” as a gameable traction metric.</div><div class="d-trig">Revisit at: Q2 outcome negotiation (18 days).</div></div>
       <div class="dentry"><div class="d-when">2026-05-11 · Wk 20</div><div class="d-what">Inserted the causal map before solution design</div><div class="d-why">Right-to-left analysis showed activation depends on a primary-account connection in session one, reframed the whole solution set around trust legibility.</div><div class="d-trig">Revisit if: noise factors (bank OAuth quality) dominate the signal.</div></div>
     </div>
@@ -2917,10 +2917,10 @@ const WALK = [
       <div class="wm-dot" style="left:52%;bottom:48%"></div>
       <div class="wm-dot" style="left:55%;bottom:24%"></div>
     </div></div>`},
-  {step:'04 · The dead ends we avoided',h:'We killed two wrong answers cheaply',body:'A SOC 2 badge at every placement moved <b>nothing</b> (TC-03). Deferring the scary step into a sample-data sandbox converted <b>9% vs a 30% bar</b> (TC-05), exploring fake books felt pointless. Both beliefs died for the price of a fake door. Safety must be legible inside the flow.',ev:'killed',evlabel:'TC-03 & TC-05 · cheap saves',
+  {step:'04 · The dead ends we avoided',h:'We disproved two wrong answers cheaply',body:'A SOC 2 badge at every placement moved <b>nothing</b> (TC-03). Deferring the scary step into a sample-data sandbox converted <b>9% vs a 30% bar</b> (TC-05), exploring fake books felt pointless. Both beliefs died for the price of a fake door. Safety must be legible inside the flow.',ev:'killed',evlabel:'TC-03 & TC-05 · cheap saves',
     vis:()=>`<div class="wc-visual"><div class="wv-kills">
-      <div class="wv-kill"><span class="wk-id">TC-03 · killed</span>${meter('killed','lg')}<span class="wk-note">SOC-2 badge alone<br><b>+1pt vs +8pt bar</b></span></div>
-      <div class="wv-kill"><span class="wk-id">TC-05 · killed</span>${meter('killed','lg')}<span class="wk-note">Sandbox-first<br><b>9% vs 30% bar</b></span></div>
+      <div class="wv-kill"><span class="wk-id">TC-03 · disproven</span>${meter('killed','lg')}<span class="wk-note">SOC-2 badge alone<br><b>+1pt vs +8pt bar</b></span></div>
+      <div class="wv-kill"><span class="wk-id">TC-05 · disproven</span>${meter('killed','lg')}<span class="wk-note">Sandbox-first<br><b>9% vs 30% bar</b></span></div>
     </div></div>`},
   {step:'05 · The bet',h:'Make safety legible at the moment of doubt',body:'The increment is the focussed half of one path: <b>read-only framing, granular permissions, “disconnect anytime,” and the security page inline at the credential step</b>, the primary-account moment only. White-glove, sandbox, historical import, all deliberately excluded. <i>Focussed success over ambiguous failure.</i>',ev:'suggestive',evlabel:'TC-08 in flight · 57%',
     vis:()=>walkProgStrip(4)},
@@ -3003,11 +3003,11 @@ const CHAT_BANK = [
   { id:'next', kw:['next step','what next',"what's next",'next move','what should','do next','now what','nba','next best'],
     a:`The next move is <b>TC-08</b>, the trust-first connection test. It's in flight across 40 new accounts, currently <b>57%</b> connecting their primary account in session one against a locked <b>50%</b> bar. It moves our weakest belief, so finishing it is what unlocks the increment. Open the <b>Delivery &amp; Impact loop</b> to watch it.` },
   { id:'sandbox', kw:['sandbox','connect later','sample data','tc-05','tc05','fake door','defer','deferr'],
-    a:`We killed sandbox-first as a cheap win. The <b>TC-05</b> fake-door test offered "explore with sample data first", only <b>9%</b> returned to connect within 48h, against a <b>30%</b> bar. Exploring fake books felt pointless, so the path closed before a line of production code. The lesson: safety has to be legible <i>at</i> the credential moment, not deferred around it.` },
+    a:`We disproved sandbox-first as a cheap win. The <b>TC-05</b> fake-door test offered "explore with sample data first", only <b>9%</b> returned to connect within 48h, against a <b>30%</b> bar. Exploring fake books felt pointless, so the path closed before a line of production code. The lesson: safety has to be legible <i>at</i> the credential moment, not deferred around it.` },
   { id:'unproven', kw:['unproven','weakest','still prove','not proven','riskiest','risky','what if','assumption','uncertain','suggestive'],
     a:`The weakest, load-bearing belief is: <b>"make safety legible and founders will connect the primary account in session one."</b> It's only <b>emerging</b>, a 7/10 concierge signal, not yet behavioral at scale. <b>TC-08</b> is the test measuring exactly this. Until it clears, the increment rests on an unproven bet.` },
-  { id:'kill', kw:['killed','dead end','what did you kill','beliefs you killed','tc-03','tc03','soc 2','soc-2','badge'],
-    a:`Two beliefs died cheaply. <b>TC-03</b>: a SOC-2 badge at every placement moved <b>nothing</b> (+1pt vs an +8pt bar), certification in the footer isn't trust. <b>TC-05</b>: sandbox-first converted <b>9% vs a 30% bar</b>. Both were killed for the price of a fake door, which is the cheapest progress we made.` },
+  { id:'kill', kw:['killed','disproven','dead end','what did you kill','beliefs you killed','tc-03','tc03','soc 2','soc-2','badge'],
+    a:`Two beliefs died cheaply. <b>TC-03</b>: a SOC-2 badge at every placement moved <b>nothing</b> (+1pt vs an +8pt bar), certification in the footer isn't trust. <b>TC-05</b>: sandbox-first converted <b>9% vs a 30% bar</b>. Both were disproved for the price of a fake door, which is the cheapest progress we made.` },
   { id:'proven', kw:['proven','validated','what do we know','what is proven','certain','load-bearing','evidence'],
     a:`Two things are validated. The <b>outcome</b> is ratified: 7-day bank-feed activation, <b>34% → 55%</b>, owned by this team. And the <b>Job</b> is consistent, across 14 interviews of real switches, 11 confirm people hire us to escape spreadsheet chaos for trusted, always-current books. Everything downstream of the trust bet is still emerging.` },
   { id:'outcome', kw:['outcome','34','55','activation','metric','number','goal','target number'],
@@ -3023,7 +3023,7 @@ const CHAT_BANK = [
   { id:'causal', kw:['causal','system','what must be true','chain','control factor','noise'],
     a:`Before any solution we mapped the causal system right-to-left: trusted books need a reconciled feed → a feed needs a primary-account connection → that needs the trust threshold crossed in session one. Control factors include badging placement, read-only messaging, and connection sequencing; noise includes bank OAuth quality and fintech-breach press. See the <b>Causal Learning loop</b>.` },
   { id:'summary', kw:['summarise','summarize','summary','overview','catch me up','where are we','project status','tldr','brief me'],
-    a:`Ledgerline owns one number, <b>7-day activation 34% → 55%</b> (validated, serving 90-day churn). The Job is proven: escape spreadsheet chaos for trusted books. The crowned opportunity is <b>bank-connection trust</b>, and the bet is a <b>trust-first connection flow</b> scoped to the primary-account moment. We killed two wrong answers cheaply (SOC-2 badge, sandbox-first). The weakest belief is in test now via <b>TC-08</b> (57% vs 50% bar), that's the next step.` },
+    a:`Ledgerline owns one number, <b>7-day activation 34% → 55%</b> (validated, serving 90-day churn). The Job is proven: escape spreadsheet chaos for trusted books. The crowned opportunity is <b>bank-connection trust</b>, and the bet is a <b>trust-first connection flow</b> scoped to the primary-account moment. We disproved two wrong answers cheaply (SOC-2 badge, sandbox-first). The weakest belief is in test now via <b>TC-08</b> (57% vs 50% bar), that's the next step.` },
 ];
 /* Socratic field guides, "Ask Noetic" interviews the user to fill an input field, then drafts it.
    Each: targetId (the .field to write into), the requirement, an intro, ordered steps (with suggested
@@ -3096,7 +3096,7 @@ function chatMatch(q){
     if(s>bestScore){ bestScore=s; best=e; }
   });
   if(best) return best.a;
-  return `Here's what I can tell you about the Ledgerline project: we're driving <b>7-day bank-feed activation from 34% to 55%</b> by making bank-connection trust legible at the credential moment. Ask me about the next step, what's proven, the weakest belief, or why we killed sandbox-first, or open the <b>Delivery &amp; Impact loop</b> to see the live test.`;
+  return `Here's what I can tell you about the Ledgerline project: we're driving <b>7-day bank-feed activation from 34% to 55%</b> by making bank-connection trust legible at the credential moment. Ask me about the next step, what's proven, the weakest belief, or why we disproved sandbox-first, or open the <b>Delivery &amp; Impact loop</b> to see the live test.`;
 }
 
 let chatMode='general', askState=null;
@@ -3321,13 +3321,13 @@ const GUIDE = [
   { title:'The system before the solution',
     body:`We refused to jump to features. First we mapped the <b>causal system</b> right-to-left: trusted books need a reconciled feed → a feed needs a primary-account connection → that needs the trust threshold crossed in session one.`,
     result:{k:'Result',v:`We separated what we <b>control</b> (badging, read-only messaging, connection sequencing) from <b>noise</b> (bank OAuth, breach press).`,
-            next:`Next: the solution paths, and the two we killed cheaply.`},
+            next:`Next: the solution paths, and the two we disproved cheaply.`},
     run:()=>{ closeCategory(); goLoop('causal'); },
     anchor:()=>document.querySelector('#screen-causal .flow')||document.querySelector('#screen-causal .card') },
 
-  { title:'Three paths, two killed cheaply',
+  { title:'Three paths, two disproven cheaply',
     body:`We generated three materially different paths: a <b>product</b> flow, a <b>service</b> (white-glove), and a <b>hybrid</b> (sandbox-first). Then we tested the riskiest beliefs, not whole ideas.`,
-    result:{k:'Result',v:`Two beliefs <b>killed for the price of a fake door</b>: a SOC-2 badge moved nothing (TC-03), and sandbox-first converted 9% vs a 30% bar (TC-05).`,
+    result:{k:'Result',v:`Two beliefs <b>disproved for the price of a fake door</b>: a SOC-2 badge moved nothing (TC-03), and sandbox-first converted 9% vs a 30% bar (TC-05).`,
             next:`Next: the bet we actually placed.`},
     run:()=>goLoop('delivery'),
     anchor:()=>document.querySelector('#screen-delivery .grid.g-3')||document.querySelector('#screen-delivery .card') },

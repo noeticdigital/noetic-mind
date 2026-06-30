@@ -74,7 +74,7 @@ This is not a generic notetaker. It encodes a specific method. The LLM brain mus
 "When [situation], I want [motivation], so I can [desired outcome / identity]."
 
 **Evidence ladder** (the spine of the whole Noetic system) — every belief carries a state:
-`assumption → emerging → validated → killed`.
+`assumption → emerging → validated → disproven`.
 Discipline: **one interview can only reach `emerging`.** Validation requires the pattern across many interviews. The copilot must never over-claim from a single conversation.
 
 **Interview discipline the prompts must enforce**: reconstruct a **real, recent past switch** (not hypotheticals, not feature wishlists). Anchor to specific moments. Don't lead the witness. Land the Job in the participant's own words, then stop talking.
@@ -220,7 +220,7 @@ The brain turns the rolling transcript + current state into the four live output
 
 enum Stage: String, CaseIterable { case firstThought, passiveLooking, activeLooking, deciding, firstUse }
 enum Force: String, CaseIterable { case push, pull, anxiety, habit }
-enum EvidenceState: String { case assumption, emerging, validated, killed }   // app caps at emerging
+enum EvidenceState: String { case assumption, emerging, validated, disproven }   // app caps at emerging
 struct StageHit { let quote: String; let at: TimeInterval }
 struct ForceHit { let snippet: String }
 struct JobStatement { var text: String; var evidence: EvidenceState }
@@ -259,8 +259,8 @@ Persist the session locally (GRDB/SQLite or Core Data). One interview = one reco
 **Design tokens (from the mock / Noetic system):**
 - Type: **Fraunces** (serif — Job, questions, headlines), **Inter** (UI/labels/body), **JetBrains Mono** (numbers, timers, meta). On macOS, bundle these or use SF Pro + New York as close substitutes; prefer bundling Fraunces/Inter for brand fidelity.
 - Default **dark**. Tokens (dark): bg `#10141b`, surface `#171c25`, ink `#e7eaf0`, accent `#5e95d8`, line `#262d39`.
-- Evidence colours: assumption slate `#8d8779`, emerging amber `#cf9c44`, validated green `#62a87d`, killed grey.
-- The **certainty meter**: 4 segments; `assumption` = 1 dashed seg, `emerging` = 2 amber segs, `validated` = all green (not reachable in-app), `killed` = struck-through.
+- Evidence colours: assumption slate `#8d8779`, emerging amber `#cf9c44`, validated green `#62a87d`, disproven grey.
+- The **certainty meter**: 4 segments; `assumption` = 1 dashed seg, `emerging` = 2 amber segs, `validated` = all green (not reachable in-app), `disproven` = struck-through.
 - Logo/favicon: `noetic-logo.svg` (square navy bar mark) — bundle it; use as app icon base.
 - Motion: slow, deliberate (150–250 ms), respect Reduce Motion.
 
@@ -355,7 +355,7 @@ MVP = Phases 0–4 working on a real Google Meet call. Phases 5–6 make it ship
 - **`copilot.html`** (noetic-mind repo) — the canonical UI/behaviour/branding mock. Open it first.
 - **`v3.html`** (same repo) — the Continuous Discovery system this plugs into (the Progress loop, evidence ladder, certainty meter). The copilot's synthesis feeds it.
 - Architecture rationale: §1 (local capture / Granola model; bot-in-call dead; extension can't do macOS system audio).
-- Methodology: JTBD "Forces of Progress" / the switch timeline; the four forces; evidence ladder `assumption → emerging → validated → killed`.
+- Methodology: JTBD "Forces of Progress" / the switch timeline; the four forces; evidence ladder `assumption → emerging → validated → disproven`.
 
 ---
 
