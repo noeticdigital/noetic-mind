@@ -1,20 +1,17 @@
 /* ───────────────────────────────────────────────────────────────────────────
    Noetic demo — single source of truth for the project switcher.
 
-   Quench (v3.html) and Ledgerline (v3-ledgerline.html) render their switcher
-   from this list, so the cross-links between silos never go stale: change a
-   project's name/sub here once and both update.
-
-   KLPT (v3-klptproj.html) and Moneytree Personal (v3-mtproj.html) are real-
-   project learning surfaces edited elsewhere — they keep their own hardcoded
-   switchers for now and can adopt this file later. Keep the entries below in
-   sync with their displayed names when they settle.
+   Quench, Ledgerline and Moneytree Personal render their switchers from this
+   list, so the cross-links between silos never go stale: change a project's
+   name/sub here once and all update. KLPT (v3-klptproj.html) is a real-project learning surface edited
+   elsewhere — it keeps its own hardcoded switcher for now and can adopt this
+   file later. Keep its entry below in sync with its displayed name.
    ─────────────────────────────────────────────────────────────────────────── */
 window.NOETIC_PROJECTS = [
   { id:'quench',     name:'Quench',             sub:'Daily hydration habit',       href:'v3.html' },
   { id:'ledgerline', name:'Ledgerline',         sub:'Bank-feed activation',        href:'v3-ledgerline.html' },
   { id:'klpt',       name:'KLPT',               sub:'Visual capture for learners', href:'v3-klptproj.html' },
-  { id:'moneytree',  name:'Moneytree Personal', sub:'New project',                 href:'v3-mtproj.html' },
+  { id:'moneytree',  name:'Moneytree Personal', sub:'Stewardship, not data',       href:'v3-mtproj.html' },
 ];
 
 window.renderProjMenu = function(currentId){
