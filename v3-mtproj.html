@@ -2386,7 +2386,7 @@ const BUILDERS = {
     <div class="section-rule"><span class="sr-n">1.2</span><h2 class="serif">The four clusters and their Jobs</h2><span class="sr-line"></span><span class="mono" style="font-size:11px;color:var(--muted)">clustered on the structure of anxiety, not demographics</span></div>
     <div class="grid g-2">
 
-      <div class="card" style="border-top:3px solid var(--amber)">
+      <div class="card" style="border-top:3px solid var(--amber-line)">
         <div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap">
           <div class="card-t" style="margin:0">The Navigator</div>
           <span style="font-size:11px;color:var(--muted);font-style:italic">was: the Unresolved Worrier (merged in)</span>
@@ -2449,7 +2449,7 @@ const BUILDERS = {
     <div class="section-rule"><span class="sr-n">1.3</span><h2 class="serif">The conversion map</h2><span class="sr-line"></span><span class="mono" style="font-size:11px;color:var(--muted)">the timeline, summarised — where people move and why</span></div>
     <div class="card">
       <div class="grid g-3" style="align-items:stretch">
-        <div style="border:1.5px solid var(--amber);border-radius:10px;padding:13px 15px;background:var(--ev-suggestive-bg)">
+        <div style="border:1.5px solid var(--amber-line);border-radius:10px;padding:13px 15px;background:var(--ev-suggestive-bg)">
           <div class="mono" style="font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--amber-ink);margin-bottom:5px">Start · the hub</div>
           <div style="font-weight:600;font-size:14.5px">Navigator</div>
           <p style="font-size:12px;color:var(--ink-2);line-height:1.5;margin:5px 0 0">Unbounded horizon anxiety, managed by repeated checking. Open-ended anxiety loops back here — more time in the app doesn’t convert anyone.</p>
@@ -2867,12 +2867,50 @@ function scrollSel(){ const el=document.querySelector(`.cmdk-item[data-i="${cmdk
 
 /* ════════════════════════════ STAKEHOLDER WALKTHROUGH ════════════════════════════ */
 const WALK = [
-  {step:'—',h:'The reasoning will appear here',body:'This is the read-only narrative you’d show a CEO: outcome → progress → opportunity → causal system → bet → proof. It assembles itself from the loops as discovery runs. Nothing has been captured for this project yet.',ev:'assumption',evlabel:'No data yet',
-    vis:()=>''},
+  {step:'01 · The question',h:'What job is Moneytree actually hired to do?',body:'A benchmark survey of ≈3,000 users surfaced a paradox: people <b>track their money, yet stay anxious</b>. If visibility were the job, tracking would settle it. It doesn\u2019t. So we treated \u201cthe job is reassurance, not visibility\u201d as a hypothesis \u2014 and spent two interview rounds trying to break it.',ev:'suggestive',evlabel:'The starting frame · held consciously',
+    vis:()=>walkProgStrip(1)},
+  {step:'02 · The method',h:'Two rounds, two populations — and we rejected our own first answer',body:'Round 1 (15 Moneytree users) produced two jobs that split almost cleanly on gender. We <b>flagged our own finding as suspicious</b> \u2014 demographics are correlates, not mechanisms \u2014 and ran Round 2 on 15 users of competing tools. Re-clustered on the <b>structure of anxiety</b>, the split dissolved and both populations converged on the same four clusters. Independent convergence is the strongest validation qualitative work offers.',ev:'validated',evlabel:'30 interviews · 2 independent populations',
+    vis:()=>`<div class="wc-visual"><div class="wv-prog">
+      <div class="wv-pstep">${meter('assumption','lg')}<span class="wp-l">Survey paradox</span></div><span class="wv-parrow">›</span>
+      <div class="wv-pstep">${meter('suggestive','lg')}<span class="wp-l">Round 1 · 15 users</span></div><span class="wv-parrow">›</span>
+      <div class="wv-pstep">${meter('suggestive','lg')}<span class="wp-l">Round 2 · 15 external</span></div><span class="wv-parrow">›</span>
+      <div class="wv-pstep now">${meter('validated','lg')}<span class="wp-l">Re-synthesis · converged</span></div>
+    </div></div>`},
+  {step:'03 · The finding',h:'People hire it to settle an anxiety, not to see their money',body:'Four clusters, three of them paying, each with its own Job. The <b>Navigator</b> (37%, the largest): \u201cconfirm I\u2019m still on course\u201d against an open-ended horizon. The <b>Guardian</b> (33%): \u201cdon\u2019t let me fail the person depending on me.\u201d The <b>Operator</b> (13%, all four paying): \u201cconfirm my approach is sound \u2014 I have no peer to check it.\u201d The <b>Tracker</b> (13%): one question, then done \u2014 never pays.',ev:'validated',evlabel:'The demand structure · validated',
+    vis:()=>`<div class="wc-visual"><div style="display:grid;grid-template-columns:repeat(4,1fr);gap:9px">
+      <div style="border:1.5px solid var(--amber-line);border-radius:9px;padding:10px 11px;text-align:center"><div style="font-weight:600;font-size:12.5px">Navigator</div><div class="mono" style="font-size:10px;color:var(--amber-ink);margin-top:2px">37% · ★ hub</div></div>
+      <div style="border:1.5px solid var(--accent);border-radius:9px;padding:10px 11px;text-align:center"><div style="font-weight:600;font-size:12.5px">Guardian</div><div class="mono" style="font-size:10px;color:var(--accent-ink);margin-top:2px">33% · pays</div></div>
+      <div style="border:1.5px solid var(--green-ink);border-radius:9px;padding:10px 11px;text-align:center"><div style="font-weight:600;font-size:12.5px">Operator</div><div class="mono" style="font-size:10px;color:var(--green-ink);margin-top:2px">13% · 4/4 pay</div></div>
+      <div style="border:1.5px dashed var(--line-strong,var(--line));border-radius:9px;padding:10px 11px;text-align:center;opacity:.65"><div style="font-weight:600;font-size:12.5px">Tracker</div><div class="mono" style="font-size:10px;color:var(--muted);margin-top:2px">13% · never pays</div></div>
+    </div></div>`},
+  {step:'04 · The lever',h:'Naming the threat is what converts',body:'The Navigator and the Guardian are the <b>same person at two points in time</b>. Kani: couldn\u2019t name the anxiety \u2192 named a child\u2019s future \u2192 built a life plan. Koinuma: a debt crisis got a name \u2192 cleared \u00a5800k in 22 months. Navigators don\u2019t need more data or more time in the app \u2014 they need <b>a concrete stake to attach the anxiety to</b>. That conversion, from the largest cluster into the highest-retention one, is the clearest growth lever in the data.',ev:'suggestive',evlabel:'Documented twice · Emerging',
+    vis:()=>`<div class="wc-visual"><div class="wv-matrix">
+      <span class="wm-line v"></span><span class="wm-line h"></span>
+      <span class="wm-ax x">Demand strength →</span><span class="wm-ax y">Ability to win →</span>
+      <div class="wm-dot tgt" style="left:80%;bottom:76%"><span class="wm-dl">Give the anxiety a name ★</span></div>
+      <div class="wm-dot" style="left:46%;bottom:70%"></div>
+      <div class="wm-dot" style="left:44%;bottom:46%"></div>
+      <div class="wm-dot" style="left:58%;bottom:22%"></div>
+    </div></div>`},
+  {step:'05 · The discipline',h:'What we ruled out, and what we refused to claim',body:'The <b>Tracker will never pay</b> \u2014 not a guess, a mechanism: no one depending on them, no scar from a past failure, no question they can\u2019t already answer. The job completes, so there is no upsell moment. Just as important is what we haven\u2019t claimed: the conversion lever is held at <b>Emerging</b> (two cases is a mechanism, not a pattern), and pricing conclusions wait until the payment-status spread is analysed.',ev:'killed',evlabel:'Ruled out with a named mechanism',
+    vis:()=>`<div class="wc-visual"><div class="wv-kills">
+      <div class="wv-kill"><span class="wk-id">Tracker · not a target</span>${meter('killed','lg')}<span class="wk-note">No stake, no scar, no open question<br><b>finite job → no subscription</b></span></div>
+      <div class="wv-kill"><span class="wk-id">Gender split · rejected</span>${meter('killed','lg')}<span class="wk-note">Round 1\u2019s easy answer<br><b>correlate, not mechanism</b></span></div>
+    </div></div>`},
+  {step:'06 · Phase two',h:'Can the product trigger the naming — not just witness it?',body:'Both documented namings happened <i>to</i> people \u2014 a child arrived, a debt crisis landed. No product caused one yet. That is the riskiest assumption, and phase two is built around it: a <b>conversion round</b> (people who hired human advisors \u2014 what did the human do to trigger naming? \u2014 then short-tenure paying Grow users), the <b>causal session</b>, and <b>outcome ratification</b> with leadership: Navigator\u2192paid conversion, baselined on the ≈160 paying Grow users. Behind it: the investment direction \u2014 ≈80% of users invest; the product does nothing with it yet.',ev:'assumption',evlabel:'T-01 queued · threshold locked before results',
+    vis:()=>`<div class="wc-visual"><div class="wv-ladder">
+      <div class="wv-lrow"><span class="wl-rung">L1</span><span class="wl-name">A Navigator\u2019s anxiety gets a named stake in week one</span><span class="wl-val flat">lead · draft</span></div>
+      <div class="wv-lconn"></div>
+      <div class="wv-lrow"><span class="wl-rung">L2</span><span class="wl-name">The unnameable worry eases \u2014 and they return to the answer</span><span class="wl-val flat">pending</span></div>
+      <div class="wv-lconn"></div>
+      <div class="wv-lrow"><span class="wl-rung">L3</span><span class="wl-name">Product outcome · Navigator\u2192paid conversion</span><span class="wl-val flat">pending ratification</span></div>
+      <div class="wv-lconn"></div>
+      <div class="wv-lrow"><span class="wl-rung">L4</span><span class="wl-name">Business outcome · Grow subscriptions &amp; retention</span><span class="wl-val flat">pending</span></div>
+    </div></div>`},
 ];
 /* certainty-progression strip, the four-meter arc, with the current step emphasised */
 function walkProgStrip(now){
-  const arc=[['Outcome','validated'],['Job','validated'],['Target','suggestive'],['Bet','suggestive']];
+  const arc=[['Job','validated'],['Clusters','validated'],['Lever','suggestive'],['Outcome','assumption'],['Bet','assumption']];
   let h='<div class="wc-visual"><div class="wv-prog">';
   arc.forEach(([lab,ev],i)=>{
     if(i) h+='<span class="wv-parrow">›</span>';
