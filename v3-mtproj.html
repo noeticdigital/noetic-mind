@@ -1396,7 +1396,7 @@ var VIEW_ONLY = (function(){try{return /(?:^|[?&])share=reasoning(?:&|$)/.test(l
       </button>
       <div class="rail-nba-body" id="nbaBody">
         <div class="meter sz-sm" data-state="assumption" style="margin-bottom:8px" title="Assumption, no evidence weighed yet"><span class="seg"></span><span class="seg"></span><span class="seg"></span><span class="seg"></span></div>
-        <div class="rail-nba-belief">“A concrete \u2018am I on track?\u2019 answer is what converts Worriers into paying CFOs.”</div>
+        <div class="rail-nba-belief">“The product can trigger the naming moment — not just benefit from it.”</div>
         <div class="rail-nba-test">Smallest test: the conversion round — people who hired human advisors, then short-tenure paying Grow users. Threshold locked before results.</div>
         <button class="btn btn-primary rail-nba-btn" onclick="goLoop('delivery')">Open the queued test →</button>
       </div>
@@ -1461,12 +1461,12 @@ var VIEW_ONLY = (function(){try{return /(?:^|[?&])share=reasoning(?:&|$)/.test(l
 
     <!-- Cadence ribbon -->
     <div class="cadence">
-      <span class="wk">WEEK 1 · 2026</span>
-      <div class="cad-item cad-todo"><span class="cad-dot"></span>No interviews logged yet</div>
-      <div class="cad-item cad-todo"><span class="cad-dot"></span>Tree not yet started</div>
-      <div class="cad-item cad-todo"><span class="cad-dot"></span>No tests in flight</div>
+      <span class="wk">WEEK 27 · 2026</span>
+      <div class="cad-item cad-done"><span class="cad-dot"></span>30 interviews · synthesis v2 complete</div>
+      <div class="cad-item cad-done"><span class="cad-dot"></span>Tree reviewed · target prioritised</div>
+      <div class="cad-item cad-todo"><span class="cad-dot"></span>Conversion round queued (T-01)</div>
       <div class="cad-spacer"></div>
-      <span class="cad-quarter">Discovery not yet started</span>
+      <span class="cad-quarter">Outcome ratification with leadership · pending</span>
     </div>
 
     <!-- ───────── VIEW ───────── -->
@@ -1711,22 +1711,22 @@ const NODES = {
       type:'Framing assumption, entered as a working frame and upgraded by evidence. The rare case where the frame itself survives discovery intact \u2014 sharpened from \u201creassurance, not visibility\u201d to \u201cstewardship is the engine, not data.\u201d',
       signals:[['conv','Round 1 split almost cleanly on gender \u2014 flagged as suspicious in the session.'],['conv','Re-clustered from first principles on the structure of anxiety: the gender split dissolved; both populations converged.']]}},
   outcome:{kind:'Desired Outcome', lead:true, ev:'assumption',
-    h:'Proposed: lift Worrier\u2192paid conversion (number pending ratification)',
-    d:'Drafted from the growth lever in the Project One synthesis. Awaiting a ratified number with Moneytree leadership.',
-    detail:{grounding:'The synthesis names the lever \u2014 converting Unresolved Worriers into paying Household CFOs \u2014 but no product outcome has been ratified yet. Candidate: conversion of Worrier-profile users to paid, anchored on the ~160 paying Grow users (about seven with under a year of tenure) as the study pool.',
+    h:'Proposed: lift Navigator\u2192paid conversion (number pending ratification)',
+    d:'Drafted from the growth lever in the synthesis. Awaiting a ratified number with Moneytree leadership.',
+    detail:{grounding:'The synthesis names the lever \u2014 converting Navigators into paying Guardians \u2014 but no product outcome has been ratified yet. Candidate: conversion of Navigator-profile users to paid, anchored on the ~160 paying Grow users (about seven with under a year of tenure) as the study pool.',
       type:'Proposed product outcome \u2014 a customer behaviour the team can influence that should lead the business outcome. Stays an assumption until leadership ratifies the number and the causal link to revenue/retention is tested.'}},
   jtbd:{kind:'Job to be Done · Timeline & Forces', ev:'validated',
-    h:'\u201cKeep the future on track without failing the people depending on me\u201d',
-    d:'People don\u2019t hire Moneytree to see their money. They hire it to settle an anxiety about the people and the future they are responsible for. Stewardship is the engine, not data.',
-    detail:{grounding:'Job statement (Household CFO, the best-evidenced paying job): \u201cHelp me maintain a complete, accurate picture of our household finances so I can keep the future on track without failing the people depending on me \u2014 and so that if something happens to me, what I carry does not disappear with me.\u201d Validated across 30 interviews in two independent populations (15 Moneytree users, 15 external \u2014 MoneyForward, freee, Zaim, Excel, Notion).',
-      type:'Motivations \u2014 functional (a complete, accurate picture), emotional (replace the background hum of worry with something to hold onto), social/identity (be the competent person who keeps us on track; the emotional ladder runs Safety \u2192 Competence \u2192 Mastery \u2192 Identity). Forces \u2014 push: a life event or financial scar (\u201cdebt once pushed my family to a breaking point\u201d); pull: a concrete answer to \u201cam I on track?\u201d; anxiety: the worry that can\u2019t be named (\u201cI was anxious, but I couldn\u2019t even name what I was anxious about\u201d \u2014 Hayashi); habit: 30 years of Excel, self-built Sheets/Notion systems.',
-      signals:[['conv','Two rounds, two populations, one structure \u2014 the segments converged after re-clustering on anxiety.'],['conv','Who pays needs all three: someone depending on them, a scar from a past failure, a question they can\u2019t already answer.'],['conv','Five segments: Household CFO (primary), System Builder (highest ceiling, thin), Unresolved Worrier (entry state), Default Manager and Pragmatic Auditor (will not pay).']]}},
+    h:'Anxiety about the people and future they\u2019re responsible for \u2014 four clusters, one mechanism',
+    d:'People don\u2019t hire Moneytree to see their money \u2014 they hire it to settle an anxiety. Navigator (37%, unbounded horizon), Guardian (33%, a named person to protect), Operator (13%, competence with no peer), Tracker (13%, one question then done). Naming the threat is what converts.',
+    detail:{grounding:'Synthesis v2 (Johana), 30 interviews across two independent populations, re-clustered on the structure of anxiety. Three paying clusters, each with its own Job \u2014 Navigator: \u201ccontinuously confirm I\u2019m still on course, so I can feel settled although the horizon keeps moving\u201d; Guardian: \u201cwhen I stand between someone I\u2019m responsible for and a harm I can see coming, help me hold the whole picture\u201d; Operator: \u201ckeep everything visible, nothing slipping, and occasionally confirm my approach is sound.\u201d The Tracker\u2019s job is finite \u2014 answer one question, then stop \u2014 so it never pays.',
+      type:'Motivations \u2014 functional (consolidated visibility, nothing slipping), emotional (replace the unnameable hum of worry with a rhythm of confirmation; 遠くの安心 vs 近くの安心), social/identity (perform the protector role credibly; be validated as competent when no peer exists). Forces \u2014 push: a threat becoming nameable (a dependant, a debt crisis, a trust breach) or complexity outgrowing the ledger; pull: calibration and confirmation, not analysis; anxiety: distant safety feels beyond an app, \u201cafraid of what I\u2019d find out\u201d; habit: decades-long manual systems and checking-as-routine.',
+      signals:[['conv','Two rounds, two populations, one structure \u2014 the Round 1 gender split dissolved when re-clustered on anxiety.'],['conv','The conversion mechanism is documented twice: Kani and Koinuma both moved Navigator\u2192Guardian once the threat got a name.'],['conv','Operator reframed in v2: the deeper job is confirmation under load, not raw data for self-analysis.']]}},
   oppTarget:{kind:'Target Opportunity', ev:'suggestive', target:true,
-    h:'\u201cI\u2019m anxious and I can\u2019t name why \u2014 am I on track?\u201d',
-    d:'The Unresolved Worrier\u2019s gap. A concrete answer converts the largest reachable group into the highest-retention one: the Worrier\u2192CFO conversion.',
-    detail:{grounding:'The Worrier and the CFO are the same person at two points in time. Documented conversion: Koinuma (confirmed) \u2014 reactive, anxious checking became full CFO ownership once a concrete stake appeared and a concrete answer was available. A second recorded case (\u201cKani / Kon\u201d) awaits identity confirmation, so the lever is Emerging, not Validated.',
-      type:'Timeline-moment struggle: a life event creates unease that stays reactive \u2014 no system, no role claimed yet. The product\u2019s job is to carry them from \u201cI can\u2019t name what I\u2019m anxious about\u201d to \u201cI\u2019m the competent person who keeps us on track.\u201d',
-      signals:[['conv','Hayashi: \u4f55\u304c\u4e0d\u5b89\u306a\u306e\u304b\u304c\u5206\u304b\u3089\u306a\u3044\u3068\u3044\u3046\u72b6\u614b\u3067\u4e0d\u5b89\u3060\u3063\u305f \u2014 \u201cI was anxious, but I couldn\u2019t even name what I was anxious about.\u201d'],['conv','Churn risk inside the segment: Hayashi is substituting ChatGPT for financial questions \u2014 \u201cnot urgent enough to do more.\u201d']]}},
+    h:'Give the anxiety a name \u2014 \u201cam I on track?\u201d',
+    d:'The Navigator\u2019s gap \u2014 the largest cluster (37%). Navigators don\u2019t need more data; they need a concrete stake to attach the anxiety to. Naming the threat converts them into Guardians.',
+    detail:{grounding:'The Navigator and the Guardian are the same person at two points in time, and the journey is documented twice: Kani (couldn\u2019t name the anxiety \u2192 named a child\u2019s future \u2192 FP2 study, a life plan, confidence) and Koinuma (childhood-poverty echo \u2192 a present debt crisis \u2192 cleared \u00a5800k in 22 months). Obata\u2019s FP life-plan shows the same mechanism without a personal-loss trigger. Held at Emerging: the mechanism recurs, but whether the product can trigger it is untested.',
+      type:'Timeline-moment struggle: open-ended horizon anxiety managed by repeated checking. The product\u2019s job is to carry them from \u201cI can\u2019t name what I\u2019m anxious about\u201d to a named stake and a concrete answer \u2014 more time in the app converts no one.',
+      signals:[['conv','Hayashi: 何が不安なのかが分からないという状態で不安だった \u2014 \u201cI was anxious, but I couldn\u2019t even name what I was anxious about.\u201d'],['conv','Churn edge: Hayashi substitutes ChatGPT and hasn\u2019t hit a question it can\u2019t answer.']]}},
   opp2:{kind:'Opportunity', ev:'suggestive',
     h:'Multi-person management under one account',
     d:'Sera manages his own finances, his children\u2019s, and now his mother\u2019s \u2014 and every tool assumes one person per account.',
@@ -1741,27 +1741,27 @@ const NODES = {
     h:'A switchable flow vs stock view',
     d:'Power users deliberately keep cash flow and investments separate \u2014 a blended total obscures the view they care about.',
     detail:{grounding:'Sakakibara and Amano both maintain the separation on purpose. Competitors that merge everything into one number are not serving this.',
-      type:'Serves the System Builder (control track) \u2014 the highest theoretical ceiling but currently a thin, reluctant segment (3 members: churned, cancelling, or anxiety-driven). A differentiator worth holding until that segment\u2019s bet is tested.'}},
+      type:'Serves the Operator\u2019s visibility job \u2014 the highest willingness-to-pay cluster (4/4 paying). A differentiator, held as a sibling behind the naming lever.'}},
   causal:{kind:'Causal System', ev:'assumption',
-    h:'What must be true for a Worrier to become a CFO',
-    d:'Not yet mapped. The next loop to run: the chain from a concrete \u201cam I on track?\u201d answer to a claimed stewardship role, separated into what we control and what is noise.',
-    detail:{grounding:'Project One stopped at synthesis; the causal loop is queued. The synthesis implies the shape \u2014 stake appears \u2192 concrete answer available \u2192 role claimed \u2192 paying CFO \u2014 but the chain, its lead measure, and its controllables have not been made explicit yet.',
-      type:'Planned lead measure candidate: share of Worrier-profile users who receive a concrete \u201con track / not on track\u201d answer in week one. Lag: Worrier\u2192paid conversion (pending outcome ratification).'}},
+    h:'What must be true for a Navigator to become a Guardian',
+    d:'Not yet mapped. The next loop to run: the chain from a nameable stake to a claimed stewardship role, separated into what we control and what is noise.',
+    detail:{grounding:'Project One stopped at synthesis; the causal loop is queued. The synthesis implies the shape \u2014 threat gets a name \u2192 concrete answer available \u2192 role claimed \u2192 paying Guardian/Operator \u2014 but the chain, its lead measure, and its controllables have not been made explicit yet.',
+      type:'Planned lead measure candidate: share of Navigator-profile users whose anxiety gets a named stake (and a concrete answer) in week one. Lag: Navigator\u2192paid conversion (pending outcome ratification).'}},
   belief:{kind:'Belief under test', ev:'assumption', weakest:true,
-    h:'A concrete \u201cam I on track?\u201d answer is what converts Worriers into paying CFOs',
-    d:'The load-bearing belief behind the growth lever. One confirmed conversion case; a test round is queued.',
-    detail:{grounding:'Rests on Koinuma (confirmed) plus one unresolved case. The planned conversion-focused round \u2014 interviewing people who hired human financial advisors or money managers \u2014 defines the \u201cpersonal CFO\u201d job an AI could serve, then tests it.',
-      type:'Riskiest assumption: important (the whole growth lever) and thin (n=1 confirmed). Next test: the conversion-focused interview round, then a behavioural probe with short-tenure paying Grow users.'}},
+    h:'The product can trigger the naming moment \u2014 not just benefit from it',
+    d:'The load-bearing belief behind the growth lever. The Navigator\u2192Guardian mechanism is documented twice (Kani, Koinuma) \u2014 but both namings happened to people; no product caused one yet.',
+    detail:{grounding:'The mechanism (naming converts) is Emerging with two documented cases. The open question is causability: can onboarding or an AI conversation surface a nameable stake, or does life have to do it? The conversion round \u2014 people who hired human advisors, then short-tenure paying users \u2014 defines what a \u201cpersonal CFO\u201d actually did to trigger naming.',
+      type:'Riskiest assumption: important (the whole growth lever) and untested on the causal side. Next test: the conversion-focused interview round, then a behavioural probe with short-tenure paying Grow users.'}},
   solA:{kind:'Solution · Product', ev:'assumption', solType:'PRODUCT',
     h:'An AI \u201cpersonal CFO\u201d that answers \u201cam I on track?\u201d',
-    d:'Does the stewardship reasoning \u2014 \u201cam I on track\u201d, \u201care my dependants covered\u201d \u2014 for the Worrier\u2192CFO conversion and the CFO.',
-    detail:{grounding:'From the synthesis\u2019 product implications: one AI system marketed per segment \u2014 reassurance to the stewardship track. Entered as a candidate, not story-mapped yet; the causal loop comes first.',
+    d:'Does the stewardship reasoning \u2014 \u201cam I on track\u201d, \u201care my dependants covered\u201d \u2014 for the Navigator\u2192Guardian conversion and the Guardian.',
+    detail:{grounding:'One system marketed per cluster \u2014 reassurance and a naming conversation for the Navigator\u2192Guardian track. Entered as a candidate, not story-mapped yet; the causal loop comes first.',
       type:'Candidate solution \u2014 assumption state until story-mapped and its riskiest assumptions surface.'}},
-  solB:{kind:'Solution · Data', ev:'assumption', solType:'DATA',
-    h:'A clean-data engine piped into the user\u2019s own analysis',
-    d:'\u201cIf I could just get the data reliably, I\u2019d do the rest with AI myself. That\u2019s what I actually want.\u201d \u2014 Okimoto',
-    detail:{grounding:'The same underlying system as the AI CFO, exposed as complete, reliable data for the System Builder\u2019s own analysis. High ceiling, but the segment itself is a bet (3 reluctant members) \u2014 validate the segment before building for it.',
-      type:'Candidate solution \u2014 assumption state. Depends on the System Builder bet resolving.'}},
+  solB:{kind:'Solution · Service', ev:'assumption', solType:'SERVICE',
+    h:'An Operator tier: full visibility plus a periodic \u201cyour approach is sound\u201d check',
+    d:'\u201cI\u2019m the only checkpoint in this system and no one can validate me.\u201d Confirmation under load \u2014 not analysis, not raw data.',
+    detail:{grounding:'Reframed by synthesis v2: the old \u201cclean-data engine\u201d read (System Builder) missed the deeper job. Ariga \u2014 ex-finance, 50 accounts at the connection limit \u2014 explicitly wants someone to tell him he isn\u2019t wrong, not someone to do the thinking. Highest willingness-to-pay cluster (4/4 paying).',
+      type:'Candidate solution \u2014 assumption state until story-mapped. The confirmation could be AI, human, or hybrid; that choice is itself an assumption to surface.'}},
   solC:{kind:'Solution · Hybrid', ev:'assumption', solType:'HYBRID',
     h:'Shared household accounts with the app holding the accountability',
     d:'Couples share the picture without one partner being forced to own the habit.',
@@ -1775,7 +1775,7 @@ const NODES = {
   impact:{kind:'Impact (4 levels)', ev:'assumption',
     h:'Four-level ladder drafts once the outcome is ratified',
     d:'Assumption behaviour \u2192 opportunity relief \u2192 product outcome \u2192 business outcome \u2014 defined, then read after the first ship.',
-    detail:{grounding:'Draft chain: Worrier receives a concrete answer (behaviour) \u2192 the unnameable worry eases (relief) \u2192 Worrier\u2192paid conversion moves (product outcome) \u2192 paid retention and ARPU move (business outcome).',
+    detail:{grounding:'Draft chain: a Navigator\u2019s anxiety gets a named stake and a concrete answer (behaviour) \u2192 the unnameable worry eases (relief) \u2192 Navigator\u2192paid conversion moves (product outcome) \u2192 paid retention and ARPU move (business outcome).',
       type:'Pending \u2014 becomes measurable at the first increment.'}},
 };
 
@@ -2282,7 +2282,7 @@ const BUILDERS = {
         <div class="card-t">Constraints<span class="ct-line"></span></div>
         <p style="font-size:13px;color:var(--ink-2);line-height:1.5">Japanese market first. Recruit from the client’s own pool (≈3,000 survey responses, ≈280 interview opt-ins, ≈160 paying Grow users). Evidence must survive review by Paul and Alexander.</p>
         <div class="card-t" style="margin-top:16px">Non-goals<span class="ct-line"></span></div>
-        <p style="font-size:13px;color:var(--ink-2);line-height:1.5">Chasing the non-paying segments (Default Manager, Pragmatic Auditor). Pricing or packaging conclusions from a 4-payer cell. Building for the System Builder before that segment’s bet is validated.</p>
+        <p style="font-size:13px;color:var(--ink-2);line-height:1.5">Chasing the Tracker (one question, then done — never subscribes between life disruptions). Pricing or packaging conclusions before the payment-status spread across clusters is analysed. Solutioning before the causal loop runs.</p>
       </div>
     </div>
 
@@ -2309,25 +2309,25 @@ const BUILDERS = {
     <div class="section-rule"><span class="sr-n">0.3</span><h2 class="serif">Who we're studying</h2><span class="sr-line"></span><span class="mono" style="font-size:11px;color:var(--muted)">demand segments, by shared Job not personas</span></div>
     <div class="grid g-3">
       <div class="card">
-        <div class="card-t">Household CFO · primary<span class="ct-line"></span></div>
-        <p style="font-size:13px;color:var(--muted);line-height:1.5">An explicit, named fear of failing a dependant — spouse, children, ageing parents. The stake is in their own words, not inferred.</p>
-        <div class="fes"><span class="fes-k func">Functional</span>A complete, accurate picture of the household</div>
-        <div class="fes"><span class="fes-k emo">Emotional</span>Settle the fear of failing the people depending on me</div>
-        <div class="fes"><span class="fes-k soc">Social</span>“The competent person who keeps us on track”</div>
-      </div>
-      <div class="card">
-        <div class="card-t">Unresolved Worrier · entry state<span class="ct-line"></span></div>
-        <p style="font-size:13px;color:var(--muted);line-height:1.5">A life event created unease that stays reactive. No system, no role claimed yet. Converts to CFO — or churns.</p>
-        <div class="fes"><span class="fes-k func">Functional</span>See that things are accumulating steadily</div>
-        <div class="fes"><span class="fes-k emo">Emotional</span>Replace the background hum of worry with something concrete</div>
+        <div class="card-t">The Navigator · primary, largest<span class="ct-line"></span></div>
+        <p style="font-size:13px;color:var(--muted);line-height:1.5">Unbounded horizon anxiety — committed to a future they can’t fully see and can’t stop worrying about. No single nameable threat.</p>
+        <div class="fes"><span class="fes-k func">Functional</span>Continuously confirm “I’m still on course”</div>
+        <div class="fes"><span class="fes-k emo">Emotional</span>Feel settled today although the horizon keeps moving</div>
         <div class="fes"><span class="fes-k soc">Social</span>No role claimed yet — the identity is the destination</div>
       </div>
       <div class="card">
-        <div class="card-t">System Builder · highest ceiling, thin<span class="ct-line"></span></div>
-        <p style="font-size:13px;color:var(--muted);line-height:1.5">Complexity exceeded what fits in their head. Wants clean, complete data for their own analysis — not the product’s conclusions.</p>
-        <div class="fes"><span class="fes-k func">Functional</span>Reliable, complete data from every account</div>
-        <div class="fes"><span class="fes-k emo">Emotional</span>The pull of running a complex system well</div>
-        <div class="fes"><span class="fes-k soc">Social</span>“I do the thinking” — mastery as identity</div>
+        <div class="card-t">The Guardian · primary<span class="ct-line"></span></div>
+        <p style="font-size:13px;color:var(--muted);line-height:1.5">A named fear of failing a dependant — a specific person, a specific harm they can already see coming. Bounded, relational anxiety.</p>
+        <div class="fes"><span class="fes-k func">Functional</span>Hold the whole picture, keep it under control</div>
+        <div class="fes"><span class="fes-k emo">Emotional</span>Never let the protected person face the consequence</div>
+        <div class="fes"><span class="fes-k soc">Social</span>Perform the protector role credibly, often invisibly</div>
+      </div>
+      <div class="card">
+        <div class="card-t">The Operator · highest willingness-to-pay<span class="ct-line"></span></div>
+        <p style="font-size:13px;color:var(--muted);line-height:1.5">A financial system grown past what any peer could check. The fear is present-tense competence — a slip no one would catch.</p>
+        <div class="fes"><span class="fes-k func">Functional</span>Everything visible, nothing slipping</div>
+        <div class="fes"><span class="fes-k emo">Emotional</span>Occasional confirmation: “your approach is sound”</div>
+        <div class="fes"><span class="fes-k soc">Social</span>The only checkpoint — no one above them to validate</div>
       </div>
     </div>
   </div>`; },
@@ -2335,11 +2335,11 @@ const BUILDERS = {
   /* ───── PROGRESS ───── */
   progress(){ return `<div class="wrap">
     <div class="screen-head">
-      <div class="eyebrow">Loop 1 · Demand side</div>
+      <div class="eyebrow">Loop 1 · Demand side · the full JTBD project</div>
       <h1 class="h1">Understand the progress people are trying to make</h1>
-      <p class="lede">Continuous JTBD interviews of real past switches, never hypotheticals.</p>
+      <p class="lede">Thirty JTBD interviews across two rounds, re-clustered on the structure of anxiety. Four clusters, three of them paying. The central finding: <b>naming the threat is what converts</b> — Navigators don’t need more data, they need a concrete stake to attach the anxiety to.</p>
     </div>
-    ${concierge('validated', `<span class="cc-step">Where we are:</span> Project One synthesis complete — <b>30 interviews across two rounds</b> (15 Moneytree users, 15 external), re-clustered on the structure of anxiety after Round 1 split suspiciously on gender. Both populations converged. <span class="cc-step">Next:</span> the conversion-focused round (people who hired human financial advisors) to define the personal-CFO job.`)}
+    ${concierge('validated', `<span class="cc-step">Where we are:</span> synthesis v2 complete — <b>30 interviews · 2 rounds · 2 populations</b>, converged after re-clustering on anxiety (the Round 1 gender split was rejected as a correlate, not a mechanism). <span class="cc-step">Next:</span> the conversion round tests whether the product can <b>trigger</b> the naming moment, not just benefit from it.`)}
 
     <div class="jtbd-actions">
       <a class="btn btn-primary btn-sm" href="copilot.html" title="Open the on-device JTBD interview copilot (native Mac app)">
@@ -2356,44 +2356,124 @@ const BUILDERS = {
       </button>
     </div>
 
-    <div class="section-rule"><span class="sr-n">3.1</span><h2 class="serif">Interview snapshots</h2><span class="sr-line"></span><span class="mono" style="font-size:11px;color:var(--muted)">30 logged · 2 rounds · 2 populations</span></div>
+    <div class="section-rule"><span class="sr-n">1.1</span><h2 class="serif">The four clusters and their Jobs</h2><span class="sr-line"></span><span class="mono" style="font-size:11px;color:var(--muted)">clustered on the structure of anxiety, not demographics</span></div>
     <div class="grid g-2">
-      <div class="card">
-        <div class="card-t">Round 1 → Round 2 → Re-synthesis<span class="ct-line"></span></div>
-        <p style="font-size:13px;line-height:1.55;color:var(--ink-2)"><b>Round 1</b> (15 Moneytree users) produced two jobs that split almost cleanly on gender — flagged as suspicious in the session. <b>Round 2</b> (15 external: MoneyForward, freee, Zaim, Excel, Notion, incl. one churned Moneytree user) let us re-cluster from first principles on the <b>structure of anxiety</b>. The gender split dissolved; both populations converged on the same five segments.</p>
-        <div style="margin:12px 0 4px;padding:10px 13px;background:var(--surface-2);border-radius:8px">
-          <p class="serif" style="font-size:14px;line-height:1.55;color:var(--ink);margin:0">「妻が専業主婦なので、私がちゃんとしないと2人の人生に影響する」</p>
-          <p style="font-size:12px;color:var(--muted);margin:4px 0 0">“My wife is a full-time homemaker, so if I mess up it affects both our lives.” — Nakayama, Household CFO</p>
+
+      <div class="card" style="border-top:3px solid var(--amber)">
+        <div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap">
+          <div class="card-t" style="margin:0">The Navigator</div>
+          <span style="font-size:11px;color:var(--muted);font-style:italic">was: the Unresolved Worrier (merged in)</span>
+          <span class="mono" style="margin-left:auto;font-size:10.5px;color:var(--amber-ink)">★ primary · highest ceiling · 12/30 · 37%</span>
         </div>
-        <div style="margin:8px 0 0;padding:10px 13px;background:var(--surface-2);border-radius:8px">
-          <p class="serif" style="font-size:14px;line-height:1.55;color:var(--ink);margin:0">「何が不安なのかが分からないという状態で不安だった」</p>
-          <p style="font-size:12px;color:var(--muted);margin:4px 0 0">“I was anxious, but I couldn’t even name what I was anxious about.” — Hayashi, Unresolved Worrier</p>
+        <p style="font-size:12.5px;color:var(--muted);margin:4px 0 10px">Unbounded horizon anxiety — calibration, not certainty. The largest cluster.</p>
+        <p class="serif" style="font-size:14.5px;line-height:1.55;color:var(--ink)">“Help me continuously confirm I’m still on course and the worst case isn’t materialising, so I can feel settled today even though the horizon keeps moving.”</p>
+        <div style="margin:10px 0;padding:9px 12px;background:var(--surface-2);border-radius:8px">
+          <p class="serif" style="font-size:13.5px;line-height:1.5;color:var(--ink);margin:0">遠くの安心 vs 近くの安心</p>
+          <p style="font-size:11.5px;color:var(--muted);margin:3px 0 0">“Distant safety vs near safety” — Inoue’s distinction. The app handles near safety daily; she saw two financial planners for the distant kind and the anxiety only moved, never resolved.</p>
         </div>
+        <p style="font-size:12.5px;line-height:1.5;color:var(--ink-2)"><b>Hidden job:</b> “I’ll never get certainty about the future — give me a steady rhythm of confirmation instead.” Checking isn’t optimisation; it’s how the worry gets metabolised day to day.</p>
+        <p style="font-size:12.5px;line-height:1.5;color:var(--ink-2);margin-top:6px"><b>Churn edge:</b> Hayashi substitutes ChatGPT for financial questions and hasn’t found one it can’t answer — the cluster’s churn risk, not its disqualification.</p>
       </div>
-      <div class="card inset">
-        <div class="card-t">Demand Map · The Job<span class="ct-line"></span></div>
-        <p class="serif" style="font-size:16px;line-height:1.5;color:var(--ink)">Help me keep a complete, accurate picture of our finances so I can <b>keep the future on track without failing the people depending on me</b> — and so what I carry doesn’t disappear with me.</p>
-        <p style="font-size:12px;color:var(--muted);margin:8px 0 0">Visibility is the means; <b>reassurance and stewardship are the job</b>. The emotional ladder both paying tracks climb: Safety → Competence → Mastery → Identity.</p>
-        <div class="card-t" style="margin-top:18px">Real competitors<span class="ct-line"></span></div>
-        <p style="font-size:13px;color:var(--ink-2);line-height:1.5;margin:0">MoneyForward, freee, Zaim — and the real ones: <b>30 years of Excel</b>, self-built Sheets/Notion systems, a human FP consultation, and lately <b>ChatGPT</b> (Hayashi already substitutes it for financial questions). Doing nothing counts too: the worry just stays.</p>
+
+      <div class="card" style="border-top:3px solid var(--accent)">
+        <div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap">
+          <div class="card-t" style="margin:0">The Guardian</div>
+          <span style="font-size:11px;color:var(--muted);font-style:italic">was: the Household CFO</span>
+          <span class="mono" style="margin-left:auto;font-size:10.5px;color:var(--accent-ink)">★ primary · 7+3 variants · 10/30 · 33%</span>
+        </div>
+        <p style="font-size:12.5px;color:var(--muted);margin:4px 0 10px">Visibility as stewardship — bounded, relational anxiety: a specific person, a specific harm they can already see coming.</p>
+        <p class="serif" style="font-size:14.5px;line-height:1.55;color:var(--ink)">“When circumstance makes me the person standing between someone I’m responsible for and a harm I can already see coming, help me hold the whole picture and keep it under control.”</p>
+        <div style="margin:10px 0;padding:9px 12px;background:var(--surface-2);border-radius:8px">
+          <p class="serif" style="font-size:13.5px;line-height:1.5;color:var(--ink);margin:0">「妻が専業主婦なので、私がちゃんとしないと2人の人生に影響する」</p>
+          <p style="font-size:11.5px;color:var(--muted);margin:3px 0 0">“My wife is a full-time homemaker, so if I mess up it affects both our lives.” — Nakayama</p>
+        </div>
+        <p style="font-size:12.5px;line-height:1.5;color:var(--ink-2)"><b>Hidden job:</b> don’t let down the people depending on you — the app is what lets them perform the role credibly, often invisibly (Muramatsu: “I’m the one who gets told off, but this is the one area I hold”).</p>
+        <p style="font-size:12.5px;line-height:1.5;color:var(--ink-2);margin-top:6px"><b>Variants:</b> stewarding alone (Obi), stewarding after a trust breach (Yano — 知るのが怖い, “afraid of what I’d find out”), post-divorce multiple dependants (Sera — blocked by one-person-per-account tools).</p>
+      </div>
+
+      <div class="card" style="border-top:3px solid var(--green-ink)">
+        <div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap">
+          <div class="card-t" style="margin:0">The Operator</div>
+          <span style="font-size:11px;color:var(--muted);font-style:italic">was: the System Builder</span>
+          <span class="mono" style="margin-left:auto;font-size:10.5px;color:var(--green-ink)">★ primary · highest willingness-to-pay · 4/30 · 13%</span>
+        </div>
+        <p style="font-size:12.5px;color:var(--muted);margin:4px 0 10px">Operational complexity with no peer to check against. Present-tense competence, not an unknowable future.</p>
+        <p class="serif" style="font-size:14.5px;line-height:1.55;color:var(--ink)">“Help me keep everything visible and nothing slipping — and occasionally confirm my approach is sound.”</p>
+        <p style="font-size:12.5px;line-height:1.5;color:var(--ink-2);margin-top:10px"><b>Hidden job:</b> “I’m the only checkpoint in this system and there’s no one to validate me. Give me visibility and occasional confirmation — <b>not analysis</b>.” Ariga (ex-finance, 50 accounts at the connection limit) wants someone to tell him he isn’t wrong, not someone to do the thinking for him.</p>
+        <p style="font-size:12.5px;line-height:1.5;color:var(--ink-2);margin-top:6px"><b>Reframed in v2:</b> this cluster was previously read as “give me clean data, I’ll do the thinking” (the System Builder). The re-synthesis shows the deeper job is <b>confirmation under load</b> — the fear is a missed payment a peer would have caught, if a peer existed.</p>
+      </div>
+
+      <div class="card" style="border-top:3px solid var(--ev-killed)">
+        <div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap">
+          <div class="card-t" style="margin:0">The Tracker</div>
+          <span style="font-size:11px;color:var(--muted);font-style:italic">was: the Pragmatic Auditor</span>
+          <span class="mono" style="margin-left:auto;font-size:10.5px;color:var(--muted)">not a target · 4/30 · 13%</span>
+        </div>
+        <p style="font-size:12.5px;color:var(--muted);margin:4px 0 10px">Answer one question, then stop. Curiosity with an expiry date — episodic, returns at the next life disruption, never subscribes between them.</p>
+        <p class="serif" style="font-size:14.5px;line-height:1.55;color:var(--ink)">“Help me answer the one financial question I have right now, then stay out of my way until I have another.”</p>
+        <div style="margin:10px 0;padding:9px 12px;background:var(--surface-2);border-radius:8px">
+          <p class="serif" style="font-size:13.5px;line-height:1.5;color:var(--ink);margin:0">「3ヶ月やってみてなんかいいかなみたいな。これ以上なのかいかなのかで見るぐらいでもいいかな」</p>
+          <p style="font-size:11.5px;color:var(--muted);margin:3px 0 0">“Three months gave me the benchmark, that’s basically enough now.” — Oosuga</p>
+        </div>
+        <p style="font-size:12.5px;line-height:1.5;color:var(--ink-2)"><b>Hidden job:</b> calibrate my baseline, then move on. The job is finite — completing it means not needing the product, so there is no upsell moment.</p>
       </div>
     </div>
 
-    <div class="section-rule"><span class="sr-n">3.2</span><h2 class="serif">Four forces</h2><span class="sr-line"></span></div>
+    <div class="section-rule"><span class="sr-n">1.2</span><h2 class="serif">The conversion map</h2><span class="sr-line"></span><span class="mono" style="font-size:11px;color:var(--muted)">the timeline, summarised — where people move and why</span></div>
+    <div class="card">
+      <div class="grid g-3" style="align-items:stretch">
+        <div style="border:1.5px solid var(--amber);border-radius:10px;padding:13px 15px;background:var(--ev-suggestive-bg)">
+          <div class="mono" style="font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--amber-ink);margin-bottom:5px">Start · the hub</div>
+          <div style="font-weight:600;font-size:14.5px">Navigator</div>
+          <p style="font-size:12px;color:var(--ink-2);line-height:1.5;margin:5px 0 0">Unbounded horizon anxiety, managed by repeated checking. Open-ended anxiety loops back here — more time in the app doesn’t convert anyone.</p>
+        </div>
+        <div style="display:flex;flex-direction:column;justify-content:center;gap:10px;text-align:center">
+          <div style="font-size:12px;color:var(--ink-2)"><b>The fork:</b> does the anxiety find a <b>name</b>, or stay open-ended?</div>
+          <div style="font-size:11.5px;color:var(--muted)">a person appears → <b>Guardian</b></div>
+          <div style="font-size:11.5px;color:var(--muted)">scale outpaces a peer → <b>Operator</b></div>
+          <div style="font-size:11.5px;color:var(--killed-ink)">no stake ever appears → Tracker never enters the journey</div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div style="border:1.5px solid var(--accent);border-radius:10px;padding:11px 14px">
+            <div style="font-weight:600;font-size:13.5px">Guardian <span class="mono" style="font-size:10px;color:var(--muted)">· stewardship for one named person</span></div>
+            <p style="font-size:11.5px;color:var(--ink-2);line-height:1.45;margin:4px 0 0">Kani: “couldn’t name the anxiety” → named a child’s future → FP2 study, a life plan, confidence. Koinuma: childhood-poverty echo → a present debt crisis → cleared ¥800k in 22 months → relief, pride.</p>
+          </div>
+          <div style="border:1.5px solid var(--green-ink);border-radius:10px;padding:11px 14px">
+            <div style="font-weight:600;font-size:13.5px">Operator <span class="mono" style="font-size:10px;color:var(--muted)">· competence with no peer to validate it</span></div>
+            <p style="font-size:11.5px;color:var(--ink-2);line-height:1.45;margin:4px 0 0">Yamaguchi: a manual ledger since primary school broke under cashless complexity — “will this be enough” became “can I keep this from slipping”. Sakakibara: 8+ brokerage accounts past MoneyForward’s cap, models to age 100.</p>
+          </div>
+        </div>
+      </div>
+      <p style="font-size:12.5px;line-height:1.55;color:var(--ink-2);margin-top:14px;padding-top:12px;border-top:1px dashed var(--line)"><b>The central finding:</b> Kani and Koinuma both made the Navigator→Guardian journey — anxious, reactive checking that became full ownership <b>once the threat got a name</b> (a child, a debt crisis). Obata’s FP life-plan shows the same mechanism without a personal-loss trigger. Naming the threat is what moves someone — not more time using the app. That is the single clearest growth lever in the dataset.</p>
+    </div>
+
+    <div class="section-rule"><span class="sr-n">1.3</span><h2 class="serif">Four forces</h2><span class="sr-line"></span></div>
     <div class="forces">
       <div class="force push"><div class="f-h"><span class="f-arrow">→</span>Push (away from today)</div>
-        <ul><li>A life event or financial scar — debt that once pushed a family to a breaking point (Koinuma), a hospital-bill incident that broke trust (Yano)</li><li>The background hum of worry that tracking alone never settles</li></ul></div>
+        <ul><li>A threat that becomes nameable: a dependant appears, a debt crisis lands (Koinuma’s ¥800k), a trust breach (Yano’s hospital-bill moment)</li><li>Complexity outgrows the head or the ledger (Yamaguchi’s cashless break; Sakakibara past MoneyForward’s cap)</li></ul></div>
       <div class="force pull"><div class="f-h"><span class="f-arrow">←</span>Pull (toward the solution)</div>
-        <ul><li>A concrete answer to <b>“am I on track?”</b> — not another number to look at</li><li>Becoming “the competent person who keeps us on track” (the identity at the top of the ladder)</li></ul></div>
+        <ul><li>A steady rhythm of “you’re still on course” — calibration, not certainty</li><li>Performing the protector role credibly (Guardian) · being confirmed “not wrong” under load (Operator)</li></ul></div>
       <div class="force anxiety"><div class="f-h">⚠ Anxiety (of switching)</div>
-        <ul><li>“I can’t even name what I’m anxious about” — the worry has no object to hand to a tool</li><li>Distant safety feels like it needs a human to model, not an app (Inoue)</li></ul></div>
+        <ul><li>遠くの安心 — distant safety feels beyond an app; two FPs later the anxiety had only moved (Inoue)</li><li>知るのが怖い — “afraid of what I’d find out if I looked closer” (Yano)</li></ul></div>
       <div class="force habit"><div class="f-h">⟳ Habit (of today)</div>
-        <ul><li>30 years of Excel (Tachibana); trusted self-built Sheets/Notion systems</li><li>“It just naturally ended up being me” — roles held by inertia, not intent</li></ul></div>
+        <ul><li>Decades-long manual systems: a ledger kept since primary school, 20 years of Sheets/Notion</li><li>Checking itself — the worry metabolised as routine, mistaken for management</li></ul></div>
     </div>
 
-    <div class="section-rule"><span class="sr-n">3.3</span><h2 class="serif">Timeline</h2><span class="sr-line"></span><span class="mono" style="font-size:11px;color:var(--muted)">where the struggle concentrates</span></div>
+    <div class="section-rule"><span class="sr-n">1.4</span><h2 class="serif">The interviews</h2><span class="sr-line"></span><span class="mono" style="font-size:11px;color:var(--muted)">30 · rosters reconciled in synthesis v2</span></div>
     <div class="card">
-      <p style="font-size:13px;line-height:1.55;color:var(--ink-2);margin:0">The struggle concentrates at the <b>entry state</b>: a life event creates unease that stays reactive — the Unresolved Worrier, checking without a system or a claimed role. From there the path forks: a concrete stake plus a concrete answer converts them into a <b>Household CFO</b> (documented: Koinuma); no stake, and they drift to the off-ramp — Default Managers and Pragmatic Auditors who use but never pay. Who pays needs all three: <b>someone depending on them, a scar, and a question they can’t already answer</b>.</p>
+      <div style="display:grid;grid-template-columns:110px 1fr;gap:8px 14px;font-size:12.5px;line-height:1.7">
+        <div class="mono" style="font-size:10.5px;letter-spacing:.06em;color:var(--amber-ink);padding-top:2px">NAVIGATOR ·12</div>
+        <div style="color:var(--ink-2)">Inoue <i>(MT·paid)</i>, Aida <i>(MT·paid)</i>, Kon <i>(MT·paid)</i>, Ishimatsu <i>(MT·free)</i>, Kaga <i>(MT·free)</i>, Yoshikawa <i>(MF·free)</i>, Okimoto <i>(MF·free)</i>, Hayashi <i>(Oshidori)</i>, Tachibana Kōji <i>(MillWallet+freee)</i>, Obata <i>(Zaim)</i>, Kotake <i>(Kakei Plus)</i>, Miyamoto <i>(Excel, joint)</i></div>
+        <div class="mono" style="font-size:10.5px;letter-spacing:.06em;color:var(--accent-ink);padding-top:2px">GUARDIAN ·10</div>
+        <div style="color:var(--ink-2)">Muramatsu <i>(MT·paid)</i>, Sakai <i>(MT·paid)</i>, Koinuma <i>(MT·paid)</i>, Amano <i>(MT·paid)</i>, Kani <i>(MT·free)</i>, Nakayama <i>(Excel)</i>, Kobatake <i>(Zaim·free)</i> · variants: Obi <i>(MT)</i>, Yano <i>(freee·paid)</i>, Sera <i>(MF·paid)</i></div>
+        <div class="mono" style="font-size:10.5px;letter-spacing:.06em;color:var(--green-ink);padding-top:2px">OPERATOR ·4</div>
+        <div style="color:var(--ink-2)">Ariga <i>(MT·paid)</i>, Sakakibara <i>(Zaim, MF·paid)</i>, Yamaguchi <i>(MT·paid)</i>, Imai <i>(MT·paid)</i></div>
+        <div class="mono" style="font-size:10.5px;letter-spacing:.06em;color:var(--muted);padding-top:2px">TRACKER ·4</div>
+        <div style="color:var(--ink-2)">Oosuga <i>(Family Bank)</i>, Kono <i>(MT·paid)</i>, Hattori, Takahashi</div>
+      </div>
+      <div style="margin-top:14px;padding-top:12px;border-top:1px dashed var(--line);font-size:12px;color:var(--ink-2);line-height:1.6">
+        <b>Placement flags (from synthesis v2):</b> <b>Kono</b> pays for Moneytree yet sits in the never-pay cluster — his own words suggest deliberate low-touch engagement, closer to an early-stage Navigator; re-check rather than treat as settled. <b>Takahashi vs Hattori</b>: deep-on-probing vs flat-on-probing — if that distinction recurs at volume, split “deliberately shallow” from “genuinely flat” as Tracker sub-types. <b>Yamaguchi</b> narrates her system to friends who’ve changed their approach because of her — the closest real evidence of a “power user who shares”, worth tracking as a trait across clusters.
+      </div>
     </div>
   </div>`; },
 
@@ -2411,7 +2491,7 @@ const BUILDERS = {
         <div class="card-t">The three altitudes, keep them distinct<span class="ct-line"></span></div>
         <div class="grid" style="gap:10px">
           <div class="card inset" style="border-radius:10px;padding:13px 15px"><div style="display:flex;align-items:center;gap:9px"><span style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)">Business outcome</span>${pill('assumption')}</div><div style="margin-top:6px;font-size:13.5px">Grow paid subscriptions and their retention. Leadership’s number — we don’t control it directly.</div></div>
-          <div class="card" style="border-radius:10px;padding:13px 15px;border-color:var(--accent)"><div style="display:flex;align-items:center;gap:9px"><span style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-ink)">Product outcome ★ ours</span>${pill('assumption')}</div><div style="margin-top:6px;font-size:14px"><b class="field var" id="f-outcome" contenteditable="true" spellcheck="false">Conversion of Worrier-profile users to paid</b> — proposed from the synthesis; the one number this team would own. ${fhelp('outcome')}</div></div>
+          <div class="card" style="border-radius:10px;padding:13px 15px;border-color:var(--accent)"><div style="display:flex;align-items:center;gap:9px"><span style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-ink)">Product outcome ★ ours</span>${pill('assumption')}</div><div style="margin-top:6px;font-size:14px"><b class="field var" id="f-outcome" contenteditable="true" spellcheck="false">Conversion of Navigator-profile users to paid</b> — proposed from the synthesis; the one number this team would own. ${fhelp('outcome')}</div></div>
           <div class="card inset" style="border-radius:10px;padding:13px 15px"><div style="display:flex;align-items:center;gap:9px"><span style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)">Traction metric</span>${pill('assumption')}</div><div style="margin-top:6px;font-size:13.5px">A vanity or activity metric, kept distinct from the outcome: it games easily and doesn’t imply a paid, lasting customer.</div></div>
         </div>
 
@@ -2423,7 +2503,7 @@ const BUILDERS = {
           </div>
           <div class="bt-marks"><span>0%</span><span style="color:var(--accent-ink)">today <span class="field var" id="f-baseline" contenteditable="true" spellcheck="false">not yet measured</span></span><span style="color:var(--green-ink)">target <span class="field var" id="f-target" contenteditable="true" spellcheck="false">pending ratification</span></span><span>100%</span></div>
         </div>
-        <p style="font-size:12.5px;color:var(--muted);margin-top:10px">Mode: <b style="color:var(--ink-2)">learning goal</b> — the driver (a concrete “am I on track?” answer converts Worriers) is Emerging, n=1 confirmed conversion. Baseline: <span class="var">measurable from the ≈160 paying Grow users once profiles are tagged</span>. ${fhelp('baseline','Work through baseline')}${fhelp('target','Work through target')}</p>
+        <p style="font-size:12.5px;color:var(--muted);margin-top:10px">Mode: <b style="color:var(--ink-2)">learning goal</b> — the driver (naming the threat converts Navigators) is Emerging, documented twice (Kani, Koinuma). Baseline: <span class="var">measurable from the ≈160 paying Grow users once profiles are tagged</span>. ${fhelp('baseline','Work through baseline')}${fhelp('target','Work through target')}</p>
       </div>
 
       <div class="card inset">
@@ -2444,15 +2524,15 @@ const BUILDERS = {
       <h1 class="h1">Organise struggle by timeline moment, prioritise one target</h1>
       <p class="lede">Opportunities are customer-framed struggling moments, never solutions.</p>
     </div>
-    ${concierge('suggestive', `<span class="cc-step">Where we are:</span> four opportunities admitted from the synthesis; <b>one target prioritised</b> — the Worrier’s “am I on track?” gap, the conversion lever from the largest reachable group to the highest-retention one. <span class="cc-step">Next:</span> map the causal system behind the conversion before designing anything.`)}
+    ${concierge('suggestive', `<span class="cc-step">Where we are:</span> four opportunities admitted from the synthesis; <b>one target prioritised</b> — the Navigator’s “give the anxiety a name” gap, the conversion lever from the largest cluster (37%) into Guardianship. <span class="cc-step">Next:</span> map the causal system behind the conversion before designing anything.`)}
 
     <div class="section-rule"><span class="sr-n">3.1</span><h2 class="serif">Opportunities by timeline moment</h2><span class="sr-line"></span></div>
     <div class="grid g-3">
       <div class="card">
         <div class="card-t">Target opportunity ★<span class="ct-line"></span></div>
-        <div style="font-weight:600;font-size:14px;margin-bottom:6px"><span class="field var" id="f-opp" contenteditable="true" spellcheck="false">“I’m anxious and I can’t name why — am I on track?”</span> ${fhelp('opportunity')}</div>
+        <div style="font-weight:600;font-size:14px;margin-bottom:6px"><span class="field var" id="f-opp" contenteditable="true" spellcheck="false">Give the anxiety a name — “am I on track?”</span> ${fhelp('opportunity')}</div>
         ${meter('suggestive')} <span style="font-size:11px;color:var(--muted);margin-left:6px">demand high · win high</span>
-        <div style="margin-top:12px;padding-top:12px;border-top:1px dashed var(--line);font-size:12.5px;color:var(--ink-2)">The Unresolved Worrier’s gap. Worrier and CFO are the same person at two points in time; a concrete answer carries them across. Documented conversion: Koinuma (a second case awaits identity confirmation) — Emerging, not Validated.</div>
+        <div style="margin-top:12px;padding-top:12px;border-top:1px dashed var(--line);font-size:12.5px;color:var(--ink-2)">The Navigator’s gap. Navigator and Guardian are the same person at two points in time; naming the threat carries them across. Documented twice: Kani and Koinuma — Emerging until the product itself can trigger a naming.</div>
       </div>
       <div class="card">
         <div class="card-t">Opportunity<span class="ct-line"></span></div>
@@ -2464,7 +2544,7 @@ const BUILDERS = {
         <div class="card-t">Opportunity<span class="ct-line"></span></div>
         <div style="font-weight:600;font-size:14px;margin-bottom:6px">The app as the accountability layer for couples</div>
         ${meter('suggestive')} <span style="font-size:11px;color:var(--muted);margin-left:6px">demand med · win med</span>
-        <div style="margin-top:12px;padding-top:12px;border-top:1px dashed var(--line);font-size:12.5px;color:var(--ink-2)">Joint-input systems die without a single owner (held for Sakakibara, collapsed for Oosuga). The app could hold the accountability itself. A fourth sibling — the switchable flow/stock view — is parked on the System Builder bet.</div>
+        <div style="margin-top:12px;padding-top:12px;border-top:1px dashed var(--line);font-size:12.5px;color:var(--ink-2)">Joint-input systems die without a single owner (held for Sakakibara, collapsed for Oosuga). The app could hold the accountability itself. A fourth sibling — the switchable flow/stock view — serves the Operator’s visibility job.</div>
       </div>
     </div>
 
@@ -2476,7 +2556,7 @@ const BUILDERS = {
           <div class="check on"><span class="box">✓</span><span class="c-txt">Framed as a customer struggle, not a solution<span class="ct-meta">✓ all four — struggles, in the customer’s words</span></span></div>
           <div class="check on"><span class="box">✓</span><span class="c-txt">Not a feature request in disguise<span class="ct-meta">✓ e.g. Sera’s blocker translated back to the stewardship need</span></span></div>
           <div class="check on"><span class="box">✓</span><span class="c-txt">Grounded in real behaviour / a real story<span class="ct-meta">✓ named people, real events, both rounds</span></span></div>
-          <div class="check on"><span class="box">✓</span><span class="c-txt">Plausibly connects to the desired outcome<span class="ct-meta">✓ each maps to Worrier→paid conversion or CFO retention</span></span></div>
+          <div class="check on"><span class="box">✓</span><span class="c-txt">Plausibly connects to the desired outcome<span class="ct-meta">✓ each maps to Navigator→paid conversion or Guardian/Operator retention</span></span></div>
           <div class="check on" style="border-bottom:none"><span class="box">✓</span><span class="c-txt">Enough evidence to matter<span class="ct-meta">✓ recurrence across 30 interviews · conversion lever n=1, held at Emerging</span></span></div>
         </div>
       </div>
@@ -2491,7 +2571,7 @@ const BUILDERS = {
           <div class="dot" style="left:44%;bottom:46%"><span class="bub"></span><span class="dl">Accountability</span></div>
           <div class="dot" style="left:58%;bottom:22%"><span class="bub"></span><span class="dl">Flow/stock view</span></div>
         </div>
-        <p style="font-size:12px;color:var(--muted);margin-top:10px">One target prioritised: top-right — the largest reachable group (Worriers) times the strongest mechanism (a concrete answer). Flow/stock sits low on ability-to-win until the System Builder bet resolves.</p>
+        <p style="font-size:12px;color:var(--muted);margin-top:10px">One target prioritised: top-right — the largest cluster (Navigators, 37%) times the strongest documented mechanism (naming). Flow/stock serves the Operator’s visibility job; kept as a sibling.</p>
       </div>
     </div>
   </div>`; },
@@ -2511,22 +2591,22 @@ const BUILDERS = {
       </div>
       <div class="flow">
         <div class="flow-col"><div class="fc-h">Inputs <span class="arr">→</span></div>
-          <div class="flow-item">A named stake + connected accounts <span style="font-size:10px;color:var(--muted)">· draft</span></div>
+          <div class="flow-item">Consolidated accounts + an onboarding that asks who depends on you <span style="font-size:10px;color:var(--muted)">· draft</span></div>
         </div>
         <div class="flow-col"><div class="fc-h">Process <span class="arr">→</span></div>
           <div class="flow-item">Stewardship reasoning: “on track / not, and why” <span style="font-size:10px;color:var(--muted)">· draft</span></div>
         </div>
         <div class="flow-col"><div class="fc-h">Outputs <span class="arr">→</span></div>
-          <div class="flow-item lead">Worrier receives a concrete answer in week one <span style="font-size:10px;color:var(--green-ink)">· lead measure (candidate)</span></div>
+          <div class="flow-item lead">A Navigator’s anxiety gets a named stake in week one <span style="font-size:10px;color:var(--green-ink)">· lead measure (candidate)</span></div>
         </div>
         <div class="flow-col"><div class="fc-h">Outcome</div>
-          <div class="flow-item lead">Worrier→paid conversion <span style="font-size:10px;color:var(--green-ink)">· lag (pending ratification)</span></div>
+          <div class="flow-item lead">Navigator→paid conversion <span style="font-size:10px;color:var(--green-ink)">· lag (pending ratification)</span></div>
         </div>
       </div>
       <div class="factors">
         <div class="fcol control"><div class="fcol-h">▣ Control factors</div>
           <div class="factor">When and how the “am I on track?” answer is delivered</div>
-          <div class="factor">Whether a stake gets named during onboarding</div>
+          <div class="factor">Whether the product surfaces a nameable stake (onboarding, AI conversation)</div>
           <div class="factor">Data completeness across accounts (feeds the answer)</div>
         </div>
         <div class="fcol noise"><div class="fcol-h">≈ Noise factors</div>
@@ -2535,7 +2615,7 @@ const BUILDERS = {
           <div class="factor">Free substitutes for one-off questions (ChatGPT)</div>
         </div>
       </div>
-      <p class="princ" style="margin-top:16px;font-size:14px">Mapped right-to-left before any solution: the outcome needs its outputs, the outputs need the process, the process needs the inputs. Build left-to-right. <b>Status: drafted from the Project One synthesis, not yet modelled with the team</b> — this loop is the next to run. The chain reads: stake appears → concrete answer available → role claimed → paying CFO.</p>
+      <p class="princ" style="margin-top:16px;font-size:14px">Mapped right-to-left before any solution: the outcome needs its outputs, the outputs need the process, the process needs the inputs. Build left-to-right. <b>Status: drafted from the Project One synthesis, not yet modelled with the team</b> — this loop is the next to run. The chain reads: threat gets a name → concrete answer available → role claimed → paying Guardian or Operator.</p>
     </div>
   </div>`; },
 
@@ -2586,7 +2666,7 @@ const BUILDERS = {
     <div class="testcard">
       <div class="tc-head">${pill('assumption')}<span class="tc-id">T-01</span><span style="font-weight:600;font-size:13.5px">The conversion round — defining the “personal CFO” job</span><span style="margin-left:auto" class="mono" style="font-size:11px;color:var(--amber-ink)">QUEUED</span></div>
       <div class="tc-body">
-        <div class="tc-field"><div class="tcf-l">Assumption under test</div><div class="tcf-v">A concrete “am I on track?” answer is what converts Worriers into paying CFOs (currently n=1: Koinuma).</div></div>
+        <div class="tc-field"><div class="tcf-l">Assumption under test</div><div class="tcf-v">The product can trigger the naming moment. The mechanism (naming converts, Navigator→Guardian) is documented twice — Kani, Koinuma — but both namings happened to people; no product caused one yet.</div></div>
         <div class="tc-field"><div class="tcf-l">Decision it informs</div><div class="tcf-v">Whether the AI personal-CFO direction leads Project Two, or the data-engine path is developed first.</div></div>
         <div class="tc-field"><div class="tcf-l">Audience &amp; moment</div><div class="tcf-v">People who hired human financial advisors / money managers (what job did the human serve?), then short-tenure paying Grow users (~7 in the opt-in pool) on what converted them.</div></div>
         <div class="tc-field"><div class="tcf-l">Observed behaviour</div><div class="tcf-v">Real past hires and real conversions — never “would you pay for an AI advisor?”</div></div>
@@ -2604,10 +2684,10 @@ const BUILDERS = {
     <div class="card">
       <div class="scope-cols">
         <div class="scope-col inc"><h4>Included, the focussed half</h4>
-          <ul><li style="color:var(--muted)">Scoped after the conversion belief survives its first test — the candidate: the smallest thing that gives a Worrier a concrete “on track / not” answer.</li></ul>
+          <ul><li style="color:var(--muted)">Scoped after the conversion belief survives its first test — the candidate: the smallest thing that surfaces a nameable stake and answers “on track / not” for a Navigator.</li></ul>
         </div>
         <div class="scope-col exc"><h4>Excluded, on purpose</h4>
-          <ul><li>Building for the System Builder before that bet is validated</li><li>Anything aimed at the Default Manager or Pragmatic Auditor — precisely defined non-payers</li><li>Pricing/packaging changes off a 4-payer evidence cell</li></ul>
+          <ul><li>Anything aimed at the Tracker — a finite job with no upsell moment</li><li>An analysis/advice engine for the Operator (they want confirmation, not thinking done for them)</li><li>Pricing/packaging changes before the causal loop and conversion round run</li></ul>
         </div>
       </div>
       <div class="kickass">
@@ -2619,11 +2699,11 @@ const BUILDERS = {
     <div class="section-rule"><span class="sr-n">5.5</span><h2 class="serif">Impact ladder · four levels</h2><span class="sr-line"></span><span class="mono" style="font-size:11px;color:var(--muted)">expected vs actual</span></div>
     <div class="card">
       <div class="iladder">
-        <div class="irow"><div class="i-rung">L1</div><div class="i-body"><div class="i-name">Assumption behaviour</div><div class="i-sub">Worrier receives (and returns to) a concrete “am I on track?” answer</div></div><div style="text-align:right"><div class="i-val" style="color:var(--muted)">—</div><div class="i-delta iflat">pending</div></div></div>
+        <div class="irow"><div class="i-rung">L1</div><div class="i-body"><div class="i-name">Assumption behaviour</div><div class="i-sub">A Navigator’s anxiety gets a named stake — and they return to the answer</div></div><div style="text-align:right"><div class="i-val" style="color:var(--muted)">—</div><div class="i-delta iflat">pending</div></div></div>
         <div class="iconn"></div>
         <div class="irow"><div class="i-rung">L2</div><div class="i-body"><div class="i-name">Opportunity relief</div><div class="i-sub">The unnameable worry eases — the anxiety gets an object and an answer</div></div><div style="text-align:right"><div class="i-val" style="color:var(--muted)">—</div><div class="i-delta iflat">pending</div></div></div>
         <div class="iconn"></div>
-        <div class="irow"><div class="i-rung">L3</div><div class="i-body"><div class="i-name">Product outcome</div><div class="i-sub">Worrier→paid conversion (proposed, pending ratification)</div></div><div style="text-align:right"><div class="i-val" style="color:var(--muted)">—</div><div class="i-delta iflat">pending</div></div></div>
+        <div class="irow"><div class="i-rung">L3</div><div class="i-body"><div class="i-name">Product outcome</div><div class="i-sub">Navigator→paid conversion (proposed, pending ratification)</div></div><div style="text-align:right"><div class="i-val" style="color:var(--muted)">—</div><div class="i-delta iflat">pending</div></div></div>
         <div class="iconn"></div>
         <div class="irow"><div class="i-rung">L4</div><div class="i-body"><div class="i-name">Business outcome</div><div class="i-sub">Grow paid subscriptions and retention</div></div><div style="text-align:right"><div class="i-val" style="color:var(--muted)">—</div><div class="i-delta iflat">pending</div></div></div>
       </div>
@@ -2639,11 +2719,14 @@ const BUILDERS = {
       <p class="lede">Every decision, its rationale, the evidence behind it, and the trigger that would make us revisit. Beliefs that were disproven are kept, they’re the cheapest progress we made.</p>
     </div>
     <div style="margin-top:26px" class="dlog">
-      <div class="dentry"><div class="d-when">Project One · synthesis</div><div class="d-what">Prioritised the Worrier→CFO conversion as the single target opportunity</div><div class="d-why">The clearest opportunity in the data is not a feature, it’s a conversion: Worrier and CFO are the same person at two points in time. A concrete answer to “am I on track?” converts the largest reachable group into the highest-retention one. Documented case: Koinuma (a second, “Kani / Kon”, awaits identity confirmation) — held at Emerging.</div><div class="d-trig">Revisit if: the conversion round fails to reproduce the mechanism, or the second case doesn’t confirm.</div></div>
-      <div class="dentry"><div class="d-when">Project One · re-synthesis</div><div class="d-what">Rejected the Round 1 gender split; re-clustered on the structure of anxiety</div><div class="d-why">Two jobs that split almost cleanly on gender were flagged as suspicious — demographics are correlates, not mechanisms. Re-cut from first principles, the split dissolved and both populations (users and externals) converged on the same five segments. This is the strongest validation the method offers.</div><div class="d-trig">Revisit if: a third population fails to reproduce the segments.</div></div>
-      <div class="dentry"><div class="d-when">Project One · reconciliation</div><div class="d-what">Moved Hattori, Imai and Takahashi out of the System Builder; held it as a bet, not a segment</div><div class="d-why">Behavioural look-alikes who will not pay (checks “so he doesn’t forget”, hobby collection, trusts his own judgement). What remains is real but thin — Okimoto (churned), Sakakibara (wants to cancel), Ariga (anxiety-driven). Highest theoretical ceiling and best AI-tier fit, so it stays on the tree as a hypothesis to test, not a target to build for.</div><div class="d-trig">Revisit if: the data-engine probe finds Builders willing to pay for clean feeds.</div></div>
-      <div class="dentry"><div class="d-when">Project One · targeting</div><div class="d-what">Ruled out the Default Manager and Pragmatic Auditor as targets, with named disqualifiers</div><div class="d-why">Seven disqualifiers reduce to three conditions that must all be present to pay: someone depending on them, a scar from a past failure, and a question they can’t already answer. No stake → no payment, however much they track. Knowing who not to chase is worth as much as the target definition.</div><div class="d-trig">Revisit if: a life disruption creates a stake (Kaga’s generational framing and Miyamoto’s migrating anxiety are flagged for sanity-check).</div></div>
-      <div class="dentry"><div class="d-when">Project One · outcome</div><div class="d-what">Proposed Worrier→paid conversion as the product outcome — pending ratification</div><div class="d-why">Drafted from the growth lever; the number and baseline come from tagging Worrier profiles in the ≈160 paying Grow users. Held as an assumption until leadership ratifies it — a ratified decision is not validated evidence, and the log keeps the two words apart.</div><div class="d-trig">Revisit if: leadership negotiates a different business-outcome link, or baseline data shows the Worrier pool is too small to move.</div></div>
+      <div class="dentry"><div class="d-when">Synthesis v2 · re-clustering</div><div class="d-what">Adopted the four-cluster model: Navigator, Guardian, Operator, Tracker</div><div class="d-why">The Unresolved Worrier dissolved into the Navigator (now the largest cluster, 12/30 · 37%) — “calibrating against an unbounded horizon” and “reactive checking, no role claimed” share one root mechanism: anxiety without a name, managed by checking. Rosters reconciled with payment status per person: Yamaguchi and Imai moved into the Operator, Yano became a Guardian variant (stewarding after a trust breach), Okimoto to Navigator.</div><div class="d-trig">Revisit if: a third population fails to reproduce the four clusters.</div></div>
+      <div class="dentry"><div class="d-when">Synthesis v2 · reframe</div><div class="d-what">Reframed the Operator: confirmation under load, not a data engine</div><div class="d-why">The v1 “System Builder” read (“give me clean data, I’ll do the thinking” — Okimoto) dissolved when Okimoto re-clustered as a Navigator. What remains is sharper: people whose system outgrew any peer’s ability to check it. Ariga (ex-finance, 50 accounts) wants to be told he isn’t wrong — visibility and occasional confirmation, not analysis. All four members pay: the highest willingness-to-pay cluster.</div><div class="d-trig">Revisit if: Operator interviews start asking for analysis rather than confirmation.</div></div>
+      <div class="dentry"><div class="d-when">Synthesis v2 · the lever</div><div class="d-what">Confirmed the conversion mechanism twice; sharpened the belief under test</div><div class="d-why">Kani (named a child’s future → FP2, a life plan) joins Koinuma (a debt crisis → cleared ¥800k) as documented Navigator→Guardian conversions. The mechanism — naming the threat — is Emerging with n=2. The riskiest assumption is now causability: both namings happened to people; no product has caused one. That is what the conversion round must test.</div><div class="d-trig">Revisit if: the conversion round shows naming can’t be triggered, only witnessed.</div></div>
+      <div class="dentry"><div class="d-when">Project One · synthesis</div><div class="d-what">Prioritised the Worrier→CFO conversion as the single target (v2: Navigator→Guardian)</div><div class="d-why">The clearest opportunity in the data is not a feature, it’s a conversion: Worrier and CFO are the same person at two points in time. A concrete answer to “am I on track?” converts the largest reachable group into the highest-retention one. Documented case: Koinuma (a second, “Kani / Kon”, awaits identity confirmation) — held at Emerging.</div><div class="d-trig">Revisit if: the conversion round fails to reproduce the mechanism, or the second case doesn’t confirm.</div></div>
+      <div class="dentry"><div class="d-when">Synthesis v1 · re-synthesis</div><div class="d-what">Rejected the Round 1 gender split; re-clustered on the structure of anxiety</div><div class="d-why">Two jobs that split almost cleanly on gender were flagged as suspicious — demographics are correlates, not mechanisms. Re-cut from first principles, the split dissolved and both populations (users and externals) converged on the same five segments. This is the strongest validation the method offers.</div><div class="d-trig">Revisit if: a third population fails to reproduce the segments.</div></div>
+      <div class="dentry"><div class="d-when">Synthesis v1 · reconciliation</div><div class="d-what">Moved Hattori, Imai and Takahashi out of the System Builder; held it as a bet, not a segment</div><div class="d-why">Behavioural look-alikes who will not pay (checks “so he doesn’t forget”, hobby collection, trusts his own judgement). What remains is real but thin — Okimoto (churned), Sakakibara (wants to cancel), Ariga (anxiety-driven). Highest theoretical ceiling and best AI-tier fit, so it stays on the tree as a hypothesis to test, not a target to build for.</div><div class="d-trig">Revisit if: the data-engine probe finds Builders willing to pay for clean feeds.</div></div>
+      <div class="dentry"><div class="d-when">Synthesis v1 · targeting</div><div class="d-what">Ruled out the Default Manager and Pragmatic Auditor as targets, with named disqualifiers</div><div class="d-why">Seven disqualifiers reduce to three conditions that must all be present to pay: someone depending on them, a scar from a past failure, and a question they can’t already answer. No stake → no payment, however much they track. Knowing who not to chase is worth as much as the target definition.</div><div class="d-trig">Revisit if: a life disruption creates a stake (Kaga’s generational framing and Miyamoto’s migrating anxiety are flagged for sanity-check).</div></div>
+      <div class="dentry"><div class="d-when">Synthesis v1 · outcome (superseded names, decision stands)</div><div class="d-what">Proposed Worrier→paid conversion as the product outcome — pending ratification</div><div class="d-why">Drafted from the growth lever; the number and baseline come from tagging Worrier profiles in the ≈160 paying Grow users. Held as an assumption until leadership ratifies it — a ratified decision is not validated evidence, and the log keeps the two words apart.</div><div class="d-trig">Revisit if: leadership negotiates a different business-outcome link, or baseline data shows the Worrier pool is too small to move.</div></div>
     </div>
   </div>`; },
 };
@@ -2805,15 +2888,15 @@ const CHAT_PROMPTS = [
 /* intent bank: keyword sets → concierge answer (with an optional loop pointer) */
 const CHAT_BANK = [
   { id:'next', kw:['next step','what next',"what's next",'next move','what should','do next','now what','nba','next best'],
-    a:`Three moves, in order: <b>1)</b> ratify the proposed product outcome (Worrier\u2192paid conversion) with Moneytree leadership, <b>2)</b> run the <b>causal session</b> — the chain \u201cstake \u2192 concrete answer \u2192 role claimed \u2192 paying CFO\u201d is drafted but not modelled with the team, and <b>3)</b> run the <b>conversion round</b>: interview people who hired human financial advisors, then the short-tenure paying Grow users. Advanced training (causal reasoning, the buyer timeline) comes first.` },
+    a:`Three moves, in order: <b>1)</b> ratify the proposed product outcome (Navigator\u2192paid conversion) with Moneytree leadership, <b>2)</b> run the <b>causal session</b> — the chain \u201cthreat gets a name \u2192 concrete answer \u2192 role claimed \u2192 paying Guardian/Operator\u201d is drafted but not modelled with the team, and <b>3)</b> run the <b>conversion round</b>: interview people who hired human financial advisors, then the short-tenure paying Grow users. Advanced training (causal reasoning, the buyer timeline) comes first.` },
   { id:'how', kw:['how does','how it works','methodology','system work','what is this','explain','how do'],
     a:`This is a continuous-discovery project. Five loops carry a belief from <b>Progress</b> (the Job) \u2192 <b>Outcome</b> (one number you own) \u2192 <b>Opportunity</b> (a prioritised struggling moment) \u2192 <b>Causal Learning</b> (what must be true) \u2192 <b>Delivery &amp; Impact</b> (the smallest tested increment). Open <b>\u201cHow it works\u201d</b> in the top bar for the full methodology.` },
   { id:'captured', kw:['captured','so far','what do we know','what is proven','proven','validated','what have you','status so far'],
-    a:`<b>Validated:</b> the Job — stewardship, not data. People hire Moneytree to settle an anxiety about the people depending on them (30 interviews, two independent populations, one converged structure). <b>Emerging:</b> the Worrier\u2192CFO conversion lever (one confirmed case, Koinuma). <b>Assumption:</b> the proposed outcome (pending ratification), the causal chain (drafted), all three solution paths, and anything about pricing — only 4 of 30 interviewees actually pay.` },
+    a:`<b>Validated:</b> the Job structure — people hire Moneytree to settle an anxiety, not to see their money (30 interviews, two populations, one converged four-cluster structure). <b>Emerging:</b> the naming lever — Navigator\u2192Guardian conversion documented twice (Kani, Koinuma). <b>Assumption:</b> whether the product can <i>trigger</i> a naming (the belief under test), the proposed outcome (pending ratification), the causal chain (drafted), and all three solution paths.` },
   { id:'summary', kw:['summarise','summarize','summary','overview','catch me up','where are we','project status','tldr','brief me'],
-    a:`<b>Moneytree Personal, Project One complete.</b> Thirty JTBD interviews across two rounds found that people don\u2019t hire a finance product to see their money — they hire it to <b>settle an anxiety about the people and future they\u2019re responsible for</b>. Primary target: the <b>Household CFO</b>; the growth lever is converting <b>Unresolved Worriers</b> into CFOs with a concrete answer to \u201cam I on track?\u201d. Outcome proposed (pending ratification), causal loop queued, conversion round next. Full reasoning in the <b>Decision Log</b>.` },
-  { id:'segments', kw:['segment','cfo','worrier','builder','auditor','default manager','who pays','five segments','persona'],
-    a:`Five segments, reconciled across both rounds: <b>Household CFO</b> (primary — a named fear of failing a dependant), <b>System Builder</b> (highest ceiling, thin — 3 reluctant members, a bet to test), <b>Unresolved Worrier</b> (entry state — converts to CFO or churns), and two defined non-targets: the <b>Default Manager</b> (does the role, no fear) and the <b>Pragmatic Auditor</b> (one question, then done). Who pays needs all three: a dependant, a scar, an unanswered question.` },
+    a:`<b>Moneytree Personal, synthesis v2.</b> Thirty JTBD interviews, two rounds: people hire a finance product to <b>settle an anxiety</b>, not to see money. Four clusters — <b>Navigator</b> (37%, the hub), <b>Guardian</b> (33%), <b>Operator</b> (13%, all paying), <b>Tracker</b> (13%, never pays). The growth lever: <b>naming the threat</b> converts Navigators into Guardians (documented twice). Outcome proposed (pending ratification), causal loop queued, conversion round tests causability next. Full reasoning in the <b>Decision Log</b>.` },
+  { id:'segments', kw:['segment','cluster','cfo','worrier','builder','auditor','navigator','guardian','operator','tracker','who pays','persona'],
+    a:`Four clusters, reconciled with payment status (synthesis v2): <b>Navigator</b> — 12/30, unbounded horizon anxiety, \u201cconfirm I\u2019m still on course\u201d (was the Worrier, now the largest cluster and primary target); <b>Guardian</b> — 10/30, a named person to protect (was the Household CFO); <b>Operator</b> — 4/30, competence with no peer to check it, all four paying (was the System Builder, reframed: confirmation, not analysis); <b>Tracker</b> — 4/30, one question then done, never pays. Placement flags: Kono (pays, yet sits in Tracker) queued for re-check.` },
   { id:'gender', kw:['gender','round 1','round one','recluster','re-cluster','demographic','suspicious','convergence','two rounds'],
     a:`Round 1 (15 Moneytree users) produced two jobs that split almost cleanly on gender — flagged as suspicious rather than accepted, because demographics are correlates, not mechanisms. Round 2 added 15 external users, and the data was re-clustered from first principles on the <b>structure of anxiety</b>. The gender split dissolved and both populations converged on the same segments. That convergence is the strongest validation this method offers.` },
   { id:'japan', kw:['quote','japanese','interviewee','nakayama','hayashi','sera','koinuma','okimoto'],
@@ -3092,56 +3175,56 @@ function chatStreamAnswer(html, after){
    Distinct from "Show the reasoning" (Feature C), which is a self-contained deck. */
 const GUIDE = [
   { title:'Project One, in one line',
-    body:`This is the <b>Moneytree Personal</b> discovery project. Two rounds, thirty interviews, two independent populations, one finding: people don't hire a finance product to <b>see their money</b> — they hire it to <b>settle an anxiety</b> about the people and the future they're responsible for. Stewardship is the engine, not data.`,
+    body:`This is the <b>Moneytree Personal</b> discovery project. Two rounds, thirty interviews, two independent populations, one finding: people don't hire a finance product to <b>see their money</b> — they hire it to <b>settle an anxiety</b>. Four clusters (Navigator, Guardian, Operator, Tracker), three of them paying — and one mechanism that moves people between them: <b>naming the threat</b>.`,
     result:{k:'Where we are',v:`Demand is <b>validated</b>. The product outcome is <b>proposed, pending ratification</b> with Moneytree leadership.`,
             next:`Next: who the anxiety belongs to.`},
     run:()=>goLoop('outcome'),
     anchor:()=>document.querySelector('#screen-outcome .bt')||document.querySelector('#screen-outcome .card') },
 
-  { title:'The job: don\u2019t fail the people depending on me',
-    body:`The best-evidenced paying job (the <b>Household CFO</b>): keep a complete, accurate picture so the future stays on track <b>without failing a dependant</b>. Who pays needs all three: someone depending on them, a scar from a past failure, and a question they can't already answer.`,
+  { title:'The full JTBD picture: four clusters, one map',
+    body:`The Progress loop holds the whole project: all 30 interviews with payment status, the four clusters and their Jobs — <b>Navigator</b> (37%, \u201cconfirm I\u2019m still on course\u201d), <b>Guardian</b> (33%, \u201cdon\u2019t fail the person depending on me\u201d), <b>Operator</b> (13%, \u201cconfirm my approach is sound\u201d), <b>Tracker</b> (13%, one question then done) — plus the forces and the conversion map.`,
     result:{k:'Result',v:`<b>Validated</b> — 30 interviews, two populations, one structure. Round 1 split on gender; re-clustered on the anxiety itself, the split dissolved and both rounds converged.`,
             next:`Next: the opportunity prioritised from that struggle.`},
     run:()=>goLoop('progress'),
     anchor:()=>document.querySelector('#screen-progress .card.inset')||document.querySelector('#screen-progress .card') },
 
   { title:'The opportunity we prioritised',
-    body:`Four struggles were admitted; one target prioritised: the <b>Unresolved Worrier's gap</b> — \u201cI'm anxious and I can't name why. Am I on track?\u201d The Worrier and the CFO are the same person at two points in time; a concrete answer carries them across.`,
-    result:{k:'Result',v:`<b>Emerging.</b> The conversion is documented once (Koinuma); a second case awaits identity confirmation. The lever converts the largest reachable group into the highest-retention one.`,
+    body:`Four struggles were admitted; one target prioritised: the <b>Navigator's gap</b> — anxiety with no name to attach to, managed by checking. The Navigator and the Guardian are the same person at two points in time; <b>naming the threat</b> carries them across. Navigators don't need more data.`,
+    result:{k:'Result',v:`<b>Emerging.</b> The conversion is documented twice — Kani and Koinuma. The lever converts the largest cluster (37%) into the highest-retention one.`,
             next:`Next: the causal system — the loop that runs next.`},
     run:()=>{ goLoop('tree'); setTimeout(()=>openCategory('opportunities'),360); },
     anchor:()=>document.querySelector('#catScrim .cat-modal') },
 
   { title:'The system before the solution',
-    body:`Before designing anything, the <b>Causal Learning loop</b> makes the chain explicit: stake appears → concrete answer available → role claimed → paying CFO. Drafted from the synthesis; <b>not yet modelled with the team</b>.`,
-    result:{k:'Where it stands',v:`Candidate lead measure: share of Worrier-profile users receiving a concrete \u201con track / not\u201d answer in week one. We control the answer; we can't cause the stake.`,
+    body:`Before designing anything, the <b>Causal Learning loop</b> makes the chain explicit: threat gets a name → concrete answer available → role claimed → paying Guardian or Operator. Drafted from the synthesis; <b>not yet modelled with the team</b>.`,
+    result:{k:'Where it stands',v:`Candidate lead measure: share of Navigator-profile users whose anxiety gets a named stake in week one. We control the answer and the asking; whether naming can be <b>triggered</b> is the open question.`,
             next:`Next: the candidate paths waiting behind it.`},
     run:()=>{ closeCategory(); goLoop('causal'); },
     anchor:()=>document.querySelector('#screen-causal .flow')||document.querySelector('#screen-causal .card') },
 
   { title:'Three candidate paths, held at assumption',
-    body:`One underlying system, marketed per segment: an <b>AI personal CFO</b> (\u201cam I on track?\u201d) for the stewardship track, a <b>clean-data engine</b> for the System Builder, and <b>shared accounts with the app holding the accountability</b>. None is story-mapped yet — the causal loop comes first.`,
-    result:{k:'Discipline',v:`The System Builder path waits on its own bet: 3 members, all reluctant. Highest ceiling, thinnest evidence.`,
+    body:`One underlying system, marketed per cluster: an <b>AI personal CFO</b> that surfaces the stake and answers \u201cam I on track?\u201d (Navigator→Guardian), an <b>Operator tier</b> — full visibility plus a periodic \u201cyour approach is sound\u201d check — and <b>shared accounts with the app holding the accountability</b>. None is story-mapped yet; the causal loop comes first.`,
+    result:{k:'Discipline',v:`The Operator wants confirmation, <b>not analysis</b> — an advice engine aimed at them would miss the job. All four Operators pay: highest willingness-to-pay in the data.`,
             next:`Next: the test that guards the whole plan.`},
     run:()=>goLoop('delivery'),
     anchor:()=>document.querySelector('#screen-delivery .grid.g-3')||document.querySelector('#screen-delivery .card') },
 
   { title:'The queued test: the conversion round',
-    body:`The load-bearing belief — <b>a concrete answer converts Worriers into paying CFOs</b> — rests on one confirmed case. Next round: interview people who hired <b>human</b> financial advisors, to define the personal-CFO job an AI could serve; then the short-tenure paying Grow users on what converted them.`,
+    body:`The load-bearing belief — <b>the product can trigger the naming moment</b> — is the sharp end. The mechanism is documented twice, but both namings happened <i>to</i> people (a child, a debt crisis); no product caused one. Next round: people who hired <b>human</b> advisors (what did the human do to trigger naming?), then short-tenure paying Grow users.`,
     result:{k:'How it\u2019s scored',v:`Threshold locked before results, per the method. Prerequisite: advanced training — causal reasoning, the buyer timeline, reaching the social job inside the time.`,
             next:`Next: who will never pay — and why that's a finding.`},
     run:()=>{ goLoop('delivery'); setTimeout(()=>{ const el=document.querySelector('#screen-delivery .testcard'); if(el) el.scrollIntoView({behavior:'smooth',block:'center'}); },140); },
     anchor:()=>document.querySelector('#screen-delivery .testcard') },
 
   { title:'Knowing who not to chase',
-    body:`Two segments are ruled out with named mechanisms: the <b>Default Manager</b> (does the role, no fear driving it) and the <b>Pragmatic Auditor</b> (one question, then done — \u201cthree months gave me the benchmark, that's enough\u201d). Only 4 of 30 interviewees actually pay, so pricing stays a hypothesis.`,
-    result:{k:'Why it matters',v:`The disqualifiers are as load-bearing as the target: no dependant, no scar, no unanswered question → no payment, however much they track.`,
+    body:`One cluster is ruled out with a named mechanism: the <b>Tracker</b> — one question, then done (\u201cthree months gave me the benchmark, that's enough\u201d). The job is finite, so there is no upsell moment. Placement flags stay open: Kono pays yet sits here — likely an early-stage Navigator, queued for re-check.`,
+    result:{k:'Why it matters',v:`The disqualifiers are as load-bearing as the target: no stake ever appears → they never enter the conversion journey at all.`,
             next:`Next: where the reasoning lives.`},
     run:()=>goLoop('decisions'),
     anchor:()=>document.querySelector('#screen-decisions .dlog')||document.querySelector('#screen-decisions .card') },
 
   { title:"You're caught up",
-    body:`Demand validated, one target prioritised at Emerging, an outcome proposed and awaiting ratification, a causal map drafted, and a conversion round queued. The reasoning — including the rejected gender split and the reconciled rosters — is all in the Decision Log.`,
+    body:`Demand validated across four clusters, the naming lever prioritised at Emerging (n=2), an outcome proposed and awaiting ratification, a causal map drafted, and the conversion round queued on the causability question. The reasoning — the rejected gender split, both re-clusterings, the Operator reframe — is all in the Decision Log.`,
     result:{k:'The next move',v:`Ratify the outcome with leadership, run the causal session, then the conversion round. Project Two (investments & the AI advisor) opens behind it.`,
             next:`Explore any loop — everything is clickable.`},
     run:()=>{ goLoop('tree'); setTimeout(()=>document.getElementById('nbaCard')&&document.getElementById('nbaCard').classList.add('open'),120); },
