@@ -2132,15 +2132,15 @@ const IMODAL = {
       <button class="btn btn-ghost btn-sm" onclick="imToast('Invite drafted for Thu, 2:00pm')">Book a slot</button>
     </div>`},
   ext:{ ico:ICO_APP, title:'Interview capture · Mac app', body:`
-    <p>The Noetic capture app is a <b>lightweight, on-device Mac app</b> that sits beside your call. It <b>records and transcribes locally</b>, no bot joins the meeting, tags the <b>four forces</b> and the <b>functional / emotional / social</b> motivations as they surface, and drops a finished <b>interview snapshot</b> straight into this project. It is the same engine behind the <b>live interview copilot</b>.</p>
+    <p>The Noetic copilot is a <b>native Mac app</b> that sits beside your call. It <b>records and transcribes both sides on-device</b>, no bot joins the meeting, and it autosaves on every turn, so an interview survives even a crash or a closed lid. When you press <b>End</b>, it runs a full-transcript <b>debrief</b>: coverage of the timeline and forces, a coaching note for the interviewer, and an <b>anchored-evidence count</b>, so discipline is scored per interview rather than assumed.</p>
     <div class="im-steps">
-      <div class="im-step">Download the Mac app, a notarized installer, no account needed yet.</div>
-      <div class="im-step">Grant microphone &amp; system-audio access, capture stays on your machine.</div>
-      <div class="im-step">Sign in and pick this discovery project.</div>
-      <div class="im-step">Start your call on Zoom, Meet or Teams, capture runs on-device; the snapshot appears in <b>Interview snapshots</b> when you hang up.</div>
+      <div class="im-step">Get the app on an activation call with Noetic. Your licence is issued on the call and bound to your Mac.</div>
+      <div class="im-step">Grant microphone and system-audio access. Capture stays on your machine; only transcript text reaches the copilot brain, with consent.</div>
+      <div class="im-step">Before each interview, add the participant\u2019s name, any screener answers you already hold (used to aim questions, never treated as evidence) and the product names the transcriber should recognise.</div>
+      <div class="im-step">Run the call on Zoom, Meet or Teams, then press End. The debrief runs and the finished snapshot lands in <b>Interview snapshots</b> here.</div>
     </div>
     <div class="imodal-cta" style="margin-top:16px">
-      <button class="btn btn-primary btn-sm" onclick="imToast('Downloading Noetic for Mac…')">Download for Mac</button>
+      <button class="btn btn-primary btn-sm" onclick="imToast('Ask Noetic for an activation call')">Request the app</button>
       <button class="btn btn-ghost btn-sm" onclick="imToast('Full setup guide opened')">View full guide</button>
     </div>`},
 };
@@ -2456,6 +2456,7 @@ function PROGRESS_V3(){ return `<div class="wrap">
       </div>
       <div style="margin-top:14px;padding-top:12px;border-top:1px dashed var(--line);font-size:12px;color:var(--ink-2);line-height:1.6">
         <b>Flags we’re carrying (ours, not the official doc’s):</b> Aida pays yet sits in the won’t-pay segment, placement worth a re-check. Two interviewees named Tachibana (Steward · Excel and Passer-by · MillWallet+freee), keep the disambiguation in the transcripts. Hayashi substitutes ChatGPT for financial questions, the Steward cluster’s churn edge.
+        <br><b>Instrumentation:</b> interviews now arrive through the Noetic copilot, which runs a full-transcript debrief on End: coverage, a coaching note, and an anchored-evidence count. Discipline is scored per transcript, not assumed.
       </div>
     </div>
 
@@ -2472,7 +2473,7 @@ function PROGRESS_V3(){ return `<div class="wrap">
       <div class="card">
         <div class="card-t">What phase two builds and tests<span class="ct-line"></span></div>
         <ul style="list-style:none;font-size:13px;line-height:1.6;margin:0;padding:0">
-          <li style="padding:5px 0 5px 18px;position:relative"><span style="position:absolute;left:0;color:var(--amber-ink)">→</span><b>The verdict test</b>, the conversion round: people who hired human financial advisors (what did the human verdict actually do?), then short-tenure paying Grow users. Defines the “personal CFO” job an AI could serve.</li>
+          <li style="padding:5px 0 5px 18px;position:relative"><span style="position:absolute;left:0;color:var(--amber-ink)">→</span><b>The verdict test</b>, the conversion round: people who hired human financial advisors (what did the human verdict actually do?), then short-tenure paying Grow users. Defines the “personal CFO” job an AI could serve. The copilot’s screener-background input carries each cohort’s survey answers into the room, so recruiting from the Grow pool needs no extra prep.</li>
           <li style="padding:5px 0 5px 18px;position:relative"><span style="position:absolute;left:0;color:var(--amber-ink)">→</span><b>Before the life event</b>, an early-career recruitment round: can the habit be built at 25, so the tool is in hand when the shock arrives? Not a cluster in the data yet.</li>
           <li style="padding:5px 0 5px 18px;position:relative"><span style="position:absolute;left:0;color:var(--amber-ink)">→</span><b>The mastery question</b>, do Guardians land in mastery once the acute fear resolves? No one in the corpus made that move; a round with settled over-55 users answers it.</li>
           <li style="padding:5px 0 5px 18px;position:relative"><span style="position:absolute;left:0;color:var(--amber-ink)">→</span><b>Outcome ratification + investments</b>, agree the Steward→paid number with leadership; ≈80% of users invest and the product shows balances only, the gap is advisory, not connective (Project Two).</li>

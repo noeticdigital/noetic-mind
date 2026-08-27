@@ -1,3 +1,10 @@
+> **SUPERSEDED (August 2026).** This spec did its job: the app is built and has moved beyond it.
+> The implementation at `~/Downloads/Noetic/NoeticCopilot` and its build chat ("Noetic JTBD Interview
+> Copilot macOS app") are canonical. Since this document was written the app gained autosave-per-turn,
+> a Recordings browser, auto-debrief on End (with an anchored-evidence count), consent-sheet context
+> inputs (screener background + transcriber vocabulary), Ed25519 device licensing, and a designed
+> backend ("Sign in with Noetic", Lambda: probe / analyze / interviews). Read this file as history only.
+
 # Noetic JTBD Interview Copilot — Build Spec (for Claude Code)
 
 > Paste this whole document into a fresh Claude Code session as the kickoff brief.
@@ -53,34 +60,74 @@ discovery in real time. It is the "live face" of the Noetic Mind Continuous Disc
 
 ---
 
-## 3. The JTBD methodology it encodes (domain model — get this right)
+## 3. The JTBD methodology it encodes (v4 — aligned to the jobstobedone.org field guide)
 
-This is not a generic notetaker. It encodes a specific method. The LLM brain must reason in these terms.
+> **Superseded in place (2026-07):** this section was rewritten to v4 after transcribing the
+> primary source — the printed #JTBD interview guide booklet (jobstobedone.org / Rewired).
+> The canonical machine-readable version lives in `server/copilot-api.ts` (METHODOLOGY) with
+> a dev copy in `NoeticCopilot/Brain/DirectBrain.swift`.
 
-**The Timeline (Forces of Progress / "the switch")** — 5 ordered stages:
-1. `firstThought` — first thought something needs to change (the trigger; a specific moment, not a general reason).
-2. `passiveLooking` — notices solutions but doesn't act.
-3. `activeLooking` — actively researches/compares.
-4. `deciding` — weighs trade-offs, makes the choice.
-5. `firstUse` — first use; did the new behaviour hold? (the proof it stuck).
+This is not a generic notetaker. It encodes the switch-interview method: reconstruct one
+real, recent purchase as a story, **hunting the energy** — the why behind the switch. The
+energy lives in the *situation*, never the product. An anchor is a specific scene (what
+they were doing, where, who was there — get the characters' names) plus a verbatim
+participant quote; story-time ("two years ago", "about two weeks") is captured per point
+because the timeline's shape is diagnostic.
 
-**The Four Forces** (what moves or blocks the switch):
-- `push` — push of the current situation (the pain).
-- `pull` — pull of the new solution (the desired progress / identity).
-- `anxiety` — anxiety of the new (fear it won't work / past failures).
-- `habit` — habit of the present (inertia).
+**The Timeline — 8 ordered points:**
+1. `firstThought` — the idea planted ("I might need to make progress"). Tentative,
+   low-energy, **provisional** — the first thought offered usually isn't the real one;
+   probe backwards and forwards, listen for the late unlock.
+2. `passiveLooking` — noticing options with **zero energy invested** (the passive/active
+   discriminator), and why they didn't act yet.
+3. `event1` — **"I've had enough."** The boil-over that flips them into active looking —
+   *this is the struggling moment*. Anchor onset (sudden vs gradual), frequency, intensity.
+4. `activeLooking` — investing real energy/time; what they compared, how long.
+5. `event2` — **"The clock is ticking."** The deadline that forces the decision.
+6. `deciding` — narrowed to 2–3 with criteria understood; anchored requires the
+   **consideration set** (name the finalists) + what mattered most + what they gave up.
+7. `buying` — committed, paid, no going back: what exactly (brand/model), where/when,
+   what nearly stopped them, what it felt like.
+8. `firstUse` — consuming: expectations beforehand, the purchase→use gap, how they decided
+   when/how to use it, whether the behaviour held.
 
-**The Job** — the progress the person is reaching for, in their words; never your product. Phrased like:
-"When [situation], I want [motivation], so I can [desired outcome / identity]."
+**Story events** (no fixed position): `firing` — *everything* the hire replaced, full vs
+**partial** ("fired in every situation, or just some?"); `resolution` — satisfaction: did
+it help them make progress or not (a switch that failed to do the job is a finding).
 
-**Evidence ladder** (the spine of the whole Noetic system) — every belief carries a state:
+**The Four Forces** (booklet definitions): `push` — energy of the current situation;
+`pull` — energy of a *possible solution* ("can this help me make progress?"); `anxiety` —
+of the new: "will it work?" + "can I figure it out?"; `habit` — of the present.
+
+**The Job — 3 dimensions**, in their words: `functional` (task/progress), `emotional`
+(the feeling hired for), `social` (who they want to be). The Job must trace back to the
+struggling moment (`event1`).
+
+**The arc — bracket the story:** open at the **buy** (right bracket — concrete, easy,
+licenses the detail torrent), then hunt the **first thought** (left bracket, trickier),
+then fill the energy between the brackets; land job dimensions + resolution last.
+Exceptions that beat phase order: an energy marker surfacing (pull the thread now) and
+participant fatigue (jump topics before "I really just can't remember").
+
+**Technique toolkit** (encoded as nudge tactics + evidence flags): documentary-metaphor
+detail probes; probe-around-the-memory; calendar anchors; wrong-dots recap (with the
+carve-out: corrections are strong evidence, only agreement contaminates); dummy up (never
+connect dots you can ask about — for interviewer *and* model); stay-in-the-moment; flags
+for leading/hypothetical/stacked/contradiction plus `noStory` (bad-recruit symptom:
+timeline won't anchor, no forces — gift / non-decision-maker / too long ago),
+`criteriaInjection`, and the `productOpinion` wormhole; never correct their language
+(it's marketing gold); no psychological evaluation beyond this purchase.
+
+**Evidence ladder** (the spine of the whole Noetic system):
 `assumption → emerging → validated → disproven`.
-Discipline: **one interview can only reach `emerging`.** Validation requires the pattern across many interviews. The copilot must never over-claim from a single conversation.
-
-**Interview discipline the prompts must enforce**: reconstruct a **real, recent past switch** (not hypotheticals, not feature wishlists). Anchor to specific moments. Don't lead the witness. Land the Job in the participant's own words, then stop talking.
+Discipline: **one interview can only reach `emerging`.** The validated Job is synthesised
+across a **round of 12**, clustered by candidate job first (≥8 consistent interviews per
+cluster), with energy-profile segmentation (onset/intensity ↔ speed-to-buy and price
+sensitivity), cross-interview "necessary details" (channel / price paid / referral), and
+next-round recruiting recommendations (canon screener bar; Groups A/B/C — buyers, leavers,
+competitor buyers; B2B landscape mapping in the first ~10).
 
 ---
-
 ## 4. System architecture
 
 ```

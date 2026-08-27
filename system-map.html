@@ -7,7 +7,7 @@
 <title>Noetic · System Map (everything we're working with)</title>
 <!--
   ════════════════════════════════════════════════════════════════════════
-  NOETIC · SYSTEM MAP  —  internal, living architecture graph
+  NOETIC · SYSTEM MAP ,  internal, living architecture graph
   ────────────────────────────────────────────────────────────────────────
   An interactive graph of the whole system: the client demo (4 silos, loops,
   modules, functions), the JTBD interview copilot, the internal methodology
@@ -148,7 +148,7 @@ const NODES = [
   /* ── client demo ── */
   N('ccs','Continuous Discovery System','demo',28,'The client-facing web demo (v3). Define + five loops, evidence-driven Progress-to-Outcome tree. Default dark, Fraunces/Inter/JetBrains.'),
   N('switcher','Project switcher','module',16,'Dropdown that cross-links all four siloed projects; each file links to the other three.'),
-  N('silo-quench','Quench','silo',18,'Daily hydration habit — the reference project. v3.html'),
+  N('silo-quench','Quench','silo',18,'Daily hydration habit, the reference project. v3.html'),
   N('silo-ledger','Ledgerline','silo',16,'Bank-feed activation · fintech. Fully distinct content. v3-ledgerline.html'),
   N('silo-klpt','KLPTPROJ','silo',14,'Placeholder silo (cloned from Quench, awaiting real content). v3-klptproj.html'),
   N('silo-mt','MTPROJ','silo',14,'Placeholder silo (cloned from Quench, awaiting real content). v3-mtproj.html'),
@@ -175,7 +175,14 @@ const NODES = [
   N('imodal-app','Get the capture app (Mac)','module',12,'On-device native Mac capture app, no bot joins the call. Same engine as the copilot.'),
 
   /* ── copilot ── */
-  N('copilot','JTBD Interview Copilot','copilot',24,'Native macOS app — the live face of the Progress loop. Scripted demo plays back so it looks real. copilot.html'),
+  N('copilot','JTBD Interview Copilot','copilot',24,'The live face of the Progress loop. Two artefacts: the marketing mock (copilot.html, scripted playback) and the real native macOS app at ~/Downloads/Noetic/NoeticCopilot.'),
+  N('cop-app','NoeticCopilot.app (real, SwiftUI)','copilot',16,'Working native app: on-device capture of both channels, SpeechAnalyzer transcription, autosave on every turn (survives closing without End), Recordings browser.'),
+  N('cop-debrief','Auto-debrief on End','copilot',13,'One full-transcript analysis pass written into the interview JSON: coverage, a coaching note, an anchored-evidence count. Orphaned runs swept on next launch.'),
+  N('cop-context','Consent-sheet context inputs','copilot',12,'What-you-already-know (screener background; hypothesis, never evidence) + names & terms fed to the transcriber as contextual vocabulary.'),
+  N('cop-brains','DirectBrain / ServerBrain','copilot',12,'Debug builds call Bedrock directly with local keys; Release compiles only ServerBrain, which needs the backend. Canonical v4 prompt.'),
+  N('cop-license','Device licensing (Ed25519)','copilot',13,'Call-gated activation: device code read out on a call, signed activation code minted by the noetic-license CLI. Per-device, offline verification, reinstall = new call.'),
+  N('cop-backend','Noetic backend (designed, unbuilt)','copilot',14,'Lambda/API GW in the Bedrock account: POST /v1/probe, /v1/analyze, /v1/interviews. Holds the methodology prompt server-side, meters per token, remote kill switch. The critical path to client hand-off.'),
+  N('cop-signin','Sign in with Noetic (v1 design)','copilot',12,'License-bundled account token: one pasted code licenses the device and signs in. OAuth PKCE scaffolded for when real accounts exist.'),
   N('cop-split','Google Meet split view','copilot',12,'Side-by-side macOS Split View: the video-off call (60%) + copilot (40%).'),
   N('cop-modes','Full / Focus modes','copilot',12,'Focus = glanceable, advice-only HUD (a small reason + the big verbatim question).'),
   N('cop-transcript','Live transcript','copilot',11,'Speaker-attributed, streaming.'),
@@ -188,10 +195,10 @@ const NODES = [
 
   /* ── toolbox (internal) ── */
   N('toolbox','Methodology Toolbox','toolbox',20,'Internal, Noetic-only. The supply-side instruments behind the client system. Unlinked from the demos. toolbox.html'),
-  N('tb-mpi','Market Potential Index','toolbox',12,'Quant sizing survey. Moderate signal — sizes, never proves.'),
+  N('tb-mpi','Market Potential Index','toolbox',12,'Quant sizing survey. Moderate signal, sizes, never proves.'),
   N('tb-cdi','Consumer Directed Insight','toolbox',12,'Consumer-led discovery survey. Emerging signal.'),
   N('tb-tribe','Tribe Map','toolbox',12,'Identity/belonging segmentation + recruiting map. A lens, not evidence.'),
-  N('tb-video','AI-moderated Video Interviews','toolbox',13,'Scaled qualitative interviews — the one instrument that can validate.'),
+  N('tb-video','AI-moderated Video Interviews','toolbox',13,'Scaled qualitative interviews, the one instrument that can validate.'),
   N('tb-gradient','Signal gradient','toolbox',12,'Organising axis: weak stated → strong observed behaviour.'),
 
   /* ── files & assets ── */
@@ -213,7 +220,7 @@ const NODES = [
   /* ── external ── */
   N('ext-fonts','fonts.bunny.net','external',12,'Fraunces / Inter / JetBrains Mono (GDPR-safe webfonts).'),
   N('ext-eleven','ElevenLabs API','external',13,'Text-to-speech; pre-rendered to bundled clips (key kept in env, never committed).'),
-  N('ext-speech','Web Speech API','external',11,'Browser on-device TTS — the copilot voice fallback.'),
+  N('ext-speech','Web Speech API','external',11,'Browser on-device TTS, the copilot voice fallback.'),
   N('ext-meet','Google Meet','external',12,'The interview call surface (video off for JTBD).'),
   N('ext-github','GitHub · noetic-mind','external',12,'Demo repo; pushed on every change.'),
   N('ext-vis','vis-network (CDN)','external',10,'This map\'s graph engine (unpkg).'),
@@ -265,7 +272,7 @@ const NODES = [
   N('v-research','Autoresearch loop','vision',12,'Karpathy keep-or-discard "dream cycle" adapted for auto-research.'),
   N('v-firecrawl','Firecrawl web-data layer','vision',12,'web → LLM-ready data; desk-research runner + web layer for the OS.'),
   N('v-playbook','Solo founder playbook','vision',11,'Verified deep-research on running Noetic solo (lives in vault + gbrain).'),
-  N('v-security','Security hardening backlog','vision',12,'Lethal-trifecta risk, secrets-in-config, superuser DB — hardening backlog.'),
+  N('v-security','Security hardening backlog','vision',12,'Lethal-trifecta risk, secrets-in-config, superuser DB, hardening backlog.'),
   N('v-cos','CoS AI panel insights','vision',11,'Design guidance for the chief-of-staff AI, mined from a real working-CoS panel.'),
 ];
 
@@ -285,7 +292,7 @@ const EDGES = [
   E('loop-progress','snapshots'),E('imodal-app','copilot',1),
   // copilot
   E('copilot','cop-split'),E('copilot','cop-modes'),E('copilot','cop-transcript'),E('copilot','cop-timeline'),
-  E('copilot','cop-forces'),E('copilot','cop-job'),E('copilot','cop-prompts'),E('copilot','cop-consent'),E('copilot','cop-voice'),
+  E('copilot','cop-forces'),E('copilot','cop-job'),E('copilot','cop-prompts'),E('copilot','cop-consent'),E('copilot','cop-app'),E('cop-app','cop-debrief'),E('cop-app','cop-context'),E('cop-app','cop-brains'),E('cop-app','cop-license'),E('cop-brains','cop-backend',1),E('cop-license','cop-signin'),E('cop-signin','cop-backend',1),E('cop-backend','saas',1),E('copilot','cop-voice'),
   E('copilot','loop-progress',1),E('silo-quench','copilot',1),
   E('cop-split','ext-meet',1),E('cop-voice','ext-eleven',1),E('cop-voice','ext-speech',1),E('cop-voice','f-audio',1),
   // toolbox
